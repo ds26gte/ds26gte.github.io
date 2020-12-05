@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+Programming in Schelog
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-1.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-3.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_2"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2">2&#xa0;&#xa0;Predicates</a></h1>
+<p class=noindent></p>
+<p>
+
+More interesting goals are created by applying a special
+kind of Schelog object called a <em>predicate</em> (or
+<em>relation</em>) to other
+Schelog objects.  Schelog comes with some primitive
+predicates, such as the arithmetic operators
+<code class=scheme><span class=variable>%=:=</span></code> and <code class=scheme><span class=variable>%&#x3c;</span></code>,
+standing for arithmetic “equal” and “less than”
+respectively.  For example, the following are some goals
+involving these predicates:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> () (<span class=variable>%=:=</span> <span class=selfeval>1</span> <span class=selfeval>1</span>)) <span style="font-family: monospace">=&#x3e;</span>()<sup><small>true</small></sup>
+(<span class=keyword>%which</span> () (<span class=variable>%&#x3c;</span> <span class=selfeval>1</span> <span class=selfeval>2</span>))   <span style="font-family: monospace">=&#x3e;</span>()<sup><small>true</small></sup>
+(<span class=keyword>%which</span> () (<span class=variable>%=:=</span> <span class=selfeval>1</span> <span class=selfeval>2</span>)) <span style="font-family: monospace">=&#x3e;</span><span class=selfeval>#f</span>
+(<span class=keyword>%which</span> () (<span class=variable>%&#x3c;</span> <span class=selfeval>1</span> <span class=selfeval>1</span>))   <span style="font-family: monospace">=&#x3e;</span><span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Other arithmetic predicates are
+<code class=scheme><span class=variable>%&#x3e;</span></code> (“greater than”),
+<code class=scheme><span class=variable>%&#x3c;=</span></code> (“less than or equal”),
+<code class=scheme><span class=variable>%&#x3e;=</span></code> (“greater than or equal”), and
+<code class=scheme><span class=variable>%=/=</span></code> (“not equal”).</p>
+<p>
+
+Schelog predicates are not to be confused with conventional
+Scheme predicates (such as <code class=scheme><span class=variable>&#x3c;</span></code> and <code class=scheme><span class=variable>=</span></code>).  Schelog
+predicates, when applied to arguments, produce goals
+that
+may either succeed or fail.  Scheme predicates, when applied
+to arguments, yield a boolean value.  Henceforth, we will
+use the term “predicate” to mean Schelog predicates.
+Conventional predicates will be explicitly called “Scheme
+predicates”.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_2.1"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.1">2.1&#xa0;&#xa0;Predicates Introducing Facts</a></h2>
+<p class=noindent></p>
+<p>
+
+Users can create their own predicates using the Schelog form
+<code class=scheme><span class=keyword>%rel</span></code>.  For example, let’s
+define the predicate <code class=scheme><span class=variable>%knows</span></code>:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%knows</span>
+  (<span class=keyword>%rel</span> ()
+    [(<span class=keyword>'</span><span class=variable>Odysseus</span> <span class=keyword>'</span><span class=variable>TeX</span>)]
+    [(<span class=keyword>'</span><span class=variable>Odysseus</span> <span class=keyword>'</span><span class=variable>Scheme</span>)]
+    [(<span class=keyword>'</span><span class=variable>Odysseus</span> <span class=keyword>'</span><span class=variable>Prolog</span>)]
+    [(<span class=keyword>'</span><span class=variable>Odysseus</span> <span class=keyword>'</span><span class=variable>Penelope</span>)]
+    [(<span class=keyword>'</span><span class=variable>Penelope</span> <span class=keyword>'</span><span class=variable>TeX</span>)]
+    [(<span class=keyword>'</span><span class=variable>Penelope</span> <span class=keyword>'</span><span class=variable>Prolog</span>)]
+    [(<span class=keyword>'</span><span class=variable>Penelope</span> <span class=keyword>'</span><span class=variable>Odysseus</span>)]
+    [(<span class=keyword>'</span><span class=variable>Telemachus</span> <span class=keyword>'</span><span class=variable>TeX</span>)]
+    [(<span class=keyword>'</span><span class=variable>Telemachus</span> <span class=keyword>'</span><span class=variable>calculus</span>)]))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The expression has the expected meaning.  Each
+<em>clause</em> in the <code class=scheme><span class=keyword>%rel</span></code> establishes a <em>fact</em>:
+Odysseus
+knows TeX, Telemachus knows calculus, &#x26;c.  In general, if we
+apply the predicate to the arguments in any one of its
+clauses, we will get a successful goal.  Thus, since
+<code class=scheme><span class=variable>%knows</span></code> has a clause that reads
+<code class=scheme>[(<span class=keyword>'</span><span class=variable>Odysseus</span> <span class=keyword>'</span><span class=variable>TeX</span>)]</code>, the goal
+<code class=scheme>(<span class=variable>%knows</span> <span class=keyword>'</span><span class=variable>Odysseus</span> <span class=keyword>'</span><span class=variable>TeX</span>)</code>
+will be true.</p>
+<p>
+
+(In the code in
+this text, brackets have the same behavior as parentheses.
+We use a mix of brackets and parentheses solely to improve
+the readability of the code for humans.]</p>
+<p>
+
+We can now get answers for the following types of queries:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> ()
+  (<span class=variable>%knows</span> <span class=keyword>'</span><span class=variable>Odysseus</span> <span class=keyword>'</span><span class=variable>TeX</span>))
+<span style="font-family: monospace">=&#x3e;</span>()<sup><small>true</small></sup>
+
+(<span class=keyword>%which</span> ()
+  (<span class=variable>%knows</span> <span class=keyword>'</span><span class=variable>Telemachus</span> <span class=keyword>'</span><span class=variable>Scheme</span>))
+<span style="font-family: monospace">=&#x3e;</span><span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_2.2"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.2">2.2&#xa0;&#xa0;Predicates with Rules</a></h2>
+<p class=noindent></p>
+<p>
+
+Predicates can be more complicated than the above bald
+recitation of facts.  The predicate clauses can be <em>rules</em>, eg,</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%computer-literate</span>
+  (<span class=keyword>%rel</span> (<span class=variable>person</span>)
+    [(<span class=variable>person</span>)
+      (<span class=variable>%knows</span> <span class=variable>person</span> <span class=keyword>'</span><span class=variable>TeX</span>)
+      (<span class=variable>%knows</span> <span class=variable>person</span> <span class=keyword>'</span><span class=variable>Scheme</span>)]
+    [(<span class=variable>person</span>)
+      (<span class=variable>%knows</span> <span class=variable>person</span> <span class=keyword>'</span><span class=variable>TeX</span>)
+      (<span class=variable>%knows</span> <span class=variable>person</span> <span class=keyword>'</span><span class=variable>Prolog</span>)]))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>This defines the predicate
+<code class=scheme><span class=variable>%computer&#x2011;literate</span></code> in
+terms of the predicate <code class=scheme><span class=variable>%knows</span></code>.  In effect, a person is
+defined as computer-literate if they know TeX and
+Scheme, <em>or</em> TeX and Prolog.</p>
+<p>
+
+Note that this use of
+<code class=scheme><span class=keyword>%rel</span></code> employs a local <em>logic variable</em> called <code class=scheme><span class=variable>person</span></code>.
+In general, a <code class=scheme><span class=keyword>%rel</span></code>-expression can have a list of symbols
+as its second subform.  These name new logic variables that
+can be used within the body of the <code class=scheme><span class=keyword>%rel</span></code>.</p>
+<p>
+
+The following query can now be answered:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> ()
+  (<span class=variable>%computer-literate</span> <span class=keyword>'</span><span class=variable>Penelope</span>))
+<span style="font-family: monospace">=&#x3e;</span>()<sup><small>true</small></sup>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Since Penelope knows TeX and Prolog, she is computer-literate.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_2.3"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.3">2.3&#xa0;&#xa0;Solving Goals</a></h2>
+<p class=noindent></p>
+<p>
+
+The above queries are yes/no questions.  Logic programming
+allows more: We can formulate a goal with <em>uninstantiated</em>
+logic variables and then ask the querying process to
+provide, if possible, values for these variables that cause
+the goal to succeed.  For instance, the query:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> (<span class=variable>what</span>)
+  (<span class=variable>%knows</span> <span class=keyword>'</span><span class=variable>Odysseus</span> <span class=variable>what</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>asks for an instantiation of the logic variable <code class=scheme><span class=variable>what</span></code>
+that satisfies the goal <code class=scheme>(<span class=variable>%knows</span> <span class=keyword>'</span><span class=variable>Odysseus</span> <span class=variable>what</span>)</code>.
+In other words, we are asking, “What does Odysseus know?”</p>
+<p>
+
+Note that this use of <code class=scheme><span class=keyword>%which</span></code> — like <code class=scheme><span class=keyword>%rel</span></code>
+in the definition of <code class=scheme><span class=variable>%computer&#x2011;literate</span></code> —
+uses a local logic
+variable, <code class=scheme><span class=variable>what</span></code>.  In general, the second subform of
+<code class=scheme><span class=keyword>%which</span></code> can be a list of local logic variables.  The
+<code class=scheme><span class=keyword>%which</span></code>-query returns an answer that is a list of
+bindings, one for each logic variable mentioned in its
+second subform.  Thus,</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> (<span class=variable>what</span>)
+  (<span class=variable>%knows</span> <span class=keyword>'</span><span class=variable>Odysseus</span> <span class=variable>what</span>))
+<span style="font-family: monospace">=&#x3e;</span>([<span class=variable>what</span> <span class=variable>TeX</span>])
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>But that is not all that wily Odysseus knows.  Schelog
+provides a zero-argument procedure (“thunk”) called
+<code class=scheme><span class=variable>%more</span></code>
+that <em>retries</em> the goal in the last
+<code class=scheme><span class=keyword>%which</span></code>-query for a different solution.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>%more</span>) <span style="font-family: monospace">=&#x3e;</span>([<span class=variable>what</span> <span class=variable>Scheme</span>])
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>We can keep pumping for more solutions:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>%more</span>) <span style="font-family: monospace">=&#x3e;</span>([<span class=variable>what</span> <span class=variable>Prolog</span>])
+(<span class=variable>%more</span>) <span style="font-family: monospace">=&#x3e;</span>([<span class=variable>what</span> <span class=variable>Penelope</span>])
+(<span class=variable>%more</span>) <span style="font-family: monospace">=&#x3e;</span><span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The final <code class=scheme><span class=selfeval>#f</span></code> shows that there are no more
+solutions.  This is because there are no more clauses in the
+<code class=scheme><span class=variable>%knows</span></code> predicate that list Odysseus as knowing anything
+else.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_2.3.1"></a>
+<h3 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.3.1">2.3.1&#xa0;&#xa0;A Note on <span style="font-family: monospace">#f</span> vs <span style="font-family: monospace">()</span></a></h3>
+<p class=noindent></p>
+<p>
+
+It is now clear why <code class=scheme>()<sup><small>true</small></sup></code> was the right choice for truth in
+the previous yes/no <code class=scheme><span class=keyword>%which</span></code>-queries that had no logic
+variables (sec <a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_sec_1">1</a>).  <code class=scheme><span class=keyword>%which</span></code> returns a
+list of bindings
+for true
+goals: the list is empty when there are no variables.</p>
+<p>
+
+For such Schemes as don’t distinguish between <code class=scheme>()</code> and
+<code class=scheme><span class=selfeval>#f</span></code>, we can still ask fruitful yes/no queries.  Simply
+use a dummy local
+variable in the
+<code class=scheme><span class=keyword>%which</span></code>-expression.  Truth will give an (ignorable)
+binding for the dummy variable, while falsity will, as
+usual, produce <code class=scheme><span class=selfeval>#f</span></code>.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> (<span class=variable>bingo</span>)
+  (<span class=variable>%knows</span> <span class=keyword>'</span><span class=variable>Odysseus</span> <span class=keyword>'</span><span class=variable>TeX</span>))
+<span style="font-family: monospace">=&#x3e;</span>([<span class=variable>bingo</span> <span class=variable>_</span>])
+
+(<span class=keyword>%which</span> (<span class=variable>bingo</span>)
+  (<span class=variable>%knows</span> <span class=keyword>'</span><span class=variable>Odysseus</span> <span class=keyword>'</span><span class=variable>calculus</span>))
+<span style="font-family: monospace">=&#x3e;</span><span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_2.4"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.4">2.4&#xa0;&#xa0; Asserting Extra Clauses</a></h2>
+<p class=noindent></p>
+<p>
+
+We can add more clauses to a predicate after it has already
+been defined with a <code class=scheme><span class=keyword>%rel</span></code>.  Schelog provides the
+<code class=scheme><span class=keyword>%assert</span></code> form for this purpose.  Eg,</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%assert</span> <span class=variable>%knows</span> ()
+  [(<span class=keyword>'</span><span class=variable>Odysseus</span> <span class=keyword>'</span><span class=variable>archery</span>)])
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>tacks on a new clause at the end of the existing clauses
+of the <code class=scheme><span class=variable>%knows</span></code>
+predicate.  Now, the query:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> (<span class=variable>what</span>)
+  (<span class=variable>%knows</span> <span class=keyword>'</span><span class=variable>Odysseus</span> <span class=variable>what</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>gives TeX, Scheme, Prolog, and Penelope, as before, but
+a subsequent <code class=scheme>(<span class=variable>%more</span>)</code> yields a new result: <code class=scheme><span class=variable>archery</span></code>.</p>
+<p>
+
+The Schelog form <code class=scheme><span class=keyword>%assert&#x2011;a</span></code> is similar to <code class=scheme><span class=keyword>%assert</span></code> but
+adds clauses <em>before</em> any of the current clauses.</p>
+<p>
+
+Both <code class=scheme><span class=keyword>%assert</span></code> and <code class=scheme><span class=keyword>%assert&#x2011;a</span></code> assume that the variable
+they are adding to already names a predicate (presumably
+defined using <code class=scheme><span class=keyword>%rel</span></code>).
+In order to allow defining a predicate entirely through
+<code class=scheme><span class=keyword>%assert</span></code>s,  Schelog provides an empty predicate value
+<code class=scheme><span class=variable>%empty&#x2011;rel</span></code>.  <code class=scheme><span class=variable>%empty&#x2011;rel</span></code> takes any number of arguments
+and always fails.  A typical use of the
+<code class=scheme><span class=variable>%empty&#x2011;rel</span></code> and <code class=scheme><span class=keyword>%assert</span></code> combination:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%parent</span> <span class=variable>%empty-rel</span>)
+
+(<span class=keyword>%assert</span> <span class=variable>%parent</span> ()
+  [(<span class=keyword>'</span><span class=variable>Laertes</span> <span class=keyword>'</span><span class=variable>Odysseus</span>)])
+
+(<span class=keyword>%assert</span> <span class=variable>%parent</span> ()
+  [(<span class=keyword>'</span><span class=variable>Odysseus</span> <span class=keyword>'</span><span class=variable>Telemachus</span>)]
+  [(<span class=keyword>'</span><span class=variable>Penelope</span> <span class=keyword>'</span><span class=variable>Telemachus</span>)])
+</pre>
+<p class=noindent></p>
+<p>
+
+(Schelog does not provide a predicate for <em>retracting</em>
+assertions, since we can keep track of older versions of
+predicates using conventional Scheme features (<code class=scheme><span class=keyword>let</span></code> and <code class=scheme><span class=keyword>set!</span></code>).)</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_2.5"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.5">2.5&#xa0;&#xa0;Local Variables</a></h2>
+<p class=noindent></p>
+<p>
+
+The local logic variables of <code class=scheme><span class=keyword>%rel</span></code>- and
+<code class=scheme><span class=keyword>%which</span></code>-expressions are in reality introduced by the
+Schelog syntactic form called <code class=scheme><span class=keyword>%let</span></code>.  (<code class=scheme><span class=keyword>%rel</span></code> and
+<code class=scheme><span class=keyword>%which</span></code> are macros written using <code class=scheme><span class=keyword>%let</span></code>.)</p>
+<p>
+
+<code class=scheme><span class=keyword>%let</span></code> introduces new lexically scoped logic variables.
+Supposing, instead of</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> (<span class=variable>what</span>)
+  (<span class=variable>%knows</span> <span class=keyword>'</span><span class=variable>Odysseus</span> <span class=variable>what</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>we had asked</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%let</span> (<span class=variable>what</span>)
+  (<span class=keyword>%which</span> ()
+    (<span class=variable>%knows</span> <span class=keyword>'</span><span class=variable>Odysseus</span> <span class=variable>what</span>)))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>This query, too, succeeds five times, since
+Odysseus knows five things.  However, <code class=scheme><span class=keyword>%which</span></code> emits
+bindings only for the local variables that <em>it</em>
+introduces.  Thus, this query emits <code class=scheme>()<sup><small>true</small></sup></code> five times before
+<code class=scheme>(<span class=variable>%more</span>)</code> finally returns <code class=scheme><span class=selfeval>#f</span></code>.</p>
+<p>
+
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-1.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-3.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<!--
+Generated from index.ms by troff2page, v. 20201205
+Copyright (C) 2003-2020 Dorai Sitaram
+(running on Lua 5.3)
+http://ds26gte.github.io/troff2page
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>
+troff2page
+</title>
+<link rel="stylesheet" href="index-Z-S.css" title=default>
+<link rel="stylesheet" href="default.css" title=default>
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-4.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-6.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+<p></p>
+<h1 style="font-size: 160%"><a name="TAG:__pca_sec_11"></a>
+5. Making an index</h1>
+<p><a name="TAG:__troff2page_index_60"></a>
+<a name="TAG:__troff2page_index_61"></a>
+<a name="TAG:__troff2page_index_62"></a>
+The supplied macro file <span style="font-family: monospace; ">pca-ix.tmac</span>
+creates a sorted
+index, with the aid of the external program makeindex.
+makeindex is included with TeX distributions, but you can
+also obtain <a href="http://stuff.mit.edu/afs/sipb/project/tex-dev/src/tar/makeindex.tar.gz"><span class=hreftext>just
+the makeindex distribution</span></a>.
+</p>
+<p class=indent>Note that the indexes created by groff and troff2page are
+necessarily different, because the respective paginations
+are different.  In addition, the index generated for
+troff2page has the additional feature of hyperlinking to the
+appropriate locations in the body text.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_63"></a>
+The call
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.IX&#xa0;item<br>
+</span>
+</div>
+</p>
+<p>marks the text “item” as an indexable item.  The metacharacters <span style="font-family: monospace; ">@</span>,
+<span style="font-family: monospace; ">!</span>, <span style="font-family: monospace; ">&#x22;</span>, and <span style="font-family: monospace; ">|</span> can be used to respectively specify (a)
+alternate alphabetization, (b) subitems, (c) literal metacharacters, and
+(d) encapsulation of the page number.
+</p>
+<p class=indent>E.g.,
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.IX&#xa0;m@-m,&#xa0;groff&#xa0;option<br>
+</span>
+</div>
+</p>
+<p>identifies an index entry for “-m, groff option” but alphabetizes
+it as though it were “m” rather than something that starts with a
+hyphen.
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.IX&#xa0;groff!macro&#xa0;packages<br>
+</span>
+</div>
+</p>
+<p>makes “macro packages” an indented index subentry under “groff”.
+</p>
+<p class=indent>Up to two <span style="font-family: monospace; ">!</span>s may be used.
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.IX&#xa0;groff!macro&#xa0;packages!ms<br>
+</span>
+</div>
+</p>
+<p>produces “ms” as a subsubentry under “macro packages” under
+“groff”.
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.IX&#xa0;troff|see&#xa0;groff<br>
+</span>
+</div>
+</p>
+<p>has the index entry for “troff” point to
+“groff” rather than have a page number of its own.
+</p>
+<p class=indent>If any of the metacharacters need to
+appear in the index entry as themselves, precede them with
+<span style="font-family: monospace; ">&#x22;</span>.
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.IX&#xa0;set&#x22;!car<br>
+</span>
+</div>
+</p>
+<p>creates an index entry for “set!car” rather than creating a
+subentry “car” under “set&#x22;”.
+</p>
+<p class=indent>Please see the
+makeindex
+documentation for all the details.  Essentially, the syntax for entering
+index entries is the same <a href="http://tex.loria.fr/bibdex/makeindex.pdf"><span class=hreftext>as for LaTeX</span></a>, except that in troff we use
+“<span style="font-family: monospace; ">.IX item</span>” where in LaTeX one would use
+“<span style="font-family: monospace; ">\index{item}</span>”.
+</p>
+<p class=indent><span style="font-family: monospace; ">pca-ix.tmac</span> will call makeindex to create a
+sorted index in the auxiliary file <span style="font-family: monospace; ">\*[AUXF].ind</span>, which can be
+slurped back into the input document:
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.so&#xa0;\*[AUXF].ind<br>
+</span>
+</div>
+</p>
+<p>Adding a section header on top is up to you.
+<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-4.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-6.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+</p>
+</div>
+</body>
+</html>

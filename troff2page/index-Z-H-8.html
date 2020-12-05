@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<!--
+Generated from index.ms by troff2page, v. 20201205
+Copyright (C) 2003-2020 Dorai Sitaram
+(running on Lua 5.3)
+http://ds26gte.github.io/troff2page
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>
+troff2page
+</title>
+<link rel="stylesheet" href="index-Z-S.css" title=default>
+<link rel="stylesheet" href="default.css" title=default>
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-7.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-9.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+<p></p>
+<h1 style="font-size: 160%"><a name="TAG:__pca_sec_16"></a>
+8. Styling</h1>
+<p><a name="TAG:__troff2page_index_83"></a>
+<span style="font-family: monospace; ">.ig ##</span> can be used to specify settings that are relevant only
+when troff2page is used on a document, e.g., stylesheet changes.
+troff2page uses the output-stream <span style="font-family: monospace; ">Css_stream</span> to
+write out its default style information.  The user can also
+append to this stream. E.g.,
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.ig&#xa0;##<br>
+&#xa0;&#xa0;&#xa0;&#xa0;Css_stream:write([[<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;h1,h2,h3,h4,h5,h6&#xa0;{<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;color:&#xa0;#9b3d3d;&#xa0;/*&#xa0;terracotta&#xa0;pink&#xa0;*/<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;font-family:&#xa0;sans-serif;<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;font-weight:&#xa0;normal;<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;margin-top:&#xa0;1em;<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;margin-bottom:&#xa0;0.5em;<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;}<br>
+&#xa0;&#xa0;&#xa0;&#xa0;]])<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.##<br>
+</span>
+</div>
+</p>
+<p>This sets the HTML headers
+with a foreground color
+of <span style="color: #9b3d3d; ">terracotta pink</span><span style="color: previous; "><a name="TAG:__troff2page_call_footnote_9"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_9"><span class=hreftext><sup><small>9</small></sup></span></a>,
+along with some other changes from the default.
+</span></p>
+<p class=indent><a name="TAG:__troff2page_index_84"></a>
+troff2page makes available many CSS classes that you can modify
+in this manner to change the look of your web pages. For
+instance, the HTML element for the document title has class
+<span style="font-family: monospace; ">title</span>. Here’s a way to get a more happening,
+Asciidoctor-like title:
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.ig&#xa0;##<br>
+&#xa0;&#xa0;&#xa0;&#xa0;Css_stream:write([[<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;h1.title&#xa0;{<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;color:&#xa0;#333333;<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;padding-bottom:&#xa0;10px;<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;border-bottom:&#xa0;1px&#xa0;solid&#xa0;#dddddf;<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;}<br>
+&#xa0;&#xa0;&#xa0;&#xa0;]])<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.##<br>
+</span>
+</div>
+</p>
+<p>Of course, these CSS mods don't affect the groff output, but they
+do affect the printed output if you choose 
+to print from the browser! To prevent any CSS mods
+from leaking into the browser-mediated printout, wrap them inside
+<span style="font-family: monospace; ">@media screen {...}</span>.
+</p>
+<p class=indent></p>
+<p></p>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_17"></a>
+Colophon</h2>
+<p><a name="TAG:__troff2page_index_85"></a>
+<a name="TAG:__troff2page_index_86"></a>
+By default, troff2page places a colophon at the bottom right of the first
+page. The colophon mentions (1) the last-modification
+time of the
+the document and (2) the troff2page version used for the conversion.
+Either or both can be suppressed via CSS.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_87"></a>
+<a name="TAG:__troff2page_index_88"></a>
+To suppress the mention of troff2page, 
+</p>
+<p class=indent></p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.colophon&#xa0;.advertisement&#xa0;{<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;display:&#xa0;none;<br>
+&#xa0;&#xa0;&#xa0;&#xa0;}<br>
+</span>
+</div>
+</p>
+<p></p>
+<p class=indent>To suppress the entire colophon,
+</p>
+<p class=indent></p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.colophon&#xa0;{<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;display:&#xa0;none;<br>
+&#xa0;&#xa0;&#xa0;&#xa0;}<br>
+</span>
+</div>
+</p>
+<p></p>
+<p class=indent>troff2page calculates the last-mod time by choosing the timestamp
+of the newest of the source documents that make up the document.
+Only user content is considered; macro and auxiliary files are
+not.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_89"></a>
+<a name="TAG:__troff2page_index_90"></a>
+To specify a document timestamp without regard to the actual mod times
+of the files in it, use the -ms macros <span style="font-family: monospace; ">.ND</span> or <span style="font-family: monospace; ">.DA</span>.
+troff2page doesn't distinguish between them, but groff does.<a name="TAG:__troff2page_call_footnote_10"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_10"><span class=hreftext><sup><small>10</small></sup></span></a>
+For web pages, note that if
+either macro is called with an argument, that argument is used as the
+last-mod date, overriding the value that troff2page would
+have determined. 
+</p>
+<p class=indent><a name="TAG:__troff2page_index_91"></a>
+If no argument is given, the colophon doesn't
+include the “Last modified” line at all, something that can also be
+accomplished via the CSS fragment:
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.colophon&#xa0;.lastmod&#xa0;{<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;display:&#xa0;none;<br>
+&#xa0;&#xa0;&#xa0;&#xa0;}<br>
+</span>
+</div>
+</p>
+<p></p>
+<div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_9"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_9"><span class=hreftext><sup><small>9</small></sup></span></a>
+The RGB values used in this manual for
+the colors
+terracotta pink
+and Venetian red are courtesy <a href="https://www.resene.co.nz/swatches"><span class=hreftext>Resene Paints</span></a>.
+</p>
+<p><a name="TAG:__troff2page_footnote_10"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_10"><span class=hreftext><sup><small>10</small></sup></span></a>
+See the -ms man page. <span style="font-family: monospace; ">.ND</span> is probably what you want. groff
+doesn't really have any notion of the last-mod date anyway: It
+simply uses the date that it was called. 
+I.e., last-creation-of-printed-output date.
+</p>
+</div>
+<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-7.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-9.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+</div>
+</body>
+</html>

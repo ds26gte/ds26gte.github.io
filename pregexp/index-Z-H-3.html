@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+pregexp: Portable Regular Expressions for Scheme and Common Lisp
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-2.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-4.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_3"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3">3&#xa0;&#xa0;The regexp pattern language</a></h1>
+<p class=noindent>Here is a complete description of the regexp pattern
+language recognized by the <code class=scheme><span class=variable>pregexp</span></code> procedures.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.1"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.1">3.1&#xa0;&#xa0;Basic assertions</a></h2>
+<p class=noindent>The <em>assertions</em> <code class=verbatim>^</code> and <code class=verbatim>$</code> identify the
+beginning and the end of the text string respectively.
+They ensure that their adjoining regexps match at
+one or other end of the text string.
+Examples:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;^contact&#x22;&#x22;</span> <span class=selfeval>&#x22;first contact&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The regexp fails to match because <code class=verbatim>contact</code> does not
+occur at the beginning of the text string.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;laugh$&#x22;&#x22;</span> <span class=selfeval>&#x22;laugh laugh laugh laugh&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>18</span> . <span class=selfeval>23</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The regexp matches the <em>last</em> <code class=verbatim>laugh</code>.</p>
+<p>
+
+The metasequence <code class=verbatim>\b</code> asserts that
+a <em>word boundary</em> exists.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;yack\\b&#x22;&#x22;</span> <span class=selfeval>&#x22;yackety yack&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>8</span> . <span class=selfeval>12</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The <code class=verbatim>yack</code> in <code class=verbatim>yackety</code> doesn’t end at a word
+boundary so it isn’t matched.  The second <code class=verbatim>yack</code> does
+and is.</p>
+<p>
+
+The metasequence <code class=verbatim>\B</code> has the opposite effect
+to <code class=verbatim>\b</code>.   It asserts that a word boundary
+does not exist.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;an\\B&#x22;&#x22;</span> <span class=selfeval>&#x22;an analysis&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>3</span> . <span class=selfeval>5</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The <code class=verbatim>an</code> that doesn’t end in a word boundary
+is matched.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.2"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.2">3.2&#xa0;&#xa0;Characters and character classes</a></h2>
+<p class=noindent>Typically a character in the regexp matches the same
+character in the text string.  Sometimes it is
+necessary or convenient to use a regexp
+metasequence to refer to a single character.
+Thus, metasequences <code class=verbatim>\n</code>, <code class=verbatim>\r</code>, <code class=verbatim>\t</code>, and <code class=verbatim>\.</code>
+match the newline, return, tab and period characters
+respectively.</p>
+<p>
+
+The <em>metacharacter</em> period (<code class=verbatim>.</code>) matches
+<em>any</em> character other than newline.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;p.t&#x22;&#x22;</span> <span class=selfeval>&#x22;pet&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;pet&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>It also matches <code class=verbatim>pat</code>, <code class=verbatim>pit</code>, <code class=verbatim>pot</code>, <code class=verbatim>put</code>,
+and <code class=verbatim>p8t</code> but not <code class=verbatim>peat</code> or <code class=verbatim>pfffft</code>.</p>
+<p>
+
+A <em>character class</em> matches any one character from
+a set of characters.  A typical format for this
+is the <em>bracketed character class</em> <code class=verbatim>[</code>...<code class=verbatim>]</code>,
+which matches any one character from the non-empty sequence
+of characters enclosed within the brackets.<a id="TAG:__tex2page_call_footnote_Temp_2"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_2">2</a></sup></span>
+Thus <code class=scheme><span class=selfeval>&#x22;p[aeiou]t&#x22;&#x22;</span></code> matches <code class=verbatim>pat</code>, <code class=verbatim>pet</code>, <code class=verbatim>pit</code>,
+<code class=verbatim>pot</code>, <code class=verbatim>put</code> and nothing else.</p>
+<p>
+
+Inside the brackets, a hyphen (<code class=verbatim>&#x2011;</code>) between two
+characters specifies the ascii range between the characters.
+Eg, <code class=scheme><span class=selfeval>&#x22;ta[b&#x2011;dgn&#x2011;p]&#x22;&#x22;</span></code> matches <code class=verbatim>tab</code>, <code class=verbatim>tac</code>, <code class=verbatim>tad</code>, <em>and</em>
+<code class=verbatim>tag</code>, <em>and</em> <code class=verbatim>tan</code>, <code class=verbatim>tao</code>, <code class=verbatim>tap</code>.</p>
+<p>
+
+An initial caret (<code class=verbatim>^</code>) after the left bracket inverts
+the set specified by the rest of the contents, ie, it
+specifies the set of characters <em>other than</em> those
+identified in the brackets.  Eg, <code class=scheme><span class=selfeval>&#x22;do[^g]&#x22;&#x22;</span></code> matches
+all three-character sequences starting with <code class=verbatim>do</code>
+except <code class=verbatim>dog</code>.</p>
+<p>
+
+Note that the metacharacter <code class=verbatim>^</code> inside brackets means
+something quite different from what it means outside.
+Most other metacharacters (<code class=verbatim>.</code>, <code class=verbatim>*</code>, <code class=verbatim>+</code>, <code class=verbatim>?</code>,
+etc) cease to be metacharacters when inside brackets,
+although you may still escape them for peace of
+mind.  <code class=verbatim>&#x2011;</code> is a metacharacter only when it’s
+inside brackets, and neither the first nor the last character.</p>
+<p>
+
+Bracketed character classes cannot contain other
+bracketed character classes (although they contain
+certain other types of character classes — see
+below).  Thus a left bracket (<code class=verbatim>[</code>)
+inside a bracketed character class doesn’t have to be a
+metacharacter; it can stand for itself.  Eg,
+<code class=scheme><span class=selfeval>&#x22;[a[b]&#x22;&#x22;</span></code> matches <code class=verbatim>a</code>, <code class=verbatim>[</code>, and <code class=verbatim>b</code>.</p>
+<p>
+
+Furthermore, since empty bracketed character classes
+are disallowed, a right bracket (<code class=verbatim>]</code>) immediately occurring
+after the opening left bracket
+also doesn’t need to be a metacharacter.  Eg,
+<code class=scheme><span class=selfeval>&#x22;[]ab]&#x22;&#x22;</span></code> matches <code class=verbatim>]</code>, <code class=verbatim>a</code>, and <code class=verbatim>b</code>.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.2.1"></a>
+<h3 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.2.1">3.2.1&#xa0;&#xa0;Some frequently used character
+classes</a></h3>
+<p class=noindent>Some standard character classes can be conveniently
+represented as metasequences instead of as explicit
+bracketed expressions.  <code class=verbatim>\d</code> matches a  digit
+(<code class=verbatim>[0&#x2011;9]</code>); <code class=verbatim>\s</code> matches a whitespace character; and
+<code class=verbatim>\w</code> matches a character that could be part of a
+“word”.<a id="TAG:__tex2page_call_footnote_Temp_3"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_3">3</a></sup></span></p>
+<p>
+
+The upper-case versions of these metasequences stand
+for the inversions of the corresponding character
+classes.  Thus <code class=verbatim>\D</code> matches a non-digit, <code class=verbatim>\S</code> a
+non-whitespace character, and <code class=verbatim>\W</code> a
+non-“word” character.</p>
+<p>
+
+Remember to include a double backslash when putting
+these metasequences in a Scheme string:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;\\d\\d&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;0 dear, 1 have 2 read catch 22 before 9&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;22&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+These character classes can be used inside
+a bracketed expression.  Eg,
+<code class=scheme><span class=selfeval>&#x22;[a&#x2011;z\\d]&#x22;&#x22;</span></code> matches a lower-case letter
+or a digit.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.2.2"></a>
+<h3 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.2.2">3.2.2&#xa0;&#xa0;POSIX character classes</a></h3>
+<p class=noindent>A <em>POSIX character class</em> is a special metasequence
+of the form <code class=verbatim>[:</code>...<code class=verbatim>:]</code> that can be used only
+inside a bracketed expression.  The POSIX classes
+supported are</p>
+<p>
+
+</p>
+<div class=medskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<table><tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:alnum:]</code>  </td><td> <span style="margin-left: 1em"> </span>letters and digits </td></tr>
+<tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:alpha:]</code>  </td><td> <span style="margin-left: 1em"> </span>letters  </td></tr>
+<tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:algor:]</code>  </td><td> <span style="margin-left: 1em"> </span>the letters <code class=verbatim>c</code>, <code class=verbatim>h</code>, <code class=verbatim>a</code> and <code class=verbatim>d</code> </td></tr>
+<tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:ascii:]</code>  </td><td> <span style="margin-left: 1em"> </span>7-bit ascii characters </td></tr>
+<tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:blank:]</code>  </td><td> <span style="margin-left: 1em"> </span>widthful whitespace, ie, space and tab </td></tr>
+<tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:cntrl:]</code>  </td><td> <span style="margin-left: 1em"> </span>“control” characters, viz, those with code <code class=verbatim>&#x3c;</code> 32 </td></tr>
+<tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:digit:]</code>  </td><td> <span style="margin-left: 1em"> </span>digits, same as <code class=verbatim>\d</code> </td></tr>
+<tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:graph:]</code>  </td><td> <span style="margin-left: 1em"> </span>characters that use ink </td></tr>
+<tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:lower:]</code>  </td><td> <span style="margin-left: 1em"> </span>lower-case letters </td></tr>
+<tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:print:]</code>  </td><td> <span style="margin-left: 1em"> </span>ink-users plus widthful whitespace </td></tr>
+<tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:space:]</code>  </td><td> <span style="margin-left: 1em"> </span>whitespace, same as <code class=verbatim>\s</code> </td></tr>
+<tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:upper:]</code>  </td><td> <span style="margin-left: 1em"> </span>upper-case letters </td></tr>
+<tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:word:]</code>   </td><td> <span style="margin-left: 1em"> </span>letters, digits, and underscore, same as <code class=verbatim>\w</code> </td></tr>
+<tr><td><span style="margin-left: 20pt"></span><code class=verbatim>[:xdigit:]</code> </td><td> <span style="margin-left: 1em"> </span>hex digits </td></tr>
+</table>
+<p>
+</p>
+<div class=medskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+
+<p class=noindent>For example, the regexp  <code class=scheme><span class=selfeval>&#x22;[[:alpha:]_]&#x22;&#x22;</span></code>
+matches a letter or underscore.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;[[:alpha:]_]&#x22;&#x22;</span> <span class=selfeval>&#x22;--x--&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;x&#x22;&#x22;</span>)
+
+(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;[[:alpha:]_]&#x22;&#x22;</span> <span class=selfeval>&#x22;--_--&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;_&#x22;&#x22;</span>)
+
+(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;[[:alpha:]_]&#x22;&#x22;</span> <span class=selfeval>&#x22;--:--&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+The POSIX class notation is valid <em>only</em> inside a
+bracketed expression.  For instance, <code class=verbatim>[:alpha:]</code>,
+when not inside a bracketed expression, will <em>not</em>
+be read as the letter class.
+Rather it is (from previous principles) the character
+class containing the characters <code class=verbatim>:</code>, <code class=verbatim>a</code>, <code class=verbatim>l</code>,
+<code class=verbatim>p</code>, <code class=verbatim>h</code>.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;[:alpha:]&#x22;&#x22;</span> <span class=selfeval>&#x22;--a--&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;a&#x22;&#x22;</span>)
+
+(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;[:alpha:]&#x22;&#x22;</span> <span class=selfeval>&#x22;--_--&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+By placing a caret (<code class=verbatim>^</code>) immediately after
+<code class=verbatim>[:</code>, you get the inversion of that POSIX
+character class.  Thus, <code class=verbatim>[:^alpha:]</code>
+is the class containing all characters
+except the letters.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.3"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.3">3.3&#xa0;&#xa0;Quantifiers</a></h2>
+<p class=noindent>The <em>quantifiers</em> <code class=verbatim>*</code>, <code class=verbatim>+</code>, and
+<code class=verbatim>?</code> match respectively: zero or more, one or more,
+and zero or one instances of the preceding subpattern.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;c[ad]*r&#x22;&#x22;</span> <span class=selfeval>&#x22;cadaddadddr&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>0</span> . <span class=selfeval>11</span>))
+(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;c[ad]*r&#x22;&#x22;</span> <span class=selfeval>&#x22;cr&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>0</span> . <span class=selfeval>2</span>))
+
+(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;c[ad]+r&#x22;&#x22;</span> <span class=selfeval>&#x22;cadaddadddr&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>0</span> . <span class=selfeval>11</span>))
+(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;c[ad]+r&#x22;&#x22;</span> <span class=selfeval>&#x22;cr&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>#f</span>
+
+(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;c[ad]?r&#x22;&#x22;</span> <span class=selfeval>&#x22;cadaddadddr&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>#f</span>
+(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;c[ad]?r&#x22;&#x22;</span> <span class=selfeval>&#x22;cr&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>0</span> . <span class=selfeval>2</span>))
+(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;c[ad]?r&#x22;&#x22;</span> <span class=selfeval>&#x22;car&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>0</span> . <span class=selfeval>3</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.3.1"></a>
+<h3 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.3.1">3.3.1&#xa0;&#xa0;Numeric quantifiers</a></h3>
+<p class=noindent>You can use braces to specify much finer-tuned
+quantification than is possible with <code class=verbatim>*</code>, <code class=verbatim>+</code>, <code class=verbatim>?</code>.</p>
+<p>
+
+The quantifier <code class=verbatim>{m}</code> matches <em>exactly</em> <code class=verbatim>m</code>
+instances of the preceding <em>subpattern</em>.  <code class=verbatim>m</code>
+must be a nonnegative integer.</p>
+<p>
+
+The quantifier <code class=verbatim>{m,n}</code> matches at least <code class=verbatim>m</code>
+and at most <code class=verbatim>n</code> instances.  <code class=verbatim>m</code> and
+<code class=verbatim>n</code> are nonnegative integers with <code class=verbatim>m &#x3c;=
+n</code>.  You may omit either or both numbers, in which case
+<code class=verbatim>m</code> defaults to 0 and <code class=verbatim>n</code> to
+infinity.</p>
+<p>
+
+It is evident that <code class=verbatim>+</code> and <code class=verbatim>?</code> are abbreviations
+for <code class=verbatim>{1,}</code> and <code class=verbatim>{0,1}</code> respectively.
+<code class=verbatim>*</code> abbreviates <code class=verbatim>{,}</code>, which is the same
+as <code class=verbatim>{0,}</code>.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;[aeiou]{3}&#x22;&#x22;</span> <span class=selfeval>&#x22;vacuous&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;uou&#x22;&#x22;</span>)
+
+(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;[aeiou]{3}&#x22;&#x22;</span> <span class=selfeval>&#x22;evolve&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>#f</span>
+
+(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;[aeiou]{2,3}&#x22;&#x22;</span> <span class=selfeval>&#x22;evolve&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>#f</span>
+
+(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;[aeiou]{2,3}&#x22;&#x22;</span> <span class=selfeval>&#x22;zeugma&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;eu&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.3.2"></a>
+<h3 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.3.2">3.3.2&#xa0;&#xa0;Non-greedy quantifiers</a></h3>
+<p class=noindent>The quantifiers described above are <em>greedy</em>, ie,
+they match the  maximal number of instances that would
+still lead to an overall match for the full pattern.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;&#x3c;.*&#x3e;&#x22;&#x22;</span> <span class=selfeval>&#x22;&#x3c;tag1&#x3e; &#x3c;tag2&#x3e; &#x3c;tag3&#x3e;&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;&#x3c;tag1&#x3e; &#x3c;tag2&#x3e; &#x3c;tag3&#x3e;&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+To make these quantifiers <em>non-greedy</em>, append
+a <code class=verbatim>?</code> to them.  Non-greedy quantifiers match
+the minimal number of instances needed to ensure an
+overall match.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;&#x3c;.*?&#x3e;&#x22;&#x22;</span> <span class=selfeval>&#x22;&#x3c;tag1&#x3e; &#x3c;tag2&#x3e; &#x3c;tag3&#x3e;&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;&#x3c;tag1&#x3e;&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+The non-greedy quantifiers are respectively:
+<code class=verbatim>*?</code>, <code class=verbatim>+?</code>, <code class=verbatim>??</code>, <code class=verbatim>{m}?</code>, <code class=verbatim>{m,n}?</code>.
+Note the two uses of the metacharacter <code class=verbatim>?</code>.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.4"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.4">3.4&#xa0;&#xa0;Clusters</a></h2>
+<p class=noindent><em>Clustering</em>, ie, enclosure within parens
+<code class=verbatim>(</code>...<code class=verbatim>)</code>, identifies the enclosed <em>subpattern</em>
+as a single entity.  It causes the matcher to <em>capture</em>
+the <em>submatch</em>, or the portion of the string
+matching the subpattern, in addition to the
+overall match.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;([a-z]+) ([0-9]+), ([0-9]+)&#x22;&#x22;</span> <span class=selfeval>&#x22;jan 1, 1970&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;jan 1, 1970&#x22;&#x22;</span> <span class=selfeval>&#x22;jan&#x22;&#x22;</span> <span class=selfeval>&#x22;1&#x22;&#x22;</span> <span class=selfeval>&#x22;1970&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+Clustering also causes a following quantifier to treat
+the entire enclosed subpattern as an entity.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;(poo )*&#x22;&#x22;</span> <span class=selfeval>&#x22;poo poo platter&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;poo poo &#x22;&#x22;</span> <span class=selfeval>&#x22;poo &#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+The number of submatches returned is always equal
+to the number of subpatterns specified in the
+regexp, even if a particular subpattern happens
+to match more than one substring or no substring
+at all.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;([a-z ]+;)*&#x22;&#x22;</span> <span class=selfeval>&#x22;lather; rinse; repeat;&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;lather; rinse; repeat;&#x22;&#x22;</span> <span class=selfeval>&#x22; repeat;&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Here the <code class=verbatim>*</code>-quantified subpattern matches three
+times, but it is the last submatch that is returned.</p>
+<p>
+
+It is also possible for a quantified subpattern to
+fail to match, even if the overall pattern matches.
+In such cases, the failing submatch is represented
+by <code class=scheme><span class=selfeval>#f</span></code>.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>date-re</span>
+  <span class=comment>;match ‘month year’ or ‘month day, year’.</span>
+
+  <span class=comment>;subpattern matches day, if present</span>
+
+  (<span class=variable>pregexp</span> <span class=selfeval>&#x22;([a-z]+) +([0-9]+,)? *([0-9]+)&#x22;&#x22;</span>))
+
+(<span class=variable>pregexp-match</span> <span class=variable>date-re</span> <span class=selfeval>&#x22;jan 1, 1970&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;jan 1, 1970&#x22;&#x22;</span> <span class=selfeval>&#x22;jan&#x22;&#x22;</span> <span class=selfeval>&#x22;1,&#x22;&#x22;</span> <span class=selfeval>&#x22;1970&#x22;&#x22;</span>)
+
+(<span class=variable>pregexp-match</span> <span class=variable>date-re</span> <span class=selfeval>&#x22;jan 1970&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;jan 1970&#x22;&#x22;</span> <span class=selfeval>&#x22;jan&#x22;&#x22;</span> <span class=selfeval>#f</span> <span class=selfeval>&#x22;1970&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.4.1"></a>
+<h3 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.4.1">3.4.1&#xa0;&#xa0;Backreferences</a></h3>
+<p class=noindent>Submatches can be used in the insert string argument of
+the procedures <code class=scheme><span class=variable>pregexp&#x2011;replace</span></code> and
+<code class=scheme><span class=variable>pregexp&#x2011;replace*</span></code>.  The insert string can use <code class=verbatim>\n</code>
+as a <em>backreference</em> to refer back to the <em>n</em>th
+submatch, ie, the substring that matched the <em>n</em>th
+subpattern.   <code class=verbatim>\0</code> refers to the entire match,
+and it can also be specified as <code class=verbatim>\&#x26;</code>.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-replace</span> <span class=selfeval>&#x22;_(.+?)_&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;the _nina_, the _pinta_, and the _santa maria_&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;*\\1*&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>&#x22;the *nina*, the _pinta_, and the _santa maria_&#x22;&#x22;</span>
+
+(<span class=variable>pregexp-replace*</span> <span class=selfeval>&#x22;_(.+?)_&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;the _nina_, the _pinta_, and the _santa maria_&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;*\\1*&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>&#x22;the *nina*, the *pinta*, and the *santa maria*&#x22;&#x22;</span>
+
+<span class=comment>;recall: \S stands for non-whitespace character</span>
+</span>
+(<span class=variable>pregexp-replace</span> <span class=selfeval>&#x22;(\\S+) (\\S+) (\\S+)&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;eat to live&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;\\3 \\2 \\1&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>&#x22;live to eat&#x22;&#x22;</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+Use <code class=verbatim>\\</code> in the insert string to specify a literal
+backslash.  Also, <code class=verbatim>\$</code> stands for an empty string,
+and is useful for separating a backreference <code class=verbatim>\n</code>
+from an immediately following number.</p>
+<p>
+
+Backreferences can also be used within the regexp
+pattern to refer back to an already matched subpattern
+in the pattern.  <code class=verbatim>\n</code> stands for an exact repeat
+of the <em>n</em>th submatch.<a id="TAG:__tex2page_call_footnote_Temp_4"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_4">4</a></sup></span></p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;([a-z]+) and \\1&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;billions and billions&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;billions and billions&#x22;&#x22;</span> <span class=selfeval>&#x22;billions&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Note that the backreference is not simply a repeat
+of the previous subpattern.  Rather it is a repeat of
+<em>the particular  substring already matched by the
+subpattern</em>.</p>
+<p>
+
+In the above example, the backreference can only match
+<code class=verbatim>billions</code>.  It will not match <code class=verbatim>millions</code>, even
+though the subpattern it harks back to — <code class=verbatim>([a&#x2011;z]+)</code>
+—  would have had no problem doing so:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;([a-z]+) and \\1&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;billions and millions&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+The following corrects doubled words:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-replace*</span> <span class=selfeval>&#x22;(\\S+) \\1&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;now is the the time for all good men to to come to the aid of of the party&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;\\1&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>&#x22;now is the time for all good men to come to the aid of the party&#x22;&#x22;</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+The following marks all immediately repeating patterns
+in a number string:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-replace*</span> <span class=selfeval>&#x22;(\\d+)\\1&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;123340983242432420980980234&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;{\\1,\\1}&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>&#x22;12{3,3}40983{24,24}3242{098,098}0234&#x22;&#x22;</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.4.2"></a>
+<h3 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.4.2">3.4.2&#xa0;&#xa0;Non-capturing clusters</a></h3>
+<p class=noindent>It is often required to specify a cluster
+(typically for quantification) but without triggering
+the capture of submatch information.  Such
+clusters are called <em>non-capturing</em>.  In such cases,
+use <code class=verbatim>(?:</code> instead of <code class=verbatim>(</code> as the cluster opener.  In
+the following example, the  non-capturing cluster
+eliminates the “directory” portion of a given
+pathname, and the capturing cluster  identifies the
+basename.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;^(?:[a-z]*/)*([a-z]+)$&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;/usr/local/bin/mzscheme&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;/usr/local/bin/mzscheme&#x22;&#x22;</span> <span class=selfeval>&#x22;mzscheme&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.4.3"></a>
+<h3 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.4.3">3.4.3&#xa0;&#xa0;Cloisters</a></h3>
+<p class=noindent>The location between the <code class=verbatim>?</code> and the <code class=verbatim>:</code> of a
+non-capturing cluster is called a <em>cloister</em>.<a id="TAG:__tex2page_call_footnote_Temp_5"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_5">5</a></sup></span>  You can put <em>modifiers</em>
+there that will cause the enclustered subpattern to be
+treated specially.  The modifier <code class=verbatim>i</code> causes the
+subpattern to match <em>case-insensitively</em>:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;(?i:hearth)&#x22;&#x22;</span> <span class=selfeval>&#x22;HeartH&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;HeartH&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+The modifier <code class=verbatim>x</code> causes the subpattern to match
+<em>space-insensitively</em>, ie, spaces and
+comments within the
+subpattern are ignored.  Comments are introduced
+as usual with a semicolon (<code class=verbatim>;</code>) and extend till
+the end of the line.  If you need
+to include a literal space or semicolon in
+a space-insensitized subpattern, escape it
+with a backslash.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;(?x: a   lot)&#x22;&#x22;</span> <span class=selfeval>&#x22;alot&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;alot&#x22;&#x22;</span>)
+
+(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;(?x: a  \\  lot)&#x22;&#x22;</span> <span class=selfeval>&#x22;a lot&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;a lot&#x22;&#x22;</span>)
+
+(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;(?x:
+   a \\ man  \\; \\   ; ignore
+   a \\ plan \\; \\   ; me
+   a \\ canal         ; completely
+   )&#x22;&#x22;</span>
+ <span class=selfeval>&#x22;a man; a plan; a canal&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;a man; a plan; a canal&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The global variable <code class=scheme><span class=global>*pregexp&#x2011;comment&#x2011;char*</span></code>
+contains the comment character (<code class=scheme><span class=selfeval>#\;</span></code>).
+For Perl-like comments,</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>set!</span> <span class=global>*pregexp-comment-char*</span> <span class=selfeval>#\#</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+You can put more than one modifier in the cloister.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;(?ix:
+   a \\ man  \\; \\   ; ignore
+   a \\ plan \\; \\   ; me
+   a \\ canal         ; completely
+   )&#x22;&#x22;</span>
+ <span class=selfeval>&#x22;A Man; a Plan; a Canal&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;A Man; a Plan; a Canal&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+A minus sign before a modifier inverts its meaning.
+Thus, you can use <code class=verbatim>&#x2011;i</code> and <code class=verbatim>&#x2011;x</code> in a <em>
+subcluster</em> to overturn the insensitivities caused by an
+enclosing cluster.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;(?i:the (?-i:TeX)book)&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;The TeXbook&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;The TeXbook&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>This regexp will allow any casing for <code class=verbatim>the</code>
+and <code class=verbatim>book</code> but insists that <code class=verbatim>TeX</code> not be
+differently cased.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.5"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.5">3.5&#xa0;&#xa0;Alternation</a></h2>
+<p class=noindent></p>
+<p>
+
+You can specify a list of <em>alternate</em>
+subpatterns by separating them by <code class=verbatim>|</code>.   The <code class=verbatim>|</code>
+separates subpatterns in the nearest enclosing cluster
+(or in the entire pattern string if there are no
+enclosing parens).</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;f(ee|i|o|um)&#x22;&#x22;</span> <span class=selfeval>&#x22;a small, final fee&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;fi&#x22;&#x22;</span> <span class=selfeval>&#x22;i&#x22;&#x22;</span>)
+
+(<span class=variable>pregexp-replace*</span> <span class=selfeval>&#x22;([yi])s(e[sdr]?|ing|ation)&#x22;&#x22;</span>
+   <span class=selfeval>&#x22;it is energising to analyse an organisation
+   pulsing with noisy organisms&#x22;&#x22;</span>
+   <span class=selfeval>&#x22;\\1z\\2&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>&#x22;it is energizing to analyze an organization
+   pulsing with noisy organisms&#x22;&#x22;</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+Note again that if you wish
+to use clustering merely to specify a list of alternate
+subpatterns but do not want the submatch, use <code class=verbatim>(?:</code>
+instead of <code class=verbatim>(</code>.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;f(?:ee|i|o|um)&#x22;&#x22;</span> <span class=selfeval>&#x22;fun for all&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;fo&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+An important thing to note about alternation is that
+the leftmost matching alternate is picked regardless of
+its length.  Thus, if one of the alternates is a prefix
+of a later alternate, the latter may not have
+a chance to match.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;call|call-with-current-continuation&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;call-with-current-continuation&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;call&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+To allow the longer alternate to have a shot at
+matching, place it before the shorter one:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;call-with-current-continuation|call&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;call-with-current-continuation&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;call-with-current-continuation&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+In any case, an overall match for the entire regexp is
+always preferred to an overall nonmatch.  In the
+following, the longer alternate still wins, because its
+preferred shorter prefix fails to yield an overall
+match.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;(?:call|call-with-current-continuation) constrained&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;call-with-current-continuation constrained&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;call-with-current-continuation constrained&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.6"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.6">3.6&#xa0;&#xa0;Backtracking</a></h2>
+<p class=noindent>We’ve already seen that greedy quantifiers match
+the maximal number of times, but the overriding priority
+is that the overall match succeed.  Consider</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;a*a&#x22;&#x22;</span> <span class=selfeval>&#x22;aaaa&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The regexp consists of two subregexps,
+<code class=verbatim>a*</code> followed by <code class=verbatim>a</code>.
+The subregexp <code class=verbatim>a*</code> cannot be allowed to match
+all four <code class=verbatim>a</code>’s in the text string <code class=verbatim>&#x22;aaaa&#x22;</code>, even though
+<code class=verbatim>*</code> is a greedy quantifier.  It may match only the first
+three, leaving the last one for the second subregexp.
+This ensures that the full regexp matches successfully.</p>
+<p>
+
+The regexp matcher accomplishes this via a process
+called <em>backtracking</em>.  The matcher
+tentatively allows the greedy quantifier
+to match all four <code class=verbatim>a</code>’s, but then when it becomes
+clear that the overall match is in jeopardy, it
+<em>backtracks</em> to a less greedy match of <em>
+three</em> <code class=verbatim>a</code>’s.  If even this fails, as in the
+call</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;a*aa&#x22;&#x22;</span> <span class=selfeval>&#x22;aaaa&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>the matcher backtracks even further.  Overall
+failure is conceded only when all possible backtracking
+has been tried with no success.</p>
+<p>
+
+Backtracking is not restricted to greedy quantifiers.
+Nongreedy quantifiers match as few instances as
+possible, and progressively backtrack to more and more
+instances in order to attain an overall match.  There
+is backtracking in alternation too, as the more
+rightward alternates are tried when locally successful
+leftward ones fail to yield an overall match.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.6.1"></a>
+<h3 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.6.1">3.6.1&#xa0;&#xa0;Disabling backtracking</a></h3>
+<p class=noindent>Sometimes it is efficient to disable backtracking.  For
+example, we may wish  to  <em>commit</em> to a choice, or
+we know that trying alternatives is fruitless.  A
+nonbacktracking regexp is enclosed in <code class=verbatim>(?&#x3e;</code>...<code class=verbatim>)</code>.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;(?&#x3e;a+).&#x22;&#x22;</span> <span class=selfeval>&#x22;aaaa&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+In this call, the subregexp <code class=verbatim>?&#x3e;a+</code> greedily matches
+all four <code class=verbatim>a</code>’s, and is denied the opportunity to
+backpedal.  So the overall match is denied.  The effect
+of the regexp is therefore to match one or more <code class=verbatim>a</code>’s
+followed by something that is definitely non-<code class=verbatim>a</code>.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.7"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.7">3.7&#xa0;&#xa0;Looking ahead and behind</a></h2>
+<p class=noindent>You can have assertions in your pattern that look <em>
+ahead</em> or <em>behind</em> to ensure that a subpattern does
+or does not occur.   These “look around” assertions are
+specified by putting the subpattern checked for in a
+cluster whose leading characters are: <code class=verbatim>?=</code> (for positive
+lookahead), <code class=verbatim>?!</code> (negative lookahead), <code class=verbatim>?&#x3c;=</code>
+(positive lookbehind), <code class=verbatim>?&#x3c;!</code> (negative lookbehind).
+Note that the subpattern in the assertion  does not
+generate a match in the final result.  It merely allows
+or disallows the rest of the match.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.7.1"></a>
+<h3 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.7.1">3.7.1&#xa0;&#xa0;Lookahead</a></h3>
+<p class=noindent>Positive lookahead (<code class=verbatim>?=</code>) peeks ahead to ensure that
+its subpattern <em>could</em> match.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;grey(?=hound)&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;i left my grey socks at the greyhound&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>28</span> . <span class=selfeval>32</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The regexp <code class=scheme><span class=selfeval>&#x22;grey(?=hound)&#x22;&#x22;</span></code> matches <code class=verbatim>grey</code>, but
+<em>only</em> if it is followed by <code class=verbatim>hound</code>.  Thus, the first
+<code class=verbatim>grey</code> in the text string is not matched.</p>
+<p>
+
+Negative lookahead (<code class=verbatim>?!</code>) peeks ahead
+to ensure that its subpattern could not possibly match.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;grey(?!hound)&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;the gray greyhound ate the grey socks&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>27</span> . <span class=selfeval>31</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The regexp <code class=scheme><span class=selfeval>&#x22;grey(?!hound)&#x22;&#x22;</span></code> matches <code class=verbatim>grey</code>, but
+only if it is <em>not</em> followed by <code class=verbatim>hound</code>.  Thus
+the <code class=verbatim>grey</code> just before <code class=verbatim>socks</code> is matched.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.7.2"></a>
+<h3 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.7.2">3.7.2&#xa0;&#xa0;Lookbehind</a></h3>
+<p class=noindent>Positive lookbehind (<code class=verbatim>?&#x3c;=</code>) checks that its subpattern <em>could</em> match
+immediately to the left of the current position in
+the text string.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;(?&#x3c;=grey)hound&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;the hound in the picture is not a greyhound&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>38</span> . <span class=selfeval>43</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The regexp <code class=verbatim>(?&#x3c;=grey)hound</code> matches <code class=verbatim>hound</code>, but only if it is
+preceded by <code class=verbatim>grey</code>.</p>
+<p>
+
+Negative lookbehind
+(<code class=verbatim>?&#x3c;!</code>) checks that its subpattern
+could not possibly match immediately to the left.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;(?&#x3c;!grey)hound&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;the greyhound in the picture is not a hound&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>38</span> . <span class=selfeval>43</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The regexp <code class=verbatim>(?&#x3c;!grey)hound</code> matches <code class=verbatim>hound</code>, but only if
+it is <em>not</em> preceded by <code class=verbatim>grey</code>.</p>
+<p>
+
+Lookaheads and lookbehinds can be convenient when they
+are not confusing.</p>
+<p>
+
+</p>
+<div class=footnoterule><hr></div><p>
+</p>
+<div class=footnote><p>
+<span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_2"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_2">2</a></sup></span> Requiring
+a bracketed character class to be non-empty is not a limitation,
+since an
+empty character class
+can be more easily represented by an empty string.</p>
+<p>
+<span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_3"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_3">3</a></sup></span> Following regexp custom, we identify
+“word” characters as
+<span style="font-family: monospace">[A-Za-z0-9_]</span>
+, although these
+are too restrictive for what a Schemer might consider a
+“word”.</p>
+<p>
+<span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_4"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_4">4</a></sup></span> <span style="font-family: monospace">0</span>
+, which is useful in
+an insert string, makes no  sense within the regexp
+pattern, because the entire regexp has not matched yet
+that you could refer back to it.</p>
+<p>
+<span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_5"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_5">5</a></sup></span> A
+useful, if terminally cute, coinage from the abbots of
+Perl&#xa0;[<a class=hrefinternal href="index-Z-H-5.html#TAG:__tex2page_bib_3">3</a>].</p>
+</div>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-2.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-4.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

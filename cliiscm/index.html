@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<!--
+Generated from index.tex by tex2page, v. 20170103c
+Copyright (C) 1997-2017 Dorai Sitaram
+(running on SBCL 1.3.13.14-88ef66703 Linux)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+CLiiScm
+</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=EB+Garamond" />
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div align=right class=navigation></div>
+<p></p>
+<p>
+</p>
+<p>
+</p>
+<p>
+
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+ 
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+
+
+ 
+</p>
+<h1 class=title>CLiiScm</h1>
+<p>
+CLiiScm ports select Common Lisp files in the working
+directory to Racket. </p>
+<p>
+Currently, it is used to create the Racket version of the Common
+Lisp source for
+<a href="https://github.com/ds26gte/tex2page">TeX2page</a>, to avoid the
+tedium of maintaining two (each about 10 kLoc) sources. The Racket
+version can be further converted to other Scheme dialects using
+<a href="https://github.com/ds26gte/scmxlate">Scmxlate</a>. </p>
+<p>
+CLiiScm isn&#x2019;t a completely general-purpose translator.
+Specifically, it requires uses of the Common Lisp <code class=verbatim>loop</code> macro to
+be such that any <code class=verbatim>return</code> expressions occur only in a tail call
+position of an immediate subform of the <code class=verbatim>loop</code>. A more general
+translation of <code class=verbatim>loop</code> would have made the more common uses
+unnecessarily inefficient.</p>
+<p>
+Specify the files to be ported (without quotes) in the file
+<code class=verbatim>cliiscm&#x2011;files&#x2011;to&#x2011;be&#x2011;ported.lisp</code> in the working directory.  In
+the following, assume <code class=verbatim>jobname.lisp</code> to be a file to be ported.</p>
+<p>
+Start Common Lisp and the load the file <code class=verbatim>clliscm.lisp</code> (using the
+appropriate relative or full pathname). When clliscm is done, it
+will  generally leave for each <code class=verbatim>jobname.lisp</code> the ported
+equivalent <code class=verbatim>my&#x2011;jobmame.lisp</code>. (You can use clliscm directives to
+change the name of the output file(s).)</p>
+<p>
+For each file <code class=verbatim>jobname.lisp</code> to be ported, a user override file
+<code class=verbatim>cliiscm&#x2011;jobname.lisp</code> can be provided in the working directory.</p>
+<p>
+In the user override file, the following directives can be used
+to guide the porting process:</p>
+<p>
+(i) <code class=verbatim>(cliiscm&#x2011;rename (old1 new1) ...)</code> will change all
+occurrences of <code class=verbatim>old1 ...</code> to <code class=verbatim>new1 ...</code>.</p>
+<p>
+(ii) <code class=verbatim>(cliiscm&#x2011;rename&#x2011;def (old1 new1) ...)</code> will ignore the
+definitions for <code class=verbatim>old1 ...</code> in <code class=verbatim>jobname.lisp</code> and will change all
+other occurrens of them to <code class=verbatim>new1 ...</code>.</p>
+<p>
+(iii) <code class=verbatim>(clisscm&#x2011;ignore&#x2011;def name1 ...)</code> will ignore the
+definitions for <code class=verbatim>name1 ...</code>.</p>
+<p>
+(iv) <code class=verbatim>(cliiscm&#x2011;uncall name1 ...)</code> will ignore all top-level calls
+to <code class=verbatim>name1 ...</code>.</p>
+<p>
+(v) <code class=verbatim>(cliiscm&#x2011;defsetf (getter1 setter1) ...)</code> will associate
+<code class=verbatim>setter1 ...</code> as the setter procedures for <code class=verbatim>getter1 ...</code>.</p>
+<p>
+(vi) <code class=verbatim>(cliiscm&#x2011;insert x ...)</code> will insert <code class=verbatim>x ...</code> at the head of
+the output file.</p>
+<p>
+(vii) <code class=verbatim>(cliiscm&#x2011;postamble)</code> will position the contents of the
+source file at that point, so any subsequent directives will go
+after that.</p>
+<p>
+(viii) <code class=verbatim>(cliiscm&#x2011;postprocess x ...)</code> will perform the actions <code class=verbatim>x
+...</code> after the output file has been created. (This can be used
+to rename or change the permissions of the output file.)</p>
+<p>
+(ix) Any definitions in the user definition file will
+automatically cause definitions of the same names in the source
+file to be ignored.</p>
+<p>
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div align=right class=navigation></div>
+</p>
+<p></p>
+<div align=right class=colophon>Last modified: Mon, Jan 2, 2017, 1:37 pm UTC−5<br><div align=right class=advertisement>HTML conversion by <a href="http://ds26gte.github.io/tex2page/index.html">T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page 20170103c</a></div></div>
+</div>
+</body>
+</html>

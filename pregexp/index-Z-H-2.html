@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+pregexp: Portable Regular Expressions for Scheme and Common Lisp
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-1.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-3.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_2"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2">2&#xa0;&#xa0;Regexp procedures</a></h1>
+<p class=noindent><code class=verbatim>pregexp.scm</code>
+provides the procedures
+<code class=scheme><span class=variable>pregexp</span></code>, <code class=scheme><span class=variable>pregexp&#x2011;match&#x2011;positions</span></code>,
+<code class=scheme><span class=variable>pregexp&#x2011;match</span></code>, <code class=scheme><span class=variable>pregexp&#x2011;split</span></code>, <code class=scheme><span class=variable>pregexp&#x2011;replace</span></code>,
+<code class=scheme><span class=variable>pregexp&#x2011;replace*</span></code>, and <code class=scheme><span class=variable>pregexp&#x2011;quote</span></code>.
+All the identifiers introduced
+by <code class=verbatim>pregexp.scm</code> have the prefix <code class=scheme><span class=variable>pregexp</span></code>, so they
+are unlikely to clash with other names in Scheme,
+including those of any natively provided regexp
+operators.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_2.1"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.1">2.1&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp</span></code></a></h2>
+<p class=noindent>The procedure <code class=scheme><span class=variable>pregexp</span></code> takes
+a U-regexp, which is a string, and returns
+an S-regexp, which is a tree.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp</span> <span class=selfeval>&#x22;c.r&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>:sub</span> (<span class=selfeval>:or</span> (<span class=selfeval>:seq</span> <span class=selfeval>#\c</span> <span class=selfeval>:any</span> <span class=selfeval>#\r</span>)))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>There is rarely any need to look at the S-regexps
+returned by <code class=scheme><span class=variable>pregexp</span></code>.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_2.2"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.2">2.2&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp&#x2011;match&#x2011;positions</span></code></a></h2>
+<p class=noindent>The procedure <code class=scheme><span class=variable>pregexp&#x2011;match&#x2011;positions</span></code> takes
+a
+regexp pattern and a text string, and returns a <em>
+match</em> if the regexp <em>matches</em> (some part of) the text string.</p>
+<p>
+
+The regexp may be either a U- or an S-regexp.
+(<code class=scheme><span class=variable>pregexp&#x2011;match&#x2011;positions</span></code> will internally compile a
+U-regexp to an S-regexp before proceeding with the
+matching.  If you find yourself calling
+<code class=scheme><span class=variable>pregexp&#x2011;match&#x2011;positions</span></code> repeatedly with the same
+U-regexp, it may be advisable to explicitly convert the
+latter into an S-regexp once beforehand, using
+<code class=scheme><span class=variable>pregexp</span></code>, to save needless recompilation.)</p>
+<p>
+
+<code class=scheme><span class=variable>pregexp&#x2011;match&#x2011;positions</span></code> returns <code class=scheme><span class=selfeval>#f</span></code> if the regexp did not
+match the string; and a list of <em>index pairs</em> if it
+did match.  Eg,</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;brain&#x22;&#x22;</span> <span class=selfeval>&#x22;bird&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>#f</span>
+
+(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;needle&#x22;&#x22;</span> <span class=selfeval>&#x22;hay needle stack&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>4</span> . <span class=selfeval>10</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>In the second example, the integers 4 and 10 identify
+the substring that was matched. 4 is the starting
+(inclusive) index and 10 the ending (exclusive) index of
+the matching substring.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>substring</span> <span class=selfeval>&#x22;hay needle stack&#x22;&#x22;</span> <span class=selfeval>4</span> <span class=selfeval>10</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>&#x22;needle&#x22;&#x22;</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+Here, <code class=scheme><span class=variable>pregexp&#x2011;match&#x2011;positions</span></code>’s return list contains only
+one index pair, and that pair represents the entire
+substring matched by the regexp.  When we discuss
+<em>subpatterns</em> later, we will see how a single match
+operation can yield a list of <em>submatches</em>.</p>
+<p>
+
+<code class=scheme><span class=variable>pregexp&#x2011;match&#x2011;positions</span></code> takes optional third
+and fourth arguments that specify the indices of
+the text string within which the matching should
+take place.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match-positions</span> <span class=selfeval>&#x22;needle&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;his hay needle stack -- my hay needle stack -- her hay needle stack&#x22;&#x22;</span>
+  <span class=selfeval>24</span> <span class=selfeval>43</span>)
+<span class=keyword>=&#x3e;</span> ((<span class=selfeval>31</span> . <span class=selfeval>37</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Note that the returned indices are still reckoned
+relative to the full text string.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_2.3"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.3">2.3&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp&#x2011;match</span></code></a></h2>
+<p class=noindent>The procedure <code class=scheme><span class=variable>pregexp&#x2011;match</span></code> is called
+like <code class=scheme><span class=variable>pregexp&#x2011;match&#x2011;positions</span></code>
+but instead of returning index pairs it returns the
+matching substrings:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;brain&#x22;&#x22;</span> <span class=selfeval>&#x22;bird&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>#f</span>
+
+(<span class=variable>pregexp-match</span> <span class=selfeval>&#x22;needle&#x22;&#x22;</span> <span class=selfeval>&#x22;hay needle stack&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;needle&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent><code class=scheme><span class=variable>pregexp&#x2011;match</span></code> also takes optional third and
+fourth arguments, with the same meaning as does
+<code class=scheme><span class=variable>pregexp&#x2011;match&#x2011;positions</span></code>.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_2.4"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.4">2.4&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp&#x2011;split</span></code></a></h2>
+<p class=noindent>The procedure <code class=scheme><span class=variable>pregexp&#x2011;split</span></code> takes
+two arguments, a
+regexp pattern and a text string, and returns a list of
+substrings of the text string, where the pattern identifies the
+delimiter separating the substrings.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-split</span> <span class=selfeval>&#x22;:&#x22;&#x22;</span> <span class=selfeval>&#x22;/bin:/usr/bin:/usr/bin/X11:/usr/local/bin&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;/bin&#x22;&#x22;</span> <span class=selfeval>&#x22;/usr/bin&#x22;&#x22;</span> <span class=selfeval>&#x22;/usr/bin/X11&#x22;&#x22;</span> <span class=selfeval>&#x22;/usr/local/bin&#x22;&#x22;</span>)
+
+(<span class=variable>pregexp-split</span> <span class=selfeval>&#x22; &#x22;&#x22;</span> <span class=selfeval>&#x22;pea soup&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;pea&#x22;&#x22;</span> <span class=selfeval>&#x22;soup&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>If the first argument can match an empty string, then
+the list of all the single-character substrings is returned.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-split</span> <span class=selfeval>&#x22;&#x22;&#x22;</span> <span class=selfeval>&#x22;smithereens&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;s&#x22;&#x22;</span> <span class=selfeval>&#x22;m&#x22;&#x22;</span> <span class=selfeval>&#x22;i&#x22;&#x22;</span> <span class=selfeval>&#x22;t&#x22;&#x22;</span> <span class=selfeval>&#x22;h&#x22;&#x22;</span> <span class=selfeval>&#x22;e&#x22;&#x22;</span> <span class=selfeval>&#x22;r&#x22;&#x22;</span> <span class=selfeval>&#x22;e&#x22;&#x22;</span> <span class=selfeval>&#x22;e&#x22;&#x22;</span> <span class=selfeval>&#x22;n&#x22;&#x22;</span> <span class=selfeval>&#x22;s&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>To identify one-or-more spaces as the delimiter,
+take care to use the regexp <code class=scheme><span class=selfeval>&#x22; +&#x22;&#x22;</span></code>, not <code class=scheme><span class=selfeval>&#x22; *&#x22;&#x22;</span></code>.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-split</span> <span class=selfeval>&#x22; +&#x22;&#x22;</span> <span class=selfeval>&#x22;split pea     soup&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;split&#x22;&#x22;</span> <span class=selfeval>&#x22;pea&#x22;&#x22;</span> <span class=selfeval>&#x22;soup&#x22;&#x22;</span>)
+
+(<span class=variable>pregexp-split</span> <span class=selfeval>&#x22; *&#x22;&#x22;</span> <span class=selfeval>&#x22;split pea     soup&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;s&#x22;&#x22;</span> <span class=selfeval>&#x22;p&#x22;&#x22;</span> <span class=selfeval>&#x22;l&#x22;&#x22;</span> <span class=selfeval>&#x22;i&#x22;&#x22;</span> <span class=selfeval>&#x22;t&#x22;&#x22;</span> <span class=selfeval>&#x22;p&#x22;&#x22;</span> <span class=selfeval>&#x22;e&#x22;&#x22;</span> <span class=selfeval>&#x22;a&#x22;&#x22;</span> <span class=selfeval>&#x22;s&#x22;&#x22;</span> <span class=selfeval>&#x22;o&#x22;&#x22;</span> <span class=selfeval>&#x22;u&#x22;&#x22;</span> <span class=selfeval>&#x22;p&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_2.5"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.5">2.5&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp&#x2011;replace</span></code></a></h2>
+<p class=noindent>The procedure <code class=scheme><span class=variable>pregexp&#x2011;replace</span></code> replaces
+the
+matched portion of the text string by another
+string.  The first argument is the pattern,
+the second the text string, and the third
+is the <em>insert string</em> (string to be inserted).</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-replace</span> <span class=selfeval>&#x22;te&#x22;&#x22;</span> <span class=selfeval>&#x22;liberte&#x22;&#x22;</span> <span class=selfeval>&#x22;ty&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>&#x22;liberty&#x22;&#x22;</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>If the pattern doesn’t occur in the text
+string, the returned string is identical (<code class=scheme><span class=variable>eq?</span></code>)
+to the text string.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_2.6"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.6">2.6&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp&#x2011;replace*</span></code></a></h2>
+<p class=noindent>The procedure <code class=scheme><span class=variable>pregexp&#x2011;replace*</span></code> replaces
+<em>all</em>
+matches in the text string by the insert
+string:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-replace*</span> <span class=selfeval>&#x22;te&#x22;&#x22;</span> <span class=selfeval>&#x22;liberte egalite fraternite&#x22;&#x22;</span> <span class=selfeval>&#x22;ty&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>&#x22;liberty egality fratyrnity&#x22;&#x22;</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>As with <code class=scheme><span class=variable>pregexp&#x2011;replace</span></code>, if the pattern doesn’t
+occur in the text string, the returned string is
+identical (<code class=scheme><span class=variable>eq?</span></code>) to the text string.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_2.7"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.7">2.7&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp&#x2011;quote</span></code></a></h2>
+<p class=noindent>The procedure <code class=scheme><span class=variable>pregexp&#x2011;quote</span></code> takes
+an arbitrary string and returns a U-regexp
+(string) that precisely represents it.  In particular,
+characters in the input string that could serve as
+regexp metacharacters are escaped with a
+backslash, so that they safely match only themselves.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-quote</span> <span class=selfeval>&#x22;cons&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>&#x22;cons&#x22;&#x22;</span>
+
+(<span class=variable>pregexp-quote</span> <span class=selfeval>&#x22;list?&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>&#x22;list\\?&#x22;&#x22;</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+<code class=scheme><span class=variable>pregexp&#x2011;quote</span></code> is useful when building a composite
+regexp from a mix of regexp strings and verbatim strings.</p>
+<p>
+
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-1.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-3.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

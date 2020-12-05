@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+Programming in Schelog
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-2.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-4.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_3"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3">3&#xa0;&#xa0;Using Conventional Scheme Expressions in Schelog</a></h1>
+<p class=noindent></p>
+<p>
+
+The arguments of Schelog predicates can be any Scheme
+objects.  In particular, composite structures such as lists,
+vectors and strings can be used, as also Scheme expressions
+using the full array of Scheme’s construction and
+decomposition operators.  For instance, consider the
+following goal:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>%member</span> <span class=variable>x</span> <span class=keyword>'</span>(<span class=selfeval>1</span> <span class=selfeval>2</span> <span class=selfeval>3</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Here, <code class=scheme><span class=variable>%member</span></code> is a predicate, <code class=scheme><span class=variable>x</span></code> is a logic
+variable, and <code class=scheme><span class=keyword>'</span>(<span class=selfeval>1</span> <span class=selfeval>2</span> <span class=selfeval>3</span>)</code> is a structure.  Given a suitably
+intuitive definition for <code class=scheme><span class=variable>%member</span></code>, the above goal
+succeeds for <code class=scheme><span class=variable>x</span></code> = <code class=scheme><span class=selfeval>1</span></code>, <code class=scheme><span class=selfeval>2</span></code>, and <code class=scheme><span class=selfeval>3</span></code>.</p>
+<p>
+
+Now to defining predicates like <code class=scheme><span class=variable>%member</span></code>:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%member</span>
+  (<span class=keyword>%rel</span> (<span class=variable>x</span> <span class=variable>y</span> <span class=variable>xs</span>)
+    [(<span class=variable>x</span> (<span class=variable>cons</span> <span class=variable>x</span> <span class=variable>xs</span>))]
+    [(<span class=variable>x</span> (<span class=variable>cons</span> <span class=variable>y</span> <span class=variable>xs</span>))
+      (<span class=variable>%member</span> <span class=variable>x</span> <span class=variable>xs</span>)]))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Ie, <code class=scheme><span class=variable>%member</span></code> is defined with three local variables:
+<code class=scheme><span class=variable>x</span></code>,  <code class=scheme><span class=variable>y</span></code>, <code class=scheme><span class=variable>xs</span></code>.  It  has two
+clauses, identifying the two ways of determining membership.</p>
+<p>
+
+The first clause of <code class=scheme><span class=variable>%member</span></code> states a fact: For any
+<code class=scheme><span class=variable>x</span></code>, <code class=scheme><span class=variable>x</span></code> is a member of a list whose head is also <code class=scheme><span class=variable>x</span></code>.</p>
+<p>
+
+The second clause of <code class=scheme><span class=variable>%member</span></code> is a rule: <code class=scheme><span class=variable>x</span></code> is a
+member of a list if we can show that it is a member of the
+<em>tail</em> of that list.  In other words, the original
+<code class=scheme><span class=variable>%member</span></code> goal is translated into a <em>sub</em>goal, which is also
+a <code class=scheme><span class=variable>%member</span></code> goal.</p>
+<p>
+
+Note that the variable <code class=scheme><span class=variable>y</span></code> in the definition of
+<code class=scheme><span class=variable>%member</span></code> occurs only once in the second clause.  As such,
+it doesn’t need you to make the effort of naming it.  (Names
+help only in matching a second occurrence to a first.)  Schelog
+lets you use the expression <code class=scheme>(<span class=variable>_</span>)</code> to denote an anonymous
+variable.  (Ie, <code class=scheme><span class=variable>_</span></code> is a thunk that generates a fresh
+anonymous variable at each call.)  The predicate <code class=scheme><span class=variable>%member</span></code> can be
+rewritten as</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%member</span>
+  (<span class=keyword>%rel</span> (<span class=variable>x</span> <span class=variable>xs</span>)
+    [(<span class=variable>x</span> (<span class=variable>cons</span> <span class=variable>x</span> (<span class=variable>_</span>)))]
+    [(<span class=variable>x</span> (<span class=variable>cons</span> (<span class=variable>_</span>) <span class=variable>xs</span>))
+      (<span class=variable>%member</span> <span class=variable>x</span> <span class=variable>xs</span>)]))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.1"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.1">3.1&#xa0;&#xa0;Constructors</a></h2>
+<p class=noindent></p>
+<p>
+
+We can use constructors — Scheme procedures for creating
+structures — to simulate data types in Schelog.  For
+instance, let’s define a natural-number data-type where
+<code class=scheme><span class=selfeval>0</span></code> denotes zero, and <code class=scheme>(<span class=variable>succ</span> <span class=variable>x</span>)</code> denotes the natural number
+whose immediate predecessor is <code class=scheme><span class=variable>x</span></code>.   The constructor
+<code class=scheme><span class=variable>succ</span></code> can
+be defined in Scheme as:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>succ</span>
+  (<span class=keyword>lambda</span> (<span class=variable>x</span>)
+    (<span class=variable>vector</span> <span class=keyword>'</span><span class=variable>succ</span> <span class=variable>x</span>)))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Addition and multiplication can be defined as:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%add</span>
+  (<span class=keyword>%rel</span> (<span class=variable>x</span> <span class=variable>y</span> <span class=variable>z</span>)
+    [(<span class=selfeval>0</span> <span class=variable>y</span> <span class=variable>y</span>)]
+    [((<span class=variable>succ</span> <span class=variable>x</span>) <span class=variable>y</span> (<span class=variable>succ</span> <span class=variable>z</span>))
+      (<span class=variable>%add</span> <span class=variable>x</span> <span class=variable>y</span> <span class=variable>z</span>)]))
+
+(<span class=keyword>define</span> <span class=variable>%times</span>
+  (<span class=keyword>%rel</span> (<span class=variable>x</span> <span class=variable>y</span> <span class=variable>z</span> <span class=variable>z1</span>)
+    [(<span class=selfeval>0</span> <span class=variable>y</span> <span class=selfeval>0</span>)]
+    [((<span class=variable>succ</span> <span class=variable>x</span>) <span class=variable>y</span> <span class=variable>z</span>)
+     (<span class=variable>%times</span> <span class=variable>x</span> <span class=variable>y</span> <span class=variable>z1</span>)
+     (<span class=variable>%add</span> <span class=variable>y</span> <span class=variable>z1</span> <span class=variable>z</span>)]))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>We can do a lot of arithmetic with this in place.  For
+instance, the factorial predicate looks like:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%factorial</span>
+  (<span class=keyword>%rel</span> (<span class=variable>x</span> <span class=variable>y</span> <span class=variable>y1</span>)
+    [(<span class=selfeval>0</span> (<span class=variable>succ</span> <span class=selfeval>0</span>))]
+    [((<span class=variable>succ</span> <span class=variable>x</span>) <span class=variable>y</span>)
+      (<span class=variable>%factorial</span> <span class=variable>x</span> <span class=variable>y1</span>)
+      (<span class=variable>%times</span> (<span class=variable>succ</span> <span class=variable>x</span>) <span class=variable>y1</span> <span class=variable>y</span>)]))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.2"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.2">3.2&#xa0;&#xa0;<span style="font-family: monospace">%is</span></a></h2>
+<p class=noindent></p>
+<p>
+
+The above is a very inefficient way to do arithmetic,
+especially when the underlying language Scheme offers
+excellent arithmetic facilities (including a comprehensive
+number “tower” and exact rational arithmetic).  One
+problem with using Scheme calculations directly in Schelog
+clauses is that the expressions used may contain logic
+variables that need to be dereferenced.  Schelog provides
+the predicate <code class=scheme><span class=keyword>%is</span></code> that takes care of this.  The goal</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%is</span> <span class=variable>X</span> <span class=variable>E</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>unifies <code class=scheme><span class=variable>X</span></code> with the value of <code class=scheme><span class=variable>E</span></code> considered as a
+Scheme expression.  <code class=scheme><span class=variable>E</span></code> can have logic variables, but
+usually they should at least be bound, as unbound variables
+may not be palatable values to the Scheme operators used in
+<code class=scheme><span class=variable>E</span></code>.</p>
+<p>
+
+We can now directly use the numbers of Scheme to write a
+more efficient <code class=scheme><span class=variable>%factorial</span></code> predicate:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%factorial</span>
+  (<span class=keyword>%rel</span> (<span class=variable>x</span> <span class=variable>y</span> <span class=variable>x1</span> <span class=variable>y1</span>)
+    [(<span class=selfeval>0</span> <span class=selfeval>1</span>)]
+    [(<span class=variable>x</span> <span class=variable>y</span>) (<span class=keyword>%is</span> <span class=variable>x1</span> (<span class=variable>-</span> <span class=variable>x</span> <span class=selfeval>1</span>))
+           (<span class=variable>%factorial</span> <span class=variable>x1</span> <span class=variable>y1</span>)
+           (<span class=keyword>%is</span> <span class=variable>y</span> (<span class=variable>*</span> <span class=variable>y1</span> <span class=variable>x</span>))]))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>A price that this efficiency comes with is that we can
+use <code class=scheme><span class=variable>%factorial</span></code> only with its first argument already
+instantiated.  In many cases, this is not an unreasonable
+constraint.  In fact, given this limitation, there is
+nothing to prevent us from using Scheme’s factorial
+directly:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%factorial</span>
+  (<span class=keyword>%rel</span> (<span class=variable>x</span> <span class=variable>y</span>)
+    [(<span class=variable>x</span> <span class=variable>y</span>)
+     (<span class=keyword>%is</span> <span class=variable>y</span> (<span class=variable>scheme-factorial</span>
+	      <span class=variable>x</span>))]))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>or better yet, “in-line” any calls to <code class=scheme><span class=variable>%factorial</span></code> with
+<code class=scheme><span class=keyword>%is</span></code>-expressions calling <code class=scheme><span class=variable>scheme&#x2011;factorial</span></code>, where the
+latter is defined in the usual manner:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>scheme-factorial</span>
+  (<span class=keyword>lambda</span> (<span class=variable>n</span>)
+    (<span class=keyword>if</span> (<span class=variable>=</span> <span class=variable>n</span> <span class=selfeval>0</span>) <span class=selfeval>1</span>
+        (<span class=variable>*</span> <span class=variable>n</span> (<span class=variable>factorial</span>
+	       (<span class=variable>-</span> <span class=variable>n</span> <span class=selfeval>1</span>))))))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.3"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.3">3.3&#xa0;&#xa0;Lexical Scoping</a></h2>
+<p class=noindent></p>
+<p>
+
+One can use Scheme’s lexical scoping to enhance predicate
+definition.  Here is a list-reversal predicate defined using
+a hidden auxiliary predicate:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%reverse</span>
+  (<span class=keyword>letrec</span>
+    ([<span class=variable>revaux</span>
+       (<span class=keyword>%rel</span> (<span class=variable>x</span> <span class=variable>y</span> <span class=variable>z</span> <span class=variable>w</span>)
+	 [(<span class=keyword>'</span>() <span class=variable>y</span> <span class=variable>y</span>)]
+	 [((<span class=variable>cons</span> <span class=variable>x</span> <span class=variable>y</span>) <span class=variable>z</span> <span class=variable>w</span>)
+	   (<span class=variable>revaux</span> <span class=variable>y</span>
+	     (<span class=variable>cons</span> <span class=variable>x</span> <span class=variable>z</span>) <span class=variable>w</span>)])])
+    (<span class=keyword>%rel</span> (<span class=variable>x</span> <span class=variable>y</span>)
+      [(<span class=variable>x</span> <span class=variable>y</span>) (<span class=variable>revaux</span> <span class=variable>x</span> <span class=keyword>'</span>() <span class=variable>y</span>)])))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent><code class=scheme>(<span class=variable>revaux</span> <span class=variable>X</span> <span class=variable>Y</span> <span class=variable>Z</span>)</code> uses <code class=scheme><span class=variable>Y</span></code> as an accumulator for
+reversing <code class=scheme><span class=variable>X</span></code> into <code class=scheme><span class=variable>Z</span></code>.  (<code class=scheme><span class=variable>Y</span></code> starts out as <code class=scheme>()</code>.
+Each head of <code class=scheme><span class=variable>X</span></code> is <code class=scheme><span class=variable>cons</span></code>ed on to <code class=scheme><span class=variable>Y</span></code>.  Finally, when
+<code class=scheme><span class=variable>X</span></code> has wound down to <code class=scheme>()</code>, <code class=scheme><span class=variable>Y</span></code> contains the reversed
+list and can be returned as <code class=scheme><span class=variable>Z</span></code>.)</p>
+<p>
+
+<code class=scheme><span class=variable>revaux</span></code> is used purely as a helper predicate for
+<code class=scheme><span class=variable>%reverse</span></code>, and so it can be concealed within a lexical
+contour.  We use <code class=scheme><span class=keyword>letrec</span></code> instead of <code class=scheme><span class=keyword>let</span></code> because
+<code class=scheme><span class=variable>revaux</span></code> is a recursive procedure.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_3.4"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.4">3.4&#xa0;&#xa0;Type Predicates</a></h2>
+<p class=noindent></p>
+<p>
+
+Schelog provides a couple of predicates that let the user
+probe the type of objects.</p>
+<p>
+
+The goal</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>%constant</span> <span class=variable>X</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>succeeds if <code class=scheme><span class=variable>X</span></code> is an <em>atomic</em> object, ie, not a
+list or vector.</p>
+<p>
+
+The predicate <code class=scheme><span class=variable>%compound</span></code>, the negation of <code class=scheme><span class=variable>%constant</span></code>,
+checks if its argument is  indeed a list or a vector.</p>
+<p>
+
+The above are merely the logic-programming equivalents of
+corresponding Scheme predicates.  Users can use the
+predicate <code class=scheme><span class=keyword>%is</span></code> and Scheme predicates to write more type
+checks in Schelog.  Thus, to test if <code class=scheme><span class=variable>X</span></code> is a string, the
+following goal could be used:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%is</span> <span class=selfeval>#t</span> (<span class=variable>string?</span> <span class=variable>X</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>User-defined Scheme predicates, in addition to primitive Scheme
+predicates, can be thus imported.</p>
+<p>
+
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-2.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-4.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

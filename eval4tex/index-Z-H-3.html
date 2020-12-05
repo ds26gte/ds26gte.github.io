@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+<!--
+Generated from index.tex by tex2page, v 20150602
+(running on Racket 6.2.0.3, unix), 
+(c) Dorai Sitaram, 
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+An \eval for TeX
+</title>
+<link rel="stylesheet" href="index-Z-S.css" title=default />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div id=slidecontent>
+<div align=right class=navigation>[Go to <span><a href="index.html">first</a>, <a href="index-Z-H-2.html">previous</a></span><span>, <a href="index-Z-H-4.html">next</a></span> page<span>; &nbsp;&nbsp;</span><span><a href="index.html#node_toc_start">contents</a></span><span><span>; &nbsp;&nbsp;</span><a href="index-Z-H-5.html#node_index_start">index</a></span>]</div>
+<p>
+<a name="node_sec_3"></a>
+<h1 class=beginchapter>3&nbsp;&nbsp;Drawing T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X pictures with PicScheme</h1></p>
+
+<p class=noindent><a name="node_idx_8"></a><a name="node_idx_10"></a></p>
+<p>
+PicScheme, or the Scheme code in <code class=verbatim>picscheme.tex</code>,
+provides a set of picture-making primitives that is
+similar in spirit to LaT<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&rsquo;s <code class=verbatim>{picture}</code>
+environment&nbsp;[<a href="index-Z-H-4.html#node_bib_4">4</a>,&nbsp;ch.&nbsp;7], except that the
+commands are in Scheme and can be combined using full
+Scheme.</p>
+<p>
+You can specify <em>picture objects</em> such as
+paths and texts and position
+them in a composite picture object called a <em>picture</em>.
+In general, a picture specification looks as follows:</p>
+<p>
+</p>
+<pre class=verbatim>\eval{&nbsp;
+</pre>
+<p class=noindent>
+</p>
+<pre class=scheme>...
+<span class=comment>;Scheme code, enhanced with</span>
+<span class=comment>;the picture-drawing primitives</span>
+...
+</pre>
+<p class=noindent>
+</p>
+<pre class=verbatim>}&nbsp;
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>The picture produced is a <em>box</em>, which means it
+will be typeset as a giant letter might be.
+We can use the usual T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X approaches to centering and
+displaying boxes, eg, <code class=verbatim>\centerline</code>.</p>
+<p>
+<a name="node_idx_12"></a></p>
+<p>
+The picture description makes use of a <em>unit
+length</em>, which is stored in the variable <code class=scheme><span class=global>*unit&#x2011;length*</span></code>
+and is by default 1 bp (big point), which is 1/72 of an inch.
+Regardless of the <code class=scheme><span class=global>*unit&#x2011;length*</span></code>, PicScheme
+internally manipulates lengths as multiples of big
+points, and thus the default initial value of
+of <code class=scheme><span class=global>*unit&#x2011;length*</span></code> is the <em>number</em> 1.</p>
+<p>
+<a name="node_idx_14"></a></p>
+<p>
+In order to allow the resetting of <code class=scheme><span class=global>*unit&#x2011;length*</span></code> easily,
+PicScheme provides the procedure <code class=scheme><span class=variable>dimen</span></code>, which converts
+lengths in other units to scaled points.  For example,</p>
+<p>
+</p>
+<pre class=scheme>(<span class=variable>dimen</span> <span class=selfeval>1</span> <span class=keyword>'</span><span class=variable>in</span>)
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>returns the bp equivalent of 1 inch, which is 72.
+<code class=scheme><span class=variable>dimen</span></code>&rsquo;s second argument is thus a symbol naming the
+unit converted from, and this can be one of <code class=scheme><span class=variable>pt</span></code>
+(point), <code class=scheme><span class=variable>pc</span></code> (pica), <code class=scheme><span class=variable>in</span></code> (inch), <code class=scheme><span class=variable>bp</span></code> (big
+point), <code class=scheme><span class=variable>cm</span></code> (centimeter), <code class=scheme><span class=variable>mm</span></code> (millimeter),
+<code class=scheme><span class=variable>dd</span></code> (didot point), <code class=scheme><span class=variable>cc</span></code> (cicero), and <code class=scheme><span class=variable>sp</span></code>
+(scaled
+point)&nbsp;[<a href="index-Z-H-4.html#node_bib_3">3</a>,&nbsp;ch.&nbsp;10],&nbsp;[<a href="index-Z-H-4.html#node_bib_2">2</a>,&nbsp;ch.&nbsp;11].
+(The word <em>dimen</em> is merely standard T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X jargon for
+(non-springy) length &#x2014; the only physical dimension
+that is relevant to typesetting.)</p>
+<p>
+We can thus
+set <code class=scheme><span class=global>*unit&#x2011;length*</span></code> to be 42 mm by</p>
+<p>
+</p>
+<pre class=scheme>(<span class=keyword>set!</span> <span class=global>*unit-length*</span> (<span class=variable>*</span> <span class=selfeval>42</span> (<span class=variable>/</span> <span class=selfeval>25.4</span>) <span class=selfeval>72</span>))
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>where we make use of the equivalences 1 mm = 1/25.4 inch,
+1 inch = 72 bp, or, we could say</p>
+<p>
+</p>
+<pre class=scheme>(<span class=keyword>set!</span> <span class=global>*unit-length*</span> (<span class=variable>dimen</span> <span class=selfeval>42</span> <span class=keyword>'</span><span class=variable>mm</span>))
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>Use whichever is easier for you.  Changing
+<code class=scheme><span class=global>*unit&#x2011;length*</span></code> is a convenient way to scale a
+picture without rewriting its innards.</p>
+<p>
+<a name="node_idx_16"></a></p>
+<p>
+An important length quantity is
+the <em>thickness</em> of (the lead of) the imaginary pencil used to
+draw a PicScheme picture.  By default this is 0.5 bp.
+You may reset it using the <code class=verbatim>pencil&#x2011;width</code> procedure.
+Thus</p>
+<p>
+</p>
+<pre class=scheme>(<span class=variable>pencil-width</span> <span class=selfeval>1/72</span>)
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>sets the pencil width to 1/72 of whatever the
+prevailing <code class=scheme><span class=global>*unit&#x2011;length*</span></code> is.  (Setting pencil width is
+probably the only occasion where it may be more
+convenient to specify a true length in bp rather than a
+multiple of the prevailing <code class=scheme><span class=global>*unit&#x2011;length*</span></code>.  To set
+it to 0.5 bp, you can use
+<code class=scheme>(<span class=variable>pencil&#x2011;width</span> (<span class=variable>/</span> (<span class=variable>dimen</span> <span class=selfeval>.5</span> <span class=keyword>'</span><span class=variable>bp</span>) <span class=global>*unit&#x2011;length*</span>))</code>,
+which does the correct thing regardless of the value of
+<code class=scheme><span class=global>*unit&#x2011;length*</span></code>.)</p>
+<p>
+<a name="node_idx_18"></a><a name="node_idx_20"></a></p>
+<p>
+The 0-argument procedures
+<code class=scheme><span class=variable>thin&#x2011;lines</span></code> and <code class=scheme><span class=variable>thick&#x2011;lines</span></code> can be used to toggle between
+the default pencil width and a value that is twice the
+default width.
+<code class=scheme>(<span class=variable>thin&#x2011;lines</span>)</code> sets pencil
+thickness to the default .5 bp, while
+<code class=scheme>(<span class=variable>thick&#x2011;lines</span>)</code> sets it to 1 bp.</p>
+<p>
+<a name="node_idx_22"></a></p>
+<p>
+A picture is introduced by a call to the
+<code class=scheme><span class=variable>picture</span></code> procedure:</p>
+<p>
+</p>
+<pre class=scheme>(<span class=variable>picture</span> <span class=variable>th</span>)
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent><code class=scheme><span class=variable>th</span></code> is a thunk (zero-argument procedure) that
+will contain commands to populate the picture.
+For example,</p>
+<p>
+<a name="node_idx_24"></a><a name="node_idx_26"></a></p>
+<p>
+
+</p>
+<p>
+</p>
+<pre class=verbatim>\centerline{&nbsp;
+</pre>
+<p class=noindent>
+</p>
+<pre class=scheme>
+<span class=variable>\eval</span>{
+(<span class=keyword>set!</span> <span class=global>*unit&#x2011;length*</span> (<span class=variable>dimen</span> <span class=selfeval>1</span> <span class=keyword>'</span><span class=variable>cm</span>))
+
+(<span class=variable>picture</span>
+  (<span class=keyword>lambda</span> ()
+   (<span class=variable>label</span> (<span class=variable>point</span> <span class=selfeval>0</span> <span class=selfeval>0</span>) <span class=selfeval>&quot;nothing special&quot;</span>)))
+}</pre>
+<p class=noindent></p>
+<pre class=verbatim>}&nbsp;
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>produces</p>
+<p>
+<blockquote></p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div align=center>&nbsp;
+<img src="index-Z-G-2.gif" border="0" alt="[index-Z-G-2.gif]">&nbsp;</div>
+
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</blockquote></p>
+<p>
+The only &ldquo;picture&rdquo; here is a text object, created by
+the procedure <code class=scheme><span class=variable>label</span></code>, but it
+nevertheless  serves to illustrate the use of
+coordinates.  The procedure <code class=scheme><span class=variable>point</span></code> makes a point
+from its <em>x</em>- and <em>y</em>-coordinates.  PicScheme represents
+fully determined points as complex numbers, with the <em>x</em>-coordinate
+as the real part and the <em>y</em>-coordinate as the imaginary
+part, so <code class=scheme>(<span class=variable>point</span> <span class=selfeval>2</span> <span class=selfeval>3</span>)</code> can be more succinctly entered
+as <code class=scheme><span class=selfeval>2+3i</span></code>.  In particular, <code class=scheme>(<span class=variable>point</span> <span class=selfeval>0</span> <span class=selfeval>0</span>)</code> is simply
+<code class=scheme><span class=selfeval>0</span></code>.  In the following, we will use the shorter
+complex-number notation when feasible.</p>
+<p>
+The first argument to <code class=scheme><span class=variable>label</span></code> is
+the
+point at which to place
+the second argument, which can be any valid T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X
+fragment.
+Eg<a name="node_call_footnote_Temp_1"></a><sup><small><a href="#node_footnote_Temp_1">1</a></small></sup></p>
+<p>
+
+</p>
+<pre class=scheme>
+<span class=variable>\eval</span>{
+(<span class=variable>picture</span>
+  (<span class=keyword>lambda</span> ()
+    (<span class=variable>label</span> <span class=selfeval>&#x2011;3</span> <span class=selfeval>&quot;West&quot;</span>)
+    (<span class=variable>label</span> <span class=selfeval>+3i</span> <span class=selfeval>&quot;North&quot;</span>)
+    (<span class=variable>label</span> <span class=selfeval>3</span> <span class=selfeval>&quot;East&quot;</span>)
+    (<span class=variable>label</span> <span class=selfeval>&#x2011;3i</span> <span class=selfeval>&quot;South&quot;</span>)))
+}</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>produces</p>
+<p>
+<blockquote></p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div align=center>&nbsp;
+<img src="index-Z-G-3.gif" border="0" alt="[index-Z-G-3.gif]">&nbsp;</div>
+
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</blockquote></p>
+<p>
+<a name="node_idx_28"></a></p>
+<p>
+</p>
+
+<p class=noindent>Note that the center of the text coincides with the
+point supplied.
+<code class=scheme><span class=variable>label</span></code> can take a third argument that can place
+the text at a different relation to the chosen point.</p>
+<p>
+In the following example, the <code class=scheme><span class=variable>label</span></code>&rsquo;s point is
+the center of the &ldquo;cross hairs&rdquo;, and we use the
+position indicators <code class=scheme><span class=variable>ulft</span></code> and <code class=scheme><span class=variable>lrt</span></code>
+to put the text <code class=scheme><span class=selfeval>&quot;UPPER LEFT&quot;</span></code> on the upper left of the
+point,
+and the  text <code class=scheme><span class=selfeval>&quot;LOWER RIGHT&quot;</span></code>
+on its lower right.
+The various position
+possibilities are <code class=scheme><span class=variable>lft</span></code>, <code class=scheme><span class=variable>ulft</span></code>, <code class=scheme><span class=variable>top</span></code>,
+<code class=scheme><span class=variable>urt</span></code>, <code class=scheme><span class=variable>rt</span></code>, <code class=scheme><span class=variable>lrt</span></code>, <code class=scheme><span class=variable>bot</span></code>, <code class=scheme><span class=variable>llft</span></code>.</p>
+<p>
+<a name="node_idx_30"></a><a name="node_idx_32"></a></p>
+<p>
+
+</p>
+<pre class=scheme>
+<span class=variable>\eval</span>{
+(<span class=variable>picture</span>
+  (<span class=keyword>lambda</span> ()
+    (<span class=variable>draw</span> (<span class=variable>path</span> <span class=selfeval>&#x2011;2.5i</span> <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> <span class=selfeval>+2.5i</span>))
+    (<span class=variable>draw</span> (<span class=variable>path</span> <span class=selfeval>&#x2011;2.5</span> <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> <span class=selfeval>2.5</span>))
+    <span class=comment>;</span>
+    (<span class=variable>label</span> <span class=selfeval>0</span> <span class=selfeval>&quot;UPPER LEFT&quot;</span> <span class=keyword>'</span><span class=variable>ulft</span>)
+    (<span class=variable>label</span> <span class=selfeval>0</span> <span class=selfeval>&quot;LOWER RIGHT&quot;</span> <span class=keyword>'</span><span class=variable>lrt</span>)))
+}</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>produces</p>
+<p>
+<blockquote></p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div align=center>&nbsp;
+<img src="index-Z-G-4.gif" border="0" alt="[index-Z-G-4.gif]">&nbsp;</div>
+
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</blockquote></p>
+<p>
+<a name="node_idx_34"></a><a name="node_idx_36"></a><a name="node_idx_38"></a><a name="node_idx_40"></a><a name="node_idx_42"></a></p>
+<p>
+</p>
+
+<p class=noindent>The procedure <code class=scheme><span class=variable>path</span></code> returns a path
+passing through a sequence of points.
+The form of the path between successive points is
+governed by the symbols <code class=scheme><span class=variable>&#x2011;&#x2011;</span></code> and <code class=scheme><span class=variable>**</span></code>, which produce straight-line
+and curved segments respectively.  Additional arguments such
+as <code class=scheme><span class=variable>direction</span></code>, <code class=scheme><span class=variable>controls</span></code> (with <code class=scheme><span class=keyword>and</span></code>), and <code class=scheme><span class=variable>cycle</span></code>
+can further alter the path.
+The procedure
+<code class=scheme><span class=variable>draw</span></code> draws its argument path.</p>
+<p>
+
+</p>
+<pre class=scheme>
+<span class=variable>\eval</span>{
+(<span class=keyword>set!</span> <span class=global>*unit&#x2011;length*</span> (<span class=variable>dimen</span> <span class=selfeval>1</span> <span class=keyword>'</span><span class=variable>cm</span>))
+
+(<span class=variable>picture</span>
+  (<span class=keyword>lambda</span> ()
+    (<span class=variable>draw</span> (<span class=variable>path</span> <span class=selfeval>0</span> <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> <span class=selfeval>10</span> <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> <span class=selfeval>10+10i</span> <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> <span class=selfeval>+10i</span> <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> <span class=keyword>'</span><span class=variable>cycle</span>))
+    (<span class=keyword>let</span> ((<span class=variable>lft&#x2011;control&#x2011;point</span> <span class=selfeval>3+12i</span>)
+          (<span class=variable>rt&#x2011;control&#x2011;point</span> <span class=selfeval>7+12i</span>))
+      (<span class=variable>draw</span> (<span class=variable>path</span> <span class=selfeval>2+2i</span> <span class=keyword>'</span><span class=variable>**</span>
+                  <span class=keyword>'</span><span class=variable>controls</span> <span class=variable>lft&#x2011;control&#x2011;point</span>
+                  <span class=keyword>'</span><span class=variable>**</span> <span class=selfeval>7+2i</span>))
+      (<span class=variable>draw</span> (<span class=variable>path</span> <span class=selfeval>3+2i</span> <span class=keyword>'</span><span class=variable>**</span>
+                  <span class=keyword>'</span><span class=variable>controls</span> <span class=variable>rt&#x2011;control&#x2011;point</span>
+                  <span class=keyword>'</span><span class=variable>**</span> <span class=selfeval>8+2i</span>)))
+    (<span class=variable>label</span> <span class=selfeval>9.8+0.2i</span>
+           <span class=selfeval>&quot;{\\it 020203120702, 030207120802}&quot;</span>
+           <span class=keyword>'</span><span class=variable>ulft</span>)))
+}</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>produces</p>
+<p>
+<blockquote></p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div align=center>&nbsp;
+<img src="index-Z-G-5.gif" border="0" alt="[index-Z-G-5.gif]">&nbsp;</div>
+
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</blockquote></p>
+<p>
+</p>
+
+<p class=noindent><code class=scheme><span class=keyword>'</span><span class=variable>controls</span> <span class=variable>z1</span></code>
+uses <code class=scheme><span class=variable>z1</span></code> as a control point (instead of having the path pass through it) for
+the enclosing points.
+For instance, a Bezier curve with the three points
+<code class=scheme><span class=variable>z1</span></code>, <code class=scheme><span class=variable>zc</span></code>, <code class=scheme><span class=variable>z2</span></code>
+connects <code class=scheme><span class=variable>z1</span></code> and <code class=scheme><span class=variable>z2</span></code> using
+<code class=scheme><span class=variable>zc</span></code> as a control point, and can be represented as</p>
+<p>
+</p>
+<pre class=scheme>(<span class=variable>path</span> <span class=variable>z1</span> <span class=keyword>'</span><span class=variable>**</span> <span class=keyword>'</span><span class=variable>controls</span> <span class=variable>zc</span> <span class=keyword>'</span><span class=variable>**</span> <span class=variable>z2</span>)
+</pre>
+<p class=noindent></p>
+<p>
+<code class=scheme><span class=keyword>'</span><span class=variable>controls</span> <span class=variable>z1</span> <span class=keyword>'</span><span class=keyword>and</span> <span class=variable>z2</span></code> uses both <code class=scheme><span class=variable>z1</span></code> and <code class=scheme><span class=variable>z2</span></code> as control points
+for the enclosing points.
+<code class=scheme><span class=variable>cycle</span></code>, if it occurs at all, should be the
+last argument, and returns a closed path.  <code class=scheme><span class=variable>direction</span></code>
+governs the direction of the part of the path at
+the adjacent point (which could be directly to the left or to the right).</p>
+<p>
+</p>
+
+<p class=noindent>Here is a <em>grid</em>:</p>
+<p>
+
+</p>
+<pre class=scheme>
+<span class=variable>\eval</span>{
+(<span class=keyword>set!</span> <span class=global>*unit&#x2011;length*</span> (<span class=variable>dimen</span> <span class=selfeval>.5</span> <span class=keyword>'</span><span class=variable>cm</span>))
+
+(<span class=variable>picture</span>
+  (<span class=keyword>lambda</span> ()
+    <span class=comment>;draw vertical lines</span>
+    (<span class=keyword>let</span> <span class=variable>loop</span> ((<span class=variable>x</span> <span class=selfeval>0</span>))
+      (<span class=keyword>when</span> (<span class=variable>&lt;=</span> <span class=variable>x</span> <span class=selfeval>20</span>)
+        ((<span class=keyword>if</span> (<span class=variable>=</span> (<span class=variable>modulo</span> <span class=variable>x</span> <span class=selfeval>5</span>) <span class=selfeval>0</span>)
+             <span class=variable>thick&#x2011;lines</span> <span class=variable>thin&#x2011;lines</span>))
+        (<span class=variable>draw</span> (<span class=variable>path</span> (<span class=variable>point</span> <span class=variable>x</span> <span class=selfeval>0</span>) <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> (<span class=variable>point</span> <span class=variable>x</span> <span class=selfeval>10</span>)))
+        (<span class=variable>loop</span> (<span class=variable>+</span> <span class=variable>x</span> <span class=selfeval>1</span>))))
+    <span class=comment>;draw horizontal lines</span>
+    (<span class=keyword>let</span> <span class=variable>loop</span> ((<span class=variable>y</span> <span class=selfeval>0</span>))
+      (<span class=keyword>when</span> (<span class=variable>&lt;=</span> <span class=variable>y</span> <span class=selfeval>10</span>)
+        ((<span class=keyword>if</span> (<span class=variable>=</span> (<span class=variable>modulo</span> <span class=variable>y</span> <span class=selfeval>5</span>) <span class=selfeval>0</span>)
+             <span class=variable>thick&#x2011;lines</span> <span class=variable>thin&#x2011;lines</span>))
+        (<span class=variable>draw</span> (<span class=variable>path</span> (<span class=variable>point</span> <span class=selfeval>0</span> <span class=variable>y</span>) <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> (<span class=variable>point</span> <span class=selfeval>20</span> <span class=variable>y</span>)))
+        (<span class=variable>loop</span> (<span class=variable>+</span> <span class=variable>y</span> <span class=selfeval>1</span>))))
+    (<span class=variable>thin&#x2011;lines</span>)))
+}</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>produces</p>
+<p>
+<blockquote></p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div align=center>&nbsp;
+<img src="index-Z-G-6.gif" border="0" alt="[index-Z-G-6.gif]">&nbsp;</div>
+
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</blockquote></p>
+<p>
+<a name="node_idx_44"></a><a name="node_idx_46"></a></p>
+<p>
+<code class=scheme><span class=variable>draw&#x2011;arrow</span></code> is similar to
+<code class=scheme><span class=variable>draw</span></code> except it attaches an arrow to the end of
+the path.  <code class=scheme><span class=variable>draw&#x2011;double&#x2011;arrow</span></code> attaches arrows to
+both the beginning and end of the path.</p>
+<p>
+<a name="node_idx_48"></a><a name="node_idx_50"></a><a name="node_idx_52"></a><a name="node_idx_54"></a></p>
+<p>
+The thunks <code class=scheme><span class=variable>quarter&#x2011;circle</span></code>, <code class=scheme><span class=variable>half&#x2011;circle</span></code> and
+<code class=scheme><span class=variable>full&#x2011;circle</span></code> return the relevant portions of a
+circle of diameter unity and center at the origin.
+<code class=scheme><span class=variable>unit&#x2011;square</span></code> returns a unit square with its lower
+left at the origin.</p>
+<p>
+<a name="node_idx_56"></a><a name="node_idx_58"></a><a name="node_idx_60"></a><a name="node_idx_62"></a><a name="node_idx_64"></a><a name="node_idx_66"></a><a name="node_idx_68"></a><a name="node_idx_70"></a><a name="node_idx_72"></a><a name="node_idx_74"></a></p>
+<p>
+Being so pegged to the origin is not a problem, as
+one can <em>transform</em> paths using
+the procedures
+<code class=scheme><span class=variable>shift</span></code>, <code class=scheme><span class=variable>rotate</span></code>,
+<code class=scheme><span class=variable>rotate&#x2011;about</span></code>,
+<code class=scheme><span class=variable>reflect&#x2011;about</span></code>,
+<code class=scheme><span class=variable>slant</span></code>,
+<code class=scheme><span class=variable>scale</span></code>,
+<code class=scheme><span class=variable>x&#x2011;scale</span></code>,
+<code class=scheme><span class=variable>y&#x2011;scale</span></code>, and
+<code class=scheme><span class=variable>z&#x2011;scale</span></code>&nbsp;[<a href="index-Z-H-4.html#node_bib_2">2</a>,&nbsp;ch.&nbsp;15].</p>
+<p>
+<a name="node_idx_76"></a><a name="node_idx_78"></a></p>
+<p>
+
+</p>
+<pre class=scheme>
+<span class=variable>\eval</span>{
+(<span class=keyword>define</span> <span class=variable>rectangle</span>
+  (<span class=keyword>lambda</span> (<span class=variable>z1</span> <span class=variable>z4</span>)
+    (<span class=keyword>let</span> ((<span class=variable>x1</span> (<span class=variable>x&#x2011;part</span> <span class=variable>z1</span>))
+          (<span class=variable>y1</span> (<span class=variable>y&#x2011;part</span> <span class=variable>z1</span>))
+          (<span class=variable>x4</span> (<span class=variable>x&#x2011;part</span> <span class=variable>z4</span>))
+          (<span class=variable>y4</span> (<span class=variable>y&#x2011;part</span> <span class=variable>z4</span>)))
+      (<span class=variable>path</span> <span class=variable>z1</span> <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> (<span class=variable>point</span> <span class=variable>x4</span> <span class=variable>y1</span>) <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> <span class=variable>z4</span>
+            <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> (<span class=variable>point</span> <span class=variable>x1</span> <span class=variable>y4</span>) <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> <span class=keyword>'</span><span class=variable>cycle</span>))))
+
+(<span class=variable>picture</span>
+  (<span class=keyword>lambda</span> ()
+    (<span class=variable>label</span> <span class=selfeval>0</span> <span class=selfeval>&quot;\\vbox{\\hbox{square}\\hbox{peg}}&quot;</span> <span class=keyword>'</span><span class=variable>llft</span>)
+    (<span class=variable>label</span> <span class=selfeval>4+3i</span> <span class=selfeval>&quot;\\vbox{\\hbox{round}\\hbox{hole}}&quot;</span> <span class=keyword>'</span><span class=variable>urt</span>)
+    <span class=comment>;draw circle of dia = 8</span>
+    (<span class=variable>draw</span> (<span class=variable>scale</span> <span class=selfeval>8</span> (<span class=variable>full&#x2011;circle</span>)))
+    <span class=comment>;for square to fit in circle,</span>
+    <span class=comment>;its side must be 8/(sqrt 2)</span>
+    (<span class=keyword>let*</span> ((<span class=variable>s</span> (<span class=variable>/</span> <span class=selfeval>8</span> (<span class=variable>sqrt</span> <span class=selfeval>2</span>)))
+           (<span class=variable>s/2</span> (<span class=variable>/</span> <span class=variable>s</span> <span class=selfeval>2</span>)))
+      (<span class=variable>draw</span> (<span class=variable>rectangle</span> (<span class=variable>point</span> (<span class=variable>&#x2011;</span> <span class=variable>s/2</span>) (<span class=variable>&#x2011;</span> <span class=variable>s/2</span>))
+                       (<span class=variable>point</span> <span class=variable>s/2</span> <span class=variable>s/2</span>))))))
+}</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>produces</p>
+<p>
+<blockquote></p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div align=center>&nbsp;
+<img src="index-Z-G-7.gif" border="0" alt="[index-Z-G-7.gif]">&nbsp;</div>
+
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</blockquote></p>
+<p>
+The procedures <code class=scheme><span class=variable>x&#x2011;part</span></code> and <code class=scheme><span class=variable>y&#x2011;part</span></code> return the
+<em>x</em>- and <em>y</em>-coordinate respectively of their argument
+point.</p>
+<p>
+In the following program for a spoked wheel,
+the path for the spoke is created only once,
+but we draw several differently rotated
+versions of it.</p>
+<p>
+
+</p>
+<pre class=scheme>
+<span class=variable>\eval</span>{
+(<span class=keyword>set!</span> <span class=global>*unit&#x2011;length*</span> (<span class=variable>dimen</span> <span class=selfeval>1</span> <span class=keyword>'</span><span class=variable>cm</span>))
+
+(<span class=variable>picture</span>
+  (<span class=keyword>lambda</span> ()
+    <span class=comment>;draw two concentric circles for wheel rim</span>
+    (<span class=keyword>let</span> ((<span class=variable>c</span> (<span class=variable>full&#x2011;circle</span>)))
+      (<span class=variable>draw</span> (<span class=variable>scale</span> <span class=selfeval>4</span> <span class=variable>c</span>))
+      (<span class=variable>draw</span> (<span class=variable>scale</span> <span class=selfeval>4.5</span> <span class=variable>c</span>)))
+    (<span class=keyword>let</span> ((<span class=variable>one&#x2011;deg</span> (<span class=keyword>let</span> ((<span class=variable>pi</span> (<span class=variable>acos</span> <span class=selfeval>&#x2011;1</span>)))
+                     (<span class=variable>/</span> <span class=variable>pi</span> <span class=selfeval>180</span>))))
+      <span class=comment>;one&#x2011;deg is 1 degree in radians</span>
+      (<span class=keyword>let</span> ((<span class=variable>spoke</span> (<span class=variable>path</span> <span class=selfeval>0</span> <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> <span class=selfeval>2</span>)))
+        <span class=comment>;draw spoke at 20&#x2011;deg increments</span>
+        (<span class=keyword>let</span> <span class=variable>loop</span> ((<span class=variable>i</span> <span class=selfeval>0</span>))
+          (<span class=keyword>unless</span> (<span class=variable>&gt;=</span> <span class=variable>i</span> <span class=selfeval>360</span>)
+            (<span class=variable>draw</span> (<span class=variable>rotate</span> (<span class=variable>*</span> <span class=variable>i</span> <span class=variable>one&#x2011;deg</span>) <span class=variable>spoke</span>))
+            (<span class=variable>loop</span> (<span class=variable>+</span> <span class=variable>i</span> <span class=selfeval>20</span>))))))))
+}</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>produces</p>
+<p>
+<blockquote></p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div align=center>&nbsp;
+<img src="index-Z-G-8.gif" border="0" alt="[index-Z-G-8.gif]">&nbsp;</div>
+
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</blockquote></p>
+<p>
+</p>
+<div class=footnoterule><hr></div><p></p>
+<div class=footnote><p><a name="node_footnote_Temp_1"></a><sup><small><a href="#node_call_footnote_Temp_1">1</a></small></sup> Henceforth, the <code class=verbatim>\centerline{...}</code> wrapper around the
+Scheme code is understood.</p>
+</div>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div align=right class=navigation>[Go to <span><a href="index.html">first</a>, <a href="index-Z-H-2.html">previous</a></span><span>, <a href="index-Z-H-4.html">next</a></span> page<span>; &nbsp;&nbsp;</span><span><a href="index.html#node_toc_start">contents</a></span><span><span>; &nbsp;&nbsp;</span><a href="index-Z-H-5.html#node_index_start">index</a></span>]</div>
+</p>
+<p></p>
+</div>
+</body>
+</html>

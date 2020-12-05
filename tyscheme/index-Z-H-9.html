@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20201114
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.8 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+Teach Yourself Scheme in Fixnum Days
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+
+<meta name=description content="A practical
+introduction to the programming language Scheme">
+
+<meta name=author content="Dorai Sitaram">
+
+<link rev=made href="mailto:ds26gte @ yahoo.com">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-8.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-10.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_chap_7"></a>
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_7">7&#xa0;&#xa0;I/O</a></h1>
+<p class=noindent><a id="TAG:__tex2page_index_334"></a>Scheme has input/output (I/O) procedures that will let you
+read from an input port or write to an output port.  Ports
+can be associated with the console, files or strings.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_7.1"></a>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.1">7.1&#xa0;&#xa0;Reading</a></h2>
+<p class=noindent>Scheme’s reader procedures take an optional input port
+argument.  If the port is not specified, the current input
+port (usually the console) is assumed.</p>
+<p>
+
+<a id="TAG:__tex2page_index_336"></a></p>
+<p>
+
+Reading can be character-, line- or s-expression-based.
+Each time a read is performed, the port’s state changes so
+that the next read will read material following what was
+already read.  If the port has no more material to be read,
+the reader procedure returns a specific datum called the
+end-of-file or eof object.  This datum is the only value
+that satisfies the <code class=scheme><span class=variable>eof&#x2011;object?</span></code> predicate.</p>
+<p>
+
+<a id="TAG:__tex2page_index_338"></a><a id="TAG:__tex2page_index_340"></a><a id="TAG:__tex2page_index_342"></a></p>
+<p>
+
+The procedure <code class=scheme><span class=variable>read&#x2011;char</span></code> reads the next character from
+the port.  <code class=scheme><span class=variable>read&#x2011;line</span></code> reads the next line, returning it
+as a string (the final newline is not included).  The
+procedure <code class=scheme><span class=variable>read</span></code> reads the next s-expression.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_7.2"></a>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.2">7.2&#xa0;&#xa0;Writing</a></h2>
+<p class=noindent>Scheme’s writer procedures take the object that is to be
+written and an optional output port argument.  If the port
+is not specified, the current output port (usually the
+console) is assumed.</p>
+<p>
+
+Writing can be character- or s-expression-based.</p>
+<p>
+
+<a id="TAG:__tex2page_index_344"></a></p>
+<p>
+
+The procedure <code class=scheme><span class=variable>write&#x2011;char</span></code> writes the given character
+(without the <code class=verbatim>#\</code>) to the output port.</p>
+<p>
+
+<a id="TAG:__tex2page_index_346"></a><a id="TAG:__tex2page_index_348"></a><a id="TAG:__tex2page_index_350"></a></p>
+<p>
+
+The procedures <code class=scheme><span class=variable>write</span></code> and <code class=scheme><span class=variable>display</span></code> both
+write the given s-expression to the port, with one
+difference: <code class=scheme><span class=variable>write</span></code> attempts to use a machine-readable
+format and <code class=scheme><span class=variable>display</span></code> doesn’t.  E.g., <code class=scheme><span class=variable>write</span></code> uses double
+quotes for strings and the <code class=verbatim>#\</code> syntax for characters.
+<code class=scheme><span class=variable>display</span></code> doesn’t.</p>
+<p>
+
+The procedure <code class=scheme><span class=variable>newline</span></code> starts a new line on 
+the output port.</p>
+<p>
+
+<a id="TAG:__tex2page_index_352"></a><a id="TAG:__tex2page_index_354"></a></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_7.3"></a>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.3">7.3&#xa0;&#xa0;File ports</a></h2>
+<p class=noindent><a id="TAG:__tex2page_index_356"></a><a id="TAG:__tex2page_index_358"></a><a id="TAG:__tex2page_index_360"></a><a id="TAG:__tex2page_index_362"></a>Scheme’s I/O procedures do not need a port argument if the
+port happens to be standard input or standard output.
+However, if you need these ports explicitly, the
+zero-argument procedures <code class=scheme><span class=variable>current&#x2011;input&#x2011;port</span></code> and
+<code class=scheme><span class=variable>current&#x2011;output&#x2011;port</span></code> furnish them.  Thus,</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>display</span> <span class=selfeval>9</span>)
+(<span class=variable>display</span> <span class=selfeval>9</span> (<span class=variable>current-output-port</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>have the same behavior.</p>
+<p>
+
+<a id="TAG:__tex2page_index_364"></a><a id="TAG:__tex2page_index_366"></a></p>
+<p>
+
+A port is associated with a file by <em>opening</em> the file.
+The procedure <code class=scheme><span class=variable>open&#x2011;input&#x2011;file</span></code> takes a filename argument
+and returns a new input port associated with it.  The
+procedure <code class=scheme><span class=variable>open&#x2011;output&#x2011;file</span></code> takes a filename argument and
+returns a new output port associated with it.  It is an
+error to open an input file that doesn’t exist, or to open
+an output file that already exists.</p>
+<p>
+
+<a id="TAG:__tex2page_index_368"></a><a id="TAG:__tex2page_index_370"></a></p>
+<p>
+
+After you have performed I/O on a port, you should close it
+with <code class=scheme><span class=variable>close&#x2011;input&#x2011;port</span></code> or <code class=scheme><span class=variable>close&#x2011;output&#x2011;port</span></code>.</p>
+<p>
+
+In the following, assume the file <code class=verbatim>hello.txt</code> contains the
+single word <code class=scheme><span class=variable>hello</span></code>.
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>i</span> (<span class=variable>open-input-file</span> <span class=selfeval>&#x22;hello.txt&#x22;&#x22;</span>))
+
+(<span class=variable>read-char</span> <span class=variable>i</span>)
+<span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>#\h</span>
+
+(<span class=keyword>define</span> <span class=variable>j</span> (<span class=variable>read</span> <span class=variable>i</span>))
+
+<span class=variable>j</span>
+<span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=variable>ello</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+Assume the file <code class=verbatim>greeting.txt</code> does not exist before the
+following programs are fed to the listener:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>o</span> (<span class=variable>open-output-file</span> <span class=selfeval>&#x22;greeting.txt&#x22;&#x22;</span>))
+
+(<span class=variable>display</span> <span class=selfeval>&#x22;hello&#x22;&#x22;</span> <span class=variable>o</span>)
+(<span class=variable>write-char</span> <span class=selfeval>#\space</span> <span class=variable>o</span>)
+(<span class=variable>display</span> <span class=keyword>'</span><span class=variable>world</span> <span class=variable>o</span>)
+(<span class=variable>newline</span> <span class=variable>o</span>)
+
+(<span class=variable>close-output-port</span> <span class=variable>o</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The file <code class=verbatim>greeting.txt</code> will now contain the
+line:</p>
+<p>
+
+</p>
+<pre class=verbatim>hello world&#xa0;
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_7.3.1"></a>
+<h3 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.3.1">7.3.1&#xa0;&#xa0;Automatic opening and closing of file ports</a></h3>
+<p class=noindent><a id="TAG:__tex2page_index_372"></a><a id="TAG:__tex2page_index_374"></a>Scheme supplies the procedures <code class=scheme><span class=variable>call&#x2011;with&#x2011;input&#x2011;file</span></code> and
+<code class=scheme><span class=variable>call&#x2011;with&#x2011;output&#x2011;file</span></code> that will take care of opening a
+port and closing it after you’re done with it.</p>
+<p>
+
+The procedure <code class=scheme><span class=variable>call&#x2011;with&#x2011;input&#x2011;file</span></code> takes a filename
+argument and a procedure.  The procedure is applied to an
+input port opened on the file.  When the procedure
+completes, its result is returned after ensuring that the
+port is closed.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>call-with-input-file</span> <span class=selfeval>&#x22;hello.txt&#x22;&#x22;</span>
+  (<span class=keyword>lambda</span> (<span class=variable>i</span>)
+    (<span class=keyword>let*</span> ((<span class=variable>a</span> (<span class=variable>read-char</span> <span class=variable>i</span>))
+           (<span class=variable>b</span> (<span class=variable>read-char</span> <span class=variable>i</span>))
+           (<span class=variable>c</span> (<span class=variable>read-char</span> <span class=variable>i</span>)))
+      (<span class=variable>list</span> <span class=variable>a</span> <span class=variable>b</span> <span class=variable>c</span>))))
+<span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> (<span class=selfeval>#\h</span> <span class=selfeval>#\e</span> <span class=selfeval>#\l</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+The procedure <code class=scheme><span class=variable>call&#x2011;with&#x2011;output&#x2011;file</span></code> does the analogous
+services for an output file.</p>
+<p>
+
+<a id="TAG:__tex2page_index_376"></a><a id="TAG:__tex2page_index_378"></a></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_7.4"></a>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.4">7.4&#xa0;&#xa0;String ports</a></h2>
+<p class=noindent><a id="TAG:__tex2page_index_380"></a>It is often convenient to associate ports with strings.
+Thus, the procedure <code class=scheme><span class=variable>open&#x2011;input&#x2011;string</span></code> associates a port
+with a given string.  Reader procedures on this port will
+read off the string:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>i</span> (<span class=variable>open-input-string</span> <span class=selfeval>&#x22;hello world&#x22;&#x22;</span>))
+
+(<span class=variable>read-char</span> <span class=variable>i</span>)
+<span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>#\h</span>
+
+(<span class=variable>read</span> <span class=variable>i</span>)
+<span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=variable>ello</span>
+
+(<span class=variable>read</span> <span class=variable>i</span>)
+<span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=variable>world</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+<a id="TAG:__tex2page_index_382"></a></p>
+<p>
+
+The procedure <code class=scheme><span class=variable>open&#x2011;output&#x2011;string</span></code> creates an 
+output port that will eventually be used to create a string:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>o</span> (<span class=variable>open-output-string</span>))
+
+(<span class=variable>write</span> <span class=keyword>'</span><span class=variable>hello</span> <span class=variable>o</span>)
+(<span class=variable>write-char</span> <span class=selfeval>#\,</span> <span class=variable>o</span>)
+(<span class=variable>display</span> <span class=selfeval>&#x22; &#x22;&#x22;</span> <span class=variable>o</span>)
+(<span class=variable>display</span> <span class=selfeval>&#x22;world&#x22;&#x22;</span> <span class=variable>o</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+<a id="TAG:__tex2page_index_384"></a></p>
+<p>
+
+You can now use the procedure <code class=scheme><span class=variable>get&#x2011;output&#x2011;string</span></code> to get
+the accumulated string in the string port <code class=scheme><span class=variable>o</span></code>:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>get-output-string</span> <span class=variable>o</span>)
+<span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>&#x22;hello, world&#x22;&#x22;</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+String ports need not be explicitly closed.</p>
+<p>
+
+<a id="TAG:__tex2page_index_386"></a><a id="TAG:__tex2page_index_388"></a></p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_7.5"></a>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.5">7.5&#xa0;&#xa0;Loading files</a></h2>
+<p class=noindent>We have already seen the procedure <code class=scheme><span class=variable>load</span></code> that loads
+files containing Scheme code.  <em>Loading</em> a file
+consists in evaluating in sequence every Scheme form in
+the file.  The pathname argument given to <code class=scheme><span class=variable>load</span></code> is
+reckoned relative to the current working directory of
+Scheme, which is normally the directory in which the
+Scheme executable was called.</p>
+<p>
+
+Files can load other files, and this is useful in a
+large program spanning many files.  Unfortunately,
+unless full pathnames are used, the argument file of a
+<code class=scheme><span class=variable>load</span></code> is dependent on Scheme’s current
+directory.  Supplying full pathnames is not always
+convenient, because we would like to move the program
+files as a unit (preserving their relative pathnames),
+perhaps to many different machines.
+<a id="TAG:__tex2page_index_390"></a></p>
+<p>
+
+MzScheme provides the <code class=scheme><span class=variable>load&#x2011;relative</span></code> procedure that
+greatly helps in fixing the files to be loaded.
+<code class=scheme><span class=variable>load&#x2011;relative</span></code>, like <code class=scheme><span class=variable>load</span></code>, takes a pathname
+argument.  When a <code class=scheme><span class=variable>load&#x2011;relative</span></code> call occurs in a
+file <code class=scheme><span class=variable>foo.scm</span></code>, the path of its argument is reckoned
+from the directory of the calling file <code class=scheme><span class=variable>foo.scm</span></code>.  In
+particular, this pathname is reckoned independent of
+Scheme’s current directory, and thus allows convenient
+multifile program development.
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-8.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-10.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

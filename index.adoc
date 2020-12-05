@@ -1,0 +1,73 @@
+== Dorai Sitaram’s Home Page
+
+`ds26gte at yahoo dot com`
+
+Here are some Scheme- and Common-Lisp-related code and documentation.
+Everything presented here is freely distributable and freely usable, and
+comes with no warranty of any kind. FS (as in GPL, LGPL) bundlers who
+require a standard license may use the LGPL to bundle any of these
+items. Others should find my `COPYING` file adequate.
+
+You may find versions of some of these items in other archives or
+bundled with larger projects, but this is where you are guaranteed to
+get the absolute latest.
+
+link:tyscheme/index.html[Teach Yourself Scheme in Fixnum Days]. Also
+available in
+http://www.sampou.org/scheme/t-y-scheme/t-y-scheme.html[Nobuo
+Yamashita’s Japanese] and
+http://songjinghe.github.io/TYS-zh-translation/[Jinghe Song’s Chinese]
+translations.
+
+https://github.com/ds26gte/neoscmindent[Editing Lisp and Scheme in
+Neovim]. And https://github.com/ds26gte/scmindent[in classical Vim, vi].
+
+link:tex2page/index.html[TeX2page] converts LaTeX and plain TeX
+documents into Web pages. Some link:tex2page/celeb.html[celebrity uses]
+of TeX2page. The link:tex2page/faq.html[TeX2page FAQ].
+
+link:eval4tex/index.html[An `\eval` for TeX].
+
+https://github.com/ds26gte/lfelessons[LFE Lessons], or my (unfinished)
+path to learning Lisp-Flavoured Erlang.
+
+link:troff2page/index.html[troff2page] converts `man` and `ms` documents to Web pages.
+
+https://github.com/ds26gte/mpca[mpca] is an extension of groff’s `-ms`
+package.
+
+https://github.com/ds26gte/txt2page[txt2page] converts free-form or
+slighty troff-y plain text to HTML.
+
+link:pregexp/index.html[pregexp]: Portable Regular Expressions for
+Scheme and Common Lisp. Perl 5.x syntax.
+
+http://www.ccs.neu.edu/~dorai/scheme2003/index.html[Scheme 2003 Workshop
+slides].
+
+http://www.ccs.neu.edu/~dorai/slatex/slatxdoc.html[SLaTeX] is a
+font-assigning pretty-printer for Scheme code in TeX documents.
+
+link:scmxlate/index.html[Scmxlate]: Porting Scheme code across dialects
+and to Common Lisp. This includes the
+https://github.com/ds26gte/scmxlate/blob/master/scm2cl.adoc[scm2cl]
+submodule that can be independently used to port Scheme code to Common
+Lisp.
+
+link:schelog/index.html[Schelog] is an embedding of Prolog-style logic
+programming in Scheme.
+
+http://www.ccs.neu.edu/~dorai/uwcallcc/uwcallcc.html[Unwind-protect in
+portable Scheme].
+
+link:notes/index.html[Other stuff], and
+http://www.ccs.neu.edu/~dorai/old.html[old stuff].
+
+More Scheme-related material may be found at
+http://www.ccs.neu.edu/scheme[PLT],
+http://www.schemers.org[Schemers.org].
+
+I am grateful to Northeastern University’s
+http://www.ccs.neu.edu/scheme[Programming Languages Team (PLT)] for
+hosting some of the above web pages.
+

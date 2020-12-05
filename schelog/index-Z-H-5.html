@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+Programming in Schelog
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-4.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-6.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_5"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_5">5&#xa0;&#xa0;Unification</a></h1>
+<p class=noindent></p>
+<p>
+
+When we say that a goal matches with a clause-head, we mean
+that the predicate and argument positions line up.  Before
+making this comparison, Schelog dereferences all already
+bound logic variables.  The resulting structures are then
+compared to see if they are recursively identical.  Thus,
+<code class=scheme><span class=selfeval>1</span></code> unifies with <code class=scheme><span class=selfeval>1</span></code>, and <code class=scheme>(<span class=variable>list</span> <span class=selfeval>1</span> <span class=selfeval>2</span>)</code> with <code class=scheme><span class=keyword>'</span>(<span class=selfeval>1</span>
+<span class=selfeval>2</span>)</code>; but <code class=scheme><span class=selfeval>1</span></code> and
+<code class=scheme><span class=selfeval>2</span></code> do not unify, and neither do <code class=scheme><span class=keyword>'</span>(<span class=selfeval>1</span> <span class=selfeval>2</span>)</code> and <code class=scheme><span class=keyword>'</span>(<span class=selfeval>1</span>
+<span class=selfeval>3</span>)</code>.</p>
+<p>
+
+In general, there could be quite a few uninstantiated logic
+variables in the compared objects.  Unification will then
+endeavor to find the most natural way of binding these
+variables so that we arrive at structurally identical
+objects.  Thus, <code class=scheme>(<span class=variable>list</span> <span class=variable>x</span> <span class=selfeval>1</span>)</code>, where <code class=scheme><span class=variable>x</span></code> is an unbound logic
+variable, unifies with <code class=scheme><span class=keyword>'</span>(<span class=selfeval>0</span> <span class=selfeval>1</span>)</code>, producing the
+binding
+<code class=scheme>[<span class=variable>x</span> <span class=selfeval>0</span>]</code>.</p>
+<p>
+
+Unification is thus a goal, and Schelog makes the unification predicate
+available  to the user as <code class=scheme><span class=variable>%=</span></code>.   Eg,</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> (<span class=variable>x</span>)
+  (<span class=variable>%=</span> (<span class=variable>list</span> <span class=variable>x</span> <span class=selfeval>1</span>) <span class=keyword>'</span>(<span class=selfeval>0</span> <span class=selfeval>1</span>))
+<span style="font-family: monospace">=&#x3e;</span>([<span class=variable>x</span> <span class=selfeval>0</span>])
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Schelog also provides the predicate <code class=scheme><span class=variable>%/=</span></code>, the <em>negation</em> of
+<code class=scheme><span class=variable>%=</span></code>.  <code class=scheme>(<span class=variable>%/=</span> <span class=variable>X</span> <span class=variable>Y</span>)</code> succeeds if and only if <code class=scheme><span class=variable>X</span></code> does
+<em>not</em> unify with <code class=scheme><span class=variable>Y</span></code>.</p>
+<p>
+
+Unification goals constitute the basic subgoals that all
+Schelog goals devolve to.  A goal succeeds because all the
+eventual unification subgoals that it decomposes to in at
+least one of its subgoal-branching succeeded.  It fails
+because every possible subgoal-branching was thwarted by the
+failure of a crucial unification subgoal.</p>
+<p>
+
+Going back to the example in sec <a class=hrefinternal href="index-Z-H-4.html#TAG:__tex2page_sec_4">4</a>, the goal
+<code class=scheme>(<span class=variable>%computer&#x2011;literate</span> <span class=keyword>'</span><span class=variable>Penelope</span>)</code> succeeds because
+(a) it unified with
+<code class=scheme>(<span class=variable>%computer&#x2011;literate</span> <span class=variable>person</span>)</code>; and then (b) with the binding
+<code class=scheme>[<span class=variable>person</span> <span class=variable>Penelope</span>]</code> in place, <code class=scheme>(<span class=variable>%knows</span> <span class=variable>person</span> <span class=keyword>'</span><span class=variable>TeX</span>)</code>
+unified with <code class=scheme>(<span class=variable>%knows</span> <span class=keyword>'</span><span class=variable>Penelope</span> <span class=keyword>'</span><span class=variable>TeX</span>)</code> and
+<code class=scheme>(<span class=variable>%knows</span> <span class=variable>person</span> <span class=keyword>'</span><span class=variable>Prolog</span>)</code> unified with <code class=scheme>(<span class=variable>%knows</span> <span class=keyword>'</span><span class=variable>Penelope</span>
+<span class=keyword>'</span><span class=variable>Prolog</span>)</code>.</p>
+<p>
+
+In contrast, the goal <code class=scheme>(<span class=variable>%computer&#x2011;literate</span> <span class=keyword>'</span><span class=variable>Telemachus</span>)</code>
+fails because, with <code class=scheme>[<span class=variable>person</span> <span class=variable>Telemachus</span>]</code>,
+the subgoals <code class=scheme>(<span class=variable>%knows</span> <span class=variable>person</span> <span class=keyword>'</span><span class=variable>Scheme</span>)</code> and
+<code class=scheme>(<span class=variable>%knows</span> <span class=variable>person</span> <span class=keyword>'</span><span class=variable>Prolog</span>)</code> have no facts they can
+unify with.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_5.1"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_5.1">5.1&#xa0;&#xa0;The Occurs Check</a></h2>
+<p class=noindent>A robust unification algorithm uses the <em>
+occurs check</em>, which ensures that a logic variable
+isn’t bound to a structure that contains itself.
+Not performing the check can cause the unification
+to go into an infinite loop in some cases.  On the
+other hand, performing the occurs check greatly
+increases the time taken by unification, even in cases
+that wouldn’t require the check.</p>
+<p>
+
+Schelog uses the global variable
+<code class=scheme><span class=global>*schelog&#x2011;use&#x2011;occurs&#x2011;check?*</span></code> to decide whether to
+use the occurs check.  By default, this variable is
+<code class=scheme><span class=selfeval>#f</span></code>, ie, Schelog disables the occurs check.  To
+enable the check,</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>set!</span> <span class=global>*schelog-use-occurs-check?*</span> <span class=selfeval>#t</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-4.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-6.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<!--
+Generated from index.tex by tex2page, v. 20170108
+Copyright (C) 1997-2017 Dorai Sitaram
+(running on SBCL 1.3.13.46-2f9bc1de9 Linux)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+Hassle-free delivery of a multi-file Lisp app
+</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=EB+Garamond" />
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div align=right class=navigation></div>
+<p></p>
+<p>
+</p>
+<p>
+
+  
+</p>
+<p>
+</p>
+<p>
+  </p>
+<p>
+
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+ 
+</p>
+<p>
+
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+
+
+
+ 
+</p>
+<p></p>
+<a name="TAG:__tex2page_chap_Temp_1"></a>
+<h1 class=chapter>Hassle-free delivery of a multi-file Lisp app</h1>
+<p class=noindent>Assume the end-user has an ANSI-compliant Common Lisp, and downloads your
+program, which you distribute as a tarball named, say,
+<code class=verbatim>coffee.tar.bz2</code>, that unpacks to a directory called <code class=verbatim>coffee</code>.  What is
+the easiest way for them to use your program?</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_2"></a>
+<h2 class=section>The scenario</h2>
+<p class=noindent>If your distribution contains the single Lisp file <code class=verbatim>coffee.lisp</code>,
+the user can
+load it into their CL, thus:</p>
+<p>
+</p>
+<div align=left><pre class=scheme>(<span class=variable>load</span> <span class=selfeval>&#x22;coffee&#x22;</span>)
+</pre></div>
+<p class=noindent>
+and use whatever functions, macros, and variables you provided as the
+external interface.  They can even do</p>
+<p>
+</p>
+<div align=left><pre class=scheme>(<span class=variable>compile-file</span> <span class=selfeval>&#x22;coffee&#x22;</span>)
+</pre></div>
+<p class=noindent>
+and then</p>
+<p>
+</p>
+<div align=left><pre class=scheme>(<span class=variable>load</span> <span class=selfeval>&#x22;coffee&#x22;</span>)
+</pre></div>
+<p class=noindent>
+is now smart enough to pick up the faster compiled file — which has the same
+basename as the source file, but with the file extension changed from
+<code class=verbatim>.lisp</code> to something like <code class=verbatim>.fasl</code> (or <code class=verbatim>.fas</code>, <code class=verbatim>.dx64fsl</code>, or
+<code class=verbatim>.sse2f</code>, depending on the user’s CL implementation).</p>
+<p>
+Typically, though, your distribution contains several Lisp files spread
+across
+several directories, to ease your development process, i.e., to
+keep things neat and maintainable.  <code class=verbatim>coffee.lisp</code> may load <code class=verbatim>caf.lisp</code> and
+<code class=verbatim>decaf.lisp</code>;
+<code class=verbatim>caf.lisp</code> may then load <code class=verbatim>cappuccino.lisp</code>, <code class=verbatim>espresso.lisp</code>, and <code class=verbatim>mocha.lisp</code>;
+and <code class=verbatim>decaf.lisp</code> may load a completely different
+<code class=verbatim>cappuccino.lisp</code> and <code class=verbatim>mocha.lisp</code>
+(in some other directory of course).  The various
+calls to <code class=verbatim>load</code> use relative pathnames, viz.,</p>
+<p>
+</p>
+<div align=left><pre class=scheme>(<span class=variable>load</span> (<span class=variable>merge-pathnames</span> ... <span class=global>*load-pathname*</span>))
+</pre></div>
+<p class=noindent></p>
+<p>
+So the user can still load
+the “main” file <code class=verbatim>coffee.lisp</code>, as before:</p>
+<p>
+</p>
+<div align=left><pre class=scheme>(<span class=variable>load</span> <span class=selfeval>&#x22;coffee&#x22;</span>)
+</pre></div>
+<p class=noindent>
+and expect things to work.  Just to consolidate our example situation,
+let’s say the directory structure of the files in the distribution is as
+follows:</p>
+<p>
+</p>
+<pre class=verbatim>  coffee
+  ├── coffee.lisp
+  ├── type
+  │   ├── caf.lisp
+  │   └── decaf.lisp
+  ├── caf
+  │   ├── cappuccino.lisp
+  │   ├── espresso.lisp
+  │   └── mocha.lisp
+  └── decaf
+      ├── cappuccino.lisp
+      └── mocha.lisp
+</pre>
+<p class=noindent></p>
+<p>
+Since all these several coffee-related files must be introducing symbols
+galore, you of course want to define a package <code class=verbatim>coffee</code>, so that the
+<code class=verbatim>coffee</code> symbols
+don’t clash with any symbols the user has, either of their own, or from
+other packages.  So you put</p>
+<p>
+</p>
+<div align=left><pre class=scheme>(<span class=keyword>defpackage</span> <span class=selfeval>:coffee</span>
+  (<span class=selfeval>:use</span> <span class=selfeval>:cl</span>)
+  (<span class=selfeval>:export</span> <span class=selfeval>:WHATEVER</span> ...))
+
+(<span class=variable>in-package</span> <span class=selfeval>:coffee</span>)
+</pre></div>
+<p class=noindent>
+at the head of <code class=verbatim>coffee.lisp</code>.  This should be enough, because when
+<code class=verbatim>coffee.lisp</code> loads other files, and these other files load still other
+files, the <code class=verbatim>load</code> function fluidly sets the special variable
+<code class=verbatim>*package*</code> to the prevailing value of <code class=verbatim>*package*</code>, so
+all the files will inherit <code class=verbatim>coffee</code> as their <code class=verbatim>*package*</code>.  However, for
+the purpose of documentation, or maybe even to play nice with any slimy
+text-editor setup you may have, you may still want to put</p>
+<p>
+</p>
+<div align=left><pre class=scheme>(<span class=variable>in-package</span> <span class=selfeval>:coffee</span>)
+</pre></div>
+<p class=noindent>
+at the head of each constituent file.  It doesn’t hurt.</p>
+<p>
+Let’s say the user likes your program, but finds it somewhat on
+the slow side, and wants to speed things
+up with
+</p>
+<div align=left><pre class=scheme>(<span class=variable>compile-file</span> <span class=selfeval>&#x22;coffee&#x22;</span>)
+</pre></div>
+<p class=noindent>
+What can you, as program developer, do to facilitate this?</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_3"></a>
+<h2 class=section>A solution</h2>
+<p class=noindent>This is when most program deliverers reach for
+<a href="http://common-lisp.net/project/asdf">ASDF</a>.  ASDF, however requires
+some non-trivial effort on the
+part of the user (and of course, much more on the part of the developer too).
+The user has to download ASDF, they have to create a
+registry directory, and for every program they download, they have to
+put the <code class=verbatim>.asd</code> file in the registry directory, and they have to follow a
+new syntax to load the program.  I wondered if it was possible to have
+something really simple instead, where the user approach remains the
+same as for a program consisting of a single Lisp file.  I.e.,
+the user calls <code class=verbatim>load</code> on the main file, and they can optionally
+<code class=verbatim>compile&#x2011;file</code> that main file.</p>
+<p>
+Turns out there is a protocol — and quite an easy one — for securing this.  Again, as
+with adding <code class=verbatim>defpackage</code> and <code class=verbatim>in&#x2011;package</code>, the little bit of
+extra code goes just in
+the main <code class=verbatim>coffee.lisp</code> file.  We place one requirement: all the
+names of the
+Lisp files and subdirectories they are in can be identified with Lisp
+symbols without any escaping mechanism.  Thus, the file and directory
+names are lowercase and are allowed to use the same characters that a
+Lisp symbol can, provided they don’t interfere with the OS’s own
+convention for unadorned file naming.  (E.g., the name can’t be a number
+even though the OS doesn’t mind, and it can’t contain a slash even though Lisp
+doesn’t mind.)</p>
+<p>
+Recall that <code class=verbatim>coffee.lisp</code> loads <code class=verbatim>caf.lisp</code> and
+<code class=verbatim>decaf.lisp</code>.  First, make sure that you don’t specify the extension
+<code class=verbatim>.lisp</code> in the calls to <code class=verbatim>load</code>, as we want the compiled versions
+of the files to be picked up whenever possible.</p>
+<p>
+Now add an expression to <code class=verbatim>coffee.lisp</code> that compiles these subfiles whenever
+<code class=verbatim>coffee.lisp</code> itself is compiled.  We could try</p>
+<p>
+</p>
+<div align=left><pre class=scheme>(<span class=keyword>eval-when</span> (<span class=selfeval>:compile-toplevel</span>)
+  (<span class=variable>compile-file</span> (<span class=variable>merge-pathnames</span> <span class=selfeval>&#x22;type/caf&#x22;</span> <span class=global>*compile-file-pathname*</span>))
+  (<span class=variable>compile-file</span> (<span class=variable>merge-pathnames</span> <span class=selfeval>&#x22;type/decaf&#x22;</span> <span class=global>*compile-file-pathname*</span>)))
+</pre></div>
+<p class=noindent>
+But we don’t just want to
+compile
+<code class=verbatim>type/caf.lisp</code> and <code class=verbatim>type/decaf.lisp</code>;
+we also want to compile the other files
+that these files load, viz., <code class=verbatim>caf/espresso.lisp</code>,
+<code class=verbatim>caf/mocha.lisp</code>,
+and
+<code class=verbatim>caf/cappuccino.lisp</code>; and <code class=verbatim>decaf/mocha.lisp</code> and
+<code class=verbatim>decaf/cappuccino.lisp</code>.  And we want them compiled in the right
+order, because these files depend on each other in a certain order.
+Instead of explicitly writing the various <code class=verbatim>compile&#x2011;file</code>s in the
+right order, we can simply specify the dependencies in a succinct
+makefile-like way,
+and have a Lisp macro take care of calling <code class=verbatim>compile&#x2011;file</code>
+on the files in the correct topological order.  For this we use the macro
+<code class=verbatim>do&#x2011;in&#x2011;topological&#x2011;order</code>, defined in the file
+<a href="https://github.com/ds26gte/ezdeliv/blob/master/dotopo.lisp">dotopo.lisp</a>.</p>
+<p>
+<code class=verbatim>do&#x2011;in&#x2011;topological&#x2011;order</code>’s first argument is a function, and its
+second argument is an expression of the dependencies among the symbols
+representing the various files.  It topologically arranges the symbols, and
+then calls the function on them, ensuring that a file is
+treated before any file depending on it.  Here’s a more maintainable way
+to add the <code class=verbatim>compile&#x2011;file</code>s to <code class=verbatim>coffee.lisp</code>,
+assuming <code class=verbatim>dotopo.lisp</code> is in the same directory as
+<code class=verbatim>coffee.lisp</code>:</p>
+<p>
+</p>
+<div align=left><pre class=scheme>(<span class=keyword>eval-when</span> (<span class=selfeval>:compile-toplevel</span>)
+  (<span class=variable>load</span> (<span class=variable>merge-pathnames</span> <span class=selfeval>&#x22;dotopo&#x22;</span> <span class=global>*compile-file-pathname*</span>)))
+
+(<span class=keyword>eval-when</span> (<span class=selfeval>:compile-toplevel</span>)
+  (<span class=variable>do-in-topological-order</span>
+      (<span class=keyword>lambda</span> (<span class=variable>f</span>)
+        (<span class=variable>compile-file</span> (<span class=variable>merge-pathnames</span> (<span class=variable>string-downcase</span> (<span class=variable>symbol-name</span> <span class=variable>f</span>))
+                                       <span class=global>*compile-file-pathname*</span>)))
+    (<span class=variable>coffee</span>
+     <span class=variable>type/caf</span> <span class=variable>type/decaf</span>)
+    (<span class=variable>type/caf</span>
+     <span class=variable>caf/espresso</span> <span class=variable>caf/mocha</span> <span class=variable>caf/cappuccino</span>)
+    (<span class=variable>type/decaf</span>
+     <span class=variable>decaf/mocha</span> <span class=variable>decaf/cappuccino</span>)))
+</pre></div>
+<p class=noindent>
+This is almost right, except for two issues, which we will now
+address.</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_4"></a>
+<h2 class=section>Preventing repeated compilation of main file</h2>
+<p class=noindent>First, one of the files that
+<code class=verbatim>do&#x2011;in&#x2011;topological&#x2011;order</code>’s first argument will attempt to
+compile is <code class=verbatim>coffee.lisp</code>, the file that we are already in the
+process of compiling
+when this expression is encountered! We could add a conditional
+disallowing the loop in
+<code class=verbatim>do&#x2011;in&#x2011;topological&#x2011;order</code>’s first argument:</p>
+<p>
+</p>
+<div align=left><pre class=scheme>(<span class=keyword>eval-when</span> (<span class=selfeval>:compile-toplevel</span>)
+  (<span class=variable>do-in-topological-order</span>
+      (<span class=keyword>lambda</span> (<span class=variable>f</span>)
+        (<span class=variable>UNLESS</span> (<span class=variable>EQ</span> <span class=variable>F</span> <span class=variable>‘COFFEE</span>)
+          (<span class=variable>compile-file</span> (<span class=variable>merge-pathnames</span> (<span class=variable>string-downcase</span> (<span class=variable>symbol-name</span> <span class=variable>f</span>))
+                                         <span class=global>*compile-file-pathname*</span>))))
+    ...))
+</pre></div>
+<p class=noindent>
+But there is an easier way: We could simply leave out (or comment
+out) the
+dependency line for <code class=verbatim>coffee.lisp</code>. Thus:</p>
+<p>
+</p>
+<div align=left><pre class=scheme>(<span class=keyword>eval-when</span> (<span class=selfeval>:compile-toplevel</span>)
+  (<span class=variable>do-in-topological-order</span>
+      (<span class=keyword>lambda</span> (<span class=variable>f</span>)
+        (<span class=variable>compile-file</span> (<span class=variable>merge-pathnames</span> (<span class=variable>string-downcase</span> (<span class=variable>symbol-name</span> <span class=variable>f</span>))
+                                       <span class=global>*compile-file-pathname*</span>)))
+   <span class=comment>;(coffee type/caf type/decaf)</span>
+    (<span class=variable>type/caf</span> <span class=variable>caf/cappuccino</span> <span class=variable>caf/espresso</span> <span class=variable>caf/mocha</span>)
+    (<span class=variable>type/decaf</span> <span class=variable>decaf/cappuccino</span> <span class=variable>decaf/mocha</span>)))
+</pre></div>
+<p class=noindent>
+This works, but only because the files that <code class=verbatim>coffee.lisp</code> depends
+on, viz., <code class=verbatim>type/caf.lisp</code> and <code class=verbatim>type/decaf.lisp</code>, are mentioned
+elsewhere in the dependency list. If <code class=verbatim>coffee.lisp</code> depended on a
+file <code class=verbatim>type/water.lisp</code> that nothing else depended on and that
+didn’t depend on anything else, then the
+compiler wouldn’t recognize that <code class=verbatim>type/water.lisp</code> needed to be
+compiled at all. To accommodate this, we can add a dependency line for
+<code class=verbatim>type/water.lisp</code> that listed no dependencies:</p>
+<p>
+</p>
+<div align=left><pre class=scheme>   <span class=comment>;(coffee type/caf type/decaf)</span>
+    (<span class=variable>type/water</span> )
+    (<span class=variable>type/caf</span> <span class=variable>caf/cappuccino</span> <span class=variable>caf/espresso</span> <span class=variable>caf/mocha</span>)
+    (<span class=variable>type/decaf</span> <span class=variable>decaf/cappuccino</span> <span class=variable>decaf/mocha</span>)
+</pre></div>
+<p class=noindent>
+We of course need only do this for files that the main file
+depends on. A file like <code class=verbatim>type/espresso.lisp</code>, which also doesn’t
+depend on anything else, doesn’t need a line of its own because
+it’s already mentioned in the dependency line for
+<code class=verbatim>type/caf.lisp</code>. But it doesn’t hurt to add such a line anyway.</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_5"></a>
+<h2 class=section>Making special variable visible to dependent files</h2>
+<p class=noindent>The second issue has to do with a file B using a special variable
+introduced in another file A that B depends on. In some
+implementations, <code class=verbatim>compile&#x2011;file</code> may
+issue a warning that file B has an “undeclared free variable”.
+To avoid this annoyance, make the introduction of the special
+variable in file A visible to <code class=verbatim>compile&#x2011;file</code>, e.g.,</p>
+<p>
+</p>
+<div align=left><pre class=scheme>(<span class=variable>EVAL-WHEN</span> (<span class=selfeval>:COMPILE-TOPLEVEL</span> <span class=selfeval>:LOAD-TOPLEVEL</span> <span class=selfeval>:EXECUTE</span>)
+  (<span class=keyword>defvar</span> <span class=global>*bean-type*</span>))
+</pre></div>
+<p class=noindent>
+Note: <a href="http://ccl.clozure.com">Clozure</a> and
+<a href="http://ecls.sourceforge.net">ECL</a> issue
+this warning, but it seems benign. <a href="http://abcl.org">ABCL</a> and
+<a href="http://sbcl.org">SBCL</a> are properly
+silent.</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_6"></a>
+<h2 class=section>Summary</h2>
+<p class=noindent>That’s all there is to it. To summarize:</p>
+<p>
+(i) You include
+<code class=verbatim>dotopo.lisp</code> in your distribution alongside the main file;</p>
+<p>
+(ii) include the above changes to the content of that main file; and</p>
+<p>
+(iii) make sure
+that all special variables used outside their files are made visible to
+the compiler.</p>
+<p>
+The user who unpacks your tarball then simply <code class=verbatim></code>load<code class=verbatim></code>s your main
+file, either as source, or after <code class=verbatim>compile&#x2011;file</code>-ing it. They do
+not have to worry about dealing with the other files at all, so
+long as the latter’s relative path to the main file is not
+altered.</p>
+<p>
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div align=right class=navigation></div>
+</p>
+<p></p>
+<div align=right class=colophon>Last modified: Sun, Jan 8, 2017, 12:47 pm UTC−5<br><div align=right class=advertisement>HTML conversion by <a href="http://ds26gte.github.io/tex2page/index.html">T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page 20170108</a></div></div>
+</div>
+</body>
+</html>

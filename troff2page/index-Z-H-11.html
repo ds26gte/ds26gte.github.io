@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<!--
+Generated from index.ms by troff2page, v. 20201205
+Copyright (C) 2003-2020 Dorai Sitaram
+(running on Lua 5.3)
+http://ds26gte.github.io/troff2page
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>
+troff2page
+</title>
+<link rel="stylesheet" href="index-Z-S.css" title=default>
+<link rel="stylesheet" href="default.css" title=default>
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-10.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-12.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+<p></p>
+<h1 style="font-size: 160%"><a name="TAG:__pca_sec_20"></a>
+11. Some unusual ways to call troff2page</h1>
+<p><a name="TAG:nvimtex"></a>
+troff2page doesn’t need a standalone Lua implementation.
+It
+runs equally well in Lua embedded in other applications, e.g.,
+the text editor <a href="https://neovim.io"><span class=hreftext>Neovim</span></a> and the
+typesetter <a href="https://luatex.org"><span class=hreftext>LuaTeX</span></a>.
+</p>
+<p class=indent></p>
+<p></p>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_21"></a>
+Calling troff2page from Neovim</h2>
+<p><a name="TAG:calling_troff2page_from_neovim"></a>
+<a name="TAG:__troff2page_index_99"></a>
+One of the merits of using 
+Neovim’s Lua to run <span style="font-family: monospace; ">troff2page</span> is the tight integration of
+composing and previewing it offers. You can convert your troff
+source and browse the HTML output as you’re editing it, using 
+appropriate autocommands.
+</p>
+<p class=indent>To set up, first copy the files <span style="font-family: monospace; ">lua/troff2page.lua</span> and
+<span style="font-family: monospace; ">plugin/troff2page.vim</span> to subdirectories <span style="font-family: monospace; ">lua/</span> and
+<span style="font-family: monospace; ">plugin/</span> respectively, somewhere in your Neovim
+<span style="font-family: monospace; ">'runtimepath'</span>.  Alternatively, place a clone of the
+<span style="font-family: monospace; ">troff2page</span> repo in a <span style="font-family: monospace; ">pack/</span> subdirectory, somewhere in
+your <span style="font-family: monospace; ">'runtimepath'</span> or <span style="font-family: monospace; ">'packpath'</span>.
+</p>
+<p class=indent>You now have the Neovim command <span style="font-family: monospace; ">Troff2page</span><a name="TAG:__troff2page_call_footnote_11"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_11"><span class=hreftext><sup><small>11</small></sup></span></a>
+which is called with the same style of arguments 
+as <span style="font-family: monospace; ">troff2page</span>, with the following Vim-specific special
+features:
+</p>
+<p class=indent>1. The argument <span style="font-family: monospace; ">%</span> is replaced with the name of the file in
+the current window (just as for other Vim commands).
+</p>
+<p class=indent>2. If called with no argument, the name of the file in the
+current window is assumed to be the single argument.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_100"></a>
+The script <span style="font-family: monospace; ">neovim-troff2page</span> combines all this into a shell
+script that can be used exactly like the regular Lua script. Use
+it if you have Neovim but not Lua.
+</p>
+<p class=indent></p>
+<p></p>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_22"></a>
+Calling troff2page from LuaTeX</h2>
+<p><a name="TAG:calling_troff2page_from_luatex"></a>
+<a name="TAG:__troff2page_index_101"></a>
+The Lua of LuaTeX can also be used for
+running <span style="font-family: monospace; ">troff2page</span>. First ensure you
+have a copy of <span style="font-family: monospace; ">lua/troff2page.lua</span> in your <span style="font-family: monospace; ">TEXINPUTS</span>.
+It is loaded in LuaTeX by
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;\directlua{<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;troff2page&#xa0;=&#xa0;(require&#xa0;'troff2page')<br>
+&#xa0;&#xa0;&#xa0;&#xa0;}<br>
+</span>
+</div>
+</p>
+<p>You can than call it on a single argument string that includes
+all the option and filename inputs, e.g.,
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;\directlua{<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;troff2page.troff2page('-mpca&#xa0;-t&#xa0;doc.ms')<br>
+&#xa0;&#xa0;&#xa0;&#xa0;}<br>
+</span>
+</div>
+</p>
+<p>The above commands can be supplied to a LuaTeX either via a TeX
+file or as a console interaction.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_102"></a>
+The script <span style="font-family: monospace; ">luatex-troff2page</span> combines all this into a shell
+script that can be used exactly like the regular Lua script. Use
+it if you have LuaTeX but not Lua.
+</p>
+<p class=indent></p>
+<div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_11"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_11"><span class=hreftext><sup><small>11</small></sup></span></a>
+Note capital <span style="font-family: monospace; ">T</span>! Vim won’t allow
+non-primitive commands to start with a lowercase letter.
+</p>
+</div>
+<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-10.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-12.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+</div>
+</body>
+</html>

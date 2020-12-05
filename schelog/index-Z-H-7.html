@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+Programming in Schelog
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-6.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-8.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_7"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7">7&#xa0;&#xa0;Manipulating Logic Variables</a></h1>
+<p class=noindent></p>
+<p>
+
+Schelog provides special predicates for probing logic
+variables, without risking their getting bound.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_7.1"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.1">7.1&#xa0;&#xa0;Checking for Variables</a></h2>
+<p class=noindent></p>
+<p>
+
+The goal</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>%==</span> <span class=variable>X</span> <span class=variable>Y</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>succeeds if <code class=scheme><span class=variable>X</span></code> and <code class=scheme><span class=variable>Y</span></code> are <em>identical</em> objects.  This
+is not quite the unification predicate <code class=scheme><span class=variable>%=</span></code>, for <code class=scheme><span class=variable>%==</span></code>
+doesn’t touch unbound objects the way <code class=scheme><span class=variable>%=</span></code> does.  Eg,
+<code class=scheme><span class=variable>%==</span></code> will not equate an unbound logic variable with a
+bound one, nor will it equate two unbound logic variables
+unless they are the <em>same</em> variable.</p>
+<p>
+
+The predicate <code class=scheme><span class=variable>%/==</span></code> is the negation of <code class=scheme><span class=variable>%==</span></code>.</p>
+<p>
+
+The goal</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>%var</span> <span class=variable>X</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>succeeds if <code class=scheme><span class=variable>X</span></code> isn’t completely bound — ie, it has at
+least one unbound logic variable in its innards.</p>
+<p>
+
+The predicate <code class=scheme><span class=variable>%nonvar</span></code> is the negation of <code class=scheme><span class=variable>%var</span></code>.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_7.2"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.2">7.2&#xa0;&#xa0;Preserving Variables</a></h2>
+<p class=noindent></p>
+<p>
+
+Schelog lets the user protect a term with variables from
+unification by allowing that term to be treated as a
+(completely) bound object.  The predicates provided for this
+purpose are
+<code class=scheme><span class=variable>%freeze</span></code>,
+<code class=scheme><span class=variable>%melt</span></code>, <code class=scheme><span class=variable>%melt&#x2011;new</span></code>, and <code class=scheme><span class=variable>%copy</span></code>.</p>
+<p>
+
+The goal</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>%freeze</span> <span class=variable>S</span> <span class=variable>F</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>unifies <code class=scheme><span class=variable>F</span></code> to the frozen version of <code class=scheme><span class=variable>S</span></code>.  Any lack
+of bindings in <code class=scheme><span class=variable>S</span></code> are preserved no matter how much you
+toss <code class=scheme><span class=variable>F</span></code> about.</p>
+<p>
+
+The goal</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>%melt</span> <span class=variable>F</span> <span class=variable>S</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>retrieves the object frozen in <code class=scheme><span class=variable>F</span></code> into <code class=scheme><span class=variable>S</span></code>.</p>
+<p>
+
+The goal</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>%melt-new</span> <span class=variable>F</span> <span class=variable>S</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>is similar to <code class=scheme><span class=variable>%melt</span></code>,
+except that when <code class=scheme><span class=variable>S</span></code> is made,  the unbound variables in
+<code class=scheme><span class=variable>F</span></code> are replaced by brand-new unbound variables.</p>
+<p>
+
+The goal</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>%copy</span> <span class=variable>S</span> <span class=variable>C</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>is an abbreviation for <code class=scheme>(<span class=variable>%freeze</span> <span class=variable>S</span> <span class=variable>F</span>)</code>
+followed by <code class=scheme>(<span class=variable>%melt&#x2011;new</span> <span class=variable>F</span> <span class=variable>C</span>)</code>.</p>
+<p>
+
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-6.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-8.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

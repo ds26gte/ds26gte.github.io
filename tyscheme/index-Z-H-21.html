@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20201114
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.8 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+Teach Yourself Scheme in Fixnum Days
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+
+<meta name=description content="A practical
+introduction to the programming language Scheme">
+
+<meta name=author content="Dorai Sitaram">
+
+<link rev=made href="mailto:ds26gte @ yahoo.com">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-20.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-22.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_chap_B"></a>
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_B">B&#xa0;&#xa0;DOS batch files in Scheme</a></h1>
+<p class=noindent></p>
+<p>
+
+<a id="TAG:__tex2page_index_538"></a>DOS shell scripts are known as <em>batch files</em>.  A
+conventional DOS batch file that outputs “Hello,
+World!”&#x200b; &#x200b;has the following contents:</p>
+<p>
+
+</p>
+<pre class=verbatim>echo Hello, World!&#xa0;
+</pre>
+<p class=noindent></p>
+<p>
+
+It uses the DOS command <code class=verbatim>echo</code>.  The batch file is
+named <code class=verbatim>hello.bat</code>, which identifies it to the
+operating system as an executable.  It may then be
+placed in one of the directories on the <code class=verbatim>PATH</code>
+environment variable.  Thereafter, anytime one types</p>
+<p>
+
+</p>
+<pre class=verbatim>hello.bat&#xa0;
+</pre>
+<p class=noindent></p>
+<p>
+
+or simply</p>
+<p>
+
+</p>
+<pre class=verbatim>hello&#xa0;
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>at the DOS prompt, one promptly gets the
+insufferable greeting.</p>
+<p>
+
+A Scheme version of the hello batch file will perform
+the same output using Scheme, but we need something in
+the file to inform DOS that it needs to construe the
+commands in the file as Scheme, and not as its default
+batch language.  The Scheme batch file, also called
+<code class=verbatim>hello.bat</code>, looks like:</p>
+<p>
+
+</p>
+<pre class=verbatim>;@echo off&#xa0;
+;goto :start&#xa0;
+#|&#xa0;
+:start&#xa0;
+echo. &#x3e; c:\_temp.scm&#xa0;
+echo (load (find-executable-path &#x22;hello.bat&#x22; &#x3e;&#x3e; c:\_temp.scm&#xa0;
+echo &#x22;hello.bat&#x22;)) &#x3e;&#x3e; c:\_temp.scm&#xa0;
+mzscheme -r c:\_temp.scm %1 %2 %3 %4 %5 %6 %7 %8 %9&#xa0;
+goto :eof&#xa0;
+|#&#xa0;
+&#xa0;
+(display &#x22;Hello, World!&#x22;)&#xa0;
+(newline)&#xa0;
+&#xa0;
+;:eof&#xa0;
+</pre>
+<p class=noindent></p>
+<p>
+
+The lines upto <code class=verbatim>|#</code> are standard DOS batch.  Then
+follows the Scheme code for the greeting.  Finally,
+there is one more standard DOS batch line, viz.,
+<code class=verbatim>;:eof</code>.
+When the user types <code class=verbatim>hello</code> at the DOS prompt, DOS
+reads and runs the file <code class=verbatim>hello.bat</code> as a regular
+batch file.  The first line, <code class=verbatim>;@echo off</code>, turns off
+the echoing of the commands run — as we don’t want
+excessive verbiage clouding the effect of our script.
+The second line, <code class=verbatim>;goto :start</code>, causes execution to
+jump forward to the line labeled <code class=verbatim>:start</code>, i.e., the
+fourth line.  The three ensuing <code class=verbatim>echo</code> lines create a
+temporary Scheme file called <code class=verbatim>c:\_temp.tmp</code> with the
+following contents:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>load</span> (<span class=variable>find-executable-path</span> <span class=selfeval>&#x22;hello.bat&#x22;&#x22;</span> <span class=selfeval>&#x22;hello.bat&#x22;&#x22;</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+The next batch command is a call to MzScheme.  The
+<code class=verbatim>&#x2011;r</code> option loads the Scheme file <code class=verbatim>c:\_temp.scm</code>.
+All the arguments (in this example, none) will be
+available to Scheme in the vector <code class=scheme><span class=variable>argv</span></code>.  This call
+to Scheme will evaluate our Scheme script, as we will
+see below.  After Scheme returns, we still need to
+ensure that the batch file winds up cleanly.  The next
+batch command is <code class=verbatim>goto :eof</code>, which causes
+control to skirt all the Scheme code and go to the very
+end of the file, which contains the label
+<code class=verbatim>;:eof</code>.   The script thus ends.</p>
+<p>
+
+Now we can see how the call to Scheme does its part,
+viz., to run the Scheme expressions embedded in the
+batch file.  Loading <code class=verbatim>c:\_temp.scm</code> will cause Scheme
+to deduce the full pathname of the file <code class=verbatim>hello.bat</code>
+(using <code class=scheme><span class=variable>find&#x2011;executable&#x2011;path</span></code>), and to then <em>
+load</em>
+<code class=verbatim>hello.bat</code>.
+Thus, the Scheme script file will now be run as a
+Scheme file, and the Scheme forms in the file will have
+access to the script’s original arguments via the
+vector <code class=scheme><span class=variable>argv</span></code>.</p>
+<p>
+
+Now, Scheme has to skirt the batch commands in the
+script.  This is easily done because these batch
+commands are either prefixed with a semicolon or are
+enclosed in <code class=verbatim>#| ... |#</code>, making them Scheme comments.</p>
+<p>
+
+The rest of the file is of course straight Scheme, and
+the expressions therein are evaluated in sequence.  (The
+final expression, <code class=verbatim>;:eof</code>, is a Scheme comment, and
+causes no harm.)  After all the expressions have been
+evaluated, Scheme will exit.</p>
+<p>
+
+In sum, typing <code class=verbatim>hello</code> at the DOS prompt will produce</p>
+<p>
+
+</p>
+<pre class=verbatim>Hello, World!&#xa0;
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>and return you to the DOS prompt.
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-20.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-22.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

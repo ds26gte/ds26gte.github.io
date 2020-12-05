@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+pregexp: Portable Regular Expressions for Scheme and Common Lisp
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-3.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-5.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_4"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_4">4&#xa0;&#xa0;An extended example</a></h1>
+<p class=noindent>Here’s an extended example from
+Friedl&#xa0;[<a class=hrefinternal href="index-Z-H-5.html#TAG:__tex2page_bib_1">1</a>,&#xa0;p 189]
+that covers many of the features described
+above.  The problem is to fashion a regexp that will
+match any and only IP addresses or <em>dotted
+quads</em>, ie, four numbers separated by three dots, with
+each number between 0 and 255.  We will use the
+commenting mechanism to build the final regexp with
+clarity.  First, a subregexp <code class=scheme><span class=variable>n0&#x2011;255</span></code> that matches 0
+through 255.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>n0-255</span>
+  <span class=selfeval>&#x22;(?x:
+  \\d          ;  0 through   9
+  | \\d\\d     ; 00 through  99
+  | [01]\\d\\d ;000 through 199
+  | 2[0-4]\\d  ;200 through 249
+  | 25[0-5]    ;250 through 255
+  )&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The first two alternates simply get all single- and
+double-digit numbers.  Since 0-padding is allowed, we
+need to match both 1 and 01.  We need to be careful
+when getting 3-digit numbers, since numbers above 255
+must be excluded.  So we fashion alternates to get 000
+through 199, then 200 through 249, and finally 250
+through 255.<a id="TAG:__tex2page_call_footnote_Temp_6"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_6">6</a></sup></span></p>
+<p>
+
+An IP-address is a string that consists of
+four <code class=scheme><span class=variable>n0&#x2011;255</span></code>s with three dots separating
+them.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>ip-re1</span>
+  (<span class=variable>string-append</span>
+    <span class=selfeval>&#x22;^&#x22;&#x22;</span>        <span class=comment>;nothing before</span>
+
+    <span class=variable>n0-255</span>     <span class=comment>;the first n0-255,</span>
+
+    <span class=selfeval>&#x22;(?x:&#x22;&#x22;</span>     <span class=comment>;then the subpattern of</span>
+
+    <span class=selfeval>&#x22;\\.&#x22;&#x22;</span>      <span class=comment>;a dot followed by</span>
+
+    <span class=variable>n0-255</span>     <span class=comment>;an n0-255,</span>
+
+    <span class=selfeval>&#x22;)&#x22;&#x22;</span>        <span class=comment>;which is</span>
+
+    <span class=selfeval>&#x22;{3}&#x22;&#x22;</span>      <span class=comment>;repeated exactly 3 times</span>
+
+    <span class=selfeval>&#x22;$&#x22;&#x22;</span>        <span class=comment>;with nothing following</span>
+
+    ))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Let’s try it out.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=variable>ip-re1</span>
+  <span class=selfeval>&#x22;1.2.3.4&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;1.2.3.4&#x22;&#x22;</span>)
+
+(<span class=variable>pregexp-match</span> <span class=variable>ip-re1</span>
+  <span class=selfeval>&#x22;55.155.255.265&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>which is fine, except that we also
+have</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=variable>ip-re1</span>
+  <span class=selfeval>&#x22;0.00.000.00&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;0.00.000.00&#x22;&#x22;</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>All-zero sequences are not valid IP addresses!
+Lookahead to the rescue.  Before starting to match
+<code class=scheme><span class=variable>ip&#x2011;re1</span></code>, we look ahead to ensure we don’t have all
+zeros.  We could use positive lookahead
+to ensure there <em>is</em> a digit other than
+zero.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>ip-re</span>
+  (<span class=variable>string-append</span>
+    <span class=selfeval>&#x22;(?=.*[1-9])&#x22;&#x22;</span> <span class=comment>;ensure there’s a non-0 digit</span>
+
+    <span class=variable>ip-re1</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Or we could use negative lookahead to
+ensure that what’s ahead isn’t composed
+of <em>only</em> zeros and dots.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>ip-re</span>
+  (<span class=variable>string-append</span>
+    <span class=selfeval>&#x22;(?![0.]*$)&#x22;&#x22;</span> <span class=comment>;not just zeros and dots</span>
+
+                 <span class=comment>;(note: dot is not metachar inside [])</span>
+
+    <span class=variable>ip-re1</span>))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The regexp <code class=scheme><span class=variable>ip&#x2011;re</span></code> will match
+all and only valid IP addresses.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>pregexp-match</span> <span class=variable>ip-re</span>
+  <span class=selfeval>&#x22;1.2.3.4&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> (<span class=selfeval>&#x22;1.2.3.4&#x22;&#x22;</span>)
+
+(<span class=variable>pregexp-match</span> <span class=variable>ip-re</span>
+  <span class=selfeval>&#x22;0.0.0.0&#x22;&#x22;</span>)
+<span class=keyword>=&#x3e;</span> <span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<div class=footnoterule><hr></div><p>
+</p>
+<div class=footnote><p>
+<span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_6"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_6">6</a></sup></span> Note that
+n0-255
+
+lists prefixes as
+preferred alternates, something we cautioned against in
+sec <a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.5">3.5</a>.  However, since we intend
+to anchor this subregexp explicitly to force an overall
+match, the order of the alternates does not matter.</p>
+</div>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-3.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-5.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

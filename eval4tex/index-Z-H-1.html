@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<!--
+Generated from index.tex by tex2page, v 20150602
+(running on Racket 6.2.0.3, unix), 
+(c) Dorai Sitaram, 
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+An \eval for TeX
+</title>
+<link rel="stylesheet" href="index-Z-S.css" title=default />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div id=slidecontent>
+<div align=right class=navigation>[Go to <span><a href="index.html">first</a>, <a href="index.html">previous</a></span><span>, <a href="index-Z-H-2.html">next</a></span> page<span>; &nbsp;&nbsp;</span><span><a href="index.html#node_toc_start">contents</a></span><span><span>; &nbsp;&nbsp;</span><a href="index-Z-H-5.html#node_index_start">index</a></span>]</div>
+<p>
+<a name="node_sec_1"></a>
+<h1 class=beginchapter>1&nbsp;&nbsp;The eval feature</h1></p>
+
+<p class=noindent>Consider a T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X document <code class=verbatim>circle.tex</code> with
+the following contents:
+<a name="node_idx_2"></a><a name="node_idx_4"></a></p>
+<p>
+
+</p>
+<p>
+</p>
+<pre class=verbatim>\input eval4tex  % defines the \eval macro&nbsp;
+&nbsp;
+The ratio of the circumference of a circle&nbsp;
+to its diameter is&nbsp;
+\eval{&nbsp;
+</pre>
+<p class=noindent>
+</p>
+<pre class=scheme><span class=comment>;following prints pi, because cos(pi) = -1</span>
+(<span class=variable>display</span> (<span class=variable>acos</span> <span class=selfeval>-1</span>))
+</pre>
+<p class=noindent>
+</p>
+<pre class=verbatim>}.&nbsp;
+&nbsp;
+\bye&nbsp;
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>We have chosen a plain T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X document for
+our example, but the same approach works for
+LaTeX documents too.</p>
+<p>
+<code class=verbatim>circle.tex</code> first inputs the T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X macro
+file <code class=verbatim>eval4tex.tex</code>, which is available in the
+eval4tex distribution, and which defines
+a T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X macro
+called <code class=verbatim>\eval</code>.  This <code class=verbatim>\eval</code> macro is used in the body of
+<code class=verbatim>circle.tex</code> and its argument is some Scheme code
+enclosed in braces.</p>
+<p>
+Now run T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X on <code class=verbatim>circle.tex</code>:</p>
+<p>
+</p>
+<pre class=verbatim>tex circle&nbsp;
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>(If <code class=verbatim>circle.tex</code> were a LaT<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X file, you would use
+<code class=verbatim>latex circle</code> here.) This creates an
+auxiliary file called <code class=verbatim>circle.eval4tex</code>
+that extracts the <code class=verbatim>\eval</code>-embedded Scheme code from <code class=verbatim>circle.tex</code>.</p>
+<p>
+Now evaluate the Scheme file <code class=verbatim>circle.eval4tex</code>.  For example, with
+Racket, you could do</p>
+<p>
+</p>
+<pre class=verbatim>racket -f circle.eval4tex&nbsp;
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>This produces an auxiliary T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X file <code class=verbatim>circle&#x2011;Z&#x2011;E&#x2011;1.tex</code>
+containing an appropriate T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X replacement for the
+<code class=verbatim>\eval</code>&rsquo;d Scheme code in <code class=verbatim>circle.tex</code>.  In general,
+you will get an aux T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X file
+for each <code class=verbatim>\eval</code> in
+the source document, and if the source document is
+named <code class=verbatim>circle.tex</code>, the aux files are named
+<code class=verbatim>circle&#x2011;Z&#x2011;E&#x2011;<em>n</em>.tex</code>, where <code class=verbatim><em>n</em> = 1, 2,
+&#x2026;</code>.</p>
+<p>
+Re-running T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X on <code class=verbatim>circle.tex</code> will now insert the
+aux file <code class=verbatim>circle&#x2011;Z&#x2011;E&#x2011;1.tex</code> at the point of
+the <code class=verbatim>\eval</code>, so the final DVI output,
+<code class=verbatim>circle.dvi</code>, looks like:</p>
+<p>
+<blockquote></p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+
+The ratio of the circumference of a circle
+to its diameter is
+3.141592653589793.
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</blockquote></p>
+<p>
+To summarize, we did</p>
+<p>
+</p>
+<pre class=verbatim>tex circle; racket -f circle.eval4tex; tex circle&nbsp;
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>The first call to <code class=verbatim>tex</code> wrote out an aux file; the
+call to <code class=verbatim>eval4tex</code> processed this aux file to produce
+one or more other aux files; and the final call to
+<code class=verbatim>tex</code> slurped these latter aux files into the
+document.</p>
+<p>
+This strategy is quite common in the T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X world.  The
+popular T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X-support programs BibT<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X and
+MakeIndex, which generate
+bibliographies and indices respectively, both operate
+this way.</p>
+<p>
+</p>
+<p>
+<h1 class=beginsection>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page</h1></p>
+
+<p class=noindent>You can also run the program T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page&nbsp;[<a href="index-Z-H-4.html#node_bib_5">5</a>] on <code class=verbatim>circle.tex</code> to get an HTML
+version of the document with the same content.  As T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page is written in
+Scheme, it will automatically convert the <code class=verbatim>\eval</code>s in <code class=verbatim>circle.tex</code>
+without requiring you to call Scheme separately.</p>
+<p>
+</p>
+<pre class=verbatim>tex2page circle&nbsp;
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>N.B.  T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X documents intended to be processed by T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page typically load the
+macro file <code class=verbatim>tex2page.tex</code>.  Please see the T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page documentation for
+more details.</p>
+<p>
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div align=right class=navigation>[Go to <span><a href="index.html">first</a>, <a href="index.html">previous</a></span><span>, <a href="index-Z-H-2.html">next</a></span> page<span>; &nbsp;&nbsp;</span><span><a href="index.html#node_toc_start">contents</a></span><span><span>; &nbsp;&nbsp;</span><a href="index-Z-H-5.html#node_index_start">index</a></span>]</div>
+</p>
+<p></p>
+</div>
+</body>
+</html>

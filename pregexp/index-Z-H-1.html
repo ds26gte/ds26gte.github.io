@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+pregexp: Portable Regular Expressions for Scheme and Common Lisp
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-2.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_1"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_1">1&#xa0;&#xa0;Introduction</a></h1>
+<p class=noindent>A <em>regexp</em> is a string that describes a pattern.  A
+regexp matcher tries to <em>match</em> this pattern
+against (a portion of) another string, which we
+will call the <em>text string</em>.  The text string
+is treated as raw text and not as a pattern.</p>
+<p>
+
+Most of the characters in a regexp pattern are meant to
+match occurrences of themselves in the text string.
+Thus, the pattern <code class=scheme><span class=selfeval>&#x22;abc&#x22;&#x22;</span></code> matches a string that
+contains the characters <code class=verbatim>a</code>, <code class=verbatim>b</code>, <code class=verbatim>c</code> in succession.</p>
+<p>
+
+In the regexp pattern, some characters  act as <em>
+metacharacters</em>, and some character sequences act as
+<em>metasequences</em>.  That is, they specify something
+other than their literal selves.  For example, in the
+pattern <code class=scheme><span class=selfeval>&#x22;a.c&#x22;&#x22;</span></code>, the characters <code class=verbatim>a</code> and <code class=verbatim>c</code> do
+stand for themselves but the <em>metacharacter</em> ‘<code class=verbatim>.</code>’
+can match <em>any</em> character (other than
+newline).  Therefore, the pattern <code class=scheme><span class=selfeval>&#x22;a.c&#x22;&#x22;</span></code>
+matches an <code class=verbatim>a</code>, followed by <em>any</em> character,
+followed by a <code class=verbatim>c</code>.</p>
+<p>
+
+If we needed to match the character ‘<code class=verbatim>.</code>’ itself,
+we <em>escape</em> it, ie, precede it with a backslash
+(<code class=verbatim>\</code>).  The character sequence <code class=verbatim>\.</code> is thus a <em>
+metasequence</em>, since it doesn’t match itself but rather
+just ‘<code class=verbatim>.</code>’.  So, to match <code class=verbatim>a</code> followed by a literal
+‘<code class=verbatim>.</code>’ followed by <code class=verbatim>c</code>, we use the regexp pattern
+<code class=scheme><span class=selfeval>&#x22;a\\.c&#x22;&#x22;</span></code>.<a id="TAG:__tex2page_call_footnote_Temp_1"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_1">1</a></sup></span>
+Another example of a metasequence is <code class=verbatim>\t</code>, which is a
+readable way to represent the tab character.</p>
+<p>
+
+We will call the string representation of a regexp the
+<em>U-regexp</em>, where <em>U</em> can be taken to mean <em>
+Unix-style</em> or <em>universal</em>, because this
+notation for regexps is universally familiar.  Our
+implementation uses an intermediate tree-like
+representation called the <em>S-regexp</em>, where <em>S</em>
+can stand for <em>Scheme</em>, <em>symbolic</em>, or
+<em>s-expression</em>.  S-regexps are more verbose
+and less readable than U-regexps, but they are much
+easier for Scheme’s recursive procedures to navigate.</p>
+<p>
+
+</p>
+<div class=footnoterule><hr></div><p>
+</p>
+<div class=footnote><p>
+<span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_1"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_1">1</a></sup></span> The double backslash is an artifact of
+Scheme strings, not the regexp pattern itself.  When we
+want a literal backslash inside a Scheme string, we
+must escape it so that it shows up in the string at
+all. Scheme strings use backslash as the escape
+character, so we end up with two backslashes — one
+Scheme-string backslash to escape the regexp backslash,
+which then escapes the dot.  Another character that
+would need escaping inside a Scheme string is
+‘<span style="font-family: monospace">&#x22;</span>’.
+
+</p>
+</div>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-2.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+
