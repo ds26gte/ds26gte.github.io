@@ -93,6 +93,7 @@
   }
 
   .display.verbatim {
+    overflow: auto;
     background-color: #f7f7f8;
   }
 
@@ -116,6 +117,10 @@
 
   .disable {
     color: gray;
+  }
+
+  .footnote {
+    font-size: 90%;
   }
 
   .footnote hr {
@@ -158,6 +163,7 @@
   @media screen and (orientation: portrait) and (max-width: 480px),
          screen and (orientation: landscape) and (max-width: 640px) {
     body {
+      max-width: none;
       margin: 5px;
     }
   }
@@ -196,6 +202,7 @@
   
 body {
     max-width: 54em;
+    font-family: georgia;
     /* font-family: georgia, serif; */
     /* line-height: 1.4; */
 }
@@ -221,17 +228,13 @@ h1,h2,h3,h4,h5 {
     color: #9b3d3d;
 }
 
-body { max-width: 576px; }
+body { max-width: 576.0px; }
 
-p { margin-top: 12px; margin-bottom: 12px; }
+p { margin-top: 12.0px; margin-bottom: 12.0px; }
 
 .display { margin-top: 12.0px; margin-bottom: 12.0px; padding-top: 12.0px; padding-bottom: 12.0px; }
 
 .display.verbatim { padding-left: 12.0px; }
-.footnote { margin-top: 24px; }
+.footnote { margin-top: 24.0px; }
 
-.navigation { margin-top: 20px; margin-bottom: 20px; }
-        h1,h2,h3,h4,h5,h6 {
-            color: #9b3d3d; /* terracotta pink */
-        }
-    
+.navigation { margin-top: 20.0px; margin-bottom: 20.0px; }

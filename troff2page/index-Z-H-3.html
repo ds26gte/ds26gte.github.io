@@ -22,16 +22,31 @@ troff2page
 <p></p>
 <h1 style="font-size: 160%"><a name="TAG:__pca_sec_8"></a>
 3. Page layout</h1>
-<p><a name="TAG:__troff2page_index_42"></a>
-<a name="TAG:__troff2page_index_43"></a>
-The page-break command <span style="font-family: monospace; ">.bp</span> ends the current HTML page and start a new
-one.  <span style="font-family: monospace; ">.bp</span> causes a page-break in both the HTML and the print outputs.
+<p><a name="TAG:__troff2page_index_49"></a>
+Each page in a multiple-page HTML output has a navigation bar at its
+head and foot.  The bar contains links to the first, previous, and next
+page, and the table-of-contents and index pages.  If any of the
+first three pages
+doesn’t exist, or if it is the same as the page containing the
+navigation bar, the link for it is disabled (grayed). If the ToC or
+index page doesn’t exist, it is absent from the bar.
+</p>
+<p class=indent></p>
+<p></p>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_9"></a>
+Page breaks</h2>
+<p><a name="TAG:__troff2page_index_50"></a>
+<a name="TAG:__troff2page_index_51"></a>
+Multiple pages are created because the document source implicitly or
+explicilty used
+the page-break command <span style="font-family: monospace; ">.bp</span>.  Each call to <span style="font-family: monospace; ">.bp</span> ends the current HTML page and start a new
+one.  Thus <span style="font-family: monospace; ">.bp</span> causes a page-break in both the HTML and the print outputs.
 </p>
 <p class=indent><a name="TAG:cond-bp"></a>
-<a name="TAG:__troff2page_index_44"></a>
-<a name="TAG:__troff2page_index_45"></a>
-<a name="TAG:__troff2page_index_46"></a>
-Generally, page-breaks require a different aesthetic in HTML than in
+<a name="TAG:__troff2page_index_52"></a>
+<a name="TAG:__troff2page_index_53"></a>
+<a name="TAG:__troff2page_index_54"></a>
+Generally, page-breaks require a different &#xe6;sthetic in HTML than in
 print.  You can use troff conditionals to express this difference:
 </p>
 <p><div class="display verbatim" align=left>
@@ -50,9 +65,9 @@ print.  You can use troff conditionals to express this difference:
 </p>
 <p class=indent>As can be seen, the number register <span style="font-family: monospace; ">\n[.troff2page]</span> has a <span style="font-style: italic; ">true</span>
 value, i.e., a number greater than zero, only when troff2page processes the
-document.<a name="TAG:__troff2page_call_footnote_4"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_4"><span class=hreftext><sup><small>4</small></sup></span></a>
+document.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_47"></a>
+<p class=indent><a name="TAG:__troff2page_index_55"></a>
 If may be convenient to define a <span style="font-family: monospace; ">.HBP</span> macro that causes a page-break
 only for HTML:
 </p>
@@ -65,27 +80,97 @@ only for HTML:
 </p>
 <p>Note that troff2page, like troff, does not automatically cause a page break
 at the sectioning commands.  Use <span style="font-family: monospace; ">.bp</span> or a macro like <span style="font-family: monospace; ">.HBP</span> to
-explicitly to insert breaks as needed.
+explicitly to insert breaks as needed, or define your own
+sectioning commands
+or modify the existing ones
+to embed a page break.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_48"></a>
-Each page in a multiple-page HTML output has a navigation bar at its
-head and foot.  The bar contains links to the first, previous, and next
-page, and the table-of-contents and index pages.  If any of these pages
-doesn’t exist, or if it is the same as the page containing the
-navigation bar, then the link for it is disabled.
+<p class=indent><a name="TAG:__troff2page_index_56"></a>
+<a name="TAG:__troff2page_index_57"></a>
+<a name="TAG:__troff2page_index_58"></a>
+<a name="TAG:__troff2page_index_59"></a>
+<a name="TAG:__troff2page_index_60"></a>
+<a name="TAG:__troff2page_index_61"></a>
+<a name="TAG:__troff2page_index_62"></a>
+Here’s a way to create pagebreaks in HTML before every top-level <span style="font-family: monospace; ">.SH</span>, by
+redefining the underlying <span style="font-family: monospace; ">.@SH</span> macro:
 </p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.if&#xa0;\n[.troff2page]&#xa0;\{\<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;rn&#xa0;@SH&#xa0;__@SH_orig<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;de&#xa0;@SH<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;&#xa0;&#xa0;nr&#xa0;__@SH_first_arg&#xa0;\\$1<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;&#xa0;&#xa0;shift<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;&#xa0;&#xa0;if&#xa0;'\\n[__@SH_first_arg]'1'&#xa0;.bp<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;&#xa0;&#xa0;__@SH_orig&#xa0;\\n[__@SH_first_arg]&#xa0;\\$*<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;.<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;als&#xa0;SH&#xa0;@SH<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.\}<br>
+</span>
+</div>
+</p>
+<p></p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_9"></a>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_10"></a>
+Recognizing when troff2page is running</h2>
+<p>We used the value stored in the number register
+<span style="font-family: monospace; ">\n[.troff2page]</span> to determine
+which typesetter — troff2page or groff — is operating on our
+text. A positive number is considered true. (Perhaps
+contrary
+to expectation, not just 0 but all negative numbers are false for
+groff.)
+Unset registers are assumed to contain 0.
+</p>
+<p class=indent>In troff2page,
+the positive number held in this register
+is in fact the version
+number of the troff2page program processing the document.  This is a number
+such as 20150320, which would be the version number of the troff2page
+released on 2015 March 20.  <span style="font-family: monospace; ">\n[.troff2page]</span> could plausibly be used
+to distinguish not just troff2page from troff, but also between various versions
+of troff2page.  Thus, one could, if the need were dire, write a document
+that translates differently with different versions of
+troff2page. But don’t do this.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_63"></a>
+If you’d rather stick to known groff registers, the read-only
+paper-length register <span style="font-family: monospace; ">\n(.p</span> is a candidate. groff sets
+it to 11 inches, i.e., the length of a US Letter size paper.
+Presumably it could vary depending on country of use, but it is
+never going to be non-positive. troff2page, since it doesn’t deal in paper, sets
+<span style="font-family: monospace; ">\n(.p</span> to 0.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_64"></a>
+<a name="TAG:__troff2page_index_65"></a>
+groff has its own version registers <span style="font-family: monospace; ">\n(.x</span>
+and <span style="font-family: monospace; ">\n(.y</span>, which contain the major and minor version numbers
+respectively. troff2page sets these too, splitting the value of
+<span style="font-family: monospace; ">\n[.troff2page]</span> between month and day. Thus the troff2page
+released on 2020 December 2 sets <span style="font-family: monospace; ">\n[.troff2page]</span> to 20201202,
+<span style="font-family: monospace; ">\n(.x</span> to 202012, and
+<span style="font-family: monospace; ">\n(.y</span> to 2. (These are all numbers (not strings), so
+there’s no 0-left-padding.)
+</p>
+<p class=indent></p>
+<p class=indent></p>
+<p></p>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_11"></a>
 HTML-style paragraphs</h2>
-<p>By default, troff2page sets paragraphs exactly as groff does: the first
+<p><a name="TAG:__troff2page_index_66"></a>
+<a name="TAG:__troff2page_index_67"></a>
+By default, troff2page sets paragraphs exactly as groff does: the first
 lines of paragraphs are indented (unless explicitly disabled via an
 <span style="font-family: monospace; ">.LP</span>), and
 the vertical distance between adjacent paragraphs is the same smallish
 amount that groff employs.  These two values are given by the number
 registers <span style="font-family: monospace; ">PI</span> and <span style="font-family: monospace; ">PD</span>, which (for the -ms format) are 0.3n and 0.3v
-respectively.<a name="TAG:__troff2page_call_footnote_5"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_5"><span class=hreftext><sup><small>5</small></sup></span></a>
-</p>
+respectively.</p>
 <p class=indent>If you wish to have the kind of block paragraphs customary in HTML, it
 is not enough to set <span style="font-family: monospace; ">PI</span> to 0, for the prevailing value of <span style="font-family: monospace; ">PD</span> is too
 small to comfortably tell adjacent paragraphs apart.  You could set <span style="font-family: monospace; ">PD</span>
@@ -97,19 +182,79 @@ text in order to respect a negative <span style="font-family: monospace; ">PD</s
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.if&#xa0;\n[.troff2page]&#xa0;\{\<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.nr&#xa0;PI&#xa0;0n<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.nr&#xa0;PD&#xa0;0-1p<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;nr&#xa0;PI&#xa0;0n<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;nr&#xa0;PD&#xa0;0-1p<br>
 &#xa0;&#xa0;&#xa0;&#xa0;.\}<br>
 </span>
 </div>
 </p>
+<p></p>
+<p class=indent></p>
+<p></p>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_12"></a>
+Scaling factors</h2>
+<p><a name="TAG:__troff2page_index_68"></a>
+The scaling factor <span style="font-family: monospace; ">n</span> (en)
+used above is half the width of the letter ‘<span style="font-family: monospace; ">m</span>’ in
+the default font size. <span style="font-family: monospace; ">v</span> is the distance between two consecutive
+baselines. Scaling factors are generally, but not always, what
+you might think of as length units.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_69"></a>
+<a name="TAG:__troff2page_index_70"></a>
+<a name="TAG:__troff2page_index_71"></a>
+<a name="TAG:__troff2page_index_72"></a>
+<a name="TAG:__troff2page_index_73"></a>
+<a name="TAG:__troff2page_index_74"></a>
+Other groff scaling factors that troff2page recognizes
+are: <span style="font-family: monospace; ">i</span> (inch = 1/12 foot), <span style="font-family: monospace; ">c</span> (cm =
+50/127 inch), <span style="font-family: monospace; ">p</span> (point = 1/72 inch), <span style="font-family: monospace; ">P</span> (pica = 12
+points), <span style="font-family: monospace; ">m</span> (em = 2 ens), and <span style="font-family: monospace; ">M</span> (1/100 em).
+</p>
+<p class=indent><a name="TAG:__troff2page_index_75"></a>
+<a name="TAG:__troff2page_index_76"></a>
+<a name="TAG:__troff2page_index_77"></a>
+Internally, both groff and troff2page store lengths in the scaling
+factor <span style="font-family: monospace; ">u</span>, which
+is 1/72000 of an inch, and all lengths are integral multiples of
+u, thereby avoiding floating-point messes. If this seems too precise, consider that TeX stores all
+its lengths in “scaled points” (sp), where 1 sp = 1 / (2^16 * 72.27) =
+1/4736286.72
+&#x2248;
+2.1113586636917e-07
+of an inch!
+</p>
+<p class=indent>At any rate, do learn your inches and keep your inch measure
+handy. The groff manual throws the usual shade on “antiquated”
+units, but it can’t really mean it, as easy factors and
+multiples of the inch are all over the place.
+The groff point is exactly 1/72 of an inch
+(unlike TeX’s slightly smaller point of 1/72.27 inch, which is
+neither metric fish nor Imperial fowl); the underlying scaling
+factor is 1/1000 of the point; and
+the default offsets, margins, and widths are all nice multiples of
+inches.
+</p>
+<p class=indent>Finally, the scaling factor <span style="font-family: monospace; ">f</span> is simply 2^16, so its
+coefficients can be used as fractions.
+</p>
+<p class=indent></p>
+<p></p>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_13"></a>
+Line length</h2>
 <p>Unlike groff -ms, which uses the line length given by the register
 <span style="font-family: monospace; ">LL</span>,
 troff2page by default does not restrict the text width on its HTML pages.
 Text will narrow or widen to fit the current browser window width.  However, if
 you explicitly set <span style="font-family: monospace; ">LL</span> (instead of relying on -ms’s default), troff2page
 will respect that line length, regardless of how wide your
-browser gets.<a name="TAG:__troff2page_call_footnote_6"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_6"><span class=hreftext><sup><small>6</small></sup></span></a>
+browser gets.
+</p>
+<p class=indent>If you prefer troff2page’s default fit-to-width text-width, but
+one of the macro files you loaded sets <span style="font-family: monospace; ">LL</span>, simply reset
+<span style="font-family: monospace; ">LL</span> to 0 inside an <span style="font-family: monospace; ">.if \n[.troff2page]</span> conditional.
+Use the same ploy to set your HTML <span style="font-family: monospace; ">LL</span> to whatever you want,
+without affecting the print output.
 </p>
 <p class=indent>It is always OK to have the browser window less
 wide than <span style="font-family: monospace; ">LL</span> (as is certainly unavoidable on cell
@@ -118,61 +263,15 @@ fit the window, avoiding the need for horizontal scrolling.
 </p>
 <p class=indent>A good <span style="font-family: monospace; ">LL</span> value for troff2page should be a bit larger than
 -ms’s 6 inches, which is too narrow for a browser.  The following sets it
-to 1 millifurlong, but it takes effect only for HTML:
+to 1/8000 of a statute mile, but it takes effect only for HTML:
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.if&#xa0;\n[.troff2page]&#xa0;.nr&#xa0;LL&#xa0;7.92i<br>
 </span>
 </div>
 </p>
-<p></p>
-<div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_4"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_4"><span class=hreftext><sup><small>4</small></sup></span></a>
-The greater-than-zero number held in the register
-<span style="font-family: monospace; ">\n[.troff2page]</span>
-is in fact the version
-number of the troff2page program processing the document.  This is a number
-such as 20150320, which would be the version number of the troff2page
-released on 2015 March 20.  <span style="font-family: monospace; ">\n[.troff2page]</span> could plausibly be used
-to distinguish not just troff2page from troff, but also between various versions
-of troff2page.  Thus, one could, if the need were dire, write a document
-that translates differently with different versions of troff2page.
+<p><div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-2.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-4.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 </p>
-<p class=indent><a name="TAG:__troff2page_index_49"></a>
-If you’d prefer to stick to known groff registers, the read-only
-paper-length register <span style="font-family: monospace; ">\n[.p]</span> is a possibility. groff sets
-it to 11 inches, i.e., the length of a US Letter size paper.
-Presumably it could vary depending on country of use, but it is
-never 0. troff2page, since it doesn't deal in paper, sets
-<span style="font-family: monospace; ">\n[.p]</span> to 0.
-</p>
-<p class=indent><a name="TAG:__troff2page_index_50"></a>
-<a name="TAG:__troff2page_index_51"></a>
-groff has its own version registers <span style="font-family: monospace; ">\n[.x]</span>
-and <span style="font-family: monospace; ">\n[.y]</span>, for the major and minor version numbers
-respectively. troff2page sets these too, splitting the value of
-<span style="font-family: monospace; ">\n[.troff2page]</span> between month and day. Thus the troff2page
-released on 2020 December 2 sets <span style="font-family: monospace; ">\n[.troff2page]</span> to 20201202,
-<span style="font-family: monospace; ">\n[.x]</span> to 202012, and
-<span style="font-family: monospace; ">\n[.y]</span> to 2. These are all numbers (not strings), so
-there’s no 0-left-padding.
-</p>
-<p><a name="TAG:__troff2page_footnote_5"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_5"><span class=hreftext><sup><small>5</small></sup></span></a>
-The length unit <span style="font-family: monospace; ">n</span> (en) is half the width of the letter ‘<span style="font-family: monospace; ">m</span>’ in
-the current font. <span style="font-family: monospace; ">v</span> is the distance between two consecutive
-baselines. Other groff length units that troff2page recognizes
-are: <span style="font-family: monospace; ">i</span> (inch = 1/12 foot), <span style="font-family: monospace; ">c</span> (cm =
-50/127 inch), <span style="font-family: monospace; ">p</span> (point = 1/72 inch), <span style="font-family: monospace; ">P</span> (pica = 12
-points), <span style="font-family: monospace; ">m</span> (em = 2 ens), and <span style="font-family: monospace; ">M</span> (1/100 em).
-</p>
-<p><a name="TAG:__troff2page_footnote_6"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_6"><span class=hreftext><sup><small>6</small></sup></span></a>
-If you prefer troff2page’s default fit-to-width text-width, but
-one of the macro files you loaded sets <span style="font-family: monospace; ">LL</span>, simply reset
-<span style="font-family: monospace; ">LL</span> to 0 inside an <span style="font-family: monospace; ">.if \n[.troff2page]</span> conditional.
-Use the same ploy to set your HTML <span style="font-family: monospace; ">LL</span> to whatever you want,
-without affecting the print output.
-</p>
-</div>
-<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-2.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-4.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 </div>
 </body>
 </html>

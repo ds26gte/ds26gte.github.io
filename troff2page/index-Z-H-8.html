@@ -20,9 +20,9 @@ troff2page
 <div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-7.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-9.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 <p></p>
-<h1 style="font-size: 160%"><a name="TAG:__pca_sec_16"></a>
+<h1 style="font-size: 160%"><a name="TAG:__pca_sec_21"></a>
 8. Styling</h1>
-<p><a name="TAG:__troff2page_index_83"></a>
+<p><a name="TAG:__troff2page_index_110"></a>
 <span style="font-family: monospace; ">.ig ##</span> can be used to specify settings that are relevant only
 when troff2page is used on a document, e.g., stylesheet changes.
 troff2page uses the output-stream <span style="font-family: monospace; ">Css_stream</span> to
@@ -46,10 +46,10 @@ append to this stream. E.g.,
 </p>
 <p>This sets the HTML headers
 with a foreground color
-of <span style="color: #9b3d3d; ">terracotta pink</span><span style="color: previous; "><a name="TAG:__troff2page_call_footnote_9"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_9"><span class=hreftext><sup><small>9</small></sup></span></a>,
+of <span style="color: #9b3d3d; ">terracotta pink</span><span style="color: previous; "><a name="TAG:__troff2page_call_footnote_2"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_2"><span class=hreftext><sup><small>2</small></sup></span></a>,
 along with some other changes from the default.
 </span></p>
-<p class=indent><a name="TAG:__troff2page_index_84"></a>
+<p class=indent><a name="TAG:__troff2page_index_111"></a>
 troff2page makes available many CSS classes that you can modify
 in this manner to change the look of your web pages. For
 instance, the HTML element for the document title has class
@@ -69,7 +69,7 @@ Asciidoctor-like title:
 </span>
 </div>
 </p>
-<p>Of course, these CSS mods don't affect the groff output, but they
+<p>Of course, these CSS mods don’t affect the groff output, but they
 do affect the printed output if you choose 
 to print from the browser! To prevent any CSS mods
 from leaking into the browser-mediated printout, wrap them inside
@@ -77,18 +77,18 @@ from leaking into the browser-mediated printout, wrap them inside
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_17"></a>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_22"></a>
 Colophon</h2>
-<p><a name="TAG:__troff2page_index_85"></a>
-<a name="TAG:__troff2page_index_86"></a>
+<p><a name="TAG:__troff2page_index_112"></a>
+<a name="TAG:__troff2page_index_113"></a>
 By default, troff2page places a colophon at the bottom right of the first
-page. The colophon mentions (1) the last-modification
+page. The colophon mentions (i) the last-modification
 time of the
-the document and (2) the troff2page version used for the conversion.
+the document and (ii) the troff2page version used for the conversion.
 Either or both can be suppressed via CSS.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_87"></a>
-<a name="TAG:__troff2page_index_88"></a>
+<p class=indent><a name="TAG:__troff2page_index_114"></a>
+<a name="TAG:__troff2page_index_115"></a>
 To suppress the mention of troff2page, 
 </p>
 <p class=indent></p>
@@ -116,18 +116,23 @@ of the newest of the source documents that make up the document.
 Only user content is considered; macro and auxiliary files are
 not.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_89"></a>
-<a name="TAG:__troff2page_index_90"></a>
+<p class=indent><a name="TAG:__troff2page_index_116"></a>
+<a name="TAG:__troff2page_index_117"></a>
 To specify a document timestamp without regard to the actual mod times
 of the files in it, use the -ms macros <span style="font-family: monospace; ">.ND</span> or <span style="font-family: monospace; ">.DA</span>.
-troff2page doesn't distinguish between them, but groff does.<a name="TAG:__troff2page_call_footnote_10"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_10"><span class=hreftext><sup><small>10</small></sup></span></a>
-For web pages, note that if
+troff2page doesn’t distinguish between them, but groff does.
+<span style="font-family: monospace; ">.ND</span> is probably what you want for both typesetters. (groff
+doesn’t really have any notion of the last-mod date anyway: It
+simply uses the date that it was called. 
+I.e., last-creation-of-printed-output date.)
+</p>
+<p class=indent>For web pages, note that if
 either macro is called with an argument, that argument is used as the
 last-mod date, overriding the value that troff2page would
 have determined. 
 </p>
-<p class=indent><a name="TAG:__troff2page_index_91"></a>
-If no argument is given, the colophon doesn't
+<p class=indent><a name="TAG:__troff2page_index_118"></a>
+If no argument is given, the colophon doesn’t
 include the “Last modified” line at all, something that can also be
 accomplished via the CSS fragment:
 </p>
@@ -139,17 +144,11 @@ accomplished via the CSS fragment:
 </div>
 </p>
 <p></p>
-<div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_9"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_9"><span class=hreftext><sup><small>9</small></sup></span></a>
+<div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_2"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_2"><span class=hreftext><sup><small>2</small></sup></span></a>
 The RGB values used in this manual for
 the colors
 terracotta pink
 and Venetian red are courtesy <a href="https://www.resene.co.nz/swatches"><span class=hreftext>Resene Paints</span></a>.
-</p>
-<p><a name="TAG:__troff2page_footnote_10"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_10"><span class=hreftext><sup><small>10</small></sup></span></a>
-See the -ms man page. <span style="font-family: monospace; ">.ND</span> is probably what you want. groff
-doesn't really have any notion of the last-mod date anyway: It
-simply uses the date that it was called. 
-I.e., last-creation-of-printed-output date.
 </p>
 </div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-7.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-9.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>

@@ -20,11 +20,11 @@ troff2page
 <div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-4.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-6.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 <p></p>
-<h1 style="font-size: 160%"><a name="TAG:__pca_sec_11"></a>
+<h1 style="font-size: 160%"><a name="TAG:__pca_sec_16"></a>
 5. Making an index</h1>
-<p><a name="TAG:__troff2page_index_60"></a>
-<a name="TAG:__troff2page_index_61"></a>
-<a name="TAG:__troff2page_index_62"></a>
+<p><a name="TAG:__troff2page_index_87"></a>
+<a name="TAG:__troff2page_index_88"></a>
+<a name="TAG:__troff2page_index_89"></a>
 The supplied macro file <span style="font-family: monospace; ">pca-ix.tmac</span>
 creates a sorted
 index, with the aid of the external program makeindex.
@@ -38,7 +38,7 @@ are different.  In addition, the index generated for
 troff2page has the additional feature of hyperlinking to the
 appropriate locations in the body text.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_63"></a>
+<p class=indent><a name="TAG:__troff2page_index_90"></a>
 The call
 </p>
 <p><div class="display verbatim" align=left>
@@ -62,15 +62,16 @@ alternate alphabetization, (b) subitems, (c) literal metacharacters, and
 it as though it were “m” rather than something that starts with a
 hyphen.
 </p>
+<p class=indent></p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.IX&#xa0;groff!macro&#xa0;packages<br>
 </span>
 </div>
 </p>
 <p>makes “macro packages” an indented index subentry under “groff”.
+Up to two <span style="font-family: monospace; ">!</span>s may be used.
 </p>
-<p class=indent>Up to two <span style="font-family: monospace; ">!</span>s may be used.
-</p>
+<p class=indent></p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.IX&#xa0;groff!macro&#xa0;packages!ms<br>
 </span>
@@ -99,7 +100,8 @@ appear in the index entry as themselves, precede them with
 <p>creates an index entry for “set!car” rather than creating a
 subentry “car” under “set&#x22;”.
 </p>
-<p class=indent>Please see the
+<p class=indent><a name="TAG:__troff2page_index_91"></a>
+Please see the
 makeindex
 documentation for all the details.  Essentially, the syntax for entering
 index entries is the same <a href="http://tex.loria.fr/bibdex/makeindex.pdf"><span class=hreftext>as for LaTeX</span></a>, except that in troff we use
