@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by troff2page, v. 20201205
+Generated from index.ms by troff2page, v. 20201207
 Copyright (C) 2003-2020 Dorai Sitaram
 (running on Lua 5.3)
 http://ds26gte.github.io/troff2page
@@ -58,7 +58,7 @@ e.g., <span style="font-family: monospace; ">pca-tag.tmac</span> for cross-refer
 for index generation; <span style="font-family: monospace; ">pca-eval.tmac</span> for extending troff
 using Lua, etc. These extensions may loaded severally or as the
 single comprehensive macro file <span style="font-family: monospace; ">pca.tmac</span>. Please consult
-this submodule’s documentation for more information.
+this submodule&#x2019;s documentation for more information.
 </p>
 <p class=indent><a name="TAG:__troff2page_index_36"></a>
 In order to take advantage of the <span style="font-family: monospace; ">mpca</span> tmac files, you
@@ -66,7 +66,7 @@ should place them in one of your troff macro directories. (Both
 groff and troff2page search for macro files first in the
 directories in <span style="font-family: monospace; ">GROFF_TMAC_PATH</span>, then in the working
 directory, and finally in your home directory. See the section
-for “Macro Directories” in the groff info file for details.)
+for &#x201C;Macro Directories&#x201D; in the groff info file for details.)
 </p>
 <p class=indent><a name="TAG:__troff2page_index_37"></a>
 <a name="TAG:__troff2page_index_38"></a>
@@ -82,15 +82,15 @@ Auxiliary files</h2>
 <a name="TAG:__troff2page_index_41"></a>
 Many of the macros defined in these <span style="font-family: monospace; ">.tmac</span> files write
 auxiliary files that are absorbed into the document during a
-second run.  Let’s first investigate how groff deals with them,
+second run.  Let&#x2019;s first investigate how groff deals with them,
 and then see how troff2page does the same in its own way. Note
 that in order to write these aux files, groff must be run with
-the <span style="font-family: monospace; ">-U</span> option for “unsafe” mode.
+the <span style="font-family: monospace; ">-U</span> option for &#x201C;unsafe&#x201D; mode.
 </p>
 <p class=indent><a name="TAG:__troff2page_index_42"></a>
 <a name="TAG:__troff2page_index_43"></a>
 As an example, consider <span style="font-family: monospace; ">index.ms</span> (the groff source for the
-document you’re reading, which is the <span style="font-family: monospace; ">doc</span> subdirectory).  The following is one
+document you&#x2019;re reading, which is the <span style="font-family: monospace; ">doc</span> subdirectory).  The following is one
 way to get the correct PostScript output:
 </p>
 <p><div class="display verbatim" align=left>
@@ -114,7 +114,7 @@ way to get the correct PostScript output:
 preprocessor) is needed because the
 document <span style="font-family: monospace; ">index.ms</span>
 uses a table.  The first run uses the <span style="font-family: monospace; ">-z</span> option to disable
-writing an output file, which we don’t need until the second
+writing an output file, which we don&#x2019;t need until the second
 run.
 </p>
 <p class=indent>In both runs, we use the <span style="font-family: monospace; ">-U</span> option: The first run
@@ -122,7 +122,7 @@ needs unsafe mode to write the aux files, and the second run
 needs it to process some of them with external programs to
 create additional aux files.  Subsequent runs may dispense
 with the <span style="font-family: monospace; ">-U</span>, as all the required aux files are made.
-(You will need the option again, if the aux files’ content
+(You will need the option again, if the aux files&#x2019; content
 changes.)
 </p>
 <p class=indent>troff2page also needs to process the document twice in order to absorb
@@ -131,7 +131,7 @@ information from the aux files. However:
 <p class=indent>i. troff2page will automatically do the second processing
 without needing the user to explicitly call it a second time; and
 </p>
-<p class=indent>ii. troff2page doesn’t need any special option to run in “unsafe”
+<p class=indent>ii. troff2page doesn&#x2019;t need any special option to run in &#x201C;unsafe&#x201D;
 mode or to process tables.
 </p>
 <p><div class="display verbatim" align=left>
@@ -174,8 +174,8 @@ resolve the aux files. This is exactly analogous to calling
 The groff string <span style="font-family: monospace; ">\*[AUXF]</span> is used to construct the
 names of the
 auxiliary files.  By default it
-will be quietly set to “<span style="font-family: monospace; ">.trofftemp</span>” for groff and
-“<span style="font-family: monospace; ">.troff2page_temp_</span><span style="font-style: italic; ">Jobname</span>” for troff2page, where
+will be quietly set to &#x201C;<span style="font-family: monospace; ">.trofftemp</span>&#x201D; for groff and
+&#x201C;<span style="font-family: monospace; ">.troff2page_temp_</span><span style="font-style: italic; ">Jobname</span>&#x201D; for troff2page, where
 <span style="font-style: italic; ">Jobname</span> is the basename of the main input document file.
 </p>
 <p class=indent>You can change it to anything else in
@@ -183,7 +183,7 @@ your document before the first use of any macros that use or
 write aux files.  It is a good idea to set it so that it
 remains
 different for groff and troff2page, so that the two
-programs’ aux files don’t clash.  The number register
+programs&#x2019; aux files don&#x2019;t clash.  The number register
 <span style="font-family: monospace; ">\n[.troff2page]</span> (page <a class=hrefinternal href="index-Z-H-3.html#TAG:cond-bp"><span class=hreftext>3</span></a>) suggests a way
 to do this.
 </p>
@@ -191,7 +191,7 @@ to do this.
 <a name="TAG:__troff2page_index_46"></a>
 <a name="TAG:__troff2page_index_47"></a>
 <a name="TAG:__troff2page_index_48"></a>
-E.g., -ms’s footnotes (<span style="font-family: monospace; ">\**</span> and <span style="font-family: monospace; ">.FS</span>/<span style="font-family: monospace; ">.FE</span>) have a
+E.g., -ms&#x2019;s footnotes (<span style="font-family: monospace; ">\**</span> and <span style="font-family: monospace; ">.FS</span>/<span style="font-family: monospace; ">.FE</span>) have a
 straightforward translation in the HTML, with the footnote text set at the
 bottom of the HTML page, and with the footnote markers in the body and the
 footnote hyperlinking to each other.

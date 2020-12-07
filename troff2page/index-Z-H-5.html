@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by troff2page, v. 20201205
+Generated from index.ms by troff2page, v. 20201207
 Copyright (C) 2003-2020 Dorai Sitaram
 (running on Lua 5.3)
 http://ds26gte.github.io/troff2page
@@ -46,7 +46,7 @@ The call
 </span>
 </div>
 </p>
-<p>marks the text “item” as an indexable item.  The metacharacters <span style="font-family: monospace; ">@</span>,
+<p>marks the text &#x201C;item&#x201D; as an indexable item.  The metacharacters <span style="font-family: monospace; ">@</span>,
 <span style="font-family: monospace; ">!</span>, <span style="font-family: monospace; ">&#x22;</span>, and <span style="font-family: monospace; ">|</span> can be used to respectively specify (a)
 alternate alphabetization, (b) subitems, (c) literal metacharacters, and
 (d) encapsulation of the page number.
@@ -58,8 +58,8 @@ alternate alphabetization, (b) subitems, (c) literal metacharacters, and
 </span>
 </div>
 </p>
-<p>identifies an index entry for “-m, groff option” but alphabetizes
-it as though it were “m” rather than something that starts with a
+<p>identifies an index entry for &#x201C;-m, groff option&#x201D; but alphabetizes
+it as though it were &#x201C;m&#x201D; rather than something that starts with a
 hyphen.
 </p>
 <p class=indent></p>
@@ -68,7 +68,7 @@ hyphen.
 </span>
 </div>
 </p>
-<p>makes “macro packages” an indented index subentry under “groff”.
+<p>makes &#x201C;macro packages&#x201D; an indented index subentry under &#x201C;groff&#x201D;.
 Up to two <span style="font-family: monospace; ">!</span>s may be used.
 </p>
 <p class=indent></p>
@@ -77,16 +77,16 @@ Up to two <span style="font-family: monospace; ">!</span>s may be used.
 </span>
 </div>
 </p>
-<p>produces “ms” as a subsubentry under “macro packages” under
-“groff”.
+<p>produces &#x201C;ms&#x201D; as a subsubentry under &#x201C;macro packages&#x201D; under
+&#x201C;groff&#x201D;.
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.IX&#xa0;troff|see&#xa0;groff<br>
 </span>
 </div>
 </p>
-<p>has the index entry for “troff” point to
-“groff” rather than have a page number of its own.
+<p>has the index entry for &#x201C;troff&#x201D; point to
+&#x201C;groff&#x201D; rather than have a page number of its own.
 </p>
 <p class=indent>If any of the metacharacters need to
 appear in the index entry as themselves, precede them with
@@ -97,16 +97,16 @@ appear in the index entry as themselves, precede them with
 </span>
 </div>
 </p>
-<p>creates an index entry for “set!car” rather than creating a
-subentry “car” under “set&#x22;”.
+<p>creates an index entry for &#x201C;set!car&#x201D; rather than creating a
+subentry &#x201C;car&#x201D; under &#x201C;set&#x22;&#x201D;.
 </p>
 <p class=indent><a name="TAG:__troff2page_index_91"></a>
 Please see the
 makeindex
 documentation for all the details.  Essentially, the syntax for entering
 index entries is the same <a href="http://tex.loria.fr/bibdex/makeindex.pdf"><span class=hreftext>as for LaTeX</span></a>, except that in troff we use
-“<span style="font-family: monospace; ">.IX item</span>” where in LaTeX one would use
-“<span style="font-family: monospace; ">\index{item}</span>”.
+&#x201C;<span style="font-family: monospace; ">.IX item</span>&#x201D; where in LaTeX one would use
+&#x201C;<span style="font-family: monospace; ">\index{item}</span>&#x201D;.
 </p>
 <p class=indent><span style="font-family: monospace; ">pca-ix.tmac</span> will call makeindex to create a
 sorted index in the auxiliary file <span style="font-family: monospace; ">\*[AUXF].ind</span>, which can be

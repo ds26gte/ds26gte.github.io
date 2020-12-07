@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by troff2page, v. 20201205
+Generated from index.ms by troff2page, v. 20201207
 Copyright (C) 2003-2020 Dorai Sitaram
 (running on Lua 5.3)
 http://ds26gte.github.io/troff2page
@@ -46,7 +46,7 @@ Consider the following troff document, <span style="font-family: monospace; ">ta
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.mso&#xa0;pca-eval.tmac<br>
 &#xa0;&#xa0;&#xa0;&#xa0;.<br>
 &#xa0;&#xa0;&#xa0;&#xa0;The&#xa0;ratio&#xa0;of&#xa0;the&#xa0;circumference&#xa0;of&#xa0;a&#xa0;circle&#xa0;to<br>
-&#xa0;&#xa0;&#xa0;&#xa0;its&#xa0;radius&#xa0;is&#xa0;\(*t&#xa0;\(~=<br>
+&#xa0;&#xa0;&#xa0;&#xa0;its&#xa0;radius&#xa0;is&#xa0;\[htmlamp]#x3c4;&#xa0;\[htmlamp]#x2248;<br>
 &#xa0;&#xa0;&#xa0;&#xa0;.eval<br>
 &#xa0;&#xa0;&#xa0;&#xa0;--&#xa0;following&#xa0;prints&#xa0;tau,&#xa0;because&#xa0;cos(tau/2)&#xa0;=&#xa0;-1<br>
 &#xa0;&#xa0;&#xa0;&#xa0;troff:write(2*math.acos(-1),&#xa0;'.\n')<br>
@@ -65,7 +65,7 @@ Run troff (actually groff, and in unsafe mode too) on <span style="font-family: 
 </div>
 </p>
 <p>(The <span style="font-family: monospace; ">-z</span> avoids generating output, because we are not ready for it
-yet.  The <span style="font-family: monospace; ">-U</span> runs in “unsafe” mode, i.e., it allows the writing of
+yet.  The <span style="font-family: monospace; ">-U</span> runs in &#x201C;unsafe&#x201D; mode, i.e., it allows the writing of
 aux files.)
 You will find that the groff asks you to run it again:
 </p>
@@ -133,16 +133,16 @@ not useful) to the <span style="font-family: monospace; ">.eval</span> code seen
 Defining color names using HSL</h2>
 <p><a name="TAG:__troff2page_index_106"></a>
 <a name="TAG:__troff2page_index_107"></a>
-For a more substantial example of <span style="font-family: monospace; ">.eval</span>’s use, consider defining
+For a more substantial example of <span style="font-family: monospace; ">.eval</span>&#x2019;s use, consider defining
 color names using the HSL (Hue/Saturation/Lightness) scheme rather than the
-RGB and CMYK schemes supported by groff’s <span style="font-family: monospace; ">.defcolor</span>.  For instance, we would like to
+RGB and CMYK schemes supported by groff&#x2019;s <span style="font-family: monospace; ">.defcolor</span>.  For instance, we would like to
 define the color Venetian red using its HSL spec (357&#xb0;, 49%,
 24%), which to many is a more intuitive description than RGB
 (91, 31, 34).
 </p>
 <p class=indent>While there is an <a href="https://en.wikipedia.org/wiki/HSL_and_HSV"><span class=hreftext>algorithm</span></a> to convert HSL to RGB,
-implementing it using groff’s limited arithmetic is tedious.  Instead,
-we’ll define a
+implementing it using groff&#x2019;s limited arithmetic is tedious.  Instead,
+we&#x2019;ll define a
 much easier Lua procedure to do the same, and put it inside an <span style="font-family: monospace; ">.eval</span>:
 </p>
 <p><div class="display verbatim" align=left>
@@ -197,7 +197,7 @@ much easier Lua procedure to do the same, and put it inside an <span style="font
 <p style="margin-top: 12.0px; margin-bottom: 12.0px"><span style="font-family: monospace; ">
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;function&#xa0;def_hsl_color(name,&#xa0;h,&#xa0;s,&#xa0;l)<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;r,&#xa0;g,&#xa0;b&#xa0;=&#xa0;hsl_to_rgb(h,&#xa0;s,&#xa0;l)<br>
-&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;troff:write(string.format('.defcolor&#xa0;%s&#xa0;rgb&#xa0;%s&#xa0;%s&#xa0;%s\n',&#xa0;name,&#xa0;r,&#xa0;g,&#xa0;b))<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;troff:write(string.format('.defcolor&#xa0;%s&#xa0;rgb&#xa0;%s&#xa0;%s&#xa0;%s0,&#xa0;name,&#xa0;r,&#xa0;g,&#xa0;b))<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
 &#xa0;&#xa0;&#xa0;&#xa0;end<br>
 &#xa0;&#xa0;&#xa0;&#xa0;.endeval<br>
@@ -222,7 +222,7 @@ distribution provides <span style="font-family: monospace; ">def_hsl_color</span
 <p>The color name <span style="font-family: monospace; ">venetianred</span> can now be used like any other groff color name:
 </p>
 <p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;Prismacolor’s&#xa0;burnt&#xa0;ochre&#xa0;pencil&#xa0;is&#xa0;a&#xa0;close&#xa0;match&#xa0;for&#xa0;Derwent’s<br>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;Prismacolor&#x2019;s&#xa0;burnt&#xa0;ochre&#xa0;pencil&#xa0;is&#xa0;a&#xa0;close&#xa0;match&#xa0;for&#xa0;Derwent&#x2019;s<br>
 &#xa0;&#xa0;&#xa0;&#xa0;\fB\m[venetianred]Venetian&#xa0;red\m[]\fP,&#xa0;and&#xa0;either&#xa0;can&#xa0;be&#xa0;used&#xa0;to<br>
 &#xa0;&#xa0;&#xa0;&#xa0;emulate&#xa0;the&#xa0;sanguine&#xa0;chalk&#xa0;drawings&#xa0;of&#xa0;the&#xa0;Old&#xa0;Masters.<br>
 </span>
@@ -235,7 +235,7 @@ distribution provides <span style="font-family: monospace; ">def_hsl_color</span
 <p class=interleaved></p>
 <p style="margin-top: 12.0px; margin-bottom: 12.0px">
 </p>
-<blockquote><p>Prismacolor’s burnt ochre pencil is a close match for Derwent’s
+<blockquote><p>Prismacolor&#x2019;s burnt ochre pencil is a close match for Derwent&#x2019;s
 <span style="font-weight: bold; "></span><span style="font-weight: bold; color: #5c1f22; ">Venetian red</span><span style="font-weight: bold; color: previous; "></span><span style="color: previous; ">, and either can be used to
 emulate the sanguine chalk drawings of the Old Masters.
 </span></p>
@@ -251,11 +251,11 @@ emulate the sanguine chalk drawings of the Old Masters.
 Extending troff2page only</h2>
 <p><a name="TAG:__troff2page_index_108"></a>
 <a name="TAG:__troff2page_index_109"></a>
-troff2page treats troff’s <span style="font-family: monospace; ">.ig</span>
+troff2page treats troff&#x2019;s <span style="font-family: monospace; ">.ig</span>
 environment, whenever it uses <span style="font-family: monospace; ">##</span> as ender, as
 containing Lua code that can be used to extend
 troff2page.  This syntactic overloading of <span style="font-family: monospace; ">.ig ##</span> is an innovation introduced by
-Oliver Laumann’s <a href="http://www-rn.informatik.uni-bremen.de/software/unroff"><span class=hreftext>unroff</span></a>.
+Oliver Laumann&#x2019;s <a href="http://www-rn.informatik.uni-bremen.de/software/unroff"><span class=hreftext>unroff</span></a>.
 </p>
 <p class=indent>Any Lua code enclosed within
 <span style="font-family: monospace; ">.ig ##</span> ... <span style="font-family: monospace; ">.##</span> will be processed by
@@ -266,20 +266,20 @@ the document, as <span style="font-family: monospace; ">.eval</span> does.  This
 that as far as output is
 concerned, <span style="font-family: monospace; ">.ig ##</span>, like other <span style="font-family: monospace; ">.ig</span>s, is <span style="font-style: italic; ">always</span> a
 comment.  However, you can add Lua code within <span style="font-family: monospace; ">.ig ##</span>
-to influence how troff2page — but not troff! — processes the rest of the
+to influence how troff2page &#x2014; but not troff! &#x2014; processes the rest of the
 document.
 </p>
-<p class=indent>For example, let’s define a
+<p class=indent>For example, let&#x2019;s define a
 <span style="font-family: monospace; ">\*[url ...]</span> string register that simply typesets its URL
 argument within angle brackets.
 </p>
 <p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.ds&#xa0;url&#xa0;\(la\fC\\$1\fP\(ra<br>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.ds&#xa0;url&#xa0;\[htmlamp]#x2329;\fC\\$1\fP\[htmlamp]#x232a;<br>
 </span>
 </div>
 </p>
 <p>This is adequate for the print output.
-For troff2page though, we’d like to
+For troff2page though, we&#x2019;d like to
 re-define this macro, in Lua, to create a hyperlink.
 We enclose this re-definition in a <span style="font-family: monospace; ">.ig ##</span>, which not
 only allows it to be in Lua, but also makes it apply only
