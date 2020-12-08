@@ -20,11 +20,11 @@ troff2page
 <div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-10.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-12.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 <p></p>
-<h1 style="font-size: 160%"><a name="TAG:__pca_sec_25"></a>
+<h1 style="font-size: 160%"><a name="TAG:__pca_sec_26"></a>
 11. Some unusual ways to call troff2page</h1>
 <p><a name="TAG:nvimtex"></a>
-<a name="TAG:__troff2page_index_126"></a>
-<a name="TAG:__troff2page_index_127"></a>
+<a name="TAG:__troff2page_index_137"></a>
+<a name="TAG:__troff2page_index_138"></a>
 troff2page doesn&#x2019;t need a standalone Lua implementation.
 It
 runs equally well in Lua embedded in other applications, e.g.,
@@ -33,13 +33,13 @@ typesetter <a href="https://luatex.org"><span class=hreftext>LuaTeX</span></a>.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_26"></a>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_27"></a>
 Calling troff2page from Neovim</h2>
 <p><a name="TAG:calling_troff2page_from_neovim"></a>
-<a name="TAG:__troff2page_index_128"></a>
+<a name="TAG:__troff2page_index_139"></a>
 One of the merits of using 
 Neovim&#x2019;s Lua to run <span style="font-family: monospace; ">troff2page</span> is the tight integration of
-composing and previewing it offers. You can convert your troff
+composing and previewing it offers. You can convert your groff
 source and browse the HTML output as you&#x2019;re editing it, using 
 appropriate autocommands.
 </p>
@@ -64,17 +64,17 @@ current window is assumed to be the single argument.
 <p class=indent>(Note the capital <span style="font-family: monospace; ">T</span>! Vim won&#x2019;t allow non-primitive commands
 to start with a lowercase letter.)
 </p>
-<p class=indent><a name="TAG:__troff2page_index_129"></a>
+<p class=indent><a name="TAG:__troff2page_index_140"></a>
 The script <span style="font-family: monospace; ">neovim-troff2page</span> combines all this into a shell
 script that can be used exactly like the regular Lua script. Use
 it if you have Neovim but not Lua.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_27"></a>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_28"></a>
 Calling troff2page from LuaTeX</h2>
 <p><a name="TAG:calling_troff2page_from_luatex"></a>
-<a name="TAG:__troff2page_index_130"></a>
+<a name="TAG:__troff2page_index_141"></a>
 The Lua of LuaTeX can also be used for
 running <span style="font-family: monospace; ">troff2page</span>. First ensure you
 have a copy of <span style="font-family: monospace; ">lua/troff2page.lua</span> in your <span style="font-family: monospace; ">TEXINPUTS</span>.
@@ -100,7 +100,7 @@ all the option and filename inputs, e.g.,
 <p>The above commands can be supplied to a LuaTeX either via a TeX
 file or as a console interaction.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_131"></a>
+<p class=indent><a name="TAG:__troff2page_index_142"></a>
 The script <span style="font-family: monospace; ">luatex-troff2page</span> combines all this into a shell
 script that can be used exactly like the regular Lua script. Use
 it if you have LuaTeX but not Lua.

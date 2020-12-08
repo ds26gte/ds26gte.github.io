@@ -21,7 +21,7 @@ troff2page
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-1.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-3.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 <p></p>
 <h1 style="font-size: 160%"><a name="TAG:__pca_sec_5"></a>
-2. troff and troff2page commands</h1>
+2. troff, groff, and troff2page commands</h1>
 <p><a name="TAG:__troff2page_index_29"></a>
 <p class=interleaved></p>
 <span class=dropcap style="color: #9b3d3d">T</span>ROFF2PAGE
@@ -38,7 +38,10 @@ have arguments.  Most of the commands are converted to their
 obvious HTML equivalent.<a name="TAG:__troff2page_call_footnote_1"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_1"><span class=hreftext><sup><small>1</small></sup></span></a>
 Please consult troff and groff documentation for these commands.  We will
 concentrate here on those commands whose HTML counterpart is not immediately
-obvious.
+obvious. In order to avoid constantly qualifying my sentences, I shall
+henceforth use groff as the troff implementation to work alongside
+troff2page. There will be some modification needed when using
+other troff implementations. 
 </p>
 <p class=indent></p>
 <p></p>
@@ -55,14 +58,14 @@ provided in <a href="http://github.com/ds26gte/mpca"><span class=hreftext>mpca</
 convenience, this repo is included as a submodule <span style="font-family: monospace; ">mpca</span>.
 It includes general-purpose extensions to the <span style="font-family: monospace; ">ms</span> package,
 e.g., <span style="font-family: monospace; ">pca-tag.tmac</span> for cross-references; <span style="font-family: monospace; ">pca-ix.tmac</span>
-for index generation; <span style="font-family: monospace; ">pca-eval.tmac</span> for extending troff
+for index generation; <span style="font-family: monospace; ">pca-eval.tmac</span> for extending groff
 using Lua, etc. These extensions may loaded severally or as the
 single comprehensive macro file <span style="font-family: monospace; ">pca.tmac</span>. Please consult
 this submodule&#x2019;s documentation for more information.
 </p>
 <p class=indent><a name="TAG:__troff2page_index_36"></a>
 In order to take advantage of the <span style="font-family: monospace; ">mpca</span> tmac files, you
-should place them in one of your troff macro directories. (Both
+should place them in one of your groff macro directories. (Both
 groff and troff2page search for macro files first in the
 directories in <span style="font-family: monospace; ">GROFF_TMAC_PATH</span>, then in the working
 directory, and finally in your home directory. See the section

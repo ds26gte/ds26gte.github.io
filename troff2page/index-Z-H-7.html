@@ -21,16 +21,16 @@ troff2page
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-6.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-8.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 <p></p>
 <h1 style="font-size: 160%"><a name="TAG:__pca_sec_18"></a>
-7. Extending troff using Lua</h1>
-<p><a name="TAG:__troff2page_index_95"></a>
-<a name="TAG:__troff2page_index_96"></a>
+7. Extending groff using Lua</h1>
+<p><a name="TAG:__troff2page_index_96"></a>
 <a name="TAG:__troff2page_index_97"></a>
 <a name="TAG:__troff2page_index_98"></a>
-To invoke Lua from troff, we use the macro <span style="font-family: monospace; ">.eval</span> with its closer
+<a name="TAG:__troff2page_index_99"></a>
+To invoke Lua from groff, we use the macro <span style="font-family: monospace; ">.eval</span> with its closer
 <span style="font-family: monospace; ">.endeval</span>. These are
 defined in the
 supplied
-troff macro file <span style="font-family: monospace; ">pca-eval.tmac</span>, which you should put
+groff macro file <span style="font-family: monospace; ">pca-eval.tmac</span>, which you should put
 in a macro directory.
 </p>
 <p class=indent><span style="font-family: monospace; ">.eval</span> does only one thing: It
@@ -40,7 +40,7 @@ this Lua code
 is substituted for the <span style="font-family: monospace; ">.eval</span> ... <span style="font-family: monospace; ">.endeval</span>.
 The usefulness of this tactic will be apparent from an
 example.
-Consider the following troff document, <span style="font-family: monospace; ">tau.ms</span>:
+Consider the following groff document, <span style="font-family: monospace; ">tau.ms</span>:
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.mso&#xa0;pca-eval.tmac<br>
@@ -54,10 +54,10 @@ Consider the following troff document, <span style="font-family: monospace; ">ta
 </span>
 </div>
 </p>
-<p><a name="TAG:__troff2page_index_99"></a>
-<a name="TAG:__troff2page_index_100"></a>
+<p><a name="TAG:__troff2page_index_100"></a>
 <a name="TAG:__troff2page_index_101"></a>
-Run troff (actually groff, and in unsafe mode too) on <span style="font-family: monospace; ">tau.ms</span>:
+<a name="TAG:__troff2page_index_102"></a>
+Run groff in unsafe mode on <span style="font-family: monospace; ">tau.ms</span>:
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;groff&#xa0;-z&#xa0;-U&#xa0;-ms&#xa0;tau.ms<br>
@@ -101,18 +101,18 @@ into the document.
 </p>
 <p class=indent>Lua code via <span style="font-family: monospace; ">.eval</span> can
 serve as a very powerful <span style="font-style: italic; ">second extension language</span>
-for troff.  This benefit is available even when the document
+for groff.  This benefit is available even when the document
 is processed by troff2page:
 We could run troff2page on the same document, <span style="font-family: monospace; ">tau.ms</span>, and the
 resulting <span style="font-family: monospace; ">tau.html</span> will show the same content.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_102"></a>
-<a name="TAG:__troff2page_index_103"></a>
+<p class=indent><a name="TAG:__troff2page_index_103"></a>
 <a name="TAG:__troff2page_index_104"></a>
 <a name="TAG:__troff2page_index_105"></a>
+<a name="TAG:__troff2page_index_106"></a>
 Furthermore, we can embed  <span style="font-family: monospace; ">.eval</span>-enclosed Lua code inside an
 <span style="font-family: monospace; ">.if</span> (or <span style="font-family: monospace; ">.ie</span> or <span style="font-family: monospace; ">.el</span>) statement so that it gets executed
-only for troff or only for troff2page.  (Recall we used the number register
+only for groff or only for troff2page.  (Recall we used the number register
 <span style="font-family: monospace; ">\n[.troff2page]</span> for this purpose on page <a class=hrefinternal href="index-Z-H-3.html#TAG:cond-bp"><span class=hreftext>3</span></a>.)  In
 particular, by calling Lua code only for troff2page, the
 user has the
@@ -125,14 +125,14 @@ not.
 code, it runs it in a Lua environment that has not only the basic
 Lua language but also includes the procedures and data structures
 defined in troff2page.  These extras are not available (and are arguably
-not useful) to the <span style="font-family: monospace; ">.eval</span> code seen by troff.
+not useful) to the <span style="font-family: monospace; ">.eval</span> code seen by groff.
 </p>
 <p class=indent></p>
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_19"></a>
 Defining color names using HSL</h2>
-<p><a name="TAG:__troff2page_index_106"></a>
-<a name="TAG:__troff2page_index_107"></a>
+<p><a name="TAG:__troff2page_index_107"></a>
+<a name="TAG:__troff2page_index_108"></a>
 For a more substantial example of <span style="font-family: monospace; ">.eval</span>&#x2019;s use, consider defining
 color names using the HSL (Hue/Saturation/Lightness) scheme rather than the
 RGB and CMYK schemes supported by groff&#x2019;s <span style="font-family: monospace; ">.defcolor</span>.  For instance, we would like to
@@ -249,9 +249,9 @@ emulate the sanguine chalk drawings of the Old Masters.
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_20"></a>
 Extending troff2page only</h2>
-<p><a name="TAG:__troff2page_index_108"></a>
-<a name="TAG:__troff2page_index_109"></a>
-troff2page treats troff&#x2019;s <span style="font-family: monospace; ">.ig</span>
+<p><a name="TAG:__troff2page_index_109"></a>
+<a name="TAG:__troff2page_index_110"></a>
+troff2page treats groff&#x2019;s <span style="font-family: monospace; ">.ig</span>
 environment, whenever it uses <span style="font-family: monospace; ">##</span> as ender, as
 containing Lua code that can be used to extend
 troff2page.  This syntactic overloading of <span style="font-family: monospace; ">.ig ##</span> is an innovation introduced by
@@ -260,13 +260,13 @@ Oliver Laumann&#x2019;s <a href="http://www-rn.informatik.uni-bremen.de/software
 <p class=indent>Any Lua code enclosed within
 <span style="font-family: monospace; ">.ig ##</span> ... <span style="font-family: monospace; ">.##</span> will be processed by
 troff2page but not by
-troff, which treats it as a multiline comment of course.
+groff, which treats it as a multiline comment of course.
 Note that <span style="font-family: monospace; ">.ig ##</span> does not pipe its stdout back into
 the document, as <span style="font-family: monospace; ">.eval</span> does.  This is to maintain the invariant
 that as far as output is
 concerned, <span style="font-family: monospace; ">.ig ##</span>, like other <span style="font-family: monospace; ">.ig</span>s, is <span style="font-style: italic; ">always</span> a
 comment.  However, you can add Lua code within <span style="font-family: monospace; ">.ig ##</span>
-to influence how troff2page &#x2014; but not troff! &#x2014; processes the rest of the
+to influence how troff2page &#x2014; but not groff! &#x2014; processes the rest of the
 document.
 </p>
 <p class=indent>For example, let&#x2019;s define a

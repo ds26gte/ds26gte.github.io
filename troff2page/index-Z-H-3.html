@@ -47,7 +47,7 @@ one.  Thus <span style="font-family: monospace; ">.bp</span> causes a page-break
 <a name="TAG:__troff2page_index_53"></a>
 <a name="TAG:__troff2page_index_54"></a>
 Generally, page-breaks require a different &#xe6;sthetic in HTML than in
-print.  You can use troff conditionals to express this difference:
+print.  You can use groff conditionals to express this difference:
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.if&#xa0;\n[.troff2page]&#xa0;.bp<br>
@@ -78,7 +78,7 @@ only for HTML:
 </span>
 </div>
 </p>
-<p>Note that troff2page, like troff, does not automatically cause a page break
+<p>Note that troff2page, like groff, does not automatically cause a page break
 at the sectioning commands.  Use <span style="font-family: monospace; ">.bp</span> or a macro like <span style="font-family: monospace; ">.HBP</span> to
 explicitly to insert breaks as needed, or define your own
 sectioning commands
@@ -133,7 +133,7 @@ is in fact the version
 number of the troff2page program processing the document.  This is a number
 such as 20150320, which would be the version number of the troff2page
 released on 2015 March 20.  <span style="font-family: monospace; ">\n[.troff2page]</span> could plausibly be used
-to distinguish not just troff2page from troff, but also between various versions
+to distinguish not just troff2page from groff, but also between various versions
 of troff2page.  Thus, one could, if the need were dire, write a document
 that translates differently with different versions of
 troff2page. But don&#x2019;t do this.
@@ -148,13 +148,15 @@ never going to be non-positive. troff2page, since it doesn&#x2019;t deal in pape
 </p>
 <p class=indent><a name="TAG:__troff2page_index_64"></a>
 <a name="TAG:__troff2page_index_65"></a>
-groff has its own version registers <span style="font-family: monospace; ">\n(.x</span>
-and <span style="font-family: monospace; ">\n(.y</span>, which contain the major and minor version numbers
+<a name="TAG:__troff2page_index_66"></a>
+groff has its own version registers <span style="font-family: monospace; ">\n(.x</span>,
+<span style="font-family: monospace; ">\n(.y</span>, and <span style="font-family: monospace; ">\n(.Y</span>, which contain the major and minor version numbers
+and revision number
 respectively. troff2page sets these too, splitting the value of
-<span style="font-family: monospace; ">\n[.troff2page]</span> between month and day. Thus the troff2page
+<span style="font-family: monospace; ">\n[.troff2page]</span> between year, month and day. Thus the troff2page
 released on 2020 December 2 sets <span style="font-family: monospace; ">\n[.troff2page]</span> to 20201202,
-<span style="font-family: monospace; ">\n(.x</span> to 202012, and
-<span style="font-family: monospace; ">\n(.y</span> to 2. (These are all numbers (not strings), so
+<span style="font-family: monospace; ">\n(.x</span> to 2020, and
+<span style="font-family: monospace; ">\n(.y</span> to 12, and <span style="font-family: monospace; ">\n(.Y</span> to 2. (These are all numbers (not strings), so
 there&#x2019;s no 0-left-padding.)
 </p>
 <p class=indent></p>
@@ -162,8 +164,8 @@ there&#x2019;s no 0-left-padding.)
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_11"></a>
 HTML-style paragraphs</h2>
-<p><a name="TAG:__troff2page_index_66"></a>
-<a name="TAG:__troff2page_index_67"></a>
+<p><a name="TAG:__troff2page_index_67"></a>
+<a name="TAG:__troff2page_index_68"></a>
 By default, troff2page sets paragraphs exactly as groff does: the first
 lines of paragraphs are indented (unless explicitly disabled via an
 <span style="font-family: monospace; ">.LP</span>), and
@@ -194,27 +196,27 @@ text in order to respect a negative <span style="font-family: monospace; ">PD</s
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_12"></a>
 Scaling factors</h2>
-<p><a name="TAG:__troff2page_index_68"></a>
+<p><a name="TAG:__troff2page_index_69"></a>
 The scaling factor <span style="font-family: monospace; ">n</span> (en)
 used above is half the width of the letter &#x2018;<span style="font-family: monospace; ">m</span>&#x2019; in
 the default font size. <span style="font-family: monospace; ">v</span> is the distance between two consecutive
 baselines. Scaling factors are generally, but not always, what
 you might think of as length units.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_69"></a>
-<a name="TAG:__troff2page_index_70"></a>
+<p class=indent><a name="TAG:__troff2page_index_70"></a>
 <a name="TAG:__troff2page_index_71"></a>
 <a name="TAG:__troff2page_index_72"></a>
 <a name="TAG:__troff2page_index_73"></a>
 <a name="TAG:__troff2page_index_74"></a>
+<a name="TAG:__troff2page_index_75"></a>
 Other groff scaling factors that troff2page recognizes
 are: <span style="font-family: monospace; ">i</span> (inch = 1/12 foot), <span style="font-family: monospace; ">c</span> (cm =
 50/127 inch), <span style="font-family: monospace; ">p</span> (point = 1/72 inch), <span style="font-family: monospace; ">P</span> (pica = 12
 points), <span style="font-family: monospace; ">m</span> (em = 2 ens), and <span style="font-family: monospace; ">M</span> (1/100 em).
 </p>
-<p class=indent><a name="TAG:__troff2page_index_75"></a>
-<a name="TAG:__troff2page_index_76"></a>
+<p class=indent><a name="TAG:__troff2page_index_76"></a>
 <a name="TAG:__troff2page_index_77"></a>
+<a name="TAG:__troff2page_index_78"></a>
 Internally, both groff and troff2page store lengths in the scaling
 factor <span style="font-family: monospace; ">u</span>, which
 is 1/72000 of an inch, and all lengths are integral multiples of
