@@ -22,10 +22,10 @@ troff2page
 <p></p>
 <h1 style="font-size: 160%"><a name="TAG:__pca_sec_18"></a>
 7. Extending groff using Lua</h1>
-<p><a name="TAG:__troff2page_index_96"></a>
-<a name="TAG:__troff2page_index_97"></a>
-<a name="TAG:__troff2page_index_98"></a>
-<a name="TAG:__troff2page_index_99"></a>
+<p><a name="TAG:__troff2page_index_99"></a>
+<a name="TAG:__troff2page_index_100"></a>
+<a name="TAG:__troff2page_index_101"></a>
+<a name="TAG:__troff2page_index_102"></a>
 To invoke Lua from groff, we use the macro <span style="font-family: monospace; ">.eval</span> with its closer
 <span style="font-family: monospace; ">.endeval</span>. These are
 defined in the
@@ -41,6 +41,8 @@ is substituted for the <span style="font-family: monospace; ">.eval</span> ... <
 The usefulness of this tactic will be apparent from an
 example.
 Consider the following groff document, <span style="font-family: monospace; ">tau.ms</span>:
+<a name="TAG:__troff2page_index_103"></a>
+<a name="TAG:__troff2page_index_104"></a>
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.mso&#xa0;pca-eval.tmac<br>
@@ -54,9 +56,9 @@ Consider the following groff document, <span style="font-family: monospace; ">ta
 </span>
 </div>
 </p>
-<p><a name="TAG:__troff2page_index_100"></a>
-<a name="TAG:__troff2page_index_101"></a>
-<a name="TAG:__troff2page_index_102"></a>
+<p><a name="TAG:__troff2page_index_105"></a>
+<a name="TAG:__troff2page_index_106"></a>
+<a name="TAG:__troff2page_index_107"></a>
 Run groff in unsafe mode on <span style="font-family: monospace; ">tau.ms</span>:
 </p>
 <p><div class="display verbatim" align=left>
@@ -106,10 +108,10 @@ is processed by troff2page:
 We could run troff2page on the same document, <span style="font-family: monospace; ">tau.ms</span>, and the
 resulting <span style="font-family: monospace; ">tau.html</span> will show the same content.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_103"></a>
-<a name="TAG:__troff2page_index_104"></a>
-<a name="TAG:__troff2page_index_105"></a>
-<a name="TAG:__troff2page_index_106"></a>
+<p class=indent><a name="TAG:__troff2page_index_108"></a>
+<a name="TAG:__troff2page_index_109"></a>
+<a name="TAG:__troff2page_index_110"></a>
+<a name="TAG:__troff2page_index_111"></a>
 Furthermore, we can embed  <span style="font-family: monospace; ">.eval</span>-enclosed Lua code inside an
 <span style="font-family: monospace; ">.if</span> (or <span style="font-family: monospace; ">.ie</span> or <span style="font-family: monospace; ">.el</span>) statement so that it gets executed
 only for groff or only for troff2page.  (Recall we used the number register
@@ -131,8 +133,8 @@ not useful) to the <span style="font-family: monospace; ">.eval</span> code seen
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_19"></a>
 Defining color names using HSL</h2>
-<p><a name="TAG:__troff2page_index_107"></a>
-<a name="TAG:__troff2page_index_108"></a>
+<p><a name="TAG:__troff2page_index_112"></a>
+<a name="TAG:__troff2page_index_113"></a>
 For a more substantial example of <span style="font-family: monospace; ">.eval</span>&#x2019;s use, consider defining
 color names using the HSL (Hue/Saturation/Lightness) scheme rather than the
 RGB and CMYK schemes supported by groff&#x2019;s <span style="font-family: monospace; ">.defcolor</span>.  For instance, we would like to
@@ -249,8 +251,8 @@ emulate the sanguine chalk drawings of the Old Masters.
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_20"></a>
 Extending troff2page only</h2>
-<p><a name="TAG:__troff2page_index_109"></a>
-<a name="TAG:__troff2page_index_110"></a>
+<p><a name="TAG:__troff2page_index_114"></a>
+<a name="TAG:__troff2page_index_115"></a>
 troff2page treats groff&#x2019;s <span style="font-family: monospace; ">.ig</span>
 environment, whenever it uses <span style="font-family: monospace; ">##</span> as ender, as
 containing Lua code that can be used to extend
@@ -272,6 +274,7 @@ document.
 <p class=indent>For example, let&#x2019;s define a
 <span style="font-family: monospace; ">\*[url ...]</span> string register that simply typesets its URL
 argument within angle brackets.
+<a name="TAG:__troff2page_index_116"></a>
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.ds&#xa0;url&#xa0;\[htmlamp]#x2329;\fC\\$1\fP\[htmlamp]#x232a;<br>

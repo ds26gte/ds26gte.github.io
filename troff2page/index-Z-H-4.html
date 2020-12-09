@@ -22,9 +22,9 @@ troff2page
 <p></p>
 <h1 style="font-size: 160%"><a name="TAG:__pca_sec_14"></a>
 4. Cross-references</h1>
-<p><a name="TAG:__troff2page_index_79"></a>
-<a name="TAG:__troff2page_index_80"></a>
-<a name="TAG:__troff2page_index_81"></a>
+<p><a name="TAG:__troff2page_index_81"></a>
+<a name="TAG:__troff2page_index_82"></a>
+<a name="TAG:__troff2page_index_83"></a>
 troff2page provides a <span style="font-family: monospace; ">.TAG</span> macro for managing
 cross-references. A compatible groff definition is provided in
 the supplied macro file <span style="font-family: monospace; ">pca-tag.tmac</span>. (This overrides the
@@ -62,22 +62,22 @@ of the current page number.
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_15"></a>
 ToC</h2>
-<p><a name="TAG:__troff2page_index_82"></a>
-<a name="TAG:__troff2page_index_83"></a>
-<a name="TAG:__troff2page_index_84"></a>
+<p><a name="TAG:__troff2page_index_84"></a>
+<a name="TAG:__troff2page_index_85"></a>
+<a name="TAG:__troff2page_index_86"></a>
 The
 macro file <span style="font-family: monospace; ">pca-toc.tmac</span> supplies a <span style="font-family: monospace; ">.ToC</span> macro
 for automatic generation of a table of contents. This can be used
 by both groff and troff2page.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_85"></a>
+<p class=indent><a name="TAG:__troff2page_index_87"></a>
 The troff2page aspect of <span style="font-family: monospace; ">pca-toc.tmac</span>
 uses <span style="font-family: monospace; ">.TAG</span>. For both outputs, ToC entries are created for
 headers of level <span style="font-family: monospace; ">\n[GROWPS]</span> or lower. By default,
 <span style="font-family: monospace; ">GROWPS</span> is set to 0, so you should set it to at least 1 to see
 a ToC.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_86"></a>
+<p class=indent><a name="TAG:__troff2page_index_88"></a>
 The original purpose of <span style="font-family: monospace; ">GROWPS</span> was to govern the font-size
 of headers at levels below it, provided it is set to at least 2
 and the register <span style="font-family: monospace; ">\n[PSINCR]</span> is set (which it is, by
@@ -102,7 +102,7 @@ following statement from the groff manual:
 is perhaps initially more difficult, but would save a great deal of time
 in the long run if you use &#x2018;ms&#x2019; regularly.
 </blockquote></p>
-<p><a name="TAG:__troff2page_index_87"></a>
+<p><a name="TAG:__troff2page_index_89"></a>
 troff2page autoloads the macro file <span style="font-family: monospace; ">pca-t2p-man.tmac</span> (if it can
 find it in <span style="font-family: monospace; ">GROFF_TMAC_PATH</span>)
 to automatically generate a ToC for man pages,

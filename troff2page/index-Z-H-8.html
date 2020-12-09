@@ -22,12 +22,14 @@ troff2page
 <p></p>
 <h1 style="font-size: 160%"><a name="TAG:__pca_sec_21"></a>
 8. Styling</h1>
-<p><a name="TAG:__troff2page_index_111"></a>
+<p><a name="TAG:__troff2page_index_117"></a>
+<a name="TAG:__troff2page_index_118"></a>
 <span style="font-family: monospace; ">.ig ##</span> can be used to specify settings that are relevant only
 when troff2page is used on a document, e.g., stylesheet changes.
 troff2page uses the output-stream <span style="font-family: monospace; ">Css_stream</span> to
 write out its default style information.  The user can also
 append to this stream. E.g.,
+<a name="TAG:__troff2page_index_119"></a>
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.ig&#xa0;##<br>
@@ -49,7 +51,7 @@ with a foreground color
 of <span style="color: #9b3d3d; ">terracotta pink</span><span style="color: previous; "><a name="TAG:__troff2page_call_footnote_2"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_2"><span class=hreftext><sup><small>2</small></sup></span></a>,
 along with some other changes from the default.
 </span></p>
-<p class=indent><a name="TAG:__troff2page_index_112"></a>
+<p class=indent><a name="TAG:__troff2page_index_120"></a>
 troff2page makes available many CSS classes that you can modify
 in this manner to change the look of your web pages. For
 instance, the HTML element for the document title has class
@@ -79,16 +81,16 @@ from leaking into the browser-mediated printout, wrap them inside
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_22"></a>
 Colophon</h2>
-<p><a name="TAG:__troff2page_index_113"></a>
-<a name="TAG:__troff2page_index_114"></a>
+<p><a name="TAG:__troff2page_index_121"></a>
+<a name="TAG:__troff2page_index_122"></a>
 By default, troff2page places a colophon at the bottom right of the first
 page. The colophon mentions (i) the last-modification
 time of the
 the document and (ii) the troff2page version used for the conversion.
 Either or both can be suppressed via CSS.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_115"></a>
-<a name="TAG:__troff2page_index_116"></a>
+<p class=indent><a name="TAG:__troff2page_index_123"></a>
+<a name="TAG:__troff2page_index_124"></a>
 To suppress the mention of troff2page,
 </p>
 <p class=indent></p>
@@ -116,8 +118,8 @@ of the newest of the source documents that make up the document.
 Only user content is considered; macro and auxiliary files are
 not.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_117"></a>
-<a name="TAG:__troff2page_index_118"></a>
+<p class=indent><a name="TAG:__troff2page_index_125"></a>
+<a name="TAG:__troff2page_index_126"></a>
 To specify a document timestamp without regard to the actual mod times
 of the files in it, use the -ms macros <span style="font-family: monospace; ">.ND</span> or <span style="font-family: monospace; ">.DA</span>.
 troff2page doesn&#x2019;t distinguish between them, but groff does.
@@ -131,7 +133,7 @@ either macro is called with an argument, that argument is used as the
 last-mod date, overriding the value that troff2page would
 have determined.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_119"></a>
+<p class=indent><a name="TAG:__troff2page_index_127"></a>
 If no argument is given, the colophon doesn&#x2019;t
 include the &#x201C;Last modified&#x201D; line at all, something that can also be
 accomplished via the CSS fragment:
@@ -148,89 +150,123 @@ accomplished via the CSS fragment:
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_23"></a>
 Glyph substition</h2>
-<p>CSS isn't the only recourse to style your document: Interesting
+<p>CSS isn&#x2019;t the only recourse to style your document: Interesting
 glyphs offer another approach.  troff2page, like groff, allows
 you to use UTF-8 characters, either directly or via escape
 sequences of the form <span style="font-family: monospace; ">\[u</span><span style="font-style: italic; ">xxxx</span><span style="font-family: monospace; ">]</span>, where <span style="font-style: italic; ">xxxx</span> is
 the corresponding hex number (in uppercase).
 </p>
-<p class=indent><a name="TAG:__troff2page_index_120"></a>
-<a name="TAG:__troff2page_index_121"></a>
-<a name="TAG:__troff2page_index_122"></a>
-E.g., U+2621 (CAUTION SIGN)
-(&#x2621;)
+<p class=indent><a name="TAG:__troff2page_index_128"></a>
+<a name="TAG:__troff2page_index_129"></a>
+<a name="TAG:__troff2page_index_130"></a>
+E.g., U+2621 (<span style="font-size: 83%; ">CAUTION SIGN</span>)
 and
-U+26A0 (WARNING SIGN)
-(&#x26A0;)
+U+26A0 (<span style="font-size: 83%; ">WARNING SIGN</span>)
 &#x2014; in a suitable color and size &#x2014; may be used rather than
-the pedestrian &#x201C;<span style="font-weight: bold; ">CAUTION</span>&#x201D; and &#x201C;<span style="font-weight: bold; ">WARNING</span>&#x201D; for admonition titles. Unfortunately,
+the pedestrian &#x201C;<span style="font-weight: bold; ">CAUTION</span>&#x201D; and &#x201C;<span style="font-weight: bold; ">WARNING</span>&#x201D; for admonition titles.
+</p>
+<p><div class="display" align=left>
+&#xa0;&#xa0;&#xa0;&#xa0;<span style="background-color: yellow; "></span><span style="background-color: yellow; font-size: 140%; "></span><span style="font-weight: bold; background-color: yellow; font-size: 140%; ">&#x2621;</span><span style="background-color: yellow; font-size: 140%; "></span><span style="background-color: yellow; "></span><span style="background-color: previous; ">&#xa0;&#xa0;&#xa0;</span><span style="background-color: red; "></span><span style="color: white; background-color: red; "></span><span style="color: white; background-color: red; font-size: 140%; "></span><span style="font-weight: bold; color: white; background-color: red; font-size: 140%; ">&#x26A0;</span><span style="color: white; background-color: red; font-size: 140%; "></span><span style="color: white; background-color: red; "></span><span style="color: previous; background-color: red; "></span><span style="color: previous; background-color: previous; "><br>
+</span>
+</div>
+</p>
+<p>Unfortunately,
 while these usually work well on browsers, the fonts
-used by groff for printing almost always won't recognize them.
-(You could use fallback fonts, but often they test groff's
-capacity, and it's not worth loading them only for a couple of
+used by groff for printing almost always won&#x2019;t recognize them.
+(You could use fallback fonts, but often they test groff&#x2019;s
+capacity, and it&#x2019;s not worth loading them only for a couple of
 exotic glyphs.) A more reasonable workaround is to use
 the <span style="font-family: monospace; ">.char</span> request to conditionally translate special characters into their
 boring equivalents for print:
 </p>
 <p class=indent></p>
 <p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;.if&#xa0;!\n[.troff2page]&#xa0;\{\<br>
-&#xa0;&#xa0;.&#xa0;&#xa0;char&#xa0;\[u2621]&#xa0;\fBCAUTION\fP<br>
-&#xa0;&#xa0;.&#xa0;&#xa0;char&#xa0;\[u26A0]&#xa0;\fBWARNING\fP<br>
-&#xa0;&#xa0;.\}<br>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.if&#xa0;!\n[.troff2page]&#xa0;\{\<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;char&#xa0;\[u2621]&#xa0;\fBCAUTION\fP<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;char&#xa0;\[u26A0]&#xa0;\fBWARNING\fP<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.\}<br>
 </span>
 </div>
 </p>
 <p></p>
-<p class=indent>The display used above brings up another use-case for glyph
+<p class=indent><a name="TAG:__troff2page_index_131"></a>
+<a name="TAG:__troff2page_index_132"></a>
+<a name="TAG:__troff2page_index_133"></a>
+The display used above brings up another use-case for glyph
 translation, even when (and especially if) no exotic characters
 are desired. The display shows the <span style="font-family: monospace; ">\</span> character, which
 is an escape character for groff. In a display, we want to
 suppress its effect. We could do this by having our display
 macros
-implicitly turn the control character off when entering the display and back on when
+implicitly turn the escape character off when entering the display and back on when
 exiting it. The requests for these actions are <span style="font-family: monospace; ">.eo</span> and
 <span style="font-family: monospace; ">.ec</span> respectively.
+<a name="TAG:__troff2page_index_134"></a>
+<a name="TAG:__troff2page_index_135"></a>
+<a name="TAG:__troff2page_index_136"></a>
+<a name="TAG:__troff2page_index_137"></a>
+<a name="TAG:__troff2page_index_138"></a>
+</p>
+<p class=indent></p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;EX<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;LD<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;ft&#xa0;C<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;eo<br>
+&#xa0;&#xa0;&#xa0;&#xa0;..<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;EE<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;ec<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;DE<br>
+&#xa0;&#xa0;&#xa0;&#xa0;..<br>
+</span>
+</div>
+</p>
+<p></p>
+<p class=indent>We then use the macros <span style="font-family: monospace; ">.EX</span> and <span style="font-family: monospace; ">.EE</span> around the code text to
+display it, in mononspace font and with the escape character
+temporarily disabled. (An improved version of these macros are provided
+in <span style="font-family: monospace; ">pca-verb.tmac</span>.)
 </p>
 <p class=indent>This works for short displays that are entirely within a page
-(we're talking printed pages via groff now, not HTML pages). The
+(we&#x2019;re talking printed pages via groff now, not HTML pages). The
 various traps that spring into action when groff breaks at a page
-rely on the control character being active, and these will start
+rely on the escape character being active, and these will start
 failing catastrophicaly when our display straddles a page
 boundary.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_123"></a>
-<a name="TAG:__troff2page_index_124"></a>
-<a name="TAG:__troff2page_index_125"></a>
-<a name="TAG:__troff2page_index_126"></a>
+<p class=indent><a name="TAG:__troff2page_index_139"></a>
+<a name="TAG:__troff2page_index_140"></a>
+<a name="TAG:__troff2page_index_141"></a>
 One way out is to
 <span style="font-style: italic; ">force</span> code displays to never cross a page boundary by
-using groff's &#x201C;keep&#x201D; macros <span style="font-family: monospace; ">.KS</span> or <span style="font-family: monospace; ">.KF</span> or the keep
+using groff&#x2019;s &#x201C;keep&#x201D; macros <span style="font-family: monospace; ">.KS</span> or <span style="font-family: monospace; ">.KF</span> or the keep
 versions of the display macros (e.g., <span style="font-family: monospace; ">.DS L</span> rather than
 <span style="font-family: monospace; ">.LD</span>). Please see the groff docs for more info about these
 macros. The problem then becomes what to do with large
 page-crossing displays. This is almost unavoidable in computer
 technical prose.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_127"></a>
-<a name="TAG:__troff2page_index_128"></a>
-<a name="TAG:__troff2page_index_129"></a>
+<p class=indent><a name="TAG:__troff2page_index_142"></a>
+<a name="TAG:__troff2page_index_143"></a>
+<a name="TAG:__troff2page_index_144"></a>
 Unicode glyph substitution offers another way out. The Unicode
-characters U+29F9 (BIG REVERSE SOLIDUS) and U+FE68 (SMALL REVERSE
-SOLIDUS) are passable replacements for the regular backslash (aka
-REVERSE SOLIDUS, U+005C). You can enter these substitute
+characters U+29F9 (<span style="font-size: 83%; ">BIG REVERSE SOLIDUS</span>) and U+FE68 (<span style="font-size: 83%; ">SMALL REVERSE
+SOLIDUS</span>) are passable replacements for the regular backslash (aka
+<span style="font-size: 83%; ">REVERSE SOLIDUS</span>, U+005C). You can enter these substitute
 backslashes with text-editor macros fairly easily. So now your
 displayed code now has something that looks like a backslash,
 at least on
 browsers, but it most probably fails for print. Even in the browser,
 close is no cigar: Somebody cutting and pasting your code is in
 for a nasty surprise. You really do want the <span style="font-style: italic; ">real</span> backslash in
-there even in the HTML page, but you don't want to disable groff's control character.
+there even in the HTML page, but you don&#x2019;t want to disable
+groff&#x2019;s escape character.
 Glyph substitution to the rescue:
 </p>
 <p class=indent></p>
 <p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;.char&#xa0;\[u29F9]&#xa0;\[u005C]<br>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.char&#xa0;\[u29F9]&#xa0;\[u005C]<br>
 </span>
 </div>
 </p>
@@ -239,7 +275,7 @@ Glyph substitution to the rescue:
 groff and troff2page convert it into the regular backslash when
 the it lands on the page.
 Even better, there is no requirement that the font used actually
-have the exotic backslash glyph at that Unicode position! 
+have the exotic backslash glyph at that Unicode position!
 You still have to type the exotic backslash but a competent text
 editors (with a Unicode font!) can help you do this.
 </p>

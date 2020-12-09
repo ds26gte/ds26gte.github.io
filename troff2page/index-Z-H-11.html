@@ -23,8 +23,8 @@ troff2page
 <h1 style="font-size: 160%"><a name="TAG:__pca_sec_26"></a>
 11. Some unusual ways to call troff2page</h1>
 <p><a name="TAG:nvimtex"></a>
-<a name="TAG:__troff2page_index_137"></a>
-<a name="TAG:__troff2page_index_138"></a>
+<a name="TAG:__troff2page_index_152"></a>
+<a name="TAG:__troff2page_index_153"></a>
 troff2page doesn&#x2019;t need a standalone Lua implementation.
 It
 runs equally well in Lua embedded in other applications, e.g.,
@@ -36,7 +36,7 @@ typesetter <a href="https://luatex.org"><span class=hreftext>LuaTeX</span></a>.
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_27"></a>
 Calling troff2page from Neovim</h2>
 <p><a name="TAG:calling_troff2page_from_neovim"></a>
-<a name="TAG:__troff2page_index_139"></a>
+<a name="TAG:__troff2page_index_154"></a>
 One of the merits of using 
 Neovim&#x2019;s Lua to run <span style="font-family: monospace; ">troff2page</span> is the tight integration of
 composing and previewing it offers. You can convert your groff
@@ -64,7 +64,7 @@ current window is assumed to be the single argument.
 <p class=indent>(Note the capital <span style="font-family: monospace; ">T</span>! Vim won&#x2019;t allow non-primitive commands
 to start with a lowercase letter.)
 </p>
-<p class=indent><a name="TAG:__troff2page_index_140"></a>
+<p class=indent><a name="TAG:__troff2page_index_155"></a>
 The script <span style="font-family: monospace; ">neovim-troff2page</span> combines all this into a shell
 script that can be used exactly like the regular Lua script. Use
 it if you have Neovim but not Lua.
@@ -74,7 +74,7 @@ it if you have Neovim but not Lua.
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_28"></a>
 Calling troff2page from LuaTeX</h2>
 <p><a name="TAG:calling_troff2page_from_luatex"></a>
-<a name="TAG:__troff2page_index_141"></a>
+<a name="TAG:__troff2page_index_156"></a>
 The Lua of LuaTeX can also be used for
 running <span style="font-family: monospace; ">troff2page</span>. First ensure you
 have a copy of <span style="font-family: monospace; ">lua/troff2page.lua</span> in your <span style="font-family: monospace; ">TEXINPUTS</span>.
@@ -100,7 +100,7 @@ all the option and filename inputs, e.g.,
 <p>The above commands can be supplied to a LuaTeX either via a TeX
 file or as a console interaction.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_142"></a>
+<p class=indent><a name="TAG:__troff2page_index_157"></a>
 The script <span style="font-family: monospace; ">luatex-troff2page</span> combines all this into a shell
 script that can be used exactly like the regular Lua script. Use
 it if you have LuaTeX but not Lua.
