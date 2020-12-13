@@ -20,7 +20,7 @@ troff2page
 <div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-7.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-9.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 <p></p>
-<h1 style="font-size: 160%"><a name="TAG:__pca_sec_21"></a>
+<h1 style="font-size: 160%"><a name="TAG:__pca_sec_23"></a>
 8. Styling</h1>
 <p><a name="TAG:__troff2page_index_117"></a>
 <a name="TAG:__troff2page_index_118"></a>
@@ -48,7 +48,7 @@ append to this stream. E.g.,
 </p>
 <p>This sets the HTML headers
 with a foreground color
-of <span style="color: #9b3d3d; ">terracotta pink</span><span style="color: previous; "><a name="TAG:__troff2page_call_footnote_2"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_2"><span class=hreftext><sup><small>2</small></sup></span></a>,
+of <span style="color: #9b3d3d; ">terracotta pink</span><span style="color: previous; "><a name="TAG:__troff2page_call_footnote_3"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_3"><span class=hreftext><sup><small>3</small></sup></span></a>,
 along with some other changes from the default.
 </span></p>
 <p class=indent><a name="TAG:__troff2page_index_120"></a>
@@ -79,14 +79,18 @@ from leaking into the browser-mediated printout, wrap them inside
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_22"></a>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_24"></a>
 Colophon</h2>
 <p><a name="TAG:__troff2page_index_121"></a>
 <a name="TAG:__troff2page_index_122"></a>
 By default, troff2page places a colophon at the bottom right of the first
-page. The colophon mentions (i) the last-modification
+page. The colophon mentions
+</p>
+<p class=indent>i. the last-modification
 time of
-the document and (ii) the troff2page version used for the conversion.
+the document, and
+</p>
+<p class=indent>ii. the troff2page version used for the conversion.
 Either or both can be suppressed via CSS.
 </p>
 <p class=indent><a name="TAG:__troff2page_index_123"></a>
@@ -146,9 +150,14 @@ accomplished via the CSS fragment:
 </div>
 </p>
 <p></p>
+<p class=indent>As a special case, for man pages, troff2page (like groff -man)
+takes the third argument of the titling macro <span style="font-family: monospace; ">.TH</span> as the
+last-mod date. If there isn&#x2019;t a third argument, the colophon
+won&#x2019;t mention any date.
+</p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_23"></a>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_25"></a>
 Glyph substition</h2>
 <p>CSS isn&#x2019;t the only recourse to style your document: Interesting
 glyphs offer another approach.  troff2page, like groff, allows
@@ -192,7 +201,7 @@ boring equivalents for print:
 <p class=indent></p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_24"></a>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_26"></a>
 Typing verbatim \ in displays</h2>
 <p><a name="TAG:__troff2page_index_131"></a>
 <a name="TAG:__troff2page_index_132"></a>
@@ -200,10 +209,13 @@ Typing verbatim \ in displays</h2>
 The display used above brings up another use-case for glyph
 translation, even when (and especially if) no exotic characters
 are desired. The display shows the backslash (<span style="font-family: monospace; ">\</span>) character, which
-is also the default escape character for groff. In a display
-containing verbatim
-code, we want to
-suppress the backslash&#x2019;s escape effect, and have it simply render as itself. 
+is also the default escape character for groff.
+</p>
+<p class=indent>We could use the
+escape sequence <span style="font-family: monospace; ">\e</span> in our input to stand for a backslash,
+but especially in an extended display containing verbatim code,
+we would like to input the backslash as-is and have groff and
+troff2page temporarily suspend its escape effect.
 We could do this by having our display
 macros
 implicitly turn the escape character off when entering the display and back on when
@@ -262,11 +274,13 @@ Unicode glyph substitution offers another way out. The Unicode
 characters U+29F9 (<span style="font-size: 83%; ">BIG REVERSE SOLIDUS</span>) and U+FE68 (<span style="font-size: 83%; ">SMALL REVERSE
 SOLIDUS</span>) are passable replacements for the regular backslash (aka
 <span style="font-size: 83%; ">REVERSE SOLIDUS</span>, U+005C). You can enter these substitute
-backslashes with text-editor macros fairly easily.<a name="TAG:__troff2page_call_footnote_3"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_3"><span class=hreftext><sup><small>3</small></sup></span></a>
-So now your
+backslashes with text-editor macros fairly easily.<a name="TAG:__troff2page_call_footnote_4"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_4"><span class=hreftext><sup><small>4</small></sup></span></a>
+</p>
+<p class=indent>So now your
 displayed code has something that <span style="font-style: italic; ">looks</span> like a backslash,
 at least on
-browsers, but it most probably fails for print. Even in the browser,
+browsers, but it most probably fails for print, because the print
+font lacks the exotic character. Even in the browser,
 close is no cigar: Somebody cutting and pasting your code is in
 for a nasty surprise. You really do want the <span style="font-style: italic; ">real</span> backslash in
 there even on the HTML page, but you don&#x2019;t want to disable
@@ -291,7 +305,7 @@ editor with a Unicode font.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_25"></a>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_27"></a>
 \ in a section heading</h2>
 <p>This and the previous section&#x2019;s headers both have a verbatim backslash in the
 header.  You could use glyph substitution here too. However, if
@@ -301,13 +315,13 @@ the <span style="font-family: monospace; ">\e</span> escape to get a literal bac
 diversion eats an escape, so you have to double it. Ergo:
 <span style="font-family: monospace; ">\\e</span>.
 </p>
-<div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_2"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_2"><span class=hreftext><sup><small>2</small></sup></span></a>
+<div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_3"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_3"><span class=hreftext><sup><small>3</small></sup></span></a>
 The RGB values used in this manual for
 the colors
 terracotta pink
 and Venetian red are courtesy <a href="https://www.resene.co.nz/swatches"><span class=hreftext>Resene Paints</span></a>.
 </p>
-<p><a name="TAG:__troff2page_footnote_3"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_3"><span class=hreftext><sup><small>3</small></sup></span></a>
+<p><a name="TAG:__troff2page_footnote_4"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_4"><span class=hreftext><sup><small>4</small></sup></span></a>
 In the Vim editor, for instance, adding the command <span style="font-family: monospace; ">exec 'dig
 \\' 0x29F9</span> to your vimrc lets you use the digraph <span style="font-family: monospace; ">\\</span>
 to enter U+29F9.

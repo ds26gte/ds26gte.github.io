@@ -172,20 +172,6 @@ for troff2page.
 <span style="font-family: monospace; ">xyz.tmac</span> or <span style="font-family: monospace; ">tmac.xyz</span>, whichever is found first in the macro directories,
 and loads it.
 </p>
-<p class=indent>If after all the option processing, no file arguments remain, and
-the options for help or version were not used,
-<span style="font-family: monospace; ">troff2page</span> displays a &#x201C;could not find&#x201D; message.
-</p>
-<p class=indent>If there is <span style="font-style: italic; ">one</span> file argument, say <span style="font-family: monospace; ">filename.ext</span>,
-<span style="font-family: monospace; ">troff2page</span> converts it to <span style="font-family: monospace; ">filename.html</span> (and possibly
-some auxiliary HTML files whose names are of form
-<span style="font-family: monospace; ">filename-Z-H-number.html</span>).
-</p>
-<p class=indent>If there is <span style="font-style: italic; ">more than one</span> file argument, say <span style="font-family: monospace; ">f1.e1, f2.e2, ...
-flast.elast</span>, <span style="font-family: monospace; ">troff2page</span> concatenates their content to create a
-corresponding HTML version in <span style="font-family: monospace; ">flast.html</span> (and possibly some
-aux HTML files <span style="font-family: monospace; ">flast-Z-H-number.html</span>).
-</p>
 <p class=indent>If you find you need to specify an option that <span style="font-family: monospace; ">troff2page</span>
 doesn&#x2019;t accept, you can always supply it in a macro file via
 <span style="font-family: monospace; ">-m</span>.
@@ -197,6 +183,36 @@ for details on all the provided options.
 <p class=indent></p>
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_3"></a>
+Filename arguments</h2>
+<p>The arguments remaining after all the option processing are
+considered to be the names of document files.
+</p>
+<p class=indent>If there is <span style="font-style: italic; ">one</span> file argument, say <span style="font-family: monospace; ">filename.ext</span>,
+<span style="font-family: monospace; ">troff2page</span> converts it to <span style="font-family: monospace; ">filename.html</span> (and possibly
+some auxiliary HTML files whose names are of form
+<span style="font-family: monospace; ">filename-Z-H-number.html</span>). This is unlike groff, which
+writes to console (&#x201C;standard output&#x201D;).
+</p>
+<p class=indent>If there is <span style="font-style: italic; ">more than one</span> file argument, say <span style="font-family: monospace; ">f1.e1, f2.e2, ...
+flast.elast</span>, <span style="font-family: monospace; ">troff2page</span> concatenates their content to create a
+corresponding HTML version in <span style="font-family: monospace; ">flast.html</span> (and possibly some
+aux HTML files <span style="font-family: monospace; ">flast-Z-H-number.html</span>). Again, this is
+unlike groff.
+</p>
+<p class=indent>If any of the argument files don&#x2019;t exist, <span style="font-family: monospace; ">troff2page</span>, like groff, issues a
+&#x201C;cannot open ... No such file or directory&#x201D; diagnostic, but does
+its best with the files that do exist.
+</p>
+<p class=indent>If after all the option processing, <span style="font-style: italic; ">no</span> file arguments remain, and
+the options for help or version were not used,
+<span style="font-family: monospace; ">troff2page</span> reads from the console (&#x201C;standard input&#x201D;), like
+groff.  The output HTML file(s) in this case use the basename
+<span style="font-family: monospace; ">troffput</span>.<a name="TAG:__troff2page_call_footnote_1"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_1"><span class=hreftext><sup><small>1</small></sup></span></a>  This part is unlike groff, which always writes
+to console.
+</p>
+<p class=indent></p>
+<p></p>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_4"></a>
 Autoloaded init files</h2>
 <p><a name="TAG:troff2pagerc"></a>
 <a name="TAG:__troff2page_index_24"></a>
@@ -245,14 +261,18 @@ not</span> disable the autoloading of <span style="font-family: monospace; ">.tr
 these files typically contain information that&#x2019;s relevant
 for HTML only.)
 </p>
-<p class=indent><a name="TAG:__troff2page_index_27"></a>
+<p class=indent></p>
+<p></p>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_5"></a>
+Man-page conversion</h2>
+<p><a name="TAG:__troff2page_index_27"></a>
 If the input file is recognizably a man page (i.e., it has the
 command <span style="font-family: monospace; ">.TH</span>), both troff2page and groff will load, if it
 exists, the init file <span style="font-family: monospace; ">man.local</span> in the home directory.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_4"></a>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_6"></a>
 Calling troff2page from within Lua</h2>
 <p><a name="TAG:calling_troff2page_within_lua"></a>
 <a name="TAG:__troff2page_index_28"></a>
@@ -280,8 +300,13 @@ supplied as multiple string arguments.
 </p>
 <p class=indent>For some more exotic ways of invoking <span style="font-family: monospace; ">troff2page</span>, see
 section <a class=hrefinternal href="index-Z-H-11.html#TAG:nvimtex"><span class=hreftext>11</span></a>.
-<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-2.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 </p>
+<div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_1"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_1"><span class=hreftext><sup><small>1</small></sup></span></a>
+The name <span style="font-family: monospace; ">troffput</span> is inspired by <span style="font-family: monospace; ">texput</span>,
+the name that TeX uses when it isn&#x2019;t given an input file.
+</p>
+</div>
+<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-2.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 </div>
 </body>
 </html>
