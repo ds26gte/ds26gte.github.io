@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by troff2page, v. 20201213
+Generated from index.ms by troff2page, v. 20201215
 Copyright (C) 2003-2020 Dorai Sitaram
 (running on Lua 5.3)
 http://ds26gte.github.io/troff2page
@@ -22,7 +22,7 @@ troff2page
 <p></p>
 <h1 style="font-size: 160%"><a name="TAG:__pca_sec_10"></a>
 3. Page layout</h1>
-<p><a name="TAG:__troff2page_index_49"></a>
+<p><a name="TAG:__troff2page_index_60"></a>
 Each page in a multiple-page HTML output has a navigation bar at its
 head and foot.  The bar contains links to the first, previous, and next
 page, and the table-of-contents and index pages.  If any of the
@@ -35,17 +35,17 @@ index page doesn&#x2019;t exist, it is absent from the bar.
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_11"></a>
 Page breaks</h2>
-<p><a name="TAG:__troff2page_index_50"></a>
-<a name="TAG:__troff2page_index_51"></a>
+<p><a name="TAG:__troff2page_index_61"></a>
+<a name="TAG:__troff2page_index_62"></a>
 Multiple pages are created because the document source implicitly or
 explicilty used
 the page-break command <span style="font-family: monospace; ">.bp</span>.  Each call to <span style="font-family: monospace; ">.bp</span> ends the current HTML page and start a new
 one.  Thus <span style="font-family: monospace; ">.bp</span> causes a page-break in both the HTML and the print outputs.
 </p>
 <p class=indent><a name="TAG:cond-bp"></a>
-<a name="TAG:__troff2page_index_52"></a>
-<a name="TAG:__troff2page_index_53"></a>
-<a name="TAG:__troff2page_index_54"></a>
+<a name="TAG:__troff2page_index_63"></a>
+<a name="TAG:__troff2page_index_64"></a>
+<a name="TAG:__troff2page_index_65"></a>
 Generally, page-breaks require a different &#xe6;sthetic in HTML than in
 print.  You can use groff conditionals to express this difference:
 </p>
@@ -67,7 +67,7 @@ print.  You can use groff conditionals to express this difference:
 value, i.e., a number greater than zero, only when troff2page processes the
 document.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_55"></a>
+<p class=indent><a name="TAG:__troff2page_index_66"></a>
 If may be convenient to define a <span style="font-family: monospace; ">.HBP</span> macro that causes a page-break
 only for HTML:
 </p>
@@ -85,13 +85,13 @@ sectioning commands
 or modify the existing ones
 to embed a page break.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_56"></a>
-<a name="TAG:__troff2page_index_57"></a>
-<a name="TAG:__troff2page_index_58"></a>
-<a name="TAG:__troff2page_index_59"></a>
-<a name="TAG:__troff2page_index_60"></a>
-<a name="TAG:__troff2page_index_61"></a>
-<a name="TAG:__troff2page_index_62"></a>
+<p class=indent><a name="TAG:__troff2page_index_67"></a>
+<a name="TAG:__troff2page_index_68"></a>
+<a name="TAG:__troff2page_index_69"></a>
+<a name="TAG:__troff2page_index_70"></a>
+<a name="TAG:__troff2page_index_71"></a>
+<a name="TAG:__troff2page_index_72"></a>
+<a name="TAG:__troff2page_index_73"></a>
 Here&#x2019;s a way to create pagebreaks in HTML before every top-level <span style="font-family: monospace; ">.SH</span>, by
 redefining the underlying <span style="font-family: monospace; ">.@SH</span> macro:
 </p>
@@ -138,7 +138,7 @@ of troff2page.  Thus, one could, if the need were dire, write a document
 that translates differently with different versions of
 troff2page. But don&#x2019;t do this.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_63"></a>
+<p class=indent><a name="TAG:__troff2page_index_74"></a>
 If you&#x2019;d rather stick to known groff registers, the read-only
 paper-length register <span style="font-family: monospace; ">\n(.p</span> is a candidate. groff sets
 it to 11 inches, i.e., the length of a US Letter size paper.
@@ -146,9 +146,9 @@ Presumably it could vary depending on country of use, but it is
 never going to be non-positive. troff2page, since it doesn&#x2019;t deal in paper, sets
 <span style="font-family: monospace; ">\n(.p</span> to 0.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_64"></a>
-<a name="TAG:__troff2page_index_65"></a>
-<a name="TAG:__troff2page_index_66"></a>
+<p class=indent><a name="TAG:__troff2page_index_75"></a>
+<a name="TAG:__troff2page_index_76"></a>
+<a name="TAG:__troff2page_index_77"></a>
 groff has its own version registers <span style="font-family: monospace; ">\n(.x</span>,
 <span style="font-family: monospace; ">\n(.y</span>, and <span style="font-family: monospace; ">\n(.Y</span>, which contain the major and minor version numbers
 and revision number
@@ -164,8 +164,11 @@ there&#x2019;s no 0-left-padding.)
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_13"></a>
 HTML-style paragraphs</h2>
-<p><a name="TAG:__troff2page_index_67"></a>
-<a name="TAG:__troff2page_index_68"></a>
+<p><a name="TAG:__troff2page_index_78"></a>
+<a name="TAG:__troff2page_index_79"></a>
+<a name="TAG:__troff2page_index_80"></a>
+<a name="TAG:__troff2page_index_81"></a>
+<a name="TAG:__troff2page_index_82"></a>
 By default, troff2page sets paragraphs exactly as groff does: the first
 lines of paragraphs are indented (unless explicitly disabled via an
 <span style="font-family: monospace; ">.LP</span>), and
@@ -182,6 +185,7 @@ to a <span style="font-style: italic; ">negative</span> value, which leads to wh
 separation that HTML uses.  Note that setting <span style="font-family: monospace; ">PD</span> to a negative value
 should be done only for HTML, as groff will happily overstrike
 text in order to respect a negative <span style="font-family: monospace; ">PD</span>:
+<a name="TAG:__troff2page_index_83"></a>
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.if&#xa0;\n[.troff2page]&#xa0;\{\<br>
@@ -196,52 +200,41 @@ text in order to respect a negative <span style="font-family: monospace; ">PD</s
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_14"></a>
 Scaling factors</h2>
-<p><a name="TAG:__troff2page_index_69"></a>
+<p><a name="TAG:__troff2page_index_84"></a>
 The scaling factor <span style="font-family: monospace; ">n</span> (en)
 used above is half the width of the letter &#x2018;<span style="font-family: monospace; ">m</span>&#x2019; in
 the default font size. <span style="font-family: monospace; ">v</span> is the distance between two consecutive
 baselines. Scaling factors are generally, but not always, what
 you might think of as length units.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_70"></a>
-<a name="TAG:__troff2page_index_71"></a>
-<a name="TAG:__troff2page_index_72"></a>
-<a name="TAG:__troff2page_index_73"></a>
-<a name="TAG:__troff2page_index_74"></a>
-<a name="TAG:__troff2page_index_75"></a>
+<p class=indent><a name="TAG:__troff2page_index_85"></a>
+<a name="TAG:__troff2page_index_86"></a>
+<a name="TAG:__troff2page_index_87"></a>
+<a name="TAG:__troff2page_index_88"></a>
+<a name="TAG:__troff2page_index_89"></a>
+<a name="TAG:__troff2page_index_90"></a>
+<a name="TAG:__troff2page_index_91"></a>
+<a name="TAG:__troff2page_index_92"></a>
+<a name="TAG:__troff2page_index_93"></a>
+<a name="TAG:__troff2page_index_94"></a>
+<a name="TAG:__troff2page_index_95"></a>
+<a name="TAG:__troff2page_index_96"></a>
+<a name="TAG:__troff2page_index_97"></a>
 Other groff scaling factors that troff2page recognizes
 are: <span style="font-family: monospace; ">i</span> (inch = 1/12 foot), <span style="font-family: monospace; ">c</span> (cm =
 50/127 inch), <span style="font-family: monospace; ">p</span> (point = 1/72 inch), <span style="font-family: monospace; ">P</span> (pica = 12
 points), <span style="font-family: monospace; ">m</span> (em = 2 ens), and <span style="font-family: monospace; ">M</span> (1/100 em).
 </p>
-<p class=indent><a name="TAG:__troff2page_index_76"></a>
-<a name="TAG:__troff2page_index_77"></a>
-<a name="TAG:__troff2page_index_78"></a>
+<p class=indent><div align=center>
+<img src="inch.jpg" width="252.0" >
+</div>
+</p>
+<p class=indent><a name="TAG:__troff2page_index_98"></a>
+<a name="TAG:__troff2page_index_99"></a>
 Internally, both groff and troff2page store lengths in the scaling
 factor <span style="font-family: monospace; ">u</span>, which
 is 1/72000 of an inch, and all lengths are integral multiples of
-u, thereby avoiding floating-point messes. If this seems too precise, consider that TeX stores all
-its lengths in &#x201C;scaled points&#x201D; (sp), where 1 sp = 1 / (2^16 * 72.27) =
-<a name="TAG:__troff2page_index_79"></a>
-1/4736286.72
-&#x2248;
-2.1113586636917e-07
-of an inch!
-</p>
-<p class=indent>At any rate, do learn your inches and keep your inch measure
-handy. The groff manual throws the usual shade on &#x201C;antiquated&#x201D;
-units, but it can&#x2019;t really mean it, as easy factors and
-multiples of the inch are all over the place.
-The groff point is exactly 1/72 of an inch
-(unlike TeX&#x2019;s slightly smaller point of 1/72.27 inch, which is
-neither metric fish nor Imperial fowl); the underlying scaling
-factor is 1/1000 of the point; and
-the default offsets, margins, and widths are all nice multiples of
-inches.
-</p>
-<p class=indent><div align=center>
-<img src="inch.jpg" width="30%" >
-</div>
+u, thereby avoiding floating-point messes.
 </p>
 <p class=indent>Finally, the scaling factor <span style="font-family: monospace; ">f</span> is simply 2^16, so its
 coefficients can be used as fractions.
@@ -250,7 +243,7 @@ coefficients can be used as fractions.
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_15"></a>
 Line length</h2>
-<p><a name="TAG:__troff2page_index_80"></a>
+<p><a name="TAG:__troff2page_index_100"></a>
 Unlike groff -ms, which uses the line length given by the register
 <span style="font-family: monospace; ">LL</span>,
 troff2page by default does not restrict the text width on its HTML pages.
@@ -270,16 +263,67 @@ wide than <span style="font-family: monospace; ">LL</span> (as is certainly unav
 phones): the text will correspondingly shrink to
 fit the window, avoiding the need for horizontal scrolling.
 </p>
-<p class=indent>A good <span style="font-family: monospace; ">LL</span> value for troff2page should be a bit larger than
+<p class=indent><a name="TAG:__troff2page_index_101"></a>
+A good <span style="font-family: monospace; ">LL</span> value for troff2page should be a bit larger than
 -ms&#x2019;s 6 inches, which is too narrow for a browser.  The following sets it
-to 1/8000 of a statute mile, but it takes effect only for HTML:
+to 1/8000 of a mile, but it takes effect only for HTML:
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.if&#xa0;\n[.troff2page]&#xa0;.nr&#xa0;LL&#xa0;7.92i<br>
 </span>
 </div>
 </p>
-<p><div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-2.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-4.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+<p></p>
+<p class=indent></p>
+<p></p>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_16"></a>
+Images</h2>
+<p><a name="TAG:__troff2page_index_102"></a>
+<a name="TAG:__troff2page_index_103"></a>
+troff2page supports a generalized version of the <span style="font-family: monospace; ">.IMG</span> macro
+from groff&#x2019;s <span style="font-family: monospace; ">www.tmac</span>. It accepts all the usual image file
+formats. An example call:
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.IMG&#xa0;t2p.png<br>
+</span>
+</div>
+</p>
+<p>This produces:
+<div align=center>
+<img src="t2p.png" width="72.0" >
+</div>
+</p>
+<p class=indent><a name="TAG:__troff2page_index_104"></a>
+An optional first argument of <span style="font-family: monospace; ">-L</span> aligns the image to the
+left; <span style="font-family: monospace; ">-R</span> to the right; and <span style="font-family: monospace; ">-C</span>, the default, centers
+it.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_105"></a>
+An optional final argument specifies the width of the image. The
+default is 1 inch.
+E.g.,
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.IMG&#xa0;-L&#xa0;t2p.png&#xa0;2.718281828i<br>
+</span>
+</div>
+</p>
+<p>produces a left-justified, <span style="font-style: italic; ">e</span>-inch-wide image:
+<div align=left>
+<img src="t2p.png" width="195.716291616" >
+</div>
+</p>
+<p><a name="TAG:__troff2page_index_106"></a>
+<a name="TAG:__troff2page_index_107"></a>
+<a name="TAG:__troff2page_index_108"></a>
+<a name="TAG:__troff2page_index_109"></a>
+<span style="font-family: monospace; ">.IMG</span> relies on external programs <span style="font-family: monospace; ">convert</span> (from
+ImageMagick); <span style="font-family: monospace; ">mkbitmap</span> and <span style="font-family: monospace; ">potrace</span> (both from the
+<span style="font-family: monospace; ">potrace</span> package); and <span style="font-family: monospace; ">inkscape</span>. <span style="font-family: monospace; ">mkbitmap</span> and
+<span style="font-family: monospace; ">potrace</span> are needed for PNG images; <span style="font-family: monospace; ">inkscape</span> for SVG
+images.
+<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-2.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-4.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 </p>
 </div>
 </body>

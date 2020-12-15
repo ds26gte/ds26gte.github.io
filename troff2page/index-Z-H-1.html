@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by troff2page, v. 20201213
+Generated from index.ms by troff2page, v. 20201215
 Copyright (C) 2003-2020 Dorai Sitaram
 (running on Lua 5.3)
 http://ds26gte.github.io/troff2page
@@ -34,6 +34,7 @@ output document with the functionally equivalent HTML markup.
 </p>
 <p class=indent><a name="TAG:__troff2page_index_6"></a>
 <a name="TAG:__troff2page_index_7"></a>
+<a name="TAG:__troff2page_index_8"></a>
 troff is a venerable typesetting program that produces
 high-quality print output from plain text source.
 It doesn&#x2019;t require
@@ -52,13 +53,13 @@ With a flag, troff2page can also produce an Info version of your
 document that&#x2019;s suitable for browing on a text terminal (chapter
 <a class=hrefinternal href="index-Z-H-10.html#TAG:gnuinfo"><span class=hreftext>10</span></a>).
 </p>
-<p class=indent><a name="TAG:__troff2page_index_8"></a>
+<p class=indent><a name="TAG:__troff2page_index_9"></a>
 First,
 ensure that the script <span style="font-family: monospace; ">troff2page</span> is in a directory in your
 <span style="font-family: monospace; ">PATH</span>.
 </p>
 <p class=indent><a name="TAG:html-output"></a>
-<a name="TAG:__troff2page_index_9"></a>
+<a name="TAG:__troff2page_index_10"></a>
 To convert an input troff document named <span style="font-family: monospace; ">jobname.ms</span>, type
 the following on the operating-system command line.
 </p>
@@ -72,7 +73,7 @@ the following on the operating-system command line.
 input troff file (i.e., <span style="font-family: monospace; ">jobname</span>), but its extension is
 <span style="font-family: monospace; ">.html</span>.)
 </p>
-<p class=indent><a name="TAG:__troff2page_index_10"></a>
+<p class=indent><a name="TAG:__troff2page_index_11"></a>
 If the input troff uses the page-break request
 <span style="font-family: monospace; ">.bp</span>,
 then the output
@@ -87,8 +88,7 @@ etc.
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_2"></a>
 Commmand-line options</h2>
-<p><a name="TAG:__troff2page_index_11"></a>
-<a name="TAG:__troff2page_index_12"></a>
+<p><a name="TAG:__troff2page_index_12"></a>
 <a name="TAG:__troff2page_index_13"></a>
 <a name="TAG:__troff2page_index_14"></a>
 <a name="TAG:__troff2page_index_15"></a>
@@ -97,6 +97,7 @@ Commmand-line options</h2>
 <a name="TAG:__troff2page_index_18"></a>
 <a name="TAG:__troff2page_index_19"></a>
 <a name="TAG:__troff2page_index_20"></a>
+<a name="TAG:__troff2page_index_21"></a>
 <span style="font-family: monospace; ">troff2page</span> takes some, but not all, of the same options as <span style="font-family: monospace; ">groff</span>,
 a widely used and actively developed implementation of troff.
 viz.,
@@ -159,9 +160,9 @@ viz.,
 </span>
 </div>
 </p>
-<p><a name="TAG:__troff2page_index_21"></a>
-<a name="TAG:__troff2page_index_22"></a>
+<p><a name="TAG:__troff2page_index_22"></a>
 <a name="TAG:__troff2page_index_23"></a>
+<a name="TAG:__troff2page_index_24"></a>
 <span style="font-family: monospace; ">troff2page</span> ignores all other <span style="font-family: monospace; ">groff</span> options, most with a warning.
 The options
 <span style="font-family: monospace; ">-z</span>, <span style="font-family: monospace; ">-t</span>, and <span style="font-family: monospace; ">-U</span> are silently ignored, as they&#x2019;re always valid
@@ -215,8 +216,8 @@ to console.
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_4"></a>
 Autoloaded init files</h2>
 <p><a name="TAG:troff2pagerc"></a>
-<a name="TAG:__troff2page_index_24"></a>
 <a name="TAG:__troff2page_index_25"></a>
+<a name="TAG:__troff2page_index_26"></a>
 <span style="font-family: monospace; ">troff2page</span> can read directives in some autoloaded files
 without the need to explicitly use a command-line option. These
 are useful to specify information that is relevant only for the HTML
@@ -247,7 +248,7 @@ unadvised for such an ad hoc file.
 <p class=indent><span style="font-family: monospace; ">troff2page</span> loads only the first <span style="font-family: monospace; ">.troff2pagerc</span> it
 finds.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_26"></a>
+<p class=indent><a name="TAG:__troff2page_index_27"></a>
 In addition, <span style="font-family: monospace; ">troff2page</span> will also pick up a file
 <span style="font-family: monospace; ">jobname.t2p</span>, where <span style="font-family: monospace; ">jobname</span> is the basename of the input document.
 This is useful for directives that are specific to this document.
@@ -265,7 +266,7 @@ for HTML only.)
 <p></p>
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_5"></a>
 Man-page conversion</h2>
-<p><a name="TAG:__troff2page_index_27"></a>
+<p><a name="TAG:__troff2page_index_28"></a>
 If the input file is recognizably a man page (i.e., it has the
 command <span style="font-family: monospace; ">.TH</span>), both troff2page and groff will load, if it
 exists, the init file <span style="font-family: monospace; ">man.local</span> in the home directory.
@@ -275,7 +276,7 @@ exists, the init file <span style="font-family: monospace; ">man.local</span> in
 <h2 style="font-size: 130%"><a name="TAG:__pca_sec_6"></a>
 Calling troff2page from within Lua</h2>
 <p><a name="TAG:calling_troff2page_within_lua"></a>
-<a name="TAG:__troff2page_index_28"></a>
+<a name="TAG:__troff2page_index_29"></a>
 The script <span style="font-family: monospace; ">troff2page</span> runs on the command-line on Unix-esque
 machines that have Lua installed.
 For more installation information,
