@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by troff2page, v. 20201215
+Generated from index.ms by troff2page, v. 20201219
 Copyright (C) 2003-2020 Dorai Sitaram
 (running on Lua 5.3)
 http://ds26gte.github.io/troff2page
@@ -13,19 +13,18 @@ http://ds26gte.github.io/troff2page
 troff2page
 </title>
 <link rel="stylesheet" href="index-Z-S.css" title=default>
-<link rel="stylesheet" href="default.css" title=default>
 <meta name=robots content="index,follow">
 </head>
 <body>
 <div>
-<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-1.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-3.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-1.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-3.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-11.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 <p></p>
-<h1 style="font-size: 160%"><a name="TAG:__pca_sec_7"></a>
-2. troff, groff, and troff2page commands</h1>
-<p><a name="TAG:__troff2page_index_30"></a>
+<h1 style="font-size: 160%"><a name="TAG:__pca_sec_6"></a>
+2.  troff, groff, and troff2page commands</h1>
+<p><a name="TAG:__troff2page_index_29"></a>
+<a name="TAG:__troff2page_index_30"></a>
 <a name="TAG:__troff2page_index_31"></a>
 <a name="TAG:__troff2page_index_32"></a>
-<a name="TAG:__troff2page_index_33"></a>
 </p><p class=interleaved></p>
 <p><span class=dropcap style="color: #9b3d3d">T</span>ROFF2PAGE
 recognizes most of the commands (requests, macros,
@@ -35,20 +34,27 @@ recherch&#xe9; macros as <span style="font-family: monospace; ">.DC</span>, here
 capital
 colored terracotta pink.
 The syntax recognized is the improved kind
-supported by <a href="https://www.gnu.org/software/groff"><span class=hreftext>groff</span></a> and <a href="http://heirloom.sf.net/doctools.html"><span class=hreftext>Heirloom troff</span></a>, i.e., macro, string,
+supported by <a href="https://www.gnu.org/software/groff"><span class=hreftext>groff</span></a>, <a href="http://heirloom.sf.net/doctools.html"><span class=hreftext>Heirloom troff</span></a>, and <a href="http://github.com/aligrudi/neatroff"><span class=hreftext>Neatroff</span></a>, i.e., macro, string,
 and glyph names can be arbitrarily long, and strings can
 have arguments.  Most of the commands are converted to their
-obvious HTML equivalent.<a name="TAG:__troff2page_call_footnote_2"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_2"><span class=hreftext><sup><small>2</small></sup></span></a>
+obvious HTML equivalent.<a name="TAG:__troff2page_call_footnote_3"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_3"><span class=hreftext><sup><small>3</small></sup></span></a>
 Please consult troff and groff documentation for these commands.  We will
 concentrate here on those commands whose HTML counterpart is not immediately
-obvious. In order to avoid constantly qualifying my sentences, I shall
+obvious.  In order to avoid constantly qualifying my sentences, I shall
 henceforth use groff as the troff implementation to work alongside
-troff2page. There will be some modification needed when using
+troff2page.  There will be some modification needed when using
 other troff implementations.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_33"></a>
+The request <span style="font-family: monospace; ">.pm</span> lists on the console, in alphabetical
+order,
+all the requests, macros, and strings defined by troff2page.  You
+can then search for their behavior in the troff2page and/or groff
+manuals.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_8"></a>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_7"></a>
 mpca macro files</h2>
 <p><a name="TAG:__troff2page_index_34"></a>
 <a name="TAG:__troff2page_index_35"></a>
@@ -62,11 +68,13 @@ mpca macro files</h2>
 <a name="TAG:__troff2page_index_43"></a>
 <a name="TAG:__troff2page_index_44"></a>
 <a name="TAG:__troff2page_index_45"></a>
+<a name="TAG:__troff2page_index_46"></a>
 troff2page can process documents that use the <span style="font-family: monospace; ">ms</span> extension macros
 provided in <a href="http://github.com/ds26gte/mpca"><span class=hreftext>mpca</span></a>. For
 convenience, this repo is included as a submodule <span style="font-family: monospace; ">mpca</span>.
 It includes general-purpose extensions to the <span style="font-family: monospace; ">ms</span> package,
 viz.,
+<span style="font-family: monospace; ">pca-bib.tmac</span> for bibliographic citations;
 <span style="font-family: monospace; ">pca-dc.tmac</span> for drop caps;
 <span style="font-family: monospace; ">pca-eval.tmac</span> for extending groff using Lua;
 <span style="font-family: monospace; ">pca-img.tmac</span> for image insertion;
@@ -82,36 +90,36 @@ include <span style="font-family: monospace; ">.mso pca.tmac</span> in your docu
 Please consult
 this submodule&#x2019;s documentation for more information.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_46"></a>
+<p class=indent><a name="TAG:__troff2page_index_47"></a>
 In order to take advantage of the <span style="font-family: monospace; ">mpca</span> tmac files, you
 should place them in one of your groff macro directories. (Both
 groff and troff2page search for macro files first in the
 directories in <span style="font-family: monospace; ">GROFF_TMAC_PATH</span>, then in the working
-directory, and finally in your home directory. See the section
+directory, and finally in your home directory.  See the section
 for &#x201C;Macro Directories&#x201D; in the groff info file for details.)
 </p>
-<p class=indent><a name="TAG:__troff2page_index_47"></a>
-<a name="TAG:__troff2page_index_48"></a>
+<p class=indent><a name="TAG:__troff2page_index_48"></a>
+<a name="TAG:__troff2page_index_49"></a>
 Your input document sources the <span style="font-family: monospace; ">mpca</span> macro files using
 either the <span style="font-family: monospace; ">-m</span> command-line option or the <span style="font-family: monospace; ">.mso</span> request.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_9"></a>
+<h2 style="font-size: 130%"><a name="TAG:__pca_sec_8"></a>
 Auxiliary files</h2>
-<p><a name="TAG:__troff2page_index_49"></a>
-<a name="TAG:__troff2page_index_50"></a>
+<p><a name="TAG:__troff2page_index_50"></a>
 <a name="TAG:__troff2page_index_51"></a>
+<a name="TAG:__troff2page_index_52"></a>
 Many of the macros defined in these <span style="font-family: monospace; ">.tmac</span> files write
 auxiliary files that are absorbed into the document during a
 second run.  Let&#x2019;s first investigate how groff deals with them,
-and then see how troff2page does the same in its own way. Note
+and then see how troff2page does the same in its own way.  Note
 that in order to write these aux files, groff must be run with
 the <span style="font-family: monospace; ">-U</span> option for &#x201C;unsafe&#x201D; mode.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_52"></a>
-<a name="TAG:__troff2page_index_53"></a>
+<p class=indent><a name="TAG:__troff2page_index_53"></a>
 <a name="TAG:__troff2page_index_54"></a>
+<a name="TAG:__troff2page_index_55"></a>
 As an example, consider <span style="font-family: monospace; ">index.ms</span> (the groff source for the
 document you&#x2019;re reading, which is the <span style="font-family: monospace; ">doc</span> subdirectory).  The following is one
 way to get the correct PostScript output:
@@ -149,12 +157,12 @@ with the <span style="font-family: monospace; ">-U</span>, as all the required a
 changes.)
 </p>
 <p class=indent>troff2page also needs to process the document twice in order to absorb
-information from the aux files. However:
+information from the aux files.  However:
 </p>
-<p class=indent>i. troff2page will automatically do the second processing
+<p class=indent>i.  troff2page will automatically do the second processing
 without needing the user to explicitly call it a second time; and
 </p>
-<p class=indent>ii. troff2page doesn&#x2019;t need any special option to run in &#x201C;unsafe&#x201D;
+<p class=indent>ii.  troff2page doesn&#x2019;t need any special option to run in &#x201C;unsafe&#x201D;
 mode or to process tables.
 </p>
 <p><div class="display verbatim" align=left>
@@ -183,17 +191,18 @@ global <span style="font-family: monospace; ">Single_pass_p</span> to true, i.e.
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;Single_pass_p&#xa0;=&#xa0;true<br>
-&#xa0;&#xa0;&#xa0;&#xa0;troff2page('index.ms')<br>
+&#xa0;&#xa0;&#xa0;&#xa0;troff2page&#xa0;'index.ms'<br>
 </span>
 </div>
 </p>
 <p>Call it the same way a second time to run the second pass, which
-resolve the aux files. This is exactly analogous to calling
+resolve the aux files.  This is exactly analogous to calling
 <span style="font-family: monospace; ">groff</span> twice on the same document to resolve aux files.
 </p>
 <p class=indent><a name="TAG:auxf"></a>
-<a name="TAG:__troff2page_index_55"></a>
 <a name="TAG:__troff2page_index_56"></a>
+<a name="TAG:__troff2page_index_57"></a>
+<a name="TAG:__troff2page_index_58"></a>
 The groff string <span style="font-family: monospace; ">\*[AUXF]</span> is used to construct the
 names of the
 auxiliary files.  By default it
@@ -210,17 +219,17 @@ programs&#x2019; aux files don&#x2019;t clash.  The number register
 <span style="font-family: monospace; ">\n[.troff2page]</span> (page <a class=hrefinternal href="index-Z-H-3.html#TAG:cond-bp"><span class=hreftext>3</span></a>) suggests a way
 to do this.
 </p>
-<div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_2"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_2"><span class=hreftext><sup><small>2</small></sup></span></a>
-<a name="TAG:__troff2page_index_57"></a>
-<a name="TAG:__troff2page_index_58"></a>
+<div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_3"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_3"><span class=hreftext><sup><small>3</small></sup></span></a>
 <a name="TAG:__troff2page_index_59"></a>
+<a name="TAG:__troff2page_index_60"></a>
+<a name="TAG:__troff2page_index_61"></a>
 E.g., -ms&#x2019;s footnotes (<span style="font-family: monospace; ">\**</span> and <span style="font-family: monospace; ">.FS</span>/<span style="font-family: monospace; ">.FE</span>) have a
 straightforward translation in the HTML, with the footnote text set at the
 bottom of the HTML page, and with the footnote markers in the body and the
 footnote hyperlinking to each other.
 </p>
 </div>
-<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-1.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-3.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-1.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-3.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-11.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 </div>
 </body>
 </html>
