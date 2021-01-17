@@ -20,23 +20,13 @@
     margin-top: 2em;
   }
 
-  h1,h2,h3,h4,h5 {
+  h1,h2,h3,h4,h5,h6 {
     margin-top: 1em;
     margin-bottom: 0.5em;
-    font-family: sans-serif;
-    font-weight: normal;
   }
 
   h1.title {
     font-size: 172.8%;
-  }
-
-  h1 {
-    font-size: 144%;
-  }
-
-  h2,h3,h4,h5,h6 {
-    font-size: 120%;
   }
 
   .dropcap {
@@ -211,8 +201,10 @@
         border-bottom: 1px solid #dddddf;
     }
 
-    h1,h2,h3,h4,h5 {
+    h1,h2,h3,h4,h5,h6 {
         color: #9b3d3d; /* terracotta pink */
+        font-family: sans-serif;
+        font-weight: normal;
     }
 
     a {
@@ -238,11 +230,12 @@ body {
 
 @media screen { body { max-width: 576.0px; } }
 
-p { margin-top: 12.0px; margin-bottom: 12.0px; }
+p { margin-top: 16.0px; margin-bottom: 16.0px; }
 
-.display { margin-top: 12.0px; margin-bottom: 12.0px; padding-top: 12.0px; padding-bottom: 12.0px; }
+.display { margin-top: 16.0px; margin-bottom: 16.0px; padding-top: 16.0px; padding-bottom: 16.0px; }
 
-.display.verbatim { padding-left: 12.0px; }
-.footnote { margin-top: 24.0px; }
+.display.verbatim { padding-left: 16.0px; }
+.footnote { margin-top: 32.0px; }
 
 .navigation { margin-top: 20.0px; margin-bottom: 20.0px; }
+h1,h2,h3,h4,h5,h6 { font-size: 1.2em; }

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by troff2page, v. 20201219
-Copyright (C) 2003-2020 Dorai Sitaram
+Generated from index.ms by Troff2page, v. 20210104
+Copyright (C) 2003-2021 Dorai Sitaram
 (running on Lua 5.3)
 http://ds26gte.github.io/troff2page
 -->
@@ -10,7 +10,7 @@ http://ds26gte.github.io/troff2page
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>
-troff2page
+Troff2page
 </title>
 <link rel="stylesheet" href="index-Z-S.css" title=default>
 <meta name=robots content="index,follow">
@@ -18,13 +18,12 @@ troff2page
 <body>
 <div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-3.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-5.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-11.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
-<p></p>
-<h1 style="font-size: 160%"><a name="TAG:__pca_sec_16"></a>
+<h1 style="font-size: 192%"><a name="TAG:__pca_sec_16"></a>
 4.  Cross-references</h1>
-<p><a name="TAG:__troff2page_index_114"></a>
+<p><a name="TAG:__troff2page_index_113"></a>
+<a name="TAG:__troff2page_index_114"></a>
 <a name="TAG:__troff2page_index_115"></a>
-<a name="TAG:__troff2page_index_116"></a>
-troff2page provides a <span style="font-family: monospace; ">.TAG</span> macro for managing
+Troff2page provides a <span style="font-family: monospace; ">.TAG</span> macro for managing
 cross-references.  A compatible groff definition is provided in
 the supplied macro file <span style="font-family: monospace; ">pca-tag.tmac</span>. (This overrides the
 similarly named macro in groff&#x2019;s <span style="font-family: monospace; ">www.tmac</span>, in order to allow
@@ -59,29 +58,28 @@ of the current page number.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_17"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_17"></a>
 ToC</h2>
-<p><a name="TAG:__troff2page_index_117"></a>
+<p><a name="TAG:__troff2page_index_116"></a>
+<a name="TAG:__troff2page_index_117"></a>
 <a name="TAG:__troff2page_index_118"></a>
-<a name="TAG:__troff2page_index_119"></a>
 The
 macro file <span style="font-family: monospace; ">pca-toc.tmac</span> supplies a <span style="font-family: monospace; ">.ToC</span> macro
 for automatic generation of a table of contents.  This can be used
-by both groff and troff2page.
+by both groff and Troff2page.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_120"></a>
-The troff2page aspect of <span style="font-family: monospace; ">pca-toc.tmac</span>
-uses <span style="font-family: monospace; ">.TAG</span>.  For both outputs, ToC entries are created for
-headers of level <span style="font-family: monospace; ">\n[GROWPS]</span> or lower.  By default,
+<p class=indent><a name="TAG:__troff2page_index_119"></a>
+For both outputs, ToC entries are created for
+headers of level <span style="font-family: monospace; ">\n[GROWPS]</span> or lower. By default,
 <span style="font-family: monospace; ">GROWPS</span> is set to 0, so you should set it to at least 1 to see
 a ToC.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_121"></a>
+<p class=indent><a name="TAG:__troff2page_index_120"></a>
 The original purpose of <span style="font-family: monospace; ">GROWPS</span> was to govern the font-size
 of headers at levels below it, provided it is set to at least 2
 and the register <span style="font-family: monospace; ">\n[PSINCR]</span> is set (which it is, by
-default, to 10p).
-troff2page respects this too.  If you&#x2019;d rather use CSS to affect
+default, to 1p).
+Troff2page respects this too. If you&#x2019;d rather use CSS to affect
 section-header style, including font-size, but you
 must have <span style="font-family: monospace; ">GROWPS</span> &#x2265; 2
 because your ToC requires it, then conditionally set <span style="font-family: monospace; ">PSINCR</span>
@@ -101,40 +99,41 @@ following statement from the groff manual:
 is perhaps initially more difficult, but would save a great deal of time
 in the long run if you use &#x2018;ms&#x2019; regularly.
 </blockquote></p>
-<p><a name="TAG:__troff2page_index_122"></a>
-troff2page autoloads the macro file <span style="font-family: monospace; ">pca-t2p-man.tmac</span> (if it can
+<p><a name="TAG:__troff2page_index_121"></a>
+Troff2page autoloads the macro file <span style="font-family: monospace; ">pca-t2p-man.tmac</span> (if it can
 find it in <span style="font-family: monospace; ">GROFF_TMAC_PATH</span>)
 to automatically generate a ToC for man pages,
 with a ToC entry for each <span style="font-family: monospace; ">.SH</span> in the input.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_18"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_18"></a>
 Bibliography</h2>
-<p class=indent>The <span style="font-family: monospace; ">.BIB</span> macro from
+<p>The <span style="font-family: monospace; ">.BIB</span> macro from
 the macro file <span style="font-family: monospace; ">pca-bib.tmac</span> introduces a paragraph that is
 a simple bibliographic reference, e.g.,
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.BIB&#xa0;landes_clock<br>
-&#xa0;&#xa0;&#xa0;&#xa0;David&#xa0;S.\ Landes,&#xa0;\fIRevolutions&#xa0;in&#xa0;Time:&#xa0;Clocks&#xa0;and&#xa0;the<br>
+&#xa0;&#xa0;&#xa0;&#xa0;David&#xa0;S.&#xa0;Landes,&#xa0;\fIRevolutions&#xa0;in&#xa0;Time:&#xa0;Clocks&#xa0;and&#xa0;the<br>
 &#xa0;&#xa0;&#xa0;&#xa0;Making&#xa0;of&#xa0;the&#xa0;Modern&#xa0;World\fP,&#xa0;Belknap&#xa0;Press,&#xa0;1983.<br>
 </span>
 </div>
 </p>
 <p>If it is the <span style="font-style: italic; ">n</span>th such reference in the document, it is prefixed
 with &#x201C;[<span style="font-style: italic; ">n</span>]&#x201D; in the output.  Furthermore, the label
-<span style="font-family: monospace; ">TAG:utp</span> is
+<span style="font-family: monospace; ">TAG:landes_clock</span> is
 associated with <span style="font-style: italic; ">n</span>, using the cross-reference mechanism
 described earlier, and can be used to cite the reference.  E.g.,
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;For&#xa0;a&#xa0;history&#xa0;of&#xa0;the&#xa0;first&#xa0;portable&#xa0;device&#xa0;that,&#xa0;for&#xa0;better<br>
-&#xa0;&#xa0;&#xa0;&#xa0;or&#xa0;worse,&#xa0;completely&#xa0;changed&#xa0;how&#xa0;we&#xa0;live,&#xa0;see&#xa0;Landes<br>
-&#xa0;&#xa0;&#xa0;&#xa0;[\*[TAG:landes_clock]].<br>
+&#xa0;&#xa0;&#xa0;&#xa0;or&#xa0;worse,&#xa0;completely&#xa0;changed&#xa0;how&#xa0;we&#xa0;live,&#xa0;see<br>
+&#xa0;&#xa0;&#xa0;&#xa0;Landes\~[\*[TAG:landes_clock]].<br>
 </span>
 </div>
 </p>
+<p></p>
 <p><div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-3.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-5.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-11.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 </p>
 </div>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by troff2page, v. 20201219
-Copyright (C) 2003-2020 Dorai Sitaram
+Generated from index.ms by Troff2page, v. 20210104
+Copyright (C) 2003-2021 Dorai Sitaram
 (running on Lua 5.3)
 http://ds26gte.github.io/troff2page
 -->
@@ -10,7 +10,7 @@ http://ds26gte.github.io/troff2page
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>
-troff2page
+Troff2page
 </title>
 <link rel="stylesheet" href="index-Z-S.css" title=default>
 <meta name=robots content="index,follow">
@@ -18,14 +18,13 @@ troff2page
 <body>
 <div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-6.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-8.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-11.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
-<p></p>
-<h1 style="font-size: 160%"><a name="TAG:__pca_sec_21"></a>
+<h1 style="font-size: 192%"><a name="TAG:__pca_sec_21"></a>
 7.  Extending groff using Lua</h1>
-<p><a name="TAG:__troff2page_index_131"></a>
+<p><a name="TAG:__troff2page_index_130"></a>
+<a name="TAG:__troff2page_index_131"></a>
 <a name="TAG:__troff2page_index_132"></a>
 <a name="TAG:__troff2page_index_133"></a>
 <a name="TAG:__troff2page_index_134"></a>
-<a name="TAG:__troff2page_index_135"></a>
 To invoke Lua from groff, we use the macro <span style="font-family: monospace; ">.eval</span> with its closer
 <span style="font-family: monospace; ">.endeval</span>.  These are
 defined in the
@@ -41,10 +40,10 @@ is substituted for the <span style="font-family: monospace; ">.eval</span> ... <
 The usefulness of this tactic will be apparent from an
 example.
 Consider the following groff document, <span style="font-family: monospace; ">tau.ms</span>:
+<a name="TAG:__troff2page_index_135"></a>
 <a name="TAG:__troff2page_index_136"></a>
 <a name="TAG:__troff2page_index_137"></a>
 <a name="TAG:__troff2page_index_138"></a>
-<a name="TAG:__troff2page_index_139"></a>
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.mso&#xa0;pca-eval.tmac<br>
@@ -58,9 +57,9 @@ Consider the following groff document, <span style="font-family: monospace; ">ta
 </span>
 </div>
 </p>
-<p><a name="TAG:__troff2page_index_140"></a>
+<p><a name="TAG:__troff2page_index_139"></a>
+<a name="TAG:__troff2page_index_140"></a>
 <a name="TAG:__troff2page_index_141"></a>
-<a name="TAG:__troff2page_index_142"></a>
 Run groff in unsafe mode on <span style="font-family: monospace; ">tau.ms</span>:
 </p>
 <p><div class="display verbatim" align=left>
@@ -103,41 +102,41 @@ for each <span style="font-family: monospace; ">.eval</span>, and each <span sty
 aux file
 into the document.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_143"></a>
+<p class=indent><a name="TAG:__troff2page_index_142"></a>
 Lua code via <span style="font-family: monospace; ">.eval</span> can
 serve as a very powerful <span style="font-style: italic; ">second extension language</span>
 for groff.  This benefit is available even when the document
-is processed by troff2page:
-We could run troff2page on the same document, <span style="font-family: monospace; ">tau.ms</span>, and the
+is processed by Troff2page:
+We could run Troff2page on the same document, <span style="font-family: monospace; ">tau.ms</span>, and the
 resulting <span style="font-family: monospace; ">tau.html</span> will show the same content.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_144"></a>
+<p class=indent><a name="TAG:__troff2page_index_143"></a>
+<a name="TAG:__troff2page_index_144"></a>
 <a name="TAG:__troff2page_index_145"></a>
 <a name="TAG:__troff2page_index_146"></a>
-<a name="TAG:__troff2page_index_147"></a>
 Furthermore, we can embed  <span style="font-family: monospace; ">.eval</span>-enclosed Lua code inside an
 <span style="font-family: monospace; ">.if</span> (or <span style="font-family: monospace; ">.ie</span> or <span style="font-family: monospace; ">.el</span>) statement so that it gets executed
-only for groff or only for troff2page.  (Recall we used the number register
+only for groff or only for Troff2page. (Recall we used the number register
 <span style="font-family: monospace; ">\n[.troff2page]</span> for this purpose on page <a class=hrefinternal href="index-Z-H-3.html#TAG:cond-bp"><span class=hreftext>3</span></a>.)  In
-particular, by calling Lua code only for troff2page, the
+particular, by calling Lua code only for Troff2page, the
 user has the
-means to extend troff2page to deal with things that the core
+means to extend Troff2page to deal with things that the core
 program as supplied does
 not.
 </p>
-<p class=indent>Note that when troff2page sees
+<p class=indent>Note that when Troff2page sees
 <span style="font-family: monospace; ">.eval</span>-enclosed Lua
 code, it runs it in a Lua environment that has not only the basic
 Lua language but also includes the procedures and data structures
-defined in troff2page.  These extras are not available (and are arguably
+defined in Troff2page. These extras are not available (and are arguably
 not useful) to the <span style="font-family: monospace; ">.eval</span> code seen by groff.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_22"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_22"></a>
 Defining color names using HSL</h2>
-<p><a name="TAG:__troff2page_index_148"></a>
-<a name="TAG:__troff2page_index_149"></a>
+<p><a name="TAG:__troff2page_index_147"></a>
+<a name="TAG:__troff2page_index_148"></a>
 For a more substantial example of <span style="font-family: monospace; ">.eval</span>&#x2019;s use, consider defining
 color names using the HSL (Hue/Saturation/Lightness) scheme rather than the
 RGB and CMYK schemes supported by groff&#x2019;s <span style="font-family: monospace; ">.defcolor</span>.  For instance, we would like to
@@ -166,7 +165,7 @@ much easier Lua procedure to do the same, and put it inside an <span style="font
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
 </span></p>
 <p class=interleaved></p>
-<p style="margin-top: 12.0px; margin-bottom: 12.0px"><span style="font-family: monospace; ">
+<p style="margin-top: 16.0px"><span style="font-family: monospace; ">
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;function&#xa0;tc_to_c(tc,&#xa0;p,&#xa0;q)<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;if&#xa0;tc&#xa0;&#x3c;&#xa0;1/6&#xa0;then<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;return&#xa0;p&#xa0;+&#xa0;(q&#xa0;-&#xa0;p)*6*tc<br>
@@ -180,7 +179,7 @@ much easier Lua procedure to do the same, and put it inside an <span style="font
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
 </span></p>
 <p class=interleaved></p>
-<p style="margin-top: 12.0px; margin-bottom: 12.0px"><span style="font-family: monospace; ">
+<p style="margin-top: 16.0px"><span style="font-family: monospace; ">
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;function&#xa0;hsl_to_rgb(h,&#xa0;s,&#xa0;l)<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;h&#xa0;=&#xa0;(h&#xa0;%&#xa0;360)&#xa0;/&#xa0;360<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;q<br>
@@ -199,7 +198,7 @@ much easier Lua procedure to do the same, and put it inside an <span style="font
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
 </span></p>
 <p class=interleaved></p>
-<p style="margin-top: 12.0px; margin-bottom: 12.0px"><span style="font-family: monospace; ">
+<p style="margin-top: 16.0px"><span style="font-family: monospace; ">
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;function&#xa0;def_hsl_color(name,&#xa0;h,&#xa0;s,&#xa0;l)<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;r,&#xa0;g,&#xa0;b&#xa0;=&#xa0;hsl_to_rgb(h,&#xa0;s,&#xa0;l)<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;troff:write(string.format('.defcolor&#xa0;%s&#xa0;rgb&#xa0;%s&#xa0;%s&#xa0;%s0,&#xa0;name,&#xa0;r,&#xa0;g,&#xa0;b))<br>
@@ -210,7 +209,7 @@ much easier Lua procedure to do the same, and put it inside an <span style="font
 </div>
 </p>
 <p>Here, the Lua procedure <span style="font-family: monospace; ">def_hsl_color</span> takes an HSL spec and
-writes out the equivalent RGB groff definition. (The troff2page
+writes out the equivalent RGB groff definition. (The Troff2page
 distribution provides <span style="font-family: monospace; ">def_hsl_color</span> in the macro file
 <span style="font-family: monospace; ">defhsl.tmac</span>.)
 </p>
@@ -238,7 +237,7 @@ distribution provides <span style="font-family: monospace; ">def_hsl_color</span
 <p class=indent><div class=troffbox>
 </p>
 <p class=interleaved></p>
-<p style="margin-top: 12.0px; margin-bottom: 12.0px">
+<p style="margin-top: 16.0px">
 </p>
 <blockquote><p>Prismacolor&#x2019;s burnt ochre pencil is a close match for Derwent&#x2019;s
 <span style="font-weight: bold; "></span><span style="font-weight: bold; color: #5c1f22; ">Venetian red</span><span style="font-weight: bold; color: previous; "></span><span style="color: previous; ">, and either can be used to
@@ -247,37 +246,37 @@ emulate the sanguine chalk drawings of the Old Masters.
 </blockquote>
 <p></p>
 <p class=interleaved></p>
-<p style="margin-top: 12.0px; margin-bottom: 12.0px">
+<p style="margin-top: 16.0px">
 </div>
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_23"></a>
-Extending troff2page only</h2>
-<p><a name="TAG:__troff2page_index_150"></a>
-<a name="TAG:__troff2page_index_151"></a>
-troff2page treats groff&#x2019;s <span style="font-family: monospace; ">.ig</span>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_23"></a>
+Extending Troff2page only</h2>
+<p><a name="TAG:__troff2page_index_149"></a>
+<a name="TAG:__troff2page_index_150"></a>
+Troff2page treats groff&#x2019;s <span style="font-family: monospace; ">.ig</span>
 environment, whenever it uses <span style="font-family: monospace; ">##</span> as ender, as
 containing Lua code that can be used to extend
-troff2page.  This syntactic overloading of <span style="font-family: monospace; ">.ig ##</span> is an innovation introduced by
+Troff2page. This syntactic overloading of <span style="font-family: monospace; ">.ig ##</span> is an innovation introduced by
 Oliver Laumann&#x2019;s <a href="http://www-rn.informatik.uni-bremen.de/software/unroff"><span class=hreftext>unroff</span></a>.
 </p>
 <p class=indent>Any Lua code enclosed within
 <span style="font-family: monospace; ">.ig ##</span> ... <span style="font-family: monospace; ">.##</span> will be processed by
-troff2page but not by
+Troff2page but not by
 groff, which treats it as a multiline comment of course.
 Note that <span style="font-family: monospace; ">.ig ##</span> does not pipe its stdout back into
 the document, as <span style="font-family: monospace; ">.eval</span> does.  This is to maintain the invariant
 that as far as output is
 concerned, <span style="font-family: monospace; ">.ig ##</span>, like other <span style="font-family: monospace; ">.ig</span>s, is <span style="font-style: italic; ">always</span> a
 comment.  However, you can add Lua code within <span style="font-family: monospace; ">.ig ##</span>
-to influence how troff2page &#x2014; but not groff! &#x2014; processes the rest of the
+to influence how Troff2page &#x2014; but not groff! &#x2014; processes the rest of the
 document.
 </p>
 <p class=indent>For example, let&#x2019;s define a
 <span style="font-family: monospace; ">\*[url ...]</span> string register that simply typesets its URL
 argument within angle brackets.
-<a name="TAG:__troff2page_index_152"></a>
+<a name="TAG:__troff2page_index_151"></a>
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.ds&#xa0;url&#xa0;\(la\fC\\$1\fP\(ra<br>
@@ -285,14 +284,14 @@ argument within angle brackets.
 </div>
 </p>
 <p>This is adequate for the print output.
-For troff2page though, we&#x2019;d like to
+For Troff2page though, we&#x2019;d like to
 re-define this macro, in Lua, to create a hyperlink.
 We enclose this re-definition in a <span style="font-family: monospace; ">.ig ##</span>, which not
 only allows it to be in Lua, but also makes it apply only
-when troff2page reads it:
+when Troff2page reads it:
+<a name="TAG:__troff2page_index_152"></a>
 <a name="TAG:__troff2page_index_153"></a>
 <a name="TAG:__troff2page_index_154"></a>
-<a name="TAG:__troff2page_index_155"></a>
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.ig&#xa0;##<br>
@@ -304,9 +303,9 @@ when troff2page reads it:
 </div>
 </p>
 <p>The procedures <span style="font-family: monospace; ">defstring</span>, <span style="font-family: monospace; ">link_start</span>, and
-<span style="font-family: monospace; ">link_stop</span> are defined in the troff2page code.
+<span style="font-family: monospace; ">link_stop</span> are defined in the Troff2page code.
 </p>
-<p class=indent><div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-6.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-8.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-11.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+<p><div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-6.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-8.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-11.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 </p>
 </div>
 </body>

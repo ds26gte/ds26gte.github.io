@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by troff2page, v. 20201219
-Copyright (C) 2003-2020 Dorai Sitaram
+Generated from index.ms by Troff2page, v. 20210104
+Copyright (C) 2003-2021 Dorai Sitaram
 (running on Lua 5.3)
 http://ds26gte.github.io/troff2page
 -->
@@ -10,7 +10,7 @@ http://ds26gte.github.io/troff2page
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>
-troff2page
+Troff2page
 </title>
 <link rel="stylesheet" href="index-Z-S.css" title=default>
 <meta name=robots content="index,follow">
@@ -18,8 +18,7 @@ troff2page
 <body>
 <div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-2.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-11.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
-<p></p>
-<h1 style="font-size: 160%"><a name="TAG:__pca_sec_1"></a>
+<h1 style="font-size: 192%"><a name="TAG:__pca_sec_1"></a>
 1.  Introduction</h1>
 <p><a name="TAG:__troff2page_index_1"></a>
 <a name="TAG:__troff2page_index_2"></a>
@@ -45,9 +44,9 @@ all Unixish machines.  These are significant benefits: so even
 though
 troff is a toolchain of some vintage, there continues to be a
 devoted band of troffglodytes preserving the tradition.
-troff2page lets you put your troff documents on the Web without
+Troff2page lets you put your troff documents on the Web without
 your having to learn a new system or to maintain separate documents.
-With a flag, troff2page can also produce an Info version of your
+Troff2page can be instructed to also produce an Info version of your
 document that&#x2019;s suitable for browing on a text terminal (chapter
 <a class=hrefinternal href="index-Z-H-10.html#TAG:gnuinfo"><span class=hreftext>10</span></a>).
 </p>
@@ -84,7 +83,7 @@ etc.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_2"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_2"></a>
 Commmand-line options</h2>
 <p><a name="TAG:__troff2page_index_11"></a>
 <a name="TAG:__troff2page_index_12"></a>
@@ -141,7 +140,7 @@ viz.,
 </div></p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;%&#xa0;troff2page&#xa0;--help<br>
-</span><span style="font-family: monospace; font-style: oblique; ">&#xa0;&#xa0;&#xa0;&#xa0;troff2page&#xa0;version&#xa0;20190929<br>
+</span><span style="font-family: monospace; font-style: oblique; ">&#xa0;&#xa0;&#xa0;&#xa0;Troff2page&#xa0;version&#xa0;20201226<br>
 &#xa0;&#xa0;&#xa0;&#xa0;Copyright&#xa0;(C)&#xa0;...<br>
 &#xa0;&#xa0;&#xa0;&#xa0;Usage:&#xa0;troff2page&#xa0;OPTION&#xa0;...&#xa0;FILE<br>
 &#xa0;&#xa0;&#xa0;&#xa0;Available&#xa0;options:&#xa0;...<br>
@@ -164,7 +163,7 @@ viz.,
 <span style="font-family: monospace; ">troff2page</span> ignores all other <span style="font-family: monospace; ">groff</span> options, most with a warning.
 The options
 <span style="font-family: monospace; ">-z</span>, <span style="font-family: monospace; ">-t</span>, and <span style="font-family: monospace; ">-U</span> are silently ignored, as they&#x2019;re always valid
-for troff2page.
+for Troff2page.
 </p>
 <p class=indent>Macro file options must be given without the suffix <span style="font-family: monospace; ">.tmac</span> or prefix
 <span style="font-family: monospace; ">tmac.</span>.  Thus, <span style="font-family: monospace; ">-mxyz</span> or <span style="font-family: monospace; ">-m xyz</span> looks for the macro file
@@ -181,7 +180,7 @@ for details on all the provided options.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_3"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_3"></a>
 Filename arguments</h2>
 <p>The arguments remaining after all the option processing are
 considered to be the names of document files.
@@ -212,7 +211,7 @@ to console.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_4"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_4"></a>
 Autoloaded init files</h2>
 <p><a name="TAG:troff2pagerc"></a>
 <a name="TAG:__troff2page_index_24"></a>
@@ -224,7 +223,7 @@ output, and they&#x2019;re loaded before the input document is
 processed.
 </p>
 <p class=indent>i.  The first such file is named
-<span style="font-family: monospace; ">.troff2pagerc</span>: troff2page looks for it in your macro
+<span style="font-family: monospace; ">.troff2pagerc</span>: Troff2page looks for it in your macro
 directories: <span style="font-family: monospace; ">GROFF_TMAC_PATH</span>, working directory, home &#x2014; in
 that order.<a name="TAG:__troff2page_call_footnote_2"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_2"><span class=hreftext><sup><small>2</small></sup></span></a>
 The working directory is a good location if your
@@ -233,7 +232,7 @@ documents that are in that directory.
 If your changes will be used in all your documents, place it in
 your home or a private (not a system!) <span style="font-family: monospace; ">GROFF_TMAC_PATH</span> directory.
 </p>
-<p class=indent>That your home directory is the last place troff2page looks in
+<p class=indent>That your home directory is the last place Troff2page looks in
 for <span style="font-family: monospace; ">.troff2pagerc</span> has a nice benefit: Use
 <span style="font-family: monospace; ">~/.troff2pagerc</span> for standard boilerplate customization that
 you want unthinkingly autoloaded for <span style="font-style: italic; ">most</span> of your
@@ -263,7 +262,7 @@ for HTML only.)
 </p>
 <p class=indent><a name="TAG:__troff2page_index_27"></a>
 iii.  Finally, If the input file is recognizably a man page (i.e., it has the
-command <span style="font-family: monospace; ">.TH</span>), both troff2page and groff will load, if it
+command <span style="font-family: monospace; ">.TH</span>), both Troff2page and groff will load, if it
 exists, the init file <span style="font-family: monospace; ">man.local</span>.  This init file, like
 <span style="font-family: monospace; ">.troff2pagerc</span>, is searched for in the
 <span style="font-family: monospace; ">GROFF_TMAC_PATH</span>, working directory, and home, in that
@@ -276,8 +275,8 @@ loaded, settings in <span style="font-family: monospace; ">man.local</span> can 
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 130%"><a name="TAG:__pca_sec_5"></a>
-Calling troff2page from within Lua</h2>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_5"></a>
+Calling Troff2page from within Lua</h2>
 <p><a name="TAG:calling_troff2page_within_lua"></a>
 <a name="TAG:__troff2page_index_28"></a>
 The script <span style="font-family: monospace; ">troff2page</span> runs on the command-line on Unix-esque
@@ -303,6 +302,7 @@ the same Lua session.  It takes the same options as the script,
 supplied as multiple string arguments.
 </p>
 <p class=indent></p>
+<p></p>
 <div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_1"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_1"><span class=hreftext><sup><small>1</small></sup></span></a>
 The name <span style="font-family: monospace; ">troffput</span> is inspired by <span style="font-family: monospace; ">texput</span>,
 the name that TeX uses when it isn&#x2019;t given an input file.
