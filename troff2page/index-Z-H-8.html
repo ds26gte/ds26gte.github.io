@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by Troff2page, v. 20210104
+Generated from index.ms by Troff2page, v. 20210209
 Copyright (C) 2003-2021 Dorai Sitaram
 (running on Lua 5.3)
 http://ds26gte.github.io/troff2page
@@ -162,10 +162,47 @@ the corresponding hex number (in uppercase).
 <p class=indent><a name="TAG:__troff2page_index_167"></a>
 <a name="TAG:__troff2page_index_168"></a>
 <a name="TAG:__troff2page_index_169"></a>
-E.g., U+2621 <span style="font-size: 83%; ">CAUTION SIGN</span>
+The <span style="font-family: monospace; ">.char</span> request is a convenient way to transliterate
+a character available in your text editor to something available
+in either your groff and/or browser font. E.g., the plain pilcrow
+or paraph
+character U+00B6 <span style="font-size: 83%; ">PILCROW SIGN</span> (&#x00B6;) is commonly available while
+text editing,
+because it&#x2019;s 8-bit ascii.  In contrast, the fancier
+U+2761 <span style="font-size: 83%; ">CURVED STEM PARAGRAPH SIGN ORNAMENT</span> (&#x2761;) may not be
+present. To automatically transliterate the
+former to the latter:
+</p>
+<p class=indent></p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.char&#xa0;\[u00B6]&#xa0;\[u2761]<br>
+</span>
+</div>
+</p>
+<p></p>
+<p class=indent>Usually, this works on the browser (because UTF-8 encoding is widespread),
+but fails for print, as the typical text font in
+groff does not have a glyph at code point U+2761. groff does have
+the glyph
+in its Zapf Dingbats (<span style="font-family: monospace; ">ZD</span>) font but at a different code point, which
+you can snag using a further <span style="font-family: monospace; ">.char</span>
+call:
+</p>
+<p class=indent></p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.if&#xa0;!\n[.troff2page]&#xa0;\{\<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;.char&#xa0;\[u2761]&#xa0;\f(ZD\N'161'\fP<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.\}<br>
+</span>
+</div>
+</p>
+<p></p>
+<p class=indent><a name="TAG:__troff2page_index_170"></a>
+<a name="TAG:__troff2page_index_171"></a>
+Here&#x2019;s a more elaborate use case. You may want to use U+2621 <span style="font-size: 83%; ">CAUTION SIGN</span>
 and
 U+26A0 <span style="font-size: 83%; ">WARNING SIGN</span>
-&#x2014; in a suitable color and size &#x2014; may be used rather than
+&#x2014; in a suitable color and size &#x2014; rather than
 the pedestrian &#x201C;<span style="font-weight: bold; ">CAUTION</span>&#x201D; and &#x201C;<span style="font-weight: bold; ">WARNING</span>&#x201D; for admonition titles.
 </p>
 <p><div class="display" align=center>
@@ -178,15 +215,15 @@ while these usually work well on browsers, the fonts
 used by groff for printing almost always won&#x2019;t recognize them.
 (You could use fallback fonts, but often they test groff&#x2019;s
 capacity, and it&#x2019;s not worth loading them only for a couple of
-exotic glyphs.) A more reasonable workaround is to use
-the <span style="font-family: monospace; ">.char</span> request to conditionally translate special characters into their
+exotic glyphs.) A more reasonable workaround is to
+conditionally translate special characters into their
 boring equivalents for print:
 </p>
 <p class=indent></p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.if&#xa0;!\n[.troff2page]&#xa0;\{\<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;char&#xa0;&#x2621;&#xa0;\fBCAUTION\fP<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;char&#xa0;&#x26A0;&#xa0;\fBWARNING\fP<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;char&#xa0;\[u2621]&#xa0;\fBCAUTION\fP<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;char&#xa0;\[u26A0]&#xa0;\fBWARNING\fP<br>
 &#xa0;&#xa0;&#xa0;&#xa0;.\}<br>
 </span>
 </div>
@@ -197,9 +234,9 @@ boring equivalents for print:
 <p></p>
 <h2 style="font-size: 156%"><a name="TAG:__pca_sec_27"></a>
 Typing verbatim \ in displays</h2>
-<p><a name="TAG:__troff2page_index_170"></a>
-<a name="TAG:__troff2page_index_171"></a>
-<a name="TAG:__troff2page_index_172"></a>
+<p><a name="TAG:__troff2page_index_172"></a>
+<a name="TAG:__troff2page_index_173"></a>
+<a name="TAG:__troff2page_index_174"></a>
 The display used above brings up another use-case for glyph
 translation, even when (and especially if) no exotic characters
 are desired.  The display shows the backslash (<span style="font-family: monospace; ">\</span>) character, which
@@ -215,11 +252,11 @@ macros
 implicitly turn the escape character off when entering the display and back on when
 exiting it.  The requests for these actions are <span style="font-family: monospace; ">.eo</span> and
 <span style="font-family: monospace; ">.ec</span> respectively:
-<a name="TAG:__troff2page_index_173"></a>
-<a name="TAG:__troff2page_index_174"></a>
 <a name="TAG:__troff2page_index_175"></a>
 <a name="TAG:__troff2page_index_176"></a>
 <a name="TAG:__troff2page_index_177"></a>
+<a name="TAG:__troff2page_index_178"></a>
+<a name="TAG:__troff2page_index_179"></a>
 </p>
 <p class=indent></p>
 <p><div class="display verbatim" align=left>
@@ -249,9 +286,9 @@ rely on the escape character being active, and these will start
 failing catastrophically when our display straddles a page
 boundary.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_178"></a>
-<a name="TAG:__troff2page_index_179"></a>
-<a name="TAG:__troff2page_index_180"></a>
+<p class=indent><a name="TAG:__troff2page_index_180"></a>
+<a name="TAG:__troff2page_index_181"></a>
+<a name="TAG:__troff2page_index_182"></a>
 One way out is to
 <span style="font-style: italic; ">force</span> code displays to never cross a page boundary by
 using groff&#x2019;s &#x201C;keep&#x201D; macros <span style="font-family: monospace; ">.KS</span> or <span style="font-family: monospace; ">.KF</span> or the keep
@@ -261,10 +298,10 @@ macros.  The problem then becomes what to do with large
 page-crossing displays.  This is almost unavoidable in computer
 technical prose.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_181"></a>
-<a name="TAG:__troff2page_index_182"></a>
-<a name="TAG:__troff2page_index_183"></a>
+<p class=indent><a name="TAG:__troff2page_index_183"></a>
 <a name="TAG:__troff2page_index_184"></a>
+<a name="TAG:__troff2page_index_185"></a>
+<a name="TAG:__troff2page_index_186"></a>
 Unicode glyph substitution offers another way out.  The Unicode
 characters U+29F9 <span style="font-size: 83%; ">BIG REVERSE SOLIDUS</span> and U+FE68 <span style="font-size: 83%; ">SMALL REVERSE
 SOLIDUS</span> are passable replacements for the regular backslash
