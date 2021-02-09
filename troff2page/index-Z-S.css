@@ -61,6 +61,7 @@
 
   blockquote {
     margin-left: 2em;
+    margin-right: 0em;
   }
 
   blockquote.quotebar {
@@ -228,14 +229,14 @@ body {
     font-size: 500%;
 }
 
-@media screen { body { max-width: 576.0px; } }
+@media screen { body { max-width: 624.0px; } }
 
-p { margin-top: 16.0px; margin-bottom: 16.0px; }
+p { margin-top: 21.333333333333px; margin-bottom: 21.333333333333px; }
 
-.display { margin-top: 16.0px; margin-bottom: 16.0px; padding-top: 16.0px; padding-bottom: 16.0px; }
+.display { margin-top: 21.333333333333px; margin-bottom: 21.333333333333px; padding-top: 21.333333333333px; padding-bottom: 21.333333333333px; }
 
-.display.verbatim { padding-left: 16.0px; }
-.footnote { margin-top: 32.0px; }
+.display.verbatim { padding-left: 21.333333333333px; }
+.footnote { margin-top: 42.666666666667px; }
 
 .navigation { margin-top: 20.0px; margin-bottom: 20.0px; }
 h1,h2,h3,h4,h5,h6 { font-size: 1.2em; }
