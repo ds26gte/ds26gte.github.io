@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by Troff2page, v. 20210209
+Generated from index.ms by Troff2page, v. 20210210
 Copyright (C) 2003-2021 Dorai Sitaram
 (running on Lua 5.3)
 http://ds26gte.github.io/troff2page
@@ -18,7 +18,7 @@ Troff2page
 <body>
 <div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-7.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-9.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-11.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
-<h1 style="font-size: 144%"><a name="TAG:__pca_sec_24"></a>
+<h1 style="font-size: 192%"><a name="TAG:__pca_sec_24"></a>
 8.  Styling</h1>
 <p><a name="TAG:__troff2page_index_155"></a>
 <a name="TAG:__troff2page_index_156"></a>
@@ -72,7 +72,7 @@ from leaking into the browser-mediated printout, wrap them inside
 </p>
 <p class=indent></p>
 <p></p>
-<h2><a name="TAG:__pca_sec_25"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_25"></a>
 Colophon</h2>
 <p><a name="TAG:__troff2page_index_159"></a>
 <a name="TAG:__troff2page_index_160"></a>
@@ -84,13 +84,13 @@ time of
 the document, and
 </p>
 <p class=indent>ii. the Troff2page version used for the conversion.
-Either or both can be suppressed via CSS.
+</p>
+<p class=indent>Either or both can be suppressed via CSS.
 </p>
 <p class=indent><a name="TAG:__troff2page_index_161"></a>
 <a name="TAG:__troff2page_index_162"></a>
 To suppress the mention of Troff2page,
 </p>
-<p class=indent></p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.colophon&#xa0;.advertisement&#xa0;{<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;display:&#xa0;none;<br>
@@ -98,10 +98,8 @@ To suppress the mention of Troff2page,
 </span>
 </div>
 </p>
-<p></p>
-<p class=indent>To suppress the entire colophon,
+<p>To suppress the entire colophon,
 </p>
-<p class=indent></p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.colophon&#xa0;{<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;display:&#xa0;none;<br>
@@ -109,8 +107,7 @@ To suppress the mention of Troff2page,
 </span>
 </div>
 </p>
-<p></p>
-<p class=indent>Troff2page calculates the last-mod time by choosing the timestamp
+<p>Troff2page calculates the last-mod time by choosing the timestamp
 of the newest of the source documents that make up the document.
 Only user content is considered; macro and auxiliary files are
 not.
@@ -142,8 +139,7 @@ accomplished via the CSS fragment:
 </span>
 </div>
 </p>
-<p></p>
-<p class=indent><a name="TAG:__troff2page_index_166"></a>
+<p><a name="TAG:__troff2page_index_166"></a>
 As a special case, for man pages, Troff2page (like groff -man)
 takes the third argument of the titling macro <span style="font-family: monospace; ">.TH</span> as the
 last-mod date.  If there isn&#x2019;t a third argument, the colophon
@@ -151,7 +147,7 @@ won&#x2019;t mention any date.
 </p>
 <p class=indent></p>
 <p></p>
-<h2><a name="TAG:__pca_sec_26"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_26"></a>
 Glyph substitution</h2>
 <p>CSS isn&#x2019;t the only recourse to style your document: Interesting
 glyphs offer another approach. Troff2page, like groff, allows
@@ -173,14 +169,12 @@ U+2761 <span style="font-size: 83%; ">CURVED STEM PARAGRAPH SIGN ORNAMENT</span>
 present. To automatically transliterate the
 former to the latter:
 </p>
-<p class=indent></p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.char&#xa0;\[u00B6]&#xa0;\[u2761]<br>
 </span>
 </div>
 </p>
-<p></p>
-<p class=indent>Usually, this works on the browser (because UTF-8 encoding is widespread),
+<p>Usually, this works on the browser (because UTF-8 encoding is widespread),
 but fails for print, as the typical text font in
 groff does not have a glyph at code point U+2761. groff does have
 the glyph
@@ -188,7 +182,6 @@ in its Zapf Dingbats (<span style="font-family: monospace; ">ZD</span>) font but
 you can snag using a further <span style="font-family: monospace; ">.char</span>
 call:
 </p>
-<p class=indent></p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.if&#xa0;!\n[.troff2page]&#xa0;\{\<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;.char&#xa0;\[u2761]&#xa0;\f(ZD\N'161'\fP<br>
@@ -196,14 +189,14 @@ call:
 </span>
 </div>
 </p>
-<p></p>
-<p class=indent><a name="TAG:__troff2page_index_170"></a>
+<p><a name="TAG:__troff2page_index_170"></a>
 <a name="TAG:__troff2page_index_171"></a>
-Here&#x2019;s a more elaborate use case. You may want to use U+2621 <span style="font-size: 83%; ">CAUTION SIGN</span>
+Here&#x2019;s a more elaborate use case: You may want to use U+2621 <span style="font-size: 83%; ">CAUTION SIGN</span>
 and
 U+26A0 <span style="font-size: 83%; ">WARNING SIGN</span>
-&#x2014; in a suitable color and size &#x2014; rather than
-the pedestrian &#x201C;<span style="font-weight: bold; ">CAUTION</span>&#x201D; and &#x201C;<span style="font-weight: bold; ">WARNING</span>&#x201D; for admonition titles.
+rather than
+the pedestrian &#x201C;<span style="font-weight: bold; ">CAUTION</span>&#x201D; and &#x201C;<span style="font-weight: bold; ">WARNING</span>&#x201D; for admonition
+titles.
 </p>
 <p><div class="display" align=center>
 <span style="background-color: yellow; "></span><span style="background-color: yellow; font-size: 140%; "></span><span style="font-weight: bold; background-color: yellow; font-size: 140%; ">&#x2621;</span><span style="background-color: yellow; font-size: 140%; "></span><span style="background-color: yellow; "></span><span style="background-color: previous; ">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</span><span style="background-color: red; "></span><span style="color: white; background-color: red; "></span><span style="color: white; background-color: red; font-size: 140%; "></span><span style="font-weight: bold; color: white; background-color: red; font-size: 140%; ">&#x26A0;</span><span style="color: white; background-color: red; font-size: 140%; "></span><span style="color: white; background-color: red; "></span><span style="color: previous; background-color: red; "></span><span style="color: previous; background-color: previous; "><br>
@@ -228,37 +221,78 @@ boring equivalents for print:
 </span>
 </div>
 </p>
+<p>If you used color and sizing to jazz up the icons, and you don&#x2019;t
+want these apply to the non-icon versions (or if you want to
+modify the latter in a different way), trivial admonition macros
+may be written that expand differently for HTML and print, e.g.,
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;CAUTION<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;if&#xa0;\n[.troff2page]&#xa0;\{\<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;&#xa0;&#xa0;\M[yellow]\s+4\fB\[u2621]\fP\s0\M[]<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;\}<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;el&#xa0;\fBCAUTION\fP<br>
+&#xa0;&#xa0;&#xa0;&#xa0;..<br>
+</span>
+</div>
+</p>
+<p></p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;WARNING<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;if&#xa0;\n[.troff2page]&#xa0;\{\<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;&#xa0;&#xa0;\M[red]\m[white]\s+4\fB\[u26A0]\fP\s0\m[]\M[]<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;\}<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;el&#xa0;\fBWARNING\fP<br>
+&#xa0;&#xa0;&#xa0;&#xa0;..<br>
+</span>
+</div>
+</p>
 <p></p>
 <p class=indent></p>
-<p class=indent></p>
 <p></p>
-<h2><a name="TAG:__pca_sec_27"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_27"></a>
 Typing verbatim \ in displays</h2>
 <p><a name="TAG:__troff2page_index_172"></a>
-<a name="TAG:__troff2page_index_173"></a>
-<a name="TAG:__troff2page_index_174"></a>
 The display used above brings up another use-case for glyph
 translation, even when (and especially if) no exotic characters
 are desired.  The display shows the backslash (<span style="font-family: monospace; ">\</span>) character, which
 is also the default escape character for groff.
 </p>
-<p class=indent>We could use the
+<p class=indent>A display environment could be fenced by a pair of macros
+<span style="font-family: monospace; ">.EX</span>/<span style="font-family: monospace; ">.EE</span> defined as follows:
+<a name="TAG:__troff2page_index_173"></a>
+<a name="TAG:__troff2page_index_174"></a>
+<a name="TAG:__troff2page_index_175"></a>
+<a name="TAG:__troff2page_index_176"></a>
+<a name="TAG:__troff2page_index_177"></a>
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;EX<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;LD<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;ft&#xa0;C<br>
+&#xa0;&#xa0;&#xa0;&#xa0;..<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;EE<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;DE<br>
+&#xa0;&#xa0;&#xa0;&#xa0;..<br>
+</span>
+</div>
+</p>
+<p><a name="TAG:__troff2page_index_178"></a>
+We could use the
 escape sequence <span style="font-family: monospace; ">\e</span> in our input to stand for a backslash,
 but especially in an extended display containing verbatim code,
 we would like to input the backslash as-is and have groff and
 Troff2page temporarily suspend its escape effect.
-We could do this by having our display
+<a name="TAG:__troff2page_index_179"></a>
+<a name="TAG:__troff2page_index_180"></a>
+We could do this by having our <span style="font-family: monospace; ">.EX</span>/<span style="font-family: monospace; ">.EE</span>
 macros
 implicitly turn the escape character off when entering the display and back on when
-exiting it.  The requests for these actions are <span style="font-family: monospace; ">.eo</span> and
+exiting it.
+The requests for these actions are <span style="font-family: monospace; ">.eo</span> and
 <span style="font-family: monospace; ">.ec</span> respectively:
-<a name="TAG:__troff2page_index_175"></a>
-<a name="TAG:__troff2page_index_176"></a>
-<a name="TAG:__troff2page_index_177"></a>
-<a name="TAG:__troff2page_index_178"></a>
-<a name="TAG:__troff2page_index_179"></a>
 </p>
-<p class=indent></p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;EX<br>
 &#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;LD<br>
@@ -273,8 +307,7 @@ exiting it.  The requests for these actions are <span style="font-family: monosp
 </span>
 </div>
 </p>
-<p></p>
-<p class=indent>We then use the macros <span style="font-family: monospace; ">.EX</span> and <span style="font-family: monospace; ">.EE</span> around the code text to
+<p>We then use the macros <span style="font-family: monospace; ">.EX</span> and <span style="font-family: monospace; ">.EE</span> around the code text to
 display it, in monospace font and with the escape character
 temporarily disabled. (An improved version of these macros are provided
 in <span style="font-family: monospace; ">pca-verb.tmac</span>.)
@@ -286,9 +319,9 @@ rely on the escape character being active, and these will start
 failing catastrophically when our display straddles a page
 boundary.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_180"></a>
-<a name="TAG:__troff2page_index_181"></a>
+<p class=indent><a name="TAG:__troff2page_index_181"></a>
 <a name="TAG:__troff2page_index_182"></a>
+<a name="TAG:__troff2page_index_183"></a>
 One way out is to
 <span style="font-style: italic; ">force</span> code displays to never cross a page boundary by
 using groff&#x2019;s &#x201C;keep&#x201D; macros <span style="font-family: monospace; ">.KS</span> or <span style="font-family: monospace; ">.KF</span> or the keep
@@ -298,10 +331,10 @@ macros.  The problem then becomes what to do with large
 page-crossing displays.  This is almost unavoidable in computer
 technical prose.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_183"></a>
-<a name="TAG:__troff2page_index_184"></a>
+<p class=indent><a name="TAG:__troff2page_index_184"></a>
 <a name="TAG:__troff2page_index_185"></a>
 <a name="TAG:__troff2page_index_186"></a>
+<a name="TAG:__troff2page_index_187"></a>
 Unicode glyph substitution offers another way out.  The Unicode
 characters U+29F9 <span style="font-size: 83%; ">BIG REVERSE SOLIDUS</span> and U+FE68 <span style="font-size: 83%; ">SMALL REVERSE
 SOLIDUS</span> are passable replacements for the regular backslash
@@ -319,14 +352,12 @@ there even on the HTML page, but you don&#x2019;t want to disable
 groff&#x2019;s escape character.
 Glyph substitution to the rescue:
 </p>
-<p class=indent></p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.char&#xa0;\[u29F9]&#xa0;\[u005C]<br>
 </span>
 </div>
 </p>
-<p></p>
-<p class=indent>This lets you type the exotic backslash in your source but have
+<p>This lets you type the exotic backslash in your source but have
 groff and Troff2page convert it into the regular backslash when
 it lands on the page.
 Note there is no requirement that the font used by groff or the
@@ -337,7 +368,7 @@ editor with a Unicode font.
 </p>
 <p class=indent></p>
 <p></p>
-<h2><a name="TAG:__pca_sec_28"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_28"></a>
 \ in a section heading</h2>
 <p>This and the previous section&#x2019;s headers both have a verbatim backslash in the
 header.  You could use glyph substitution here too.  However, if

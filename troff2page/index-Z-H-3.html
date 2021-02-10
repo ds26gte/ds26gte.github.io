@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by Troff2page, v. 20210209
+Generated from index.ms by Troff2page, v. 20210210
 Copyright (C) 2003-2021 Dorai Sitaram
 (running on Lua 5.3)
 http://ds26gte.github.io/troff2page
@@ -18,7 +18,7 @@ Troff2page
 <body>
 <div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-2.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-4.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-11.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
-<h1 style="font-size: 144%"><a name="TAG:__pca_sec_9"></a>
+<h1 style="font-size: 192%"><a name="TAG:__pca_sec_9"></a>
 3.  Page layout</h1>
 <p><a name="TAG:__troff2page_index_61"></a>
 Each page in a multiple-page HTML output has a navigation bar at its
@@ -31,7 +31,7 @@ index page doesn&#x2019;t exist, it is absent from the bar.
 </p>
 <p class=indent></p>
 <p></p>
-<h2><a name="TAG:__pca_sec_10"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_10"></a>
 Page breaks</h2>
 <p><a name="TAG:__troff2page_index_62"></a>
 <a name="TAG:__troff2page_index_63"></a>
@@ -114,7 +114,7 @@ redefining the underlying <span style="font-family: monospace; ">.@SH</span> mac
 <p></p>
 <p class=indent></p>
 <p></p>
-<h2><a name="TAG:__pca_sec_11"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_11"></a>
 Recognizing when Troff2page is running</h2>
 <p>We used the value stored in the number register
 <span style="font-family: monospace; ">\n[.troff2page]</span> to determine
@@ -139,7 +139,7 @@ Troff2page. But don&#x2019;t do this.
 <p class=indent><a name="TAG:__troff2page_index_75"></a>
 If you&#x2019;d rather stick to known groff registers, the read-only
 paper-length register <span style="font-family: monospace; ">\n(.p</span> is a candidate.  groff sets
-it to 11&#x2033;, i.e., the length of a US Letter size paper.
+it to 11 inches, i.e., the length of a US Letter size paper.
 Presumably it could vary depending on country of use, but it is
 never going to be non-positive. Troff2page, since it doesn&#x2019;t deal in paper, sets
 <span style="font-family: monospace; ">\n(.p</span> to 0.
@@ -160,7 +160,7 @@ there&#x2019;s no 0-left-padding.)
 <p class=indent></p>
 <p class=indent></p>
 <p></p>
-<h2><a name="TAG:__pca_sec_12"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_12"></a>
 HTML-style paragraphs</h2>
 <p><a name="TAG:__troff2page_index_79"></a>
 <a name="TAG:__troff2page_index_80"></a>
@@ -196,7 +196,7 @@ text in order to respect a negative <span style="font-family: monospace; ">PD</s
 <p></p>
 <p class=indent></p>
 <p></p>
-<h2><a name="TAG:__pca_sec_13"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_13"></a>
 Scaling factors</h2>
 <p><a name="TAG:__troff2page_index_85"></a>
 The scaling factor <span style="font-family: monospace; ">n</span> (en)
@@ -219,9 +219,9 @@ you might think of as length units.
 <a name="TAG:__troff2page_index_97"></a>
 <a name="TAG:__troff2page_index_98"></a>
 Other groff scaling factors that Troff2page recognizes
-are: <span style="font-family: monospace; ">i</span> (inch = 1&#x2033; = 1/12 foot), <span style="font-family: monospace; ">c</span> (cm =
-50/127&#x2033;), <span style="font-family: monospace; ">p</span> (point = 1/72&#x2033;), <span style="font-family: monospace; ">P</span> (pica = 12
-points), <span style="font-family: monospace; ">m</span> (em = 2 ens), and <span style="font-family: monospace; ">M</span> (1/100 em).
+are: <span style="font-family: monospace; ">i</span> (inch = 1/12 ft), <span style="font-family: monospace; ">c</span> (cm =
+50/127 in., <span style="font-family: monospace; ">p</span> (point = 1/72 in., <span style="font-family: monospace; ">P</span> (pica = 12
+pt), <span style="font-family: monospace; ">m</span> (em = 2 ens), and <span style="font-family: monospace; ">M</span> (1/100 em).
 </p>
 <p class=indent><div align=center>
 <img src="inch.jpg" width="336.0" >
@@ -253,7 +253,7 @@ Troff2page uses Lua&#x2019;s FP, so its fractions can be finer grained.
 </p>
 <p class=indent></p>
 <p></p>
-<h2><a name="TAG:__pca_sec_14"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_14"></a>
 Line length</h2>
 <p><a name="TAG:__troff2page_index_104"></a>
 Unlike groff -ms, which uses the line length given by the register
@@ -277,7 +277,7 @@ phones): the text will correspondingly shrink to
 fit the window, avoiding the need for horizontal scrolling.
 </p>
 <p class=indent>A good <span style="font-family: monospace; ">LL</span> value for Troff2page should be a bit larger than
--ms&#x2019;s 6&#x2033;, which is too narrow for a browser. The following sets it
+-ms&#x2019;s 6 inches, which is too narrow for a browser. The following sets it
 to 1/8000 of a mile, but it takes effect only for HTML:
 </p>
 <p><div class="display verbatim" align=left>
@@ -288,7 +288,7 @@ to 1/8000 of a mile, but it takes effect only for HTML:
 <p></p>
 <p class=indent></p>
 <p></p>
-<h2><a name="TAG:__pca_sec_15"></a>
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_15"></a>
 Images</h2>
 <p><a name="TAG:__troff2page_index_105"></a>
 <a name="TAG:__troff2page_index_106"></a>
@@ -313,7 +313,7 @@ it.
 </p>
 <p class=indent><a name="TAG:__troff2page_index_108"></a>
 An optional final argument specifies the width of the image.  The
-default is 1&#x2033;.
+default is 1 inch.
 E.g.,
 </p>
 <p><div class="display verbatim" align=left>
@@ -321,7 +321,7 @@ E.g.,
 </span>
 </div>
 </p>
-<p>produces a left-justified, <span style="font-style: italic; ">e</span>&#x2033;-wide image:
+<p>produces a left-justified image that&#x2019;s <span style="font-style: italic; ">e</span> inches wide:
 <div align=left>
 <img src="t2p.png" width="260.955055488" >
 </div>
