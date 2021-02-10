@@ -76,16 +76,10 @@ from leaking into the browser-mediated printout, wrap them inside
 Colophon</h2>
 <p><a name="TAG:__troff2page_index_159"></a>
 <a name="TAG:__troff2page_index_160"></a>
-By default, Troff2page places a colophon at the bottom right of the first
-page.  The colophon mentions
-</p>
-<p class=indent>i.  the last-modification
-time of
-the document, and
-</p>
-<p class=indent>ii. the Troff2page version used for the conversion.
-</p>
-<p class=indent>Either or both can be suppressed via CSS.
+By default, Troff2page places a colophon at the bottom right of
+the first page.  The colophon mentions: (1) the last-modification
+time of the document; and (2) the Troff2page version used for the
+conversion. Either or both can be suppressed via CSS.
 </p>
 <p class=indent><a name="TAG:__troff2page_index_161"></a>
 <a name="TAG:__troff2page_index_162"></a>
@@ -149,15 +143,26 @@ won&#x2019;t mention any date.
 <p></p>
 <h2 style="font-size: 156%"><a name="TAG:__pca_sec_26"></a>
 Glyph substitution</h2>
-<p>CSS isn&#x2019;t the only recourse to style your document: Interesting
-glyphs offer another approach. Troff2page, like groff, allows
-you to use UTF-8 characters, either directly or via escape
-sequences of the form <span style="font-family: monospace; ">\[u</span><span style="font-style: italic; ">xxxx</span><span style="font-family: monospace; ">]</span><span style="font-style: normal; ">, where </span><span style="font-style: italic; ">xxxx</span><span style="font-style: normal; "> is
-the corresponding hex number (in uppercase).
+<p>CSS isn&#x2019;t the only way to style your document: Interesting glyphs
+offer another approach. Troff2page, like groff, allows you to use
+UTF-8 characters, either directly or via escape sequences of the
+form <span style="font-family: monospace; ">\[u</span><span style="font-style: italic; ">xxxx</span><span style="font-family: monospace; ">_</span><span style="font-style: italic; ">yyyy</span><span style="font-family: monospace; ">...]</span><span style="font-style: normal; ">, where the </span><span style="font-style: italic; ">xxxx</span><span style="font-style: normal; ">
+and </span><span style="font-style: italic; ">yyyy</span><span style="font-style: normal; "> are hex numbers in uppercase. </span><span style="font-style: italic; ">xxxx</span><span style="font-style: normal; "> is the
+code point of the base glyph, and each optional </span><span style="font-family: monospace; ">_</span><span style="font-style: italic; ">yyyy</span><span style="font-style: normal; "> is
+a code point for a combining diacritic.
 </span></p>
 <p class=indent><a name="TAG:__troff2page_index_167"></a>
 <a name="TAG:__troff2page_index_168"></a>
 <a name="TAG:__troff2page_index_169"></a>
+Thus U+00E9 <span style="font-size: 83%; ">LATIN SMALL LETTER E WITH ACUTE</span> (&#x00E9;) can be
+entered (1) directly as <span style="font-family: monospace; ">&#x00E9;</span>; (2) as the Unicode escape
+<span style="font-family: monospace; ">\[u00E9]</span>; or (3) as the Unicode <span style="font-style: italic; ">combining</span> escape
+<span style="font-family: monospace; ">\[u0065_0301]</span>, because U+0065 is <span style="font-size: 83%; ">LATIN SMALL LETTER
+E</span> and U+0301 is <span style="font-size: 83%; ">COMBINING ACUTE ACCENT</span>.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_170"></a>
+<a name="TAG:__troff2page_index_171"></a>
+<a name="TAG:__troff2page_index_172"></a>
 The <span style="font-family: monospace; ">.char</span> request is a convenient way to transliterate
 a character available in your text editor to something available
 in either your groff and/or browser font. E.g., the plain pilcrow
@@ -189,8 +194,8 @@ call:
 </span>
 </div>
 </p>
-<p><a name="TAG:__troff2page_index_170"></a>
-<a name="TAG:__troff2page_index_171"></a>
+<p><a name="TAG:__troff2page_index_173"></a>
+<a name="TAG:__troff2page_index_174"></a>
 Here&#x2019;s a more elaborate use case: You may want to use U+2621 <span style="font-size: 83%; ">CAUTION SIGN</span>
 and
 U+26A0 <span style="font-size: 83%; ">WARNING SIGN</span>
@@ -252,7 +257,7 @@ may be written that expand differently for HTML and print, e.g.,
 <p></p>
 <h2 style="font-size: 156%"><a name="TAG:__pca_sec_27"></a>
 Typing verbatim \ in displays</h2>
-<p><a name="TAG:__troff2page_index_172"></a>
+<p><a name="TAG:__troff2page_index_175"></a>
 The display used above brings up another use-case for glyph
 translation, even when (and especially if) no exotic characters
 are desired.  The display shows the backslash (<span style="font-family: monospace; ">\</span>) character, which
@@ -260,11 +265,11 @@ is also the default escape character for groff.
 </p>
 <p class=indent>A display environment could be fenced by a pair of macros
 <span style="font-family: monospace; ">.EX</span>/<span style="font-family: monospace; ">.EE</span> defined as follows:
-<a name="TAG:__troff2page_index_173"></a>
-<a name="TAG:__troff2page_index_174"></a>
-<a name="TAG:__troff2page_index_175"></a>
 <a name="TAG:__troff2page_index_176"></a>
 <a name="TAG:__troff2page_index_177"></a>
+<a name="TAG:__troff2page_index_178"></a>
+<a name="TAG:__troff2page_index_179"></a>
+<a name="TAG:__troff2page_index_180"></a>
 </p>
 <p><div class="display verbatim" align=left>
 <span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;EX<br>
@@ -278,14 +283,14 @@ is also the default escape character for groff.
 </span>
 </div>
 </p>
-<p><a name="TAG:__troff2page_index_178"></a>
+<p><a name="TAG:__troff2page_index_181"></a>
 We could use the
 escape sequence <span style="font-family: monospace; ">\e</span> in our input to stand for a backslash,
 but especially in an extended display containing verbatim code,
 we would like to input the backslash as-is and have groff and
 Troff2page temporarily suspend its escape effect.
-<a name="TAG:__troff2page_index_179"></a>
-<a name="TAG:__troff2page_index_180"></a>
+<a name="TAG:__troff2page_index_182"></a>
+<a name="TAG:__troff2page_index_183"></a>
 We could do this by having our <span style="font-family: monospace; ">.EX</span>/<span style="font-family: monospace; ">.EE</span>
 macros
 implicitly turn the escape character off when entering the display and back on when
@@ -319,9 +324,9 @@ rely on the escape character being active, and these will start
 failing catastrophically when our display straddles a page
 boundary.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_181"></a>
-<a name="TAG:__troff2page_index_182"></a>
-<a name="TAG:__troff2page_index_183"></a>
+<p class=indent><a name="TAG:__troff2page_index_184"></a>
+<a name="TAG:__troff2page_index_185"></a>
+<a name="TAG:__troff2page_index_186"></a>
 One way out is to
 <span style="font-style: italic; ">force</span> code displays to never cross a page boundary by
 using groff&#x2019;s &#x201C;keep&#x201D; macros <span style="font-family: monospace; ">.KS</span> or <span style="font-family: monospace; ">.KF</span> or the keep
@@ -331,10 +336,10 @@ macros.  The problem then becomes what to do with large
 page-crossing displays.  This is almost unavoidable in computer
 technical prose.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_184"></a>
-<a name="TAG:__troff2page_index_185"></a>
-<a name="TAG:__troff2page_index_186"></a>
-<a name="TAG:__troff2page_index_187"></a>
+<p class=indent><a name="TAG:__troff2page_index_187"></a>
+<a name="TAG:__troff2page_index_188"></a>
+<a name="TAG:__troff2page_index_189"></a>
+<a name="TAG:__troff2page_index_190"></a>
 Unicode glyph substitution offers another way out.  The Unicode
 characters U+29F9 <span style="font-size: 83%; ">BIG REVERSE SOLIDUS</span> and U+FE68 <span style="font-size: 83%; ">SMALL REVERSE
 SOLIDUS</span> are passable replacements for the regular backslash
