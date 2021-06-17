@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by Troff2page, v. 20210210
+Generated from index.ms by Troff2page, v. 20210617
 Copyright (C) 2003-2021 Dorai Sitaram
 (running on Lua 5.3)
 http://ds26gte.github.io/troff2page
@@ -17,385 +17,296 @@ Troff2page
 </head>
 <body>
 <div>
-<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-7.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-9.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-11.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
-<h1 style="font-size: 192%"><a name="TAG:__pca_sec_24"></a>
-8.  Styling</h1>
-<p><a name="TAG:__troff2page_index_155"></a>
-<a name="TAG:__troff2page_index_156"></a>
-<span style="font-family: monospace; ">.ig ##</span> can be used to specify settings that are relevant only
-when Troff2page is used on a document, e.g., stylesheet changes.
-Troff2page uses the output-stream <span style="font-family: monospace; ">CSS</span> to
-write out its default style information.  The user can also
-append to this stream.  E.g.,
-<a name="TAG:__troff2page_index_157"></a>
+<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-7.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-9.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+<h1 style="font-size: 192%"><a name="TAG:__pca_sec_22"></a>
+8.  Extending groff using Lua</h1>
+<p><a name="TAG:__troff2page_index_132"></a>
+<a name="TAG:__troff2page_index_133"></a>
+<a name="TAG:__troff2page_index_134"></a>
+<a name="TAG:__troff2page_index_135"></a>
+<a name="TAG:__troff2page_index_136"></a>
+To invoke Lua from groff, we use the macro <span style="font-family: monospace; ">.eval</span> with its closer
+<span style="font-family: monospace; ">.endeval</span>.  These are
+defined in the
+supplied
+groff macro file <span style="font-family: monospace; ">pca-eval.tmac</span>, which you should put
+in a macro directory.
+</p>
+<p class=indent><span style="font-family: monospace; ">.eval</span> does only one thing: It
+allows you to place arbitrary Lua code until the following
+<span style="font-family: monospace; ">.endeval</span>, and the text written to the stream <span style="font-family: monospace; ">troff</span> by
+this Lua code
+is substituted for the <span style="font-family: monospace; ">.eval</span> ... <span style="font-family: monospace; ">.endeval</span>.
+The usefulness of this tactic will be apparent from an
+example.
+Consider the following groff document, <span style="font-family: monospace; ">tau.ms</span>:
+<a name="TAG:__troff2page_index_137"></a>
+<a name="TAG:__troff2page_index_138"></a>
+<a name="TAG:__troff2page_index_139"></a>
+<a name="TAG:__troff2page_index_140"></a>
 </p>
 <p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.ig&#xa0;##<br>
-&#xa0;&#xa0;&#xa0;&#xa0;CSS:write([[<br>
-&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;h1,h2,h3,h4,h5,h6&#xa0;{<br>
-&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;color:&#xa0;#9b3d3d;&#xa0;/*&#xa0;terracotta&#xa0;pink&#xa0;*/<br>
-&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;}<br>
-&#xa0;&#xa0;&#xa0;&#xa0;]])<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.##<br>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.mso&#xa0;pca-eval.tmac<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.<br>
+&#xa0;&#xa0;&#xa0;&#xa0;The&#xa0;ratio&#xa0;of&#xa0;the&#xa0;circumference&#xa0;of&#xa0;a&#xa0;circle&#xa0;to<br>
+&#xa0;&#xa0;&#xa0;&#xa0;its&#xa0;radius&#xa0;is&#xa0;&#x3c4;&#xa0;&#x2248;<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.eval<br>
+&#xa0;&#xa0;&#xa0;&#xa0;--&#xa0;following&#xa0;prints&#xa0;tau,&#xa0;because&#xa0;cos(tau/2)&#xa0;=&#xa0;-1<br>
+&#xa0;&#xa0;&#xa0;&#xa0;troff:write(2*math.acos(-1),&#xa0;'.0)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.endeval<br>
 </span>
 </div>
 </p>
-<p>This renders the section headers
-with a foreground color
-of <span style="color: #9b3d3d; ">terracotta pink</span><span style="color: previous; "><a name="TAG:__troff2page_call_footnote_4"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_4"><span class=hreftext><sup><small>4</small></sup></span></a>.
-</span></p>
-<p class=indent><a name="TAG:__troff2page_index_158"></a>
-Troff2page makes available many CSS classes that you can modify
-in this manner to change the look of your web pages.  For
-instance, the HTML element for the document title has class
-<span style="font-family: monospace; ">title</span>.  Here&#x2019;s a way to get a more happening,
-Asciidoctor-like title:
+<p><a name="TAG:__troff2page_index_141"></a>
+<a name="TAG:__troff2page_index_142"></a>
+<a name="TAG:__troff2page_index_143"></a>
+Run groff in unsafe mode on <span style="font-family: monospace; ">tau.ms</span>:
 </p>
 <p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.ig&#xa0;##<br>
-&#xa0;&#xa0;&#xa0;&#xa0;CSS:write([[<br>
-&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;h1.title&#xa0;{<br>
-&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;color:&#xa0;#333333;<br>
-&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;padding-bottom:&#xa0;10px;<br>
-&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;border-bottom:&#xa0;1px&#xa0;solid&#xa0;#dddddf;<br>
-&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;}<br>
-&#xa0;&#xa0;&#xa0;&#xa0;]])<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.##<br>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;groff&#xa0;-z&#xa0;-U&#xa0;-ms&#xa0;tau.ms<br>
 </span>
 </div>
 </p>
-<p>Of course, these CSS mods don&#x2019;t affect the groff output, but they
-do affect the printed output if you choose
-to print from the browser!  To prevent any CSS mods
-from leaking into the browser-mediated printout, wrap them inside
-<span style="font-family: monospace; ">@media screen</span>.
-</p>
-<p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_25"></a>
-Colophon</h2>
-<p><a name="TAG:__troff2page_index_159"></a>
-<a name="TAG:__troff2page_index_160"></a>
-By default, Troff2page places a colophon at the bottom right of
-the first page.  The colophon mentions: (1) the last-modification
-time of the document; and (2) the Troff2page version used for the
-conversion. Either or both can be suppressed via CSS.
-</p>
-<p class=indent><a name="TAG:__troff2page_index_161"></a>
-<a name="TAG:__troff2page_index_162"></a>
-To suppress the mention of Troff2page,
+<p>(The <span style="font-family: monospace; ">-z</span> avoids generating output, because we are not ready for it
+yet.  The <span style="font-family: monospace; ">-U</span> runs in &#x201C;unsafe&#x201D; mode, i.e., it allows the writing of
+aux files.)
+You will find that the groff asks you to run it again:
 </p>
 <p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.colophon&#xa0;.advertisement&#xa0;{<br>
-&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;display:&#xa0;none;<br>
-&#xa0;&#xa0;&#xa0;&#xa0;}<br>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;</span><span style="font-family: monospace; font-style: oblique; ">Rerun&#xa0;groff&#xa0;with&#xa0;-U<br>
 </span>
 </div>
 </p>
-<p>To suppress the entire colophon,
+<p>Call groff again as follows:
 </p>
 <p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.colophon&#xa0;{<br>
-&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;display:&#xa0;none;<br>
-&#xa0;&#xa0;&#xa0;&#xa0;}<br>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;groff&#xa0;-U&#xa0;-ms&#xa0;tau.ms&#xa0;&#x3e;&#xa0;tau.ps<br>
 </span>
 </div>
 </p>
-<p>Troff2page calculates the last-mod time by choosing the timestamp
-of the newest of the source documents that make up the document.
-Only user content is considered; macro and auxiliary files are
+<p><span style="font-family: monospace; ">tau.ps</span> will now look like:
+</p>
+<p class=indent><div class=troffbox>
+</p>
+<blockquote><p>The ratio of the circumference of a circle to
+its radius is &#x3c4; &#x2248;
+6.2831853071796.
+</p>
+</blockquote>
+<p></div>
+</p>
+<p class=indent>The first groff call produces a temp Lua file.
+The second groff
+call invokes Lua on this temp file to create an auxiliary file
+for each <span style="font-family: monospace; ">.eval</span>, and each <span style="font-family: monospace; ">.eval</span> sources its assigned
+aux file
+into the document.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_144"></a>
+Lua code via <span style="font-family: monospace; ">.eval</span> can
+serve as a very powerful <span style="font-style: italic; ">second extension language</span>
+for groff.  This benefit is available even when the document
+is processed by Troff2page:
+We could run Troff2page on the same document, <span style="font-family: monospace; ">tau.ms</span>, and the
+resulting <span style="font-family: monospace; ">tau.html</span> will show the same content.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_145"></a>
+<a name="TAG:__troff2page_index_146"></a>
+<a name="TAG:__troff2page_index_147"></a>
+<a name="TAG:__troff2page_index_148"></a>
+Furthermore, we can embed  <span style="font-family: monospace; ">.eval</span>-enclosed Lua code inside an
+<span style="font-family: monospace; ">.if</span> (or <span style="font-family: monospace; ">.ie</span> or <span style="font-family: monospace; ">.el</span>) statement so that it gets executed
+only for groff or only for Troff2page. (Recall we used the number register
+<span style="font-family: monospace; ">\n[.troff2page]</span> for this purpose on page <a class=hrefinternal href="index-Z-H-3.html#TAG:cond-bp"><span class=hreftext>3</span></a>.)  In
+particular, by calling Lua code only for Troff2page, the
+user has the
+means to extend Troff2page to deal with things that the core
+program as supplied does
 not.
 </p>
-<p class=indent><a name="TAG:__troff2page_index_163"></a>
-<a name="TAG:__troff2page_index_164"></a>
-To specify a document timestamp without regard to the actual mod times
-of the files in it, use the -ms macros <span style="font-family: monospace; ">.ND</span> or <span style="font-family: monospace; ">.DA</span>.
-Troff2page doesn&#x2019;t distinguish between them, but groff does.
-<span style="font-family: monospace; ">.ND</span> is probably what you want for both typesetters. (groff
-doesn&#x2019;t really have any notion of the last-mod date anyway: It
-simply uses the date that it was called on.
-I.e., last-creation-of-printed-output date.)
-</p>
-<p class=indent>For web pages, note that if
-either macro is called with an argument, that argument is used as the
-last-mod date, overriding the value that Troff2page would
-have determined.
-</p>
-<p class=indent><a name="TAG:__troff2page_index_165"></a>
-If no argument is given, the colophon doesn&#x2019;t
-include the &#x201C;Last modified&#x201D; line at all, something that can also be
-accomplished via the CSS fragment:
-</p>
-<p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.colophon&#xa0;.lastmod&#xa0;{<br>
-&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;display:&#xa0;none;<br>
-&#xa0;&#xa0;&#xa0;&#xa0;}<br>
-</span>
-</div>
-</p>
-<p><a name="TAG:__troff2page_index_166"></a>
-As a special case, for man pages, Troff2page (like groff -man)
-takes the third argument of the titling macro <span style="font-family: monospace; ">.TH</span> as the
-last-mod date.  If there isn&#x2019;t a third argument, the colophon
-won&#x2019;t mention any date.
+<p class=indent>Note that when Troff2page sees
+<span style="font-family: monospace; ">.eval</span>-enclosed Lua
+code, it runs it in a Lua environment that has not only the basic
+Lua language but also includes the procedures and data structures
+defined in Troff2page. These extras are not available (and are arguably
+not useful) to the <span style="font-family: monospace; ">.eval</span> code seen by groff.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_26"></a>
-Glyph substitution</h2>
-<p>CSS isn&#x2019;t the only way to style your document: Interesting glyphs
-offer another approach. Troff2page, like groff, allows you to use
-UTF-8 characters, either directly or via escape sequences of the
-form <span style="font-family: monospace; ">\[u</span><span style="font-style: italic; ">xxxx</span><span style="font-family: monospace; ">_</span><span style="font-style: italic; ">yyyy</span><span style="font-family: monospace; ">...]</span><span style="font-style: normal; ">, where the </span><span style="font-style: italic; ">xxxx</span><span style="font-style: normal; ">
-and </span><span style="font-style: italic; ">yyyy</span><span style="font-style: normal; "> are hex numbers in uppercase. </span><span style="font-style: italic; ">xxxx</span><span style="font-style: normal; "> is the
-code point of the base glyph, and each optional </span><span style="font-family: monospace; ">_</span><span style="font-style: italic; ">yyyy</span><span style="font-style: normal; "> is
-a code point for a combining diacritic.
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_23"></a>
+Defining color names using HSL</h2>
+<p><a name="TAG:__troff2page_index_149"></a>
+<a name="TAG:__troff2page_index_150"></a>
+For a more substantial example of <span style="font-family: monospace; ">.eval</span>&#x2019;s use, consider defining
+color names using the HSL (Hue/Saturation/Lightness) scheme rather than the
+RGB and CMYK schemes supported by groff&#x2019;s <span style="font-family: monospace; ">.defcolor</span>.  For instance, we would like to
+define the color Venetian red using its HSL spec (357&#xb0;, 49%,
+24%), which to many is a more intuitive description than RGB
+(91, 31, 34).
+</p>
+<p class=indent>While there is an <a href="https://en.wikipedia.org/wiki/HSL_and_HSV"><span class=hreftext>algorithm</span></a> to convert HSL to RGB,
+implementing it using groff&#x2019;s limited arithmetic is tedious.  Instead,
+we&#x2019;ll define a
+much easier Lua procedure to do the same, and put it inside an <span style="font-family: monospace; ">.eval</span>:
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.mso&#xa0;pca-eval.tmac<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.eval<br>
+&#xa0;&#xa0;&#xa0;&#xa0;do<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;function&#xa0;between_0_and_1(n)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;if&#xa0;n&#xa0;&#x3c;&#xa0;0&#xa0;then<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;return&#xa0;n&#xa0;+&#xa0;1<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;elseif&#xa0;n&#xa0;&#x3e;&#xa0;1&#xa0;then<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;return&#xa0;n&#xa0;-&#xa0;1<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;else<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;return&#xa0;n<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
 </span></p>
-<p class=indent><a name="TAG:__troff2page_index_167"></a>
-<a name="TAG:__troff2page_index_168"></a>
-<a name="TAG:__troff2page_index_169"></a>
-Thus U+00E9 <span style="font-size: 83%; ">LATIN SMALL LETTER E WITH ACUTE</span> (&#x00E9;) can be
-entered (1) directly as <span style="font-family: monospace; ">&#x00E9;</span>; (2) as the Unicode escape
-<span style="font-family: monospace; ">\[u00E9]</span>; or (3) as the Unicode <span style="font-style: italic; ">combining</span> escape
-<span style="font-family: monospace; ">\[u0065_0301]</span>, because U+0065 is <span style="font-size: 83%; ">LATIN SMALL LETTER
-E</span> and U+0301 is <span style="font-size: 83%; ">COMBINING ACUTE ACCENT</span>.
+<p class=interleaved></p>
+<p style="margin-top: 42.666666666667px"><span style="font-family: monospace; ">
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;function&#xa0;tc_to_c(tc,&#xa0;p,&#xa0;q)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;if&#xa0;tc&#xa0;&#x3c;&#xa0;1/6&#xa0;then<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;return&#xa0;p&#xa0;+&#xa0;(q&#xa0;-&#xa0;p)*6*tc<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;elseif&#xa0;1/6&#xa0;&#x3c;=&#xa0;tc&#xa0;and&#xa0;tc&#xa0;&#x3c;&#xa0;1/2&#xa0;then<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;return&#xa0;q<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;elseif&#xa0;1/2&#xa0;&#x3c;=&#xa0;tc&#xa0;and&#xa0;tc&#xa0;&#x3c;&#xa0;2/3&#xa0;then<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;return&#xa0;p&#xa0;+&#xa0;(q&#xa0;-&#xa0;p)*6*(2/3&#xa0;-&#xa0;tc)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;else<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;return&#xa0;p<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
+</span></p>
+<p class=interleaved></p>
+<p style="margin-top: 42.666666666667px"><span style="font-family: monospace; ">
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;function&#xa0;hsl_to_rgb(h,&#xa0;s,&#xa0;l)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;h&#xa0;=&#xa0;(h&#xa0;%&#xa0;360)&#xa0;/&#xa0;360<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;q<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;if&#xa0;l&#xa0;&#x3c;&#xa0;1/2&#xa0;then<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;q&#xa0;=&#xa0;l&#xa0;*&#xa0;(s&#xa0;+&#xa0;1)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;else<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;q&#xa0;=&#xa0;1&#xa0;+&#xa0;s&#xa0;-&#xa0;l*s<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;p&#xa0;=&#xa0;2*l&#xa0;-&#xa0;q<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;tr&#xa0;=&#xa0;between_0_and_1(h&#xa0;+&#xa0;1/3)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;tg&#xa0;=&#xa0;between_0_and_1(h)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;tb&#xa0;=&#xa0;between_0_and_1(h&#xa0;-&#xa0;1/3)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;return&#xa0;tc_to_c(tr,&#xa0;p,&#xa0;q),<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;tc_to_c(tg,&#xa0;p,&#xa0;q),<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;tc_to_c(tb,&#xa0;p,&#xa0;q)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
+</span></p>
+<p class=interleaved></p>
+<p style="margin-top: 42.666666666667px"><span style="font-family: monospace; ">
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;function&#xa0;def_hsl_color(name,&#xa0;h,&#xa0;s,&#xa0;l)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;r,&#xa0;g,&#xa0;b&#xa0;=&#xa0;hsl_to_rgb(h,&#xa0;s,&#xa0;l)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;troff:write(string.format('.defcolor&#xa0;%s&#xa0;rgb&#xa0;%s&#xa0;%s&#xa0;%s0,&#xa0;name,&#xa0;r,&#xa0;g,&#xa0;b))<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
+&#xa0;&#xa0;&#xa0;&#xa0;end<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.endeval<br>
+</span>
+</div>
 </p>
-<p class=indent><a name="TAG:__troff2page_index_170"></a>
-<a name="TAG:__troff2page_index_171"></a>
-<a name="TAG:__troff2page_index_172"></a>
-The <span style="font-family: monospace; ">.char</span> request is a convenient way to transliterate
-a character available in your text editor to something available
-in either your groff and/or browser font. E.g., the plain pilcrow
-or paraph
-character U+00B6 <span style="font-size: 83%; ">PILCROW SIGN</span> (&#x00B6;) is commonly available while
-text editing,
-because it&#x2019;s 8-bit ascii.  In contrast, the fancier
-U+2761 <span style="font-size: 83%; ">CURVED STEM PARAGRAPH SIGN ORNAMENT</span> (&#x2761;) may not be
-present. To automatically transliterate the
-former to the latter:
+<p>Here, the Lua procedure <span style="font-family: monospace; ">def_hsl_color</span> takes an HSL spec and
+writes out the equivalent RGB groff definition. (The Troff2page
+distribution provides <span style="font-family: monospace; ">def_hsl_color</span> in the macro file
+<span style="font-family: monospace; ">defhsl.tmac</span>.)
+</p>
+<p class=indent>We can call this Lua procedure inside another <span style="font-family: monospace; ">.eval</span> to define
+<span style="font-family: monospace; ">venetianred</span> using its HSL spec:
 </p>
 <p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.char&#xa0;\[u00B6]&#xa0;\[u2761]<br>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.eval<br>
+&#xa0;&#xa0;&#xa0;&#xa0;def_hsl_color('venetianred',&#xa0;357,&#xa0;.49,&#xa0;.24)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.endeval<br>
 </span>
 </div>
 </p>
-<p>Usually, this works on the browser (because UTF-8 encoding is widespread),
-but fails for print, as the typical text font in
-groff does not have a glyph at code point U+2761. groff does have
-the glyph
-in its Zapf Dingbats (<span style="font-family: monospace; ">ZD</span>) font but at a different code point, which
-you can snag using a further <span style="font-family: monospace; ">.char</span>
-call:
+<p>The color name <span style="font-family: monospace; ">venetianred</span> can now be used like any other groff color name:
 </p>
 <p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.if&#xa0;!\n[.troff2page]&#xa0;\{\<br>
-&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;.char&#xa0;\[u2761]&#xa0;\f(ZD\N'161'\fP<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.\}<br>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;Prismacolor&#x2019;s&#xa0;burnt&#xa0;ochre&#xa0;pencil&#xa0;is&#xa0;a&#xa0;close&#xa0;match&#xa0;for&#xa0;Derwent&#x2019;s<br>
+&#xa0;&#xa0;&#xa0;&#xa0;\fB\m[venetianred]Venetian&#xa0;red\m[]\fP,&#xa0;and&#xa0;either&#xa0;can&#xa0;be&#xa0;used&#xa0;to<br>
+&#xa0;&#xa0;&#xa0;&#xa0;emulate&#xa0;the&#xa0;sanguine&#xa0;chalk&#xa0;drawings&#xa0;of&#xa0;the&#xa0;Old&#xa0;Masters.<br>
 </span>
 </div>
 </p>
-<p><a name="TAG:__troff2page_index_173"></a>
-<a name="TAG:__troff2page_index_174"></a>
-Here&#x2019;s a more elaborate use case: You may want to use U+2621 <span style="font-size: 83%; ">CAUTION SIGN</span>
-and
-U+26A0 <span style="font-size: 83%; ">WARNING SIGN</span>
-rather than
-the pedestrian &#x201C;<span style="font-weight: bold; ">CAUTION</span>&#x201D; and &#x201C;<span style="font-weight: bold; ">WARNING</span>&#x201D; for admonition
-titles.
+<p>This produces:
 </p>
-<p><div class="display" align=center>
-<span style="background-color: yellow; "></span><span style="background-color: yellow; font-size: 140%; "></span><span style="font-weight: bold; background-color: yellow; font-size: 140%; ">&#x2621;</span><span style="background-color: yellow; font-size: 140%; "></span><span style="background-color: yellow; "></span><span style="background-color: previous; ">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</span><span style="background-color: red; "></span><span style="color: white; background-color: red; "></span><span style="color: white; background-color: red; font-size: 140%; "></span><span style="font-weight: bold; color: white; background-color: red; font-size: 140%; ">&#x26A0;</span><span style="color: white; background-color: red; font-size: 140%; "></span><span style="color: white; background-color: red; "></span><span style="color: previous; background-color: red; "></span><span style="color: previous; background-color: previous; "><br>
-</span>
-</div>
+<p class=indent><div class=troffbox>
 </p>
-<p>Unfortunately,
-while these usually work well on browsers, the fonts
-used by groff for printing almost always won&#x2019;t recognize them.
-(You could use fallback fonts, but often they test groff&#x2019;s
-capacity, and it&#x2019;s not worth loading them only for a couple of
-exotic glyphs.) A more reasonable workaround is to
-conditionally translate special characters into their
-boring equivalents for print:
+<p class=interleaved></p>
+<p style="margin-top: 42.666666666667px">
 </p>
-<p class=indent></p>
-<p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.if&#xa0;!\n[.troff2page]&#xa0;\{\<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;char&#xa0;\[u2621]&#xa0;\fBCAUTION\fP<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;char&#xa0;\[u26A0]&#xa0;\fBWARNING\fP<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.\}<br>
-</span>
-</div>
-</p>
-<p>If you used color and sizing to jazz up the icons, and you don&#x2019;t
-want these apply to the non-icon versions (or if you want to
-modify the latter in a different way), trivial admonition macros
-may be written that expand differently for HTML and print, e.g.,
-</p>
-<p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;CAUTION<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;if&#xa0;\n[.troff2page]&#xa0;\{\<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;&#xa0;&#xa0;\M[yellow]\s+4\fB\[u2621]\fP\s0\M[]<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;\}<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;el&#xa0;\fBCAUTION\fP<br>
-&#xa0;&#xa0;&#xa0;&#xa0;..<br>
-</span>
-</div>
-</p>
+<blockquote><p>Prismacolor&#x2019;s burnt ochre pencil is a close match for Derwent&#x2019;s
+<span style="font-weight: bold; "></span><span style="font-weight: bold; color: #5c1f22; ">Venetian red</span><span style="font-weight: bold; color: previous; "></span><span style="color: previous; ">, and either can be used to
+emulate the sanguine chalk drawings of the Old Masters.
+</span></p>
+</blockquote>
 <p></p>
-<p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;WARNING<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;if&#xa0;\n[.troff2page]&#xa0;\{\<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;&#xa0;&#xa0;\M[red]\m[white]\s+4\fB\[u26A0]\fP\s0\m[]\M[]<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;\}<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;el&#xa0;\fBWARNING\fP<br>
-&#xa0;&#xa0;&#xa0;&#xa0;..<br>
-</span>
+<p class=interleaved></p>
+<p style="margin-top: 42.666666666667px">
 </div>
-</p>
-<p></p>
-<p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_27"></a>
-Typing verbatim \ in displays</h2>
-<p><a name="TAG:__troff2page_index_175"></a>
-The display used above brings up another use-case for glyph
-translation, even when (and especially if) no exotic characters
-are desired.  The display shows the backslash (<span style="font-family: monospace; ">\</span>) character, which
-is also the default escape character for groff.
-</p>
-<p class=indent>A display environment could be fenced by a pair of macros
-<span style="font-family: monospace; ">.EX</span>/<span style="font-family: monospace; ">.EE</span> defined as follows:
-<a name="TAG:__troff2page_index_176"></a>
-<a name="TAG:__troff2page_index_177"></a>
-<a name="TAG:__troff2page_index_178"></a>
-<a name="TAG:__troff2page_index_179"></a>
-<a name="TAG:__troff2page_index_180"></a>
-</p>
-<p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;EX<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;LD<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;ft&#xa0;C<br>
-&#xa0;&#xa0;&#xa0;&#xa0;..<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;EE<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;DE<br>
-&#xa0;&#xa0;&#xa0;&#xa0;..<br>
-</span>
-</div>
-</p>
-<p><a name="TAG:__troff2page_index_181"></a>
-We could use the
-escape sequence <span style="font-family: monospace; ">\e</span> in our input to stand for a backslash,
-but especially in an extended display containing verbatim code,
-we would like to input the backslash as-is and have groff and
-Troff2page temporarily suspend its escape effect.
-<a name="TAG:__troff2page_index_182"></a>
-<a name="TAG:__troff2page_index_183"></a>
-We could do this by having our <span style="font-family: monospace; ">.EX</span>/<span style="font-family: monospace; ">.EE</span>
-macros
-implicitly turn the escape character off when entering the display and back on when
-exiting it.
-The requests for these actions are <span style="font-family: monospace; ">.eo</span> and
-<span style="font-family: monospace; ">.ec</span> respectively:
-</p>
-<p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;EX<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;LD<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;ft&#xa0;C<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;eo<br>
-&#xa0;&#xa0;&#xa0;&#xa0;..<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.de&#xa0;EE<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;ec<br>
-&#xa0;&#xa0;&#xa0;&#xa0;.&#xa0;&#xa0;DE<br>
-&#xa0;&#xa0;&#xa0;&#xa0;..<br>
-</span>
-</div>
-</p>
-<p>We then use the macros <span style="font-family: monospace; ">.EX</span> and <span style="font-family: monospace; ">.EE</span> around the code text to
-display it, in monospace font and with the escape character
-temporarily disabled. (An improved version of these macros are provided
-in <span style="font-family: monospace; ">pca-verb.tmac</span>.)
-</p>
-<p class=indent>This works for short displays that are entirely within a page
-(we&#x2019;re talking printed pages via groff now, not HTML pages). The
-various traps that spring into action when groff breaks at a page
-rely on the escape character being active, and these will start
-failing catastrophically when our display straddles a page
-boundary.
-</p>
-<p class=indent><a name="TAG:__troff2page_index_184"></a>
-<a name="TAG:__troff2page_index_185"></a>
-<a name="TAG:__troff2page_index_186"></a>
-One way out is to
-<span style="font-style: italic; ">force</span> code displays to never cross a page boundary by
-using groff&#x2019;s &#x201C;keep&#x201D; macros <span style="font-family: monospace; ">.KS</span> or <span style="font-family: monospace; ">.KF</span> or the keep
-versions of the display macros (e.g., <span style="font-family: monospace; ">.DS L</span> rather than
-<span style="font-family: monospace; ">.LD</span>). Please see the groff docs for more info about these
-macros.  The problem then becomes what to do with large
-page-crossing displays.  This is almost unavoidable in computer
-technical prose.
-</p>
-<p class=indent><a name="TAG:__troff2page_index_187"></a>
-<a name="TAG:__troff2page_index_188"></a>
-<a name="TAG:__troff2page_index_189"></a>
-<a name="TAG:__troff2page_index_190"></a>
-Unicode glyph substitution offers another way out.  The Unicode
-characters U+29F9 <span style="font-size: 83%; ">BIG REVERSE SOLIDUS</span> and U+FE68 <span style="font-size: 83%; ">SMALL REVERSE
-SOLIDUS</span> are passable replacements for the regular backslash
-(U+005C <span style="font-size: 83%; ">REVERSE SOLIDUS</span>). You can enter these substitute
-backslashes with text-editor macros fairly easily.<a name="TAG:__troff2page_call_footnote_5"></a><a class=hrefinternal href="#TAG:__troff2page_footnote_5"><span class=hreftext><sup><small>5</small></sup></span></a>
-</p>
-<p class=indent>So now your
-displayed code has something that <span style="font-style: italic; ">looks</span> like a backslash,
-at least on
-browsers, but it most probably fails for print, because the print
-font lacks the exotic character.  Even in the browser,
-close is no cigar: Somebody cutting and pasting your code is in
-for a nasty surprise.  You really do want the <span style="font-style: italic; ">real</span> backslash in
-there even on the HTML page, but you don&#x2019;t want to disable
-groff&#x2019;s escape character.
-Glyph substitution to the rescue:
-</p>
-<p><div class="display verbatim" align=left>
-<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.char&#xa0;\[u29F9]&#xa0;\[u005C]<br>
-</span>
-</div>
-</p>
-<p>This lets you type the exotic backslash in your source but have
-groff and Troff2page convert it into the regular backslash when
-it lands on the page.
-Note there is no requirement that the font used by groff or the
-browser actually
-have the exotic backslash glyph at that Unicode position!
-You still have to <span style="font-style: italic; ">type</span> the exotic backslash, so you do require a competent text
-editor with a Unicode font.
 </p>
 <p class=indent></p>
 <p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_28"></a>
-\ in a section heading</h2>
-<p>This and the previous section&#x2019;s headers both have a verbatim backslash in the
-header.  You could use glyph substitution here too.  However, if
-you aren&#x2019;t, <span style="font-style: italic; ">and</span> you&#x2019;re using the <span style="font-family: monospace; ">.ToC</span> macro, the fact that
-the ToC macros use groff diversions creates a hitch.  You can use
-the <span style="font-family: monospace; ">\e</span> escape to get a literal backslash, but the
-diversion eats an escape, so you have to double it.  Ergo:
-<span style="font-family: monospace; ">\\e</span>.
+<h2 style="font-size: 156%"><a name="TAG:__pca_sec_24"></a>
+Extending Troff2page only</h2>
+<p><a name="TAG:__troff2page_index_151"></a>
+<a name="TAG:__troff2page_index_152"></a>
+Troff2page treats groff&#x2019;s <span style="font-family: monospace; ">.ig</span>
+environment, whenever it uses <span style="font-family: monospace; ">##</span> as ender, as
+containing Lua code that can be used to extend
+Troff2page. This syntactic overloading of <span style="font-family: monospace; ">.ig ##</span> is an innovation introduced by
+Oliver Laumann&#x2019;s <a href="http://www-rn.informatik.uni-bremen.de/software/unroff"><span class=hreftext>unroff</span></a>.
 </p>
-<p></p>
-<div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_4"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_4"><span class=hreftext><sup><small>4</small></sup></span></a>
-The color names and values for
-terracotta pink
-and Venetian red are courtesy <a href="https://www.resene.co.nz/swatches"><span class=hreftext>Resene Paints</span></a>.
+<p class=indent>Any Lua code enclosed within
+<span style="font-family: monospace; ">.ig ##</span> ... <span style="font-family: monospace; ">.##</span> will be processed by
+Troff2page but not by
+groff, which treats it as a multiline comment of course.
+Note that <span style="font-family: monospace; ">.ig ##</span> does not pipe its stdout back into
+the document, as <span style="font-family: monospace; ">.eval</span> does.  This is to maintain the invariant
+that as far as output is
+concerned, <span style="font-family: monospace; ">.ig ##</span>, like other <span style="font-family: monospace; ">.ig</span>s, is <span style="font-style: italic; ">always</span> a
+comment.  However, you can add Lua code within <span style="font-family: monospace; ">.ig ##</span>
+to influence how Troff2page &#x2014; but not groff! &#x2014; processes the rest of the
+document.
 </p>
-<p><a name="TAG:__troff2page_footnote_5"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_5"><span class=hreftext><sup><small>5</small></sup></span></a>
-In the Vim editor, for instance, adding the command <span style="font-family: monospace; ">exec 'dig
-\\' 0x29F9</span> to your vimrc lets you use the digraph <span style="font-family: monospace; ">\\</span>
-to enter U+29F9.
+<p class=indent>For example, let&#x2019;s define a
+<span style="font-family: monospace; ">\*[url ...]</span> string register that simply typesets its URL
+argument within angle brackets.
+<a name="TAG:__troff2page_index_153"></a>
 </p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.ds&#xa0;url&#xa0;\(la\fC\\$1\fP\(ra<br>
+</span>
 </div>
-<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-7.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-9.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-11.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+</p>
+<p>This is adequate for the print output.
+For Troff2page though, we&#x2019;d like to
+re-define this macro, in Lua, to create a hyperlink.
+We enclose this re-definition in a <span style="font-family: monospace; ">.ig ##</span>, which not
+only allows it to be in Lua, but also makes it apply only
+when Troff2page reads it:
+<a name="TAG:__troff2page_index_154"></a>
+<a name="TAG:__troff2page_index_155"></a>
+<a name="TAG:__troff2page_index_156"></a>
+</p>
+<p><div class="display verbatim" align=left>
+<span style="font-family: monospace; ">&#xa0;&#xa0;&#xa0;&#xa0;.ig&#xa0;##<br>
+&#xa0;&#xa0;&#xa0;&#xa0;defstring('url',&#xa0;function(url)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;return&#xa0;link_start(url)&#xa0;..&#xa0;url&#xa0;..&#xa0;link_stop()<br>
+&#xa0;&#xa0;&#xa0;&#xa0;end)<br>
+&#xa0;&#xa0;&#xa0;&#xa0;.##<br>
+</span>
+</div>
+</p>
+<p>The procedures <span style="font-family: monospace; ">defstring</span>, <span style="font-family: monospace; ">link_start</span>, and
+<span style="font-family: monospace; ">link_stop</span> are defined in the Troff2page code.
+</p>
+<p><div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-7.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-9.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+</p>
 </div>
 </body>
 </html>
