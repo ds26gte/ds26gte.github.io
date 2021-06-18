@@ -102,13 +102,6 @@
     border-width: 1px;
   }
 
-  .navigation {
-    color: #72010f; /* venetian red */
-    text-align: right;
-    font-size: medium;
-    font-style: italic;
-  }
-
   .disable {
     color: gray;
   }
@@ -137,6 +130,13 @@
       margin-bottom: 2em;
       margin-left: 8%;
       margin-right: 8%;
+    }
+
+    .navigation {
+      color: #72010f; /* venetian red */
+      text-align: right;
+      font-size: medium;
+      font-style: italic;
     }
 
     @media screen {
