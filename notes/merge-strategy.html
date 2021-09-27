@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.12">
+<title>How to merge a side branch into the main branch safely</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>How to merge a side branch into the main branch safely</h1>
+</div>
+<div id="content">
+<div class="paragraph">
+<p>Let&#8217;s say the main branch is <code>master</code>. (In newer repos this is
+often <code>main</code>.)</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s also say you branched off a new branch called <code>new-work</code>
+from <code>master</code> and started working on a new set of features that&#8217;s
+not yet ready for prime time.</p>
+</div>
+<div class="paragraph">
+<p>While you&#8217;re working away on <code>new-work</code>, there may be changes
+being added to <code>master</code> too. You may want to get all those
+changes into <code>new-work</code> too so the latter doesn&#8217;t diverge too
+much. This is done with</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git merge master</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Resolve any conflicts as suggested.</p>
+</div>
+<div class="paragraph">
+<p>When you&#8217;re finally satisfied with the work you&#8217;ve done on
+<code>new-work</code> and want it to be part of <code>master</code>, you could in
+principle check out <code>master</code> and do</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git merge new-work</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and resolve any conflicts that arise. However, since you don&#8217;t
+want to mess up <code>master</code> with poor conflict resolution and being
+saddled with a bungled merge, and since you do want the ability
+to test things thoroughly before updating <code>master</code>, here&#8217;s a
+sanity check you can do before doing the final merge.</p>
+</div>
+<div class="paragraph">
+<p>Create a new sandbox branch called <code>new-work-merge</code> off of
+<code>new-work</code>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git checkout -b new-work-merge</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is safer to bungle merges on this throwaway branch. All you
+need to do is delete and try again.</p>
+</div>
+<div class="paragraph">
+<p>First, merge <code>master</code> into this new branch:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git merge master</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Resolve conflicts in <code>new-work-merge</code>, even the ones that aren&#8217;t
+overtly warned by Git. Test everything thoroughly. Satisfy
+yourself this is really the final merged code that you want.
+Commit to <code>new-work-merge</code>.</p>
+</div>
+<div class="paragraph">
+<p>Then check out <code>master</code> and merge <code>new-work-merge</code> into it. This
+should go with no conflicts whatsoever (because you already
+resolved them before commiting <code>new-work-merge</code>).</p>
+</div>
+<div class="paragraph">
+<p>Alternately, if there were no conflicts when you merged <code>master</code>
+into <code>new-work-merge</code>, you could check out <code>master</code> and simply do</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git merge new-work</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The branches <code>new-work</code> and <code>new-work-merge</code> may then be removed.</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2021-09-27 16:32:42 -0400
+</div>
+</div>
+</body>
+</html>
