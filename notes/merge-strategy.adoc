@@ -1,0 +1,57 @@
+= How to merge a side branch into the main branch safely
+
+Let's say the main branch is `master`. (In newer repos this is
+often `main`.)
+
+Let's also say you branched off a new branch called `new-work`
+from `master` and started working on a new set of features that's
+not yet ready for prime time.
+
+While you're working away on `new-work`, there may be changes
+being added to `master` too. You may want to get all those
+changes into `new-work` too so the latter doesn't diverge too
+much. This is done with
+
+  git merge master
+
+Resolve any conflicts as suggested.
+
+When you're finally satisfied with the work you've done on
+`new-work` and want it to be part of `master`, you could in
+principle check out `master` and do 
+
+  git merge new-work
+
+and resolve any conflicts that arise. However, since you don't
+want to mess up `master` with poor conflict resolution and being
+saddled with a bungled merge, and since you do want the ability
+to test things thoroughly before updating `master`, here's a
+sanity check you can do before doing the final merge.
+
+Create a new sandbox branch called `new-work-merge` off of
+`new-work`:
+
+  git checkout -b new-work-merge
+
+It is safer to bungle merges on this throwaway branch. All you
+need to do is delete and try again.
+
+First, merge `master` into this new branch:
+
+  git merge master
+
+Resolve conflicts in `new-work-merge`, even the ones that aren't
+overtly warned by Git. Test everything thoroughly. Satisfy
+yourself this is really the final merged code that you want.
+Commit to `new-work-merge`.
+
+Then check out `master` and merge `new-work-merge` into it. This
+should go with no conflicts whatsoever (because you already
+resolved them before commiting `new-work-merge`).
+
+Alternately, if there were no conflicts when you merged `master`
+into `new-work-merge`, you could check out `master` and simply do
+
+  git merge new-work
+
+The branches `new-work` and `new-work-merge` may then be removed.
