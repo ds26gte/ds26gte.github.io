@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by Troff2page, v. 20210617
+Generated from index.ms by Troff2page, v. 20211107
 Copyright (C) 2003-2021 Dorai Sitaram
-(running on Lua 5.3)
+(running on Lua 5.4)
 http://ds26gte.github.io/troff2page
 -->
 <head>
@@ -18,7 +18,7 @@ Troff2page
 <body>
 <div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-1.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-3.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
-<h1 style="font-size: 192%"><a name="TAG:__pca_sec_6"></a>
+<h1 style="font-size: 144%"><a name="TAG:__pca_sec_6"></a>
 2. troff, groff, and Troff2page commands</h1>
 <p><a name="TAG:__troff2page_index_29"></a>
 <a name="TAG:__troff2page_index_30"></a>
@@ -52,8 +52,7 @@ can then search for their behavior in the Troff2page and/or groff
 manuals.
 </p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_7"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_7"></a>
 mpca macro files</h2>
 <p><a name="TAG:__troff2page_index_34"></a>
 <a name="TAG:__troff2page_index_35"></a>
@@ -67,11 +66,9 @@ mpca macro files</h2>
 <a name="TAG:__troff2page_index_43"></a>
 <a name="TAG:__troff2page_index_44"></a>
 <a name="TAG:__troff2page_index_45"></a>
-Troff2page can process documents that use the <span style="font-family: monospace; ">ms</span> extension macros
-provided in <a href="http://github.com/ds26gte/mpca"><span class=hreftext>mpca</span></a>. For
-convenience, this repo is included as a submodule <span style="font-family: monospace; ">mpca</span>.
-It includes general-purpose extensions to the <span style="font-family: monospace; ">ms</span> package,
-viz.,
+Troff2page can process documents that use the general-purpose <span style="font-family: monospace; ">ms</span> extension macros
+provided in <a href="http://github.com/ds26gte/mpca"><span class=hreftext>mpca</span></a>. `mpca`
+macro files include:
 <span style="font-family: monospace; ">pca-bib.tmac</span> for bibliographic citations;
 <span style="font-family: monospace; ">pca-dc.tmac</span> for drop caps;
 <span style="font-family: monospace; ">pca-eval.tmac</span> for extending groff using Lua;
@@ -80,12 +77,11 @@ viz.,
 <span style="font-family: monospace; ">pca-tag.tmac</span> for cross-references;
 <span style="font-family: monospace; ">pca-toc.tmac</span> for table of contents;
 <span style="font-family: monospace; ">pca-verb.tmac</span> for verbatim displays.
-These extensions may loaded severally or as the
+These extensions may be loaded severally or as the
 single comprehensive macro file <span style="font-family: monospace; ">pca.tmac</span>.
 To load them all, use the command-line option <span style="font-family: monospace; ">-mpca</span> or
 include <span style="font-family: monospace; ">.mso pca.tmac</span> in your document source.
-Please consult
-this submodule&#x2019;s documentation for more information.
+Please consult the `mpca` documentation for more information.
 </p>
 <p class=indent><a name="TAG:__troff2page_index_46"></a>
 In order to take advantage of the <span style="font-family: monospace; ">mpca</span> tmac files, you
@@ -101,8 +97,7 @@ Your input document sources the <span style="font-family: monospace; ">mpca</spa
 either the <span style="font-family: monospace; ">-m</span> command-line option or the <span style="font-family: monospace; ">.mso</span> request.
 </p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_8"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_8"></a>
 Auxiliary files</h2>
 <p><a name="TAG:__troff2page_index_49"></a>
 <a name="TAG:__troff2page_index_50"></a>
@@ -216,7 +211,6 @@ programs&#x2019; aux files don&#x2019;t clash.  The number register
 <span style="font-family: monospace; ">\n[.troff2page]</span> (page <a class=hrefinternal href="index-Z-H-3.html#TAG:cond-bp"><span class=hreftext>3</span></a>) suggests a way
 to do this.
 </p>
-<p></p>
 <div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_3"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_3"><span class=hreftext><sup><small>3</small></sup></span></a>
 <a name="TAG:__troff2page_index_58"></a>
 <a name="TAG:__troff2page_index_59"></a>

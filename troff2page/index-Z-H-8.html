@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by Troff2page, v. 20210617
+Generated from index.ms by Troff2page, v. 20211107
 Copyright (C) 2003-2021 Dorai Sitaram
-(running on Lua 5.3)
+(running on Lua 5.4)
 http://ds26gte.github.io/troff2page
 -->
 <head>
@@ -18,7 +18,7 @@ Troff2page
 <body>
 <div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-7.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-9.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
-<h1 style="font-size: 192%"><a name="TAG:__pca_sec_22"></a>
+<h1 style="font-size: 144%"><a name="TAG:__pca_sec_22"></a>
 8.  Extending groff using Lua</h1>
 <p><a name="TAG:__troff2page_index_132"></a>
 <a name="TAG:__troff2page_index_133"></a>
@@ -132,8 +132,7 @@ defined in Troff2page. These extras are not available (and are arguably
 not useful) to the <span style="font-family: monospace; ">.eval</span> code seen by groff.
 </p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_23"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_23"></a>
 Defining color names using HSL</h2>
 <p><a name="TAG:__troff2page_index_149"></a>
 <a name="TAG:__troff2page_index_150"></a>
@@ -165,7 +164,7 @@ much easier Lua procedure to do the same, and put it inside an <span style="font
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
 </span></p>
 <p class=interleaved></p>
-<p style="margin-top: 42.666666666667px"><span style="font-family: monospace; ">
+<p style="margin-top: 21.333333333333px"><span style="font-family: monospace; ">
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;function&#xa0;tc_to_c(tc,&#xa0;p,&#xa0;q)<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;if&#xa0;tc&#xa0;&#x3c;&#xa0;1/6&#xa0;then<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;return&#xa0;p&#xa0;+&#xa0;(q&#xa0;-&#xa0;p)*6*tc<br>
@@ -179,7 +178,7 @@ much easier Lua procedure to do the same, and put it inside an <span style="font
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
 </span></p>
 <p class=interleaved></p>
-<p style="margin-top: 42.666666666667px"><span style="font-family: monospace; ">
+<p style="margin-top: 21.333333333333px"><span style="font-family: monospace; ">
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;function&#xa0;hsl_to_rgb(h,&#xa0;s,&#xa0;l)<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;h&#xa0;=&#xa0;(h&#xa0;%&#xa0;360)&#xa0;/&#xa0;360<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;q<br>
@@ -198,7 +197,7 @@ much easier Lua procedure to do the same, and put it inside an <span style="font
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;end<br>
 </span></p>
 <p class=interleaved></p>
-<p style="margin-top: 42.666666666667px"><span style="font-family: monospace; ">
+<p style="margin-top: 21.333333333333px"><span style="font-family: monospace; ">
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;function&#xa0;def_hsl_color(name,&#xa0;h,&#xa0;s,&#xa0;l)<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;local&#xa0;r,&#xa0;g,&#xa0;b&#xa0;=&#xa0;hsl_to_rgb(h,&#xa0;s,&#xa0;l)<br>
 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;troff:write(string.format('.defcolor&#xa0;%s&#xa0;rgb&#xa0;%s&#xa0;%s&#xa0;%s0,&#xa0;name,&#xa0;r,&#xa0;g,&#xa0;b))<br>
@@ -237,7 +236,7 @@ distribution provides <span style="font-family: monospace; ">def_hsl_color</span
 <p class=indent><div class=troffbox>
 </p>
 <p class=interleaved></p>
-<p style="margin-top: 42.666666666667px">
+<p style="margin-top: 21.333333333333px">
 </p>
 <blockquote><p>Prismacolor&#x2019;s burnt ochre pencil is a close match for Derwent&#x2019;s
 <span style="font-weight: bold; "></span><span style="font-weight: bold; color: #5c1f22; ">Venetian red</span><span style="font-weight: bold; color: previous; "></span><span style="color: previous; ">, and either can be used to
@@ -246,12 +245,11 @@ emulate the sanguine chalk drawings of the Old Masters.
 </blockquote>
 <p></p>
 <p class=interleaved></p>
-<p style="margin-top: 42.666666666667px">
+<p style="margin-top: 21.333333333333px">
 </div>
 </p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_24"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_24"></a>
 Extending Troff2page only</h2>
 <p><a name="TAG:__troff2page_index_151"></a>
 <a name="TAG:__troff2page_index_152"></a>
@@ -304,8 +302,7 @@ when Troff2page reads it:
 </p>
 <p>The procedures <span style="font-family: monospace; ">defstring</span>, <span style="font-family: monospace; ">link_start</span>, and
 <span style="font-family: monospace; ">link_stop</span> are defined in the Troff2page code.
-</p>
-<p><div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-7.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-9.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-7.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-9.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 </p>
 </div>
 </body>

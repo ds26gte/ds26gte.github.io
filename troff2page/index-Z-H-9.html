@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by Troff2page, v. 20210617
+Generated from index.ms by Troff2page, v. 20211107
 Copyright (C) 2003-2021 Dorai Sitaram
-(running on Lua 5.3)
+(running on Lua 5.4)
 http://ds26gte.github.io/troff2page
 -->
 <head>
@@ -18,7 +18,7 @@ Troff2page
 <body>
 <div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-8.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-10.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
-<h1 style="font-size: 192%"><a name="TAG:__pca_sec_25"></a>
+<h1 style="font-size: 144%"><a name="TAG:__pca_sec_25"></a>
 9.  Styling</h1>
 <p><a name="TAG:__troff2page_index_157"></a>
 <a name="TAG:__troff2page_index_158"></a>
@@ -71,8 +71,7 @@ from leaking into the browser-mediated printout, wrap them inside
 <span style="font-family: monospace; ">@media screen</span>.
 </p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_26"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_26"></a>
 Colophon</h2>
 <p><a name="TAG:__troff2page_index_161"></a>
 <a name="TAG:__troff2page_index_162"></a>
@@ -140,8 +139,7 @@ last-mod date.  If there isn&#x2019;t a third argument, the colophon
 won&#x2019;t mention any date.
 </p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_27"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_27"></a>
 Glyph substitution</h2>
 <p>CSS isn&#x2019;t the only way to style your document: Interesting glyphs
 offer another approach. Troff2page, like groff, allows you to use
@@ -254,8 +252,7 @@ may be written that expand differently for HTML and print, e.g.,
 </p>
 <p></p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_28"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_28"></a>
 Typing verbatim \ in displays</h2>
 <p><a name="TAG:__troff2page_index_177"></a>
 The display used above brings up another use-case for glyph
@@ -372,18 +369,33 @@ You still have to <span style="font-style: italic; ">type</span> the exotic back
 editor with a Unicode font.
 </p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_29"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_29"></a>
 \ in a section heading</h2>
-<p>This and the previous section&#x2019;s headers both have a verbatim backslash in the
-header.  You could use glyph substitution here too.  However, if
-you aren&#x2019;t, <span style="font-style: italic; ">and</span> you&#x2019;re using the <span style="font-family: monospace; ">.ToC</span> macro, the fact that
-the ToC macros use groff diversions creates a hitch.  You can use
-the <span style="font-family: monospace; ">\e</span> escape to get a literal backslash, but the
-diversion eats an escape, so you have to double it.  Ergo:
-<span style="font-family: monospace; ">\\e</span>.
+<p>This and the previous section&#x2019;s headings both have a verbatim
+backslash in the heading. Glyph substitution works fine here.
 </p>
-<p></p>
+<p class=indent>However, if you use <span style="font-family: monospace; ">\e</span>, there is a situation to watch
+out for. If you're using the <span style="font-family: monospace; ">.ToC</span> macro, <span style="font-style: italic; ">and</span> this
+particular heading happens to be eligible to go into the ToC,
+then the escape fails as it goes through a groff diversion.
+</p>
+<p class=indent><a name="TAG:__troff2page_index_193"></a>
+To remedy this, enclose the problem areas of the heading with a
+pair of <span style="font-family: monospace; ">\?</span>s. (In fact, you can be conservative and enclose the
+entire heading.) Unfortunately, you should take care to do this
+only for
+headings meant for the ToC. Wrapping <span style="font-family: monospace; ">\?</span> around a non-ToC heading
+will cause the heading to
+disappear!
+</p>
+<p class=indent>While glyph substitution doesn't have this problem, note that
+this is a pervasive problem for all escapes, including
+font-changing escapes, so this trick is good to keep handy.
+</p>
+<p class=indent>These problems are groff-specific. Troff2page will cleanly
+process the heading, ToC or no ToC, and whether or not you use
+<span style="font-family: monospace; ">\?</span>.
+</p>
 <div class=footnote><hr align=left width="40%"><p><a name="TAG:__troff2page_footnote_4"></a><a class=hrefinternal href="#TAG:__troff2page_call_footnote_4"><span class=hreftext><sup><small>4</small></sup></span></a>
 The color names and values for
 terracotta pink

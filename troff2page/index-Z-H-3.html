@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <!--
-Generated from index.ms by Troff2page, v. 20210617
+Generated from index.ms by Troff2page, v. 20211107
 Copyright (C) 2003-2021 Dorai Sitaram
-(running on Lua 5.3)
+(running on Lua 5.4)
 http://ds26gte.github.io/troff2page
 -->
 <head>
@@ -18,7 +18,7 @@ Troff2page
 <body>
 <div>
 <div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-2.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-4.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
-<h1 style="font-size: 192%"><a name="TAG:__pca_sec_9"></a>
+<h1 style="font-size: 144%"><a name="TAG:__pca_sec_9"></a>
 3.  Page layout</h1>
 <p><a name="TAG:__troff2page_index_61"></a>
 Each page in a multiple-page HTML output has a navigation bar at its
@@ -30,8 +30,7 @@ navigation bar, the link for it is disabled (grayed). If the ToC or
 index page doesn&#x2019;t exist, it is absent from the bar.
 </p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_10"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_10"></a>
 Page breaks</h2>
 <p><a name="TAG:__troff2page_index_62"></a>
 <a name="TAG:__troff2page_index_63"></a>
@@ -113,8 +112,7 @@ redefining the underlying <span style="font-family: monospace; ">.@SH</span> mac
 </p>
 <p></p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_11"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_11"></a>
 Recognizing when Troff2page is running</h2>
 <p>We used the value stored in the number register
 <span style="font-family: monospace; ">\n[.troff2page]</span> to determine
@@ -159,8 +157,7 @@ there&#x2019;s no 0-left-padding.)
 </p>
 <p class=indent></p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_12"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_12"></a>
 HTML-style paragraphs</h2>
 <p><a name="TAG:__troff2page_index_79"></a>
 <a name="TAG:__troff2page_index_80"></a>
@@ -195,8 +192,7 @@ text in order to respect a negative <span style="font-family: monospace; ">PD</s
 </p>
 <p></p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_13"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_13"></a>
 Scaling factors</h2>
 <p><a name="TAG:__troff2page_index_85"></a>
 The scaling factor <span style="font-family: monospace; ">n</span> (en)
@@ -225,7 +221,7 @@ pt), <span style="font-family: monospace; ">m</span> (em = 2 ens), and <span sty
 </p>
 <p class=indent><divalign=center>
 <img src="inch.jpg"
- width="336">
+ width="336" alt="[inch.jpg]">
 </div>
 </p>
 <p class=indent><a name="TAG:__troff2page_index_99"></a>
@@ -253,8 +249,7 @@ but the product with <span style="font-family: monospace; ">f</span> is always r
 Troff2page uses Lua&#x2019;s FP, so its fractions can be finer grained.
 </p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_14"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_14"></a>
 Line length</h2>
 <p><a name="TAG:__troff2page_index_104"></a>
 Unlike groff -ms, which uses the line length given by the register
@@ -288,8 +283,7 @@ to 1/8000 of a mile, but it takes effect only for HTML:
 </p>
 <p></p>
 <p class=indent></p>
-<p></p>
-<h2 style="font-size: 156%"><a name="TAG:__pca_sec_15"></a>
+<h2 style="font-size: 132%"><a name="TAG:__pca_sec_15"></a>
 Images</h2>
 <p><a name="TAG:__troff2page_index_105"></a>
 <a name="TAG:__troff2page_index_106"></a>
@@ -305,7 +299,7 @@ formats.  An example call:
 <p>This produces:
 <divalign=center>
 <img src="t2p.png"
- width="72">
+ width="72" alt="[t2p.png]">
 </div>
 </p>
 <p class=indent><a name="TAG:__troff2page_index_107"></a>
@@ -326,7 +320,7 @@ E.g.,
 <p>produces a left-justified image that&#x2019;s <span style="font-style: italic; ">e</span> inches wide:
 <divalign=left>
 <img src="t2p.png"
- width="261">
+ width="261" alt="[t2p.png]">
 </div>
 </p>
 <p><a name="TAG:__troff2page_index_109"></a>
@@ -338,8 +332,7 @@ ImageMagick); <span style="font-family: monospace; ">mkbitmap</span> and <span s
 Potrace package); and Inkscape. <span style="font-family: monospace; ">mkbitmap</span> and
 <span style="font-family: monospace; ">potrace</span> are needed for PNG images; Inkscape for SVG
 images.
-</p>
-<p><div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-2.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-4.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
+<div align=right class=navigation>[Go to <span><a class=hrefinternal href="index.html"><span class=hreftext>first</span></a>, <a class=hrefinternal href="index-Z-H-2.html"><span class=hreftext>previous</span></a></span><span>, <a class=hrefinternal href="index-Z-H-4.html"><span class=hreftext>next</span></a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__troff2page_toc"><span class=hreftext>contents</span></a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-12.html#TAG:__troff2page_index"><span class=hreftext>index</span></a></span>]</div>
 </p>
 </div>
 </body>

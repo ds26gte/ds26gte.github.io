@@ -228,14 +228,18 @@ body {
     font-size: 500%;
 }
 
-@media screen { body { max-width: 624.0px; } }
+@media screen { body { max-width: 672.0px; } }
 
-p { margin-top: 21.333333333333px; margin-bottom: 21.333333333333px; }
+p.indent { text-indent: 20.0px; }
+
+p.hanging { padding-left: 20.0px; text-indent: -20.0px; }
+
+p { margin-top: 0.0px; margin-bottom: 0.0px; }
 
 .display { margin-top: 21.333333333333px; margin-bottom: 21.333333333333px; padding-top: 21.333333333333px; padding-bottom: 21.333333333333px; }
 
 .display.verbatim { padding-left: 21.333333333333px; }
-.footnote { margin-top: 42.666666666667px; }
+.footnote { margin-top: 0.0px; }
 
 .navigation { margin-top: 20.0px; margin-bottom: 20.0px; }
 h1,h2,h3,h4,h5,h6 { font-size: 1.2em; }
