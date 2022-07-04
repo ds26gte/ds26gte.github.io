@@ -3,7 +3,7 @@
 <!--
 Generated from index.tex by tex2page, v. 20201115
 Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+(running on Racket 8.2 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
@@ -66,13 +66,14 @@ name of your Lisp implementation.  Put <code class=verbatim>tex2page.lisp</code>
 
 Set <code class=verbatim>LISP</code> to
 <code class=verbatim>abcl</code> for ABCL&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_1">1</a>],
-<code class=verbatim>allegro</code> for Allegro&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_22">22</a>],
-<code class=verbatim>clisp</code> for CLISP&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_18">18</a>],
+<code class=verbatim>allegro</code> for Allegro&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_23">23</a>],
+<code class=verbatim>clasp</code> for Clasp&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_16">16</a>],
+<code class=verbatim>clisp</code> for CLISP&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_19">19</a>],
 <code class=verbatim>clozure</code> for Clozure&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_8">8</a>],
 <code class=verbatim>cmucl</code> for CMUCL&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_9">9</a>],
-<code class=verbatim>ecl</code> for ECL&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_29">29</a>],
+<code class=verbatim>ecl</code> for ECL&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_30">30</a>],
 <code class=verbatim>mkcl</code> for MKCL&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_3">3</a>],
-and <code class=verbatim>sbcl</code> for SBCL&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_44">44</a>].</p>
+and <code class=verbatim>sbcl</code> for SBCL&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_45">45</a>].</p>
 <p>
 
 The top few lines in <code class=verbatim>tex2page.lisp</code> contain the lines
@@ -85,8 +86,8 @@ Lisp’s command line options.</p>
 </p>
 <a id="TAG:__tex2page_sec_Temp_88"></a>
 <h2 class=section>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page out of the box (Racket)</h2>
-<p class=noindent><a id="TAG:__tex2page_index_492"></a>If you run Racket&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_40">40</a>] on a Unix (including Mac OS X and
-Cygwin&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_23">23</a>]), setup is minimal.  Simply put a copy of (or link to) the Scheme
+<p class=noindent><a id="TAG:__tex2page_index_492"></a>If you run Racket&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_41">41</a>] on a Unix (including Mac OS X and
+Cygwin&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_24">24</a>]), setup is minimal.  Simply put a copy of (or link to) the Scheme
 file <code class=verbatim>tex2page.rkt</code> in a directory in your <code class=verbatim>PATH</code> environment
 variable. You may rename it to <code class=verbatim>tex2page</code>.</p>
 <p>
@@ -132,13 +133,13 @@ Put it in your <code class=verbatim>PATH</code>.</p>
 <p>
 
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page is known to configure for the Scheme dialects
-Chez&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_45">45</a>],
+Chez&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_46">46</a>],
 Chicken&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_7">7</a>],
 Gambit&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_11">11</a>],
-Gauche&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_25">25</a>],
+Gauche&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_26">26</a>],
 Guile&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_12">12</a>],
-and Racket&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_40">40</a>]; and the Common Lisp
-implementations ABCL, Allegro, CLISP, Clozure, CMUCL, ECL, and SBCL.
+and Racket&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_41">41</a>]; and the Common Lisp
+implementations ABCL, Allegro, Clasp, CLISP, Clozure, CMUCL, ECL, and SBCL.
 </p>
 <a id="TAG:__tex2page_sec_Temp_92"></a>
 <h2 class=section>Using Scmxlate directly</h2>
