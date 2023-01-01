@@ -336,15 +336,18 @@ a:hover {
   text-decoration: none;
 }
 
+/*
 .item {
   font-family: 'miltonian', sans-serif;
 }
+*/
 
 .oldstyle {
-  font-family: 'eb garamond', sans-serif;
-  /* font-family: 'sorts mill goudy', sans-serif; */
-  font-size: 120%;
+  font-family: 'linden hill', sans-serif;
+  font-size: 110%;
 }
 
 body { max-width: 450pt; }
+
+body { margin: auto; }
 body { max-width: 400pt; }

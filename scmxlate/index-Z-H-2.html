@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20200131
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.6 :unix)
+Generated from index.tex by tex2page, v. 20230101
+Copyright (C) 1997-2023 Dorai Sitaram
+(running on Racket 8.6 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
@@ -12,76 +12,74 @@ http://ds26gte.github.io/tex2page/index.html
 scmxlate
 </title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=EB+Garamond" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Linden+Hill" />
 <link rel="stylesheet" href="index-Z-S.css" />
 <meta name=robots content="index,follow">
+
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-1.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-3.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-1.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-3.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_sec_2"></a>
-<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2">2&#xa0;&#xa0;Writing an Scmxlate configuration</a></h1>
-<p class=noindent></p>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2">2&#xa0;&#xa0;Writing an Scmxlate configuration</a></h1><p class=noindent></p>
 <p>
 </p>
 <a id="TAG:__tex2page_sec_2.1"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.1">2.1&#xa0;&#xa0;A minimal configuration</a></h2>
-<p class=noindent>Let us say you have a number of Scheme files in
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.1">2.1&#xa0;&#xa0;A minimal configuration</a></h2><p class=noindent>
+Let us say you have a number of Scheme files in
 a directory that you intend to package as a
 distribution.  For specificity let’s say the name of the
-directory is &#x2018;pkgdir&#x2018; and you have three Scheme files in it,
-viz, &#x2018;apple&#x2018;, &#x2018;orange.scm&#x2018;, and &#x2018;banana.ss&#x2018;.
+directory is <code class=verbatim>pkgdir</code> and you have three Scheme files in it,
+viz, <code class=verbatim>apple</code>, <code class=verbatim>orange.scm</code>, and <code class=verbatim>banana.rkt</code>.
 There is no restriction on the names of these Scheme
 files: They may have any or no extension.  An end-user
 of your distribution will unpack it to produce a
-&#x2018;pkgdir&#x2018; of their own with the three Scheme files in
+<code class=verbatim>pkgdir</code> of their own with the three Scheme files in
 it.</p>
 <p>
 
 Let us now say that you wrote the Scheme files in the
-MzScheme dialect of Scheme, but that the end-user
+Racket dialect of Scheme, but that the end-user
 uses the Guile dialect of Scheme.  In order for them to
 be able to create Guile versions of your files, you
-need to provide in &#x2018;pkgdir&#x2018; some configuration
+need to provide in <code class=verbatim>pkgdir</code> some configuration
 information.  This can be done as follows:</p>
 <p>
 
-Create a subdirectory called &#x2018;dialects&#x2018; in
-&#x2018;pkgdir&#x2018;.  In the &#x2018;dialects&#x2018; subdirectory,
-create a file called &#x2018;files-to-be-ported.scm&#x2018;
+Create a subdirectory called <code class=verbatim>dialects</code> in
+<code class=verbatim>pkgdir</code>.  In the <code class=verbatim>dialects</code> subdirectory,
+create a file called <code class=verbatim>files&#x2011;to&#x2011;be&#x2011;ported.scm</code>
 containing the names of the Scheme files to be
 translated,  viz.,</p>
 <p>
 
 </p>
 <div class=leftline><pre class=scheme>
-<span class=selfeval>&#x22;apple&#x22;&#x22;</span>
-<span class=selfeval>&#x22;orange.scm&#x22;&#x22;</span>
-<span class=selfeval>&#x22;banana.ss&#x22;&#x22;</span>
-</pre></div>
-<p class=noindent>
-and a file called &#x2018;dialects-supported.scm&#x2018; containing
+<span class=selfeval>&#x22;apple&#x22;</span>
+<span class=selfeval>&#x22;orange.scm&#x22;</span>
+<span class=selfeval>&#x22;banana.rkt&#x22;</span>
+</pre></div><p class=noindent>
+
+and a file called <code class=verbatim>dialects&#x2011;supported.scm</code> containing
 the line</p>
 <p>
 
 </p>
 <div class=leftline><pre class=scheme>
 <span class=variable>guile</span>
-</pre></div>
-<p class=noindent>
+</pre></div><p class=noindent>
+
 The symbol <code class=scheme><span class=variable>guile</span></code> of course stands for the Scheme
 dialect Guile.</p>
 <p>
 
-The Guile-using user can now start Guile in &#x2018;pkgdir&#x2018;,
-and load &#x2018;scmxlate.scm&#x2018; (using the appropriate
-pathname for &#x2018;scmxlate.scm&#x2018; on their system, as
+The Guile-using user can now start Guile in <code class=verbatim>pkgdir</code>,
+and load <code class=verbatim>scmxlate.scm</code> (using the appropriate
+pathname for <code class=verbatim>scmxlate.scm</code> on their system, as
 described in Section&#xa0;<a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_sec_1">1</a>).  Scmxlate will learn
 from <code class=verbatim>dialects/files&#x2011;to&#x2011;be&#x2011;ported.scm</code> that the files
-&#x2018;apple&#x2018;, &#x2018;orange.scm&#x2018;, and &#x2018;banana.ss&#x2018; need to be
+<code class=verbatim>apple</code>, <code class=verbatim>orange.scm</code>, and <code class=verbatim>banana.rkt</code> need to be
 translated.  It will ask the user what the dialect is,
 offering as choices the dialects listed in
 <code class=verbatim>dialects/dialects&#x2011;supported.scm</code>, plus a catch-all
@@ -92,18 +90,16 @@ dialect called Other:<a id="TAG:__tex2page_call_footnote_Temp_1"></a><span class
 <pre class=verbatim>
 What is your Scheme dialect?
      (guile other)
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p>
 
-The user types &#x2018;guile&#x2018; in response.  Scmxlate now
+The user types <code class=verbatim>guile</code> in response.  Scmxlate now
 understands that it is to create Guile translations of
 the three files, and proceeds to do so.  By default,
 the translation-result files are created in the
-&#x2018;pkgdir&#x2018; directory and have the same names as the
-original but with the prefix &#x2018;my-&#x2018; attached.  Thus,
-in this case, their names are &#x2018;my-apple&#x2018;,
-&#x2018;my-orange.scm&#x2018;, and &#x2018;my-banana.ss&#x2018;.</p>
+<code class=verbatim>pkgdir</code> directory and have the same names as the
+original but with the prefix <code class=verbatim>my&#x2011;</code> attached.  Thus,
+in this case, their names are <code class=verbatim>my&#x2011;apple</code>,
+<code class=verbatim>my&#x2011;orange.scm</code>, and <code class=verbatim>my&#x2011;banana.rkt</code>.</p>
 <p>
 
 In the following, we will for convenience use
@@ -120,24 +116,22 @@ a translation;</p>
 (iii) <em>target dialect</em>: the dialect translated to.</p>
 <p>
 
-</p>
-
-<p class=noindent>In our example above, &#x2018;apple&#x2018; is an input
-file, &#x2018;my-apple&#x2018; is its corresponding output file,
+In our example above, <code class=verbatim>apple</code> is an input
+file, <code class=verbatim>my&#x2011;apple</code> is its corresponding output file,
 and Guile is the target dialect.</p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_2.2"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.2">2.2&#xa0;&#xa0;Dialect-configuration files</a></h2>
-<p class=noindent>The output  file &#x2018;my-apple&#x2018; above uses Scmxlate’s
-default rules for an MzScheme-to-Guile translation.
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.2">2.2&#xa0;&#xa0;Dialect-configuration files</a></h2><p class=noindent>
+The output  file <code class=verbatim>my&#x2011;apple</code> above uses Scmxlate’s
+default rules for an Racket-to-Guile translation.
 These rules are general and cannot be expected to cover
 any peculiar translational information that may be
-relevant to the code in &#x2018;apple&#x2018;.  You can supply such
+relevant to the code in <code class=verbatim>apple</code>.  You can supply such
 additional information to Scmxlate via a <em>
-dialect-configuration file</em> called &#x2018;guile-apple&#x2018; in
-the &#x2018;dialects&#x2018; subdirectory.   Ie, the name of
+dialect-configuration file</em> called <code class=verbatim>guile&#x2011;apple</code> in
+the <code class=verbatim>dialects</code> subdirectory.   I.e., the name of
 the dialect-configuration file for a given input file
 and a given dialect is formed from  the Scmxlate symbol
 for the dialect, followed by a hyphen, followed by the
@@ -153,8 +147,8 @@ the code in the dialect-configuration file is preserved
 in the output file.</p>
 <p>
 
-For instance, if the MzScheme code in &#x2018;apple&#x2018; made
-use of a nonstandard (MzScheme-only) primitive such as
+For instance, if the Racket code in <code class=verbatim>apple</code> made
+use of a nonstandard (Racket-only) primitive such as
 <code class=scheme><span class=variable>file&#x2011;or&#x2011;directory&#x2011;modify&#x2011;seconds</span></code>, we could supply
 the following Guile definition in the
 dialect-configuration file,
@@ -165,15 +159,14 @@ dialect-configuration file,
 <div class=leftline><pre class=scheme>
 (<span class=keyword>define</span> <span class=variable>file-or-directory-modify-seconds</span>
   (<span class=keyword>lambda</span> (<span class=variable>f</span>) (<span class=variable>vector-ref</span> (<span class=variable>stat</span> <span class=variable>f</span>) <span class=selfeval>9</span>)))
-</pre></div>
-<p class=noindent></p>
+</pre></div><p class=noindent></p>
 <p>
 
 If the dialect-configuration file supplies a definition for
 a name that is also defined in the input file,
 then the output file will contain the definition from
 the dialect-configuration file, not the input file.
-For example, if &#x2018;apple&#x2018; contained
+For example, if <code class=verbatim>apple</code> contained
 the definition</p>
 <p>
 
@@ -182,13 +175,12 @@ the definition</p>
 (<span class=keyword>define</span> <span class=variable>file-newer?</span>
   (<span class=keyword>lambda</span> (<span class=variable>f1</span> <span class=variable>f2</span>)
     <span class=comment>;checks if f1 is newer than f2</span>
-
     (<span class=variable>&#x3e;</span> (<span class=variable>file-or-directory-modify-seconds</span> <span class=variable>f1</span>)
        (<span class=variable>file-or-directory-modify-seconds</span> <span class=variable>f2</span>))))
-</pre></div>
-<p class=noindent>
+</pre></div><p class=noindent>
+
 we could put a competing Guile-specific definition
-in &#x2018;dialects/guile-apple&#x2018;:</p>
+in <code class=verbatim>dialects/guile&#x2011;apple</code>:</p>
 <p>
 
 </p>
@@ -197,20 +189,21 @@ in &#x2018;dialects/guile-apple&#x2018;:</p>
   (<span class=keyword>lambda</span> (<span class=variable>f1</span> <span class=variable>f2</span>)
     (<span class=variable>&#x3e;</span> (<span class=variable>vector-ref</span> (<span class=variable>stat</span> <span class=variable>f1</span>) <span class=selfeval>9</span>)
        (<span class=variable>vector-ref</span> (<span class=variable>stat</span> <span class=variable>f2</span>) <span class=selfeval>9</span>))))
-</pre></div>
-<p class=noindent>
-When Scmxlate translates &#x2018;apple&#x2018;, it will directly
+</pre></div><p class=noindent></p>
+<p>
+
+When Scmxlate translates <code class=verbatim>apple</code>, it will directly
 incorporate this Guile definition into the output file
-&#x2018;my-apple&#x2018; and won’t even attempt to translate
-the MzScheme definition of the same name in the
+<code class=verbatim>my&#x2011;apple</code> and won’t even attempt to translate
+the Racket definition of the same name in the
 input file.</p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_2.3"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.3">2.3&#xa0;&#xa0;Target dialects</a></h2>
-<p class=noindent>In the above, we used the symbol <code class=scheme><span class=variable>guile</span></code> in the
-&#x2018;dialects/dialects-supported.scm&#x2018; file to signal to
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.3">2.3&#xa0;&#xa0;Target dialects</a></h2><p class=noindent>
+In the above, we used the symbol <code class=scheme><span class=variable>guile</span></code> in the
+<code class=verbatim>dialects/dialects&#x2011;supported.scm</code> file to signal to
 Scmxlate that Guile is one of the dialects into which
 the package can be translated.  The list of dialect symbols
 recognized by Scmxlate is: <code class=scheme><span class=variable>bigloo</span></code>, <code class=scheme><span class=variable>chez</span></code>,
@@ -221,15 +214,6 @@ recognized by Scmxlate is: <code class=scheme><span class=variable>bigloo</span>
 <code class=scheme><span class=variable>scm</span></code>, <code class=scheme><span class=variable>scsh</span></code>, <code class=scheme><span class=variable>stk</span></code>, <code class=scheme><span class=variable>stklos</span></code>, <code class=scheme><span class=variable>sxm</span></code>,
 <code class=scheme><span class=variable>umbscheme</span></code>, <code class=scheme><span class=variable>ypsilon</span></code>.</p>
 <p>
-
-The symbols <code class=scheme><span class=variable>mzscheme</span></code> and <code class=scheme><span class=variable>plt</span></code>
-may both be used for PLT Scheme: two symbols are
-provided in case two distinct types of translations are
-called for &#x2014; with <code class=scheme><span class=variable>mzscheme</span></code> perhaps being used to create a
-self-sufficient MzScheme script file, and <code class=scheme><span class=variable>plt</span></code> to construct a
-PLT module library.</p>
-<p>
-
 The symbol <code class=scheme><span class=variable>cl</span></code> stands for
 Common Lisp.<a id="TAG:__tex2page_call_footnote_Temp_2"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_2">2</a></sup></span></p>
 <p>
@@ -252,8 +236,8 @@ writing dialect-configuration files.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_2.4"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.4">2.4&#xa0;&#xa0;User-configuration files</a></h2>
-<p class=noindent>Some packages need some configuration information that
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_2.4">2.4&#xa0;&#xa0;User-configuration files</a></h2><p class=noindent>
+Some packages need some configuration information that
 the package author cannot predict and that therefore
 can come only come from the user.  The information
 typically contains user preferences for global
@@ -265,9 +249,9 @@ Such user information can be placed in <em>
 user-configuration files</em> in the package directory.
 Each input file can have its own
 user-configuration file, and the latter’s name
-consists of the prefix &#x2018;scmxlate-&#x2018; followed by the
+consists of the prefix <code class=verbatim>scmxlate&#x2011;</code> followed by the
 name of the input file.  Thus the user configuration
-file for &#x2018;orange.scm&#x2018; is &#x2018;scmxlate-orange.scm&#x2018;.</p>
+file for <code class=verbatim>orange.scm</code> is <code class=verbatim>scmxlate&#x2011;orange.scm</code>.</p>
 <p>
 
 While the package author may not be able to predict the
@@ -296,20 +280,16 @@ target dialect is, when it is already running on it!
 Unfortunately, since the Scxmlate code is necessarily
 written in a style that must load in all Schemes, it
 cannot portably determine the identity of the
-particular Scheme dialect it is currently running on.</p>
-<p>
+particular Scheme dialect it is currently running on.</p><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_2"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_2">2</a></sup></span> Note that
 Scmxlate can readily determine if it’s running
 on Common Lisp (as opposed to Scheme), so it will not query the user
 for further “dialect” information.</p>
 </div>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-1.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-3.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-1.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-3.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

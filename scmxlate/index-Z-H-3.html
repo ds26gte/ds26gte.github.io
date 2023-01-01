@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20200131
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.6 :unix)
+Generated from index.tex by tex2page, v. 20230101
+Copyright (C) 1997-2023 Dorai Sitaram
+(running on Racket 8.6 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
@@ -12,19 +12,17 @@ http://ds26gte.github.io/tex2page/index.html
 scmxlate
 </title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=EB+Garamond" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Linden+Hill" />
 <link rel="stylesheet" href="index-Z-S.css" />
 <meta name=robots content="index,follow">
+
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-2.html">previous</a></span><span class=disable>, next</span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-2.html">previous</a></span><span class=disable>, next</span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_sec_3"></a>
-<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3">3&#xa0;&#xa0;The Scmxlate directives</a></h1>
-<p class=noindent></p>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3">3&#xa0;&#xa0;The Scmxlate directives</a></h1><p class=noindent></p>
 <p>
 
 In addition to Scheme code intended to either augment
@@ -38,21 +36,21 @@ of the output file.  These directives are now described.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_3.1"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.1">3.1&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-insert</span></a></h2>
-<p class=noindent>As we saw, Scheme code in the dialect- and
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.1">3.1&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-insert</span></a></h2><p class=noindent>
+As we saw, Scheme code in the dialect- and
 user-configuration files is transferred verbatim
 to the output file.  Sometimes, we need to put into the
 output file arbitrary text that is not Scheme code.
 For instance, we may want the output file to start with
 a “shell magic” line, so that it can be used as a
 shell script.  Such text can be written using the
-&#x2018;scmxlate-insert&#x2018; directive, which evaluates its
+<code class=verbatim>scmxlate&#x2011;insert</code> directive, which evaluates its
 subforms in Scheme and displays them on the output
 file.</p>
 <p>
 
-Eg, if you put the following at
-the very head of the &#x2018;guile-apple&#x2018; file:</p>
+E.g., if you put the following at
+the very head of the <code class=verbatim>guile&#x2011;apple</code> file:</p>
 <p>
 
 </p>
@@ -61,10 +59,10 @@ the very head of the &#x2018;guile-apple&#x2018; file:</p>
   <span class=selfeval>&#x22;#!/bin/sh
 exec guile -s $0 \&#x22;$@\&#x22;
 !#
-&#x22;&#x22;</span>)
-</pre></div>
-<p class=noindent>
-the output Guile file &#x2018;my-apple&#x2018; will start with the
+&#x22;</span>)
+</pre></div><p class=noindent>
+
+the output Guile file <code class=verbatim>my&#x2011;apple</code> will start with the
 line</p>
 <p>
 
@@ -73,9 +71,7 @@ line</p>
 #!/bin/sh
 exec guile -s $0 &#x22;$@&#x22;
 !#
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p>
 
 Note that the order of the code and <code class=scheme><span class=variable>scmxlate&#x2011;insert</span></code>
 text in the configuration file is preserved in
@@ -84,13 +80,13 @@ the output file.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_3.2"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.2">3.2&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-postamble</span></a></h2>
-<p class=noindent>Typically, the Scheme code and &#x2018;scmxlate-insert&#x2018;s
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.2">3.2&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-postamble</span></a></h2><p class=noindent>
+Typically, the Scheme code and <code class=verbatim>scmxlate&#x2011;insert</code>s
 specified in the dialect-configuration file occur in
 the output file before the translated counterpart of
 input file’s contents, and thus may be considered as
 <em>preamble</em> text.   Sometimes we need to add <em>
-postamble</em> text, ie, things that go <em>after</em> the
+postamble</em> text, i.e., things that go <em>after</em> the
 code from the input file.  In order to do this,
 place the directive</p>
 <p>
@@ -98,8 +94,8 @@ place the directive</p>
 </p>
 <div class=leftline><pre class=scheme>
 (<span class=variable>scmxlate-postamble</span>)
-</pre></div>
-<p class=noindent>
+</pre></div><p class=noindent>
+
 after any preamble text in the dialect-configuration
 file.  Everything following that, whether Scheme
 code or <code class=scheme><span class=variable>scmxlate&#x2011;insert</span></code>s, will show up in the
@@ -109,11 +105,11 @@ file.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_3.3"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.3">3.3&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-postprocess</span></a></h2>
-<p class=noindent>One can also specify actions that need to performed
-after the output file has been written.  Eg, let’s say
-we want the Guile output file for &#x2018;apple&#x2018; to be
-named &#x2018;pear&#x2018; rather than &#x2018;my-apple&#x2018;.  We can
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.3">3.3&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-postprocess</span></a></h2><p class=noindent>
+One can also specify actions that need to performed
+after the output file has been written.  E.g., let’s say
+we want the Guile output file for <code class=verbatim>apple</code> to be
+named <code class=verbatim>pear</code> rather than <code class=verbatim>my&#x2011;apple</code>.  We can
 enclose Scheme code for achieving this inside the
 Scmxlate directive <code class=scheme><span class=variable>scmxlate&#x2011;postprocess</span></code>:</p>
 <p>
@@ -121,47 +117,45 @@ Scmxlate directive <code class=scheme><span class=variable>scmxlate&#x2011;postp
 </p>
 <div class=leftline><pre class=scheme>
 (<span class=variable>scmxlate-postprocess</span>
-  (<span class=variable>rename-file</span> <span class=selfeval>&#x22;my-apple&#x22;&#x22;</span> <span class=selfeval>&#x22;pear&#x22;&#x22;</span>))
-</pre></div>
-<p class=noindent></p>
+  (<span class=variable>rename-file</span> <span class=selfeval>&#x22;my-apple&#x22;</span> <span class=selfeval>&#x22;pear&#x22;</span>))
+</pre></div><p class=noindent></p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_3.4"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.4">3.4&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-ignore-define</span></a></h2>
-<p class=noindent>Sometimes the input file has a definition that the
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.4">3.4&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-ignoredef</span></a></h2><p class=noindent>
+Sometimes the input file has a definition that the
 target dialect does not need, either because the target
 dialect already has it as a primitive, or because we
 wish to completely re-write input code that uses that
-definition.  Eg, if the target dialect is MzScheme,
+definition.  E.g., if the target dialect is Gambit,
 which already contains <code class=scheme><span class=variable>reverse!</span></code>, any definition of
 <code class=scheme><span class=variable>reverse!</span></code> in the input file can be ignored.</p>
 <p>
 
 </p>
 <div class=leftline><pre class=scheme>
-(<span class=variable>scmxlate-ignore-define</span> <span class=variable>reverse!</span>)
-</pre></div>
-<p class=noindent></p>
+(<span class=variable>scmxlate-ignoredef</span> <span class=variable>reverse!</span>)
+</pre></div><p class=noindent></p>
 <p>
 
-<code class=scheme><span class=variable>scmxlate&#x2011;ignore&#x2011;define</span></code> can have any number of
+<code class=scheme><span class=variable>scmxlate&#x2011;ignoredef</span></code> can have any number of
 arguments.  The definitions of all of them will be
 ignored.</p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_3.5"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.5">3.5&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-rename</span></a></h2>
-<p class=noindent>Sometimes we want to rename certain identifiers from
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.5">3.5&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-rename</span></a></h2><p class=noindent>
+Sometimes we want to rename certain identifiers from
 the input file.  One possible motivation is that
 these identifiers name nonstandard primitives that are
 provided under a different name in the target dialect.
-For instance, the Bigloo versions of the MzScheme
+For instance, the Bigloo versions of the Racket
 primitives <code class=scheme><span class=variable>current&#x2011;directory</span></code> and
 <code class=scheme><span class=variable>file&#x2011;or&#x2011;directory&#x2011;modify&#x2011;seconds</span></code> are <code class=scheme><span class=variable>chdir</span></code> and
 <code class=scheme><span class=variable>file&#x2011;modification&#x2011;time</span></code> respectively.  So if your
-MzScheme input file uses <code class=scheme><span class=variable>current&#x2011;directory</span></code> and
+Racket input file uses <code class=scheme><span class=variable>current&#x2011;directory</span></code> and
 <code class=scheme><span class=variable>file&#x2011;or&#x2011;directory&#x2011;modify&#x2011;seconds</span></code>, your Bigloo
 dialect-configuration file should contain</p>
 <p>
@@ -171,8 +165,7 @@ dialect-configuration file should contain</p>
 (<span class=variable>scmxlate-rename</span>
  (<span class=variable>current-directory</span> <span class=variable>chdir</span>)
  (<span class=variable>file-or-directory-modify-seconds</span> <span class=variable>file-modification-time</span>))
-</pre></div>
-<p class=noindent></p>
+</pre></div><p class=noindent></p>
 <p>
 
 Note the syntax: <code class=scheme><span class=variable>scmxlate&#x2011;rename</span></code> has any number of
@@ -183,22 +176,21 @@ replacement.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_3.6"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.6">3.6&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-rename-define</span></a></h2>
-<p class=noindent>Sometimes the input file includes a definition
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.6">3.6&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-ignoredef-rename</span></a></h2><p class=noindent>
+Sometimes the input file includes a definition
 for an operator that the target dialect already has as
-a primitive, but with a different name.   Eg, consider
+a primitive, but with a different name.   E.g., consider
 an input file that contains a definition for
-<code class=scheme><span class=variable>nreverse</span></code>.  MzScheme has the same operator but with
+<code class=scheme><span class=variable>nreverse</span></code>.  Gambit has the same operator but with
 name <code class=scheme><span class=variable>reverse!</span></code>.  You could add the following to
-the MzScheme dialect-configuration file:</p>
+the Gambit dialect-configuration file:</p>
 <p>
 
 </p>
 <div class=leftline><pre class=scheme>
-(<span class=variable>scmxlate-rename-define</span>
+(<span class=variable>scmxlate-ignoredef-rename</span>
   (<span class=variable>nreverse</span> <span class=variable>reverse!</span>))
-</pre></div>
-<p class=noindent></p>
+</pre></div><p class=noindent></p>
 <p>
 
 Note that this is shorthand for</p>
@@ -206,15 +198,16 @@ Note that this is shorthand for</p>
 
 </p>
 <div class=leftline><pre class=scheme>
-(<span class=variable>scmxlate-ignore-define</span> <span class=variable>nreverse</span>)
+(<span class=variable>scmxlate-ignoredef</span> <span class=variable>nreverse</span>)
 (<span class=variable>scmxlate-rename</span>
   (<span class=variable>nreverse</span> <span class=variable>reverse!</span>))
-</pre></div>
-<p class=noindent>
+</pre></div><p class=noindent></p>
+<p>
+
 </p>
 <a id="TAG:__tex2page_sec_3.7"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.7">3.7&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-prefix</span></a></h2>
-<p class=noindent>Another motivation for renaming is to avoid polluting
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.7">3.7&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-prefix</span></a></h2><p class=noindent>
+Another motivation for renaming is to avoid polluting
 namespace.  We may wish to have short names in the
 input file, but when we configure it, we want longer,
 “qualified” names.  It is possible to use
@@ -226,12 +219,12 @@ are all uniformly formed by adding a prefix.</p>
 </p>
 <div class=leftline><pre class=scheme>
 (<span class=variable>scmxlate-prefix</span>
-  <span class=selfeval>&#x22;regexp::&#x22;&#x22;</span>
+  <span class=selfeval>&#x22;regexp::&#x22;</span>
   <span class=variable>match</span>
   <span class=variable>substitute</span>
   <span class=variable>substitute-all</span>)
-</pre></div>
-<p class=noindent>
+</pre></div><p class=noindent>
+
 renames the identifiers <code class=scheme><span class=variable>match</span></code>, <code class=scheme><span class=variable>substitute</span></code>,
 and <code class=scheme><span class=variable>substitute&#x2011;all</span></code> to
 <code class=scheme><span class=variable>regexp::match</span></code>, <code class=scheme><span class=variable>regexp::substitute</span></code>, and
@@ -245,12 +238,12 @@ the identifiers that should be renamed.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_3.8"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.8">3.8&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-cond</span></a></h2>
-<p class=noindent>Sometimes we want parts of the dialect-configuration
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.8">3.8&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-cond</span></a></h2><p class=noindent>
+Sometimes we want parts of the dialect-configuration
 file to processed only when a condition holds.  For
 instance, we can use the following <code class=scheme><span class=keyword>cond</span></code>-like
 conditional in
-a dialect-configuration file for MzScheme to
+a dialect-configuration file to
 write out a  shell-magic
 line appropriate to the operating system:</p>
 <p>
@@ -258,12 +251,12 @@ line appropriate to the operating system:</p>
 </p>
 <div class=leftline><pre class=scheme>
 (<span class=variable>scmxlate-cond</span>
-  ((<span class=variable>eqv?</span> (<span class=variable>system-type</span>) <span class=variable>‘unix</span>)
+  ((<span class=variable>eqv?</span> (<span class=variable>system-type</span>) <span class=keyword>'</span><span class=variable>unix</span>)
    (<span class=variable>scmxlate-insert</span> <span class=global>*unix-shell-magic-line*</span>))
-  ((<span class=variable>eqv?</span> (<span class=variable>system-type</span>) <span class=variable>‘windows</span>)
+  ((<span class=variable>eqv?</span> (<span class=variable>system-type</span>) <span class=keyword>'</span><span class=variable>windows</span>)
    (<span class=variable>scmxlate-insert</span> <span class=global>*windows-shell-magic-line*</span>)))
-</pre></div>
-<p class=noindent>
+</pre></div><p class=noindent>
+
 where <code class=scheme><span class=global>*unix&#x2011;shell&#x2011;magic&#x2011;line*</span></code> and
 <code class=scheme><span class=global>*windows&#x2011;shell&#x2011;magic&#x2011;line*</span></code> are replaced by
 appropriate strings.</p>
@@ -276,8 +269,8 @@ Scheme <code class=scheme><span class=keyword>cond</span></code>’s <code class
 
 </p>
 <a id="TAG:__tex2page_sec_3.9"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.9">3.9&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-eval</span></a></h2>
-<p class=noindent>The test argument of <code class=scheme><span class=variable>scmxlate&#x2011;cond</span></code> and all the
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.9">3.9&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-eval</span></a></h2><p class=noindent>
+The test argument of <code class=scheme><span class=variable>scmxlate&#x2011;cond</span></code> and all the
 arguments of <code class=scheme><span class=variable>scmxlate&#x2011;insert</span></code> are evaluated in the
 Scheme global environment when Scmxlate is running.
 You can enhance this environment with
@@ -289,8 +282,8 @@ You can enhance this environment with
 (<span class=variable>scmxlate-eval</span>
   (<span class=keyword>define</span> <span class=global>*unix-shell-magic-line*</span> <span class=variable>&#x3c;...&#x3e;</span>)
   (<span class=keyword>define</span> <span class=global>*windows-shell-magic-line*</span> <span class=variable>&#x3c;...&#x3e;</span>))
-</pre></div>
-<p class=noindent>
+</pre></div><p class=noindent>
+
 where the <code class=scheme><span class=variable>&#x3c;...&#x3e;</span></code> stand for code that constructs
 the appropriate string, then we could use these
 variables as the arguments to <code class=scheme><span class=variable>scmxlate&#x2011;insert</span></code> in
@@ -303,18 +296,17 @@ It evaluates each of them in the given order.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_3.10"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.10">3.10&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-compile</span></a></h2>
-<p class=noindent><code class=scheme><span class=variable>scmxlate&#x2011;compile</span></code> can be used to tell if the output
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.10">3.10&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-compile</span></a></h2><p class=noindent>
+<code class=scheme><span class=variable>scmxlate&#x2011;compile</span></code> can be used to tell if the output
 file is to be compiled.  Typical usage is</p>
 <p>
 
 </p>
 <div class=leftline><pre class=scheme>
 (<span class=variable>scmxlate-compile</span> <span class=selfeval>#t</span>)      <span class=comment>;or</span>
-
 (<span class=variable>scmxlate-compile</span> <span class=selfeval>#f</span>)
-</pre></div>
-<p class=noindent>
+</pre></div><p class=noindent>
+
 The first forces compilation but only if the dialect
 supports it, and the second disables compilation even
 if the dialect supports it.  The argument of
@@ -329,8 +321,8 @@ the dialect supports compilation.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_3.11"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.11">3.11&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-include</span></a></h2>
-<p class=noindent>It is often convenient to keep in a separate file some
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.11">3.11&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-include</span></a></h2><p class=noindent>
+It is often convenient to keep in a separate file some
 of the portions of the text that should go into a
 dialect-configuration file.  Some definitions may
 naturally be already written down somewhere else, or
@@ -341,17 +333,17 @@ The call</p>
 
 </p>
 <div class=leftline><pre class=scheme>
-(<span class=variable>scmxlate-include</span> <span class=selfeval>&#x22;filename&#x22;&#x22;</span>)
-</pre></div>
-<p class=noindent>
-inserts the contents of <code class=scheme><span class=selfeval>&#x22;filename&#x22;&#x22;</span></code>
+(<span class=variable>scmxlate-include</span> <span class=selfeval>&#x22;filename&#x22;</span>)
+</pre></div><p class=noindent>
+
+inserts the contents of <code class=scheme><span class=selfeval>&#x22;filename&#x22;</span></code>
 into that location in the dialect-configuration file.</p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_3.12"></a>
-<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.12">3.12&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-uncall</span></a></h2>
-<p class=noindent>It is sometimes necessary to skip a top-level
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_3.12">3.12&#xa0;&#xa0;<span style="font-family: monospace">scmxlate-uncall</span></a></h2><p class=noindent>
+It is sometimes necessary to skip a top-level
 call when translating an input file.  For instance,
 the input file may be used as a script file whose
 scriptural action consists in calling a procedure
@@ -366,8 +358,8 @@ in the output file, add</p>
 </p>
 <div class=leftline><pre class=scheme>
 (<span class=variable>scmxlate-uncall</span> <span class=variable>main</span>)
-</pre></div>
-<p class=noindent>
+</pre></div><p class=noindent>
+
 to the configuration file.</p>
 <p>
 
@@ -377,13 +369,10 @@ will be disabled in the output.</p>
 <p>
 
 </p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-2.html">previous</a></span><span class=disable>, next</span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-2.html">previous</a></span><span class=disable>, next</span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-
