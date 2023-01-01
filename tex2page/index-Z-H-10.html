@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20221231
-Copyright (C) 1997-2022 Dorai Sitaram
+Generated from index.tex by tex2page, v. 20230101
+Copyright (C) 1997-2023 Dorai Sitaram
 (running on Racket 8.6 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
@@ -255,7 +255,7 @@ of Lisp:<p>
 (<span class=keyword>let</span> ((<span class=variable>x</span> (<span class=variable>ungroup</span> (<span class=variable>get-token</span>))))
   (<span class=keyword>unless</span> (<span class=variable>all-blanks-p</span> <span class=variable>x</span>)
     (<span class=variable>princ</span> (<span class=variable>code-char</span> <span class=selfeval>92</span>))
-    (<span class=variable>princ</span> <span class=selfeval>&#x22;space&#x22;&#x22;</span>)))
+    (<span class=variable>princ</span> <span class=selfeval>&#x22;space&#x22;</span>)))
 </pre></div><p class=noindent>
 
 </p>
@@ -266,7 +266,7 @@ of Lisp:<p>
 Note that we had to use <code class=scheme>(<span class=variable>code&#x2011;char</span> <span class=selfeval>92</span>)</code> to refer to the
 backslash character, as the <code class=verbatim>\eval</code> is inside a macro body and ‘<code class=verbatim>\</code>’
 is not and cannot be made a letter.
-(Otherwise we could have simply written <code class=scheme>(<span class=variable>princ</span> <span class=selfeval>&#x22;\\space&#x22;&#x22;</span>)</code>.)<p>
+(Otherwise we could have simply written <code class=scheme>(<span class=variable>princ</span> <span class=selfeval>&#x22;\\space&#x22;</span>)</code>.)<p>
 
 Later <code class=verbatim>\eval</code>s can
 use definitions introduced in previous <code class=verbatim>\eval</code>s,

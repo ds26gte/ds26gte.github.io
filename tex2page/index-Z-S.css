@@ -347,13 +347,12 @@ a:hover {
   font-size: 110%;
 }
 
-body { margin-top: 3.6134999999999997em; }
 body { margin-left: 9.3951em; }
+body { margin: auto; }
+body { margin-top: 3.6134999999999997em; margin-bottom: 3.6134999999999997em; }
 p { margin-bottom: 0pt; }
 p { text-indent: 20pt; }
 p { margin-top: 5pt; }
 .mathdisplay { margin-top: 12pt; margin-bottom: 12pt; }
 .navigation { color: black; font-style: normal; }
-
-body { margin: auto; }
 body { max-width: 400pt; }
