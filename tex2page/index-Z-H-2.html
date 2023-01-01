@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201115
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 8.2 :unix)
+Generated from index.tex by tex2page, v. 20221231
+Copyright (C) 1997-2022 Dorai Sitaram
+(running on Racket 8.6 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
@@ -12,26 +12,18 @@ http://ds26gte.github.io/tex2page/index.html
 TeX2page
 </title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=EB+Garamond" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Linden+Hill" />
 <link rel="stylesheet" href="index-Z-S.css" />
 <meta name=robots content="index,follow">
-
-<meta name=description content="Scheme, Common Lisp script for making Web pages
-from TeX documents">
-
-<meta name=author content="Dorai Sitaram">
-<!-- <link rev=made href="mailto:ds26gte at yahoo dot com"> -->
-
+ <meta name=description content="Scheme, Common Lisp script for making Web pages from TeX documents">  <meta name=author content="Dorai Sitaram"> <!-- <link rev=made href="mailto:ds26gte at yahoo dot com"> -->  
 </head>
 <body>
 <div>
-<div class=navigation><a class=hrefinternal href="index-Z-H-1.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-3.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div>
-<p>
+<div class=navigation><a class=hrefinternal href="index-Z-H-1.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-3.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div><p>
 </p>
 <a id="TAG:__tex2page_chap_2"></a>
-<h1 class=chapter><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_chap_2">2&#xa0;&#xa0;T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;commands  </a></h1>
-<p class=noindent><a id="TAG:__tex2page_index_38"></a><a id="TAG:__tex2page_index_40"></a>A T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;document is a text file.  Most of the text
+<h1 class=chapter><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_chap_2">2&#xa0;&#xa0;T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;commands  </a></h1><p class=noindent>
+<a id="TAG:__tex2page_index_38"></a><a id="TAG:__tex2page_index_40"></a>A T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;document is a text file.  Most of the text
 represents the content of the document, but a few
 characters are used specially to embed <em>markup
 commands</em> within the text.  When
@@ -76,18 +68,18 @@ math is translated as text and not image
 simply types the command’s name without the leading
 escape character.  This is sometimes a good choice, as
 in the following text (where <code class=verbatim>\sin</code> and <code class=verbatim>\cos</code> are not
-explicitly recognized by T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page):
+explicitly recognized by T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page):</p>
+<p>
+
 </p>
 <pre class=verbatim>
 $$\sin^2 x + \cos^2 x = 1$$
 </pre>
-<p class=noindent>
-This becomes</p>
-<p>
+This becomes<p>
 
 </p>
-<div class="mathdisplay centerline"><table style="margin-left:auto; margin-right:auto"><tr><td></td><td><table><tr><td class=centerline>sin <sup>2</sup> <em>x</em>  +  cos <sup>2</sup> <em>x</em>  =  1</td></tr></table></td><td></td></tr></table></div>
-<p class=noindent>
+<div class="mathdisplay centerline"><table style="margin-left:auto; margin-right:auto"><tr><td></td><td><table><tr><td class=centerline>sin <sup>2</sup> <em>x</em>  +  cos <sup>2</sup> <em>x</em>  =  1</td></tr></table></td><td></td></tr></table></div><p class=noindent>
+
 
 which is clear enough.</p>
 <p>
@@ -135,8 +127,8 @@ DVI, if your T<span style="position: relative; top: 0.5ex; margin-left: -0.1667e
 
 </p>
 <a id="TAG:__tex2page_sec_Temp_12"></a>
-<h2 class=section>Defining T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X-only and HTML-only text regions</h2>
-<p class=noindent><a id="TAG:__tex2page_tag_Temp_13"></a>
+<h2 class=section>Defining T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X-only and HTML-only text regions</h2><p class=noindent>
+<a id="TAG:__tex2page_tag_Temp_13"></a>
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page will attempt gamely to process any T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X
 definitions that you use in your document or in
 external macro files without the extension <code class=verbatim>.sty</code>,
@@ -159,11 +151,9 @@ such as <code class=verbatim>\shipout</code>:</p>
   ... <em> for DVI only</em> ...
 \fi
 </pre>
-<p class=noindent>
 For example, let’s say you want to have  your document load the macro file
 <code class=verbatim>manmac.tex</code>, but in a way that T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page will ignore
-it.  Use:</p>
-<p>
+it.  Use:<p>
 
 <a id="TAG:__tex2page_index_56"></a></p>
 <pre class=verbatim>
@@ -172,7 +162,6 @@ it.  Use:</p>
   \input manmac
 \fi
 </pre>
-<p class=noindent>
 However, there will also be many  commands that
 you do not want ignored in the HTML.  In such
 cases, while you may not be able to use the print-specific
@@ -181,31 +170,26 @@ can handle.  For instance, although it may be acceptable
 to ignore the print-specific macros of <code class=verbatim>manmac</code>, the
 <code class=verbatim>\bull</code> macro defined in <code class=verbatim>manmac</code> should be
 translated by T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page.  The following is a possible
-definition for T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page:</p>
-<p>
+definition for T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page:<p>
 
 <a id="TAG:__tex2page_index_58"></a></p>
 <pre class=verbatim>
 \def\bull{{\bf *}}
 </pre>
-<p class=noindent>
 Of course, we want this definition to be seen only
 by T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page, as we don’t want to override the
 original, more sophisticated <code class=verbatim>\vrule</code>-based definition as seen
 by T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X.
 We therefore make our
 definition HTML-only
-using a conditional:</p>
-<p>
+using a conditional:<p>
 
 </p>
 <pre class=verbatim>
 \ifx\shipout\UnDeFiNeD % HTML only
   \def\bull{{\bf *}}
 \fi
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p>
 
 <a id="TAG:__tex2page_index_60"></a><a id="TAG:__tex2page_index_62"></a>Note that the HTML-only text continues to use T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;syntax.
 To specify some of this text as <em>raw</em> HTML, enclose it
@@ -222,9 +206,7 @@ HTML-only definition of <code class=verbatim>\bull</code>:</p>
   \rawhtml&#x3c;span style=&#x22;color: hsl(0,100%,30%)&#x22;&#x3e;&#x26;spades;&#x3c;/span&#x3e;\endrawhtml
   }}
 \fi
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p>
 
 <a id="TAG:__tex2page_index_64"></a><a id="TAG:__tex2page_index_66"></a>One can put HTML-only definitions in separate files
 that are loaded just like regular T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;macro files.
@@ -241,8 +223,8 @@ is included in the T<span style="position: relative; top: 0.5ex; margin-left: -0
 
 </p>
 <a id="TAG:__tex2page_sec_Temp_14"></a>
-<h2 class=section>Paper and screen</h2>
-<p class=noindent>One could use HTML-only and DVI-only regions to cordon off
+<h2 class=section>Paper and screen</h2><p class=noindent>
+One could use HTML-only and DVI-only regions to cordon off
 any text at all, not just macro definitions.  E.g.,</p>
 <p>
 
@@ -256,7 +238,6 @@ a time-tested
 \fi
 technology.
 </pre>
-<p class=noindent>
 Use of these directives may seem to miss the point of
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page.  <code class=verbatim>\ifx\shipout\UnDeFiNeD</code> violates the
 principle of avoiding  writing <em>two</em> texts, one
@@ -266,13 +247,12 @@ principle of avoiding writing raw HTML at all.
 the guarantee that the output pages will be valid HTML.
 Nevertheless, these directives are often useful, especially when the
 text will profit from exploiting the presentational differences between
-HTML and DVI.</p>
-<p>
+HTML and DVI.<p>
 
 </p>
 <a id="TAG:__tex2page_sec_Temp_15"></a>
-<h2 class=section>The .t2p file</h2>
-<p class=noindent><a id="TAG:__tex2page_tag_Temp_16"></a>
+<h2 class=section>The .t2p file</h2><p class=noindent>
+<a id="TAG:__tex2page_tag_Temp_16"></a>
 <a id="TAG:__tex2page_index_68"></a>Before processing a T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;document, T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page will
 automatically load a file
 with the same basename as the T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;main file but with
@@ -305,14 +285,12 @@ accomplishing this:</p>
   ... <em> HTML-specific definitions</em> ...
   \PRIMdocument}
 </pre>
-<p class=noindent>
 This code, which goes in the <code class=verbatim>.t2p</code> file,
 redefines the <code class=verbatim>\document</code> command to include a
 hook that loads some <em>HTML-specific definitions</em>.
 Since the <code class=verbatim>\document</code> command is called right after
 the preamble, the definitions introduced by  the hook
-will shadow the preamble macros, as intended.</p>
-<p>
+will shadow the preamble macros, as intended.<p>
 
 Sample <code class=verbatim>.t2p</code> files may be found in the T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page
 distribution.</p>
@@ -338,13 +316,10 @@ L<span style="position: relative; bottom: 0.3ex; margin-left: -0.36em; margin-ri
 (as human readers can readily testify by reading just a
 few opening lines) to allow this disambiguation.</p>
 </div>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation><a class=hrefinternal href="index-Z-H-1.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-3.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div>
-<p>
+<div class=navigation><a class=hrefinternal href="index-Z-H-1.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-3.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div><p>
 </p>
 </div>
 </body>
 </html>
-

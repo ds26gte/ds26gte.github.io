@@ -336,14 +336,15 @@ a:hover {
   text-decoration: none;
 }
 
+/*
 .item {
   font-family: 'miltonian', sans-serif;
 }
+*/
 
 .oldstyle {
-  font-family: 'eb garamond', sans-serif;
-  /* font-family: 'sorts mill goudy', sans-serif; */
-  font-size: 120%;
+  font-family: 'linden hill', sans-serif;
+  font-size: 110%;
 }
 
 body { margin-top: 3.6134999999999997em; }
@@ -353,4 +354,6 @@ p { text-indent: 20pt; }
 p { margin-top: 0pt; }
 .mathdisplay { margin-top: 12pt; margin-bottom: 12pt; }
 .navigation { color: black; font-style: normal; }
+
+body { margin: auto; }
 body { max-width: 400pt; }

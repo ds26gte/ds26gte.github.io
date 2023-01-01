@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201115
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 8.2 :unix)
+Generated from index.tex by tex2page, v. 20221231
+Copyright (C) 1997-2022 Dorai Sitaram
+(running on Racket 8.6 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
@@ -12,26 +12,18 @@ http://ds26gte.github.io/tex2page/index.html
 TeX2page
 </title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=EB+Garamond" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Linden+Hill" />
 <link rel="stylesheet" href="index-Z-S.css" />
 <meta name=robots content="index,follow">
-
-<meta name=description content="Scheme, Common Lisp script for making Web pages
-from TeX documents">
-
-<meta name=author content="Dorai Sitaram">
-<!-- <link rev=made href="mailto:ds26gte at yahoo dot com"> -->
-
+ <meta name=description content="Scheme, Common Lisp script for making Web pages from TeX documents">  <meta name=author content="Dorai Sitaram"> <!-- <link rev=made href="mailto:ds26gte at yahoo dot com"> -->  
 </head>
 <body>
 <div>
-<div class=navigation><a class=hrefinternal href="index-Z-H-3.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-5.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div>
-<p>
+<div class=navigation><a class=hrefinternal href="index-Z-H-3.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-5.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div><p>
 </p>
 <a id="TAG:__tex2page_chap_4"></a>
-<h1 class=chapter><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_chap_4">4&#xa0;&#xa0;T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;commands with a difference</a></h1>
-<p class=noindent>Most T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;commands, whether from the format or from
+<h1 class=chapter><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_chap_4">4&#xa0;&#xa0;T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;commands with a difference</a></h1><p class=noindent>
+Most T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;commands, whether from the format or from
 macro files, are translated into an obvious HTML
 equivalent, and therefore need no further description
 than what is available in the T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;and L<span style="position: relative; bottom: 0.3ex; margin-left: -0.36em; margin-right: -0.15em; text-transform: uppercase"><small>a</small></span>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;manuals.
@@ -41,8 +33,8 @@ specially.  We now turn to these commands.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_Temp_19"></a>
-<h2 class=section>Multiple pages</h2>
-<p class=noindent><a id="TAG:__tex2page_tag_Temp_20"></a>
+<h2 class=section>Multiple pages</h2><p class=noindent>
+<a id="TAG:__tex2page_tag_Temp_20"></a>
 <a id="TAG:__tex2page_index_88"></a><a id="TAG:__tex2page_index_90"></a><a id="TAG:__tex2page_index_92"></a><a id="TAG:__tex2page_index_94"></a>Unlike T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X, T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page does not automatically split the document into
 pages at regular vertical lengths.
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page will start a new HTML page only at <code class=verbatim>\chapter</code>
@@ -76,8 +68,8 @@ navigation bar.  The nav bar is customizable if you set the
 
 </p>
 <a id="TAG:__tex2page_sec_Temp_21"></a>
-<h2 class=section>Table of contents</h2>
-<p class=noindent><a id="TAG:__tex2page_index_98"></a><a id="TAG:__tex2page_index_100"></a><a id="TAG:__tex2page_index_102"></a><a id="TAG:__tex2page_index_104"></a>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page recognizes L<span style="position: relative; bottom: 0.3ex; margin-left: -0.36em; margin-right: -0.15em; text-transform: uppercase"><small>a</small></span>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X’s <code class=verbatim>\tableofcontents</code> and
+<h2 class=section>Table of contents</h2><p class=noindent>
+<a id="TAG:__tex2page_index_98"></a><a id="TAG:__tex2page_index_100"></a><a id="TAG:__tex2page_index_102"></a><a id="TAG:__tex2page_index_104"></a>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page recognizes L<span style="position: relative; bottom: 0.3ex; margin-left: -0.36em; margin-right: -0.15em; text-transform: uppercase"><small>a</small></span>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X’s <code class=verbatim>\tableofcontents</code> and
 Eplain’s <code class=verbatim>\readtocfile</code>, both of which list the table
 of contents (ToC). Each section name in the ToC links to the
 page on which the section occurs.  In L<span style="position: relative; bottom: 0.3ex; margin-left: -0.36em; margin-right: -0.15em; text-transform: uppercase"><small>a</small></span>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X, the ToC
@@ -102,8 +94,8 @@ to furnish an HTML-only definition for it in terms of
 
 </p>
 <a id="TAG:__tex2page_sec_Temp_22"></a>
-<h2 class=section>Footnotes</h2>
-<p class=noindent><a id="TAG:__tex2page_index_110"></a><a id="TAG:__tex2page_index_112"></a><a id="TAG:__tex2page_index_114"></a><a id="TAG:__tex2page_index_116"></a>Both unnumbered and numbered footnotes — plain T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X’s
+<h2 class=section>Footnotes</h2><p class=noindent>
+<a id="TAG:__tex2page_index_110"></a><a id="TAG:__tex2page_index_112"></a><a id="TAG:__tex2page_index_114"></a><a id="TAG:__tex2page_index_116"></a>Both unnumbered and numbered footnotes — plain T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X’s
 <code class=verbatim>\footnote</code> and <code class=verbatim>\vfootnote</code>,
 LaTeX’s <code class=verbatim>\footnote</code>, Eplain’s
 <code class=verbatim>\numberedfootnote</code> — are recognized.
@@ -127,13 +119,11 @@ follows:</p>
   \global\advance\footnotenumber by 1
   \footnote{$^{\the\footnotenumber}$}}
 </pre>
-<p class=noindent>
 This definition could be made T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X-only, since
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page already recognizes <code class=verbatim>\numberedfootnote</code>.
 However, the T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;programming in this definition is
 recognized by T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page, so it does not matter if it
-overrides T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page’s internal definition.</p>
-<p>
+overrides T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page’s internal definition.<p>
 
 Indeed, one could define a
 more complicated macro such as the following
@@ -156,9 +146,7 @@ nine symbols:</p>
   \global\advance\footnotenumber by 1
   \ifnum\footnotenumber&#x3e;9 \global\footnotenumber=1 \fi
   \footnote{\fnsymbol{\the\footnotenumber}}}
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p>
 
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page produces the expected output for
 all the footnote macros, including the user-defined
@@ -167,8 +155,8 @@ ones.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_Temp_24"></a>
-<h2 class=section>Bibliographies</h2>
-<p class=noindent><a id="TAG:__tex2page_index_136"></a><a id="TAG:__tex2page_index_138"></a><a id="TAG:__tex2page_index_140"></a>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page
+<h2 class=section>Bibliographies</h2><p class=noindent>
+<a id="TAG:__tex2page_index_136"></a><a id="TAG:__tex2page_index_138"></a><a id="TAG:__tex2page_index_140"></a>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page
 can use the external program B<span style="text-transform: uppercase"><small>ib</small></span>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_33">33</a>,&#xa0;<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_36">36</a>,&#xa0;<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_39">39</a>] to
 generate bibliographies from bibliographic database
 (<code class=verbatim>.bib</code>) files.  The bibliography commands —
@@ -188,8 +176,8 @@ documentation&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page
 
 </p>
 <a id="TAG:__tex2page_sec_Temp_25"></a>
-<h2 class=section>Index generation</h2>
-<p class=noindent><a id="TAG:__tex2page_index_144"></a><a id="TAG:__tex2page_index_146"></a><a id="TAG:__tex2page_index_148"></a>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page can use the external program
+<h2 class=section>Index generation</h2><p class=noindent>
+<a id="TAG:__tex2page_index_144"></a><a id="TAG:__tex2page_index_146"></a><a id="TAG:__tex2page_index_148"></a>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page can use the external program
 MakeIndex&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_6">6</a>,&#xa0;<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_32">32</a>] to generate indices.
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page’s index-generation feature follows the same
 conventions as traditionally used with T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;and its
@@ -209,7 +197,7 @@ of course the HTML page numbers, and are furthermore
 links to them.  Two things need be noted:</p>
 <p>
 
-(<span class=item>i</span>) The link in the index goes directly to the spot where
+(i) The link in the index goes directly to the spot where
 the corresponding <code class=verbatim>\index</code> command was called.  This
 is convenient, especially as the target HTML page could
 be arbitrarily long, and it may not be as easy to hunt
@@ -217,7 +205,7 @@ for the occurrence of the indexed item as on a paper
 page.</p>
 <p>
 
-(<span class=item>ii</span>) An index entry could link to the same HTML page
+(ii) An index entry could link to the same HTML page
 several times.  In the print index, a page would be mentioned
 only once per entry, but since an HTML page could
 be equivalent to many contiguous paper pages, it makes
@@ -236,8 +224,8 @@ on MakeIndex.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_Temp_26"></a>
-<h2 class=section>Internal cross-references</h2>
-<p class=noindent><a id="TAG:__tex2page_index_162"></a><a id="TAG:__tex2page_index_164"></a><a id="TAG:__tex2page_index_166"></a><a id="TAG:__tex2page_index_168"></a>L<span style="position: relative; bottom: 0.3ex; margin-left: -0.36em; margin-right: -0.15em; text-transform: uppercase"><small>a</small></span>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X’s <code class=verbatim>\label</code> and <code class=verbatim>\ref</code> produce internal
+<h2 class=section>Internal cross-references</h2><p class=noindent>
+<a id="TAG:__tex2page_index_162"></a><a id="TAG:__tex2page_index_164"></a><a id="TAG:__tex2page_index_166"></a><a id="TAG:__tex2page_index_168"></a>L<span style="position: relative; bottom: 0.3ex; margin-left: -0.36em; margin-right: -0.15em; text-transform: uppercase"><small>a</small></span>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X’s <code class=verbatim>\label</code> and <code class=verbatim>\ref</code> produce internal
 cross-references in the HTML.  The <code class=verbatim>\label</code> <em>anchors</em>
 a location in the document, and a <code class=verbatim>\ref</code> anywhere
 else in the document links to it.  The link text used
@@ -259,17 +247,15 @@ an explicit link text as its second argument.</p>
 <pre class=verbatim>
 \xrtag{<em> alabel</em>}{<em> alabelvalue</em>}
 </pre>
-<p class=noindent>
 A reference to this tag, i.e.,
 <code class=verbatim>\ref{<em>alabel</em>}</code>, will typeset as
 <code class=verbatim><em>alabelvalue</em></code>, which will link to the location
-identified by the <code class=verbatim>\xrtag</code>.<a id="TAG:__tex2page_call_footnote_Temp_27"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_27">2</a></sup></span></p>
-<p>
+identified by the <code class=verbatim>\xrtag</code>.<a id="TAG:__tex2page_call_footnote_Temp_27"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_27">2</a></sup></span><p>
 
 </p>
 <a id="TAG:__tex2page_sec_Temp_28"></a>
-<h2 class=section><span style="color: #8601AF">C</span><span style="color: blue">o</span><span style="color: green">l</span><span style="color: yellow">o</span><span style="color: #FFA500">r</span><span style="color: red">s</span></h2>
-<p class=noindent><a id="TAG:__tex2page_tag_Temp_29"></a>
+<h2 class=section><span style="color: #8601AF">C</span><span style="color: blue">o</span><span style="color: green">l</span><span style="color: yellow">o</span><span style="color: #FFA500">r</span><span style="color: red">s</span></h2><p class=noindent>
+<a id="TAG:__tex2page_tag_Temp_29"></a>
 <a id="TAG:__tex2page_index_172"></a><a id="TAG:__tex2page_index_174"></a><a id="TAG:__tex2page_index_176"></a><a id="TAG:__tex2page_index_178"></a><a id="TAG:__tex2page_index_180"></a>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page recognizes the macros <code class=verbatim>\color</code>, <code class=verbatim>\colorbox</code>, and
 <code class=verbatim>\definecolor</code>&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_5">5</a>] provided by the L<span style="position: relative; bottom: 0.3ex; margin-left: -0.36em; margin-right: -0.15em; text-transform: uppercase"><small>a</small></span>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;package
 <code class=verbatim>color.sty</code>. It also recognizes the <em>color models</em>
@@ -297,16 +283,11 @@ models <code class=verbatim>hsl</code> and <code class=verbatim>Hsl</code>.</p>
 {\color[Hsl]{10, .36, .37} venetian red},
 and {\color{magenta} magenta}.
 </pre>
-<p class=noindent>
-produces</p>
-<p>
+produces<p>
 
 </p>
-<blockquote><div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
-</p>
+<blockquote><div class=smallskip></div><p></p><p class=noindent>
 
-<p class=noindent>
 <span style="color: #8a3324">burnt umber</span>,
 <span style="color: #b80000">brick red</span>,
 <span style="color: hsl(0,0%,41.17%)">dim gray</span>,
@@ -322,13 +303,10 @@ produces</p>
 <span style="color: hsl(10,36.0%,37.0%)">venetian red</span>,
 and <span style="color: magenta">magenta</span>.
 </p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-</blockquote><p>
-</p>
+</blockquote><p></p><p class=noindent>
 
-<p class=noindent>
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page doesn’t need either <code class=verbatim>color.sty</code> or <code class=verbatim>xcolor.sty</code> to
 process these commands, but you need these packages if you wish
 to see the color in your PDF output.
@@ -354,28 +332,19 @@ with the \colorbox{gray}{\color{thistle}thistle hair} seized his
 copies of \colorbox{dodgerblue}{\color{white} The \TeX book} and
 \colorbox{orangered}{\color{white} The \MF book}.
 </pre>
-<p class=noindent>
-produces</p>
-<p>
+produces<p>
 
 </p>
-<blockquote><div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
-</p>
+<blockquote><div class=smallskip></div><p></p><p class=noindent>
 
-<p class=noindent>
 Poor Mr Norrell could only watch on helplessly as the gentleman
 with the <span style="color: hsl(288,100%,71.0%)">thistle hair</span> seized his
 copies of <span style="background-color: hsl(210,100%,56.00000000000001%)"><span style="color: white">The T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>Xbook</span></span> and
 <span style="background-color: hsl(16,100%,50.0%)"><span style="color: white">The <span style="font-family: sans-serif">METAFONT</span>book</span></span>.
 </p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-</blockquote><p>
-</p>
-
-<p class=noindent></p>
+</blockquote><p></p><p class=noindent></p>
 <p>
 <a id="TAG:__tex2page_index_182"></a></p>
 <p>
@@ -393,21 +362,17 @@ them.</p>
 </p>
 <div class=footnote><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_23"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_23">1</a></sup></span> Footnotes are separated from the body of
-the page by a horizontal rule.</p>
-<p>
+the page by a horizontal rule.</p><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_27"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_27">2</a></sup></span> Eplain offers a version of <code class=verbatim>\xrtag</code> which it calls
 <code class=verbatim>\definexref</code>.  T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page recognizes Eplain’s <code class=verbatim>\refn</code> and
 <code class=verbatim>\xrefn</code> as synonyms for the <code class=verbatim>\ref</code> described
 above.  Eplain also has a <code class=verbatim>\ref</code> macro, but it
 behaves differently than a L<span style="position: relative; bottom: 0.3ex; margin-left: -0.36em; margin-right: -0.15em; text-transform: uppercase"><small>a</small></span>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X-like <code class=verbatim>\ref</code>.</p>
 </div>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation><a class=hrefinternal href="index-Z-H-3.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-5.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div>
-<p>
+<div class=navigation><a class=hrefinternal href="index-Z-H-3.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-5.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div><p>
 </p>
 </div>
 </body>
 </html>
-

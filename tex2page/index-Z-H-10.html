@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201115
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 8.2 :unix)
+Generated from index.tex by tex2page, v. 20221231
+Copyright (C) 1997-2022 Dorai Sitaram
+(running on Racket 8.6 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
@@ -12,27 +12,19 @@ http://ds26gte.github.io/tex2page/index.html
 TeX2page
 </title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=EB+Garamond" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Linden+Hill" />
 <link rel="stylesheet" href="index-Z-S.css" />
 <meta name=robots content="index,follow">
-
-<meta name=description content="Scheme, Common Lisp script for making Web pages
-from TeX documents">
-
-<meta name=author content="Dorai Sitaram">
-<!-- <link rev=made href="mailto:ds26gte at yahoo dot com"> -->
-
+ <meta name=description content="Scheme, Common Lisp script for making Web pages from TeX documents">  <meta name=author content="Dorai Sitaram"> <!-- <link rev=made href="mailto:ds26gte at yahoo dot com"> -->  
 </head>
 <body>
 <div>
-<div class=navigation><a class=hrefinternal href="index-Z-H-9.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-11.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div>
-<p>
+<div class=navigation><a class=hrefinternal href="index-Z-H-9.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-11.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div><p>
 </p>
 <a id="TAG:__tex2page_chap_10"></a>
-<h1 class=chapter><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_chap_10">10&#xa0;&#xa0;Extending T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;with Lisp</a></h1>
-<p class=noindent><a id="TAG:__tex2page_tag_Temp_77"></a>
-<a id="TAG:__tex2page_index_454"></a><a id="TAG:__tex2page_index_456"></a>The command <code class=verbatim>\eval</code> allows you to use arbitrary
+<h1 class=chapter><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_chap_10">10&#xa0;&#xa0;Extending T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;with Lisp</a></h1><p class=noindent>
+<a id="TAG:__tex2page_tag_Temp_77"></a>
+<a id="TAG:__tex2page_index_456"></a><a id="TAG:__tex2page_index_458"></a>The command <code class=verbatim>\eval</code> allows you to use arbitrary
 Lisp
 expressions, as opposed to just T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;macros, to
 guide the course of the typesetter.</p>
@@ -51,39 +43,29 @@ following complete document, <code class=verbatim>root2.tex</code>:</p>
 The square root of 2 is
 \eval{
 </pre>
-<p class=noindent>
-</p>
 <div class=leftline><pre class=scheme>
 (<span class=variable>princ</span> (<span class=variable>sqrt</span> <span class=selfeval>2</span>))
-</pre></div>
-<p class=noindent>
+</pre></div><p class=noindent>
+
 </p>
 <pre class=verbatim>
 }.
 
 \bye
 </pre>
-<p class=noindent>
 Running T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page on <code class=verbatim>root2.tex</code> produces
-the following HTML output:</p>
-<p>
+the following HTML output:<p>
 
 </p>
-<blockquote><div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
-</p>
+<blockquote><div class=smallskip></div><p></p><p class=noindent>
 
-<p class=noindent>
 The square root of 2 is
 1.4142135623730951.
 </p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-</blockquote><p>
-</p>
+</blockquote><p></p><p class=noindent>
 
-<p class=noindent>
 In effect, T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page processes the <code class=verbatim>\eval</code> call
 using Lisp, producing some output in an auxiliary
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;file, which is then re-inserted into the document at the location of
@@ -143,42 +125,26 @@ Typical calls to <code class=verbatim>\proto</code> are:</p>
 \proto{car}{c}{procedure}
 \proto{cdr}{c}{procedure}
 </pre>
-<p class=noindent>
-which typeset as follows:</p>
-<p>
+which typeset as follows:<p>
 
 </p>
-<blockquote><div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
-</p>
+<blockquote><div class=smallskip></div><p></p><p class=noindent>
 
-<p class=noindent>
-</p>
 
-<p class=noindent>
 <span style="font-family: monospace">(cons</span>&#x200b; &#x200b;<i>a d</i><span style="font-family: monospace">)</span><span style="margin-left: 2em"> </span>;procedure</p>
-<p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 <span style="font-family: monospace">(car</span>&#x200b; &#x200b;<i>c</i><span style="font-family: monospace">)</span><span style="margin-left: 2em"> </span>;procedure</p>
-<p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 <span style="font-family: monospace">(cdr</span>&#x200b; &#x200b;<i>c</i><span style="font-family: monospace">)</span><span style="margin-left: 2em"> </span>;procedure</p>
 <p>
 
 </p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-</blockquote><p>
-</p>
+</blockquote><p></p><p class=noindent>
 
-<p class=noindent>
 The macro <code class=verbatim>\proto</code> takes three arguments: the
 operator name; the metavariables for its operands;
 and the operator kind.  In particular, it typesets
@@ -195,58 +161,40 @@ space should not.  Thus,</p>
 <pre class=verbatim>
 \proto{gentemp}{}{procedure}
 </pre>
-<p class=noindent>
-should not produce</p>
-<p>
+should not produce<p>
 
 </p>
-<blockquote><div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
-</p>
+<blockquote><div class=smallskip></div><p></p><p class=noindent>
 
-<p class=noindent>
-</p>
 
-<p class=noindent>
 <span style="font-family: monospace">(gentemp</span>&#x200b; &#x200b;<i>&#x200b; &#x200b;</i><span style="font-family: monospace">)</span><span style="margin-left: 2em"> </span>;procedure</p>
 <p>
 
 </p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-</blockquote><p>
-</p>
+</blockquote><p></p><p class=noindent>
 
-<p class=noindent>
 but rather</p>
 <p>
 
 </p>
-<blockquote><div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
-</p>
+<blockquote><div class=smallskip></div><p></p><p class=noindent>
 
-<p class=noindent>
-</p>
 
-<p class=noindent>
 <span style="font-family: monospace">(gentemp</span><i></i><span style="font-family: monospace">)</span><span style="margin-left: 2em"> </span>;procedure</p>
 <p>
 
 </p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-</blockquote><p>
-</p>
+</blockquote><p></p><p class=noindent>
 
-<p class=noindent>
 (I.e., no space between <code class=verbatim>gentemp</code> and the
 closing paren.)</p>
 <p>
 
-<a id="TAG:__tex2page_index_458"></a></p>
+<a id="TAG:__tex2page_index_460"></a></p>
 <p>
 
 The <code class=verbatim>\proto</code> macro can be written
@@ -259,13 +207,11 @@ in T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-
   \hbox{{\tt(#1}\spaceifnotempty{#2}{\it#2}{\tt)}%
     \qquad ;#3}\par}
 </pre>
-<p class=noindent>
 where <code class=verbatim>\spaceifnotempty</code> is a helper macro
 that expands to a space only if its argument is
 not empty.  T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page can expand this definition
 for <code class=verbatim>\proto</code>, provided it knows how to deal
-with the <code class=verbatim>\spaceifnotempty</code>.</p>
-<p>
+with the <code class=verbatim>\spaceifnotempty</code>.<p>
 
 One way to write <code class=verbatim>\spaceifnotempty</code> in T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X
 is:</p>
@@ -281,54 +227,46 @@ is:</p>
   \templen\wd\tempbox
   \ifdim\templen&#x3e;0pt{\ }\fi}
 </pre>
-<p class=noindent>
 This piece of box-measuring contortion is
 too much for T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page’s mimicry of the T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;macro
 system.  However, it’s easy enough to  achieve the
 same effect using the string-processing capabilities
-of Lisp:</p>
-<p>
+of Lisp:<p>
 
 </p>
 <pre class=verbatim>
 \ifx\shipout\UnDeFiNeD
 \eval{
 </pre>
-<p class=noindent>
-</p>
 <div class=leftline><pre class=scheme>
 (<span class=keyword>defun</span> <span class=variable>all-blanks-p</span> (<span class=variable>s</span>)
   (<span class=variable>every</span> (<span class=keyword>lambda</span> (<span class=variable>c</span>) (<span class=keyword>or</span> (<span class=variable>char=</span> <span class=variable>c</span> <span class=selfeval>#\space</span>) (<span class=variable>char=</span> <span class=variable>c</span> <span class=selfeval>#\tab</span>)
                           (<span class=variable>not</span> (<span class=variable>graphic-char-p</span> <span class=variable>c</span>))))
         <span class=variable>s</span>))
-</pre></div>
-<p class=noindent>
+</pre></div><p class=noindent>
+
 </p>
 <pre class=verbatim>
 }
 
 \def\spaceifnotempty{\eval{
 </pre>
-<p class=noindent>
-</p>
 <div class=leftline><pre class=scheme>
 (<span class=keyword>let</span> ((<span class=variable>x</span> (<span class=variable>ungroup</span> (<span class=variable>get-token</span>))))
   (<span class=keyword>unless</span> (<span class=variable>all-blanks-p</span> <span class=variable>x</span>)
     (<span class=variable>princ</span> (<span class=variable>code-char</span> <span class=selfeval>92</span>))
     (<span class=variable>princ</span> <span class=selfeval>&#x22;space&#x22;&#x22;</span>)))
-</pre></div>
-<p class=noindent>
+</pre></div><p class=noindent>
+
 </p>
 <pre class=verbatim>
 }}
 \fi
 </pre>
-<p class=noindent>
 Note that we had to use <code class=scheme>(<span class=variable>code&#x2011;char</span> <span class=selfeval>92</span>)</code> to refer to the
 backslash character, as the <code class=verbatim>\eval</code> is inside a macro body and ‘<code class=verbatim>\</code>’
 is not and cannot be made a letter.
-(Otherwise we could have simply written <code class=scheme>(<span class=variable>princ</span> <span class=selfeval>&#x22;\\space&#x22;&#x22;</span>)</code>.)</p>
-<p>
+(Otherwise we could have simply written <code class=scheme>(<span class=variable>princ</span> <span class=selfeval>&#x22;\\space&#x22;&#x22;</span>)</code>.)<p>
 
 Later <code class=verbatim>\eval</code>s can
 use definitions introduced in previous <code class=verbatim>\eval</code>s,
@@ -345,8 +283,8 @@ code is evaluated inside the <code class=verbatim>tex2page</code> package.)</p>
 
 </p>
 <a id="TAG:__tex2page_sec_Temp_78"></a>
-<h2 class=section>eval without regard to HTML</h2>
-<p class=noindent><a id="TAG:__tex2page_tag_Temp_79"></a>
+<h2 class=section>eval without regard to HTML</h2><p class=noindent>
+<a id="TAG:__tex2page_tag_Temp_79"></a>
 The key thing to remember is that
 an <code class=verbatim>\eval</code>-call is replaced by whatever text the
 Lisp code in that <code class=verbatim>\eval</code>-call writes to its
@@ -376,13 +314,10 @@ T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-rig
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X</em>&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_44">44</a>].</p>
 <p>
 </p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation><a class=hrefinternal href="index-Z-H-9.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-11.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div>
-<p>
+<div class=navigation><a class=hrefinternal href="index-Z-H-9.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-11.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div><p>
 </p>
 </div>
 </body>
 </html>
-
