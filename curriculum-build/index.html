@@ -71,6 +71,13 @@
 <li><a href="#_pathway_narrative_files">5.6. Pathway narrative files</a></li>
 </ul>
 </li>
+<li><a href="#_converting_adoc_to_html">6. Converting .adoc to .html</a>
+<ul class="sectlevel2">
+<li><a href="#_racket_preprocessor">6.1. Racket preprocessor</a></li>
+<li><a href="#_calling_asciidoctor">6.2. Calling Asciidoctor</a></li>
+</ul>
+</li>
+<li><a href="#_postprocessing">7. Postprocessing</a></li>
 </ul>
 </div>
 </div>
@@ -101,11 +108,8 @@ i.e., <code>en-us</code> and <code>es-mx</code>.  The source tree thus looks lik
 <div class="literalblock">
 <div class="content">
 <pre>pathway/
-|
 `—— core/
-    |
     `—— langs/
-        |
         |—— en-us/
         `—— es-mx/</pre>
 </div>
@@ -179,11 +183,8 @@ natlangs for pathways.)</p>
 <div class="literalblock">
 <div class="content">
 <pre>lessons/
-|
 `—— simple-data-types/
-    |
     `—— langs/
-        |
         |—— en-us/
         `—— es-mx/</pre>
 </div>
@@ -295,11 +296,9 @@ as follows:</p>
 <div class="literalblock">
 <div class="content">
 <pre>distribution/
-|
 |—— en-us/
 |   `—— courses/
 |       `—— core/
-|
 `—— es-mx/
     `—— courses/
         `—— core/</pre>
@@ -805,10 +804,73 @@ file is added to <code>$ADOC_POSTPROC_NARRATIVEAUX_INPUT</code>.</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_converting_adoc_to_html">6. Converting .adoc to .html</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_racket_preprocessor">6.1. Racket preprocessor</h3>
+<div class="paragraph">
+<p>After all the <code>$ADOC&#8230;&#8203;</code> batch files have been populated, the
+build runs a Racket preprocessor on the entries in
+<code>$ADOCABLES_INPUT</code> to create the <code>.cached/*.asc</code> files.</p>
+</div>
+<div class="paragraph">
+<p>This is because the .adoc files created by the curriculum authors
+contains some directives in addition to the commands provided by
+raw AsciiDoc. A Racket program preprocesses these away to create
+a raw AsciiDoc file. This has the extension <code>.asc</code> and is
+situation in a <code>.cached</code> subdir alongside the <code>.adoc</code> file penned
+by the author.</p>
+</div>
+<div class="paragraph">
+<p>The additional keyword values provided in the <code>$ADOCABLES_INPUT</code>
+enables the Racket preprocessor to correctly address the
+different types of .adoc files we have (workbook pages, lesson
+plans, narratives, etc.).</p>
+</div>
+<div class="paragraph">
+<p>A single Racket call is sufficient to process all the entries in
+<code>$ADOCABLES_INPUT</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_calling_asciidoctor">6.2. Calling Asciidoctor</h3>
+<div class="paragraph">
+<p>Once the Racket preprocessor done, we have a bunch of
+<code>.cached/*.asc</code> files in the distribution, and the list of these
+we have already captured in the file <code>$ADOC_INPUT</code>.</p>
+</div>
+<div class="paragraph">
+<p>These files are now ready to be processed by Asciidoctor to
+produce the corresponding .html.</p>
+</div>
+<div class="paragraph">
+<p>The <code>asciidoctor</code> command can take a bunch of input files
+as command-line input, however, given the number of files we&#8217;re
+processing, we will be exceeding the maximum-arg limit. We
+therefore split the <code>$ADOC_INPUT</code> file into smaller files, each
+of at most 100 entries, and we run <code>asciidoctor</code> separately on
+these groups of 100.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_postprocessing">7. Postprocessing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the Racket preprocessing and the Asciidoctor runs complete,
+we have a bunch of <code>.cached/*.html</code> files in our <code>distribution</code>
+tree. It would be nice if these were all there is to it, but
+there is still a bunch of post-processing left. We use the other
+<code>$ADOC_POSTPROC_*</code> files to guide this post-processing.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-01-23 16:11:50 -0500
+Last updated 2023-01-23 16:40:52 -0500
 </div>
 </div>
 </body>
