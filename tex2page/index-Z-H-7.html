@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20230101
+Generated from index.tex by tex2page, v. 20230105
 Copyright (C) 1997-2023 Dorai Sitaram
 (running on Racket 8.6 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20230105">
 <title>
 TeX2page
 </title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Linden+Hill" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre&display=swap" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Linden+Hill&display=swap" />
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
  <meta name=description content="Scheme, Common Lisp script for making Web pages from TeX documents">  <meta name=author content="Dorai Sitaram"> <!-- <link rev=made href="mailto:ds26gte at yahoo dot com"> -->  
 </head>
 <body>
 <div>
-<div class=navigation><a class=hrefinternal href="index-Z-H-6.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-8.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div><p>
+<div class=navigation><a class=hrefinternal href="index-Z-H-6.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-8.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_95">Index</a></div><p>
 </p>
 <a id="TAG:__tex2page_chap_7"></a>
 <h1 class=chapter><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_chap_7">7&#xa0;&#xa0;Style</a></h1><p class=noindent>
-<a id="TAG:__tex2page_tag_Temp_49"></a>
-<a id="TAG:__tex2page_index_288"></a><a id="TAG:__tex2page_index_290"></a><a id="TAG:__tex2page_index_292"></a>You can use the T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page command <code class=verbatim>\inputcss</code> to have your HTML output use <em>style
+<a id="TAG:__tex2page_tag_Temp_50"></a>
+<a id="TAG:__tex2page_index_290"></a><a id="TAG:__tex2page_index_292"></a><a id="TAG:__tex2page_index_294"></a>You can use the T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page command <code class=verbatim>\inputcss</code> to have your HTML output use <em>style
 sheets</em>&#xa0;[<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_50">50</a>,&#xa0;<a class=hrefinternal href="index-Z-H-13.html#TAG:__tex2page_bib_34">34</a>].  E.g.,</p>
 <p>
 
@@ -54,7 +54,7 @@ body {
 </pre>
 As another example, here’s a way to convert itemized lists (aka
 “bulleted” or unordered or unnumbered lists) to
-enumerations<a id="TAG:__tex2page_call_footnote_Temp_50"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_50">1</a></sup></span>:<p>
+enumerations<a id="TAG:__tex2page_call_footnote_Temp_51"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_51">1</a></sup></span>:<p>
 
 </p>
 <pre class=verbatim>
@@ -67,7 +67,7 @@ You can get finer control on the look of your document
 by defining rules for some classes that are peculiar to
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page.  These special classes
 are discussed in this manual alongside the commands
-that they govern (p.&#xa0;<a class=hrefinternal href="index-Z-H-8.html#TAG:__tex2page_tag_Temp_60">8</a>).</p>
+that they govern (p.&#xa0;<a class=hrefinternal href="index-Z-H-8.html#TAG:__tex2page_tag_Temp_61">8</a>).</p>
 <p>
 
 You can have as many <code class=verbatim>\inputcss</code>’s in your
@@ -77,7 +77,7 @@ necessary to add that style sheets are completely
 optional.</p>
 <p>
 
-<a id="TAG:__tex2page_index_294"></a><a id="TAG:__tex2page_index_296"></a></p>
+<a id="TAG:__tex2page_index_296"></a><a id="TAG:__tex2page_index_298"></a></p>
 <p>
 
 You can also <em>embed</em> style sheet information
@@ -120,7 +120,7 @@ Here are two examples of using the latter:</p>
 </p>
 <pre class=verbatim>
 \ifx\shipout\UnDeFiNeD % HTML only
-\inputcss https://fonts.googleapis.com/css?family=Libre+Baskerville
+\inputcss https://fonts.googleapis.com/css?family=Libre+Baskerville&#x26;display=swap
 
 \cssblock
 body {
@@ -130,7 +130,7 @@ body {
 \fi
 </pre><p>
 
-<a id="TAG:__tex2page_index_298"></a>(ii) T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page has a CSS class <code class=verbatim>.oldstyle</code> in place for translating
+<a id="TAG:__tex2page_index_300"></a>(ii) T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page has a CSS class <code class=verbatim>.oldstyle</code> in place for translating
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X’s <code class=verbatim>\oldstyle</code> macro. However, for this to actually show up
 as something meaningful in your HTML, e.g.,</p>
 <p>
@@ -152,7 +152,7 @@ a font that has oldstyle numerals:</p>
 </p>
 <pre class=verbatim>
 \ifx\shipout\UnDeFiNeD % HTML only
-\input https://fonts.googleapis.com/css?family=Linden+Hill
+\inputcss https://fonts.googleapis.com/css?family=Linden+Hill&#x26;display=swap
 
 \cssblock
 .oldstyle {
@@ -167,7 +167,7 @@ a font that has oldstyle numerals:</p>
 <div class=footnoterule><hr></div><p>
 </p>
 <div class=footnote><p>
-<span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_50"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_50">1</a></sup></span> It’s easier for people to discuss an item
+<span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_51"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_51">1</a></sup></span> It’s easier for people to discuss an item
 explicitly marked ‘vii’ (or ‘7’, or ‘g’, or ‘&#x3b7;’) rather than
 having all of them count up to the seventh bullet. If you’re using
 more than three bullets per list, you’re shooting yourself in the
@@ -175,7 +175,7 @@ foot.</p>
 </div>
 <div class=smallskip></div><p>
 </p>
-<div class=navigation><a class=hrefinternal href="index-Z-H-6.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-8.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div><p>
+<div class=navigation><a class=hrefinternal href="index-Z-H-6.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-8.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_95">Index</a></div><p>
 </p>
 </div>
 </body>

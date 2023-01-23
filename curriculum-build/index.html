@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<title>The build spec</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>The build spec</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_the_document_source_layout">The document source layout</a>
+<ul class="sectlevel2">
+<li><a href="#_multiple_natural_languages">Multiple natural languages</a></li>
+<li><a href="#_multiple_proglangs">Multiple proglangs</a></li>
+<li><a href="#_pathway_narratives">Pathway narratives</a></li>
+<li><a href="#_lessons_associated_with_a_pathway">Lessons associated with a pathway</a>
+<ul class="sectlevel3">
+<li><a href="#_lesson_plans">Lesson plans</a></li>
+<li><a href="#_lesson_workbook_pages">Lesson workbook pages</a></li>
+<li><a href="#_adding_proglang_specific_source">Adding proglang-specific source</a></li>
+<li><a href="#_solution_mode_pages">Solution-mode pages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_the_distribution_layout">The distribution layout</a>
+<ul class="sectlevel2">
+<li><a href="#_the_distribution_subdir">The distribution subdir</a></li>
+<li><a href="#_proglang_associated_with_a_course">Proglang associated with a course</a></li>
+<li><a href="#_proglang_associated_with_a_distribution_lesson">Proglang associated with a distribution lesson</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_the_document_source_layout">The document source layout</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Our documentation sources are divided into <em>pathways</em> and <em>lessons</em>,
+which are in the subdirectories <code>pathways</code> and <code>lessons</code>
+respectively. A pathway is broadly a concatenation of a chosen
+ordered set of lessons (with some other pathway-specific resources
+thrown in).</p>
+</div>
+<div class="paragraph">
+<p>In the following, we&#8217;ll use <code>core</code> as an example
+pathway, and <code>simple-data-types</code> as an example lesson</p>
+</div>
+<div class="sect2">
+<h3 id="_multiple_natural_languages">Multiple natural languages</h3>
+<div class="paragraph">
+<p>First, we may want to create the course <code>core</code> in
+multiple natural languages, e.g, English (<code>en-us</code>) or Spanish
+(<code>es-mx</code>). To accommodate this, the source dir <code>pathway/core</code> has
+a <code>langs</code> subdir, with further subdirs for each natlang that we want:
+i.e., <code>en-us</code> and <code>es-mx</code>.  The source tree thus looks like:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pathway/
+`—— core/
+    `—— langs/
+        |—— en-us/
+        `—— es-mx/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll call the <code>pathway/core/langs/en-us</code> the <code>core</code> pathway&#8217;s
+root directory (for the <code>en-us</code> natlang).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_multiple_proglangs">Multiple proglangs</h3>
+<div class="paragraph">
+<p>By default, the programming language associated with a pathway is
+Pyret.</p>
+</div>
+<div class="paragraph">
+<p>We may also want to create the courses for our <code>core</code> pathway for
+multiple programming languages, e.g., <code>pyret</code> and <code>wescheme</code>. To
+accommodate this, we include the file <code>proglang.txt</code> in the
+pathway root directory (<code>pathways/core/langs/en-us/</code>), and list
+in it the various proglangs supported. Thus the contents of
+<code>proglang.txt</code> will look like:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pyret
+wescheme</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sometimes we have a pathway that has associated with it only a
+single proglang, but that proglang is not Pyret. As an example,
+consider the
+pathway <code>shipwrecks</code> which is defined for the proglang
+<code>spreadsheets</code>. In this case, we still need a
+<code>proglang.txt</code> file containing
+the single line</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>spreadsheets</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pathway_narratives">Pathway narratives</h3>
+<div class="paragraph">
+<p>The pathway root directory has a file <code>index.adoc</code>, which
+specifies the
+<em>pathway narrative</em>.  This gets converted to <code>index.shtml</code> in the
+course root directory. The pathway root also has a <code>resources/</code>
+subdirectory that houses additional documentation that is
+specific to teachers. The pathway root may also contain subdirs
+for <code>front-matter</code>, <code>back-matter</code>, and <code>images</code>: the former two
+add flanking matter to the final workbook for the pathway&#8217;s
+course, while <code>images</code> is a convenient location for image
+subfiles.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lessons_associated_with_a_pathway">Lessons associated with a pathway</h3>
+<div class="paragraph">
+<p>The pathway root directory has a file <code>lesson-order.txt</code> listing
+the names of the lessons associated with it, in order. These
+lessons occur as directories in the <code>lessons/</code> directory in the
+repo top dir.</p>
+</div>
+<div class="paragraph">
+<p>As with pathways, lessons can be in different natlangs and
+proglangs. To accommodate multiple natlangs, each lesson has a
+<code>langs</code> subdir, with subdirs (e.g., <code>en-us</code>, <code>es-mx</code>) for the
+different natlangs. (This is similar to how we specify multiple
+natlangs for pathways.)</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>lessons/
+`—— simple-data-types/
+    `—— langs/
+        |—— en-us/
+        `—— es-mx/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll call <code>lessons/simple-data-types/langs/en-us</code> the lesson root
+directory.</p>
+</div>
+<div class="paragraph">
+<p>As for pathways, a lesson root directory can contain a
+<code>proglang.txt</code> listing the proglang(s) associatable with it. If
+no <code>proglang.txt</code> is present, the (single) proglang is assumed to
+be <code>pyret</code>.</p>
+</div>
+<div class="paragraph">
+<p>If more than one proglang is needed, or if the single proglang is
+something other than <code>pyret</code>, list it in <code>proglang.txt</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="_lesson_plans">Lesson plans</h4>
+<div class="paragraph">
+<p>The lesson counterpart to the pathway narrative is the <code>lesson
+plan</code>, given as an <code>index.adoc</code> file in the lesson root
+directory. This gets converted to <code>index.shtml</code> in the
+distribution lesson root. Here too, an <code>images/</code> subdir is used
+for image subfiles.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_lesson_workbook_pages">Lesson workbook pages</h4>
+<div class="paragraph">
+<p>A lesson typically contains a <code>pages/</code> subdir, which consist of
+AsciiDoc sources for the pages in that lesson. The <code>pages/</code>
+subdir has a file <code>workbook-pages.txt</code>, listing all these pages
+in order. These pages get converted to corresponding <code>.html</code>
+files in the <code>pages/</code> subdir for the lesson in the distribution.</p>
+</div>
+<div class="paragraph">
+<p>A lesson may also contain other subdirs, even within its
+<code>pages/</code>. These may contain files meant for inclusion in the main
+pages files.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_adding_proglang_specific_source">Adding proglang-specific source</h4>
+<div class="paragraph">
+<p>We&#8217;ve seen that both pathways and lessons may have <code>proglang.txt</code>
+identifying multiple proglangs as vehicles for that
+course/lesson. Proglang-specific material is specified in the
+source in two ways:</p>
+</div>
+<div class="paragraph">
+<p>1: We use the directive <code>@ifproglang{pyret}{&#8230;&#8203;}</code> to specify source fragments
+meant for the proglang <code>pyret</code>.</p>
+</div>
+<div class="paragraph">
+<p>2: Especially in the <code>pages/</code> subdirs, we use further
+subdirs named for the proglang to add files that would shadow the
+main files. Thus for a file <code>pages/abc.adoc</code>, the file
+<code>pages/pyret/abc.adoc</code> would shadow it for <code>pyret</code>, and file
+<code>pages/wescheme/abc.adoc</code> would shadow it for <code>wescheme</code>. If we
+provide shadowing files for all relevant proglangs, the main file
+doesn&#8217;t need to exist.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_solution_mode_pages">Solution-mode pages</h4>
+<div class="paragraph">
+<p>The <code>pages/</code> subdir in a lesson contributes to the student
+version of the final workbook. However, we also have solutions
+workbook that is intended for teachers. We have a
+<code>solution-pages/</code> subdir alongside <code>pages/</code>, which contains files
+that will shadow the similarly named student pages.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_distribution_layout">The distribution layout</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>built</em> version of a pathway&#8201;&#8212;&#8201;called a <em>course</em>&#8201;&#8212;&#8201;is
+created in a subdirectory called <code>courses</code> under the
+<code>distribution</code> subdir. The built version of a lesson&#8201;&#8212;&#8201;we&#8217;ll
+just call it the distribution lesson&#8201;&#8212;&#8201;is similarly created in a
+subdir called <code>lessons</code>, also under the <code>distribution</code> suddir.</p>
+</div>
+<div class="sect2">
+<h3 id="_the_distribution_subdir">The distribution subdir</h3>
+<div class="paragraph">
+<p>The <code>courses</code> and <code>lessons</code> are not direct subdirs of
+<code>distribution</code>, in order to accommodate different versions of
+pathways and lessons based on the natlang used. To effect this,
+the <code>distribution</code> has subdirs for each natlang (called <code>en-us</code>,
+<code>es-mx</code>, etc.), and it is the <code>courses</code> and <code>lessons</code> subdirs of
+these that contain the natlang-specific courses and lessons.
+Thus, the two natlang versions of the pathway <code>core</code> are laid out
+as follows:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>distribution/
+|—— en-us/
+|   `—— courses/
+|       `—— core/
+`—— es-mx/
+    `—— courses/
+        `—— core/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that we use the same name <code>core</code> for the two natlang
+versions in the distribution. We can do this because they reside
+inside two different subtrees <code>distribution/en-us</code>
+<code>distribution/es-mx</code> and thus don&#8217;t risk a name clash.</p>
+</div>
+<div class="paragraph">
+<p>As with pathways, so with lessons: To accommodate multiple
+natlangs, the lessons go into the <code>lessons</code> subdir of their
+natlang. E.g., for the lesson <code>simple-data-types</code>, we have:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>distribution/
+|—— en-us/
+|   `—— lessons/
+|       `—— simple-data-types/
+`—— es-mx/
+    `—— lessons/
+        `—— simple-data-types/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the following, we will assume the prevailiing natural language is
+<code>en-us</code>. For other natlangs, the setup is exactly the same but in
+the appropriate natlang-based subtree.</p>
+</div>
+<div class="paragraph">
+<p>Also, we will call <code>distribution/en-us/courses/core</code> the
+course root directory (of the English version of the <code>core</code>
+pathway). The dir
+<code>distribution/en-us/lessons/simple-date-types</code> is the
+distribution lesson root directory (of the English version of the
+<code>simple-data-types</code> lesson).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_proglang_associated_with_a_course">Proglang associated with a course</h3>
+<div class="paragraph">
+<p>Typically&#8201;&#8212;&#8201;as seen in the above example&#8201;&#8212;&#8201;the built name of the
+pathway and the lesson are the same as their names in the source,
+but not always.</p>
+</div>
+<div class="paragraph">
+<p>By default, the programming language associated with a course is
+<code>pyret</code>. This is marked in the course root directory as the 0-length
+file <code>.cached/.proglang-pyret</code>.  (I.e.,
+<code>distribution/en-us/courses/core/.cached/.proglang-pyret</code>.)</p>
+</div>
+<div class="paragraph">
+<p>But
+we as have seen, a pathway may have a <code>proglang.txt</code> listing a
+different or multiple proglangs.</p>
+</div>
+<div class="paragraph">
+<p>This causes two different courses for <code>core</code> to be created in
+<code>distribution/en-us/courses</code>. We continue to use the unadorned
+pathway name, <code>core</code>, for the Pyret version. For other proglangs,
+the course dir&#8217;s name uses the proglang as a hyphenated suffix.
+Thus for the WeScheme version, the course is entitled
+<code>core-wescheme</code>. I.e., the two course root directories are</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>distribution/en-us/courses/core
+distribution/en-us/courses/core-wescheme</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These two directories have their own proglang marker files, i.e.,
+<code>.cached/.proglang-pyret</code> (as before)
+and
+<code>.cached/.proglang-wescheme</code>.</p>
+</div>
+<div class="paragraph">
+<p>We have pathways whose <code>proglang.txt</code> contains only a single
+proglang, but that proglang isn&#8217;t Pyret, e.g., the pathway
+<code>shipwrecks</code> whose <code>proglang.txt</code> contains only <code>spreadsheets</code>.
+In such a case,
+the built course is simply called <code>shipwrecks</code> rather
+than <code>shipwrecks-spreadsheets</code>, since there is no Pyret version
+to distinguish it from.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_proglang_associated_with_a_distribution_lesson">Proglang associated with a distribution lesson</h3>
+<div class="paragraph">
+<p>As with pathways, lessons can be in different proglangs, also
+specified with <code>proglang.txt</code>. If no <code>proglang.txt</code> if present,
+the (single) proglang is assumed to be <code>pyret</code>.  The distribution
+version of the non-Pyret lesson have the proglang as hyphenated
+suffix, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>simple-data-types-wescheme</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Again, as with pathways, a proglang-marker file
+<code>.cached/.proglang-wesceme</code> is placed in the distribution lesson
+root to identify it as a lesson using <code>wescheme</code>.</p>
+</div>
+<div class="paragraph">
+<p>Note that the pathway mentions in its <code>lesson-order.txt</code> the
+lesson names in unadorned form. On building, a pathway becomes a
+course, and the distribution lessons associated with it are the
+right versions corrected for proglang. Thus the pathway <code>core</code>
+has <code>simple-data-types</code> as a constituent lesson. Moving over to
+the built <code>distribution</code>, the course <code>core</code> (Pyret) includes the lesson
+<code>simple-data-types</code> (Pyret), and the course <code>core-wescheme</code>
+includes the lesson <code>simple-data-types-wescheme</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-01-22 12:56:58 -0500
+</div>
+</div>
+</body>
+</html>

@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20230101
+Generated from index.tex by tex2page, v. 20230105
 Copyright (C) 1997-2023 Dorai Sitaram
 (running on Racket 8.6 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20230105">
 <title>
 TeX2page
 </title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Linden+Hill" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre&display=swap" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Linden+Hill&display=swap" />
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
  <meta name=description content="Scheme, Common Lisp script for making Web pages from TeX documents">  <meta name=author content="Dorai Sitaram"> <!-- <link rev=made href="mailto:ds26gte at yahoo dot com"> -->  
 </head>
 <body>
 <div>
-<div class=navigation><a class=hrefinternal href="index-Z-H-1.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-3.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div><p>
+<div class=navigation><a class=hrefinternal href="index-Z-H-1.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-3.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_95">Index</a></div><p>
 </p>
 <a id="TAG:__tex2page_chap_2"></a>
 <h1 class=chapter><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_chap_2">2&#xa0;&#xa0;T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;commands  </a></h1><p class=noindent>
@@ -64,7 +64,7 @@ there are plenty of commands in both the format proper
 and the vast arena of macro files and packages that
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page does not know.  If in math mode (assuming
 math is translated as text and not image
-(p.&#xa0;<a class=hrefinternal href="index-Z-H-6.html#TAG:__tex2page_tag_Temp_35">6</a>)), T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page
+(p.&#xa0;<a class=hrefinternal href="index-Z-H-6.html#TAG:__tex2page_tag_Temp_36">6</a>)), T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page
 simply types the command’s name without the leading
 escape character.  This is sometimes a good choice, as
 in the following text (where <code class=verbatim>\sin</code> and <code class=verbatim>\cos</code> are not
@@ -140,10 +140,10 @@ to have T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; ma
 is  to use
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;conditionals, and indeed to exploit the
 fact that T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page does not know certain T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;commands
-such as <code class=verbatim>\shipout</code>:</p>
+such as <code class=verbatim>\shipout</code>:<a id="TAG:__tex2page_call_footnote_Temp_14"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_14">2</a></sup></span></p>
 <p>
 
-<a id="TAG:__tex2page_index_48"></a><a id="TAG:__tex2page_index_50"></a><a id="TAG:__tex2page_index_52"></a><a id="TAG:__tex2page_index_54"></a></p>
+<a id="TAG:__tex2page_index_50"></a><a id="TAG:__tex2page_index_52"></a><a id="TAG:__tex2page_index_54"></a><a id="TAG:__tex2page_index_56"></a></p>
 <pre class=verbatim>
 \ifx\shipout\UnDeFiNeD
   ... <em> for HTML only</em> ...
@@ -155,7 +155,7 @@ For example, let’s say you want to have  your document load the macro file
 <code class=verbatim>manmac.tex</code>, but in a way that T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page will ignore
 it.  Use:<p>
 
-<a id="TAG:__tex2page_index_56"></a></p>
+<a id="TAG:__tex2page_index_58"></a></p>
 <pre class=verbatim>
 \ifx\shipout\UnDeFiNeD
 \else
@@ -172,7 +172,7 @@ to ignore the print-specific macros of <code class=verbatim>manmac</code>, the
 translated by T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page.  The following is a possible
 definition for T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page:<p>
 
-<a id="TAG:__tex2page_index_58"></a></p>
+<a id="TAG:__tex2page_index_60"></a></p>
 <pre class=verbatim>
 \def\bull{{\bf *}}
 </pre>
@@ -191,7 +191,7 @@ using a conditional:<p>
 \fi
 </pre><p>
 
-<a id="TAG:__tex2page_index_60"></a><a id="TAG:__tex2page_index_62"></a>Note that the HTML-only text continues to use T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;syntax.
+<a id="TAG:__tex2page_index_62"></a><a id="TAG:__tex2page_index_64"></a>Note that the HTML-only text continues to use T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;syntax.
 To specify some of this text as <em>raw</em> HTML, enclose it
 in <code class=verbatim>\rawhtml</code> <code class=verbatim>...</code> <code class=verbatim>\endrawhtml</code>.   With
 <code class=verbatim>\rawhtml</code>, we can
@@ -208,7 +208,7 @@ HTML-only definition of <code class=verbatim>\bull</code>:</p>
 \fi
 </pre><p>
 
-<a id="TAG:__tex2page_index_64"></a><a id="TAG:__tex2page_index_66"></a>One can put HTML-only definitions in separate files
+<a id="TAG:__tex2page_index_66"></a><a id="TAG:__tex2page_index_68"></a>One can put HTML-only definitions in separate files
 that are loaded just like regular T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;macro files.
 Indeed, one such external file, <code class=verbatim>texi2p.tex</code>, is used
 by T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page to process Texinfo
@@ -222,7 +222,7 @@ is included in the T<span style="position: relative; top: 0.5ex; margin-left: -0
 <p>
 
 </p>
-<a id="TAG:__tex2page_sec_Temp_14"></a>
+<a id="TAG:__tex2page_sec_Temp_15"></a>
 <h2 class=section>Paper and screen</h2><p class=noindent>
 One could use HTML-only and DVI-only regions to cordon off
 any text at all, not just macro definitions.  E.g.,</p>
@@ -250,10 +250,10 @@ text will profit from exploiting the presentational differences between
 HTML and DVI.<p>
 
 </p>
-<a id="TAG:__tex2page_sec_Temp_15"></a>
+<a id="TAG:__tex2page_sec_Temp_16"></a>
 <h2 class=section>The .t2p file</h2><p class=noindent>
-<a id="TAG:__tex2page_tag_Temp_16"></a>
-<a id="TAG:__tex2page_index_68"></a>Before processing a T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;document, T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page will
+<a id="TAG:__tex2page_tag_Temp_17"></a>
+<a id="TAG:__tex2page_index_70"></a>Before processing a T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;document, T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page will
 automatically load a file
 with the same basename as the T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;main file but with
 extension <code class=verbatim>.t2p</code>, <em>if</em> this file exists.  This
@@ -277,7 +277,7 @@ appropriate for HTML.  Here is a technique for
 accomplishing this:</p>
 <p>
 
-<a id="TAG:__tex2page_index_70"></a><a id="TAG:__tex2page_index_72"></a></p>
+<a id="TAG:__tex2page_index_72"></a><a id="TAG:__tex2page_index_74"></a></p>
 <pre class=verbatim>
 \let\PRIMdocument\document
 
@@ -314,11 +314,18 @@ choose the correct behavior based on which format it
 thinks the overall document is in.  The plain T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;and
 L<span style="position: relative; bottom: 0.3ex; margin-left: -0.36em; margin-right: -0.15em; text-transform: uppercase"><small>a</small></span>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;document structures are sufficiently different
 (as human readers can readily testify by reading just a
-few opening lines) to allow this disambiguation.</p>
+few opening lines) to allow this disambiguation.</p><p>
+<span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_14"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_14">2</a></sup></span> <a id="TAG:__tex2page_index_48"></a>Here, <code class=verbatim>\UnDeFiNeD</code> is chosen because it is
+a control sequence that is (presumably) undefined. If perchance
+you defined it, replace it with something else, e.g.,
+<code class=verbatim>\forHTMLonly</code>, <code class=verbatim>\ForTheWeb</code>. If using a modern PDF-producing
+T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X, you can use <code class=verbatim>\ifdefined</code>, and thus avoid having to come up
+with arbitrary undefined control sequences. Note that with
+<code class=verbatim>\ifdefined\shipout</code> it’s the else-branch that’s HTML-only.</p>
 </div>
 <div class=smallskip></div><p>
 </p>
-<div class=navigation><a class=hrefinternal href="index-Z-H-1.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-3.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div><p>
+<div class=navigation><a class=hrefinternal href="index-Z-H-1.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-3.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_95">Index</a></div><p>
 </p>
 </div>
 </body>

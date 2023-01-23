@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20230101
+Generated from index.tex by tex2page, v. 20230105
 Copyright (C) 1997-2023 Dorai Sitaram
 (running on Racket 8.6 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20230105">
 <title>
 TeX2page
 </title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Linden+Hill" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre&display=swap" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Linden+Hill&display=swap" />
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
  <meta name=description content="Scheme, Common Lisp script for making Web pages from TeX documents">  <meta name=author content="Dorai Sitaram"> <!-- <link rev=made href="mailto:ds26gte at yahoo dot com"> -->  
 </head>
 <body>
 <div>
-<div class=navigation><a class=hrefinternal href="index.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-2.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div><p>
+<div class=navigation><a class=hrefinternal href="index.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-2.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_95">Index</a></div><p>
 </p>
 <a id="TAG:__tex2page_chap_1"></a>
 <h1 class=chapter><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_chap_1">1&#xa0;&#xa0;Running T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page</a></h1><p class=noindent>
@@ -106,7 +106,7 @@ auxiliary HTML pages in addition to
 the main HTML page <code class=verbatim><em>jobname</em>.html</code> (especially
 for larger documents).  The auxiliary HTML pages
 are reachable from <code class=verbatim><em>jobname</em>.html</code>
-by navigation links (p.&#xa0;<a class=hrefinternal href="index-Z-H-4.html#TAG:__tex2page_tag_Temp_20">4</a>).  As  each
+by navigation links (p.&#xa0;<a class=hrefinternal href="index-Z-H-4.html#TAG:__tex2page_tag_Temp_21">4</a>).  As  each
 auxiliary HTML page is completed, the log will show the
 bracketed numbers <code class=verbatim>[1]</code>, <code class=verbatim>[2]</code>, etc.  The <code class=verbatim>[0]</code>
 in this log refers to the only HTML file created, viz.,
@@ -191,7 +191,7 @@ typically permitted for <code class=verbatim>TEXINPUTS</code>.</p>
 
 Error recovery in T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page is also exactly analogous to
 T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X, but we will postpone that discussion to
-p.&#xa0;<a class=hrefinternal href="index-Z-H-11.html#TAG:__tex2page_tag_Temp_80">11</a>.</p>
+p.&#xa0;<a class=hrefinternal href="index-Z-H-11.html#TAG:__tex2page_tag_Temp_81">11</a>.</p>
 <p>
 
 </p>
@@ -248,7 +248,7 @@ using the Scheme version of T<span style="position: relative; top: 0.5ex; margin
 <a id="TAG:__tex2page_sec_Temp_10"></a>
 <h2 class=section>Specifying a target directory  </h2><p class=noindent>
 <a id="TAG:__tex2page_index_32"></a><a id="TAG:__tex2page_index_34"></a>By default, T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page generates the output HTML files
-and other auxiliary files (p.&#xa0;<a class=hrefinternal href="index-Z-H-15.html#TAG:__tex2page_tag_Temp_93">15</a>) in the
+and other auxiliary files (p.&#xa0;<a class=hrefinternal href="index-Z-H-15.html#TAG:__tex2page_tag_Temp_94">15</a>) in the
 current working directory.  You can tell T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page
 to place its output and auxiliary files in a different
 directory and thus avoid cluttering up your working
@@ -292,7 +292,7 @@ specifically mean the “plain” format. We will use “Lisp” to refer
 to the implementation language of the T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page script under
 discussion, although this can be either Common Lisp or Scheme,
 with near-identical behavior. For the minor differences, see
-Appendix A (p.&#xa0;<a class=hrefinternal href="index-Z-H-12.html#TAG:__tex2page_tag_Temp_83">12</a>).</p><p>
+Appendix A (p.&#xa0;<a class=hrefinternal href="index-Z-H-12.html#TAG:__tex2page_tag_Temp_84">12</a>).</p><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_4"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_4">2</a></sup></span> The executable <code class=verbatim>tex</code> expects
 its input file to be marked up in plain T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X.  For a L<span style="position: relative; bottom: 0.3ex; margin-left: -0.36em; margin-right: -0.15em; text-transform: uppercase"><small>a</small></span>T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;document, the
 executable to use is <code class=verbatim>latex</code>. Modern T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X&#x200b; &#x200b;engines such as
@@ -316,7 +316,7 @@ T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-rig
 </div>
 <div class=smallskip></div><p>
 </p>
-<div class=navigation><a class=hrefinternal href="index.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-2.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_94">Index</a></div><p>
+<div class=navigation><a class=hrefinternal href="index.html">&#x3c;&#xb7;&#xb7;&#xb7;Prev </a>||<a class=hrefinternal href="index-Z-H-2.html"> Next&#xb7;&#xb7;&#xb7;&#x3e;</a>, &#xa0;&#xa0; <a class=hrefinternal href="index.html#TAG:__tex2page_tag_Temp_1">ToC</a>, &#xa0;&#xa0; <a class=hrefinternal href="index-Z-H-16.html#TAG:__tex2page_tag_Temp_95">Index</a></div><p>
 </p>
 </div>
 </body>
