@@ -580,8 +580,8 @@ $PUPPETEER_INPUT</pre>
 </div>
 <div class="paragraph">
 <p>The <code>&lt;adoc-filename&gt;</code> is the basename of the adoc file. The
-<code><mark>:containing-directory</code> value is given relative to
-<code>distribution/en-us</code>. The <code></mark>:dist-root-dir</code> value is the
+<code>#:containing-directory</code> value is given relative to
+<code>distribution/en-us</code>. The <code>#:dist-root-dir</code> value is the
 pathname of <code>distribution/en-us</code> relative to the adoc file. These
 three values are not optional.</p>
 </div>
@@ -686,8 +686,8 @@ these base names to the <code>$RELEVANT_LESSONS_INPUT</code>.</p>
 <code>distribution/en-us/textbooks</code> are collected.</p>
 </div>
 <div class="paragraph">
-<p>The .adoc file, together with its <code><mark>:containing-directory</code> and
-<code></mark>:dist-root-dir</code> value is added to <code>$ADOCABLES_INPUT</code>.</p>
+<p>The .adoc file, together with its <code>#:containing-directory</code> and
+<code>#:dist-root-dir</code> value is added to <code>$ADOCABLES_INPUT</code>.</p>
 </div>
 <div class="paragraph">
 <p>The .asc file (which sits in the <code>.cached</code> subdir), pathname
@@ -708,9 +708,9 @@ can be proceed.</p>
 <div class="paragraph">
 <p>Using the entries in <code>$RELEVANT_LESSONS_INPUT</code>, we collect all
 the workbook-page .adoc files and add them to
-<code>$ADOCABLES_INPUT</code>. The <code><mark>:containing-directory</code>,
-<code></mark>:dist-root-dir</code>, <code><mark>:lesson</code>, <code></mark>:other-dir</code>, <code><mark>:solutions-mode?</code>
-and <code></mark>:proglang</code> values are included.</p>
+<code>$ADOCABLES_INPUT</code>. The <code>#:containing-directory</code>,
+<code>#:dist-root-dir</code>, <code>#:lesson</code>, <code>#:other-dir</code>, <code>#:solutions-mode?</code>
+and <code>#:proglang</code> values are included.</p>
 </div>
 <div class="paragraph">
 <p><code>#:lesson</code> is simply the
@@ -746,8 +746,8 @@ can be proceed.</p>
 <div class="paragraph">
 <p>Using the entries in <code>$RELEVANT_LESSONS_INPUT</code>, we collect all
 the lesson-plan .adoc files and add them to
-<code>$ADOCABLES_INPUT</code>. The <code><mark>:containing-directory</code>,
-<code></mark>:dist-root-dir</code>, <code><mark>:lesson-plan</code>, <code></mark>:proglang</code>,
+<code>$ADOCABLES_INPUT</code>. The <code>#:containing-directory</code>,
+<code>#:dist-root-dir</code>, <code>#:lesson-plan</code>, <code>#:proglang</code>,
 and <code>#:other-proglangs</code>
  values are included.</p>
 </div>
@@ -775,9 +775,9 @@ cached .html version of the file is added ot
 <div class="paragraph">
 <p>Collect all the .adoc files <em>except</em> the narrative file and add
 them to <code>$ADOCABLES_INPUT</code>.  Other values included:
-<code><mark>:containing-directory</code>, <code>#dist-root-dir</code>, <code></mark>:other-dir</code>,
-<code><mark>:resources</code>, <code></mark>:target-pathway</code>, <code><mark>:solutions-mode?</code>,
-<code></mark>:proglang</code>.</p>
+<code>#:containing-directory</code>, <code>#dist-root-dir</code>, <code>#:other-dir</code>,
+<code>#:resources</code>, <code>#:target-pathway</code>, <code>#:solutions-mode?</code>,
+<code>#:proglang</code>.</p>
 </div>
 <div class="paragraph">
 <p><code>#:resources</code> is set to true.</p>
@@ -799,8 +799,8 @@ them to <code>$ADOCABLES_INPUT</code>.  Other values included:
 <div class="paragraph">
 <p>Collect all the narrative .adoc files in the distribution and add
 then to <code>$ADOCABLES_INPUT</code>. Other values included:
-<code><mark>:containing-directory</code>, <code></mark>:dist-root-dir</code>, <code><mark>:narrative</code>,
-<code></mark>:target-pathway</code>, <code><mark>:proglang</code>, <code></mark>:other-proglangs</code>.</p>
+<code>#:containing-directory</code>, <code>#:dist-root-dir</code>, <code>#:narrative</code>,
+<code>#:target-pathway</code>, <code>#:proglang</code>, <code>#:other-proglangs</code>.</p>
 </div>
 <div class="paragraph">
 <p><code>#:narrative</code> is set to true.</p>
