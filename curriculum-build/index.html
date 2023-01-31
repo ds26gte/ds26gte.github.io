@@ -73,11 +73,31 @@
 </li>
 <li><a href="#_converting_adoc_to_html">6. Converting .adoc to .html</a>
 <ul class="sectlevel2">
-<li><a href="#_racket_preprocessor">6.1. Racket preprocessor</a></li>
+<li><a href="#_racket_preprocessor">6.1. Racket preprocessor</a>
+<ul class="sectlevel3">
+<li><a href="#_primitives_used">6.1.1. Primitives used</a></li>
+<li><a href="#_exercise_files">6.1.2. Exercise files</a></li>
+</ul>
+</li>
 <li><a href="#_calling_asciidoctor">6.2. Calling Asciidoctor</a></li>
 </ul>
 </li>
 <li><a href="#_postprocessing">7. Postprocessing</a></li>
+<li><a href="#_collective_information">8. Collective information</a>
+<ul class="sectlevel2">
+<li><a href="#_primitives">8.1. Primitives</a></li>
+<li><a href="#_the_dependency_graph">8.2. The dependency graph</a></li>
+<li><a href="#_image_list">8.3. Image list</a></li>
+<li><a href="#_pathway_tocs">8.4. Pathway ToCs</a></li>
+<li><a href="#_bilingual_glossary">8.5. Bilingual glossary</a></li>
+</ul>
+</li>
+<li><a href="#_pdfs_and_workbooks">9. PDFs and Workbooks</a>
+<ul class="sectlevel2">
+<li><a href="#_creating_page_pdfs">9.1. Creating page PDFs</a></li>
+<li><a href="#_workbooks">9.2. Workbooks</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -511,7 +531,7 @@ collected form <code>workbook-pages.txt</code></p>
 <p>The next stage of the build creates batch files that enshrine
 enough information to the converters. We do not simply drill down
 the distribution tree and convert the .adoc files immediately, as
-that would be too inefficient, given the the converters have
+that would be too inefficient, given the converters have
 significant startup time. Instead, we create the batch
 files in <code>distribution/en-us/.cached</code> so the conversions can be
 done in one go. The names of these batch files are given by the
@@ -819,7 +839,7 @@ build runs a Racket preprocessor on the entries in
 contains some directives in addition to the commands provided by
 raw AsciiDoc. A Racket program preprocesses these away to create
 a raw AsciiDoc file. This has the extension <code>.asc</code> and is
-situation in a <code>.cached</code> subdir alongside the <code>.adoc</code> file penned
+situated in a <code>.cached</code> subdir alongside the <code>.adoc</code> file penned
 by the author.</p>
 </div>
 <div class="paragraph">
@@ -831,6 +851,27 @@ plans, narratives, etc.).</p>
 <div class="paragraph">
 <p>A single Racket call is sufficient to process all the entries in
 <code>$ADOCABLES_INPUT</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="_primitives_used">6.1.1. Primitives used</h4>
+<div class="paragraph">
+<p>When processing lesson files (whether lesson plan, work page, or
+a file included by them), the primitives found in it are stored
+in temp files in <code>.cached</code>. These become useful when creating
+a collective description
+of all the courses and lessons.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_exercise_files">6.1.2. Exercise files</h4>
+<div class="paragraph">
+<p>Special directives&#8201;&#8212;&#8201;<code>@printable-exercise</code>,
+<code>@opt-printable-exercise</code>, <code>@handout</code>&#8201;&#8212;&#8201;are used to include
+files within the lesson directory that are meant to be
+<em>exercises</em>. Their names are stored in
+<code>.cached/.lesson-exericses.txt.kp</code>.  Again these are useful for
+the collective description.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -865,12 +906,101 @@ tree. It would be nice if these were all there is to it, but
 there is still a bunch of post-processing left. We use the other
 <code>$ADOC_POSTPROC_*</code> files to guide this post-processing.</p>
 </div>
+<div class="paragraph">
+<p>For starters, the <code>.cached/*.html</code> files need to go up one
+directory, so they sit alongside their source <code>.adoc</code> files in
+the <code>distribution</code> tree. (We may later choose to delete the <code>.adoc</code>
+files before deployment to the website, but that&#8217;s a different
+matter.) In particular, we need to ensure that the final HTML
+file has extension <code>.shtml</code> when it&#8217;s a lesson plan or pathway
+doc, either narrative or resources. It is <code>.html</code> in all other
+cases, i.e., workbook pages and pathway-independent files.</p>
+</div>
+<div class="paragraph">
+<p>The following are the components of the postprocessing:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CSS path correction:
+When Asciidoctor is run on the <code>.asc</code> file, it enshrines a
+pathname for <code>curriculum.css</code>. Make it relative to the HTML
+location. (Unfortunately, Asciidoctor can&#8217;t take a relative
+pathname correctly from commandline when called on files that
+aren&#8217;t in the calling directory.)</p>
+</li>
+<li>
+<p>Boilerplate insertion.
+Include links to various <code><strong>.css</code> and <code></strong>.js</code> files. Sometimes
+conditionally: Codemirror-related links are included only if the
+file has tags classed <code>pyret</code>, <code>racket</code>, or <code>circleevalsexp</code>.</p>
+</li>
+<li>
+<p>Nested span and div insertion.
+Asciidoctor lacks the ability to nest more than one level of div or span with specific
+classes. The Racket preprocessor embeds markers for these so they
+go through Asciidoctor verbatim. We can now scan for them and
+replace them with divs/spans as appropriate.</p>
+</li>
+<li>
+<p>Remove intrusive spans in headers, add self-link to h2&#8217;s</p>
+</li>
+<li>
+<p>Create Google-Drive versions</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In general, it would be nice to reduce the amount of
+postprocessing needed. However there are some limitations to how
+much we can autoinsert during the preprocessing and
+Asciidoctor-ing phases. View this purely as the unavoidable finishing
+touch. Hopefully we can reduce this with time.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_collective_information">8. Collective information</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_primitives">8.1. Primitives</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_the_dependency_graph">8.2. The dependency graph</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_image_list">8.3. Image list</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_pathway_tocs">8.4. Pathway ToCs</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_bilingual_glossary">8.5. Bilingual glossary</h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pdfs_and_workbooks">9. PDFs and Workbooks</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_creating_page_pdfs">9.1. Creating page PDFs</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_workbooks">9.2. Workbooks</h3>
+
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-01-23 16:40:52 -0500
+Last updated 2023-01-31 00:07:46 -0500
 </div>
 </div>
 </body>
