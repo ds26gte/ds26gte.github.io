@@ -104,6 +104,12 @@
 <li><a href="#_workbooks">10.2. Workbooks</a></li>
 </ul>
 </li>
+<li><a href="#_using_the_makefile">11. Using the Makefile</a>
+<ul class="sectlevel2">
+<li><a href="#_pdf_and_workbook_generation">11.1. PDF and workbook generation</a></li>
+<li><a href="#_link_checking">11.2. Link checking</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -1057,10 +1063,53 @@ touch. Hopefully we can reduce this with time.</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_using_the_makefile">11. Using the Makefile</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>Makefile</code> in the top directory allows to you build the
+documentation system. Simply type <code>make</code>: This creates or updates the
+<code>distribution</code> subdirectory with the various files
+needed for the user.</p>
+</div>
+<div class="sect2">
+<h3 id="_pdf_and_workbook_generation">11.1. PDF and workbook generation</h3>
+<div class="paragraph">
+<p>By default, <code>make</code> won&#8217;t create the PDF versions of the HTML files, nor the
+collections of them that form the various workbooks. PDF and
+workbook construction can be time-consuming process that can be
+relegated to the final run, when the author is sure that the HTML
+conversions have been thoroughly debugged. Once they are, and the
+PDFs are desired, set the variable <code>BOOK</code> at the <code>make</code> command
+line to a nonempty string, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make BOOK=yes</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_link_checking">11.2. Link checking</h3>
+<div class="paragraph">
+<p>By default, the checking of the various internal and external
+links in the documents are not checked&#8201;&#8212;&#8201;because it can be a
+time-consuming process when its results are actively being
+sought. To enable link checking, set the <code>LINKCHECK</code> variable to
+a nonempty string, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make LINKCHECK=yes</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-09 13:46:38 -0500
+Last updated 2023-02-13 19:47:23 -0500
 </div>
 </div>
 </body>
