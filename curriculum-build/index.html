@@ -108,6 +108,8 @@
 <ul class="sectlevel2">
 <li><a href="#_pdf_and_workbook_generation">11.1. PDF and workbook generation</a></li>
 <li><a href="#_link_checking">11.2. Link checking</a></li>
+<li><a href="#_dependency_graph_generation">11.3. Dependency graph generation</a></li>
+<li><a href="#_making_from_scratch">11.4. Making from scratch</a></li>
 </ul>
 </li>
 </ul>
@@ -1096,7 +1098,7 @@ line to a nonempty string, e.g.,</p>
 links in the documents are not checked&#8201;&#8212;&#8201;because it can be a
 time-consuming process when its results are actively being
 sought. To enable link checking, set the <code>LINKCHECK</code> variable to
-a nonempty string, e.g.,</p>
+nonempty, e.g.,</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -1104,12 +1106,44 @@ a nonempty string, e.g.,</p>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_dependency_graph_generation">11.3. Dependency graph generation</h3>
+<div class="paragraph">
+<p>By default, no dependency graph is generated. To generate one at
+<code>distribution/en-us/dependency-graph.js</code>, set the <code>GRAPH</code>
+variable to nonempty, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make GRAPH=yes</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The dependency graph shows how the various lessons depend on one
+another.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_making_from_scratch">11.4. Making from scratch</h3>
+<div class="paragraph">
+<p>To remove a previously made distribution entirely, do</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make clean</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The next <code>make</code>&#8201;&#8212;&#8201;with whatever options you desire&#8201;&#8212;&#8201;will be on
+a fresh slate.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-13 19:47:23 -0500
+Last updated 2023-02-13 23:44:56 -0500
 </div>
 </div>
 </body>
