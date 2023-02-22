@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<title>Untitled</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="paragraph">
+<p>This merge addresses issue #467, replacing the original
+<code>build-pathway</code> Bash shell script with a <code>Makefile</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Makefile</code> resides at the top dir, and a build is initiated
+by calling <code>make</code>, possibly with the following options:
+- <code>BOOK=yes</code> to generate the individual and workbook PDFs
+- <code>GRAPH=yes</code> to generate the lesson dependency graph
+- <code>LINKCHECK=yes</code> to verify all the internal and external links
+  used
+- <code>NATLANG=&lt;natlang&gt;</code> to generate the docs in a language
+  different from the default <code>en-us</code>, e.g., <code>es-mx</code>
+- <code>SEMESTER=&lt;season&gt;</code> to identify the season, e.g., <code>fall</code>
+- <code>YEAR=&lt;year&gt;</code> to identify the year, e.g., <code>2023</code></p>
+</div>
+<div class="paragraph">
+<p>The top-level <code>Makefile</code> includes <code>Makefile.all</code>, which resides
+in <code>lib/maker</code> alongside all the other auxiliary makefiles and
+programs used by the make process.</p>
+</div>
+<div class="paragraph">
+<p><code>Makefile.all</code> calls two makefiles in order: <code>Makefile.phase1</code>
+and <code>Makefile.phase2</code>. Both makefiles use make functions to
+create a set of related rules, as the number of rules cannot be
+determined beforehand. Furthermore, we use two makefiles to run
+two phases of the build, because the sources for the (generated)
+rules of the second phase cannot be determined until the first
+phase is done. We need only two sequential makefiles.</p>
+</div>
+<div class="paragraph">
+<p><code>Makefile.phase1</code> initializes the <code>distribution/</code> directory, with
+subdir <code>en-us/</code>, which has subdirs <code>lib/</code>, <code>extlib/</code>, <code>lessons/</code>,
+<code>courses/</code>. It also zeroes out the various temp files in
+<code>en-us/.cached</code>, which contain lists of files that will
+eventually fed as a batch to various processing scripts. We will
+mention these batch files as they come up in the process.</p>
+</div>
+<div class="paragraph">
+<p>Using generated make rules, <code>distribution/en-us/courses/</code> is
+populated with copies of the pathways, and
+<code>distribution/en-us/lessons/</code> with copies of the lessons. If a
+lesson allows multiple proglangs (e.g., <code>pyret</code>, <code>wescheme</code>,
+<code>codap</code>, etc.), it is duplicated for each such proglang, with the
+proglang added as a suffix, except for <code>pyret</code> and <code>none</code>, which
+do not get a suffix.</p>
+</div>
+<div class="paragraph">
+<p>The courses and lessons in the distribution are "massaged" to
+create <code>solution-pages/</code> alongside any <code>pages/</code> subdirs, and to
+move any shadowing files specifically meant for the prevailing
+proglang to overwrite files that are generic or meant for other
+proglangs. The massaging is done by two external scripts:
+<code>massage-distribution-lesson</code> and <code>massage-course</code>. Both these
+scripts make use of a program <code>collect-workbook-pages.lua</code> to
+identify within each lesson (or lesson-like entity like
+front-matter and back-matter in a course) all the pages that are
+eligible to go into the workbook&#8201;&#8212;&#8201;the so-called workbook pages.</p>
+</div>
+<div class="paragraph">
+<p>After populating (or updating) the <code>en-us/{courses,lessons}</code>,
+<code>Makefile.phase1</code> collects all the exercises in the lessons
+(these are specific exercise directives used in the adoc source
+of the lessons). These are placed in <code>.cached/</code> subdirs in the
+individual lesson <code>pages/</code>, and are also collated into the batch
+file <code>$EXERCISE_COLLECTOR_INPUT</code>.</p>
+</div>
+<div class="paragraph">
+<p>In addition, phase 1 also takes care of creating the HTML version
+of the bilingual glossary file, and adds it to the batch file
+<code>$PUPPETEER_INPUT</code>. <code>$PUPPETEER_INPUT</code> will eventually contain
+all the HTML files that will need to be converted into PDF pages.</p>
+</div>
+<div class="paragraph">
+<p>After phase 1 is done, <code>Makefile.phase2</code> picks up the next phase.
+It identifies the different kinds of <code>.adoc</code> files (already
+copied under <code>{lessons, courses}</code> in the <code>distribution</code>, and
+creates make rules for converting these to <code>.asc</code> files using the
+Racket-based preprocessor. This is accomplished by updating three
+batch files: <code>$ADOCABLES_INPUT</code>, <code>$ADOC_INPUT</code> and a third
+<code>$ADOC_POSTPROC_*_INPUT</code> file whose name depends on whether the
+<code>adoc</code> file in question is a lesson plan, a pathway narrative
+file, a pathway glossary file, a pathway resources file, a
+pathway-independent file, or a workbook page (which can be in
+both lessons and pathways).</p>
+</div>
+<div class="paragraph">
+<p>After these batch files are updated, an external script
+<code>run-asciidoctor.sh</code> converts the files in <code>$ADOCABLES_INPUT</code> to
+their corresponding <code>.asc</code> (also an asciidoc file), using
+adocables-preproc.rkt, an adoc preprocessor written in Racket. It
+then uses the $ADOC_INPUT batch file containing the list of
+.asc&#8217;s and, after splitting it into manageable chunks, feeds them
+to asciidoctor. (The splitting is because asciidoctor has an
+argument number limit.) A set of .html files results alongside
+the .asc&#8217;s.</p>
+</div>
+<div class="paragraph">
+<p>The preprocessing also collects the primitive functions used (if
+any) in each of the lesson pages, and notes down the lesson
+prerequisites for each lesson.</p>
+</div>
+<div class="paragraph">
+<p>If the make var <code>BOOK</code> is set, the preproc rules include a
+further set of rules that add lines to <code>$PUPPETEER_INPUT</code>, so
+that the HTML files posited by the preproc (but only finally
+created after the postproc) will also become candidates for PDF
+conversion.</p>
+</div>
+<div class="paragraph">
+<p>This completes the preproc subphase. After it is done, the
+following bunch of other rules come into play (in no temporal
+order):</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The primitives are then consolidated per lesson, using the
+external script <code>collect-primitives.sh</code>.</p>
+</li>
+<li>
+<p>The <code>$ADOC_POSTPROC_*_INPUT</code> batch files are now used by a
+postprocessing program, <code>do-postproc.lua</code>, that creates the
+final html or shtml file in the correct directory (i.e.,
+alongside the original .adoc files). In addition,
+Google-drive-ready copies of these (s)html files are also
+created.</p>
+</li>
+<li>
+<p>If the make variable <code>LINKCHECK</code> is set, a make rule uses the
+external script <code>do-link-check.sh</code> to verify that all the
+internal and external links used in the documents really do
+exist.</p>
+</li>
+<li>
+<p>An external script <code>make-image-list.sh</code> collects all the image
+information from the lessons into a global image glossary at
+<code>en-us/images.js</code>.</p>
+</li>
+<li>
+<p>An external script <code>make-pathways-tocs.sh</code> collects the ToC
+info for all the courses into <code>en-us/pathway-tocs.js</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>After the primitive generation rule (1 above) is done, if the
+make variable <code>GRAPH</code> is set, a rule calls an external script
+<code>make-dependency-graph.sh</code> that gathers the generated info about
+the lesson primitives and prereqs to create a global lesson
+dependency graph in <code>en-us/dependency-graph.js</code>.</p>
+</div>
+<div class="paragraph">
+<p>After the postproc rule (2 above) is done, if the make variable
+<code>BOOK</code> set, the batch file <code>$PUPPETEER_INPUT</code> is used by a Node
+program <code>html2pdf.js</code> to create all the individual page PDFs.</p>
+</div>
+<div class="paragraph">
+<p>After these individual PDFs are available, and again only if
+<code>BOOK</code> is set, a make rule uses the external program
+<code>make-workbook-pages.lua</code> to go into each course, collects all
+its constituent lessons workbook and exercise pages into six
+course-specific list of pages for the six different types of
+workbooks. The same rule then calls the Node program
+<code>makeWorkbook.js</code> to create each course&#8217;s set of workbook PDFs.</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-02-22 17:33:09 -0500
+</div>
+</div>
+</body>
+</html>
