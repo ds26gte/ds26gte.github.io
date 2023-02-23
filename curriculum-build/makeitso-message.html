@@ -53,7 +53,7 @@ programs used by the make process.</p>
 </div>
 <div class="paragraph">
 <p><code>Makefile.all</code> calls two makefiles in order: <code>Makefile.phase1</code>
-and <code>Makefile.phase2</code>. Both makefiles use make functions to
+and <code>Makefile.phase2</code>. Both makefiles use <code>make</code> functions to
 create a set of related rules, as the number of rules cannot be
 determined beforehand. Furthermore, we use two makefiles to run
 two phases of the build, because the sources for the (generated)
@@ -184,7 +184,7 @@ dependency graph in <code>en-us/dependency-graph.js</code>.</p>
 </div>
 <div class="paragraph">
 <p>After the postproc rule (2 above) is done, if the make variable
-<code>BOOK</code> set, the batch file <code>$PUPPETEER_INPUT</code> is used by a Node
+<code>BOOK</code> is set, the batch file <code>$PUPPETEER_INPUT</code> is used by a Node
 program <code>html2pdf.js</code> to create all the individual page PDFs.</p>
 </div>
 <div class="paragraph">
@@ -199,7 +199,7 @@ workbooks. The same rule then calls the Node program
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-22 17:40:34 -0500
+Last updated 2023-02-22 19:39:07 -0500
 </div>
 </div>
 </body>
