@@ -5,18 +5,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<title>Draft of merge commit message for resolution of curriculum issue #467</title>
+<title>Implementing the build process using Makefile(s)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>Draft of merge commit message for resolution of curriculum issue #467</h1>
 </div>
 <div id="content">
+<div class="sect1">
+<h2 id="_implementing_the_build_process_using_makefiles">Implementing the build process using Makefile(s)</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>This merge addresses issue #467, replacing the original
-<code>build-pathway</code> Bash shell script with a <code>Makefile</code>.</p>
+<p>The build was originally implementated as a long Bash script
+<code>build-pathway</code>, but
+following
+<a href="https://github.com/bootstrapworld/curriculum/issues/467">Issue
+467</a>,
+has since been rewritten as a more maintainable collection of
+Makefiles that calls much smaller subroutine-like scripts.</p>
 </div>
 <div class="paragraph">
 <p>The <code>Makefile</code> resides at the top dir, and a build is initiated
@@ -60,6 +67,8 @@ two phases of the build, because the sources for the (generated)
 rules of the second phase cannot be determined until the first
 phase is done. We need only two sequential makefiles.</p>
 </div>
+<div class="sect2">
+<h3 id="_make_phase_1">make, phase 1</h3>
 <div class="paragraph">
 <p><code>Makefile.phase1</code> initializes the <code>distribution/</code> directory, with
 subdir <code>en-us/</code>, which has subdirs <code>lib/</code>, <code>extlib/</code>, <code>lessons/</code>,
@@ -83,7 +92,7 @@ create <code>solution-pages/</code> alongside any <code>pages/</code> subdirs, a
 move any shadowing files specifically meant for the prevailing
 proglang to overwrite files that are generic or meant for other
 proglangs. The massaging is done by two external scripts:
-<code>massage-distribution-lesson</code> and <code>massage-course</code>. Both these
+<code>massage-distribution-lesson.sh</code> and <code>massage-course.sh</code>. Both these
 scripts make use of a program <code>collect-workbook-pages.lua</code> to
 identify within each lesson (or lesson-like entity like
 front-matter and back-matter in a course) all the pages that are
@@ -103,6 +112,9 @@ of the bilingual glossary file, and adds it to the batch file
 <code>$PUPPETEER_INPUT</code>. <code>$PUPPETEER_INPUT</code> will eventually contain
 all the HTML files that will need to be converted into PDF pages.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_make_phase_2">make, phase 2</h3>
 <div class="paragraph">
 <p>After phase 1 is done, <code>Makefile.phase2</code> picks up the next phase.
 It identifies the different kinds of <code>.adoc</code> files (already
@@ -148,7 +160,7 @@ order):</p>
 <ol class="arabic">
 <li>
 <p>The primitives are then consolidated per lesson, using the
-external script <code>collect-primitives.sh</code>.</p>
+external script <code>collect-primitives.lua</code>.</p>
 </li>
 <li>
 <p>The <code>$ADOC_POSTPROC_*_INPUT</code> batch files are now used by a
@@ -165,12 +177,12 @@ internal and external links used in the documents really do
 exist.</p>
 </li>
 <li>
-<p>An external script <code>make-image-list.sh</code> collects all the image
+<p>An external script <code>make-images-js.lua</code> collects all the image
 information from the lessons into a global image glossary at
 <code>en-us/images.js</code>.</p>
 </li>
 <li>
-<p>An external script <code>make-pathways-tocs.sh</code> collects the ToC
+<p>An external script <code>make-pathways-tocs.lua</code> collects the ToC
 info for all the courses into <code>en-us/pathway-tocs.js</code>.</p>
 </li>
 </ol>
@@ -178,7 +190,7 @@ info for all the courses into <code>en-us/pathway-tocs.js</code>.</p>
 <div class="paragraph">
 <p>After the primitive generation rule (1 above) is done, if the
 make variable <code>GRAPH</code> is set, a rule calls an external script
-<code>make-dependency-graph.sh</code> that gathers the generated info about
+<code>make-dependency-graph.lua</code> that gathers the generated info about
 the lesson primitives and prereqs to create a global lesson
 dependency graph in <code>en-us/dependency-graph.js</code>.</p>
 </div>
@@ -197,9 +209,12 @@ workbooks. The same rule then calls the Node program
 <code>makeWorkbook.js</code> to create each course&#8217;s set of workbook PDFs.</p>
 </div>
 </div>
+</div>
+</div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-22 19:40:00 -0500
+Last updated 2023-02-26 10:09:34 -0500
 </div>
 </div>
 </body>
