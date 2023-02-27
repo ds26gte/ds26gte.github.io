@@ -1114,23 +1114,49 @@ repo.</p>
 <h2 id="_pdfs_and_workbooks">10. PDFs and Workbooks</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A course has six types of workbooks. The student-facing workbooks
-are in the <code>workbook/</code> subdir of the course, while the
-teacher-facing ones are in <code>resources/protected</code> (and are, as the
-dir name suggests, password-protected).</p>
+<p>A course has six types of workbooks.</p>
 </div>
 <div class="paragraph">
-<p>The workbooks are a concatenation of pages.</p>
+<p>Each workbook is a concatenation of pages.</p>
 </div>
 <div class="paragraph">
-<p>Most of the workbook pages are from a course&#8217;s constituent
+<p>Most of the workbook pages are from the course&#8217;s constituent
 lessons, and these are listed in the lesson&#8217;s
 <code>pages/workbook-pages.txt</code>.
 In addition, a course&#8217;s workbook may include front and back
 matter, which are specified within the pathway dir itself. Some
-workbooks may contain exercise pages, which are referred to be
+workbooks may contain exercise pages, which are referred to in
 the lesson plan, are present in the lesson&#8217;s <code>pages/</code> dir, but
 not listed in its <code>workbook-pages.txt</code>.</p>
+</div>
+<div class="paragraph">
+<p>The three student-facing workbooks
+are in the <code>workbook/</code> subdir of the course:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>workbook.pdf
+workbook-long.pdf
+opt-exercises.pdf</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>workbook.pdf</code> contains the basic lesson pages. The <code>-long</code>
+version includes the optional exercises referred to in the lesson
+plans. The <code>opt-</code> version contains just the exercises.</p>
+</div>
+<div class="paragraph">
+<p>The three teacher-facing workbooks are named similarly but for
+the <code>-sols</code> suffix, and
+reside in the <code>resources/protected</code> subdir, which is
+password-protected:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>workbook-sols.pdf
+workbook-long-sols.pdf
+opt-exercises-sols.pdf</pre>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_creating_page_pdfs">10.1. Creating page PDFs</h3>
