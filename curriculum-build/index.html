@@ -57,24 +57,19 @@
 <ul class="sectlevel2">
 <li><a href="#_adocables_input">5.1. $ADOCABLES_INPUT</a></li>
 <li><a href="#_adoc_input">5.2. $ADOC_INPUT</a></li>
-<li><a href="#_adoc_postproc_lessonplan_input">5.3. $ADOC_POSTPROC_LESSONPLAN_INPUT</a></li>
-<li><a href="#_adoc_postproc_narrativeaux_input">5.4. $ADOC_POSTPROC_NARRATIVEAUX_INPUT</a></li>
-<li><a href="#_adoc_postproc_narrative_input">5.5. $ADOC_POSTPROC_NARRATIVE_INPUT</a></li>
-<li><a href="#_adoc_postproc_resources_input">5.6. $ADOC_POSTPROC_RESOURCES_INPUT</a></li>
-<li><a href="#_adoc_postproc_pwyindep_input">5.7. $ADOC_POSTPROC_PWYINDEP_INPUT</a></li>
-<li><a href="#_adoc_postproc_workbookpage_input">5.8. $ADOC_POSTPROC_WORKBOOKPAGE_INPUT</a></li>
-<li><a href="#_relevant_lessons_input">5.9. $RELEVANT_LESSONS_INPUT</a></li>
-<li><a href="#_puppeteer_input">5.10. $PUPPETEER_INPUT</a></li>
+<li><a href="#_adoc_postproc_input">5.3. $ADOC_POSTPROC_*_INPUT</a></li>
+<li><a href="#_puppeteer_input">5.4. $PUPPETEER_INPUT</a></li>
+<li><a href="#_exercise_collector_input">5.5. $EXERCISE_COLLECTOR_INPUT</a></li>
+<li><a href="#_list_file">5.6. *_LIST_FILE</a></li>
 </ul>
 </li>
 <li><a href="#_populating_the_conversion_batch_files">6. Populating the conversion batch files</a>
 <ul class="sectlevel2">
-<li><a href="#_relevant_adoc_files">6.1. Relevant adoc files</a></li>
-<li><a href="#_pathway_independent_files_3">6.2. Pathway-independent files</a></li>
-<li><a href="#_workbook_pages">6.3. Workbook pages</a></li>
-<li><a href="#_lesson_plan_files">6.4. Lesson-plan files</a></li>
-<li><a href="#_pathway_resource_files">6.5. Pathway resource files</a></li>
-<li><a href="#_pathway_narrative_files">6.6. Pathway narrative files</a></li>
+<li><a href="#_pathway_independent_files_3">6.1. Pathway-independent files</a></li>
+<li><a href="#_workbook_pages">6.2. Workbook pages</a></li>
+<li><a href="#_lesson_plan_files">6.3. Lesson-plan files</a></li>
+<li><a href="#_pathway_resource_files">6.4. Pathway resource files</a></li>
+<li><a href="#_pathway_narrative_files">6.5. Pathway narrative files</a></li>
 </ul>
 </li>
 <li><a href="#_converting_adoc_to_html">7. Converting .adoc to .html</a>
@@ -91,11 +86,10 @@
 <li><a href="#_postprocessing">8. Postprocessing</a></li>
 <li><a href="#_collective_information">9. Collective information</a>
 <ul class="sectlevel2">
-<li><a href="#_primitives">9.1. Primitives</a></li>
-<li><a href="#_the_dependency_graph">9.2. The dependency graph</a></li>
-<li><a href="#_image_list">9.3. Image list</a></li>
-<li><a href="#_pathway_tocs">9.4. Pathway ToCs</a></li>
-<li><a href="#_bilingual_glossary">9.5. Bilingual glossary</a></li>
+<li><a href="#_the_dependency_graph">9.1. The dependency graph</a></li>
+<li><a href="#_images_list">9.2. Images list</a></li>
+<li><a href="#_pathway_tocs">9.3. Pathway ToCs</a></li>
+<li><a href="#_bilingual_glossary">9.4. Bilingual glossary</a></li>
 </ul>
 </li>
 <li><a href="#_pdfs_and_workbooks">10. PDFs and Workbooks</a>
@@ -610,7 +604,7 @@ significant startup time. Instead, we create the batch
 files in <code>distribution/en-us/.cached</code> so the conversions can be
 done in one go. The names of these batch files are given by the
 following environment variables (which are set in the build
-make):</p>
+makefile):</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -622,8 +616,10 @@ $ADOC_POSTPROC_NARRATIVE_INPUT
 $ADOC_POSTPROC_RESOURCES_INPUT
 $ADOC_POSTPROC_PWYINDEP_INPUT
 $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
-$RELEVANT_LESSONS_INPUT
-$PUPPETEER_INPUT</pre>
+$PUPPETEER_INPUT
+$EXERCISE_COLLECTOR_INPUT
+$COURSES_LIST_FILE
+$LESSONS_LIST_FILE</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -632,7 +628,9 @@ $PUPPETEER_INPUT</pre>
 <div class="sect2">
 <h3 id="_adocables_input">5.1. $ADOCABLES_INPUT</h3>
 <div class="paragraph">
-<p>The <code>$ADOCABLES_INPUT</code> file contains expressions of the form</p>
+<p>The <code>$ADOCABLES_INPUT</code> file has entries for each adoc file that
+are given to the Racket preprocessor.
+Each entry is of the form:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -664,7 +662,7 @@ three values are not optional.</p>
 <h3 id="_adoc_input">5.2. $ADOC_INPUT</h3>
 <div class="paragraph">
 <p>This contains a list of <code>.asc</code> files, which are intermediate
-files created by a Racket preprocessor from the <code>.adoc</code> files
+files created by the Racket preprocessor from the <code>.adoc</code> files
 listed in <code>$ADOCABLES_INPUT</code> before eventual conversion by
 AsciiDoctor into HTML.</p>
 </div>
@@ -680,65 +678,82 @@ phase before moving to the directory above.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_adoc_postproc_lessonplan_input">5.3. $ADOC_POSTPROC_LESSONPLAN_INPUT</h3>
+<h3 id="_adoc_postproc_input">5.3. $ADOC_POSTPROC_*_INPUT</h3>
 <div class="paragraph">
-<p>This contains the list of the lesson plan HTML files, awaiting
-postprocessing.
-Their names are relative to <code>distribution/en-us</code>.</p>
+<p>These are the files</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ADOC_POSTPROC_LESSONPLAN_INPUT
+$ADOC_POSTPROC_NARRATIVEAUX_INPUT
+$ADOC_POSTPROC_NARRATIVE_INPUT
+$ADOC_POSTPROC_RESOURCES_INPUT
+$ADOC_POSTPROC_PWYINDEP_INPUT
+$ADOC_POSTPROC_WORKBOOKPAGE_INPUT</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These list the names of the HTML files awaiting postprocessing.
+They are given in six lots, because the type of postprocessing
+varies for:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>lesson plan HTML files</p>
+</li>
+<li>
+<p>glossary HTML files in courses</p>
+</li>
+<li>
+<p>pathway narrative HTML files</p>
+</li>
+<li>
+<p>pathway resource HTML files (i.e., pathway files other than the
+narrative)</p>
+</li>
+<li>
+<p>pathway-independent HTML files (neither lessons nor pathways)</p>
+</li>
+<li>
+<p>workbook HTML files (in the lessons)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The filenames in these files are relative to <code>distribution/en-us</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_adoc_postproc_narrativeaux_input">5.4. $ADOC_POSTPROC_NARRATIVEAUX_INPUT</h3>
-<div class="paragraph">
-<p>This contains the list of auxiliary HTML files (for
-glossaries) created inside
-courses, and awaiting postprocessing. Again relative to <code>distribution/en-us</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_adoc_postproc_narrative_input">5.5. $ADOC_POSTPROC_NARRATIVE_INPUT</h3>
-<div class="paragraph">
-<p>This contains the list of pathway narrative HTML files awaiting
-postprocessing. Pathnames relative to <code>distribution/en-us</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_adoc_postproc_resources_input">5.6. $ADOC_POSTPROC_RESOURCES_INPUT</h3>
-<div class="paragraph">
-<p>This contains the list of pathway resource HTML files&#8201;&#8212;&#8201;everything except the narrative files&#8201;&#8212;&#8201;awaiting
-postprocessing.  Pathnames relative to <code>distribution/en-us</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_adoc_postproc_pwyindep_input">5.7. $ADOC_POSTPROC_PWYINDEP_INPUT</h3>
-<div class="paragraph">
-<p>This contains the list of pathway-independent HTML files
-awaiting
-postprocessing.  Pathnames relative to <code>distribution/en-us</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_adoc_postproc_workbookpage_input">5.8. $ADOC_POSTPROC_WORKBOOKPAGE_INPUT</h3>
-<div class="paragraph">
-<p>This contains the list of workbook HTML pages (inside <code>pages</code>,
-<code>solution-pages</code>)
-awaiting
-postprocessing.  Pathnames relative to <code>distribution/en-us</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_relevant_lessons_input">5.9. $RELEVANT_LESSONS_INPUT</h3>
-<div class="paragraph">
-<p>This contains a list of distribution lesson names that are being
-addressed by the current build. These are the basenames of the
-distribution lessons, i.e., with proglang suffix if any.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_puppeteer_input">5.10. $PUPPETEER_INPUT</h3>
+<h3 id="_puppeteer_input">5.4. $PUPPETEER_INPUT</h3>
 <div class="paragraph">
 <p>This is a JSON file containing the list of postprocessed HTML
 files that are ready to be converted to PDF.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exercise_collector_input">5.5. $EXERCISE_COLLECTOR_INPUT</h3>
+<div class="paragraph">
+<p>This contains all the lessons containing exercises, so that the
+latter can be quickly collected when making the workbooks.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_list_file">5.6. *_LIST_FILE</h3>
+<div class="paragraph">
+<p>These are:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$COURSES_LIST_FILE
+$LESSONS_LIST_FILE</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These contain the list of all the courses and lessons
+respectively. While they can be obtained by listing the
+concerned subdirs in <code>distribution/</code>, they are used often enough
+that it is useful to cache these values.</p>
 </div>
 </div>
 </div>
@@ -747,14 +762,7 @@ files that are ready to be converted to PDF.</p>
 <h2 id="_populating_the_conversion_batch_files">6. Populating the conversion batch files</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_relevant_adoc_files">6.1. Relevant adoc files</h3>
-<div class="paragraph">
-<p>When the build   was creating the distribution lessons, it adds
-these base names to the <code>$RELEVANT_LESSONS_INPUT</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_pathway_independent_files_3">6.2. Pathway-independent files</h3>
+<h3 id="_pathway_independent_files_3">6.1. Pathway-independent files</h3>
 <div class="paragraph">
 <p>The names of the pathway-independent .adoc files under
 <code>distribution/en-us/textbooks</code> are collected.</p>
@@ -774,13 +782,9 @@ pathname relative to <code>distribution/en-us</code>) is added to
 </div>
 </div>
 <div class="sect2">
-<h3 id="_workbook_pages">6.3. Workbook pages</h3>
+<h3 id="_workbook_pages">6.2. Workbook pages</h3>
 <div class="paragraph">
-<p><code>$RELEVANT_LESSONS_INPUT</code> must be fully be populated before this
-can be proceed.</p>
-</div>
-<div class="paragraph">
-<p>Using the entries in <code>$RELEVANT_LESSONS_INPUT</code>, we collect all
+<p>We collect all
 the workbook-page .adoc files and add them to
 <code>$ADOCABLES_INPUT</code>. The <code>#:containing-directory</code>,
 <code>#:dist-root-dir</code>, <code>#:lesson</code>, <code>#:other-dir</code>, <code>#:solutions-mode?</code>
@@ -812,13 +816,9 @@ cached .html version of the file is added ot
 </div>
 </div>
 <div class="sect2">
-<h3 id="_lesson_plan_files">6.4. Lesson-plan files</h3>
+<h3 id="_lesson_plan_files">6.3. Lesson-plan files</h3>
 <div class="paragraph">
-<p><code>$RELEVANT_LESSONS_INPUT</code> must be fully be populated before this
-can be proceed.</p>
-</div>
-<div class="paragraph">
-<p>Using the entries in <code>$RELEVANT_LESSONS_INPUT</code>, we collect all
+<p>We collect all
 the lesson-plan .adoc files and add them to
 <code>$ADOCABLES_INPUT</code>. The <code>#:containing-directory</code>,
 <code>#:dist-root-dir</code>, <code>#:lesson-plan</code>, <code>#:proglang</code>,
@@ -845,7 +845,7 @@ cached .html version of the file is added ot
 </div>
 </div>
 <div class="sect2">
-<h3 id="_pathway_resource_files">6.5. Pathway resource files</h3>
+<h3 id="_pathway_resource_files">6.4. Pathway resource files</h3>
 <div class="paragraph">
 <p>Collect all the .adoc files <em>except</em> the narrative file and add
 them to <code>$ADOCABLES_INPUT</code>.  Other values included:
@@ -869,7 +869,7 @@ them to <code>$ADOCABLES_INPUT</code>.  Other values included:
 </div>
 </div>
 <div class="sect2">
-<h3 id="_pathway_narrative_files">6.6. Pathway narrative files</h3>
+<h3 id="_pathway_narrative_files">6.5. Pathway narrative files</h3>
 <div class="paragraph">
 <p>Collect all the narrative .adoc files in the distribution and add
 then to <code>$ADOCABLES_INPUT</code>. Other values included:
@@ -1036,38 +1036,122 @@ touch. Hopefully we can reduce this with time.</p>
 <div class="sect1">
 <h2 id="_collective_information">9. Collective information</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_primitives">9.1. Primitives</h3>
-
+<div class="paragraph">
+<p>The build also creates four files in <code>distribution/en-us</code> that combine
+glossary-type information from all the courses and lessons. They
+are: the dependency graph, the images list, the pathway ToCs,
+and the bilingual glossary.</p>
 </div>
 <div class="sect2">
-<h3 id="_the_dependency_graph">9.2. The dependency graph</h3>
-
+<h3 id="_the_dependency_graph">9.1. The dependency graph</h3>
+<div class="paragraph">
+<p>The lesson dependency graph <code>dependency-graph.js</code> is generated by the program
+<code>make-dependency-graph.lua</code>. It shows, for each
+lesson:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>its title</p>
+</li>
+<li>
+<p>its description</p>
+</li>
+<li>
+<p>the pages it contains</p>
+</li>
+<li>
+<p>its exercise pages</p>
+</li>
+<li>
+<p>the primitives needed for it</p>
+</li>
+<li>
+<p>its key words</p>
+</li>
+<li>
+<p>its prerequisite lessons</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The primitives are generated for each lesson as
+<code>.cached/.index-primitives.txt.kp</code> by the program
+<code>collect-primitives.lua</code>.</p>
+</div>
+<div class="paragraph">
+<p>Note that the JS file represent the collected information as a JSON
+object set to a variable. The file itself isn&#8217;t JSON. This also holds
+for the next two JS files described below.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_image_list">9.3. Image list</h3>
-
+<h3 id="_images_list">9.2. Images list</h3>
+<div class="paragraph">
+<p>A glossary of image information, <code>images.js</code>, is compiled from the
+<code>images/lesson-imags.json</code> file in each lesson.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_pathway_tocs">9.4. Pathway ToCs</h3>
-
+<h3 id="_pathway_tocs">9.3. Pathway ToCs</h3>
+<div class="paragraph">
+<p>A list of all the courses with their constituent lessons is
+generated in <code>pathway-tocs.js</code>.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_bilingual_glossary">9.5. Bilingual glossary</h3>
-
+<h3 id="_bilingual_glossary">9.4. Bilingual glossary</h3>
+<div class="paragraph">
+<p>In addition to these JS files, a bilingual glossary
+<code>bilingual-glossary.html</code> is created in <code>distribution/en-us/lib</code>.
+This is a browsable version of the file <code>glossary-terms.rkt</code> in the
+repo.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_pdfs_and_workbooks">10. PDFs and Workbooks</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>A course has six types of workbooks. The student-facing workbooks
+are in the <code>workbook/</code> subdir of the course, while the
+teacher-facing ones are in <code>resources/protected</code> (and are, as the
+dir name suggests, password-protected).</p>
+</div>
+<div class="paragraph">
+<p>The workbooks are a concatenation of pages.</p>
+</div>
+<div class="paragraph">
+<p>Most of the workbook pages are from a course&#8217;s constituent
+lessons, and these are listed in the lesson&#8217;s
+<code>pages/workbook-pages.txt</code>.
+In addition, a course&#8217;s workbook may include front and back
+matter, which are specified within the pathway dir itself. Some
+workbooks may contain exercise pages, which are referred to be
+the lesson plan, are present in the lesson&#8217;s <code>pages/</code> dir, but
+not listed in its <code>workbook-pages.txt</code>.</p>
+</div>
 <div class="sect2">
 <h3 id="_creating_page_pdfs">10.1. Creating page PDFs</h3>
-
+<div class="paragraph">
+<p>The script <code>make-pdf.sh</code> passes the list of HTML files generated in
+<code>$PUPPETEER_INPUT</code> to the Node program <code>html2pdf.js</code>, creating
+the corresponding PDFs.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_workbooks">10.2. Workbooks</h3>
-
+<div class="paragraph">
+<p>The program <code>make-workbook-jsons.lua</code> scans the course and lesson
+dirs for various temp files create the previous portions of the
+build to create JSON files that list the constituent PDFs for
+each type of workbook.</p>
+</div>
+<div class="paragraph">
+<p>The script <code>make-books.sh</code> uses these JSON files to create the
+final workbook PDFs.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1347,7 +1431,7 @@ a fresh slate.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-26 10:09:34 -0500
+Last updated 2023-02-27 11:27:15 -0500
 </div>
 </div>
 </body>
