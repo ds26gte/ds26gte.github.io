@@ -8,6 +8,7 @@
 <title>READ ME</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="article">
 <div id="header">
@@ -60,7 +61,7 @@
 <li><a href="#_generic_links">Generic links</a></li>
 <li><a href="#_images">Images</a></li>
 <li><a href="#_comments">Comments</a></li>
-<li><a href="#_programming_language_specific_text">Programming language specific text</a></li>
+<li><a href="#_programming_language_specific_text">Programming-language specific text</a></li>
 <li><a href="#_adding_custom_css_classes">Adding custom CSS classes</a></li>
 </ul>
 </li>
@@ -428,15 +429,16 @@ done to save time</p>
 <code>distribution/en-us/dependency-graph.js</code></p>
 </li>
 <li>
-<p><code>NATLANG=LL</code>&#8201;&#8212;&#8201;builds for the natural language <code>LL</code>. The default is
-<code>en-us</code> (AmEng)</p>
+<p><code>NATLANG=lang</code>&#8201;&#8212;&#8201;builds for the natural language <code>lang</code>. The default is
+<code>en-us</code> (US English). Currently, the only other language that has
+significant support is <code>es-mx</code> (español mexicano)</p>
 </li>
 <li>
-<p><code>SEMESTER=season</code>&#8201;&#8212;&#8201;can be set to anything, typically: <code>fall</code>,
+<p><code>SEMESTER=season</code>&#8201;&#8212;&#8201;typically either <code>fall</code> or
 <code>spring</code>. The default is <code>fall</code></p>
 </li>
 <li>
-<p><code>YEAR=yyyy</code>&#8201;&#8212;&#8201;can be set to anything, typically the four-digit year
+<p><code>YEAR=yyyy</code>&#8201;&#8212;&#8201;typically the four-digit year
 of the Common Era. The default is the current year followed by
 <code>-BETA</code></p>
 </li>
@@ -446,13 +448,13 @@ of the Common Era. The default is the current year followed by
 <table>
 <tr>
 <td class="icon">
-<div class="title">Important</div>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
 <div class="paragraph">
 <p>These environment variables may also be set separately (i.e., not as a
 <code>make</code> argument) on your machine, either on the command line or in your
-shell profile. In such cases, they should be `export`ed so that the make
+shell profile. In such cases, they should be <code>export</code>ed so that the make
 can see them, e.g.,</p>
 </div>
 <div class="literalblock">
@@ -576,6 +578,9 @@ password, which is available on signing up with Bootstrapworld.</p>
 <div class="sect2">
 <h3 id="_deployment">Deployment</h3>
 <div class="paragraph">
+<p>(This section is relevant only to administrators.)</p>
+</div>
+<div class="paragraph">
 <p>After making the distribution, it may be deployed to the web host
 using the <code>make</code> target <code>deploy</code>:</p>
 </div>
@@ -605,7 +610,7 @@ command line or in your shell profile, or on the <code>make</code> command line,
 <table>
 <tr>
 <td class="icon">
-<div class="title">Important</div>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
 If <code>SEASON</code> and <code>YEAR</code> are not set externally <em>and</em> are not
@@ -620,7 +625,7 @@ a currently active deployment. <em>Always explicitly set <code>SEASON</code> and
 </table>
 </div>
 <div class="paragraph">
-<p>Deployment requires that you have enabled SSH access to the web site machine,
+<p>Deployment requires that you have enabled SSH access to the website machine,
 and that the environment variables <code>HOSTINGER_IPADDR</code>,
 <code>HOSTINGER_USER</code>, and <code>HOSTINGER_PORT</code> are set to the appropriate values.</p>
 </div>
@@ -633,7 +638,7 @@ to unpack them on the webhost machine.</p>
 <table>
 <tr>
 <td class="icon">
-<div class="title">Tip</div>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 <div class="paragraph">
@@ -657,7 +662,7 @@ changed:</p>
 <table>
 <tr>
 <td class="icon">
-<div class="title">Note</div>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 <div class="paragraph">
@@ -723,7 +728,7 @@ the documentation</p>
 <table>
 <tr>
 <td class="icon">
-<div class="title">Note</div>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 There was an older script called <code>build-pathway</code> that our authors have
@@ -1143,12 +1148,12 @@ shadowing glossary file.</p>
 <div class="paragraph">
 <p>The <code>glossary-terms.rkt</code> file (and any shadowing files) defines and
 exports the
-Scheme variable <code><strong>glossary-list</strong></code>, whose value is a list of glosses. Each
+Scheme variable <code>*glossary-list*</code>, whose value is a list of glosses. Each
 gloss is itself a list of sublists, where the sublist contains three
 elements:</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>a symbol specifying the natural language (e.g., <code>en-us</code>, <code>es-mx</code>)</p>
 </li>
@@ -1179,8 +1184,15 @@ generated glossary</p>
 <li>
 <p>a string specifying the definition for the glossed item</p>
 </li>
-</ul>
+</ol>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
 <div class="paragraph">
 <p>As a convenience, it is not necessary to specify simple grammatical
 declensions in the glossary file. Thus, in the glossary entry for
@@ -1212,7 +1224,13 @@ they will both refer to <code>"coordinate"</code>.</p>
 (<code>"child"</code>/<code>"children"</code>) need explicit entries however; sorry!</p>
 </div>
 <div class="paragraph">
-<p>Spanish (<code>es-mx</code>) has its own set of declension detection mechanisms.</p>
+<p>Spanish (<code>es-mx</code>) has its own set of declension detection mechanisms
+(<code>"-iones"</code> to <code>"-ión"</code>, <code>"-ques"</code> to <code>"-c"</code>, <code>"-gues"</code> to <code>"-g"</code>,
+<code>"-ces"</code> to <code>"-z"</code>, <code>"-es"</code> to <code>""</code>).</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -1266,7 +1284,7 @@ such recipes, please see the <code>.adoc</code> files in the various
 <div class="paragraph">
 <p>Some exercise files are more elaborate than recipes and contain
 sketches of solutions and tables that need to be filled. These
-use some extra directives like <code>@do</code>, <code>@show</code>, <code>@code</code> that then
+use some extra directives like <code>@do</code>, <code>@show</code>, <code>@showsoln</code>, and <code>@code</code> that then
 use raw Racket code to format the exercise. Examples of
 these can be found in the <code>Supplemental</code> lesson.</p>
 </div>
@@ -1309,6 +1327,18 @@ or <code>contracts</code> (for multiple).</p>
 <p>Note that <code>contracts</code> takes a list of arguments. Also note that
 quoting each such argument obviates the need for quoting the
 domain-list argument.</p>
+</div>
+<div class="paragraph">
+<p>The directive <code>@showsoln</code> is similar to <code>@show</code> but renders
+only
+in solution pages.</p>
+</div>
+<div class="paragraph">
+<p>The directive <code>@do</code> passes its argument to Racket, and renders
+the standard output thereof. It is a general-purpose trapdoor into
+Racket for things that are too difficult to do using regular
+AsciiDoc and the standard directives. (That said, we haven&#8217;t had
+occasion to need it so far.)</p>
 </div>
 </div>
 <div class="sect3">
@@ -1367,18 +1397,9 @@ the link text is optional.</p>
 <p>Use <code>@image{images/pic.png}</code> to insert the image <code>images/pic.png</code>.</p>
 </div>
 <div class="paragraph">
-<p>Use commas to add image options, e.g.,</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>@image{images/player-move.png, PlayerMovement, 400, , credit}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The second argument is the alt text, which also pops up on mouse hover.
-The third and fourth arguments (which can be left empty) specify width
-and height respectively. The fifth argument is used to specify credit
-for the image, and is rendered to the bottom right of the image.</p>
+<p>An optional second argument gives the preferred width of the image.
+Additional information about the image is retrieved from the
+<code>images/lesson-images.json</code> file.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1414,7 +1435,7 @@ obviously needed to keep the extent of
 </div>
 </div>
 <div class="sect3">
-<h4 id="_programming_language_specific_text">Programming language specific text</h4>
+<h4 id="_programming_language_specific_text">Programming-language specific text</h4>
 <div class="paragraph">
 <p>Use the <code>@ifproglang</code> directive to conditonally include a
 fragment text for a specific programming language. E.g.,</p>
@@ -1499,7 +1520,7 @@ without the brackets.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-03-01 11:01:34 -0500
+Last updated 2023-03-01 13:04:36 -0500
 </div>
 </div>
 </body>
