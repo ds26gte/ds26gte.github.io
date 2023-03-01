@@ -1392,14 +1392,23 @@ line to a nonempty string, e.g.,</p>
 <div class="paragraph">
 <p>By default, the checking of the various internal and external
 links in the documents are not checked&#8201;&#8212;&#8201;because it can be a
-time-consuming process when its results are actively being
-sought. To enable link checking, set the <code>LINKCHECK</code> variable to
+time-consuming process. (External-link checking is particularly
+heinous because it takes a long while for each URL probe to return.)</p>
+</div>
+<div class="paragraph">
+<p>To enable link checking, set the <code>LINKCHECK</code> variable to
 nonempty, e.g.,</p>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre>make LINKCHECK=yes</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>It is often advisable to do the link check just for its own sake,
+and only once in a while,
+after the distribution dir is already in place from a previous
+<code>make</code>.</p>
 </div>
 </div>
 <div class="sect2">
