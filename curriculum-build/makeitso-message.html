@@ -133,10 +133,9 @@ both lessons and pathways).</p>
 <code>run-asciidoctor.sh</code> converts the files in <code>$ADOCABLES_INPUT</code> to
 their corresponding <code>.asc</code> (also an asciidoc file), using
 adocables-preproc.rkt, an adoc preprocessor written in Racket. It
-then uses the $ADOC_INPUT batch file containing the list of
-.asc&#8217;s and, after splitting it into manageable chunks, feeds them
-to asciidoctor. (The splitting is because asciidoctor has an
-argument number limit.) A set of .html files results alongside
+then uses the $ADOC_INPUT batch file containing the list of .asc&#8217;s
+as input to Asciidoctor.
+A set of .html files results alongside
 the .asc&#8217;s.</p>
 </div>
 <div class="paragraph">
@@ -214,7 +213,7 @@ workbooks. The same rule then calls the Node program
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-26 10:09:34 -0500
+Last updated 2023-02-27 21:49:32 -0500
 </div>
 </div>
 </body>

@@ -53,16 +53,7 @@
 <li><a href="#_modifying_the_course_directory">4.2. Modifying the course directory</a></li>
 </ul>
 </li>
-<li><a href="#_batch_files_for_html_conversion">5. Batch files for HTML conversion</a>
-<ul class="sectlevel2">
-<li><a href="#_adocables_input">5.1. $ADOCABLES_INPUT</a></li>
-<li><a href="#_adoc_input">5.2. $ADOC_INPUT</a></li>
-<li><a href="#_adoc_postproc_input">5.3. $ADOC_POSTPROC_*_INPUT</a></li>
-<li><a href="#_puppeteer_input">5.4. $PUPPETEER_INPUT</a></li>
-<li><a href="#_exercise_collector_input">5.5. $EXERCISE_COLLECTOR_INPUT</a></li>
-<li><a href="#_list_file">5.6. *_LIST_FILE</a></li>
-</ul>
-</li>
+<li><a href="#_batch_files_for_html_conversion">5. Batch files for HTML conversion</a></li>
 <li><a href="#_populating_the_conversion_batch_files">6. Populating the conversion batch files</a>
 <ul class="sectlevel2">
 <li><a href="#_pathway_independent_files_3">6.1. Pathway-independent files</a></li>
@@ -110,6 +101,8 @@
 <li><a href="#_link_checking">12.2. Link checking</a></li>
 <li><a href="#_dependency_graph_generation">12.3. Dependency graph generation</a></li>
 <li><a href="#_making_from_scratch">12.4. Making from scratch</a></li>
+<li><a href="#_deploying_to_websit">12.5. Deploying to websit</a></li>
+<li><a href="#_for_users_of_legacy_build_pathway">12.6. For users of legacy build-pathway</a></li>
 </ul>
 </li>
 </ul>
@@ -361,7 +354,7 @@ natlang. E.g., for the lesson <code>simple-data-types</code>, we have:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In the following, we will assume the prevailiing natural language is
+<p>In the following, we will assume the prevailing natural language is
 <code>en-us</code>, so we will restrict our attention to the
 <code>distribution/en-us</code> subtree. For other natlangs, the setup is exactly the same but in
 the appropriate natlang-based subtree.</p>
@@ -586,8 +579,7 @@ proglang and solution-pages. Note here that the subdirs
 <code>front-matter</code>, <code>back-matter</code>, and <code>resources</code> may contain
 <code>pages/</code> subdirs with the appropriate <code>workbook-pages.txt</code>, and
 these are mined to get <code>.cached/.workbook-pages.txt.kp</code> and
-<code>.cached/.workbook-pages-ls.txt.kp</code> as well, just as for lessons.
-collected form <code>workbook-pages.txt</code></p>
+<code>.cached/.workbook-pages-ls.txt.kp</code> as well, just as for the lessons.</p>
 </div>
 </div>
 </div>
@@ -625,8 +617,7 @@ $LESSONS_LIST_FILE</pre>
 <div class="paragraph">
 <p>(The actual names used are not germane to this discussion.)</p>
 </div>
-<div class="sect2">
-<h3 id="_adocables_input">5.1. $ADOCABLES_INPUT</h3>
+<h3 id="_adocables_input" class="discrete">$ADOCABLES_INPUT</h3>
 <div class="paragraph">
 <p>The <code>$ADOCABLES_INPUT</code> file has entries for each adoc file that
 are given to the Racket preprocessor.
@@ -657,9 +648,7 @@ Each entry is of the form:</p>
 pathname of <code>distribution/en-us</code> relative to the adoc file. These
 three values are not optional.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_adoc_input">5.2. $ADOC_INPUT</h3>
+<h3 id="_adoc_input" class="discrete">$ADOC_INPUT</h3>
 <div class="paragraph">
 <p>This contains a list of <code>.asc</code> files, which are intermediate
 files created by the Racket preprocessor from the <code>.adoc</code> files
@@ -676,9 +665,7 @@ these <code>.asc</code> files are given relative to <code>distribution/en-us</co
 reside in the <code>.cached</code> subdir and go through a postprocessing
 phase before moving to the directory above.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_adoc_postproc_input">5.3. $ADOC_POSTPROC_*_INPUT</h3>
+<h3 id="_adoc_postproc_input" class="discrete">$ADOC_POSTPROC_*_INPUT</h3>
 <div class="paragraph">
 <p>These are the files</p>
 </div>
@@ -723,23 +710,17 @@ narrative)</p>
 <div class="paragraph">
 <p>The filenames in these files are relative to <code>distribution/en-us</code>.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_puppeteer_input">5.4. $PUPPETEER_INPUT</h3>
+<h3 id="_puppeteer_input" class="discrete">$PUPPETEER_INPUT</h3>
 <div class="paragraph">
 <p>This is a JSON file containing the list of postprocessed HTML
 files that are ready to be converted to PDF.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_exercise_collector_input">5.5. $EXERCISE_COLLECTOR_INPUT</h3>
+<h3 id="_exercise_collector_input" class="discrete">$EXERCISE_COLLECTOR_INPUT</h3>
 <div class="paragraph">
 <p>This contains all the lessons containing exercises, so that the
 latter can be quickly collected when making the workbooks.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_list_file">5.6. *_LIST_FILE</h3>
+<h3 id="_list_file" class="discrete">*_LIST_FILE</h3>
 <div class="paragraph">
 <p>These are:</p>
 </div>
@@ -754,7 +735,6 @@ $LESSONS_LIST_FILE</pre>
 respectively. While they can be obtained by listing the
 concerned subdirs in <code>distribution/</code>, they are used often enough
 that it is useful to cache these values.</p>
-</div>
 </div>
 </div>
 </div>
@@ -943,7 +923,7 @@ of all the courses and lessons.</p>
 <code>@opt-printable-exercise</code>, <code>@handout</code>&#8201;&#8212;&#8201;are used to include
 files within the lesson directory that are meant to be
 <em>exercises</em>. Their names are stored in
-<code>.cached/.lesson-exericses.txt.kp</code>.  Again these are useful for
+<code>.cached/.lesson-exercises.txt.kp</code>.  Again these are useful for
 the collective description.</p>
 </div>
 </div>
@@ -961,11 +941,8 @@ produce the corresponding .html.</p>
 </div>
 <div class="paragraph">
 <p>The <code>asciidoctor</code> command can take a bunch of input files
-as command-line input, however, given the number of files we&#8217;re
-processing, we will be exceeding the maximum-arg limit. We
-therefore split the <code>$ADOC_INPUT</code> file into smaller files, each
-of at most 100 entries, and we run <code>asciidoctor</code> separately on
-these groups of 100.</p>
+as command-line input, so we passit the contents of
+<code>$ADOC_INPUT</code>.</p>
 </div>
 </div>
 </div>
@@ -1000,7 +977,7 @@ cases, i.e., workbook pages and pathway-independent files.</p>
 When Asciidoctor is run on the <code>.asc</code> file, it enshrines a
 pathname for <code>curriculum.css</code>. Make it relative to the HTML
 location. (Unfortunately, Asciidoctor can&#8217;t take a relative
-pathname correctly from commandline when called on files that
+pathname correctly from command-line when called on files that
 aren&#8217;t in the calling directory.)</p>
 </li>
 <li>
@@ -1301,10 +1278,9 @@ both lessons and pathways).</p>
 <code>run-asciidoctor.sh</code> converts the files in <code>$ADOCABLES_INPUT</code> to
 their corresponding <code>.asc</code> (also an asciidoc file), using
 adocables-preproc.rkt, an adoc preprocessor written in Racket. It
-then uses the $ADOC_INPUT batch file containing the list of
-.asc&#8217;s and, after splitting it into manageable chunks, feeds them
-to asciidoctor. (The splitting is because asciidoctor has an
-argument number limit.) A set of .html files results alongside
+then uses the $ADOC_INPUT batch file containing the list of .asc&#8217;s
+as input to Asciidoctor.
+A set of .html files results alongside
 the .asc&#8217;s.</p>
 </div>
 <div class="paragraph">
@@ -1388,6 +1364,11 @@ documentation system. Simply type <code>make</code>: This creates or updates the
 <code>distribution</code> subdirectory with the various files
 needed for the user.</p>
 </div>
+<div class="paragraph">
+<p>You may also set a small number of environment variables on the
+<code>make</code> command-line to further guide the build. These variable
+settings may be combined.</p>
+</div>
 <div class="sect2">
 <h3 id="_pdf_and_workbook_generation">12.1. PDF and workbook generation</h3>
 <div class="paragraph">
@@ -1452,12 +1433,126 @@ another.</p>
 a fresh slate.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_deploying_to_websit">12.5. Deploying to websit</h3>
+<div class="paragraph">
+<p>To deploy a built distribution to the website, do</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make deploy</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deployment is described in more detail in the repo&#8217;s README.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_for_users_of_legacy_build_pathway">12.6. For users of legacy build-pathway</h3>
+<div class="paragraph">
+<p>Before the Makefile-based system was implemented, builds were done using a Bash
+script called <code>build-pathway</code>.  For those familiar with its usage and unable to
+let go, a new script <code>build</code> is provided whose API is similar to
+<code>build-pathway</code>, and which is actually a wrapper that calls the new <code>make</code>
+under the hood.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The new name <code>build</code> is used  because <code>build-pathway</code> (singular) would a
+bit of a misnomer: the underlying <code>make</code> always creates or updates <em>all</em>
+pathways (i.e., courses). Nevertheless, for those who really can&#8217;t help using
+the old name, <code>build-pathway</code> is provided a trivial identity wrapper for
+<code>build</code>. Just remember that you cannot chose one pathway to build: Such
+arguments are ignored with a helpful diagnostic.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>build</code> takes the following options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--book</code> (aka <code>--pdf</code>, <code>-b</code>): generates PDFs, both for
+individuals and the workbooks</p>
+</li>
+<li>
+<p><code>--force</code> (aka <code>--superforce</code>, <code>--super-force</code>, <code>-f</code>, <code>-F</code>):
+builds from scratch, scrubbing any previous <code>distribution/</code></p>
+</li>
+<li>
+<p><code>--graph</code> (aka <code>-g</code>): generates the lesson dependency graph</p>
+</li>
+<li>
+<p><code>--help</code> (aka <code>-h</code>): displays help and exists</p>
+</li>
+<li>
+<p><code>--link</code> (aka <code>--verify-links</code>, <code>-l</code>): verify all the links in
+the documentation</p>
+</li>
+<li>
+<p><code>--natlang L</code>: builds doc for the natural language <code>L</code>
+(default: <code>en-us</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Options may be combined in any order.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The <code>--help</code>
+option overwhelms all other options: help is displayed but no building takes
+place.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Use <code>-fb</code> or <code>-bf</code> for the often useful combination of
+<code>--force</code> and <code>--book</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+An experimental option <code>--adocjs</code> is provided that tells the
+build to use the Node
+version of Asciidoctor rather than the Ruby one.
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-27 11:27:15 -0500
+Last updated 2023-02-28 18:19:42 -0500
 </div>
 </div>
 </body>

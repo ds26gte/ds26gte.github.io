@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<title>READ ME</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>READ ME</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_structure_of_the_curriculum_directory">Structure of the <code>curriculum</code> directory</a>
+<ul class="sectlevel2">
+<li><a href="#_structure_of_a_lesson_directory">Structure of a lesson directory</a>
+<ul class="sectlevel3">
+<li><a href="#_the_images_subdirectory">The images/ subdirectory</a></li>
+</ul>
+</li>
+<li><a href="#_structure_of_a_pathway_directory">Structure of a pathway directory</a></li>
+</ul>
+</li>
+<li><a href="#_building_and_deploying_using_the_makefile">Building and deploying using the Makefile</a>
+<ul class="sectlevel2">
+<li><a href="#_cleaning">Cleaning</a></li>
+<li><a href="#_deployment">Deployment</a></li>
+<li><a href="#_the_build_wrapper">The build wrapper</a></li>
+</ul>
+</li>
+<li><a href="#_standards_compliance">Standards compliance</a>
+<ul class="sectlevel2">
+<li><a href="#_other_compliances">Other compliances</a></li>
+</ul>
+</li>
+<li><a href="#_lesson_prerequisites">Lesson prerequisites</a></li>
+<li><a href="#_git_basics">Git basics</a>
+<ul class="sectlevel2">
+<li><a href="#_creating_your_private_branch_in_the_original_repo">Creating your private branch in the original repo</a></li>
+</ul>
+</li>
+<li><a href="#_prerequisites">Prerequisites</a></li>
+<li><a href="#_authoring_guidelines">Authoring guidelines</a>
+<ul class="sectlevel2">
+<li><a href="#_a_brief_introduction_to_asciidoc">A brief introduction to AsciiDoc</a></li>
+<li><a href="#_racket_preprocessing">Racket preprocessing</a>
+<ul class="sectlevel3">
+<li><a href="#_glossary">Glossary</a>
+<ul class="sectlevel4">
+<li><a href="#_syntax_of_the_glossary_terms_rkt_file">Syntax of the glossary-terms.rkt file</a></li>
+</ul>
+</li>
+<li><a href="#_lesson_descriptions_and_dependencies">Lesson descriptions and dependencies</a></li>
+<li><a href="#_exercises">Exercises</a></li>
+<li><a href="#_cross_references_and_pagination">Cross-references and pagination</a></li>
+<li><a href="#_generic_links">Generic links</a></li>
+<li><a href="#_images">Images</a></li>
+<li><a href="#_comments">Comments</a></li>
+<li><a href="#_programming_language_specific_text">Programming language specific text</a></li>
+<li><a href="#_adding_custom_css_classes">Adding custom CSS classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>We describe here the directories and files in the <code>curriculum</code>
+directory, and how to use the programs provided.</p>
+</div>
+<div class="paragraph">
+<p>For a generated document tree, please see
+<a href="https://bootstrapworld.site/materials/spring2023/en-us" class="bare">https://bootstrapworld.site/materials/spring2023/en-us</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_structure_of_the_curriculum_directory">Structure of the <code>curriculum</code> directory</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The top directory contains a bunch of scripts and subdirectories.</p>
+</div>
+<div class="paragraph">
+<p>The curriculum content is placed in the subdirectories <code>lessons</code>
+and <code>pathways</code>. <code>lessons</code> contains individual lessons, including
+the lesson plan, exercises, and workbook pages. <code>pathways</code>
+contains pathway directories, each of which defines a collection
+of lessons. (It is possible for a lesson to occur in multiple
+pathways.)</p>
+</div>
+<div class="paragraph">
+<p>The subdirectories <code>lib</code> and <code>shared</code> contain the components of
+the program used to generate web pages and PDFs from the
+<code>lessons</code> and <code>pathways</code>. <code>shared</code> contains directories named for
+the various natural languages used for instruction, e.g., <code>en-us</code>
+for US English, and <code>es-mx</code> for Mexican Spanish. Inside these
+dwell centralized educational-standards dictionaries, e.g.,
+<code>csta-standards-dictionary.rkt</code> for a list of standards defined
+by the CSTA. Also present is a general glossary of terms used in
+the lessons: <code>glossary-terms.rkt</code>.</p>
+</div>
+<div class="paragraph">
+<p>The file <code>Makefile</code> is used (via <code>make</code>) to
+constructs the web pages and PDFs a directory called
+<code>distribution</code>.</p>
+</div>
+<div class="paragraph">
+<p>Here is a skeleton of the <code>curriculum</code> tree, showing the salient
+files, with a sample lesson and sample pathway:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>curriculum/
+  Makefile
+  lib/
+    &lt;language-independent implementation files&gt;
+    *.rkt
+    *.css
+    glossary-terms.rkt
+    glossary-terms-ss.rkt
+  shared/langs/
+    en-us/
+      &lt;language-dependent implementation files, such as&gt;
+      *.rkt
+      *.css
+      Badges/*.{jpg,png}
+      docroot/*.{html,png}
+      images/*.png
+      practices/*.rkt
+      standards/*.rkt
+      textbooks/*.rkt
+  lessons/
+    sample-lesson/
+      langs/
+        en-us/
+          proglang.txt (optional)
+          shadow-glossary.txt (optional)
+          index.adoc
+          slides.md
+          images/
+            *.{png,gif,jpg}
+            lesson-images.json
+          pyret/
+          wescheme/
+          pages/
+            *.{adoc,pdf}
+            workbook-pages.txt
+            pyret/
+            wescheme/
+          solution-pages/
+            *.{adoc,pdf}
+            pyret/
+            wescheme/
+          xtra/
+            *.{adoc,pdf}
+            pyret/
+            wescheme/
+  pathways/
+    sample-pathway/
+      langs/
+        en-us/
+          proglang.txt (optional)
+          index.adoc
+          lesson-order.txt
+          external-index.rkt
+          images/
+            *.{png,gif,jpg}
+            lesson-images.json
+          front-matter/
+            pages/
+              *.{adoc,pdf}
+              workbook-pages.txt
+            solution-pages/
+              *.adoc
+              workbook-pages.txt
+          back-matter/
+            pages/
+            solution-pages/
+          resources/
+            index.adoc
+            images/
+              *.{png,gif,jpg}
+              lesson-images.json
+            pages/
+              *.{adoc,pdf}
+              workbook-pages.txt</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Some standard subdirectory names are used to separate and shadow
+content based on (natural) language of instruction, the
+programming language used, or whether content is being built for
+student or teacher. Thus:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>langs</code> subdirectory uses further subdirectories, e.g.,
+<code>en-us</code> for US English, <code>es-mx</code> for Mexican Spanish, and <code>fr</code> for French. Source
+documents from the relevant natural language are chosen based on
+the value of the environment variable <code>$NATLANG</code> during build.
+The default is
+<code>en-us</code>. In order to ease transition, if a language other than
+<code>en-us</code> is chosen, any content unavailable in the new language is
+filled in by what&#8217;s in <code>en-us</code>.</p>
+</li>
+<li>
+<p>Some of the directories have <code>pyret</code> and <code>wescheme</code>
+subdirectories or both. These contain content that should shadow
+the default content (one directory level up) if that
+programming language is used.</p>
+</li>
+<li>
+<p>The directory <code>solution-pages</code> is used to house source
+that will shadow <code>pages</code>, when the pages meant only for
+teacher use are created.  Similarly,</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In all these cases, it is important that the shadowing content
+have the same file basename as the content that is being
+shadowed. Extensions can vary; thus it is possible for
+<code>filename.pdf</code> to shadow <code>filename.adoc</code> and vice versa.</p>
+</div>
+<div class="sect2">
+<h3 id="_structure_of_a_lesson_directory">Structure of a lesson directory</h3>
+<div class="paragraph">
+<p>Each lesson has a subdirectory, e.g., <code>sample-lesson</code>, under the
+<code>lessons</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>A lesson plan is specified by an <code>.adoc</code> file in the language
+directory for that lesson, e.g.,
+<code>sample-lesson/langs/en-us/index.adoc</code>. While the file basename
+doesn’t
+have to be <code>index</code>, ensure that there is only one <code>.adoc</code> file at
+this level.</p>
+</div>
+<div class="paragraph">
+<p>Images are in subdirectory <code>images</code>.</p>
+</div>
+<div class="paragraph">
+<p>Single workbook pages are in subdirs <code>pages</code>
+and <code>solution-pages</code> (some of these can be static PDFs
+rather than adoc source files).
+(The <code>solution-</code> versions, as already explained, are meant to supply
+shadowing content intended for teacher-only documents.)</p>
+</div>
+<div class="paragraph">
+<p>The file <code>pages/workbook-pages.txt</code> lists
+the pages&#8201;&#8212;&#8201;one per line&#8201;&#8212;&#8201;in the
+<code>pages</code> directory in the order in which they should show up in the
+final workbook. By default,
+these pages are rendered in portrait mode. If you desire a
+particular file <code>file.adoc</code> to be in landscape, its entry line in
+<code>workbook-pages.txt</code> should be <code>file.adoc landscape</code> rather
+than just <code>file.adoc</code>. (The
+entry <code>file.adoc</code> is convenient shorthand for <code>file.adoc
+portrait</code>.)  (The words <code>landscape</code> and <code>portrait</code> may
+be in any case.) Supplementary <code>adoc</code> files used by these pages
+can be stored in subdirectories, typically named <code>fragments</code>.</p>
+</div>
+<div class="paragraph">
+<p>Lesson pages are paginated by default when they show up in the
+workbook. If you don’t want a page to be populated, its entry
+line in <code>workbook-pages.txt</code> should be <code>file.adoc portrait
+nopagenum</code>. (The aspect should also be mentioned, even if it’s
+the default.)</p>
+</div>
+<div class="paragraph">
+<p>(Any of the components in an entry line in <code>workbook-pages.txt</code>
+may be enclosed in double-quotes.)</p>
+</div>
+<div class="sect3">
+<h4 id="_the_images_subdirectory">The images/ subdirectory</h4>
+<div class="paragraph">
+<p>As mentioned above, the images for a lesson are collected in a
+subdirectory called <code>images</code>.  References to these images in the adoc
+files are of the form <code>@image{path-to-image-file, width}</code>, where the
+<code>path-to-image-file</code> is the relative pathname of the chosen image file
+in <code>images</code>, and the optional <code>width</code> is the desired width of the image.</p>
+</div>
+<div class="paragraph">
+<p>The <code>images</code> also contains a <code>lesson-images.json</code> file that lists all
+the image files in the same directory with their associated metadata,
+i.e., <em>caption</em>, <em>description</em>, <em>source</em>, and <em>license</em>. The topmost
+JSON object in this file maps each image name to an object containing
+its metadata.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>"louis.png": {
+  "caption": "Louis",
+  "description": "A very good standard apricot poodle named Louis",
+  "source": "Image from Louis's hooman",
+  "license": "Creative Commons 4.0 - NC - SA"
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Captions are optional and will print under the image on the webpage and workbook page. They can be left out if no caption is desired.</p>
+</div>
+<div class="paragraph">
+<p>Descriptions are for visually impaired folks using screenreaders so need to be detailed enough to allow students to engage with our materials. For example:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>"description" : "pie chart: 44.6% white, 22.8% Black, 19.8% Hispanic/Latinx, 9.9% Asian, Small wedges for some other race alone and 2 or more races",</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If an image is created by us, not derived from other work, and is not a data display, use</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>"source" : "Created by the Bootstrap Team.",
+"license" : "Creative Commons 4.0 - NC - SA"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If an image is created by us and derived from other work, indicate that. Here&#8217;s an example of how we credit the data cycle images:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>  "source" : "Created by the Bootstrap Team based on work from @link{http://introdatascience.org/, Mobilizing IDS project} and @link{https://www.amstat.org/asa/files/pdfs/GAISE/GAISEPreK12_Intro.pdf, GAISE}",
+  "license" : "Creative Commons 4.0 - NC - SA"
+},</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If an image is a data display created by us using real data, please specify the source. For example:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>  "source" : "Created by the Bootstrap Team using data from https://nces.ed.gov/Programs/Edge/ACSDashboard",
+  "license" : "Creative Commons 4.0 - NC - SA"
+},</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If an image is a data display created using fictitious data, please indicate that.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>"source" : "Created by the Bootstrap Team using contrived data",
+"license" : "Creative Commons 4.0 - NC - SA"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The build will issue warnings for underdefined images when <code>description</code>, <code>source</code>, or <code>license</code> are missing. (You will get warnings even if the value is an empty string. However, for the moment, empty-string captions are ignored.)</p>
+</div>
+<div class="paragraph">
+<p>The build process collects all the image descriptions into a single file
+<code>images.js</code> in <code>distribution/en-us</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_structure_of_a_pathway_directory">Structure of a pathway directory</h3>
+<div class="paragraph">
+<p>Each pathway has a subdirectory, e.g., <code>sample-pathway</code>, under the
+<code>pathways</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>A pathway narrative is specified by an <code>.adoc</code> file in the
+language directory for that pathway, e.g.,
+<code>sample-pathway/langs/en-us/index.adoc</code>. The file basename
+doesn’t have to be <code>index</code>, but there should be only one <code>.adoc</code>
+file in this directory.</p>
+</div>
+<div class="paragraph">
+<p>There can also be a file <code>external-index.rkt</code> used to expand
+pointers to URLs in the pathway narrative (see below).</p>
+</div>
+<div class="paragraph">
+<p>In the same directory, the file <code>lesson-order.txt</code> lists
+the names of the lessons (e.g., <code>sample-lesson</code>)
+that should be included in the
+pathway, in the order in which they should appear in the pathway
+workbook. (The filename can be enclosed in double-quotes.)</p>
+</div>
+<div class="paragraph">
+<p>The pathway directory can also contains a <code>resources</code>
+subdirectory, where an <code>.adoc</code> file describes the “Teacher
+Resources” page. There should be only one such <code>.adoc</code> file, but
+it can be named anything (not necessarily <code>index.adoc</code>).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_and_deploying_using_the_makefile">Building and deploying using the Makefile</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The top dir contains <code>Makefile</code>. Type <code>make</code> to build the distribution,
+to populate the <code>distribution/</code> directory with the built documentation.</p>
+</div>
+<div class="paragraph">
+<p><code>make</code> can take environment-variable settings on the command line:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>BOOK=yes</code>&#8201;&#8212;&#8201;creates the PDF versions of the HTML files, as also the
+workbook PDFs. By default, these are not created as it is a relatively
+time-consuming process and is required only after the author is sure
+that the HTML conversions have been thoroughly debugged</p>
+</li>
+<li>
+<p><code>LINKCHECK=yes</code>&#8201;&#8212;&#8201;checks the various internal and external links in
+the documents to ensure they are valid. By default, this check isn&#8217;t
+done to save time</p>
+</li>
+<li>
+<p><code>GRAPH=yes</code>&#8201;&#8212;&#8201;creates the lesson dependency graph in
+<code>distribution/en-us/dependency-graph.js</code></p>
+</li>
+<li>
+<p><code>NATLANG=LL</code>&#8201;&#8212;&#8201;builds for the natural language <code>LL</code>. The default is
+<code>en-us</code> (AmEng)</p>
+</li>
+<li>
+<p><code>SEMESTER=season</code>&#8201;&#8212;&#8201;can be set to anything, typically: <code>fall</code>,
+<code>spring</code>. The default is <code>fall</code></p>
+</li>
+<li>
+<p><code>YEAR=yyyy</code>&#8201;&#8212;&#8201;can be set to anything, typically the four-digit year
+of the Common Era. The default is the current year followed by
+<code>-BETA</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>These environment variables may also be set separately (i.e., not as a
+<code>make</code> argument) on your machine, either on the command line or in your
+shell profile. In such cases, they should be `export`ed so that the make
+can see them, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>export GRAPH=yes</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The doctree for the built pathway (e.g., <code>data-science</code>) for the prose language <code>en-us</code>,
+resides in
+<code>distribution/en-us/courses/</code>. Thus:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>distribution/
+  en-us/
+    courses/
+      data-science/
+        index.shtml
+        workbook/
+          workbook.pdf
+          workbook-long.pdf
+          opt-exercises.pdf
+        resources/
+          protected/
+            workbook-sols.pdf
+            workbook-long-sols.pdf
+            opt-exercises-sols.pdf</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here <code>index.shtml</code> is the web page corresponding to the pathway
+narrative. The student workbooks in <code>workbook/</code> are</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>workbook.pdf</code>, the basic student workbook</p>
+</li>
+<li>
+<p><code>workbook-long.pdf</code>, above plus the optional exercises</p>
+</li>
+<li>
+<p><code>opt-exercises.pdf</code>, just the optional exercises</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The teacher workbooks in <code>resources/protected</code> are</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>workbook-sols.pdf</code>, the basic teacher workbook, i.e., with solutions</p>
+</li>
+<li>
+<p><code>workbook-long-sols.pdf</code>, above plus the optional exercises</p>
+</li>
+<li>
+<p><code>opt-exercises-sols.pdf</code>, just the optional exercises</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These filenames are standard and do not vary with course. Their location
+identifies which course they describe.</p>
+</div>
+<div class="paragraph">
+<p>Note that many workbook PDFs can be created: the students’ versions
+are created
+in the <code>workbook</code> directory; the teachers’ versions in
+the “protected” directory
+<code>resources/protected</code>.</p>
+</div>
+<div class="paragraph">
+<p>Pages under <code>resources/protected</code> may prompt you for a teacher
+password, which is available on signing up with Bootstrapworld.</p>
+</div>
+<div class="paragraph">
+<p>The lessons referred to by the various pathways reside in
+<code>distribution/en-us/lessons/</code>. Thus:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>distribution/
+  en-us/
+    lessons/
+      sample-lesson/
+        index.shtml
+        pages/
+        solution-pages/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For slide generation, please see
+<a href="./README-slides.adoc" class="bare">./README-slides.adoc</a>.</p>
+</div>
+<div class="paragraph">
+<p>For more on the build process in general, see
+<a href="lib/maker/doc/index.adoc" class="bare">lib/maker/doc/index.adoc</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="_cleaning">Cleaning</h3>
+<div class="paragraph">
+<p>The <code>make</code> target <code>clean</code> scrubs any existing <code>distribution</code>.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make clean</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The next
+<code>make</code> builds anew.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deployment">Deployment</h3>
+<div class="paragraph">
+<p>After making the distribution, it may be deployed to the web host
+using the <code>make</code> target <code>deploy</code>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make deploy</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We
+currently deploy to:
+<a href="https://www.bootstrapworld.site" class="bare">https://www.bootstrapworld.site</a></p>
+</div>
+<div class="paragraph">
+<p>A typical <code>make deploy</code> goes to something like
+<a href="https://www.bootstrapworld.site/materials/fall2023" class="bare">https://www.bootstrapworld.site/materials/fall2023</a>, assuming that
+the environment variables <code>SEASON</code> and <code>YEAR</code> are <code>fall</code> and <code>2023</code>
+respectively. These environment variables may be set at your OS
+command line or your shell profile, or on the <code>make</code> command line, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make SEASON=fall YEAR=2023 deploy</pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+If <code>SEASON</code> and <code>YEAR</code> are not set externally and are not
+supplied on the <code>make</code>
+command line, the default values of <code>fall</code> and <code>yyyy-BETA</code> (where <code>yyyy</code>
+is the current year) are used. This is to prevent inadvertently
+overwriting
+a currently active deployment. Always explicitly set <code>SEASON</code> and
+<code>YEAR</code> when deploying in earnest.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Deployment requires that you have enabled SSH access to the web site machine,
+and that the environment variables <code>HOSTINGER_IPADDR</code>,
+<code>HOSTINGER_USER</code>, and <code>HOSTINGER_PORT</code> are set to the appropriate values.</p>
+</div>
+<div class="paragraph">
+<p>You will be prodded for your webhost password,
+once to copy the files over and another time
+to unpack them on the webhost machine.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Deployment uses SSH
+SSH to interact with your webost.
+account. This can be slow. If you&#8217;re updating an already deployed
+doctree, you may set the variable <code>SKIPLIB</code> to save yourself the time taken
+to recopy the large mathjax library, since it&#8217;s unlikely to have
+changed.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make SKIPLIB=true deploy</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>make deploy</code> actually calls the script <code>deploy-to-hostinger</code>, which may also be
+called on its own, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>deploy-to-hostinger
+SKIPLIB=true deploy-to-hostinger</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_build_wrapper">The build wrapper</h3>
+<div class="paragraph">
+<p>A Bash script <code>build</code> is provided as a convenient wrapper for <code>make</code>:</p>
+</div>
+<div class="paragraph">
+<p><code>build</code> takes the following options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--book</code> (aka <code>--pdf</code>, <code>-b</code>): generates PDFs, both for
+individuals and the workbooks</p>
+</li>
+<li>
+<p><code>--force</code> (aka <code>--superforce</code>, <code>--super-force</code>, <code>-f</code>, <code>-F</code>):
+builds from scratch, scrubbing any previous <code>distribution/</code></p>
+</li>
+<li>
+<p><code>--graph</code> (aka <code>-g</code>): generates the lesson dependency graph</p>
+</li>
+<li>
+<p><code>--help</code> (aka <code>-h</code>): displays help and exists</p>
+</li>
+<li>
+<p><code>--link</code> (aka <code>--verify-links</code>, <code>-l</code>): verify all the links in
+the documentation</p>
+</li>
+<li>
+<p><code>--natlang L</code>: builds doc for the natural language <code>L</code>
+(default: <code>en-us</code>)</p>
+</li>
+<li>
+<p><code>-bf</code> or <code>-fb</code>: combination of <code>-f</code> and <code>-b</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Options can be combined in any order.</p>
+</div>
+<div class="paragraph">
+<p>(There was an older script called <code>build-pathway</code> that our authors have
+gotten used to. It is provided as a trivial identify wrapper for
+<code>build</code>.)</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_standards_compliance">Standards compliance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The standards compliance for the various lessons is documented in the
+directory `shared/langs/en-us/standards/'. In it are
+dictionaries for the
+various standards. For now, these are:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>standards-cc-ela-dictionary.rkt
+standards-cc-math-dictionary.rkt
+standards-cc-states-dictionary.rkt
+standards-csta-dictionary.rkt
+standards-ia-dictionary.rkt
+standards-k12cs-dictionary.rkt
+standards-ma-dictionary.rkt
+standards-ngss-dictionary.rkt
+standards-ok-dictionary.rkt</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each dictionary entry associates an educational standard label with its description
+and all the lessons that comply with it. E.g., the following is an entry in the
+dictionary file <code>standards-cc-math-dictionary.rkt</code></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>("6.EE.B"
+ "Reason about and solve one-variable equations and inequalities."
+ "inequalities1-simple"
+ "inequalities2-compound"
+ )</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It associates the label <code>6.EE.B</code> with the description <code>Reason about and
+solve one-variable equations and inequalities</code>, and says that the two
+lessons <code>inequalities1-simple</code> and <code>inequalities2-compound</code> comply with
+it. As you create or modify lessons, add to their names to the
+appropriate standard entries as appropriate.</p>
+</div>
+<div class="paragraph">
+<p>The build process creates a menu for finding out the standards
+complied with by the lessons and the pathway. The lesson’s menu
+is embedded in the lesson plan, whereas the pathway’s (larger)
+menu is linked to.</p>
+</div>
+<div class="sect2">
+<h3 id="_other_compliances">Other compliances</h3>
+<div class="paragraph">
+<p>Compliances with textbooks and practices are similarly documented in the
+subdirectories <code>textbooks/</code> and <code>practices/</code> of the <code>shared/langs/en-us</code>
+directory.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lesson_prerequisites">Lesson prerequisites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The directive <code>@lesson-prereqs{}</code> is used as a placeholder in a
+table for row(s) that include lesson prerequisites (if any) and
+standards. (The mode of inclusion may change in subsequent
+versions depending on how predictable lesson-plan formats
+become. For now, we need a placeholder.)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_git_basics">Git basics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Fork this repo to your GitHub account (say, <code>jrandomuser</code>). (This is done using
+obvious buttons on the GitHub page.)</p>
+</div>
+<div class="paragraph">
+<p>In your terminal, clone your fork thusly:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git clone https://github.com/jrandomuser/curriculum</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will create a local repo where you can try things, change
+things, etc. But first, to retain connection with the original do:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git remote add upstream https://github.com/bootstrapworld/curriculum</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Every time the original changes, update like so:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git fetch upstream
+git merge upstream/master</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You are probably in your own <code>master</code> branch. Even if you’re
+“branching out” to other new branches, the above merge will
+mostly work.  “Mostly” because merge often triggers conflicts
+depending on how far you have diverged from the original. At the
+very least, make sure you’ve checked in all your changes that you
+care about, before you attempt a merge. For changes you aren’t
+ready to check in, save the concerned files somewhere else, and
+make sure there are no “modified” files in your directory.</p>
+</div>
+<div class="sect2">
+<h3 id="_creating_your_private_branch_in_the_original_repo">Creating your private branch in the original repo</h3>
+<div class="paragraph">
+<p>Alternatively&#8201;&#8212;&#8201;and this will work only for greenlisted members&#8201;&#8212;&#8201;clone the repo directly and add your own branch, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git clone https://github.com/bootstrapworld/curriculum
+cd curriculum
+git checkout -b my-sandbox</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can pull and merge from <code>master</code> as needed:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git checkout master
+git pull
+git checkout my-sandbox
+git merge master</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If conflicts arise, you will be given a way to resolve them.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites">Prerequisites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following is needed to construct documents from this repo:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A Unix-like environment.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If you&#8217;re already on some flavor of unix, you&#8217;re there! ✅</p>
+</li>
+<li>
+<p>If you&#8217;re on Windows, you&#8217;ll want to install
+<a href="https://docs.microsoft.com/en-us/windows/wsl/install">WSL2</a> to give yourself a Linux environment first (we recommend Ubuntu).</p>
+</li>
+<li>
+<p>If you&#8217;re on MacOS, your environment is close but missing some
+tools. You&#8217;ll want to install
+<a href="https://brew.sh/">Homebrew</a> first, then run the following commands to add them:</p>
+<div class="literalblock">
+<div class="content">
+<pre>brew install gnu-sed
+brew install curl
+brew install make</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Mac users will also need to add these unix tools to their path. In the terminal, run <code>open ~/.zshrc</code> to edit your configuration file. Add the following, then save the file and restart your terminal:</p>
+<div class="literalblock">
+<div class="content">
+<pre># use modern unix versions of commands, installed via brew
+PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/make/libexec/gnubin:$PATH"</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bash. Keeps all the scripts humming. (This is already available on Linux, macOS, and WSL) ✅</p>
+</li>
+<li>
+<p>Racket, to do preprocessing and other bookkeeping. Any version should
+do. We&#8217;re not using any bleeding-edge features of Racket. You&#8217;ll want to
+<a href="https://download.racket-lang.org/">download and install DrRacket</a>
+and make sure the <code>racket</code> binary is in your <code>$PATH</code>.</p>
+</li>
+<li>
+<p>Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>on Linux/WSL: <code>sudo apt-get install asciidoctor</code></p>
+</li>
+<li>
+<p>on macOS: <code>brew install asciidoctor</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Lua, used for postprocessing.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>on Linux/WSL: <code>sudo apt-get install lua5.4</code></p>
+</li>
+<li>
+<p>on macOS: <code>brew install lua</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Several node packages <strong>all of which are installed by running <code>npm install</code></strong>. (Note: you will need to be running Node v14 or above!)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>puppeter</code>, and HTML &#8594; PDF generator that converts web pages into PDF documents</p>
+</li>
+<li>
+<p><code>puppeteer-cluster</code> to build the hundreds of pages we have in parallel.</p>
+</li>
+<li>
+<p><code>pdf-lib</code>, which handles collecting all the PDFs and adding page numbers</p>
+</li>
+<li>
+<p><code>md2googleslides</code>, which generates slide decks from markdown files in each of the lesson plans</p>
+</li>
+<li>
+<p><code>mathjax</code>, which generates beautifully formatted math output</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authoring_guidelines">Authoring guidelines</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>.adoc</code> files peppering this curriculum repo are written in
+general-purpose AsciiDoc overlaid with some preprocessing directives written in
+Racket that are available only in our documentation base.</p>
+</div>
+<div class="paragraph">
+<p>AsciiDoc is a plain-text-based markup that is converted
+by the Asciidoctor program into HTML.</p>
+</div>
+<div class="sect2">
+<h3 id="_a_brief_introduction_to_asciidoc">A brief introduction to AsciiDoc</h3>
+<div class="paragraph">
+<p>An AsciiDoc source file typically has the extension <code>.adoc</code>, at
+least in our setup.</p>
+</div>
+<div class="paragraph">
+<p>A title (aka “level 0”) header has its line preceded by a single
+equal sign.</p>
+</div>
+<div class="paragraph">
+<p>Level 1 headers (“sections”) are preceded by two equal signs.
+Similarly for “subsections” at level 2, 3, 4, 5.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>= Title at level 0</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>== Section at level 1</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>=== Subsection at level 2</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>==== Header at level 3</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>===== Header at level 4</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>====== Header at level 5</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(That&#8217;s it. Headers of level 6+ are not provided.)</p>
+</div>
+<div class="paragraph">
+<p>Itemized lists have each item paragraph preceded by a <code>*</code> or
+<code>-</code> and space.</p>
+</div>
+<div class="paragraph">
+<p>Emphasized text is set within underscores: <code>_emphasized text_</code>.</p>
+</div>
+<div class="paragraph">
+<p>Bold text is set within stars: <code>*bold text*</code>.</p>
+</div>
+<div class="paragraph">
+<p>In-text code fragments are set within backticks: <code>`code fragment`</code>.</p>
+</div>
+<div class="paragraph">
+<p>Code displays are on contiguous lines that are indented (amount
+of indentation doesn’t matter as long it’s non-0).</p>
+</div>
+<div class="paragraph">
+<p>Once you&#8217;re ready to learn a bit more, see the
+<a href="https://asciidoctor.org/docs/asciidoc-writers-guide/">Writer&#8217;s Guide</a>.</p>
+</div>
+<div class="paragraph">
+<p>For a full description of all the bells and whistles, see the
+<a href="https://docs.asciidoctor.org/asciidoc/latest">AsciiDoc Language
+Documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s quite possible, and encouraged, to write decent AsciiDoc documents
+without knowing all of its syntax.
+Learn just the bare minimum to get started writing,
+and then learn more as needed, either from the online manual, or by bugging
+me. (If something seems too tedious to learn or input, I could
+perhaps implement a simpler Racket directive.)</p>
+</div>
+<div class="paragraph">
+<p>If your Asciidoctor version is at least 2.0.0, you can type</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>asciidoctor --help syntax</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to get a brief reference guide to the syntax. To create a browsable HTML
+file, do</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>asciidoctor --help syntax | asciidoctor - -o help.html</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and open <code>help.html</code> in your browser.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_racket_preprocessing">Racket preprocessing</h3>
+<div class="paragraph">
+<p>The <code>.adoc</code> files we author can contain some additional markup,
+which we shall call <em>directives</em>.  All directives begin with an
+<code>@</code>, and, if they take arguments, the latter are encased in
+braces (<code>{}</code>). Here are all the directives:</p>
+</div>
+<div class="sect3">
+<h4 id="_glossary">Glossary</h4>
+<div class="paragraph">
+<p>Glossary items are annotated with the directive <code>@vocab</code>. E.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@vocab{function}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In a lesson plan, such items are searched in the main glossary
+file, <code>lib/glossary-terms.rkt</code>, and are inserted as lists at the
+head of the document.</p>
+</div>
+<div class="paragraph">
+<p>For a pathway narrative, the glossary items from all its
+constituent lessons are collected into a file
+<code>pathway-standards.shtml</code> that is linked to in the narrative
+page.</p>
+</div>
+<div class="paragraph">
+<p>There can be auxiliary glossary files in <code>lib/</code> that can be used
+to <em>shadow</em> the main glossary for particular lessons. For now,
+the only such shadowing glossary file is <code>glossary-terms-ss.rkt</code>,
+used for Social-Studies lessons.</p>
+</div>
+<div class="paragraph">
+<p>In order for a lesson <code>lessonA</code> to use a shadowing glossary, its
+directory, i.e., <code>lessons/lessonA/langs/en-us</code>, should containing a
+file <code>shadow-glossary.txt</code> that contains the name of the
+shadowing glossary file.</p>
+</div>
+<div class="sect4">
+<h5 id="_syntax_of_the_glossary_terms_rkt_file">Syntax of the glossary-terms.rkt file</h5>
+<div class="paragraph">
+<p>The <code>glossary-terms.rkt</code> file (and any shadowing files) defines and
+exports the
+Scheme variable <code><strong>glossary-list</strong></code>, whose value is a list of glosses. Each
+gloss is itself a list of sublists, where the sublist contains three
+elements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a symbol specifying the natural language (e.g., <code>en-us</code>, <code>es-mx</code>)</p>
+</li>
+<li>
+<p>the glossed item. This can be:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>a string, e.g., <code>"variable"</code></p>
+</li>
+<li>
+<p>a list of strings, meant to be grammatically related items, e.g., <code>("axis"
+"axes")</code>. Either string can be used in the source (whatever fits the
+prose flow), but the item in the generated glossary will be the first
+item</p>
+</li>
+<li>
+<p>a list of sublist of strings, where each of sublist of strings is
+internally
+grammatically related, but the different sublists are quite different
+terms, e.g., <code>"mean") ("average" "ave" "avg"</code>. The word in the source is used
+to find the relevant sublist, and <em>its</em> first item is used in the
+generated glossary</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>a string specifying the definition for the glossed item</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>As a convenience, it is not necessary to specify simple grammatical
+declensions in the glossary file. Thus, in the glossary entry for
+<code>"coordinate"</code> you don&#8217;t need to tack on <code>"coordinates"</code>, although you
+can call <code>@vocab</code> on either term in your source with the assurance that
+they will both refer to <code>"coordinate"</code>.</p>
+</div>
+<div class="paragraph">
+<p>For English (<code>en-us</code>), this convenience covers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>"-s"</code>, <code>"-es"</code>, <code>"-y/-ies"</code> plurals and singular present tense, e.g.,
+<code>"cars"</code> maps to <code>"car"</code>, <code>"boxes"</code> to <code>"box"</code>, <code>"stories"</code> to
+<code>"story"</code>, <code>"applies"</code> to <code>"apply"</code></p>
+</li>
+<li>
+<p><code>"-d"</code>, <code>"-ed"</code>, <code>"y/-ied"</code> preterites, e.g., <code>"saved"</code> maps to
+<code>"save"</code>, <code>"turned"</code> to <code>"turn"</code>, <code>"applied"</code> to <code>"apply"</code></p>
+</li>
+<li>
+<p><code>"-ing"</code> gerunds, e.g., <code>"applying"</code> maps to <code>"apply"</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Latin (the aforementioned <code>"axis"</code>/<code>"axes"</code>) and Old English plurals
+(<code>"child"</code>/<code>"children"</code>) need explicit entries however; sorry!</p>
+</div>
+<div class="paragraph">
+<p>Spanish (<code>es-mx</code>) has its own set of declension detection mechanisms.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_lesson_descriptions_and_dependencies">Lesson descriptions and dependencies</h4>
+<div class="paragraph">
+<p>Each lesson plan is strongly advised to start out with a</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@description{A brief paragraph describing the lesson.}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The description is displayed in the lesson plan, but is also part
+of the autogenerated thumbnails used by the pathway narrative for
+each of its lessons.</p>
+</div>
+<div class="paragraph">
+<p>A lesson can optionally include a set of keywords, which are used
+when searching for lesson content. While the title, description,
+and standards alignment are already included in the search,
+occasionally there are search terms a user might employ which are
+<em>not</em> reflected in any part of the lesson (e.g., “PEMDAS”, “GEMDAS”). These
+keywords can be added anywhere in the lesson with the <code>keywords</code>
+directive: <code>@keywords{PEMDAS, GEMDAS}</code>. Multiple keywords are comma-separated.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_exercises">Exercises</h4>
+<div class="paragraph">
+<p>Exercise files are typically recipes and have calls to one of two
+directives</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@design-recipe-exercise{...}</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@assess-design-recipe{...}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The former is used to specify a correct recipe; the latter to
+introduce a recipe that needs to be debugged. For examples of
+such recipes, please see the <code>.adoc</code> files in the various
+<code>fragments</code> subdirectories in the repo.</p>
+</div>
+<div class="paragraph">
+<p>Some exercise files are more elaborate than recipes and contain
+sketches of solutions and tables that need to be filled. These
+use some extra directives like <code>@do</code>, <code>@show</code>, <code>@code</code> that then
+use raw Racket code to format the exercise. Examples of
+these can be found in the <code>Supplemental</code> lesson.</p>
+</div>
+<div class="paragraph">
+<p>Sometimes, just a contract (part of a recipe) needs to be shown
+in the text. Use <code>@show</code> to call the Racket procedures <code>contract</code>
+(for a single contract)
+or <code>contracts</code> (for multiple).</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@show{(contract "/" '("Number" "Number") "Number")}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This states that the function name is <code>/</code>, its domain list is
+<code>("Number" "Number")</code> and its range is <code>"Number"</code>.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@show{(contract "/" '("Number" "Number") "Number"
+  "divides one number by another")}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>adds an optional fourth argument stating the function&#8217;s purpose.</p>
+</div>
+<div class="paragraph">
+<p>To show multiple contracts,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@show{(contracts
+  '("/" '("Number" "Number") "Number" "divides one number by another")
+  '("*" '("Number" "Number") "Number" "multiples one number by another")
+ }</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that <code>contracts</code> takes a list of arguments. Also note that
+quoting each such argument obviates the need for quoting the
+domain-list argument.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cross_references_and_pagination">Cross-references and pagination</h4>
+<div class="paragraph">
+<p>There are a clutch of directives to allow easy cross-referencing between
+pages in the converted document base.</p>
+</div>
+<div class="paragraph">
+<p>The directive <code>@printable-exercise</code> is used to refer to pages
+that are part of the workbook, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@printable-exercise{lessonA/pages/page.adoc, link text}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If <code>, link text</code> is not supplied, the title of the page is used.
+The first and second components of the pathname may be dropped in certain
+cases: <code>lessonA/</code> may be dropped if the reference is made within the
+same lesson. In that case, the second component, if <code>pages/</code>, may also
+be dropped. (The only other possible second component is
+<code>solution-pages/</code>, which cannot be dropped.) The third component may
+have extension <code>.pdf</code>, <code>.html</code>, or <code>.adoc</code>. If <code>.adoc</code>, it is resolved
+to <code>.html</code>.</p>
+</div>
+<div class="paragraph">
+<p>The directives <code>@opt-printable-exercise</code> and <code>@handout</code> are called the
+same way, and are
+applied to exercise pages not mentioned in the lesson&#8217;s page list. (The
+two are categorized differently in the collections appearing in the
+pathway narrative.)</p>
+</div>
+<div class="paragraph">
+<p>The directive <code>@lesson-link{&#8230;&#8203;}</code> is a general-purpose link to any pages
+within lessons, and uses pathnames relative to the
+<code>distribution/&lt;natlang&gt;/lessons/</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>The directive <code>@dist-link{&#8230;&#8203;}</code> uses pathnames relative to the
+<code>distribution/&lt;natlang&gt;/</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_generic_links">Generic links</h4>
+<div class="paragraph">
+<p>Use <code>@link{URL, link-text}</code> to refer to a generic URL
+not part of the curriculum hierarchy.  The second argument for
+the link text is optional.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_images">Images</h4>
+<div class="paragraph">
+<p>Use <code>@image{images/pic.png}</code> to insert the image <code>images/pic.png</code>.</p>
+</div>
+<div class="paragraph">
+<p>Use commas to add image options, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@image{images/player-move.png, PlayerMovement, 400, , credit}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The second argument is the alt text, which also pops up on mouse hover.
+The third and fourth arguments (which can be left empty) specify width
+and height respectively. The fifth argument is used to specify credit
+for the image, and is rendered to the bottom right of the image.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_comments">Comments</h4>
+<div class="paragraph">
+<p>Comments can be inserted anywhere in the <code>.adoc</code> file as</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@comment{A comment}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that such comments <em>will be seen</em> in the HTML source, which may be
+exactly what you want, either for documentation or debugging.</p>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t want your comments to survive into the HTML, you may use
+AsciiDoc&#8217;s own commenting mechanism with <code>//</code> and <code>////</code> (see manual). While
+these work mostly, their text is unfortunately subject to preprocessing for
+directives, which may have consequences. To have truly inert comments, use</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@scrub{Everything within these braces is thoroughly scrubbed}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>@scrub</code>'s argument can contain plausible directives&#8201;&#8212;&#8201;the only
+requirement is that any braces within it should be paired. (This is
+obviously needed to keep the extent of
+<code>@scrub</code>'s argument recognizable.)</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_programming_language_specific_text">Programming language specific text</h4>
+<div class="paragraph">
+<p>Use the <code>@ifproglang</code> directive to conditonally include a
+fragment text for a specific programming language. E.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@ifproglang{pyret}{
+This text occurs in the Pyret version of this document.
+}</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@ifproglang{wescheme}{
+This text occurs in the WeScheme version of this document.
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_adding_custom_css_classes">Adding custom CSS classes</h4>
+<div class="paragraph">
+<p>Some standard CSS classes to emphasize certain regions of text.</p>
+</div>
+<div class="paragraph">
+<p>Use</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[.strategy-box]
+.Header
+****
+Rem suscipit soluta quas recusandae dolor culpa non. Iste aut
+ipsum qui eos quidem et. Debitis omnis ipsam cupiditate ut vero
+odio.
+****</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to generate a “strategy box”, a boxed text with a blue border.</p>
+</div>
+<div class="paragraph">
+<p>Use</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[.notice-box]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to generate a “notice &amp; wonder box”, a boxed text with a purple
+border.</p>
+</div>
+<div class="paragraph">
+<p>Add the class <code>.physics-table</code> to a table attribute to generate a
+single-arg function
+table, e.g., one that maps miles driven to cost.</p>
+</div>
+<div class="paragraph">
+<p>You can add your own CSS classes or IDs. Classes are specified
+with an initial dot and IDs with an initial <code>#</code>. Note that at
+most one ID is meaningful, although any number of classes may be
+specified. A combination of classes and ID are simply strung
+together, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[.class1.class2.class3#onlyid]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above works for blocks. Use <code>@span{classes and id}{text}</code> to
+enclose CSS classes and/or an ID around arbitrary (i.e., in-line)
+text. <code>@span</code>s may be nested. <code>@span</code>’s first argument of
+classes and ID is specified in the same way as for blocks,
+without the brackets.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-03-01 09:12:41 -0500
+</div>
+</div>
+</body>
+</html>
