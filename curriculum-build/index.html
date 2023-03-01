@@ -8,6 +8,7 @@
 <title>The curriculum build specification</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="article">
 <div id="header">
@@ -102,9 +103,9 @@
 <li><a href="#_dependency_graph_generation">12.3. Dependency graph generation</a></li>
 <li><a href="#_making_from_scratch">12.4. Making from scratch</a></li>
 <li><a href="#_deploying_to_website">12.5. Deploying to website</a></li>
-<li><a href="#_for_users_of_legacy_build_pathway">12.6. For users of legacy build-pathway</a></li>
 </ul>
 </li>
+<li><a href="#_for_users_of_legacy_script_build_pathway">13. For users of legacy script build-pathway</a></li>
 </ul>
 </div>
 </div>
@@ -1447,10 +1448,14 @@ a fresh slate.</p>
 <p>Deployment is described in more detail in the repo&#8217;s README.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_for_users_of_legacy_build_pathway">12.6. For users of legacy build-pathway</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_for_users_of_legacy_script_build_pathway">13. For users of legacy script build-pathway</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Before the Makefile-based system was implemented, builds were done using a Bash
+<p>Before the Makefile-based system was implemented, builds were
+done using a shell
 script called <code>build-pathway</code>.  For those familiar with its usage and unable to
 let go, a new script <code>build</code> is provided whose API is similar to
 <code>build-pathway</code>, and which is actually a wrapper that calls the new <code>make</code>
@@ -1460,14 +1465,17 @@ under the hood.</p>
 <table>
 <tr>
 <td class="icon">
-<div class="title">Note</div>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The new name <code>build</code> is used  because <code>build-pathway</code> (singular) would a
+The new name <code>build</code> is used  because <code>build-pathway</code>
+(singular) would now be a
 bit of a misnomer: the underlying <code>make</code> always creates or updates <em>all</em>
 pathways (i.e., courses). Nevertheless, for those who really can&#8217;t help using
 the old name, <code>build-pathway</code> is provided a trivial identity wrapper for
-<code>build</code>. Just remember that you cannot chose one pathway to build: Such
+<code>build</code>. Just remember that you cannot supply names of specific
+pathways to build:
+Such
 arguments are ignored with a helpful diagnostic.
 </td>
 </tr>
@@ -1514,12 +1522,12 @@ the documentation</p>
 <table>
 <tr>
 <td class="icon">
-<div class="title">Note</div>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 The <code>--help</code> and <code>--version</code>
 options overwhelm all other options: they display info but
-do not build
+do not build.
 </td>
 </tr>
 </table>
@@ -1528,7 +1536,7 @@ do not build
 <table>
 <tr>
 <td class="icon">
-<div class="title">Tip</div>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 Use <code>-fb</code> or <code>-bf</code> for the often useful combination of
@@ -1543,7 +1551,7 @@ satisfaction.
 <table>
 <tr>
 <td class="icon">
-<div class="title">Tip</div>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 An experimental option <code>--adocjs</code> is provided that tells the
@@ -1556,10 +1564,9 @@ version of Asciidoctor rather than the Ruby one.
 </div>
 </div>
 </div>
-</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-28 18:19:42 -0500
+Last updated 2023-03-01 11:08:07 -0500
 </div>
 </div>
 </body>
