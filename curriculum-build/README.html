@@ -642,7 +642,7 @@ SSH to interact with your webost.
 account. This can be slow. If you&#8217;re updating an already deployed
 doctree, you may set the variable <code>SKIPLIB</code> to save yourself the time taken
 to recopy the large mathjax library, since it&#8217;s unlikely to have
-changed.</p>
+changed:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -688,6 +688,10 @@ SKIPLIB=true deploy-to-hostinger</pre>
 <li>
 <p><code>--book</code> (aka <code>--pdf</code>, <code>-b</code>): generates PDFs, both for
 individuals and the workbooks</p>
+</li>
+<li>
+<p><code>--deploy</code>: deploys to website. If dir <code>distribution/</code> not found,
+makes it first; otherwise uses already-built distribution</p>
 </li>
 <li>
 <p><code>--force</code> (aka <code>--superforce</code>, <code>--super-force</code>, <code>-f</code>, <code>-F</code>):
@@ -1486,7 +1490,7 @@ without the brackets.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-03-01 10:01:51 -0500
+Last updated 2023-03-01 10:44:13 -0500
 </div>
 </div>
 </body>

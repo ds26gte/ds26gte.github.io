@@ -101,7 +101,7 @@
 <li><a href="#_link_checking">12.2. Link checking</a></li>
 <li><a href="#_dependency_graph_generation">12.3. Dependency graph generation</a></li>
 <li><a href="#_making_from_scratch">12.4. Making from scratch</a></li>
-<li><a href="#_deploying_to_websit">12.5. Deploying to websit</a></li>
+<li><a href="#_deploying_to_website">12.5. Deploying to website</a></li>
 <li><a href="#_for_users_of_legacy_build_pathway">12.6. For users of legacy build-pathway</a></li>
 </ul>
 </li>
@@ -1434,7 +1434,7 @@ a fresh slate.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_deploying_to_websit">12.5. Deploying to websit</h3>
+<h3 id="_deploying_to_website">12.5. Deploying to website</h3>
 <div class="paragraph">
 <p>To deploy a built distribution to the website, do</p>
 </div>
@@ -1483,6 +1483,11 @@ arguments are ignored with a helpful diagnostic.
 individuals and the workbooks</p>
 </li>
 <li>
+<p><code>--deploy</code>: deploys to website. Uses existing <code>distribution/</code>,
+if not, makes it first. May be preceded with settings for
+<code>SKIPLIB</code>, <code>SEASON</code>, <code>YEAR</code></p>
+</li>
+<li>
 <p><code>--force</code> (aka <code>--superforce</code>, <code>--super-force</code>, <code>-f</code>, <code>-F</code>):
 builds from scratch, scrubbing any previous <code>distribution/</code></p>
 </li>
@@ -1512,9 +1517,9 @@ the documentation</p>
 <div class="title">Note</div>
 </td>
 <td class="content">
-The <code>--help</code>
-option overwhelms all other options: help is displayed but no building takes
-place.
+The <code>--help</code> and <code>--version</code>
+options overwhelm all other options: they display info but
+do not build
 </td>
 </tr>
 </table>
@@ -1527,7 +1532,9 @@ place.
 </td>
 <td class="content">
 Use <code>-fb</code> or <code>-bf</code> for the often useful combination of
-<code>--force</code> and <code>--book</code>.
+<code>--force</code> and <code>--book</code>, used to make a final-cut distribution
+including the workbook PDFs after the source has been debugged to
+satisfaction.
 </td>
 </tr>
 </table>
