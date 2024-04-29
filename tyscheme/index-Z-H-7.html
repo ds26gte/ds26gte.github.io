@@ -1,34 +1,27 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-6.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-8.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-6.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-8.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_5"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_5">5&#xa0;&#xa0;Lexical variables</a></h1>
-<p class=noindent><a id="TAG:__tex2page_index_274"></a><a id="TAG:__tex2page_index_276"></a><a id="TAG:__tex2page_index_278"></a>Scheme’s variables have lexical scope, i.e., they are
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_5">5&#xa0;&#xa0;Lexical variables</a></h1><p class=noindent>
+<a id="TAG:__tex2page_index_274"></a><a id="TAG:__tex2page_index_276"></a><a id="TAG:__tex2page_index_278"></a>Scheme’s variables have lexical scope, i.e., they are
 visible only to forms within a certain contiguous
 stretch of program text.  The <em>global</em> variables we
 have seen thus far are no exception: Their scope is all
@@ -51,8 +44,7 @@ whose scope is that procedure’s body.  E.g.,</p>
 (<span class=variable>add2</span> <span class=variable>x</span>) <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>11</span>
 
 <span class=variable>x</span>        <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>9</span>
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 Here, there is a global <code class=scheme><span class=variable>x</span></code>, and there is also a
@@ -71,13 +63,9 @@ variable.</p>
 
 </p>
 <pre class=scheme>(<span class=keyword>set!</span> <span class=variable>x</span> <span class=selfeval>20</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>modifies the global binding of <code class=scheme><span class=variable>x</span></code> from <code class=scheme><span class=selfeval>9</span></code> to
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+modifies the global binding of <code class=scheme><span class=variable>x</span></code> from <code class=scheme><span class=selfeval>9</span></code> to
 <code class=scheme><span class=selfeval>20</span></code>, because that is the binding of <code class=scheme><span class=variable>x</span></code> that is
 visible to <code class=scheme><span class=keyword>set!</span></code>.  If the <code class=scheme><span class=keyword>set!</span></code> was inside
 <code class=scheme><span class=variable>add2</span></code>’s body, it would have modified the local
@@ -89,8 +77,7 @@ visible to <code class=scheme><span class=keyword>set!</span></code>.  If the <c
   (<span class=keyword>lambda</span> (<span class=variable>x</span>)
     (<span class=keyword>set!</span> <span class=variable>x</span> (<span class=variable>+</span> <span class=variable>x</span> <span class=selfeval>2</span>))
     <span class=variable>x</span>))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 The <code class=scheme><span class=keyword>set!</span></code> here adds <code class=scheme><span class=selfeval>2</span></code> to the local variable
@@ -102,13 +89,9 @@ global <code class=scheme><span class=variable>x</span></code>, as before:</p>
 
 </p>
 <pre class=scheme>(<span class=variable>add2</span> <span class=variable>x</span>) <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>22</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>(Remember global <code class=scheme><span class=variable>x</span></code> is now <code class=scheme><span class=selfeval>20</span></code>, not <code class=scheme><span class=selfeval>9</span></code>!)</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+(Remember global <code class=scheme><span class=variable>x</span></code> is now <code class=scheme><span class=selfeval>20</span></code>, not <code class=scheme><span class=selfeval>9</span></code>!)</p>
 <p>
 
 The <code class=scheme><span class=keyword>set!</span></code> inside <code class=scheme><span class=variable>add2</span></code> affects only the local
@@ -120,8 +103,7 @@ the latter is unaffected by the <code class=scheme><span class=keyword>set!</spa
 
 </p>
 <pre class=scheme><span class=variable>x</span> <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>20</span>
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 Note that we had all this discussion because we used
@@ -146,8 +128,7 @@ interesting programs.  E.g.,</p>
   (<span class=keyword>lambda</span> ()
     (<span class=keyword>set!</span> <span class=variable>counter</span> (<span class=variable>+</span> <span class=variable>counter</span> <span class=selfeval>1</span>))
     <span class=variable>counter</span>))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 The procedure <code class=scheme><span class=variable>bump&#x2011;counter</span></code> is a zero-argument
@@ -164,14 +145,13 @@ its current value.  Here are some successive calls to
 <pre class=scheme>(<span class=variable>bump-counter</span>) <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>1</span>
 (<span class=variable>bump-counter</span>) <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>2</span>
 (<span class=variable>bump-counter</span>) <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>3</span>
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_280"></a><a id="TAG:__tex2page_index_282"></a></p>
 <a id="TAG:__tex2page_sec_5.1"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_5.1">5.1&#xa0;&#xa0;<code class=scheme><span class=keyword>let</span></code> and <code class=scheme><span class=keyword>let*</span></code></a></h2>
-<p class=noindent>Local variables can be introduced without explicitly
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_5.1">5.1&#xa0;&#xa0;<code class=scheme><span class=keyword>let</span></code> and <code class=scheme><span class=keyword>let*</span></code></a></h2><p class=noindent>
+Local variables can be introduced without explicitly
 creating a procedure.  The special form <code class=scheme><span class=keyword>let</span></code>
 introduces a list of local variables for use within its
 body:</p>
@@ -183,13 +163,9 @@ body:</p>
       (<span class=variable>z</span> <span class=selfeval>3</span>))
   (<span class=variable>list</span> <span class=variable>x</span> <span class=variable>y</span> <span class=variable>z</span>))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> (<span class=selfeval>1</span> <span class=selfeval>2</span> <span class=selfeval>3</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>As with <code class=scheme><span class=keyword>lambda</span></code>, within the <code class=scheme><span class=keyword>let</span></code>-body, the local
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+As with <code class=scheme><span class=keyword>lambda</span></code>, within the <code class=scheme><span class=keyword>let</span></code>-body, the local
 <code class=scheme><span class=variable>x</span></code> (bound to <code class=scheme><span class=selfeval>1</span></code>) shadows the global <code class=scheme><span class=variable>x</span></code> (which
 is bound to <code class=scheme><span class=selfeval>20</span></code>).</p>
 <p>
@@ -206,13 +182,9 @@ not the local <code class=scheme><span class=variable>x</span></code>:</p>
       (<span class=variable>y</span> <span class=variable>x</span>))
   (<span class=variable>+</span> <span class=variable>x</span> <span class=variable>y</span>))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>21</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>This is because <code class=scheme><span class=variable>x</span></code> is bound to <code class=scheme><span class=selfeval>1</span></code>, and <code class=scheme><span class=variable>y</span></code> is
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+This is because <code class=scheme><span class=variable>x</span></code> is bound to <code class=scheme><span class=selfeval>1</span></code>, and <code class=scheme><span class=variable>y</span></code> is
 bound to the <em>global</em> <code class=scheme><span class=variable>x</span></code>, which is <code class=scheme><span class=selfeval>20</span></code>.</p>
 <p>
 
@@ -228,13 +200,9 @@ the initialization of a later variable occurs in the
        (<span class=variable>y</span> <span class=variable>x</span>))
   (<span class=variable>+</span> <span class=variable>x</span> <span class=variable>y</span>))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>2</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The <code class=scheme><span class=variable>x</span></code> in <code class=scheme><span class=variable>y</span></code>’s initialization refers to the <code class=scheme><span class=variable>x</span></code>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The <code class=scheme><span class=variable>x</span></code> in <code class=scheme><span class=variable>y</span></code>’s initialization refers to the <code class=scheme><span class=variable>x</span></code>
 just above.  The example is entirely equivalent to —
 and is in fact intended to be a convenient abbreviation
 for — the following program with nested <code class=scheme><span class=keyword>let</span></code>s:</p>
@@ -245,8 +213,7 @@ for — the following program with nested <code class=scheme><span class=keyword
   (<span class=keyword>let</span> ((<span class=variable>y</span> <span class=variable>x</span>))
     (<span class=variable>+</span> <span class=variable>x</span> <span class=variable>y</span>)))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>2</span>
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 The values bound to lexical variables can be
@@ -257,13 +224,9 @@ procedures:</p>
 <pre class=scheme>(<span class=keyword>let</span> ((<span class=variable>cons</span> (<span class=keyword>lambda</span> (<span class=variable>x</span> <span class=variable>y</span>) (<span class=variable>+</span> <span class=variable>x</span> <span class=variable>y</span>))))
   (<span class=variable>cons</span> <span class=selfeval>1</span> <span class=selfeval>2</span>))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>3</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Inside this <code class=scheme><span class=keyword>let</span></code> body, the lexical variable <code class=scheme><span class=variable>cons</span></code>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Inside this <code class=scheme><span class=keyword>let</span></code> body, the lexical variable <code class=scheme><span class=variable>cons</span></code>
 adds its arguments.   Outside, <code class=scheme><span class=variable>cons</span></code> continues to
 create dotted pairs.</p>
 <p>
@@ -273,8 +236,7 @@ create dotted pairs.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_5.2"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_5.2">5.2&#xa0;&#xa0;<code class=scheme><span class=keyword>fluid&#x2011;let</span></code></a></h2>
-<p class=noindent></p>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_5.2">5.2&#xa0;&#xa0;<code class=scheme><span class=keyword>fluid&#x2011;let</span></code></a></h2><p class=noindent></p>
 <p>
 
 A lexical variable is visible throughout its scope,
@@ -289,13 +251,9 @@ certain value.  For this, we use the form
   (<span class=variable>display</span> (<span class=variable>bump-counter</span>)) (<span class=variable>newline</span>)
   (<span class=variable>display</span> (<span class=variable>bump-counter</span>)) (<span class=variable>newline</span>)
   (<span class=variable>display</span> (<span class=variable>bump-counter</span>)) (<span class=variable>newline</span>))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 This looks similar to a <code class=scheme><span class=keyword>let</span></code>, but instead of
 shadowing the global variable <code class=scheme><span class=variable>counter</span></code>, it
 temporarily sets it to <code class=scheme><span class=selfeval>99</span></code> before continuing with
@@ -308,21 +266,16 @@ produce</p>
 <pre class=verbatim>100&#xa0;
 101&#xa0;
 102&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>After the <code class=scheme><span class=keyword>fluid&#x2011;let</span></code> expression has evaluated,
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+After the <code class=scheme><span class=keyword>fluid&#x2011;let</span></code> expression has evaluated,
 the global <code class=scheme><span class=variable>counter</span></code> reverts to the value it had
 before the <code class=scheme><span class=keyword>fluid&#x2011;let</span></code>.</p>
 <p>
 
 </p>
 <pre class=scheme><span class=variable>counter</span> <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>3</span>
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 Note that <code class=scheme><span class=keyword>fluid&#x2011;let</span></code> has an entirely different
@@ -340,13 +293,9 @@ To drive home this point, consider the program</p>
   (<span class=variable>display</span> (<span class=variable>bump-counter</span>)) (<span class=variable>newline</span>)
   (<span class=variable>display</span> (<span class=variable>bump-counter</span>)) (<span class=variable>newline</span>)
   (<span class=variable>display</span> (<span class=variable>bump-counter</span>)) (<span class=variable>newline</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>which substitutes <code class=scheme><span class=keyword>let</span></code> for <code class=scheme><span class=keyword>fluid&#x2011;let</span></code> in
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+which substitutes <code class=scheme><span class=keyword>let</span></code> for <code class=scheme><span class=keyword>fluid&#x2011;let</span></code> in
 the previous example.  The output is now</p>
 <p>
 
@@ -354,13 +303,9 @@ the previous example.  The output is now</p>
 <pre class=scheme><span class=selfeval>4</span>
 <span class=selfeval>5</span>
 <span class=selfeval>6</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>I.e., the global <code class=scheme><span class=variable>counter</span></code>, which is initially
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+I.e., the global <code class=scheme><span class=variable>counter</span></code>, which is initially
 <code class=scheme><span class=selfeval>3</span></code>, is updated by each call to <code class=scheme><span class=variable>bump&#x2011;counter</span></code>.
 The new lexical variable <code class=scheme><span class=variable>counter</span></code>, with its
 initialization of <code class=scheme><span class=selfeval>99</span></code>, has no impact on the calls to
@@ -373,14 +318,13 @@ latter continues to refer to the <em>global</em>
 
 </p>
 <pre class=scheme><span class=variable>counter</span> <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>6</span>
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_5.3"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_5.3">5.3&#xa0;&#xa0;Pseudorandom-number generators</a></h2>
-<p class=noindent><a id="TAG:__tex2page_index_286"></a><a id="TAG:__tex2page_index_288"></a><a id="TAG:__tex2page_index_290"></a>We see that unlike <code class=scheme><span class=variable>add2</span></code>, the procedure <code class=scheme><span class=variable>bump&#x2011;counter</span></code>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_5.3">5.3&#xa0;&#xa0;Pseudorandom-number generators</a></h2><p class=noindent>
+<a id="TAG:__tex2page_index_286"></a><a id="TAG:__tex2page_index_288"></a><a id="TAG:__tex2page_index_290"></a>We see that unlike <code class=scheme><span class=variable>add2</span></code>, the procedure <code class=scheme><span class=variable>bump&#x2011;counter</span></code>
 returns a different result each time it’s called, because it
 side-effects something outside itself. One particularly useful
 variant of this procedure generates a different <em>random</em>
@@ -396,13 +340,9 @@ uniformly distributed within that interval.</p>
 <pre class=scheme>(<span class=variable>random</span>) <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>0.6360226737551197</span>
 (<span class=variable>random</span>) <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>0.8057127493871963</span>
 (<span class=variable>random</span>) <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>0.8595213305159558</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>With only a little bit of arithmetic, <code class=scheme><span class=variable>random</span></code> can be used
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+With only a little bit of arithmetic, <code class=scheme><span class=variable>random</span></code> can be used
 to simulate events of known probability. Consider the throwing of
 a fair, six-headed die: The outcomes 1, 2, 3, 4, 5, 6 are equally
 likely. To simulate this, we divide the interval [0, 1) into six
@@ -417,13 +357,9 @@ this takes on the value of each die face with 1/6 probability.</p>
   (<span class=keyword>lambda</span> ()
     (<span class=keyword>let</span> ((<span class=variable>result</span> (<span class=variable>ceiling</span> (<span class=variable>*</span> (<span class=variable>random</span>) <span class=selfeval>6</span>))))
       <span class=variable>result</span>)))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent><code class=scheme><span class=variable>throw&#x2011;two&#x2011;dice</span></code> simply calls <code class=scheme><span class=variable>throw&#x2011;one&#x2011;die</span></code> twice:</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+<code class=scheme><span class=variable>throw&#x2011;two&#x2011;dice</span></code> simply calls <code class=scheme><span class=variable>throw&#x2011;one&#x2011;die</span></code> twice:</p>
 <p>
 
 </p>
@@ -431,33 +367,27 @@ this takes on the value of each die face with 1/6 probability.</p>
 (<span class=keyword>define</span> <span class=variable>throw-two-dice</span>
   (<span class=keyword>lambda</span> ()
     (<span class=variable>+</span> (<span class=variable>throw-one-die</span>) (<span class=variable>throw-one-die</span>))))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+It returns an integer between 2 and 12 inclusive — not all
+equally likely!</p>
 <p>
 
-</p>
-
-<p class=noindent>It returns an integer between 2 and 12 inclusive — not all
-equally likely!
 </p>
 <div class=footnoterule><hr></div><p>
 </p>
 <div class=footnote><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_4"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_4">1</a></sup></span> <code class=scheme><span class=keyword>fluid&#x2011;let</span></code> is a nonstandard special
 form.  See section&#xa0;<a class=hrefinternal href="index-Z-H-10.html#TAG:__tex2page_sec_8.3">8.3</a> for a definition
-of <code class=scheme><span class=keyword>fluid&#x2011;let</span></code> in Scheme.</p>
-<p>
+of <code class=scheme><span class=keyword>fluid&#x2011;let</span></code> in Scheme.</p><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_5"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_5">2</a></sup></span> Writing your own version
 of <code class=scheme><span class=variable>random</span></code> in Scheme requires quite a bit of mathematical
 chops to get something acceptable. We won’t get into that here.</p>
 </div>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-6.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-8.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-6.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-8.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

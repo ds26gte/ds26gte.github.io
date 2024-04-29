@@ -1,34 +1,27 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-14.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-16.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-14.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-16.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_13"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_13">13&#xa0;&#xa0;Jumps</a></h1>
-<p class=noindent><a id="TAG:__tex2page_index_470"></a>One of the signal features of Scheme is its support for
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_13">13&#xa0;&#xa0;Jumps</a></h1><p class=noindent>
+<a id="TAG:__tex2page_index_470"></a>One of the signal features of Scheme is its support for
 jumps or <em>nonlocal control</em>.  Specifically, Scheme
 allows program control to jump to <em>arbitrary</em>
 locations in the program, in contrast to the more
@@ -42,8 +35,8 @@ breathtaking variety of control idioms.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_13.1"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_13.1">13.1&#xa0;&#xa0;<code class=scheme><span class=variable>call&#x2011;with&#x2011;current&#x2011;continuation</span></code></a></h2>
-<p class=noindent><a id="TAG:__tex2page_index_472"></a><a id="TAG:__tex2page_index_474"></a>The operator <code class=scheme><span class=variable>call&#x2011;with&#x2011;current&#x2011;continuation</span></code> <em>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_13.1">13.1&#xa0;&#xa0;<code class=scheme><span class=variable>call&#x2011;with&#x2011;current&#x2011;continuation</span></code></a></h2><p class=noindent>
+<a id="TAG:__tex2page_index_472"></a><a id="TAG:__tex2page_index_474"></a>The operator <code class=scheme><span class=variable>call&#x2011;with&#x2011;current&#x2011;continuation</span></code> <em>
 call</em>s its argument, which must be a unary procedure,
 <em>with</em> a value called the “<em>current
 continuation</em>”.  If nothing else, this explains the
@@ -61,13 +54,9 @@ program</em>.  Thus in the program</p>
 <pre class=scheme>(<span class=variable>+</span> <span class=selfeval>1</span> (<span class=variable>call/cc</span>
        (<span class=keyword>lambda</span> (<span class=variable>k</span>)
          (<span class=variable>+</span> <span class=selfeval>2</span> (<span class=variable>k</span> <span class=selfeval>3</span>)))))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 the rest of the program, from the point of view of the
 <code class=scheme><span class=variable>call/cc</span></code>-application, is the following
 program-with-a-hole (with <code class=scheme>[]</code> representing the
@@ -76,13 +65,9 @@ hole):</p>
 
 </p>
 <pre class=scheme>(<span class=variable>+</span> <span class=selfeval>1</span> [])
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 In other words, this continuation is a program that
 will add <code class=scheme><span class=selfeval>1</span></code> to whatever is used to fill its hole.</p>
 <p>
@@ -95,13 +80,9 @@ the procedure</p>
 </p>
 <pre class=scheme>(<span class=keyword>lambda</span> (<span class=variable>k</span>)
   (<span class=variable>+</span> <span class=selfeval>2</span> (<span class=variable>k</span> <span class=selfeval>3</span>)))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 This procedure’s body applies the continuation (bound
 now to the parameter <code class=scheme><span class=variable>k</span></code>) to the argument <code class=scheme><span class=selfeval>3</span></code>.
 This is when the unusual aspect of the continuation
@@ -115,25 +96,17 @@ directly to the program-with-the-hole:</p>
 
 </p>
 <pre class=scheme>(<span class=variable>+</span> <span class=selfeval>1</span> [])
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 The program now running is simply</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=variable>+</span> <span class=selfeval>1</span> <span class=selfeval>3</span>)
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 which returns <code class=scheme><span class=selfeval>4</span></code>.  In sum,</p>
 <p>
 
@@ -142,13 +115,9 @@ which returns <code class=scheme><span class=selfeval>4</span></code>.  In sum,<
        (<span class=keyword>lambda</span> (<span class=variable>k</span>)
          (<span class=variable>+</span> <span class=selfeval>2</span> (<span class=variable>k</span> <span class=selfeval>3</span>)))))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>4</span>
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 The above illustrates what is called an <em>
 escaping</em> continuation, one used to exit out of a
 computation (here: the <code class=scheme>(<span class=variable>+</span> <span class=selfeval>2</span> [])</code> computation).  This
@@ -170,13 +139,9 @@ a quick example, type the following at the listener:</p>
          (<span class=keyword>set!</span> <span class=variable>r</span> <span class=variable>k</span>)
          (<span class=variable>+</span> <span class=selfeval>2</span> (<span class=variable>k</span> <span class=selfeval>3</span>)))))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>4</span>
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 The latter expression returns <code class=scheme><span class=selfeval>4</span></code> as before.  The
 difference between this use of <code class=scheme><span class=variable>call/cc</span></code> and the
 previous example is that here we also store the
@@ -191,13 +156,9 @@ number incremented by <code class=scheme><span class=selfeval>1</span></code>:</
 </p>
 <pre class=scheme>(<span class=variable>r</span> <span class=selfeval>5</span>)
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>6</span>
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 Note that <code class=scheme><span class=variable>r</span></code> will abandon its own continuation,
 which is better illustrated by embedding the call to
 <code class=scheme><span class=variable>r</span></code> inside some context:</p>
@@ -206,21 +167,17 @@ which is better illustrated by embedding the call to
 </p>
 <pre class=scheme>(<span class=variable>+</span> <span class=selfeval>3</span> (<span class=variable>r</span> <span class=selfeval>5</span>))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>6</span>
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 The continuations provided by <code class=scheme><span class=variable>call/cc</span></code> are thus
 <em>abortive</em> continuations.</p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_13.2"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_13.2">13.2&#xa0;&#xa0;Escaping continuations</a></h2>
-<p class=noindent>Escaping continuations are the simplest use of
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_13.2">13.2&#xa0;&#xa0;Escaping continuations</a></h2><p class=noindent>
+Escaping continuations are the simplest use of
 <code class=scheme><span class=variable>call/cc</span></code> and are very useful for programming
 procedure or loop exits.  Consider a procedure
 <code class=scheme><span class=variable>list&#x2011;product</span></code> that takes a list of numbers and
@@ -233,13 +190,9 @@ definition for <code class=scheme><span class=variable>list&#x2011;product</span
     (<span class=keyword>let</span> <span class=variable>recur</span> ((<span class=variable>s</span> <span class=variable>s</span>))
       (<span class=keyword>if</span> (<span class=variable>null?</span> <span class=variable>s</span>) <span class=selfeval>1</span>
           (<span class=variable>*</span> (<span class=variable>car</span> <span class=variable>s</span>) (<span class=variable>recur</span> (<span class=variable>cdr</span> <span class=variable>s</span>)))))))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 There is a problem with this solution.  If one of the
 elements in the list is <code class=scheme><span class=selfeval>0</span></code>, and if there are many
 elements after <code class=scheme><span class=selfeval>0</span></code> in the list, then the answer is a
@@ -258,13 +211,9 @@ rewrite the procedure as:</p>
           (<span class=keyword>if</span> (<span class=variable>null?</span> <span class=variable>s</span>) <span class=selfeval>1</span>
               (<span class=keyword>if</span> (<span class=variable>=</span> (<span class=variable>car</span> <span class=variable>s</span>) <span class=selfeval>0</span>) (<span class=variable>exit</span> <span class=selfeval>0</span>)
                   (<span class=variable>*</span> (<span class=variable>car</span> <span class=variable>s</span>) (<span class=variable>recur</span> (<span class=variable>cdr</span> <span class=variable>s</span>))))))))))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 If a <code class=scheme><span class=selfeval>0</span></code> element is encountered, the continuation
 <code class=scheme><span class=variable>exit</span></code> is called with <code class=scheme><span class=selfeval>0</span></code>, thereby avoiding
 further calls to <code class=scheme><span class=variable>recur</span></code>.</p>
@@ -272,8 +221,8 @@ further calls to <code class=scheme><span class=variable>recur</span></code>.</p
 
 </p>
 <a id="TAG:__tex2page_sec_13.3"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_13.3">13.3&#xa0;&#xa0;Tree matching</a></h2>
-<p class=noindent>A more involved example of continuation usage is the
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_13.3">13.3&#xa0;&#xa0;Tree matching</a></h2><p class=noindent>
+A more involved example of continuation usage is the
 problem of determining if two trees (arbitrarily nested
 dotted pairs) have the same <em>fringe</em>, i.e., the
 same elements (or <em>leaves</em>) in the same sequence.
@@ -286,8 +235,7 @@ E.g.,</p>
 
 (<span class=variable>same-fringe?</span> <span class=keyword>'</span>(<span class=selfeval>1</span> <span class=selfeval>2</span> <span class=selfeval>3</span>) <span class=keyword>'</span>(<span class=selfeval>1</span> (<span class=selfeval>3</span> <span class=selfeval>2</span>)))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>#f</span>
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 The purely functional approach is to flatten both trees
@@ -313,13 +261,9 @@ and check if the results match.</p>
           (<span class=keyword>else</span>
            (<span class=variable>cons</span> (<span class=variable>car</span> <span class=variable>tree</span>)
                  (<span class=variable>flatten</span> (<span class=variable>cdr</span> <span class=variable>tree</span>)))))))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 However, this traverses the trees completely to flatten
 them, and then again till it finds non-matching
 elements.  Furthermore, even the best flattening
@@ -360,13 +304,9 @@ the tree.</p>
            (<span class=keyword>lambda</span> (<span class=variable>k</span>)
              (<span class=keyword>set!</span> <span class=variable>caller</span> <span class=variable>k</span>)
              (<span class=variable>generate-leaves</span>))))))))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 When a generator created by <code class=scheme><span class=variable>tree&#x2011;&#x3e;generator</span></code> is
 called, it will store the continuation of its call in
 <code class=scheme><span class=variable>caller</span></code>, so that it can know who to send the leaf to
@@ -406,13 +346,9 @@ as two non-matching leaves are found:</p>
           (<span class=keyword>if</span> (<span class=variable>eqv?</span> <span class=variable>leaf1</span> <span class=variable>leaf2</span>)
               (<span class=keyword>if</span> (<span class=variable>null?</span> <span class=variable>leaf1</span>) <span class=selfeval>#t</span> (<span class=keyword>loop</span>))
               <span class=selfeval>#f</span>))))))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 It is easy to see that the trees are traversed at most
 once, and in case of mismatch, the traversals extend
 only upto the leftmost mismatch.  <code class=scheme><span class=variable>cons</span></code> is not used.</p>
@@ -423,8 +359,8 @@ only upto the leftmost mismatch.  <code class=scheme><span class=variable>cons</
 
 </p>
 <a id="TAG:__tex2page_sec_13.4"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_13.4">13.4&#xa0;&#xa0;Coroutines</a></h2>
-<p class=noindent>The generators used above are interesting
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_13.4">13.4&#xa0;&#xa0;Coroutines</a></h2><p class=noindent>
+The generators used above are interesting
 generalizations of the procedure concept.  Each time
 the generator is called, it resumes its computation,
 and when it has a result for its caller returns it, but
@@ -456,13 +392,9 @@ the coroutine’s initial argument, and the body of the coroutine.</p>
                     (<span class=variable>c</span> <span class=variable>v</span>))))))
        (<span class=keyword>lambda</span> (<span class=variable>v</span>)
          (<span class=variable>+local-control-state</span> <span class=variable>v</span>)))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>A call of this macro creates a coroutine procedure
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+A call of this macro creates a coroutine procedure
 (let’s call it <em>A</em>) that can be called with one
 argument.  <em>A</em> has an internal variable called
 <code class=scheme><span class=variable>+local&#x2011;control&#x2011;state</span></code> that stores, at any point, the
@@ -478,8 +410,8 @@ continuation stored in its <code class=scheme><span class=variable>+local&#x2011
 <p>
 </p>
 <a id="TAG:__tex2page_sec_13.4.1"></a>
-<h3 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_13.4.1">13.4.1&#xa0;&#xa0;Tree-matching with coroutines</a></h3>
-<p class=noindent>Tree-matching is further simplified using coroutines.
+<h3 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_13.4.1">13.4.1&#xa0;&#xa0;Tree-matching with coroutines</a></h3><p class=noindent>
+Tree-matching is further simplified using coroutines.
 The matching process is coded as a coroutine that
 depends on two other coroutines to supply the leaves of
 the respective trees:</p>
@@ -495,13 +427,9 @@ the respective trees:</p>
           (<span class=keyword>if</span> (<span class=variable>eqv?</span> <span class=variable>leaf1</span> <span class=variable>leaf2</span>)
               (<span class=keyword>if</span> (<span class=variable>null?</span> <span class=variable>leaf1</span>) <span class=selfeval>#t</span> (<span class=keyword>loop</span>))
               <span class=selfeval>#f</span>))))))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 The leaf-generator coroutines remember who to send
 their leaves to:</p>
 <p>
@@ -518,13 +446,9 @@ their leaves to:</p>
               (<span class=keyword>else</span>
                (<span class=variable>resume</span> <span class=variable>matcher-cor</span> <span class=variable>tree</span>))))
       (<span class=variable>resume</span> <span class=variable>matcher-cor</span> <span class=keyword>'</span>()))))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 The <code class=scheme><span class=variable>same&#x2011;fringe?</span></code> procedure can now <em>almost</em>
 be written as</p>
 <p>
@@ -545,13 +469,9 @@ be written as</p>
                <span class=variable>tree-cor-1</span>
                <span class=variable>tree-cor-2</span>)))
       (<span class=variable>matcher-cor</span> <span class=keyword>'</span><span class=variable>start-the-ball-rolling</span>))))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 Unfortunately, Scheme’s <code class=scheme><span class=keyword>letrec</span></code> can resolve
 mutually recursive references amongst the lexical
 variables it introduces <em>only</em> if such variable
@@ -575,13 +495,9 @@ write:</p>
                (<span class=keyword>lambda</span> (<span class=variable>v</span>) (<span class=variable>tree-cor-1</span> <span class=variable>v</span>))
                (<span class=keyword>lambda</span> (<span class=variable>v</span>) (<span class=variable>tree-cor-2</span> <span class=variable>v</span>)))))
       (<span class=variable>matcher-cor</span> <span class=keyword>'</span><span class=variable>start-the-ball-rolling</span>))))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 Note that <code class=scheme><span class=variable>call/cc</span></code> is not called directly at all in
 this rewrite of <code class=scheme><span class=variable>same&#x2011;fringe?</span></code>.  All the continuation
 manipulation is handled for us by the
@@ -590,8 +506,8 @@ manipulation is handled for us by the
 
 </p>
 <a id="TAG:__tex2page_sec_13.4.2"></a>
-<h3 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_13.4.2">13.4.2&#xa0;&#xa0;Getting wet</a></h3>
-<p class=noindent>In the <code class=scheme><span class=variable>same&#x2011;fringe?</span></code> program, the coroutines for the two trees
+<h3 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_13.4.2">13.4.2&#xa0;&#xa0;Getting wet</a></h3><p class=noindent>
+In the <code class=scheme><span class=variable>same&#x2011;fringe?</span></code> program, the coroutines for the two trees
 report back to one managing coroutine, which takes care to call
 them alternately, as many times as needed. The two tree
 coroutines don&#x2019;t interact with each other. Let’s now explore a
@@ -613,13 +529,9 @@ raining, which it can be with a certain probability
 </p>
 <pre class=scheme>(<span class=keyword>define</span> <span class=global>*rain-prob*</span> <span class=selfeval>0.4</span>)
 (<span class=keyword>define</span> <span class=global>*max-num-walks*</span> (<span class=variable>*</span> <span class=selfeval>365</span> <span class=selfeval>2</span> <span class=selfeval>5</span>)) <span class=comment>;2 walks/day for 5 years</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>To prepare for this, Prof F decides to keep an umbrella at
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+To prepare for this, Prof F decides to keep an umbrella at
 both home and office. Unfortunately, the smart prof is also
 absent-minded, so if the weather is clear, he invariably neglects
 to take an umbrella along, so there is a possibility that when it
@@ -670,13 +582,9 @@ as parameters.</p>
                   (<span class=variable>apply</span> <span class=keyword>loop</span>
                     (<span class=variable>resume</span> <span class=variable>other-location-cor</span>
                             (<span class=variable>list</span> <span class=selfeval>#f</span> (<span class=variable>+</span> <span class=variable>walks-so-far</span> <span class=selfeval>1</span>)))))))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Each location starts off with one umbrella (<code class=scheme><span class=variable>num&#x2011;umbrellas</span> <span class=variable>=</span>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Each location starts off with one umbrella (<code class=scheme><span class=variable>num&#x2011;umbrellas</span> <span class=variable>=</span>
 <span class=selfeval>1</span></code>). Each resumption to the location (whether at the start, or
 after a walk from the other location) comes with the following
 info: Whether an umbrella arrived with the latest walk, and the
@@ -706,13 +614,9 @@ coroutine as paramter:</p>
   (<span class=keyword>lambda</span> (<span class=variable>home-cor</span>)
     (<span class=keyword>coroutine</span> <span class=variable>dummy-init-arg</span>
       (<span class=variable>resume</span> <span class=variable>home-cor</span> (<span class=variable>list</span> <span class=selfeval>#f</span> <span class=selfeval>0</span>)))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>All it does is start off the professor at his home, and waits
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+All it does is start off the professor at his home, and waits
 until one of the locations resumes it when the prof has stranded
 himself.</p>
 <p>
@@ -730,13 +634,9 @@ coroutines, and link them together.</p>
          (<span class=variable>manager-cor</span> (<span class=variable>make-manager-cor</span>
                         (<span class=keyword>lambda</span> (<span class=variable>v</span>) (<span class=variable>home-cor</span> <span class=variable>v</span>)))))
   <span class=comment>;...</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Note that we use lambda-wrapping, so the argument coroutines have
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Note that we use lambda-wrapping, so the argument coroutines have
 a chance to be created before being used.</p>
 <p>
 
@@ -747,8 +647,7 @@ The body of the letrec then runs the manager</p>
 <pre class=scheme>   <span class=comment>;...</span>
    (<span class=variable>manager-cor</span> <span class=keyword>'</span><span class=variable>start-the-ball-rolling</span>)
    )
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 This should give the number of walks the prof manages before
 getting stranded. We&#x2019;d like to run this simulation multiple
@@ -765,24 +664,16 @@ can be run as one trial.</p>
 
       <span class=comment>; the letrec expression goes here</span>
       )))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>We can now call, say</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+We can now call, say</p>
 <p>
 
 </p>
 <pre class=scheme>((<span class=variable>umbrella-trial</span> <span class=selfeval>0.4</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>and this will output the number of walks before strandedness.</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+and this will output the number of walks before strandedness.</p>
 <p>
 
 To estimate the expected value of the achieved walks,
@@ -792,18 +683,16 @@ chapter&#xa0;<a class=hrefinternal href="index-Z-H-8.html#TAG:__tex2page_chap_6"
 
 </p>
 <pre class=scheme>(<span class=variable>monte-carlo</span> (<span class=variable>umbrella-trial</span> <span class=selfeval>0.4</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>You will find that Prof F gets stranded in a matter of mere
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+You will find that Prof F gets stranded in a matter of mere
 days, way before the 5-year goal he set himself.  What do you
 think the result will be if the probability of rain is 0 or 1?
 What if it is a little more than 0 or a little less than 1? Well,
 you don’t have to puzzle over it. Just call <code class=scheme><span class=variable>monte&#x2011;carlo</span></code> on
-<code class=scheme><span class=variable>umbrella&#x2011;trial</span></code> with the appropriate argument!
+<code class=scheme><span class=variable>umbrella&#x2011;trial</span></code> with the appropriate argument!</p>
+<p>
+
 </p>
 <div class=footnoterule><hr></div><p>
 </p>
@@ -812,8 +701,7 @@ you don’t have to puzzle over it. Just call <code class=scheme><span class=var
 abbreviation, include
 <code class=scheme>(<span class=keyword>define</span> <span class=variable>call/cc</span> <span class=variable>call&#x2011;with&#x2011;current&#x2011;continuation</span>)</code> in
 your initialization code and protect yourself from
-RSI.</p>
-<p>
+RSI.</p><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_10"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_10">2</a></sup></span> We could,
 if we wanted, vary the maximum number of walks too, in the same
 way. While we’ve used globals <code class=scheme><span class=global>*rain&#x2011;prob*</span></code> and
@@ -823,13 +711,10 @@ only to the body of <code class=scheme><span class=variable>umbrella&#x2011;tria
 the coroutine-generators moving into <code class=scheme><span class=variable>umbrella&#x2011;trial</span></code>’s body so
 they can access these parameters.</p>
 </div>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-14.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-16.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-14.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-16.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

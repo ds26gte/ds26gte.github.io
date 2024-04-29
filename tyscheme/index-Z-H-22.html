@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-21.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-23.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-21.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-23.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_C"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_C">C&#xa0;&#xa0;Numerical techniques</a></h1>
-<p class=noindent></p>
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_C">C&#xa0;&#xa0;Numerical techniques</a></h1><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_540"></a><a id="TAG:__tex2page_index_542"></a>Recursion (including iteration) combines well with
@@ -40,8 +32,8 @@ an approximation for a definite integral.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_C.1"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_C.1">C.1&#xa0;&#xa0;Simpson’s rule</a></h2>
-<p class=noindent>The definite integral of a function <em>f</em>(<em>x</em>) within an
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_C.1">C.1&#xa0;&#xa0;Simpson’s rule</a></h2><p class=noindent>
+The definite integral of a function <em>f</em>(<em>x</em>) within an
 interval of integration [<em>a</em>,<em>b</em>] can be viewed as the
 <em>area under the curve</em> representing <em>f</em>(<em>x</em>) from the
 lower limit <em>x</em>  =  <em>a</em> to the upper limit <em>x</em>  =  <em>b</em>.
@@ -54,14 +46,12 @@ ordinates</em> of <em>f</em>(<em>x</em>) at <em>x</em>  =  <em>a</em> and <em>x<
 
 
 </p>
-<div class=medskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=medskip></div><p>
 
 </p>
 <div class=centerline>&#xa0;<img src="index-Z-G-1.png" style="border: 0" alt="[index-Z-G-1.png]">&#xa0;</div>
 
-<div class=medskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=medskip></div><p>
 According to Simpson’s rule, we divide
 the interval of integration [<em>a</em>,<em>b</em>]
 into <em>n</em> evenly spaced
@@ -87,8 +77,8 @@ approximates the definite integral of <em>f</em>(<em>x</em>) between
 {h\over 3} \left[ (y_0 + y_n)
 + 4(y_1 + y_3 + \cdots + y_{n-1})
 + 2(y_2 + y_4 + \cdots + y_{n-2}) \right]
-"></div>
-<p class=noindent>
+"></div><p class=noindent>
+
 We define
 the procedure <code class=scheme><span class=variable>integrate&#x2011;simpson</span></code>
 to take four arguments: the integrand <code class=scheme><span class=variable>f</span></code>; the
@@ -101,13 +91,9 @@ number of intervals <code class=scheme><span class=variable>n</span></code>.</p>
 <pre class=scheme>(<span class=keyword>define</span> <span class=variable>integrate-simpson</span>
   (<span class=keyword>lambda</span> (<span class=variable>f</span> <span class=variable>a</span> <span class=variable>b</span> <span class=variable>n</span>)
     <span class=comment>;...</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The first thing we do in
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The first thing we do in
 <code class=scheme><span class=variable>integrate&#x2011;simpson</span></code>’s body is ensure that
 <code class=scheme><span class=variable>n</span></code> is even — if it isn’t, we simply bump its
 value by 1.</p>
@@ -117,13 +103,9 @@ value by 1.</p>
 <pre class=scheme>    <span class=comment>;...</span>
     (<span class=keyword>unless</span> (<span class=variable>even?</span> <span class=variable>n</span>) (<span class=keyword>set!</span> <span class=variable>n</span> (<span class=variable>+</span> <span class=variable>n</span> <span class=selfeval>1</span>)))
     <span class=comment>;...</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Next, we put in the local variable <code class=scheme><span class=variable>h</span></code>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Next, we put in the local variable <code class=scheme><span class=variable>h</span></code>
 the length of the interval.  We introduce two more local variables
 <code class=scheme><span class=variable>h*2</span></code> and <code class=scheme><span class=variable>n/2</span></code> to store the values of twice <code class=scheme><span class=variable>h</span></code>
 and half <code class=scheme><span class=variable>n</span></code> respectively, as we expect to
@@ -136,13 +118,9 @@ use these values often in the ensuing calculations.</p>
            (<span class=variable>h*2</span> (<span class=variable>*</span> <span class=variable>h</span> <span class=selfeval>2</span>))
            (<span class=variable>n/2</span> (<span class=variable>/</span> <span class=variable>n</span> <span class=selfeval>2</span>))
            <span class=comment>;...</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>We note that the sums <em>y</em><sub>1</sub>  +  <em>y</em><sub>3</sub>  +  &#x22ef; +  <em>y</em><sub><em>n</em>&#x2212;1</sub>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+We note that the sums <em>y</em><sub>1</sub>  +  <em>y</em><sub>3</sub>  +  &#x22ef; +  <em>y</em><sub><em>n</em>&#x2212;1</sub>
 and <em>y</em><sub>2</sub>  +  <em>y</em><sub>4</sub>  +  &#x22ef; +  <em>y</em><sub><em>n</em>&#x2212;2</sub> both involve adding
 every other ordinate. So let’s define a local procedure
 <code class=scheme><span class=variable>sum&#x2011;every&#x2011;other&#x2011;ordinate&#x2011;starting&#x2011;from</span></code> that
@@ -167,13 +145,9 @@ the starting ordinate and the number of ordinates to be summed.</p>
                            (<span class=variable>+</span> <span class=variable>i</span> <span class=selfeval>1</span>)
                            (<span class=variable>+</span> <span class=variable>r</span> (<span class=variable>f</span> <span class=variable>x</span>)))))))
            <span class=comment>;...</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>We can now calculate the three ordinate sums, and
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+We can now calculate the three ordinate sums, and
 combine them to produce the final answer.  Note
 that there are <em>n</em>/2 terms in <em>y</em><sub>1</sub>  +  <em>y</em><sub>3</sub>  +  &#x22ef; + 
 <em>y</em><sub><em>n</em>&#x2212;1</sub>, and (<em>n</em>/2) &#x2212; 1 terms in <em>y</em><sub>2</sub>  +  <em>y</em><sub>4</sub>  +  &#x22ef;
@@ -193,21 +167,17 @@ that there are <em>n</em>/2 terms in <em>y</em><sub>1</sub>  +  <em>y</em><sub>3
          (<span class=variable>+</span> <span class=variable>y0+yn</span>
             (<span class=variable>*</span> <span class=selfeval>4.0</span> <span class=variable>y1+y3+...+y.n-1</span>)
             (<span class=variable>*</span> <span class=selfeval>2.0</span> <span class=variable>y2+y4+...+y.n-2</span>))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Let’s use <code class=scheme><span class=variable>integrate&#x2011;simpson</span></code> to find the definite
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Let’s use <code class=scheme><span class=variable>integrate&#x2011;simpson</span></code> to find the definite
 integral of the function</p>
 <p>
 
 </p>
 <div class="mathdisplay centerline"><img src="index-Z-G-3.png" style="border: 0" alt="
 \phi(x) = {1\over \sqrt{2\pi}} e^{-x^2/2}
-"></div>
-<p class=noindent>
+"></div><p class=noindent>
+
 We first define <img src="index-Z-G-D-1.png" style="border: 0" alt="[index-Z-G-D-1.png]"> in Scheme’s prefix
 notation.<a id="TAG:__tex2page_call_footnote_Temp_17"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_17">2</a></sup></span></p>
 <p>
@@ -219,13 +189,9 @@ notation.<a id="TAG:__tex2page_call_footnote_Temp_17"></a><span class=footnotema
   (<span class=keyword>lambda</span> (<span class=variable>x</span>)
     (<span class=variable>*</span> (<span class=variable>/</span> <span class=selfeval>1</span> (<span class=variable>sqrt</span> (<span class=variable>*</span> <span class=selfeval>2</span> <span class=global>*pi*</span>)))
        (<span class=variable>exp</span> (<span class=variable>-</span> (<span class=variable>*</span> <span class=selfeval>1/2</span> (<span class=variable>*</span> <span class=variable>x</span> <span class=variable>x</span>)))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Note that we exploit the fact that tan <sup>&#x2212;1</sup> 1  = 
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Note that we exploit the fact that tan <sup>&#x2212;1</sup> 1  = 
 <img src="index-Z-G-D-3.png" style="border: 0" alt="[index-Z-G-D-3.png]">/4 in order to define <code class=scheme><span class=global>*pi*</span></code>.<a id="TAG:__tex2page_call_footnote_Temp_18"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_18">3</a></sup></span></p>
 <p>
 
@@ -238,13 +204,9 @@ all use 10 intervals.</p>
 <pre class=scheme>(<span class=variable>integrate-simpson</span> <span class=variable>phi</span> <span class=selfeval>0</span> <span class=selfeval>1</span> <span class=selfeval>10</span>)
 (<span class=variable>integrate-simpson</span> <span class=variable>phi</span> <span class=selfeval>0</span> <span class=selfeval>2</span> <span class=selfeval>10</span>)
 (<span class=variable>integrate-simpson</span> <span class=variable>phi</span> <span class=selfeval>0</span> <span class=selfeval>3</span> <span class=selfeval>10</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>To four decimal places, these values should be
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+To four decimal places, these values should be
 0.3413, 0.4772, and 0.4987 respectively [<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_2">2</a>,&#xa0;Table
 26.1].  Check to see that our implementation
 of Simpson’s rule does indeed produce comparable
@@ -253,8 +215,8 @@ values!<a id="TAG:__tex2page_call_footnote_Temp_19"></a><span class=footnotemark
 
 </p>
 <a id="TAG:__tex2page_sec_C.2"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_C.2">C.2&#xa0;&#xa0;Adaptive interval sizes</a></h2>
-<p class=noindent>It is not always convenient to specify the number <code class=scheme><span class=variable>n</span></code>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_C.2">C.2&#xa0;&#xa0;Adaptive interval sizes</a></h2><p class=noindent>
+It is not always convenient to specify the number <code class=scheme><span class=variable>n</span></code>
 of intervals.  A number that is good enough for
 one integrand may be woefully inadequate for another.  In
 such cases, it is better to specify the amount of
@@ -275,13 +237,9 @@ try increasingly better answers by steadily increasing
         (<span class=keyword>if</span> (<span class=variable>&#x3c;=</span> (<span class=variable>abs</span> (<span class=variable>-</span> <span class=variable>icurr</span> <span class=variable>iprev</span>)) <span class=variable>e</span>)
             <span class=variable>icurr</span>
             (<span class=keyword>loop</span> (<span class=variable>+</span> <span class=variable>n</span> <span class=selfeval>2</span>)))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Here we calculate successive Simpson integrals (using
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Here we calculate successive Simpson integrals (using
 our original procedure <code class=scheme><span class=variable>integrate&#x2011;simpson</span></code>) for
 <code class=scheme><span class=variable>n</span></code> = 2, 4, &#x2026;.  (Remember that <code class=scheme><span class=variable>n</span></code> must be even.)
 When the integral <code class=scheme><span class=variable>icurr</span></code> for the current <code class=scheme><span class=variable>n</span></code>
@@ -311,13 +269,9 @@ improve each segment separately.</p>
                   (<span class=variable>e</span> (<span class=variable>/</span> <span class=variable>e</span> <span class=selfeval>2</span>)))
               (<span class=variable>+</span> (<span class=variable>integrate-segment</span> <span class=variable>a</span> <span class=variable>c</span> <span class=variable>e</span>)
                  (<span class=variable>integrate-segment</span> <span class=variable>c</span> <span class=variable>b</span> <span class=variable>e</span>))))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The initial segment is from <code class=scheme><span class=variable>a</span></code> to <code class=scheme><span class=variable>b</span></code>.  To find
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The initial segment is from <code class=scheme><span class=variable>a</span></code> to <code class=scheme><span class=variable>b</span></code>.  To find
 the integral for a segment, we calculate the Simpson
 integrals <code class=scheme><span class=variable>i2</span></code> and <code class=scheme><span class=variable>i4</span></code> with the two smallest
 interval numbers 2 and 4.  If these are within <code class=scheme><span class=variable>e</span></code> of
@@ -370,13 +324,9 @@ and across successive calls to <code class=scheme><span class=variable>integrate
                      <span class=variable>x0</span> <span class=variable>x1</span> <span class=variable>x2</span> <span class=variable>y0</span> <span class=variable>y1</span> <span class=variable>y2</span> <span class=variable>h</span> <span class=variable>e</span>)
                    (<span class=variable>integrate-segment</span>
                      <span class=variable>x2</span> <span class=variable>x3</span> <span class=variable>x4</span> <span class=variable>y2</span> <span class=variable>y3</span> <span class=variable>y4</span> <span class=variable>h</span> <span class=variable>e</span>)))))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent><code class=scheme><span class=variable>integrate&#x2011;segment</span></code> now explicitly sets four
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+<code class=scheme><span class=variable>integrate&#x2011;segment</span></code> now explicitly sets four
 intervals of size <code class=scheme><span class=variable>h</span></code>, giving five ordinates <code class=scheme><span class=variable>y0</span></code>,
 <code class=scheme><span class=variable>y1</span></code>, <code class=scheme><span class=variable>y2</span></code>, <code class=scheme><span class=variable>y3</span></code>, and <code class=scheme><span class=variable>y4</span></code>.  The integral
 <code class=scheme><span class=variable>i4</span></code> uses all of these ordinates, while the integral
@@ -396,13 +346,9 @@ Compare the following approximations of
 (<span class=variable>integrate-simpson</span>          <span class=variable>exp</span> <span class=selfeval>0</span> <span class=selfeval>20</span> <span class=selfeval>40</span>)
 (<span class=variable>integrate-adaptive-simpson</span> <span class=variable>exp</span> <span class=selfeval>0</span> <span class=selfeval>20</span> <span class=selfeval>.001</span>)
 (<span class=variable>-</span> (<span class=variable>exp</span> <span class=selfeval>20</span>) <span class=selfeval>1</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The last one is the analytically correct answer.  See
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The last one is the analytically correct answer.  See
 if you can figure out the smallest <code class=scheme><span class=variable>n</span></code> (overshooting is
 expensive!)
 such that <code class=scheme>(<span class=variable>integrate&#x2011;simpson</span> <span class=variable>exp</span> <span class=selfeval>0</span> <span class=selfeval>20</span> <span class=variable>n</span>)</code> yields a result
@@ -412,8 +358,8 @@ call.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_C.3"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_C.3">C.3&#xa0;&#xa0;Improper integrals</a></h2>
-<p class=noindent>Simpson’s rule cannot be directly applied to <em>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_C.3">C.3&#xa0;&#xa0;Improper integrals</a></h2><p class=noindent>
+Simpson’s rule cannot be directly applied to <em>
 improper integrals</em> (integrals such that either
 the value of the integrand is unbounded somewhere
 within the interval of integration, or the interval of
@@ -426,8 +372,8 @@ following integral with unbounded upper limit:</p>
 <p>
 
 </p>
-<div class="mathdisplay centerline"><img src="index-Z-G-4.png" style="border: 0" alt=" \Gamma(n) = \int_0^{\infty} x^{n-1}e^{-x} dx "></div>
-<p class=noindent>
+<div class="mathdisplay centerline"><img src="index-Z-G-4.png" style="border: 0" alt=" \Gamma(n) = \int_0^{\infty} x^{n-1}e^{-x} dx "></div><p class=noindent>
+
 From this, it follows that (a) <img src="index-Z-G-D-4.png" style="border: 0" alt="[index-Z-G-D-4.png]">(1)  =  1, and (b)
 for <em>n</em> &#x3e; 0, <img src="index-Z-G-D-4.png" style="border: 0" alt="[index-Z-G-D-4.png]">(<em>n</em> + 1)  =  <em>n</em><img src="index-Z-G-D-4.png" style="border: 0" alt="[index-Z-G-D-4.png]">(<em>n</em>).  This implies
 that if we know the value of <img src="index-Z-G-D-4.png" style="border: 0" alt="[index-Z-G-D-4.png]"> in the interval
@@ -448,15 +394,11 @@ second argument <code class=scheme><span class=variable>e</span></code> for the 
 <pre class=scheme>(<span class=keyword>define</span> <span class=variable>gamma-1-to-2</span>
   (<span class=keyword>lambda</span> (<span class=variable>n</span> <span class=variable>e</span>)
     (<span class=keyword>unless</span> (<span class=variable>&#x3c;</span> <span class=selfeval>1</span> <span class=variable>n</span> <span class=selfeval>2</span>)
-      (<span class=variable>error</span> <span class=keyword>'</span><span class=variable>gamma-1-to-2</span> <span class=selfeval>&#x22;argument outside (1, 2)&#x22;&#x22;</span>))
+      (<span class=variable>error</span> <span class=keyword>'</span><span class=variable>gamma-1-to-2</span> <span class=selfeval>&#x22;argument outside (1, 2)&#x22;</span>))
     <span class=comment>;...</span>
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 We introduce a local variable <code class=scheme><span class=variable>gamma&#x2011;integrand</span></code> to hold
 the <img src="index-Z-G-D-4.png" style="border: 0" alt="[index-Z-G-D-4.png]">-integrand <em>g</em>(<em>x</em>)  =  <em>x</em><sup><em>n</em>&#x2212;1</sup><em>e</em><sup><em>x</em></sup>:</p>
 <p>
@@ -469,13 +411,9 @@ the <img src="index-Z-G-D-4.png" style="border: 0" alt="[index-Z-G-D-4.png]">-in
                 (<span class=variable>*</span> (<span class=variable>expt</span> <span class=variable>x</span> <span class=variable>n-1</span>)
                    (<span class=variable>exp</span> (<span class=variable>-</span> <span class=variable>x</span>))))))
           <span class=comment>;...</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>We now need to integrate <em>g</em>(<em>x</em>) from 0 to <img src="index-Z-G-D-5.png" style="border: 0" alt="[index-Z-G-D-5.png]">.
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+We now need to integrate <em>g</em>(<em>x</em>) from 0 to <img src="index-Z-G-D-5.png" style="border: 0" alt="[index-Z-G-D-5.png]">.
 Clearly we cannot deal with an infinite number of
 intervals; we therefore use Simpson’s rule for only a
 portion of the interval [0, <img src="index-Z-G-D-5.png" style="border: 0" alt="[index-Z-G-D-5.png]">), say [0, <em>x</em><sub><em>c</em></sub>]
@@ -494,8 +432,8 @@ function <em>t</em>(<em>x</em>)  =  <em>y</em><sub><em>c</em></sub> <em>e</em><s
 \int_0^{\infty} g(x) dx \approx 
 \int_0^{x_c} g(x) dx +
 \int_{x_c}^{\infty} t(x) dx 
-"></div>
-<p class=noindent>
+"></div><p class=noindent>
+
 The first integral can be solved using Simpson’s rule,
 and the second integral is just <em>y</em><sub><em>c</em></sub>.  To find <em>x</em><sub><em>c</em></sub>,
 we start with a low-ball value (say 4), and then refine
@@ -525,13 +463,9 @@ tolerance is not affected:</p>
                     <span class=selfeval>0</span> <span class=variable>xc</span> <span class=variable>e/100</span>)
                   <span class=variable>yc</span>)
                (<span class=keyword>loop</span> <span class=variable>x1</span> <span class=variable>y1</span>)))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>We can now write a more general procedure <code class=scheme><span class=variable>gamma</span></code>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+We can now write a more general procedure <code class=scheme><span class=variable>gamma</span></code>
 that returns <img src="index-Z-G-D-4.png" style="border: 0" alt="[index-Z-G-D-4.png]">(<em>n</em>) for any real <em>n</em>:</p>
 <p>
 
@@ -543,26 +477,18 @@ that returns <img src="index-Z-G-D-4.png" style="border: 0" alt="[index-Z-G-D-4.
           ((<span class=variable>&#x3c;</span> <span class=selfeval>1</span> <span class=variable>n</span> <span class=selfeval>2</span>) (<span class=variable>gamma-1-to-2</span> <span class=variable>n</span> <span class=variable>e</span>))
           (<span class=keyword>else</span> (<span class=keyword>let</span> ((<span class=variable>n-1</span> (<span class=variable>-</span> <span class=variable>n</span> <span class=selfeval>1</span>)))
                   (<span class=variable>*</span> <span class=variable>n-1</span> (<span class=variable>gamma</span> <span class=variable>n-1</span> <span class=variable>e</span>)))))))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 Let us now calculate <img src="index-Z-G-D-4.png" style="border: 0" alt="[index-Z-G-D-4.png]">(3/2).</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=variable>gamma</span> <span class=selfeval>3/2</span> <span class=selfeval>.001</span>)
 (<span class=variable>*</span> <span class=selfeval>1/2</span> (<span class=variable>sqrt</span> <span class=global>*pi*</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The second value is the analytically correct answer.
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The second value is the analytically correct answer.
 (This is because <img src="index-Z-G-D-4.png" style="border: 0" alt="[index-Z-G-D-4.png]">(3/2)  = 
 (1/2)<img src="index-Z-G-D-4.png" style="border: 0" alt="[index-Z-G-D-4.png]">(1/2), and <img src="index-Z-G-D-4.png" style="border: 0" alt="[index-Z-G-D-4.png]">(1/2) is known to be
 <img src="index-Z-G-D-3.png" style="border: 0" alt="[index-Z-G-D-3.png]"><sup>1/2</sup>.)
@@ -576,8 +502,7 @@ approximation as you desire.</p>
 <div class=footnote><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_16"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_16">1</a></sup></span> Consult any elementary
 text on the calculus for an explanation of why this
-approximation is reasonable.</p>
-<p>
+approximation is reasonable.</p><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_17"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_17">2</a></sup></span> <img src="index-Z-G-D-1.png" style="border: 0" alt="[index-Z-G-D-1.png]">
 is the probability density of a
 random variable with a <em>normal</em> or <em>Gaussian</em>
@@ -586,29 +511,23 @@ The definite integral <img src="index-Z-G-D-2.png" style="border: 0" alt="[index
 is the probability that the random
 variable assumes a value between 0 and <em>z</em>.
 However, you don’t need to know all this in
-order to understand the example!</p>
-<p>
+order to understand the example!</p><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_18"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_18">3</a></sup></span> If Scheme didn’t
 have the <code class=scheme><span class=variable>atan</span></code> procedure, we could use our
 numerical-integration procedure to get an approximation
-for <img src="index-Z-G-D-2.png" style="border: 0" alt="[index-Z-G-D-2.png]"><sub>0</sub><sup>1</sup> (1  +  <em>x</em><sup>2</sup>)<sup>&#x2212;1</sup> <em>d</em><em>x</em>, which is <img src="index-Z-G-D-3.png" style="border: 0" alt="[index-Z-G-D-3.png]">/4.</p>
-<p>
+for <img src="index-Z-G-D-2.png" style="border: 0" alt="[index-Z-G-D-2.png]"><sub>0</sub><sup>1</sup> (1  +  <em>x</em><sup>2</sup>)<sup>&#x2212;1</sup> <em>d</em><em>x</em>, which is <img src="index-Z-G-D-3.png" style="border: 0" alt="[index-Z-G-D-3.png]">/4.</p><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_19"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_19">4</a></sup></span> By pulling constant factors — such as <code class=scheme>(<span class=variable>/</span>
 <span class=selfeval>1</span> (<span class=variable>sqrt</span> (<span class=variable>*</span> <span class=selfeval>2</span> <span class=global>*pi*</span>)))</code> in <code class=scheme><span class=variable>phi</span></code> — out of the
 integrand, we could speed up the ordinate calculations
-within <code class=scheme><span class=variable>integrate&#x2011;simpson</span></code>.</p>
-<p>
+within <code class=scheme><span class=variable>integrate&#x2011;simpson</span></code>.</p><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_20"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_20">5</a></sup></span> <img src="index-Z-G-D-4.png" style="border: 0" alt="[index-Z-G-D-4.png]">(<em>n</em>) for real <em>n</em> &#x3e; 0 is
 itself an extension of the “decrement-then-factorial” function
 that maps <em>integer</em> <em>n</em> &#x3e; 0 to (<em>n</em>&#x2212;1)!.</p>
 </div>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-21.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-23.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-21.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-23.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

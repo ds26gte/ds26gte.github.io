@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-9.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-11.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-9.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-11.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_8"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_8">8&#xa0;&#xa0;Macros</a></h1>
-<p class=noindent></p>
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_8">8&#xa0;&#xa0;Macros</a></h1><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_392"></a>Users can create their own special forms by defining
@@ -62,16 +54,14 @@ special form <code class=scheme><span class=keyword>when</span></code>, you coul
   (<span class=keyword>lambda</span> (<span class=variable>test</span> . <span class=variable>branch</span>)
     (<span class=variable>list</span> <span class=keyword>'</span><span class=keyword>if</span> <span class=variable>test</span>
       (<span class=variable>cons</span> <span class=keyword>'</span><span class=keyword>begin</span> <span class=variable>branch</span>))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>This defines a  <code class=scheme><span class=keyword>when</span></code>-transformer that would
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+This defines a  <code class=scheme><span class=keyword>when</span></code>-transformer that would
 convert a <code class=scheme><span class=keyword>when</span></code>-expression into the equivalent
 <code class=scheme><span class=keyword>if</span></code>-expression.   With this macro definition in
-place, the <code class=scheme><span class=keyword>when</span></code>-expression
+place, the <code class=scheme><span class=keyword>when</span></code>-expression</p>
+<p>
+
 </p>
 <pre class=scheme>(<span class=keyword>when</span> (<span class=variable>&#x3c;</span> (<span class=variable>pressure</span> <span class=variable>tube</span>) <span class=selfeval>60</span>)
    (<span class=variable>open-valve</span> <span class=variable>tube</span>)
@@ -79,13 +69,9 @@ place, the <code class=scheme><span class=keyword>when</span></code>-expression
    (<span class=variable>depress</span> <span class=variable>floor-pump</span> <span class=selfeval>5</span>)
    (<span class=variable>detach</span> <span class=variable>floor-pump</span> <span class=variable>tube</span>)
    (<span class=variable>close-valve</span> <span class=variable>tube</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>will be converted to another expression, the result
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+will be converted to another expression, the result
 of applying the
 <code class=scheme><span class=keyword>when</span></code>-transformer to the <code class=scheme><span class=keyword>when</span></code>-expression’s
 subforms:</p>
@@ -102,13 +88,9 @@ subforms:</p>
       (<span class=variable>depress</span> <span class=variable>floor-pump</span> <span class=selfeval>5</span>)
       (<span class=variable>detach</span> <span class=variable>floor-pump</span> <span class=variable>tube</span>)
       (<span class=variable>close-valve</span> <span class=variable>tube</span>)))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The transformation yields the list</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The transformation yields the list</p>
 <p>
 
 </p>
@@ -119,13 +101,9 @@ subforms:</p>
       (<span class=variable>depress</span> <span class=variable>floor-pump</span> <span class=selfeval>5</span>)
       (<span class=variable>detach</span> <span class=variable>floor-pump</span> <span class=variable>tube</span>)
       (<span class=variable>close-valve</span> <span class=variable>tube</span>)))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Scheme will then evaluate this expression, as it
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Scheme will then evaluate this expression, as it
 would any other.</p>
 <p>
 
@@ -142,13 +120,9 @@ for <code class=scheme><span class=keyword>when</span></code>’s counterpart <c
     (<span class=variable>list</span> <span class=keyword>'</span><span class=keyword>if</span>
           (<span class=variable>list</span> <span class=keyword>'</span><span class=variable>not</span> <span class=variable>test</span>)
           (<span class=variable>cons</span> <span class=keyword>'</span><span class=keyword>begin</span> <span class=variable>branch</span>))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Alternatively, we could invoke <code class=scheme><span class=keyword>when</span></code> inside
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Alternatively, we could invoke <code class=scheme><span class=keyword>when</span></code> inside
 <code class=scheme><span class=keyword>unless</span></code>’s definition:</p>
 <p>
 
@@ -157,19 +131,15 @@ for <code class=scheme><span class=keyword>when</span></code>’s counterpart <c
   (<span class=keyword>lambda</span> (<span class=variable>test</span> . <span class=variable>branch</span>)
     (<span class=variable>cons</span> <span class=keyword>'</span><span class=keyword>when</span>
           (<span class=variable>cons</span> (<span class=variable>list</span> <span class=keyword>'</span><span class=variable>not</span> <span class=variable>test</span>) <span class=variable>branch</span>))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Macro expansions can refer to other macros.</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Macro expansions can refer to other macros.</p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_8.1"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_8.1">8.1&#xa0;&#xa0;Specifying the expansion as a template</a></h2>
-<p class=noindent>A macro transformer takes some s-expressions and
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_8.1">8.1&#xa0;&#xa0;Specifying the expansion as a template</a></h2><p class=noindent>
+A macro transformer takes some s-expressions and
 produces an s-expression that will be used as a form.
 Typically this output is a list.  In our
 <code class=scheme><span class=keyword>when</span></code> example, the output list is created using</p>
@@ -178,25 +148,17 @@ Typically this output is a list.  In our
 </p>
 <pre class=scheme>(<span class=variable>list</span> <span class=keyword>'</span><span class=keyword>if</span> <span class=variable>test</span>
   (<span class=variable>cons</span> <span class=keyword>'</span><span class=keyword>begin</span> <span class=variable>branch</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>where <code class=scheme><span class=variable>test</span></code> is bound to the macro’s first
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+where <code class=scheme><span class=variable>test</span></code> is bound to the macro’s first
 subform, i.e.,</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=variable>&#x3c;</span> (<span class=variable>pressure</span> <span class=variable>tube</span>) <span class=selfeval>60</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>and <code class=scheme><span class=variable>branch</span></code> to the rest of the macro’s subforms,
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+and <code class=scheme><span class=variable>branch</span></code> to the rest of the macro’s subforms,
 i.e.,</p>
 <p>
 
@@ -206,16 +168,12 @@ i.e.,</p>
  (<span class=variable>depress</span> <span class=variable>floor-pump</span> <span class=selfeval>5</span>)
  (<span class=variable>detach</span> <span class=variable>floor-pump</span> <span class=variable>tube</span>)
  (<span class=variable>close-valve</span> <span class=variable>tube</span>))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_400"></a><a id="TAG:__tex2page_index_402"></a><a id="TAG:__tex2page_index_404"></a></p>
-<p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 Output lists can be quite complicated.  It is easy to
 see that a more ambitious macro than <code class=scheme><span class=keyword>when</span></code> could
 lead to quite an elaborate construction process for the
@@ -230,25 +188,17 @@ specify such templates.    Thus the expression</p>
 </p>
 <pre class=scheme>(<span class=variable>list</span> <span class=keyword>'</span><span class=variable>IF</span> <span class=variable>test</span>
   (<span class=variable>cons</span> <span class=keyword>'</span><span class=variable>BEGIN</span> <span class=variable>branch</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>is more conveniently written as</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+is more conveniently written as</p>
 <p>
 
 </p>
 <pre class=scheme><span class=keyword>`</span>(<span class=variable>IF</span> <span class=keyword>,</span><span class=variable>test</span>
   (<span class=variable>BEGIN</span> <span class=keyword>,@</span><span class=variable>branch</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>We can refashion the <code class=scheme><span class=keyword>when</span></code> macro-definition as:</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+We can refashion the <code class=scheme><span class=keyword>when</span></code> macro-definition as:</p>
 <p>
 
 </p>
@@ -256,13 +206,9 @@ specify such templates.    Thus the expression</p>
   (<span class=keyword>lambda</span> (<span class=variable>test</span> . <span class=variable>branch</span>)
     <span class=keyword>`</span>(<span class=variable>IF</span> <span class=keyword>,</span><span class=variable>test</span>
          (<span class=variable>BEGIN</span> <span class=keyword>,@</span><span class=variable>branch</span>))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Note that the template format, unlike the earlier
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Note that the template format, unlike the earlier
 list construction, gives immediate visual indication of
 the shape of the output list.  The backquote (<code class=scheme><span class=keyword>`</span></code>)
 introduces a template for a list.  The elements of the
@@ -296,14 +242,13 @@ template will expand to the required</p>
       (<span class=variable>depress</span> <span class=variable>floor-pump</span> <span class=selfeval>5</span>)
       (<span class=variable>detach</span> <span class=variable>floor-pump</span> <span class=variable>tube</span>)
       (<span class=variable>close-valve</span> <span class=variable>tube</span>)))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_8.2"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_8.2">8.2&#xa0;&#xa0;Avoiding variable capture inside macros</a></h2>
-<p class=noindent><a id="TAG:__tex2page_index_406"></a>A two-argument disjunction form, <code class=scheme><span class=keyword>my&#x2011;or</span></code>, could be
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_8.2">8.2&#xa0;&#xa0;Avoiding variable capture inside macros</a></h2><p class=noindent>
+<a id="TAG:__tex2page_index_406"></a>A two-argument disjunction form, <code class=scheme><span class=keyword>my&#x2011;or</span></code>, could be
 defined as follows:</p>
 <p>
 
@@ -311,13 +256,9 @@ defined as follows:</p>
 <pre class=scheme>(<span class=keyword>define-macro</span> <span class=keyword>my-or</span>
   (<span class=keyword>lambda</span> (<span class=variable>x</span> <span class=variable>y</span>)
     <span class=keyword>`</span>(<span class=keyword>if</span> <span class=keyword>,</span><span class=variable>x</span> <span class=keyword>,</span><span class=variable>x</span> <span class=keyword>,</span><span class=variable>y</span>)))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 <code class=scheme><span class=keyword>my&#x2011;or</span></code> takes two arguments and returns the value of
 the first of them that is true (i.e., non-<code class=scheme><span class=selfeval>#f</span></code>).  In
 particular, the second argument is evaluated only if
@@ -330,8 +271,7 @@ the first turns out to be false.</p>
 
 (<span class=keyword>my-or</span> <span class=selfeval>#f</span> <span class=selfeval>2</span>)
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>2</span>
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 There is a problem with the <code class=scheme><span class=keyword>my&#x2011;or</span></code> macro as it is
@@ -344,17 +284,13 @@ the first argument were to contain side-effects, e.g.,</p>
 </p>
 <pre class=scheme>(<span class=keyword>my-or</span>
   (<span class=keyword>begin</span> 
-    (<span class=variable>display</span> <span class=selfeval>&#x22;doing first argument&#x22;&#x22;</span>)
+    (<span class=variable>display</span> <span class=selfeval>&#x22;doing first argument&#x22;</span>)
      (<span class=variable>newline</span>)
      <span class=selfeval>#t</span>)
   <span class=selfeval>2</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>displays <code class=scheme><span class=selfeval>&#x22;doing first argument&#x22;&#x22;</span></code> twice.</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+displays <code class=scheme><span class=selfeval>&#x22;doing first argument&#x22;</span></code> twice.</p>
 <p>
 
 This can be avoided by storing
@@ -366,13 +302,9 @@ the <code class=scheme><span class=keyword>if</span></code>-test result in a loc
   (<span class=keyword>lambda</span> (<span class=variable>x</span> <span class=variable>y</span>)
     <span class=keyword>`</span>(<span class=keyword>let</span> ((<span class=variable>temp</span> <span class=keyword>,</span><span class=variable>x</span>))
        (<span class=keyword>if</span> <span class=variable>temp</span> <span class=variable>temp</span> <span class=keyword>,</span><span class=variable>y</span>))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>This is almost OK, except in the case where the
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+This is almost OK, except in the case where the
 second argument happens to contain the same
 identifier <code class=scheme><span class=variable>temp</span></code> as used in the macro definition.
 E.g.,</p>
@@ -383,13 +315,9 @@ E.g.,</p>
 
 (<span class=keyword>my-or</span> <span class=selfeval>#f</span> <span class=variable>temp</span>)
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>#f</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Surely it should be 3!  The fiasco happens because
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Surely it should be 3!  The fiasco happens because
 the macro uses a local variable <code class=scheme><span class=variable>temp</span></code> to store the
 value of the first argument (<code class=scheme><span class=selfeval>#f</span></code>) and the 
 variable 
@@ -409,13 +337,9 @@ that nobody else comes up with them.   E.g.,</p>
   (<span class=keyword>lambda</span> (<span class=variable>x</span> <span class=variable>y</span>)
     <span class=keyword>`</span>(<span class=keyword>let</span> ((<span class=variable>+temp</span> <span class=keyword>,</span><span class=variable>x</span>))
        (<span class=keyword>if</span> <span class=variable>+temp</span> <span class=variable>+temp</span> <span class=keyword>,</span><span class=variable>y</span>))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>This will work given the tacit understanding 
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+This will work given the tacit understanding 
 that <code class=scheme><span class=variable>+temp</span></code> will not be used by code outside the
 macro.  This is of course an understanding waiting to
 be disillusioned.</p>
@@ -437,13 +361,9 @@ is a safe definition for <code class=scheme><span class=keyword>my&#x2011;or</sp
     (<span class=keyword>let</span> ((<span class=variable>temp</span> (<span class=variable>gensym</span>)))
       <span class=keyword>`</span>(<span class=keyword>let</span> ((<span class=keyword>,</span><span class=variable>temp</span> <span class=keyword>,</span><span class=variable>x</span>))
          (<span class=keyword>if</span> <span class=keyword>,</span><span class=variable>temp</span> <span class=keyword>,</span><span class=variable>temp</span> <span class=keyword>,</span><span class=variable>y</span>)))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>In the macros defined in this document, in order to be
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+In the macros defined in this document, in order to be
 concise, we will not use the <code class=scheme><span class=variable>gensym</span></code> approach.
 Instead, we will consider the point about variable
 capture as having been made, and go ahead with the less
@@ -458,8 +378,7 @@ above.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_8.3"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_8.3">8.3&#xa0;&#xa0;<code class=scheme><span class=keyword>fluid&#x2011;let</span></code></a></h2>
-<p class=noindent></p>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_8.3">8.3&#xa0;&#xa0;<code class=scheme><span class=keyword>fluid&#x2011;let</span></code></a></h2><p class=noindent></p>
 <p>
 
 Here is a definition of a rather more complicated
@@ -472,13 +391,9 @@ a set of already existing lexical variables.  Given a
 </p>
 <pre class=scheme>(<span class=keyword>fluid-let</span> ((<span class=variable>x</span> <span class=selfeval>9</span>) (<span class=variable>y</span> (<span class=variable>+</span> <span class=variable>y</span> <span class=selfeval>1</span>)))
   (<span class=variable>+</span> <span class=variable>x</span> <span class=variable>y</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>we want the expansion to be</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+we want the expansion to be</p>
 <p>
 
 </p>
@@ -489,13 +404,9 @@ a set of already existing lexical variables.  Given a
     (<span class=keyword>set!</span> <span class=variable>x</span> <span class=variable>OLD-X</span>)
     (<span class=keyword>set!</span> <span class=variable>y</span> <span class=variable>OLD-Y</span>)
     <span class=variable>RESULT</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>where we want the identifiers <code class=scheme><span class=variable>OLD&#x2011;X</span></code>, <code class=scheme><span class=variable>OLD&#x2011;Y</span></code>,
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+where we want the identifiers <code class=scheme><span class=variable>OLD&#x2011;X</span></code>, <code class=scheme><span class=variable>OLD&#x2011;Y</span></code>,
 and <code class=scheme><span class=variable>RESULT</span></code> to be symbols that will not capture
 variables in the expressions in the <code class=scheme><span class=keyword>fluid&#x2011;let</span></code> form.</p>
 <p>
@@ -521,13 +432,9 @@ macro that implements what we want:</p>
                     <span class=keyword>`</span>(<span class=keyword>set!</span> <span class=keyword>,</span><span class=variable>x</span> <span class=keyword>,</span><span class=variable>old-x</span>)) 
                   <span class=variable>xx</span> <span class=variable>old-xx</span>)
            <span class=keyword>,</span><span class=variable>result</span>)))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The macro’s arguments are:
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The macro’s arguments are:
 <code class=scheme><span class=variable>xexe</span></code>, the list of
 variable/expression pairs introduced by the <code class=scheme><span class=keyword>fluid&#x2011;let</span></code>; and  
 <code class=scheme><span class=variable>body</span></code>, the list of
@@ -566,13 +473,9 @@ example looks like</p>
     (<span class=keyword>set!</span> <span class=variable>x</span> <span class=variable>GEN-63</span>)
     (<span class=keyword>set!</span> <span class=variable>y</span> <span class=variable>GEN-64</span>)
     <span class=variable>GEN-65</span>))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 which matches our requirement.</p>
 <p>
 </p>
@@ -581,15 +484,12 @@ which matches our requirement.</p>
 <div class=footnote><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_6"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_6">1</a></sup></span> MzScheme provides
 <code class=scheme><span class=keyword>define&#x2011;macro</span></code> via the <code class=verbatim>defmacro</code> library.  Use <code class=scheme>(<span class=variable>require</span> (<span class=variable>lib</span>
-<span class=selfeval>&#x22;defmacro.ss&#x22;&#x22;</span>))</code> to load this library.</p>
+<span class=selfeval>&#x22;defmacro.ss&#x22;</span>))</code> to load this library.</p>
 </div>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-9.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-11.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-9.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-11.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

@@ -1,34 +1,27 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-11.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-13.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-11.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-13.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_10"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_10">10&#xa0;&#xa0;Alists and tables</a></h1>
-<p class=noindent><a id="TAG:__tex2page_index_420"></a><a id="TAG:__tex2page_index_422"></a>An <em>association list</em>, or <em>alist</em>, is a Scheme
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_10">10&#xa0;&#xa0;Alists and tables</a></h1><p class=noindent>
+<a id="TAG:__tex2page_index_420"></a><a id="TAG:__tex2page_index_422"></a>An <em>association list</em>, or <em>alist</em>, is a Scheme
 list of a special format.  Each element of the list is
 a cons cell, the car of which is called a <em>key</em>,
 the cdr being the <em>value</em> associated with the key.
@@ -37,8 +30,7 @@ E.g.,</p>
 
 </p>
 <pre class=scheme>((<span class=variable>a</span> . <span class=selfeval>1</span>) (<span class=variable>b</span> . <span class=selfeval>2</span>) (<span class=variable>c</span> . <span class=selfeval>3</span>))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_424"></a></p>
@@ -62,13 +54,9 @@ its keys.  Its fields are <code class=scheme><span class=variable>equ</span></co
 <p>
 </p>
 <pre class=scheme>(<span class=keyword>defstruct</span> <span class=variable>table</span> (<span class=variable>equ</span> <span class=variable>eqv?</span>) (<span class=variable>alist</span> <span class=keyword>'</span>()))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>(The default predicate is <code class=scheme><span class=variable>eqv?</span></code> — as for an
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+(The default predicate is <code class=scheme><span class=variable>eqv?</span></code> — as for an
 ordinary alist — and the alist is initially empty.)</p>
 <p>
 
@@ -85,8 +73,7 @@ is returned if the key was not found in the table:</p>
     (<span class=keyword>let</span> ((<span class=variable>c</span> (<span class=variable>lassoc</span> <span class=variable>k</span> (<span class=variable>table.alist</span> <span class=variable>tbl</span>) (<span class=variable>table.equ</span> <span class=variable>tbl</span>))))
       (<span class=keyword>cond</span> (<span class=variable>c</span> (<span class=variable>cdr</span> <span class=variable>c</span>))
             ((<span class=variable>pair?</span> <span class=variable>d</span>) (<span class=variable>car</span> <span class=variable>d</span>))))))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 The procedure <code class=scheme><span class=variable>lassoc</span></code>, used in <code class=scheme><span class=variable>table&#x2011;get</span></code>, is
@@ -101,8 +88,7 @@ defined as:</p>
           (<span class=keyword>let</span> ((<span class=variable>c</span> (<span class=variable>car</span> <span class=variable>al</span>)))
             (<span class=keyword>if</span> (<span class=variable>equ?</span> (<span class=variable>car</span> <span class=variable>c</span>) <span class=variable>k</span>) <span class=variable>c</span>
                 (<span class=keyword>loop</span> (<span class=variable>cdr</span> <span class=variable>al</span>))))))))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 The procedure <code class=scheme><span class=variable>table&#x2011;put!</span></code> is used to update a key’s
@@ -116,8 +102,7 @@ value in the given table:</p>
       (<span class=keyword>let</span> ((<span class=variable>c</span> (<span class=variable>lassoc</span> <span class=variable>k</span> <span class=variable>al</span> (<span class=variable>table.equ</span> <span class=variable>tbl</span>))))
         (<span class=keyword>if</span> <span class=variable>c</span> (<span class=variable>set-cdr!</span> <span class=variable>c</span> <span class=variable>v</span>)
             (<span class=variable>set!table.alist</span> <span class=variable>tbl</span> (<span class=variable>cons</span> (<span class=variable>cons</span> <span class=variable>k</span> <span class=variable>v</span>) <span class=variable>al</span>)))))))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 The procedure <code class=scheme><span class=variable>table&#x2011;for&#x2011;each</span></code> calls the given
@@ -131,17 +116,13 @@ procedure on every key/value pair in the table</p>
      (<span class=keyword>lambda</span> (<span class=variable>c</span>)
        (<span class=variable>p</span> (<span class=variable>car</span> <span class=variable>c</span>) (<span class=variable>cdr</span> <span class=variable>c</span>)))
      (<span class=variable>table.alist</span> <span class=variable>tbl</span>))))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 </p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-11.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-13.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-11.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-13.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

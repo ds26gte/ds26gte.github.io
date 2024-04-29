@@ -1,38 +1,30 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-2.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-4.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-2.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-4.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_1"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_1">1&#xa0;&#xa0;Enter Scheme</a></h1>
-<p class=noindent></p>
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_1">1&#xa0;&#xa0;Enter Scheme</a></h1><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_8"></a><a id="TAG:__tex2page_index_10"></a><a id="TAG:__tex2page_index_12"></a>The canonical first program is the one that says
-<code class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;&#x22;</span></code> on the console.  Using your 
+<code class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;</span></code> on the console.  Using your 
 favorite editor, create a file called
 <code class=verbatim>hello.scm</code> with the following contents:</p>
 <p>
@@ -41,15 +33,11 @@ favorite editor, create a file called
 <pre class=scheme><span class=comment>;The first program</span>
 
 (<span class=keyword>begin</span>
-  (<span class=variable>display</span> <span class=selfeval>&#x22;Hello, World!&#x22;&#x22;</span>)
+  (<span class=variable>display</span> <span class=selfeval>&#x22;Hello, World!&#x22;</span>)
   (<span class=variable>newline</span>))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 <a id="TAG:__tex2page_index_14"></a>The first line is a comment.  When Scheme sees a
 semicolon, it ignores it and all the following text on
 the line.</p>
@@ -63,7 +51,7 @@ introducing a sequence of <em>subforms</em>.  In this
 case there are two subforms.  The first is a call to
 the 
 <code class=scheme><span class=variable>display</span></code> procedure that outputs its argument
-(the string <code class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;&#x22;</span></code>) to the console (or
+(the string <code class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;</span></code>) to the console (or
 “standard output”).  It is followed by a <code class=scheme><span class=variable>newline</span></code>
 procedure call, which outputs a carriage return.</p>
 <p>
@@ -80,13 +68,9 @@ you type</p>
 
 </p>
 <pre class=verbatim>mzscheme&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>at the operating-system prompt.</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+at the operating-system prompt.</p>
 <p>
 
 <a id="TAG:__tex2page_index_28"></a><a id="TAG:__tex2page_index_30"></a><a id="TAG:__tex2page_index_32"></a></p>
@@ -112,14 +96,10 @@ At the listener prompt, <em>load</em> the file
 <p>
 
 </p>
-<pre class=scheme>(<span class=variable>load</span> <span class=selfeval>&#x22;hello.scm&#x22;&#x22;</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Scheme will now execute the contents of
+<pre class=scheme>(<span class=variable>load</span> <span class=selfeval>&#x22;hello.scm&#x22;</span>)
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Scheme will now execute the contents of
 <code class=verbatim>hello.scm</code>, outputting <code class=verbatim>Hello, World!</code> followed
 by a carriage return.  After this, you will get the listener
 prompt again, waiting for more input from you.</p>
@@ -134,38 +114,29 @@ typing the form</p>
 <p>
 
 </p>
-<pre class=scheme>(<span class=keyword>begin</span> (<span class=variable>display</span> <span class=selfeval>&#x22;Hello, World!&#x22;&#x22;</span>)
+<pre class=scheme>(<span class=keyword>begin</span> (<span class=variable>display</span> <span class=selfeval>&#x22;Hello, World!&#x22;</span>)
        (<span class=variable>newline</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>at the Scheme prompt produces</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+at the Scheme prompt produces</p>
 <p>
 
 </p>
 <pre class=verbatim>Hello, World!&#xa0;
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 Actually, you could simply have typed the form
-<code class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;&#x22;</span></code> at the listener, and you would have
+<code class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;</span></code> at the listener, and you would have
 obtained as result the string</p>
 <p>
 
 </p>
-<pre class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;&#x22;</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>because that is the result of the listener evaluating
-<code class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;&#x22;</span></code>.</p>
+<pre class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;</span>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+because that is the result of the listener evaluating
+<code class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;</span></code>.</p>
 <p>
 
 Other than the fact that the second approach produces a
@@ -176,7 +147,7 @@ to anything — the <code class=verbatim>Hello, World!</code> it emits is a
 <em>side-effect</em> produced by the <code class=scheme><span class=variable>display</span></code> and
 <code class=scheme><span class=variable>newline</span></code> procedures writing to the standard output.
 In the second program, the form
-<code class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;&#x22;</span></code> <em>evaluates</em> to the result, which
+<code class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;</span></code> <em>evaluates</em> to the result, which
 in this case is the same string as the form.</p>
 <p>
 
@@ -186,64 +157,44 @@ evaluation.  Thus</p>
 
 </p>
 <pre class=scheme><span class=variable>E</span> <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=variable>v</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>indicates that the form <code class=scheme><span class=variable>E</span></code> evaluates to a result value
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+indicates that the form <code class=scheme><span class=variable>E</span></code> evaluates to a result value
 of <code class=scheme><span class=variable>v</span></code>.  E.g.,</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=keyword>begin</span>
-  (<span class=variable>display</span> <span class=selfeval>&#x22;Hello, World!&#x22;&#x22;</span>)
+  (<span class=variable>display</span> <span class=selfeval>&#x22;Hello, World!&#x22;</span>)
   (<span class=variable>newline</span>))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> 
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>(i.e., nothing or void), although it has the side-effect of writing</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+(i.e., nothing or void), although it has the side-effect of writing</p>
 <p>
 
 </p>
 <pre class=verbatim>Hello, World!&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>to the standard output.
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+to the standard output.
 On the other hand,</p>
 <p>
 
 </p>
-<pre class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;&#x22;</span>
-<span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>&#x22;Hello, World!&#x22;&#x22;</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>In either case, we are still at the listener.  To exit,
+<pre class=scheme><span class=selfeval>&#x22;Hello, World!&#x22;</span>
+<span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>&#x22;Hello, World!&#x22;</span>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+In either case, we are still at the listener.  To exit,
 type</p>
 <p>
 
 <a id="TAG:__tex2page_index_36"></a></p>
 <pre class=scheme>(<span class=variable>exit</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>and this will land you back at the operating-system
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+and this will land you back at the operating-system
 command-line (which, as we’ve seen, is also a kind of
 listener).</p>
 <p>
@@ -259,13 +210,9 @@ could say (at the operating-system prompt)</p>
 
 </p>
 <pre class=verbatim>mzscheme -r hello.scm&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>and this will produce the greeting without making you
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+and this will produce the greeting without making you
 deal with
 the listener.   After the greeting, <code class=verbatim>mzscheme</code> will
 return you to the
@@ -274,8 +221,7 @@ operating-system prompt.  This is almost as if you said</p>
 
 </p>
 <pre class=verbatim>echo Hello, World!&#xa0;
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 You could even make <code class=verbatim>hello.scm</code> seem like an
@@ -284,13 +230,10 @@ batch file), but that will have to wait till
 chapter&#xa0;<a class=hrefinternal href="index-Z-H-18.html#TAG:__tex2page_chap_16">16</a>.</p>
 <p>
 </p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-2.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-4.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-2.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-4.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

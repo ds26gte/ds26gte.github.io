@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-20.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-22.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-20.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-22.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_B"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_B">B&#xa0;&#xa0;DOS batch files in Scheme</a></h1>
-<p class=noindent></p>
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_B">B&#xa0;&#xa0;DOS batch files in Scheme</a></h1><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_538"></a>DOS shell scripts are known as <em>batch files</em>.  A
@@ -38,8 +30,7 @@ World!”&#x200b; &#x200b;has the following contents:</p>
 
 </p>
 <pre class=verbatim>echo Hello, World!&#xa0;
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 It uses the DOS command <code class=verbatim>echo</code>.  The batch file is
@@ -51,8 +42,7 @@ environment variable.  Thereafter, anytime one types</p>
 
 </p>
 <pre class=verbatim>hello.bat&#xa0;
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 or simply</p>
@@ -60,13 +50,9 @@ or simply</p>
 
 </p>
 <pre class=verbatim>hello&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>at the DOS prompt, one promptly gets the
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+at the DOS prompt, one promptly gets the
 insufferable greeting.</p>
 <p>
 
@@ -94,14 +80,15 @@ goto :eof&#xa0;
 (newline)&#xa0;
 &#xa0;
 ;:eof&#xa0;
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 The lines upto <code class=verbatim>|#</code> are standard DOS batch.  Then
 follows the Scheme code for the greeting.  Finally,
 there is one more standard DOS batch line, viz.,
-<code class=verbatim>;:eof</code>.
+<code class=verbatim>;:eof</code>.</p>
+<p>
+
 When the user types <code class=verbatim>hello</code> at the DOS prompt, DOS
 reads and runs the file <code class=verbatim>hello.bat</code> as a regular
 batch file.  The first line, <code class=verbatim>;@echo off</code>, turns off
@@ -115,9 +102,8 @@ following contents:</p>
 <p>
 
 </p>
-<pre class=scheme>(<span class=variable>load</span> (<span class=variable>find-executable-path</span> <span class=selfeval>&#x22;hello.bat&#x22;&#x22;</span> <span class=selfeval>&#x22;hello.bat&#x22;&#x22;</span>))
-</pre>
-<p class=noindent></p>
+<pre class=scheme>(<span class=variable>load</span> (<span class=variable>find-executable-path</span> <span class=selfeval>&#x22;hello.bat&#x22;</span> <span class=selfeval>&#x22;hello.bat&#x22;</span>))
+</pre><p class=noindent></p>
 <p>
 
 The next batch command is a call to MzScheme.  The
@@ -139,7 +125,9 @@ batch file.  Loading <code class=verbatim>c:\_temp.scm</code> will cause Scheme
 to deduce the full pathname of the file <code class=verbatim>hello.bat</code>
 (using <code class=scheme><span class=variable>find&#x2011;executable&#x2011;path</span></code>), and to then <em>
 load</em>
-<code class=verbatim>hello.bat</code>.
+<code class=verbatim>hello.bat</code>.</p>
+<p>
+
 Thus, the Scheme script file will now be run as a
 Scheme file, and the Scheme forms in the file will have
 access to the script’s original arguments via the
@@ -164,21 +152,16 @@ In sum, typing <code class=verbatim>hello</code> at the DOS prompt will produce<
 
 </p>
 <pre class=verbatim>Hello, World!&#xa0;
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+and return you to the DOS prompt.</p>
 <p>
 
 </p>
-
-<p class=noindent>and return you to the DOS prompt.
+<div class=smallskip></div><p>
 </p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
-</p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-20.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-22.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-20.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-22.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-22.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-24.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-22.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-24.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_D"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_D">D&#xa0;&#xa0;A clock for infinity</a></h1>
-<p class=noindent></p>
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_D">D&#xa0;&#xa0;A clock for infinity</a></h1><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_544"></a><a id="TAG:__tex2page_index_546"></a>The Guile [<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_13">13</a>] procedure <code class=scheme><span class=variable>alarm</span></code> provides an interruptable
@@ -69,24 +61,20 @@ using the procedure
 </p>
 <pre class=scheme>(<span class=variable>sigaction</span> <span class=variable>SIGALRM</span>
   (<span class=keyword>lambda</span> (<span class=variable>sig</span>)
-    (<span class=variable>display</span> <span class=selfeval>&#x22;Signal &#x22;&#x22;</span>)
+    (<span class=variable>display</span> <span class=selfeval>&#x22;Signal &#x22;</span>)
     (<span class=variable>display</span> <span class=variable>sig</span>)
-    (<span class=variable>display</span> <span class=selfeval>&#x22; raised.  Continuing...&#x22;&#x22;</span>)
+    (<span class=variable>display</span> <span class=selfeval>&#x22; raised.  Continuing...&#x22;</span>)
     (<span class=variable>newline</span>)))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 The first argument <code class=scheme><span class=variable>SIGALRM</span></code> (which happens to be
 <code class=scheme><span class=selfeval>14</span></code>) identifies to <code class=scheme><span class=variable>sigaction</span></code> that it is the
 alarm handler that needs setting.<a id="TAG:__tex2page_call_footnote_Temp_21"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_21">1</a></sup></span>  The
 second argument is a unary alarm-handling procedure of
 the user’s choice.  In this example, when the alarm
 goes off, the handler displays <code class=scheme><span class=selfeval>&#x22;Signal 14 raised.
-Continuing...&#x22;&#x22;</span></code> on the console without exiting Scheme.
+Continuing...&#x22;</span></code> on the console without exiting Scheme.
 (The <code class=scheme><span class=selfeval>14</span></code> is the <code class=scheme><span class=variable>SIGALRM</span></code> value that the alarm
 will pass to its handler.  Don’t worry about it now.)</p>
 <p>
@@ -124,8 +112,7 @@ In Guile, we can define <code class=scheme><span class=global>*infinity*</span><
 
 </p>
 <pre class=scheme>(<span class=keyword>define</span> <span class=global>*infinity*</span> (<span class=variable>/</span> <span class=selfeval>1</span> <span class=selfeval>0</span>))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 We can define <code class=scheme><span class=variable>clock</span></code> in terms of <code class=scheme><span class=variable>alarm</span></code>.</p>
@@ -135,7 +122,7 @@ We can define <code class=scheme><span class=variable>clock</span></code> in ter
 <pre class=scheme>(<span class=keyword>define</span> <span class=variable>clock</span>
   (<span class=keyword>let</span> ((<span class=variable>stopped?</span> <span class=selfeval>#t</span>)
         (<span class=variable>clock-interrupt-handler</span>
-         (<span class=keyword>lambda</span> () (<span class=variable>error</span> <span class=selfeval>&#x22;Clock interrupt!&#x22;&#x22;</span>))))
+         (<span class=keyword>lambda</span> () (<span class=variable>error</span> <span class=selfeval>&#x22;Clock interrupt!&#x22;</span>))))
     (<span class=keyword>let</span> ((<span class=variable>generate-clock-interrupt</span>
            (<span class=keyword>lambda</span> ()
              (<span class=keyword>set!</span> <span class=variable>stopped?</span> <span class=selfeval>#t</span>)
@@ -180,13 +167,9 @@ We can define <code class=scheme><span class=variable>clock</span></code> in ter
                     (<span class=keyword>if</span> <span class=variable>stopped?</span>
                         (<span class=keyword>begin</span> (<span class=keyword>set!</span> <span class=variable>stopped?</span> <span class=selfeval>#f</span>) <span class=global>*infinity*</span>)
                         <span class=variable>time-remaining</span>))))))))))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 The <code class=scheme><span class=variable>clock</span></code> procedure uses three internal state
 variables:</p>
 <p>
@@ -224,13 +207,10 @@ transparent interface to <code class=scheme><span class=variable>alarm</span></c
 signals with their corresponding handlers, and
 <code class=scheme><span class=variable>sigaction</span></code> can be used to set these as well.</p>
 </div>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-22.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-24.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-22.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-24.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

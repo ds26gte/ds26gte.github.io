@@ -1,34 +1,27 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-15.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-17.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-15.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-17.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_14"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_14">14&#xa0;&#xa0;Nondeterminism</a></h1>
-<p class=noindent><a id="TAG:__tex2page_index_480"></a><a id="TAG:__tex2page_index_482"></a><a id="TAG:__tex2page_index_484"></a>McCarthy’s nondeterministic operator
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_14">14&#xa0;&#xa0;Nondeterminism</a></h1><p class=noindent>
+<a id="TAG:__tex2page_index_480"></a><a id="TAG:__tex2page_index_482"></a><a id="TAG:__tex2page_index_484"></a>McCarthy’s nondeterministic operator
 <code class=scheme><span class=keyword>amb</span></code> [<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_25">25</a>,&#xa0;<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_4">4</a>,&#xa0;<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_34">34</a>] is as old as
 Lisp itself, although it is present in no Lisp.
 <code class=scheme><span class=keyword>amb</span></code> takes zero or more expressions, and makes a
@@ -52,8 +45,8 @@ such as logic variables and unification.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_14.1"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_14.1">14.1&#xa0;&#xa0;Description of <code class=scheme><span class=keyword>amb</span></code></a></h2>
-<p class=noindent>An accessible description of <code class=scheme><span class=keyword>amb</span></code> and many example
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_14.1">14.1&#xa0;&#xa0;Description of <code class=scheme><span class=keyword>amb</span></code></a></h2><p class=noindent>
+An accessible description of <code class=scheme><span class=keyword>amb</span></code> and many example
 uses are found in the premier Scheme textbook
 SICP [<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_1">1</a>].  Informally,
 <code class=scheme><span class=keyword>amb</span></code> takes zero or more expressions and <em>
@@ -63,13 +56,9 @@ them.  Thus,</p>
 
 </p>
 <pre class=scheme>(<span class=keyword>amb</span> <span class=selfeval>1</span> <span class=selfeval>2</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>may evaluate to 1 <em>or</em> 2.</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+may evaluate to 1 <em>or</em> 2.</p>
 <p>
 
 <code class=scheme><span class=keyword>amb</span></code> called with <em>no</em> expressions has no
@@ -80,13 +69,9 @@ Thus,</p>
 </p>
 <pre class=scheme>(<span class=keyword>amb</span>)
 <span style="color: red"><span style="font-family: monospace"><strong><i>--&#x3e;ERROR!!!</i></strong></span></span><span class=keyword>amb</span> <span class=variable>tree</span> <span class=variable>exhausted</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>(We will examine the wording of the error message later.)</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+(We will examine the wording of the error message later.)</p>
 <p>
 
 In particular, <code class=scheme><span class=keyword>amb</span></code> is required to return a value if at
@@ -96,24 +81,16 @@ Thus,</p>
 
 </p>
 <pre class=scheme>(<span class=keyword>amb</span> <span class=selfeval>1</span> (<span class=keyword>amb</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>and</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+and</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=keyword>amb</span> (<span class=keyword>amb</span>) <span class=selfeval>1</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>both return 1.</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+both return 1.</p>
 <p>
 
 Clearly, <code class=scheme><span class=keyword>amb</span></code> cannot simply be equated to its first
@@ -132,34 +109,26 @@ For example,</p>
 
 </p>
 <pre class=scheme>(<span class=keyword>amb</span> <span class=selfeval>#f</span> <span class=selfeval>#t</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>may return either <code class=scheme><span class=selfeval>#f</span></code> or <code class=scheme><span class=selfeval>#t</span></code>, but in the program</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+may return either <code class=scheme><span class=selfeval>#f</span></code> or <code class=scheme><span class=selfeval>#t</span></code>, but in the program</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=keyword>if</span> (<span class=keyword>amb</span> <span class=selfeval>#f</span> <span class=selfeval>#t</span>)
     <span class=selfeval>1</span>
     (<span class=keyword>amb</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>the first <code class=scheme><span class=keyword>amb</span></code>-expression <em>must</em> return <code class=scheme><span class=selfeval>#t</span></code>.
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+the first <code class=scheme><span class=keyword>amb</span></code>-expression <em>must</em> return <code class=scheme><span class=selfeval>#t</span></code>.
 If it returned <code class=scheme><span class=selfeval>#f</span></code>, the <code class=scheme><span class=keyword>if</span></code>’s “else” branch would be
 chosen, which causes the entire program to fail.</p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_14.2"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_14.2">14.2&#xa0;&#xa0;Implementing <code class=scheme><span class=keyword>amb</span></code> in Scheme</a></h2>
-<p class=noindent>In our implementation of <code class=scheme><span class=keyword>amb</span></code>, we will favor
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_14.2">14.2&#xa0;&#xa0;Implementing <code class=scheme><span class=keyword>amb</span></code> in Scheme</a></h2><p class=noindent>
+In our implementation of <code class=scheme><span class=keyword>amb</span></code>, we will favor
 <code class=scheme><span class=keyword>amb</span></code>’s subexpressions from left to right.  I.e., the
 first subexpression is chosen, and if it leads to overall
 failure, the second is picked, and so on.  <code class=scheme><span class=keyword>amb</span></code>s occurring
@@ -184,16 +153,12 @@ continuation:</p>
   (<span class=keyword>lambda</span> ()
     (<span class=keyword>set!</span> <span class=variable>amb-fail</span>
       (<span class=keyword>lambda</span> ()
-        (<span class=variable>error</span> <span class=selfeval>&#x22;amb tree exhausted&#x22;&#x22;</span>)))))
+        (<span class=variable>error</span> <span class=selfeval>&#x22;amb tree exhausted&#x22;</span>)))))
 
 (<span class=variable>initialize-amb-fail</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>When <code class=scheme><span class=keyword>amb</span></code> fails, it invokes the continuation bound at
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+When <code class=scheme><span class=keyword>amb</span></code> fails, it invokes the continuation bound at
 the time to <code class=scheme><span class=variable>amb&#x2011;fail</span></code>.  This is the continuation invoked
 when all the alternates in the <code class=scheme><span class=keyword>amb</span></code> choice tree have been
 tried and were found to fail.</p>
@@ -221,13 +186,9 @@ number of subexpressions.</p>
                  <span class=variable>alts...</span>)
 
           (<span class=variable>+prev-amb-fail</span>))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>A call to <code class=scheme><span class=keyword>amb</span></code> first stores away, in
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+A call to <code class=scheme><span class=keyword>amb</span></code> first stores away, in
 <code class=scheme><span class=variable>+prev&#x2011;amb&#x2011;fail</span></code>, the <code class=scheme><span class=variable>amb&#x2011;fail</span></code> value that was
 current at the time of entry.  This is because the
 <code class=scheme><span class=variable>amb&#x2011;fail</span></code> variable will be set to different failure
@@ -262,19 +223,15 @@ called.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_14.3"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_14.3">14.3&#xa0;&#xa0;Using <code class=scheme><span class=keyword>amb</span></code> in Scheme</a></h2>
-<p class=noindent>To choose a number between 1 and 10, one could say</p>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_14.3">14.3&#xa0;&#xa0;Using <code class=scheme><span class=keyword>amb</span></code> in Scheme</a></h2><p class=noindent>
+To choose a number between 1 and 10, one could say</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=keyword>amb</span> <span class=selfeval>1</span> <span class=selfeval>2</span> <span class=selfeval>3</span> <span class=selfeval>4</span> <span class=selfeval>5</span> <span class=selfeval>6</span> <span class=selfeval>7</span> <span class=selfeval>8</span> <span class=selfeval>9</span> <span class=selfeval>10</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>To be sure, as a program, this will give 1, but
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+To be sure, as a program, this will give 1, but
 depending on the context, it could return any of the
 mentioned numbers.</p>
 <p>
@@ -290,13 +247,9 @@ to a given <code class=scheme><span class=variable>hi</span></code> (inclusive):
     (<span class=keyword>let</span> <span class=keyword>loop</span> ((<span class=variable>i</span> <span class=variable>lo</span>))
       (<span class=keyword>if</span> (<span class=variable>&#x3e;</span> <span class=variable>i</span> <span class=variable>hi</span>) (<span class=keyword>amb</span>)
           (<span class=keyword>amb</span> <span class=variable>i</span> (<span class=keyword>loop</span> (<span class=variable>+</span> <span class=variable>i</span> <span class=selfeval>1</span>)))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Thus <code class=scheme>(<span class=variable>number&#x2011;between</span> <span class=selfeval>1</span> <span class=selfeval>6</span>)</code> will first
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Thus <code class=scheme>(<span class=variable>number&#x2011;between</span> <span class=selfeval>1</span> <span class=selfeval>6</span>)</code> will first
 generate 1.  Should that fail, the <code class=scheme><span class=keyword>loop</span></code> iterates,
 producing 2.  Should <em>that</em> fail, we get 3, and
 so on, until 6.  After 6, <code class=scheme><span class=keyword>loop</span></code> is called with
@@ -318,13 +271,9 @@ The guaranteed failure of <code class=scheme>(<span class=keyword>amb</span>)</c
 <pre class=scheme>(<span class=keyword>define</span> <span class=keyword>assert</span>
   (<span class=keyword>lambda</span> (<span class=variable>pred</span>)
     (<span class=keyword>if</span> (<span class=variable>not</span> <span class=variable>pred</span>) (<span class=keyword>amb</span>))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The call <code class=scheme>(<span class=keyword>assert</span> <span class=variable>pred</span>)</code> insists that <code class=scheme><span class=variable>pred</span></code> be
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The call <code class=scheme>(<span class=keyword>assert</span> <span class=variable>pred</span>)</code> insists that <code class=scheme><span class=variable>pred</span></code> be
 true.  Otherwise it will cause the current <code class=scheme><span class=keyword>amb</span></code> choice
 point to fail.<a id="TAG:__tex2page_call_footnote_Temp_11"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_11">1</a></sup></span></p>
 <p>
@@ -339,13 +288,9 @@ less than or equal to its argument <code class=scheme><span class=variable>hi</s
     (<span class=keyword>let</span> ((<span class=variable>i</span> (<span class=variable>number-between</span> <span class=selfeval>2</span> <span class=variable>hi</span>)))
       (<span class=keyword>assert</span> (<span class=variable>prime?</span> <span class=variable>i</span>))
       <span class=variable>i</span>)))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>This seems devilishly simple, except that when called as
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+This seems devilishly simple, except that when called as
 a program with any number (say 20), it will produce the
 uninteresting first solution, i.e., 2.</p>
 <p>
@@ -361,26 +306,18 @@ solution.  Thus,</p>
 </p>
 <pre class=scheme>(<span class=keyword>amb</span>)
 <span class=keyword>=&#x3e;</span> <span class=selfeval>3</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>This leaves yet another failure continuation, which can
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+This leaves yet another failure continuation, which can
 be called again for yet another solution:</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=keyword>amb</span>)
 <span class=keyword>=&#x3e;</span> <span class=selfeval>5</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The problem with this method is that the program is
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The problem with this method is that the program is
 initially called at the Scheme prompt, and successive
 solutions are also obtained by calling <code class=scheme><span class=keyword>amb</span></code> at the Scheme
 prompt.  In effect, we are using different programs (we
@@ -398,24 +335,16 @@ Thus, we could say,</p>
 </p>
 <pre class=scheme>(<span class=keyword>bag-of</span>
   (<span class=variable>gen-prime</span> <span class=selfeval>20</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>and it would return</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+and it would return</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=selfeval>2</span> <span class=selfeval>3</span> <span class=selfeval>5</span> <span class=selfeval>7</span> <span class=selfeval>11</span> <span class=selfeval>13</span> <span class=selfeval>17</span> <span class=selfeval>19</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The <code class=scheme><span class=keyword>bag&#x2011;of</span></code> macro is defined as follows:</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The <code class=scheme><span class=keyword>bag&#x2011;of</span></code> macro is defined as follows:</p>
 <p>
 
 </p>
@@ -432,13 +361,9 @@ Thus, we could say,</p>
            (<span class=variable>amb-fail</span>))
        (<span class=keyword>set!</span> <span class=variable>amb-fail</span> <span class=variable>+prev-amb-fail</span>)
        (<span class=variable>reverse!</span> <span class=variable>+results</span>))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent><code class=scheme><span class=keyword>bag&#x2011;of</span></code> first saves away its entry <code class=scheme><span class=variable>amb&#x2011;fail</span></code>.  It
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+<code class=scheme><span class=keyword>bag&#x2011;of</span></code> first saves away its entry <code class=scheme><span class=variable>amb&#x2011;fail</span></code>.  It
 redefines <code class=scheme><span class=variable>amb&#x2011;fail</span></code> to a local continuation <code class=scheme><span class=variable>+k</span></code> created within an
 <code class=scheme><span class=keyword>if</span></code>-test.  Inside the test, the <code class=scheme><span class=keyword>bag&#x2011;of</span></code> argument <code class=scheme><span class=variable>e</span></code>
 is evaluated.
@@ -461,8 +386,8 @@ in which they were generated.)</p>
 
 <a id="TAG:__tex2page_index_486"></a></p>
 <a id="TAG:__tex2page_sec_14.4"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_14.4">14.4&#xa0;&#xa0;Logic puzzles</a></h2>
-<p class=noindent>The power of depth-first search coupled
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_14.4">14.4&#xa0;&#xa0;Logic puzzles</a></h2><p class=noindent>
+The power of depth-first search coupled
 with backtracking becomes obvious when applied to solving
 logic puzzles.  These problems are extraordinarily difficult
 to solve procedurally, but can be solved concisely and
@@ -472,8 +397,8 @@ from the charm of solving the puzzle.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_14.4.1"></a>
-<h3 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_14.4.1">14.4.1&#xa0;&#xa0;The Kalotan puzzle</a></h3>
-<p class=noindent>The Kalotans are a tribe with a peculiar quirk.<a id="TAG:__tex2page_call_footnote_Temp_12"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_12">2</a></sup></span>  Their males always
+<h3 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_14.4.1">14.4.1&#xa0;&#xa0;The Kalotan puzzle</a></h3><p class=noindent>
+The Kalotans are a tribe with a peculiar quirk.<a id="TAG:__tex2page_call_footnote_Temp_12"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_12">2</a></sup></span>  Their males always
 tell the truth.  Their females never make two consecutive
 true statements, or two consecutive untrue statements.</p>
 <p>
@@ -495,8 +420,7 @@ Solve for the sex of the parents and Kibi.</p>
 <p>
 
 </p>
-<div class=centerline>&#xa0;—&#xa0;</div>
-<p>
+<div class=centerline>&#xa0;—&#xa0;</div><p>
 
 The solution consists in introducing a bunch of variables,
 allowing them to take a choice of values, and
@@ -553,13 +477,9 @@ is the boolean on whether Kibi’s claim was a lie.</p>
             (<span class=variable>eqv?</span> <span class=variable>kibi</span> <span class=keyword>'</span><span class=variable>f</span>)
             (<span class=variable>eqv?</span> <span class=variable>kibi-lied?</span> <span class=selfeval>#t</span>))))
       (<span class=variable>list</span> <span class=variable>parent1</span> <span class=variable>parent2</span> <span class=variable>kibi</span>))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>A note on the helper procedures: The procedure
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+A note on the helper procedures: The procedure
 <code class=scheme><span class=variable>distinct?</span></code> returns true if all the elements in its
 argument list are distinct, and false otherwise.  The
 procedure <code class=scheme><span class=variable>xor</span></code> returns true if only one of its two
@@ -571,8 +491,8 @@ Typing <code class=scheme>(<span class=variable>solve&#x2011;kalotan&#x2011;puzz
 
 </p>
 <a id="TAG:__tex2page_sec_14.4.2"></a>
-<h3 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_14.4.2">14.4.2&#xa0;&#xa0;Map coloring</a></h3>
-<p class=noindent>It has been known for some time (but not proven until
+<h3 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_14.4.2">14.4.2&#xa0;&#xa0;Map coloring</a></h3><p class=noindent>
+It has been known for some time (but not proven until
 1976&#xa0;[<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_30">30</a>]) that four colors suffice to
 color a terrestrial map — i.e., to color the countries
 so that neighbors are distinguished.  To actually
@@ -595,13 +515,9 @@ returns one of four colors:</p>
 <pre class=scheme>(<span class=keyword>define</span> <span class=variable>choose-color</span>
   (<span class=keyword>lambda</span> ()
     (<span class=keyword>amb</span> <span class=keyword>'</span><span class=variable>red</span> <span class=keyword>'</span><span class=variable>yellow</span> <span class=keyword>'</span><span class=variable>blue</span> <span class=keyword>'</span><span class=variable>white</span>)))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>In our solution, we create for each country a data
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+In our solution, we create for each country a data
 structure.  The data structure is a 3-element list: The
 first element of the list is the country’s name; the
 second element is its assigned color; and the third
@@ -696,17 +612,15 @@ should not be a member of the third element.</p>
           (<span class=variable>for-each</span>
            (<span class=keyword>lambda</span> (<span class=variable>c</span>)
              (<span class=variable>display</span> (<span class=variable>car</span> <span class=variable>c</span>))
-             (<span class=variable>display</span> <span class=selfeval>&#x22; &#x22;&#x22;</span>)
+             (<span class=variable>display</span> <span class=selfeval>&#x22; &#x22;</span>)
              (<span class=variable>display</span> (<span class=variable>cadr</span> <span class=variable>c</span>))
              (<span class=variable>newline</span>))
            <span class=variable>countries</span>))))))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Type <code class=scheme>(<span class=variable>color&#x2011;europe</span>)</code> to get a color assignment.</p>
 <p>
 
-</p>
-
-<p class=noindent>Type <code class=scheme>(<span class=variable>color&#x2011;europe</span>)</code> to get a color assignment.
 </p>
 <div class=footnoterule><hr></div><p>
 </p>
@@ -715,21 +629,16 @@ should not be a member of the third element.</p>
 <code class=scheme><span class=variable>require</span></code>.  We use the identifier <code class=scheme><span class=keyword>assert</span></code> in order to
 avoid confusion with the popular if informal use of
 the identifier <code class=scheme><span class=variable>require</span></code> for something else, viz.., an
-operator that loads code modules on a per-need basis.</p>
-<p>
+operator that loads code modules on a per-need basis.</p><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_12"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_12">2</a></sup></span> This
-puzzle is due to Hunter [<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_19">19</a>].</p>
-<p>
+puzzle is due to Hunter [<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_19">19</a>].</p><p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_13"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_13">3</a></sup></span> Spain (Espan&#x303;a) has <code class=scheme><span class=variable>e</span></code> so as not to
 clash with Switzerland.</p>
 </div>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-15.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-17.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-15.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-17.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-7.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-9.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-7.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-9.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_6"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_6">6&#xa0;&#xa0;Recursion</a></h1>
-<p class=noindent></p>
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_6">6&#xa0;&#xa0;Recursion</a></h1><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_292"></a><a id="TAG:__tex2page_index_294"></a>A procedure body can contain calls to other procedures,
@@ -40,13 +32,9 @@ not least itself:</p>
   (<span class=keyword>lambda</span> (<span class=variable>n</span>)
     (<span class=keyword>if</span> (<span class=variable>=</span> <span class=variable>n</span> <span class=selfeval>0</span>) <span class=selfeval>1</span>
         (<span class=variable>*</span> <span class=variable>n</span> (<span class=variable>factorial</span> (<span class=variable>-</span> <span class=variable>n</span> <span class=selfeval>1</span>))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>This <em>recursive</em> procedure calculates the <em>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+This <em>recursive</em> procedure calculates the <em>
 factorial</em> of a number.  If the number is <code class=scheme><span class=selfeval>0</span></code>, the
 answer is <code class=scheme><span class=selfeval>1</span></code>.  For any other number <code class=scheme><span class=variable>n</span></code>, the
 procedure uses itself to calculate the factorial of
@@ -69,8 +57,7 @@ other:</p>
   (<span class=keyword>lambda</span> (<span class=variable>n</span>)
     (<span class=keyword>if</span> (<span class=variable>=</span> <span class=variable>n</span> <span class=selfeval>0</span>) <span class=selfeval>#f</span>
         (<span class=variable>is-even?</span> (<span class=variable>-</span> <span class=variable>n</span> <span class=selfeval>1</span>)))))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_296"></a><a id="TAG:__tex2page_index_298"></a></p>
@@ -87,8 +74,8 @@ provides the primitive predicates <code class=scheme><span class=variable>even?<
 
 </p>
 <a id="TAG:__tex2page_sec_6.1"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_6.1">6.1&#xa0;&#xa0;<code class=scheme><span class=keyword>letrec</span></code></a></h2>
-<p class=noindent>If we wanted the above procedures as local
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_6.1">6.1&#xa0;&#xa0;<code class=scheme><span class=keyword>letrec</span></code></a></h2><p class=noindent>
+If we wanted the above procedures as local
 variables, we could try to use a <code class=scheme><span class=keyword>let</span></code> form:</p>
 <p>
 
@@ -100,13 +87,9 @@ variables, we could try to use a <code class=scheme><span class=keyword>let</spa
                     (<span class=keyword>if</span> (<span class=variable>=</span> <span class=variable>n</span> <span class=selfeval>0</span>) <span class=selfeval>#f</span>
                         (<span class=variable>local-even?</span> (<span class=variable>-</span> <span class=variable>n</span> <span class=selfeval>1</span>))))))
   (<span class=variable>list</span> (<span class=variable>local-even?</span> <span class=selfeval>23</span>) (<span class=variable>local-odd?</span> <span class=selfeval>23</span>)))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>This won’t quite work, because the occurrences of
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+This won’t quite work, because the occurrences of
 <code class=scheme><span class=variable>local&#x2011;even?</span></code> and <code class=scheme><span class=variable>local&#x2011;odd?</span></code> in the initializations
 don’t refer to the lexical variables themselves.
 Changing the <code class=scheme><span class=keyword>let</span></code> to a <code class=scheme><span class=keyword>let*</span></code> won’t work either,
@@ -127,13 +110,9 @@ To solve problems like this, Scheme provides the form
                        (<span class=keyword>if</span> (<span class=variable>=</span> <span class=variable>n</span> <span class=selfeval>0</span>) <span class=selfeval>#f</span>
                            (<span class=variable>local-even?</span> (<span class=variable>-</span> <span class=variable>n</span> <span class=selfeval>1</span>))))))
   (<span class=variable>list</span> (<span class=variable>local-even?</span> <span class=selfeval>23</span>) (<span class=variable>local-odd?</span> <span class=selfeval>23</span>)))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The lexical variables introduced by a <code class=scheme><span class=keyword>letrec</span></code> are
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The lexical variables introduced by a <code class=scheme><span class=keyword>letrec</span></code> are
 visible not only in the <code class=scheme><span class=keyword>letrec</span></code>-body but also within
 all the initializations.  <code class=scheme><span class=keyword>letrec</span></code> is thus
 tailor-made for defining recursive and mutually
@@ -145,8 +124,8 @@ recursive local procedures.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_6.2"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_6.2">6.2&#xa0;&#xa0;Named <code class=scheme><span class=keyword>let</span></code></a></h2>
-<p class=noindent>A recursive procedure defined using <code class=scheme><span class=keyword>letrec</span></code> can
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_6.2">6.2&#xa0;&#xa0;Named <code class=scheme><span class=keyword>let</span></code></a></h2><p class=noindent>
+A recursive procedure defined using <code class=scheme><span class=keyword>letrec</span></code> can
 describe loops.  Let’s say we want to display a
 countdown from <code class=scheme><span class=selfeval>10</span></code>:</p>
 <p>
@@ -159,13 +138,9 @@ countdown from <code class=scheme><span class=selfeval>10</span></code>:</p>
                             (<span class=variable>newline</span>)
                             (<span class=variable>countdown</span> (<span class=variable>-</span> <span class=variable>i</span> <span class=selfeval>1</span>)))))))
   (<span class=variable>countdown</span> <span class=selfeval>10</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>This outputs on the console the numbers <code class=scheme><span class=selfeval>10</span></code> down to
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+This outputs on the console the numbers <code class=scheme><span class=selfeval>10</span></code> down to
 <code class=scheme><span class=selfeval>1</span></code>, and returns the result <code class=scheme><span class=variable>liftoff</span></code>.</p>
 <p>
 
@@ -180,13 +155,9 @@ Scheme allows a variant of <code class=scheme><span class=keyword>let</span></co
         (<span class=variable>display</span> <span class=variable>i</span>)
         (<span class=variable>newline</span>)
         (<span class=variable>countdown</span> (<span class=variable>-</span> <span class=variable>i</span> <span class=selfeval>1</span>)))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Note the presence of a variable identifying the loop
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Note the presence of a variable identifying the loop
 immediately after the <code class=scheme><span class=keyword>let</span></code>.  This program is
 equivalent to the one written with <code class=scheme><span class=keyword>letrec</span></code>.  You may
 consider the named <code class=scheme><span class=keyword>let</span></code> to be a macro
@@ -198,8 +169,8 @@ consider the named <code class=scheme><span class=keyword>let</span></code> to b
 
 </p>
 <a id="TAG:__tex2page_sec_6.3"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_6.3">6.3&#xa0;&#xa0;Iteration</a></h2>
-<p class=noindent><code class=scheme><span class=variable>countdown</span></code> defined above is really a recursive
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_6.3">6.3&#xa0;&#xa0;Iteration</a></h2><p class=noindent>
+<code class=scheme><span class=variable>countdown</span></code> defined above is really a recursive
 procedure.  Scheme can define loops only through
 recursion.  There are no special looping or iteration
 constructs.</p>
@@ -236,13 +207,9 @@ procedure:</p>
       (<span class=keyword>if</span> (<span class=variable>null?</span> <span class=variable>l</span>) <span class=selfeval>#f</span>
           (<span class=keyword>if</span> (<span class=variable>eqv?</span> (<span class=variable>car</span> <span class=variable>l</span>) <span class=variable>o</span>) <span class=variable>i</span>
               (<span class=keyword>loop</span> (<span class=variable>+</span> <span class=variable>i</span> <span class=selfeval>1</span>) (<span class=variable>cdr</span> <span class=variable>l</span>)))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent><code class=scheme><span class=variable>list&#x2011;position</span></code> finds the index of the first
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+<code class=scheme><span class=variable>list&#x2011;position</span></code> finds the index of the first
 occurrence of the object <code class=scheme><span class=variable>o</span></code> in the list <code class=scheme><span class=variable>l</span></code>.  If
 the object is not found in the list, the procedure
 returns <code class=scheme><span class=selfeval>#f</span></code>.</p>
@@ -263,13 +230,9 @@ allocating a new one:</p>
 	  (<span class=keyword>let</span> ((<span class=variable>d</span> (<span class=variable>cdr</span> <span class=variable>s</span>)))
             (<span class=variable>set-cdr!</span> <span class=variable>s</span> <span class=variable>r</span>)
 	    (<span class=keyword>loop</span> <span class=variable>d</span> <span class=variable>s</span>))))))
-</pre>
-<p class=noindent></p>
-<p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
 
-</p>
-
-<p class=noindent>
 (<code class=scheme><span class=variable>reverse!</span></code> is a useful enough procedure that it is
 provided primitively in many Scheme dialects, e.g.,
 MzScheme and Guile.)</p>
@@ -292,25 +255,17 @@ run the experiment many (e.g., 10000) times, and average the results.</p>
       (<span class=keyword>if</span> (<span class=variable>=</span> <span class=variable>i</span> <span class=global>*num-trials*</span>)
           (<span class=variable>/</span> <span class=variable>acc</span> <span class=global>*num-trials*</span>)
           (<span class=keyword>loop</span> (<span class=variable>+</span> <span class=variable>i</span> <span class=selfeval>1</span>) (<span class=variable>+</span> <span class=variable>acc</span> (<span class=variable>experiment</span>)))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Now run</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Now run</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=variable>monte-carlo</span> <span class=variable>throw-one-die</span>)  <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>3.4728</span>
 (<span class=variable>monte-carlo</span> <span class=variable>throw-two-dice</span>) <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>6.9994</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The expected values should be close to 3.5 and 7 respectively.</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The expected values should be close to 3.5 and 7 respectively.</p>
 <p>
 
 For some numerical-calculus examples of recursion (including iteration),
@@ -322,8 +277,8 @@ see appendix&#xa0;<a class=hrefinternal href="index-Z-H-22.html#TAG:__tex2page_c
 
 </p>
 <a id="TAG:__tex2page_sec_6.4"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_6.4">6.4&#xa0;&#xa0;Mapping a procedure across a list</a></h2>
-<p class=noindent>A special kind of iteration involves repeating the same
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_6.4">6.4&#xa0;&#xa0;Mapping a procedure across a list</a></h2><p class=noindent>
+A special kind of iteration involves repeating the same
 action for each element of a list.  Scheme offers two
 procedures for this situation: <code class=scheme><span class=variable>map</span></code> and <code class=scheme><span class=variable>for&#x2011;each</span></code>.</p>
 <p>
@@ -336,8 +291,7 @@ results.  E.g.,</p>
 </p>
 <pre class=scheme>(<span class=variable>map</span> <span class=variable>add2</span> <span class=keyword>'</span>(<span class=selfeval>1</span> <span class=selfeval>2</span> <span class=selfeval>3</span>))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> (<span class=selfeval>3</span> <span class=selfeval>4</span> <span class=selfeval>5</span>)
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 The <code class=scheme><span class=variable>for&#x2011;each</span></code> procedure also applies a procedure to each
@@ -348,14 +302,10 @@ cause.  E.g.,</p>
 
 </p>
 <pre class=scheme>(<span class=variable>for-each</span> <span class=variable>display</span>
-  (<span class=variable>list</span> <span class=selfeval>&#x22;one &#x22;&#x22;</span> <span class=selfeval>&#x22;two &#x22;&#x22;</span> <span class=selfeval>&#x22;buckle my shoe&#x22;&#x22;</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>has the side-effect of displaying the strings (in
+  (<span class=variable>list</span> <span class=selfeval>&#x22;one &#x22;</span> <span class=selfeval>&#x22;two &#x22;</span> <span class=selfeval>&#x22;buckle my shoe&#x22;</span>))
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+has the side-effect of displaying the strings (in
 the order they appear) on the console.</p>
 <p>
 
@@ -373,16 +323,14 @@ the lists.  E.g.,</p>
 
 (<span class=variable>map</span> <span class=variable>+</span> <span class=keyword>'</span>(<span class=selfeval>1</span> <span class=selfeval>2</span> <span class=selfeval>3</span>) <span class=keyword>'</span>(<span class=selfeval>10</span> <span class=selfeval>20</span> <span class=selfeval>30</span>))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> (<span class=selfeval>11</span> <span class=selfeval>22</span> <span class=selfeval>33</span>)
-</pre>
-<p class=noindent>
-</p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
-</p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-7.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-9.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
+</pre><p class=noindent></p>
 <p>
+
+</p>
+<div class=smallskip></div><p>
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-7.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-9.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

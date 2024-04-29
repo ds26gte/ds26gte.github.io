@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-17.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-19.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-17.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-19.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_16"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_16">16&#xa0;&#xa0;Shell scripts</a></h1>
-<p class=noindent></p>
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_16">16&#xa0;&#xa0;Shell scripts</a></h1><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_498"></a>It is often convenient to simply write what one wants
@@ -74,8 +66,8 @@ will deal with the DOS counterpart.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_16.1"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_16.1">16.1&#xa0;&#xa0;Hello, World!, again</a></h2>
-<p class=noindent>We will now create a Scheme script that says hello to
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_16.1">16.1&#xa0;&#xa0;Hello, World!, again</a></h2><p class=noindent>
+We will now create a Scheme script that says hello to
 the world.  Saying hello is of course not a demanding
 scripting problem for traditional scripting languages.
 However, understanding how to transcribe it into Scheme
@@ -86,38 +78,26 @@ contents that look like:</p>
 
 </p>
 <pre class=verbatim>echo Hello, World!&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>It uses the shell command <code class=verbatim>echo</code>.  The script can be
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+It uses the shell command <code class=verbatim>echo</code>.  The script can be
 named <code class=verbatim>hello</code>, made into an executable by doing</p>
 <p>
 
 </p>
 <pre class=verbatim>chmod +x hello&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>and placed in one of
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+and placed in one of
 the directories named in the <code class=verbatim>PATH</code> environment
 variable.  Thereafter, anytime one types</p>
 <p>
 
 </p>
 <pre class=verbatim>hello&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>at the shell  prompt, one promptly gets the
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+at the shell  prompt, one promptly gets the
 insufferable greeting.</p>
 <p>
 
@@ -135,13 +115,9 @@ language.  The Scheme script file, also called
 &#xa0;
 (display &#x22;Hello, World!&#x22;)&#xa0;
 (newline))&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Everything following the first line is straight
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Everything following the first line is straight
 Scheme.  However, the first line is the magic that
 makes this into a script.  When the user types
 <code class=verbatim>hello</code> at the Unix prompt, Unix will read the file
@@ -163,13 +139,9 @@ command into a different shell command, viz.,</p>
 
 </p>
 <pre class=verbatim>mzscheme -r /whereveritis/hello&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>where <code class=verbatim>/whereveritis/hello</code> is the pathname of <code class=verbatim>hello</code>.</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+where <code class=verbatim>/whereveritis/hello</code> is the pathname of <code class=verbatim>hello</code>.</p>
 <p>
 
 <code class=verbatim>mzscheme</code> calls the MzScheme executable.  The <code class=verbatim>&#x2011;r</code>
@@ -187,7 +159,7 @@ the script’s original arguments via the vector
 
 Now, Scheme has to tackle the first line in the script,
 which as we’ve already seen, was really a well-formed,
-<em>traditional</em> shell script.  The <code class=scheme><span class=selfeval>&#x22;:&#x22;&#x22;</span></code> is a
+<em>traditional</em> shell script.  The <code class=scheme><span class=selfeval>&#x22;:&#x22;</span></code> is a
 self-evaluating string in Scheme and thus harmless.
 The
 ‘<code class=verbatim>;</code>’ marks a Scheme comment, and so the <code class=verbatim>exec ...</code> is
@@ -202,25 +174,21 @@ In sum, typing <code class=verbatim>hello</code> at the shell prompt will produc
 
 </p>
 <pre class=verbatim>Hello, World!&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>and return you to the shell prompt.</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+and return you to the shell prompt.</p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_16.2"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_16.2">16.2&#xa0;&#xa0;Scripts with arguments</a></h2>
-<p class=noindent>A Scheme script uses the variable <code class=scheme><span class=variable>argv</span></code> to refer to
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_16.2">16.2&#xa0;&#xa0;Scripts with arguments</a></h2><p class=noindent>
+A Scheme script uses the variable <code class=scheme><span class=variable>argv</span></code> to refer to
 its arguments.  For example, the following script
 echoes all its arguments, each on a line:</p>
 <p>
 
 </p>
-<pre class=scheme><span class=selfeval>&#x22;:&#x22;&#x22;</span><span class=comment>; exec mzscheme -r $0 &#x22;$@&#x22;</span>
+<pre class=scheme><span class=selfeval>&#x22;:&#x22;</span><span class=comment>; exec mzscheme -r $0 &#x22;$@&#x22;</span>
 
 <span class=comment>;Put in argv-count the number of arguments supplied</span>
 
@@ -231,8 +199,7 @@ echoes all its arguments, each on a line:</p>
     (<span class=variable>display</span> (<span class=variable>vector-ref</span> <span class=variable>argv</span> <span class=variable>i</span>))
     (<span class=variable>newline</span>)
     (<span class=keyword>loop</span> (<span class=variable>+</span> <span class=variable>i</span> <span class=selfeval>1</span>))))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 Let’s call this script <code class=verbatim>echoall</code>.  Calling <code class=verbatim>echoall
@@ -243,20 +210,16 @@ Let’s call this script <code class=verbatim>echoall</code>.  Calling <code cla
 <pre class=verbatim>1&#xa0;
 2&#xa0;
 3&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Note that the script name (<code class=scheme><span class=selfeval>&#x22;echoall&#x22;&#x22;</span></code>) is <em>not</em> included in
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Note that the script name (<code class=scheme><span class=selfeval>&#x22;echoall&#x22;</span></code>) is <em>not</em> included in
 the argument vector.</p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_16.3"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_16.3">16.3&#xa0;&#xa0;Example</a></h2>
-<p class=noindent>Let’s now tackle a more substantial problem.  We need
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_16.3">16.3&#xa0;&#xa0;Example</a></h2><p class=noindent>
+Let’s now tackle a more substantial problem.  We need
 to transfer files from one computer to another and the
 only method we have is to use a 3.5&#x201d; floppy as a
 ferry.  We need a script <code class=verbatim>split4floppy</code> that will
@@ -266,7 +229,7 @@ is as follows:</p>
 <p>
 
 </p>
-<pre class=scheme><span class=selfeval>&#x22;:&#x22;&#x22;</span><span class=comment>;exec mzscheme -r $0 &#x22;$@&#x22;</span>
+<pre class=scheme><span class=selfeval>&#x22;:&#x22;</span><span class=comment>;exec mzscheme -r $0 &#x22;$@&#x22;</span>
 
 <span class=comment>;floppy-size = number of bytes that will comfortably fit on a</span>
 <span class=comment>;              3.5&#x22; floppy</span>
@@ -292,7 +255,7 @@ is as follows:</p>
 
 (<span class=keyword>define</span> <span class=variable>copy-to-floppy-sized-subfile</span>
   (<span class=keyword>lambda</span> (<span class=variable>i</span> <span class=variable>subfile-prefix</span> <span class=variable>n</span>)
-    (<span class=keyword>let</span> ((<span class=variable>nth-subfile</span> (<span class=variable>string-append</span> <span class=variable>subfile-prefix</span> <span class=selfeval>&#x22;.&#x22;&#x22;</span>
+    (<span class=keyword>let</span> ((<span class=variable>nth-subfile</span> (<span class=variable>string-append</span> <span class=variable>subfile-prefix</span> <span class=selfeval>&#x22;.&#x22;</span>
                                       (<span class=variable>number-&#x3e;string</span> <span class=variable>n</span>))))
       (<span class=keyword>if</span> (<span class=variable>file-exists?</span> <span class=variable>nth-subfile</span>) (<span class=variable>delete-file</span> <span class=variable>nth-subfile</span>))
       (<span class=variable>call-with-output-file</span> <span class=variable>nth-subfile</span>
@@ -320,24 +283,16 @@ is as follows:</p>
 <span class=comment>;bigfile</span>
 
 (<span class=variable>split</span> <span class=variable>bigfile</span> <span class=variable>subfile-prefix</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Script <code class=verbatim>split4floppy</code> is called as follows:</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Script <code class=verbatim>split4floppy</code> is called as follows:</p>
 <p>
 
 </p>
 <pre class=verbatim>split4floppy largefile chunk&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>This splits <code class=verbatim>largefile</code> into subfiles <code class=verbatim>chunk.1</code>,
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+This splits <code class=verbatim>largefile</code> into subfiles <code class=verbatim>chunk.1</code>,
 <code class=verbatim>chunk.2</code>, ..., such that each subfile fits on a
 floppy.</p>
 <p>
@@ -350,28 +305,20 @@ can be  done on Unix with:</p>
 
 </p>
 <pre class=verbatim>cat chunk.1 chunk.2 ... &#x3e; largefile&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>and on DOS with:</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+and on DOS with:</p>
 <p>
 
 </p>
 <pre class=verbatim>copy /b chunk.1+chunk.2+... largefile&#xa0;
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 </p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-17.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-19.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-17.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-19.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

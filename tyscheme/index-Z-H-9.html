@@ -1,42 +1,35 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-8.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-10.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-8.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-10.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_7"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_7">7&#xa0;&#xa0;I/O</a></h1>
-<p class=noindent><a id="TAG:__tex2page_index_334"></a>Scheme has input/output (I/O) procedures that will let you
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_7">7&#xa0;&#xa0;I/O</a></h1><p class=noindent>
+<a id="TAG:__tex2page_index_334"></a>Scheme has input/output (I/O) procedures that will let you
 read from an input port or write to an output port.  Ports
 can be associated with the console, files or strings.</p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_7.1"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.1">7.1&#xa0;&#xa0;Reading</a></h2>
-<p class=noindent>Scheme’s reader procedures take an optional input port
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.1">7.1&#xa0;&#xa0;Reading</a></h2><p class=noindent>
+Scheme’s reader procedures take an optional input port
 argument.  If the port is not specified, the current input
 port (usually the console) is assumed.</p>
 <p>
@@ -64,8 +57,8 @@ procedure <code class=scheme><span class=variable>read</span></code> reads the n
 
 </p>
 <a id="TAG:__tex2page_sec_7.2"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.2">7.2&#xa0;&#xa0;Writing</a></h2>
-<p class=noindent>Scheme’s writer procedures take the object that is to be
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.2">7.2&#xa0;&#xa0;Writing</a></h2><p class=noindent>
+Scheme’s writer procedures take the object that is to be
 written and an optional output port argument.  If the port
 is not specified, the current output port (usually the
 console) is assumed.</p>
@@ -101,8 +94,8 @@ the output port.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_7.3"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.3">7.3&#xa0;&#xa0;File ports</a></h2>
-<p class=noindent><a id="TAG:__tex2page_index_356"></a><a id="TAG:__tex2page_index_358"></a><a id="TAG:__tex2page_index_360"></a><a id="TAG:__tex2page_index_362"></a>Scheme’s I/O procedures do not need a port argument if the
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.3">7.3&#xa0;&#xa0;File ports</a></h2><p class=noindent>
+<a id="TAG:__tex2page_index_356"></a><a id="TAG:__tex2page_index_358"></a><a id="TAG:__tex2page_index_360"></a><a id="TAG:__tex2page_index_362"></a>Scheme’s I/O procedures do not need a port argument if the
 port happens to be standard input or standard output.
 However, if you need these ports explicitly, the
 zero-argument procedures <code class=scheme><span class=variable>current&#x2011;input&#x2011;port</span></code> and
@@ -112,13 +105,9 @@ zero-argument procedures <code class=scheme><span class=variable>current&#x2011;
 </p>
 <pre class=scheme>(<span class=variable>display</span> <span class=selfeval>9</span>)
 (<span class=variable>display</span> <span class=selfeval>9</span> (<span class=variable>current-output-port</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>have the same behavior.</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+have the same behavior.</p>
 <p>
 
 <a id="TAG:__tex2page_index_364"></a><a id="TAG:__tex2page_index_366"></a></p>
@@ -141,9 +130,11 @@ with <code class=scheme><span class=variable>close&#x2011;input&#x2011;port</spa
 <p>
 
 In the following, assume the file <code class=verbatim>hello.txt</code> contains the
-single word <code class=scheme><span class=variable>hello</span></code>.
+single word <code class=scheme><span class=variable>hello</span></code>.</p>
+<p>
+
 </p>
-<pre class=scheme>(<span class=keyword>define</span> <span class=variable>i</span> (<span class=variable>open-input-file</span> <span class=selfeval>&#x22;hello.txt&#x22;&#x22;</span>))
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>i</span> (<span class=variable>open-input-file</span> <span class=selfeval>&#x22;hello.txt&#x22;</span>))
 
 (<span class=variable>read-char</span> <span class=variable>i</span>)
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>#\h</span>
@@ -152,8 +143,7 @@ single word <code class=scheme><span class=variable>hello</span></code>.
 
 <span class=variable>j</span>
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=variable>ello</span>
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 Assume the file <code class=verbatim>greeting.txt</code> does not exist before the
@@ -161,34 +151,29 @@ following programs are fed to the listener:</p>
 <p>
 
 </p>
-<pre class=scheme>(<span class=keyword>define</span> <span class=variable>o</span> (<span class=variable>open-output-file</span> <span class=selfeval>&#x22;greeting.txt&#x22;&#x22;</span>))
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>o</span> (<span class=variable>open-output-file</span> <span class=selfeval>&#x22;greeting.txt&#x22;</span>))
 
-(<span class=variable>display</span> <span class=selfeval>&#x22;hello&#x22;&#x22;</span> <span class=variable>o</span>)
+(<span class=variable>display</span> <span class=selfeval>&#x22;hello&#x22;</span> <span class=variable>o</span>)
 (<span class=variable>write-char</span> <span class=selfeval>#\space</span> <span class=variable>o</span>)
 (<span class=variable>display</span> <span class=keyword>'</span><span class=variable>world</span> <span class=variable>o</span>)
 (<span class=variable>newline</span> <span class=variable>o</span>)
 
 (<span class=variable>close-output-port</span> <span class=variable>o</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The file <code class=verbatim>greeting.txt</code> will now contain the
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The file <code class=verbatim>greeting.txt</code> will now contain the
 line:</p>
 <p>
 
 </p>
 <pre class=verbatim>hello world&#xa0;
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_7.3.1"></a>
-<h3 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.3.1">7.3.1&#xa0;&#xa0;Automatic opening and closing of file ports</a></h3>
-<p class=noindent><a id="TAG:__tex2page_index_372"></a><a id="TAG:__tex2page_index_374"></a>Scheme supplies the procedures <code class=scheme><span class=variable>call&#x2011;with&#x2011;input&#x2011;file</span></code> and
+<h3 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.3.1">7.3.1&#xa0;&#xa0;Automatic opening and closing of file ports</a></h3><p class=noindent>
+<a id="TAG:__tex2page_index_372"></a><a id="TAG:__tex2page_index_374"></a>Scheme supplies the procedures <code class=scheme><span class=variable>call&#x2011;with&#x2011;input&#x2011;file</span></code> and
 <code class=scheme><span class=variable>call&#x2011;with&#x2011;output&#x2011;file</span></code> that will take care of opening a
 port and closing it after you’re done with it.</p>
 <p>
@@ -201,15 +186,14 @@ port is closed.</p>
 <p>
 
 </p>
-<pre class=scheme>(<span class=variable>call-with-input-file</span> <span class=selfeval>&#x22;hello.txt&#x22;&#x22;</span>
+<pre class=scheme>(<span class=variable>call-with-input-file</span> <span class=selfeval>&#x22;hello.txt&#x22;</span>
   (<span class=keyword>lambda</span> (<span class=variable>i</span>)
     (<span class=keyword>let*</span> ((<span class=variable>a</span> (<span class=variable>read-char</span> <span class=variable>i</span>))
            (<span class=variable>b</span> (<span class=variable>read-char</span> <span class=variable>i</span>))
            (<span class=variable>c</span> (<span class=variable>read-char</span> <span class=variable>i</span>)))
       (<span class=variable>list</span> <span class=variable>a</span> <span class=variable>b</span> <span class=variable>c</span>))))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> (<span class=selfeval>#\h</span> <span class=selfeval>#\e</span> <span class=selfeval>#\l</span>)
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 The procedure <code class=scheme><span class=variable>call&#x2011;with&#x2011;output&#x2011;file</span></code> does the analogous
@@ -221,15 +205,15 @@ services for an output file.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_7.4"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.4">7.4&#xa0;&#xa0;String ports</a></h2>
-<p class=noindent><a id="TAG:__tex2page_index_380"></a>It is often convenient to associate ports with strings.
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.4">7.4&#xa0;&#xa0;String ports</a></h2><p class=noindent>
+<a id="TAG:__tex2page_index_380"></a>It is often convenient to associate ports with strings.
 Thus, the procedure <code class=scheme><span class=variable>open&#x2011;input&#x2011;string</span></code> associates a port
 with a given string.  Reader procedures on this port will
 read off the string:</p>
 <p>
 
 </p>
-<pre class=scheme>(<span class=keyword>define</span> <span class=variable>i</span> (<span class=variable>open-input-string</span> <span class=selfeval>&#x22;hello world&#x22;&#x22;</span>))
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>i</span> (<span class=variable>open-input-string</span> <span class=selfeval>&#x22;hello world&#x22;</span>))
 
 (<span class=variable>read-char</span> <span class=variable>i</span>)
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>#\h</span>
@@ -239,8 +223,7 @@ read off the string:</p>
 
 (<span class=variable>read</span> <span class=variable>i</span>)
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=variable>world</span>
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_382"></a></p>
@@ -255,10 +238,9 @@ output port that will eventually be used to create a string:</p>
 
 (<span class=variable>write</span> <span class=keyword>'</span><span class=variable>hello</span> <span class=variable>o</span>)
 (<span class=variable>write-char</span> <span class=selfeval>#\,</span> <span class=variable>o</span>)
-(<span class=variable>display</span> <span class=selfeval>&#x22; &#x22;&#x22;</span> <span class=variable>o</span>)
-(<span class=variable>display</span> <span class=selfeval>&#x22;world&#x22;&#x22;</span> <span class=variable>o</span>)
-</pre>
-<p class=noindent></p>
+(<span class=variable>display</span> <span class=selfeval>&#x22; &#x22;</span> <span class=variable>o</span>)
+(<span class=variable>display</span> <span class=selfeval>&#x22;world&#x22;</span> <span class=variable>o</span>)
+</pre><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_384"></a></p>
@@ -270,9 +252,8 @@ the accumulated string in the string port <code class=scheme><span class=variabl
 
 </p>
 <pre class=scheme>(<span class=variable>get-output-string</span> <span class=variable>o</span>)
-<span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>&#x22;hello, world&#x22;&#x22;</span>
-</pre>
-<p class=noindent></p>
+<span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>&#x22;hello, world&#x22;</span>
+</pre><p class=noindent></p>
 <p>
 
 String ports need not be explicitly closed.</p>
@@ -283,8 +264,8 @@ String ports need not be explicitly closed.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_7.5"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.5">7.5&#xa0;&#xa0;Loading files</a></h2>
-<p class=noindent>We have already seen the procedure <code class=scheme><span class=variable>load</span></code> that loads
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_7.5">7.5&#xa0;&#xa0;Loading files</a></h2><p class=noindent>
+We have already seen the procedure <code class=scheme><span class=variable>load</span></code> that loads
 files containing Scheme code.  <em>Loading</em> a file
 consists in evaluating in sequence every Scheme form in
 the file.  The pathname argument given to <code class=scheme><span class=variable>load</span></code> is
@@ -300,7 +281,9 @@ unless full pathnames are used, the argument file of a
 directory.  Supplying full pathnames is not always
 convenient, because we would like to move the program
 files as a unit (preserving their relative pathnames),
-perhaps to many different machines.
+perhaps to many different machines.</p>
+<p>
+
 <a id="TAG:__tex2page_index_390"></a></p>
 <p>
 
@@ -312,15 +295,13 @@ file <code class=scheme><span class=variable>foo.scm</span></code>, the path of 
 from the directory of the calling file <code class=scheme><span class=variable>foo.scm</span></code>.  In
 particular, this pathname is reckoned independent of
 Scheme’s current directory, and thus allows convenient
-multifile program development.
-</p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
-</p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-8.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-10.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
+multifile program development.</p>
 <p>
+</p>
+<div class=smallskip></div><p>
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-8.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-10.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

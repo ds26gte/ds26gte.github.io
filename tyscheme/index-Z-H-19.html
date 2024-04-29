@@ -1,34 +1,27 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-18.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-20.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-18.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-20.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_17"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_17">17&#xa0;&#xa0;CGI scripts</a></h1>
-<p class=noindent><a id="TAG:__tex2page_index_500"></a><span style="color: #ff0000">(<strong>Warning:</strong> CGI scripts without
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_17">17&#xa0;&#xa0;CGI scripts</a></h1><p class=noindent>
+<a id="TAG:__tex2page_index_500"></a><span style="color: #ff0000">(<strong>Warning:</strong> CGI scripts without
 appropriate safeguards can compromise your site’s
 security.  The scripts presented here are simple
 examples and are not assured to be secure for actual
@@ -36,8 +29,7 @@ Web use.)</span></p>
 <p>
 
 </p>
-<div class=medskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=medskip></div><p>
 CGI scripts [<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_28">28</a>] are scripts that reside on a
 web server and can be run by a client (browser).  The
 client accesses a CGI script by its URL, just as they
@@ -61,14 +53,10 @@ scripts.  E.g., the line</p>
 <p>
 
 </p>
-<pre class=scheme><span class=selfeval>&#x22;:&#x22;&#x22;</span><span class=comment>;exec mzscheme -r $0 &#x22;$@&#x22;</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>implicitly assumes that there is a particular shell
+<pre class=scheme><span class=selfeval>&#x22;:&#x22;</span><span class=comment>;exec mzscheme -r $0 &#x22;$@&#x22;</span>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+implicitly assumes that there is a particular shell
 (<code class=verbatim>bash</code>, say), and that there is a <code class=verbatim>PATH</code>, and that
 <code class=verbatim>mzscheme</code> is in it.  For CGI scripts, we will need
 to be more expansive:</p>
@@ -76,9 +64,8 @@ to be more expansive:</p>
 
 </p>
 <pre class=scheme><span class=selfeval>#!/bin/sh</span>
-<span class=selfeval>&#x22;:&#x22;&#x22;</span><span class=comment>;exec /usr/local/bin/mzscheme -r $0 &#x22;$@&#x22;</span>
-</pre>
-<p class=noindent></p>
+<span class=selfeval>&#x22;:&#x22;</span><span class=comment>;exec /usr/local/bin/mzscheme -r $0 &#x22;$@&#x22;</span>
+</pre><p class=noindent></p>
 <p>
 
 This gives fully qualified pathnames for the shell and
@@ -88,8 +75,8 @@ shell to Scheme proceeds as for regular scripts.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_17.1"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_17.1">17.1&#xa0;&#xa0;Example: Displaying environment variables</a></h2>
-<p class=noindent>Here is an example Scheme CGI script,
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_17.1">17.1&#xa0;&#xa0;Example: Displaying environment variables</a></h2><p class=noindent>
+Here is an example Scheme CGI script,
 <code class=verbatim>testcgi.scm</code>, that outputs the settings of some
 commonly used CGI environment variables.  This
 information is returned as a new, freshly created, page
@@ -104,13 +91,9 @@ Note that the script first outputs the line</p>
 
 </p>
 <pre class=verbatim>content-type: text/plain&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent><em>followed by a blank line</em>.  This is standard ritual
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+<em>followed by a blank line</em>.  This is standard ritual
 for a web server serving up a page.  These two lines
 aren’t part of what is actually displayed as the page.
 They are there to inform the browser that the page being sent
@@ -125,11 +108,11 @@ The script <code class=verbatim>testcgi.scm</code>:</p>
 <p>
 </p>
 <pre class=scheme><span class=selfeval>#!/bin/sh</span>
-<span class=selfeval>&#x22;:&#x22;&#x22;</span><span class=comment>;exec /usr/local/bin/mzscheme -r $0 &#x22;$@&#x22;</span>
+<span class=selfeval>&#x22;:&#x22;</span><span class=comment>;exec /usr/local/bin/mzscheme -r $0 &#x22;$@&#x22;</span>
 
 <span class=comment>;Identify content-type as plain text.</span>
 
-(<span class=variable>display</span> <span class=selfeval>&#x22;content-type: text/plain&#x22;&#x22;</span>) (<span class=variable>newline</span>)
+(<span class=variable>display</span> <span class=selfeval>&#x22;content-type: text/plain&#x22;</span>) (<span class=variable>newline</span>)
 (<span class=variable>newline</span>)
 
 <span class=comment>;Generate a page with the requested info.  This is</span>
@@ -138,32 +121,31 @@ The script <code class=verbatim>testcgi.scm</code>:</p>
 (<span class=variable>for-each</span>
  (<span class=keyword>lambda</span> (<span class=variable>env-var</span>)
    (<span class=variable>display</span> <span class=variable>env-var</span>)
-   (<span class=variable>display</span> <span class=selfeval>&#x22; = &#x22;&#x22;</span>)
-   (<span class=variable>display</span> (<span class=keyword>or</span> (<span class=variable>getenv</span> <span class=variable>env-var</span>) <span class=selfeval>&#x22;&#x22;&#x22;</span>))
+   (<span class=variable>display</span> <span class=selfeval>&#x22; = &#x22;</span>)
+   (<span class=variable>display</span> (<span class=keyword>or</span> (<span class=variable>getenv</span> <span class=variable>env-var</span>) <span class=selfeval>&#x22;&#x22;</span>))
    (<span class=variable>newline</span>))
- <span class=keyword>'</span>(<span class=selfeval>&#x22;AUTH_TYPE&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;CONTENT_LENGTH&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;CONTENT_TYPE&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;DOCUMENT_ROOT&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;GATEWAY_INTERFACE&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;HTTP_ACCEPT&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;HTTP_REFERER&#x22;&#x22;</span> <span class=comment>; [sic]</span>
-   <span class=selfeval>&#x22;HTTP_USER_AGENT&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;PATH_INFO&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;PATH_TRANSLATED&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;QUERY_STRING&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;REMOTE_ADDR&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;REMOTE_HOST&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;REMOTE_IDENT&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;REMOTE_USER&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;REQUEST_METHOD&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;SCRIPT_NAME&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;SERVER_NAME&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;SERVER_PORT&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;SERVER_PROTOCOL&#x22;&#x22;</span>
-   <span class=selfeval>&#x22;SERVER_SOFTWARE&#x22;&#x22;</span>))
-</pre>
-<p class=noindent></p>
+ <span class=keyword>'</span>(<span class=selfeval>&#x22;AUTH_TYPE&#x22;</span>
+   <span class=selfeval>&#x22;CONTENT_LENGTH&#x22;</span>
+   <span class=selfeval>&#x22;CONTENT_TYPE&#x22;</span>
+   <span class=selfeval>&#x22;DOCUMENT_ROOT&#x22;</span>
+   <span class=selfeval>&#x22;GATEWAY_INTERFACE&#x22;</span>
+   <span class=selfeval>&#x22;HTTP_ACCEPT&#x22;</span>
+   <span class=selfeval>&#x22;HTTP_REFERER&#x22;</span> <span class=comment>; [sic]</span>
+   <span class=selfeval>&#x22;HTTP_USER_AGENT&#x22;</span>
+   <span class=selfeval>&#x22;PATH_INFO&#x22;</span>
+   <span class=selfeval>&#x22;PATH_TRANSLATED&#x22;</span>
+   <span class=selfeval>&#x22;QUERY_STRING&#x22;</span>
+   <span class=selfeval>&#x22;REMOTE_ADDR&#x22;</span>
+   <span class=selfeval>&#x22;REMOTE_HOST&#x22;</span>
+   <span class=selfeval>&#x22;REMOTE_IDENT&#x22;</span>
+   <span class=selfeval>&#x22;REMOTE_USER&#x22;</span>
+   <span class=selfeval>&#x22;REQUEST_METHOD&#x22;</span>
+   <span class=selfeval>&#x22;SCRIPT_NAME&#x22;</span>
+   <span class=selfeval>&#x22;SERVER_NAME&#x22;</span>
+   <span class=selfeval>&#x22;SERVER_PORT&#x22;</span>
+   <span class=selfeval>&#x22;SERVER_PROTOCOL&#x22;</span>
+   <span class=selfeval>&#x22;SERVER_SOFTWARE&#x22;</span>))
+</pre><p class=noindent></p>
 <p>
 
 <code class=verbatim>testcgi.scm</code> can be called directly by opening it on
@@ -172,8 +154,7 @@ a browser.  The URL is:</p>
 
 </p>
 <pre class=verbatim>http://www.foo.org/cgi-bin/testcgi.scm&#xa0;
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 Alternately, <code class=verbatim>testcgi.scm</code> can occur as a link in an
@@ -184,8 +165,7 @@ HTML file, which you can click.  E.g.,</p>
 <pre class=verbatim>... To view some common CGI environment variables, click&#xa0;
 &#x3c;a href=&#x22;http://www.foo.org/cgi-bin/testcgi.scm&#x22;&#x3e;here&#x3c;/a&#x3e;.&#xa0;
 ...&#xa0;
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 However <code class=verbatim>testcgi.scm</code> is launched, it will produce a
@@ -215,14 +195,12 @@ SERVER_NAME = localhost.localdomain&#xa0;
 SERVER_PORT = 80&#xa0;
 SERVER_PROTOCOL = HTTP/1.0&#xa0;
 SERVER_SOFTWARE = Apache/1.2.4&#xa0;
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_17.2"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_17.2">17.2&#xa0;&#xa0;Example: Displaying selected environment variable</a></h2>
-<p class=noindent></p>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_17.2">17.2&#xa0;&#xa0;Example: Displaying selected environment variable</a></h2><p class=noindent></p>
 <p>
 
 <code class=verbatim>testcgi.scm</code> does not take any input from the user.
@@ -251,13 +229,9 @@ Enter environment variable: &#x3c;input type=text name=envvar size=30&#x3e;&#xa0
 &#xa0;
 &#x3c;/body&#x3e;&#xa0;
 &#x3c;/html&#x3e;&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The user enters the desired environment variable (e.g.,
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The user enters the desired environment variable (e.g.,
 <code class=verbatim>GATEWAY_INTERFACE</code>)  in the
 textbox and clicks the submit button.  This causes all
 the information in the form — here, the setting of
@@ -290,12 +264,14 @@ one parameter/argument pair, viz.,
 <code class=verbatim>envvar=GATEWAY_INTERFACE</code>.</p>
 <p>
 
-The script <code class=verbatim>testcgi2.scm</code>:
+The script <code class=verbatim>testcgi2.scm</code>:</p>
+<p>
+
 </p>
 <pre class=scheme><span class=selfeval>#!/bin/sh</span>
-<span class=selfeval>&#x22;:&#x22;&#x22;</span><span class=comment>;exec /usr/local/bin/mzscheme -r $0 &#x22;$@&#x22;</span>
+<span class=selfeval>&#x22;:&#x22;</span><span class=comment>;exec /usr/local/bin/mzscheme -r $0 &#x22;$@&#x22;</span>
 
-(<span class=variable>display</span> <span class=selfeval>&#x22;content-type: text/plain&#x22;&#x22;</span>) (<span class=variable>newline</span>)
+(<span class=variable>display</span> <span class=selfeval>&#x22;content-type: text/plain&#x22;</span>) (<span class=variable>newline</span>)
 (<span class=variable>newline</span>)
 
 <span class=comment>;string-index returns the leftmost index in string s</span>
@@ -314,7 +290,7 @@ The script <code class=verbatim>testcgi2.scm</code>:
 (<span class=keyword>define</span> <span class=variable>split</span>
   (<span class=keyword>lambda</span> (<span class=variable>c</span> <span class=variable>s</span>)
     (<span class=keyword>let</span> <span class=keyword>loop</span> ((<span class=variable>s</span> <span class=variable>s</span>))
-      (<span class=keyword>if</span> (<span class=variable>string=?</span> <span class=variable>s</span> <span class=selfeval>&#x22;&#x22;&#x22;</span>) <span class=keyword>'</span>()
+      (<span class=keyword>if</span> (<span class=variable>string=?</span> <span class=variable>s</span> <span class=selfeval>&#x22;&#x22;</span>) <span class=keyword>'</span>()
           (<span class=keyword>let</span> ((<span class=variable>i</span> (<span class=variable>string-index</span> <span class=variable>s</span> <span class=variable>c</span>)))
             (<span class=keyword>if</span> <span class=variable>i</span> (<span class=variable>cons</span> (<span class=variable>substring</span> <span class=variable>s</span> <span class=selfeval>0</span> <span class=variable>i</span>)
                         (<span class=keyword>loop</span> (<span class=variable>substring</span> <span class=variable>s</span> (<span class=variable>+</span> <span class=variable>i</span> <span class=selfeval>1</span>)
@@ -324,22 +300,18 @@ The script <code class=verbatim>testcgi2.scm</code>:
 (<span class=keyword>define</span> <span class=variable>args</span>
   (<span class=variable>map</span> (<span class=keyword>lambda</span> (<span class=variable>par-arg</span>)
          (<span class=variable>split</span> <span class=selfeval>#\=</span> <span class=variable>par-arg</span>))
-       (<span class=variable>split</span> <span class=selfeval>#\&#x26;</span> (<span class=variable>getenv</span> <span class=selfeval>&#x22;QUERY_STRING&#x22;&#x22;</span>))))
+       (<span class=variable>split</span> <span class=selfeval>#\&#x26;</span> (<span class=variable>getenv</span> <span class=selfeval>&#x22;QUERY_STRING&#x22;</span>))))
 
-(<span class=keyword>define</span> <span class=variable>envvar</span> (<span class=variable>cadr</span> (<span class=variable>assoc</span> <span class=selfeval>&#x22;envvar&#x22;&#x22;</span> <span class=variable>args</span>)))
+(<span class=keyword>define</span> <span class=variable>envvar</span> (<span class=variable>cadr</span> (<span class=variable>assoc</span> <span class=selfeval>&#x22;envvar&#x22;</span> <span class=variable>args</span>)))
 
 (<span class=variable>display</span> <span class=variable>envvar</span>)
-(<span class=variable>display</span> <span class=selfeval>&#x22; = &#x22;&#x22;</span>)
+(<span class=variable>display</span> <span class=selfeval>&#x22; = &#x22;</span>)
 (<span class=variable>display</span> (<span class=variable>getenv</span> <span class=variable>envvar</span>))
 
 (<span class=variable>newline</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Note the use of a helper procedure <code class=scheme><span class=variable>split</span></code> to split
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Note the use of a helper procedure <code class=scheme><span class=variable>split</span></code> to split
 the <code class=verbatim>QUERY_STRING</code> into parameter/argument pairs
 along the <code class=verbatim>&#x26;</code> character, and then splitting parameter
 and argument along the <code class=verbatim>=</code> character.  (If we had
@@ -356,8 +328,8 @@ the full repertoire.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_17.3"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_17.3">17.3&#xa0;&#xa0;CGI script utilities</a></h2>
-<p class=noindent>In the example above, the parameter’s name or the
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_17.3">17.3&#xa0;&#xa0;CGI script utilities</a></h2><p class=noindent>
+In the example above, the parameter’s name or the
 argument it assumed did not themselves contain any
 ‘<code class=verbatim>&#x26;</code>’ or ‘<code class=verbatim>=</code>’ characters.  In general, they may.
 To accommodate such characters, and not have them be
@@ -374,13 +346,9 @@ code.  Thus, the character sequence ‘<code class=verbatim>20% + 30% =
 
 </p>
 <pre class=verbatim>20%25+%2b+30%25+%3d+50%25%2c+%26c%2e&#xa0;
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>(Space become ‘<code class=verbatim>+</code>’; ‘<code class=verbatim>%</code>’ becomes ‘<code class=verbatim>%25</code>’;
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+(Space become ‘<code class=verbatim>+</code>’; ‘<code class=verbatim>%</code>’ becomes ‘<code class=verbatim>%25</code>’;
 ‘<code class=verbatim>+</code>’ becomes ‘<code class=verbatim>%2b</code>’; ‘<code class=verbatim>=</code>’ becomes ‘<code class=verbatim>%3d</code>’;
 ‘<code class=verbatim>,</code>’ becomes ‘<code class=verbatim>%2c</code>’; ‘<code class=verbatim>&#x26;</code>’ becomes ‘<code class=verbatim>%26</code>’;
 and ‘<code class=verbatim>.</code>’ becomes ‘<code class=verbatim>%2e</code>’.)</p>
@@ -395,13 +363,13 @@ more compactly as</p>
 <p>
 </p>
 <pre class=scheme><span class=selfeval>#!/bin/sh</span>
-<span class=selfeval>&#x22;:&#x22;&#x22;</span><span class=comment>;exec /usr/local/bin/mzscheme -r $0 &#x22;$@&#x22;</span>
+<span class=selfeval>&#x22;:&#x22;</span><span class=comment>;exec /usr/local/bin/mzscheme -r $0 &#x22;$@&#x22;</span>
 
 <span class=comment>;Load the cgi utilities</span>
 
-(<span class=variable>load-relatve</span> <span class=selfeval>&#x22;cgi.scm&#x22;&#x22;</span>)
+(<span class=variable>load-relatve</span> <span class=selfeval>&#x22;cgi.scm&#x22;</span>)
 
-(<span class=variable>display</span> <span class=selfeval>&#x22;content-type: text/plain&#x22;&#x22;</span>) (<span class=variable>newline</span>)
+(<span class=variable>display</span> <span class=selfeval>&#x22;content-type: text/plain&#x22;</span>) (<span class=variable>newline</span>)
 (<span class=variable>newline</span>)
 
 <span class=comment>;Read the data input via the form</span>
@@ -410,21 +378,17 @@ more compactly as</p>
 
 <span class=comment>;Get the envvar parameter</span>
 
-(<span class=keyword>define</span> <span class=variable>envvar</span> (<span class=variable>form-data-get/1</span> <span class=selfeval>&#x22;envvar&#x22;&#x22;</span>))
+(<span class=keyword>define</span> <span class=variable>envvar</span> (<span class=variable>form-data-get/1</span> <span class=selfeval>&#x22;envvar&#x22;</span>))
 
 <span class=comment>;Display the value of the envvar</span>
 
 (<span class=variable>display</span> <span class=variable>envvar</span>)
-(<span class=variable>display</span> <span class=selfeval>&#x22; = &#x22;&#x22;</span>)
+(<span class=variable>display</span> <span class=selfeval>&#x22; = &#x22;</span>)
 (<span class=variable>display</span> (<span class=variable>getenv</span> <span class=variable>envvar</span>))
 (<span class=variable>newline</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>This shorter CGI script uses two utility procedures
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+This shorter CGI script uses two utility procedures
 defined in <code class=verbatim>cgi.scm</code>. <code class=scheme><span class=variable>parse&#x2011;form&#x2011;data</span></code> to read
 the data supplied by the user via the form.  The data
 consists of parameters and their associated values.
@@ -438,18 +402,14 @@ particular parameter.</p>
 </p>
 <pre class=scheme><span class=comment>;Load our table definitions</span>
 
-(<span class=variable>load-relative</span> <span class=selfeval>&#x22;table.scm&#x22;&#x22;</span>)
+(<span class=variable>load-relative</span> <span class=selfeval>&#x22;table.scm&#x22;</span>)
 
 <span class=comment>;Define the *form-data-table*</span>
 
 (<span class=keyword>define</span> <span class=global>*form-data-table*</span> (<span class=variable>make-table</span> <span class=keyword>'</span><span class=variable>equ</span> <span class=variable>string=?</span>))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>An advantage of using a general mechanism such
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+An advantage of using a general mechanism such
 as the <code class=scheme><span class=variable>parse&#x2011;form&#x2011;data</span></code> procedure is that we can
 hide the details of what <code class=verbatim>method</code> (<code class=verbatim>get</code> or
 <code class=verbatim>post</code>) was used.</p>
@@ -458,17 +418,13 @@ hide the details of what <code class=verbatim>method</code> (<code class=verbati
 </p>
 <pre class=scheme>(<span class=keyword>define</span> <span class=variable>parse-form-data</span>
   (<span class=keyword>lambda</span> ()
-    ((<span class=keyword>if</span> (<span class=variable>string-ci=?</span> (<span class=keyword>or</span> (<span class=variable>getenv</span> <span class=selfeval>&#x22;REQUEST_METHOD&#x22;&#x22;</span>) <span class=selfeval>&#x22;GET&#x22;&#x22;</span>)
-                      <span class=selfeval>&#x22;GET&#x22;&#x22;</span>)
+    ((<span class=keyword>if</span> (<span class=variable>string-ci=?</span> (<span class=keyword>or</span> (<span class=variable>getenv</span> <span class=selfeval>&#x22;REQUEST_METHOD&#x22;</span>) <span class=selfeval>&#x22;GET&#x22;</span>)
+                      <span class=selfeval>&#x22;GET&#x22;</span>)
          <span class=variable>parse-form-data-using-query-string</span>
          <span class=variable>parse-form-data-using-stdin</span>))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The environment variable
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The environment variable
 <code class=verbatim>REQUEST_METHOD</code> tells which method was used to transmit
 the form data.  If the method is <code class=verbatim>GET</code>, then the form
 data was sent as the string available via another
@@ -481,7 +437,7 @@ apart <code class=verbatim>QUERY_STRING</code>:</p>
 </p>
 <pre class=scheme>(<span class=keyword>define</span> <span class=variable>parse-form-data-using-query-string</span>
   (<span class=keyword>lambda</span> ()
-    (<span class=keyword>let</span> ((<span class=variable>query-string</span> (<span class=keyword>or</span> (<span class=variable>getenv</span> <span class=selfeval>&#x22;QUERY_STRING&#x22;&#x22;</span>) <span class=selfeval>&#x22;&#x22;&#x22;</span>)))
+    (<span class=keyword>let</span> ((<span class=variable>query-string</span> (<span class=keyword>or</span> (<span class=variable>getenv</span> <span class=selfeval>&#x22;QUERY_STRING&#x22;</span>) <span class=selfeval>&#x22;&#x22;</span>)))
       (<span class=variable>for-each</span>
        (<span class=keyword>lambda</span> (<span class=variable>par=arg</span>)
          (<span class=keyword>let</span> ((<span class=variable>par/arg</span> (<span class=variable>split</span> <span class=selfeval>#\=</span> <span class=variable>par=arg</span>)))
@@ -492,13 +448,9 @@ apart <code class=verbatim>QUERY_STRING</code>:</p>
               (<span class=variable>cons</span> <span class=variable>arg</span> 
                     (<span class=variable>table-get</span> <span class=global>*form-data-table*</span> <span class=variable>par</span> <span class=keyword>'</span>()))))))
        (<span class=variable>split</span> <span class=selfeval>#\&#x26;</span> <span class=variable>query-string</span>)))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The  helper procedure <code class=scheme><span class=variable>split</span></code>, and <em>its</em> helper
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The  helper procedure <code class=scheme><span class=variable>split</span></code>, and <em>its</em> helper
 <code class=scheme><span class=variable>string&#x2011;index</span></code>, are defined as in section&#xa0;<a class=hrefinternal href="#TAG:__tex2page_sec_17.2">17.2</a>.
 As noted, the incoming form data is a sequence of
 name-value pairs separated by <code class=verbatim>&#x26;</code>s.  Within each
@@ -506,10 +458,8 @@ pair, the name comes first, followed by an <code class=verbatim>=</code>
 character, followed by the value.  Each name-value
 combination is collected into a global table, the
 <code class=scheme><span class=global>*form&#x2011;data&#x2011;table*</span></code>.</p>
-<p>
-</p>
-
-<p class=noindent>Both name and value are encoded, so we
+<p></p><p class=noindent>
+Both name and value are encoded, so we
 need to decode them using the <code class=scheme><span class=variable>url&#x2011;decode</span></code> procedure
 to get their actual representation.</p>
 <p>
@@ -527,13 +477,9 @@ to get their actual representation.</p>
                  ((<span class=selfeval>#\%</span>) (<span class=variable>cons</span> (<span class=variable>hex-&#x3e;char</span> (<span class=variable>car</span> <span class=variable>d</span>) (<span class=variable>cadr</span> <span class=variable>d</span>))
                               (<span class=keyword>loop</span> (<span class=variable>cddr</span> <span class=variable>d</span>))))
                  (<span class=keyword>else</span> (<span class=variable>cons</span> <span class=variable>a</span> (<span class=keyword>loop</span> <span class=variable>d</span>)))))))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>‘<code class=verbatim>+</code>’ is converted into space.  A triliteral of the
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+‘<code class=verbatim>+</code>’ is converted into space.  A triliteral of the
 form ‘<code class=verbatim>%xy</code>’
 is converted, using the procedure <code class=scheme><span class=variable>hex&#x2011;&#x3e;char</span></code> into
 the character whose
@@ -545,13 +491,9 @@ ascii encoding is the hex number ‘<code class=verbatim>xy</code>’.</p>
   (<span class=keyword>lambda</span> (<span class=variable>x</span> <span class=variable>y</span>)
     (<span class=variable>integer-&#x3e;char</span>
      (<span class=variable>string-&#x3e;number</span> (<span class=variable>string</span> <span class=variable>x</span> <span class=variable>y</span>) <span class=selfeval>16</span>))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>We still need a form-data parser for the case where the
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+We still need a form-data parser for the case where the
 request method is <code class=verbatim>POST</code>.  The auxiliary procedure
 <code class=scheme><span class=variable>parse&#x2011;form&#x2011;data&#x2011;using&#x2011;stdin</span></code> does this.</p>
 <p>
@@ -559,7 +501,7 @@ request method is <code class=verbatim>POST</code>.  The auxiliary procedure
 </p>
 <pre class=scheme>(<span class=keyword>define</span> <span class=variable>parse-form-data-using-stdin</span>
   (<span class=keyword>lambda</span> ()
-    (<span class=keyword>let*</span> ((<span class=variable>content-length</span> (<span class=variable>getenv</span> <span class=selfeval>&#x22;CONTENT_LENGTH&#x22;&#x22;</span>))
+    (<span class=keyword>let*</span> ((<span class=variable>content-length</span> (<span class=variable>getenv</span> <span class=selfeval>&#x22;CONTENT_LENGTH&#x22;</span>))
            (<span class=variable>content-length</span>
              (<span class=keyword>if</span> <span class=variable>content-length</span>
                  (<span class=variable>string-&#x3e;number</span> <span class=variable>content-length</span>) <span class=selfeval>0</span>))
@@ -589,13 +531,9 @@ request method is <code class=verbatim>POST</code>.  The auxiliary procedure
                           (<span class=variable>par-loop</span> <span class=keyword>'</span>())))
                       (<span class=variable>arg-loop</span> (<span class=variable>cons</span> <span class=variable>c</span> <span class=variable>arg</span>)))))
               (<span class=variable>par-loop</span> (<span class=variable>cons</span> <span class=variable>c</span> <span class=variable>par</span>))))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>The <code class=verbatim>POST</code> method sends form data via the script’s
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+The <code class=verbatim>POST</code> method sends form data via the script’s
 <code class=verbatim>stdin</code>.  The number of characters sent is placed in
 the environment variable <code class=verbatim>CONTENT_LENGTH</code>.
 <code class=scheme><span class=variable>parse&#x2011;form&#x2011;data&#x2011;using&#x2011;stdin</span></code> reads the required
@@ -617,13 +555,9 @@ value, it returns a singleton containing that value.</p>
 <pre class=scheme>(<span class=keyword>define</span> <span class=variable>form-data-get</span>
   (<span class=keyword>lambda</span> (<span class=variable>k</span>)
     (<span class=variable>table-get</span> <span class=global>*form-data-table*</span> <span class=variable>k</span> <span class=keyword>'</span>())))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent><code class=scheme><span class=variable>form&#x2011;data&#x2011;get/1</span></code> returns the first (or most
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+<code class=scheme><span class=variable>form&#x2011;data&#x2011;get/1</span></code> returns the first (or most
 significant) value associated with a parameter.</p>
 <p>
 
@@ -633,14 +567,10 @@ significant) value associated with a parameter.</p>
     (<span class=keyword>let</span> ((<span class=variable>vv</span> (<span class=variable>form-data-get</span> <span class=variable>k</span>)))
       (<span class=keyword>cond</span> ((<span class=variable>pair?</span> <span class=variable>vv</span>) (<span class=variable>car</span> <span class=variable>vv</span>))
             ((<span class=variable>pair?</span> <span class=variable>default</span>) (<span class=variable>car</span> <span class=variable>default</span>))
-            (<span class=keyword>else</span> <span class=selfeval>&#x22;&#x22;&#x22;</span>)))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>In our examples so far, the CGI script has generated
+            (<span class=keyword>else</span> <span class=selfeval>&#x22;&#x22;</span>)))))
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+In our examples so far, the CGI script has generated
 plain text.  Generally, though, we will want to
 generate an HTML page.  It is not uncommon for a
 combination of HTML form and CGI script to trigger a
@@ -663,28 +593,27 @@ encoded appropriately:</p>
             (<span class=keyword>let</span> ((<span class=variable>c</span> (<span class=variable>string-ref</span> <span class=variable>s</span> <span class=variable>i</span>)))
               (<span class=variable>display</span>
                (<span class=keyword>case</span> <span class=variable>c</span>
-                 ((<span class=selfeval>#\&#x3c;</span>) <span class=selfeval>&#x22;&#x26;lt;&#x22;&#x22;</span>)
-                 ((<span class=selfeval>#\&#x3e;</span>) <span class=selfeval>&#x22;&#x26;gt;&#x22;&#x22;</span>)
-                 ((<span class=selfeval>#\&#x22;</span>) <span class=selfeval>&#x22;&#x26;quot;&#x22;&#x22;</span>)
-                 ((<span class=selfeval>#\&#x26;</span>) <span class=selfeval>&#x22;&#x26;amp;&#x22;&#x22;</span>)
+                 ((<span class=selfeval>#\&#x3c;</span>) <span class=selfeval>&#x22;&#x26;lt;&#x22;</span>)
+                 ((<span class=selfeval>#\&#x3e;</span>) <span class=selfeval>&#x22;&#x26;gt;&#x22;</span>)
+                 ((<span class=selfeval>#\&#x22;</span>) <span class=selfeval>&#x22;&#x26;quot;&#x22;</span>)
+                 ((<span class=selfeval>#\&#x26;</span>) <span class=selfeval>&#x22;&#x26;amp;&#x22;</span>)
                  (<span class=keyword>else</span> <span class=variable>c</span>)) <span class=variable>o</span>)
               (<span class=keyword>loop</span> (<span class=variable>+</span> <span class=variable>i</span> <span class=selfeval>1</span>)))))))))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_17.4"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_17.4">17.4&#xa0;&#xa0;A calculator via CGI</a></h2>
-<p class=noindent>Here is an CGI calculator script, <code class=verbatim>cgicalc.scm</code>, that
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_17.4">17.4&#xa0;&#xa0;A calculator via CGI</a></h2><p class=noindent>
+Here is an CGI calculator script, <code class=verbatim>cgicalc.scm</code>, that
 exploits Scheme’s arbitrary-precision arithmetic.</p>
 <p>
 </p>
 <pre class=scheme><span class=selfeval>#!/bin/sh</span>
-<span class=selfeval>&#x22;:&#x22;&#x22;</span><span class=comment>;exec /usr/local/bin/mzscheme -r $0</span>
+<span class=selfeval>&#x22;:&#x22;</span><span class=comment>;exec /usr/local/bin/mzscheme -r $0</span>
 
 <span class=comment>;Load the CGI utilities</span>
-(<span class=variable>load-relative</span> <span class=selfeval>&#x22;cgi.scm&#x22;&#x22;</span>)
+(<span class=variable>load-relative</span> <span class=selfeval>&#x22;cgi.scm&#x22;</span>)
 
 (<span class=keyword>define</span> <span class=variable>uhoh</span> <span class=selfeval>#f</span>)
 
@@ -703,23 +632,23 @@ exploits Scheme’s arbitrary-precision arithmetic.</p>
       ((<span class=variable>*</span>) <span class=variable>*</span>)
       ((<span class=variable>/</span>) <span class=variable>/</span>)
       ((<span class=variable>**</span>) <span class=variable>expt</span>)
-      (<span class=keyword>else</span> (<span class=variable>uhoh</span> <span class=selfeval>&#x22;unpermitted operator&#x22;&#x22;</span>)))))
+      (<span class=keyword>else</span> (<span class=variable>uhoh</span> <span class=selfeval>&#x22;unpermitted operator&#x22;</span>)))))
 
 (<span class=keyword>define</span> <span class=variable>ensure-number</span>
   (<span class=keyword>lambda</span> (<span class=variable>e</span>)
     (<span class=keyword>if</span> (<span class=variable>number?</span> <span class=variable>e</span>) <span class=variable>e</span>
-        (<span class=variable>uhoh</span> <span class=selfeval>&#x22;non-number&#x22;&#x22;</span>))))
+        (<span class=variable>uhoh</span> <span class=selfeval>&#x22;non-number&#x22;</span>))))
 
 (<span class=keyword>define</span> <span class=variable>print-form</span>
   (<span class=keyword>lambda</span> ()
-    (<span class=variable>display</span> <span class=selfeval>&#x22;&#x3c;form action=\&#x22;&#x22;&#x22;</span>)
-    (<span class=variable>display</span> (<span class=variable>getenv</span> <span class=selfeval>&#x22;SCRIPT_NAME&#x22;&#x22;</span>))
+    (<span class=variable>display</span> <span class=selfeval>&#x22;&#x3c;form action=\&#x22;&#x22;</span>)
+    (<span class=variable>display</span> (<span class=variable>getenv</span> <span class=selfeval>&#x22;SCRIPT_NAME&#x22;</span>))
     (<span class=variable>display</span> <span class=selfeval>&#x22;\&#x22;&#x3e;
   Enter arithmetic expression:&#x3c;br&#x3e;
   &#x3c;input type=textarea name=arithexp&#x3e;&#x3c;p&#x3e;
   &#x3c;input type=submit value=\&#x22;Evaluate\&#x22;&#x3e;
   &#x3c;input type=reset value=\&#x22;Clear\&#x22;&#x3e;
-&#x3c;/form&#x3e;&#x22;&#x22;</span>)))
+&#x3c;/form&#x3e;&#x22;</span>)))
 
 (<span class=keyword>define</span> <span class=variable>print-page-begin</span>
   (<span class=keyword>lambda</span> ()
@@ -729,46 +658,42 @@ exploits Scheme’s arbitrary-precision arithmetic.</p>
   &#x3c;head&#x3e;
     &#x3c;title&#x3e;A Scheme Calculator&#x3c;/title&#x3e;
   &#x3c;/head&#x3e;
-  &#x3c;body&#x3e;&#x22;&#x22;</span>)))
+  &#x3c;body&#x3e;&#x22;</span>)))
 
 (<span class=keyword>define</span> <span class=variable>print-page-end</span>
   (<span class=keyword>lambda</span> ()
     (<span class=variable>display</span> <span class=selfeval>&#x22;&#x3c;/body&#x3e;
-&#x3c;/html&#x3e;&#x22;&#x22;</span>)))
+&#x3c;/html&#x3e;&#x22;</span>)))
 
 (<span class=variable>parse-form-data</span>)
 
 (<span class=variable>print-page-begin</span>)
 
-(<span class=keyword>let</span> ((<span class=variable>e</span> (<span class=variable>form-data-get</span> <span class=selfeval>&#x22;arithexp&#x22;&#x22;</span>)))
+(<span class=keyword>let</span> ((<span class=variable>e</span> (<span class=variable>form-data-get</span> <span class=selfeval>&#x22;arithexp&#x22;</span>)))
   (<span class=keyword>unless</span> (<span class=variable>null?</span> <span class=variable>e</span>)
     (<span class=keyword>let</span> ((<span class=variable>e1</span> (<span class=variable>car</span> <span class=variable>e</span>)))
       (<span class=variable>display-html</span> <span class=variable>e1</span>)
       (<span class=variable>display</span> <span class=selfeval>&#x22;&#x3c;p&#x3e;
-  =&#x26;gt;&#x26;nbsp;&#x26;nbsp;&#x22;&#x22;</span>)
+  =&#x26;gt;&#x26;nbsp;&#x26;nbsp;&#x22;</span>)
       (<span class=variable>display-html</span>
        (<span class=variable>call/cc</span>
         (<span class=keyword>lambda</span> (<span class=variable>k</span>)
           (<span class=keyword>set!</span> <span class=variable>uhoh</span>
                 (<span class=keyword>lambda</span> (<span class=variable>s</span>)
-                  (<span class=variable>k</span> (<span class=variable>string-append</span> <span class=selfeval>&#x22;Error: &#x22;&#x22;</span> <span class=variable>s</span>))))
+                  (<span class=variable>k</span> (<span class=variable>string-append</span> <span class=selfeval>&#x22;Error: &#x22;</span> <span class=variable>s</span>))))
           (<span class=variable>number-&#x3e;string</span>
            (<span class=variable>calc-eval</span> (<span class=variable>read</span> (<span class=variable>open-input-string</span> (<span class=variable>car</span> <span class=variable>e</span>))))))))
-      (<span class=variable>display</span> <span class=selfeval>&#x22;&#x3c;p&#x3e;&#x22;&#x22;</span>))))
+      (<span class=variable>display</span> <span class=selfeval>&#x22;&#x3c;p&#x3e;&#x22;</span>))))
 
 (<span class=variable>print-form</span>)
 (<span class=variable>print-page-end</span>)
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 </p>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-18.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-20.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-18.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-20.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

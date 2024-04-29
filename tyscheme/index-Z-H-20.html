@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-19.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-21.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-19.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-21.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_A"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_A">A&#xa0;&#xa0;Scheme dialects</a></h1>
-<p class=noindent></p>
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_A">A&#xa0;&#xa0;Scheme dialects</a></h1><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_502"></a><a id="TAG:__tex2page_index_504"></a>All major Scheme dialects implement the R5RS
@@ -67,15 +59,11 @@ MzScheme using the forms:</p>
 <p>
 
 </p>
-<pre class=scheme>(<span class=variable>require</span> (<span class=variable>lib</span> <span class=selfeval>&#x22;defmacro.ss&#x22;&#x22;</span>)) <span class=comment>;provides define-macro</span>
-(<span class=variable>require</span> (<span class=variable>lib</span> <span class=selfeval>&#x22;process.ss&#x22;&#x22;</span>))  <span class=comment>;provides system</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>A good place to place these forms is the MzScheme
+<pre class=scheme>(<span class=variable>require</span> (<span class=variable>lib</span> <span class=selfeval>&#x22;defmacro.ss&#x22;</span>)) <span class=comment>;provides define-macro</span>
+(<span class=variable>require</span> (<span class=variable>lib</span> <span class=selfeval>&#x22;process.ss&#x22;</span>))  <span class=comment>;provides system</span>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+A good place to place these forms is the MzScheme
 <em>initialization file</em> (or <em>init file</em>), which, on Unix, is the file
 <code class=verbatim>.mzschemerc</code> in the user’s home directory.<a id="TAG:__tex2page_call_footnote_Temp_15"></a><span class=footnotemark><sup><a class=hrefinternal href="#TAG:__tex2page_footnote_Temp_15">1</a></sup></span></p>
 <p>
@@ -101,8 +89,8 @@ implementor (appendix&#xa0;<a class=hrefinternal href="index-Z-H-24.html#TAG:__t
 
 </p>
 <a id="TAG:__tex2page_sec_A.1"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_A.1">A.1&#xa0;&#xa0;Invocation and init files</a></h2>
-<p class=noindent><a id="TAG:__tex2page_index_510"></a><a id="TAG:__tex2page_index_512"></a></p>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_A.1">A.1&#xa0;&#xa0;Invocation and init files</a></h2><p class=noindent>
+<a id="TAG:__tex2page_index_510"></a><a id="TAG:__tex2page_index_512"></a></p>
 <p>
 
 Like MzScheme, many Scheme dialects load, if
@@ -120,8 +108,7 @@ following code in Guile’s init file, which is
 <pre class=scheme>(<span class=keyword>define</span> <span class=variable>file-or-directory-modify-seconds</span>
   (<span class=keyword>lambda</span> (<span class=variable>f</span>)
     (<span class=variable>vector-ref</span> (<span class=variable>stat</span> <span class=variable>f</span>) <span class=selfeval>9</span>)))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 Also, the various Scheme dialects have their own
@@ -145,21 +132,19 @@ for some Scheme dialects:</p>
 <tr><td><span style="margin-left: 2em"> </span>MzScheme (Win, Mac OS Classic)  </td><td>   <code class=verbatim>mzscheme</code>  </td><td>   <code class=verbatim>~/mzschemerc.ss</code>  </td></tr>
 <tr><td><span style="margin-left: 2em"> </span>SCM  </td><td>   <code class=verbatim>scm</code>  </td><td>   <code class=verbatim>~/ScmInit.scm</code>  </td></tr>
 <tr><td><span style="margin-left: 2em"> </span>STk  </td><td>   <code class=verbatim>snow</code>  </td><td>   <code class=verbatim>~/.stkrc</code>  </td></tr>
-</table>
-<p>
+</table><p>
 <a id="TAG:__tex2page_index_514"></a></p>
 <p>
 
 </p>
 <a id="TAG:__tex2page_sec_A.2"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_A.2">A.2&#xa0;&#xa0;Shell scripts</a></h2>
-<p class=noindent>The initial line for a shell script written in Guile is:</p>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_A.2">A.2&#xa0;&#xa0;Shell scripts</a></h2><p class=noindent>
+The initial line for a shell script written in Guile is:</p>
 <p>
 
 </p>
-<pre class=scheme><span class=selfeval>&#x22;:&#x22;&#x22;</span><span class=comment>;exec guile -s $0 &#x22;$@&#x22;</span>
-</pre>
-<p class=noindent></p>
+<pre class=scheme><span class=selfeval>&#x22;:&#x22;</span><span class=comment>;exec guile -s $0 &#x22;$@&#x22;</span>
+</pre><p class=noindent></p>
 <p>
 
 In the script, the procedure-call <code class=scheme>(<span class=variable>command&#x2011;line</span>)</code> returns
@@ -171,9 +156,8 @@ A Gauche&#xa0;[<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_
 <p>
 
 </p>
-<pre class=scheme><span class=selfeval>&#x22;:&#x22;&#x22;</span><span class=comment>; exec gosh -- $0 &#x22;$@&#x22;</span>
-</pre>
-<p class=noindent></p>
+<pre class=scheme><span class=selfeval>&#x22;:&#x22;</span><span class=comment>; exec gosh -- $0 &#x22;$@&#x22;</span>
+</pre><p class=noindent></p>
 <p>
 
 In the script, the variable <code class=scheme><span class=global>*argv*</span></code> holds
@@ -184,9 +168,8 @@ A shell script written in SCM starts out as:</p>
 <p>
 
 </p>
-<pre class=scheme><span class=selfeval>&#x22;:&#x22;&#x22;</span><span class=comment>;exec scm -l $0 &#x22;$@&#x22;</span>
-</pre>
-<p class=noindent></p>
+<pre class=scheme><span class=selfeval>&#x22;:&#x22;</span><span class=comment>;exec scm -l $0 &#x22;$@&#x22;</span>
+</pre><p class=noindent></p>
 <p>
 
 In the script, the variable <code class=scheme><span class=global>*argv*</span></code> contains
@@ -200,9 +183,8 @@ STk&#xa0;[<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_14">1
 <p>
 
 </p>
-<pre class=scheme><span class=selfeval>&#x22;:&#x22;&#x22;</span><span class=comment>;exec snow -f $0 &#x22;$@&#x22;</span>
-</pre>
-<p class=noindent></p>
+<pre class=scheme><span class=selfeval>&#x22;:&#x22;</span><span class=comment>;exec snow -f $0 &#x22;$@&#x22;</span>
+</pre><p class=noindent></p>
 <p>
 
 In the script, the variable <code class=scheme><span class=global>*argv*</span></code> contains
@@ -214,8 +196,7 @@ the list of the script’s arguments.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_A.3"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_A.3">A.3&#xa0;&#xa0;<code class=scheme><span class=keyword>define&#x2011;macro</span></code></a></h2>
-<p class=noindent></p>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_A.3">A.3&#xa0;&#xa0;<code class=scheme><span class=keyword>define&#x2011;macro</span></code></a></h2><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_518"></a><a id="TAG:__tex2page_index_520"></a><a id="TAG:__tex2page_index_522"></a><a id="TAG:__tex2page_index_524"></a><a id="TAG:__tex2page_index_526"></a>The <code class=scheme><span class=keyword>define&#x2011;macro</span></code> used in the text occurs in
@@ -232,16 +213,12 @@ other dialects notate the following code fragment:</p>
 <pre class=scheme>(<span class=keyword>define-macro</span> <span class=variable>MACRO-NAME</span>
   (<span class=keyword>lambda</span> <span class=variable>MACRO-ARGS</span>
     <span class=variable>MACRO-BODY</span> ...))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_528"></a></p>
-<p>
-
-</p>
-
-<p class=noindent>In MIT Scheme&#xa0;[<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_26">26</a>] version 7.7.1 and later, this is written as:</p>
+<p></p><p class=noindent>
+In MIT Scheme&#xa0;[<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_26">26</a>] version 7.7.1 and later, this is written as:</p>
 <p>
 
 </p>
@@ -250,51 +227,38 @@ other dialects notate the following code fragment:</p>
     (<span class=keyword>let</span> ((<span class=variable>xfmr</span> (<span class=keyword>lambda</span> <span class=variable>MACRO-ARGS</span> <span class=variable>MACRO-BODY</span> ...)))
       (<span class=keyword>lambda</span> (<span class=variable>e</span> <span class=variable>r</span>)
         (<span class=variable>apply</span> <span class=variable>xfmr</span> (<span class=variable>cdr</span> <span class=variable>e</span>))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>In older versions of MIT Scheme:</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+In older versions of MIT Scheme:</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=variable>syntax-table-define</span> <span class=variable>system-global-syntax-table</span> <span class=keyword>'</span><span class=variable>MACRO-NAME</span>
   (<span class=variable>macro</span> <span class=variable>MACRO-ARGS</span>
     <span class=variable>MACRO-BODY</span> ...))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_530"></a><a id="TAG:__tex2page_index_532"></a></p>
-<p>
-
-</p>
-
-<p class=noindent>In SCM&#xa0;[<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_20">20</a>]  and Kawa [<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_3">3</a>]:</p>
+<p></p><p class=noindent>
+In SCM&#xa0;[<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_20">20</a>]  and Kawa [<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_3">3</a>]:</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=keyword>defmacro</span> <span class=variable>MACRO-NAME</span> <span class=variable>MACRO-ARGS</span>
   <span class=variable>MACRO-BODY</span> ...)
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_534"></a></p>
-<p>
-
-</p>
-
-<p class=noindent>In STk&#xa0;[<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_14">14</a>]:</p>
+<p></p><p class=noindent>
+In STk&#xa0;[<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_14">14</a>]:</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=keyword>define-macro</span> (<span class=variable>MACRO-NAME</span> . <span class=variable>MACRO-ARGS</span>)
   <span class=variable>MACRO-BODY</span> ...)
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_536"></a></p>
@@ -302,8 +266,8 @@ other dialects notate the following code fragment:</p>
 
 </p>
 <a id="TAG:__tex2page_sec_A.4"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_A.4">A.4&#xa0;&#xa0;<code class=scheme><span class=variable>load&#x2011;relative</span></code></a></h2>
-<p class=noindent>The procedure <code class=scheme><span class=variable>load&#x2011;relative</span></code> may be defined for Guile as follows:</p>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_A.4">A.4&#xa0;&#xa0;<code class=scheme><span class=variable>load&#x2011;relative</span></code></a></h2><p class=noindent>
+The procedure <code class=scheme><span class=variable>load&#x2011;relative</span></code> may be defined for Guile as follows:</p>
 <p>
 
 </p>
@@ -320,10 +284,9 @@ other dialects notate the following code fragment:</p>
             (<span class=keyword>let</span> ((<span class=variable>clp</span> (<span class=variable>current-load-port</span>)))
               (<span class=keyword>if</span> <span class=variable>clp</span>
                   (<span class=variable>string-append</span>
-                    (<span class=variable>dirname</span> (<span class=variable>port-filename</span> <span class=variable>clp</span>)) <span class=selfeval>&#x22;/&#x22;&#x22;</span> <span class=variable>f</span>)
+                    (<span class=variable>dirname</span> (<span class=variable>port-filename</span> <span class=variable>clp</span>)) <span class=selfeval>&#x22;/&#x22;</span> <span class=variable>f</span>)
                   <span class=variable>f</span>)))))))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 For SCM:</p>
@@ -341,8 +304,7 @@ For SCM:</p>
     (<span class=variable>load</span> (<span class=keyword>if</span> (<span class=keyword>and</span> <span class=global>*load-pathname*</span> <span class=variable>full-pathname?</span>)
               (<span class=variable>in-vicinity</span> (<span class=variable>program-vicinity</span>) <span class=variable>f</span>)
               <span class=variable>f</span>)))))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 For STk, the following definition for <code class=scheme><span class=variable>load&#x2011;relative</span></code>
@@ -368,14 +330,15 @@ works only if you discipline yourself to not use <code class=scheme><span class=
                (<span class=keyword>if</span> <span class=variable>full-pathname?</span> <span class=variable>f</span>
                    (<span class=variable>string-append</span>
                      (<span class=variable>dirname</span> <span class=global>*load-pathname*</span>)
-                     <span class=selfeval>&#x22;/&#x22;&#x22;</span> <span class=variable>f</span>))))))
+                     <span class=selfeval>&#x22;/&#x22;</span> <span class=variable>f</span>))))))
       (<span class=variable>stk%load</span> <span class=global>*load-pathname*</span>))))
 
 (<span class=keyword>define</span> <span class=variable>load</span>
   (<span class=keyword>lambda</span> (<span class=variable>f</span>)
-    (<span class=variable>error</span> <span class=selfeval>&#x22;Don’t use load.  Use load-relative instead.&#x22;&#x22;</span>)))
-</pre>
-<p class=noindent>
+    (<span class=variable>error</span> <span class=selfeval>&#x22;Don’t use load.  Use load-relative instead.&#x22;</span>)))
+</pre><p class=noindent></p>
+<p>
+
 </p>
 <div class=footnoterule><hr></div><p>
 </p>
@@ -384,13 +347,10 @@ works only if you discipline yourself to not use <code class=scheme><span class=
 use <code class=verbatim>~/filename</code> to denote the file called
 <code class=verbatim>filename</code> in the user’s home directory.</p>
 </div>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-19.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-21.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-19.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-21.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-

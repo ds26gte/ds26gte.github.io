@@ -1,34 +1,27 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-Generated from index.tex by tex2page, v. 20201114
-Copyright (C) 1997-2020 Dorai Sitaram
-(running on Racket 7.8 :unix)
+Generated from index.tex by tex2page, v. 20240429
+Copyright (C) 1997-2024 Dorai Sitaram
+(running on Racket 8.12 :unix)
 http://ds26gte.github.io/tex2page/index.html
 -->
 <head>
 <meta charset="utf-8">
+<meta name="generator" content="tex2page 20240429">
 <title>
 Teach Yourself Scheme in Fixnum Days
 </title>
 <link rel="stylesheet" href="index-Z-S.css" />
-<meta name=robots content="index,follow">
-
-<meta name=description content="A practical
-introduction to the programming language Scheme">
-
-<meta name=author content="Dorai Sitaram">
-
-<link rev=made href="mailto:ds26gte @ yahoo.com">
+ <meta name=description content="A practical introduction to the programming language Scheme">  <meta name=author content="Dorai Sitaram">  <link rev=made href="mailto:ds26gte @ yahoo.com"> 
 </head>
 <body>
 <div>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-16.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-18.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-16.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-18.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 <a id="TAG:__tex2page_chap_15"></a>
-<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_15">15&#xa0;&#xa0;Engines</a></h1>
-<p class=noindent><a id="TAG:__tex2page_index_488"></a>An engine [<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_17">17</a>] represents computation that is
+<h1 class=chapter><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_chap_15">15&#xa0;&#xa0;Engines</a></h1><p class=noindent>
+<a id="TAG:__tex2page_index_488"></a>An engine [<a class=hrefinternal href="index-Z-H-24.html#TAG:__tex2page_bib_17">17</a>] represents computation that is
 subject to timed preemption.  In other words, an
 engine’s underlying computation is an ordinary thunk
 that runs as a timer-preemptable process.</p>
@@ -61,28 +54,20 @@ returns the corresponding engine:</p>
     (<span class=keyword>lambda</span> ()
       (<span class=keyword>let</span> <span class=keyword>loop</span> ((<span class=variable>i</span> <span class=selfeval>0</span>))
         (<span class=variable>display</span> <span class=variable>i</span>)
-        (<span class=variable>display</span> <span class=selfeval>&#x22; &#x22;&#x22;</span>)
+        (<span class=variable>display</span> <span class=selfeval>&#x22; &#x22;</span>)
         (<span class=keyword>loop</span> (<span class=variable>+</span> <span class=variable>i</span> <span class=selfeval>1</span>))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>Here is a call to <code class=scheme><span class=variable>printn&#x2011;engine</span></code>:</p>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+Here is a call to <code class=scheme><span class=variable>printn&#x2011;engine</span></code>:</p>
 <p>
 
 </p>
 <pre class=scheme>(<span class=keyword>define</span> <span class=global>*more*</span> <span class=selfeval>#f</span>)
 (<span class=variable>printn-engine</span> <span class=selfeval>50</span> <span class=variable>list</span> (<span class=keyword>lambda</span> (<span class=variable>ne</span>) (<span class=keyword>set!</span> <span class=global>*more*</span> <span class=variable>ne</span>)))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>0</span> <span class=selfeval>1</span> <span class=selfeval>2</span> <span class=selfeval>3</span> <span class=selfeval>4</span> <span class=selfeval>5</span> <span class=selfeval>6</span> <span class=selfeval>7</span> <span class=selfeval>8</span> <span class=selfeval>9</span>
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>I.e., the loop gets to print upto a certain number
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+I.e., the loop gets to print upto a certain number
 (here <code class=scheme><span class=selfeval>9</span></code>) and then fails because of the clock
 interrupt.  However, our <em>failure</em> procedure sets
 a global variable called <code class=scheme><span class=global>*more*</span></code> to the failed
@@ -93,8 +78,7 @@ previous engine left off:</p>
 </p>
 <pre class=scheme>(<span class=global>*more*</span> <span class=selfeval>50</span> <span class=variable>list</span> (<span class=keyword>lambda</span> (<span class=variable>ne</span>) (<span class=keyword>set!</span> <span class=global>*more*</span> <span class=variable>ne</span>)))
 <span style="color: teal"><span style="font-family: monospace"><strong>=&#x3e;</strong></span></span> <span class=selfeval>10</span> <span class=selfeval>11</span> <span class=selfeval>12</span> <span class=selfeval>13</span> <span class=selfeval>14</span> <span class=selfeval>15</span> <span class=selfeval>16</span> <span class=selfeval>17</span> <span class=selfeval>18</span> <span class=selfeval>19</span>
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 <a id="TAG:__tex2page_index_490"></a></p>
@@ -115,8 +99,7 @@ cases, we need a timer mechanism, or a <em>clock</em>.</p>
 
 </p>
 <a id="TAG:__tex2page_sec_15.1"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_15.1">15.1&#xa0;&#xa0;The clock</a></h2>
-<p class=noindent></p>
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_15.1">15.1&#xa0;&#xa0;The clock</a></h2><p class=noindent></p>
 <p>
 
 Our engines assume the presence of a global clock or
@@ -166,24 +149,20 @@ The clock handler is set to a thunk.  For example,</p>
 </p>
 <pre class=scheme>(<span class=variable>clock</span> <span class=keyword>'</span><span class=variable>set-handler</span>
   (<span class=keyword>lambda</span> ()
-    (<span class=variable>error</span> <span class=selfeval>&#x22;Say goodnight, cat!&#x22;&#x22;</span>)))
+    (<span class=variable>error</span> <span class=selfeval>&#x22;Say goodnight, cat!&#x22;</span>)))
 
 (<span class=variable>clock</span> <span class=keyword>'</span><span class=variable>set</span> <span class=selfeval>9</span>)
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>This will cause an error to be signaled after 9
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+This will cause an error to be signaled after 9
 ticks have passed, and the message displayed by the
 signal will be “Say goodnight, cat!”</p>
 <p>
 
 <a id="TAG:__tex2page_index_494"></a></p>
 <a id="TAG:__tex2page_sec_15.2"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_15.2">15.2&#xa0;&#xa0;Flat engines</a></h2>
-<p class=noindent>We will first set the clock interrupt handler.  Note
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_15.2">15.2&#xa0;&#xa0;Flat engines</a></h2><p class=noindent>
+We will first set the clock interrupt handler.  Note
 that the handler is invoked only if a non-quiescent
 clock runs out of ticks.  This happens only during
 engine computations that are on the brink of failure,
@@ -207,8 +186,7 @@ requisite failure action can be taken.</p>
 (<span class=variable>clock</span> <span class=keyword>'</span><span class=variable>set-handler</span>
   (<span class=keyword>lambda</span> ()
     (<span class=variable>call/cc</span> <span class=global>*engine-escape*</span>)))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 Let us now look into the innards of the engine code
@@ -242,13 +220,9 @@ fashions an engine out of it:</p>
              (<span class=variable>make-engine</span>
               (<span class=keyword>lambda</span> ()
                 (<span class=variable>result</span> <span class=keyword>'</span><span class=variable>resume</span>)))))))))
-</pre>
-<p class=noindent></p>
-<p>
-
-</p>
-
-<p class=noindent>First we introduce the variables <code class=scheme><span class=variable>ticks&#x2011;left</span></code>
+</pre><p class=noindent></p>
+<p></p><p class=noindent>
+First we introduce the variables <code class=scheme><span class=variable>ticks&#x2011;left</span></code>
 and <code class=scheme><span class=variable>engine&#x2011;succeeded?</span></code>.  The first will hold
 the ticks left over should the engine thunk finish
 in time.  The second is a flag that will be used in
@@ -306,8 +280,8 @@ executing engine code.</p>
 
 <a id="TAG:__tex2page_index_496"></a></p>
 <a id="TAG:__tex2page_sec_15.3"></a>
-<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_15.3">15.3&#xa0;&#xa0;Nestable engines</a></h2>
-<p class=noindent>In order to generalize the code above to accommodate
+<h2 class=section><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_15.3">15.3&#xa0;&#xa0;Nestable engines</a></h2><p class=noindent>
+In order to generalize the code above to accommodate
 the nestable type of engine, we need to incorporate
 into it some <em>tick management</em> that will take
 care of the apportioning of the right amounts of ticks
@@ -423,8 +397,7 @@ as follows:</p>
          (<span class=keyword>else</span>
           ((<span class=variable>make-engine</span> (<span class=keyword>lambda</span> () (<span class=variable>result</span> <span class=keyword>'</span><span class=variable>resume</span>)))
            <span class=variable>ticks-left</span> <span class=variable>s</span> <span class=variable>f</span>)))))))
-</pre>
-<p class=noindent></p>
+</pre><p class=noindent></p>
 <p>
 
 Note that we have used the arithmetic operators
@@ -444,13 +417,10 @@ to define the enhanced operators.</p>
 <span class=footnotemark><a id="TAG:__tex2page_footnote_Temp_14"></a><sup><a class=hrefinternal href="#TAG:__tex2page_call_footnote_Temp_14">1</a></sup></span> E.g., in Guile, you can <code class=scheme>(<span class=keyword>define</span>
 <span class=global>*infinity*</span> (<span class=variable>/</span> <span class=selfeval>1</span> <span class=selfeval>0</span>))</code>.</p>
 </div>
-<div class=smallskip></div>
-<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div class=smallskip></div><p>
 </p>
-<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-16.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-18.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div>
-<p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-16.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-18.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_toc">contents</a></span><span><span>; &#xa0;&#xa0;</span><a class=hrefinternal href="index-Z-H-25.html#TAG:__tex2page_index_start">index</a></span>]</div><p>
 </p>
 </div>
 </body>
 </html>
-
