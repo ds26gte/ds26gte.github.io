@@ -1,0 +1,11 @@
+Proof that the single-var linear regression derived from the
+matrix calculations for multiple regression matches the original
+Pyret implementation.
+
+image::mulreg1.jpg[]
+
+image::mulreg2.jpg[]
+
+image::mulreg3.jpg[]
+
+image::mulreg4.jpg[]
