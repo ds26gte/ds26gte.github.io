@@ -1,12 +1,6 @@
-#set page(
-  numbering: "1",
-)
-#set math.mat(
-  delim: "[",
-)
-#set math.vec(
-  delim: "[",
-)
+#set page(numbering: "1")
+#set math.mat(delim: "[")
+#set math.vec(delim: "[")
 
 Proof that the single-variable linear-regression predictor
 derived using the general matrix-based multiple
