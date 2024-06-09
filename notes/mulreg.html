@@ -14,35 +14,212 @@
 </div>
 <div id="content">
 <div class="paragraph">
-<p>Proof that the single-var linear regression derived from the
-matrix calculations for multiple regression matches the original
-Pyret implementation.</p>
+<p>Proof that the single-variable linear-regression predictor derived using
+the general matrix-based multiple regression algorithm gives the same
+results as the original Pyret implementation.</p>
 </div>
-<div class="imageblock">
+<div class="paragraph">
+<p>Given: a set of inputs \(\left\{ x,\ldots \right\}\) and their
+corresponding outputs \(\left\{ y,\ldots \right\}\).</p>
+</div>
+<div class="paragraph">
+<p>Let</p>
+</div>
+<div class="stemblock">
 <div class="content">
-<img src="mulreg1.jpg" alt="mulreg1">
+\[X = \begin{pmatrix}
+1 &amp; x \\
+ \cdot &amp; \cdot \\
+ \cdot &amp; \cdot \\
+ \cdot &amp; \cdot
+\end{pmatrix},Y = \begin{pmatrix}
+y \\
+ \cdot \\
+ \cdot \\
+ \cdot
+\end{pmatrix}\]
 </div>
 </div>
-<div class="imageblock">
+<div class="paragraph">
+<p>Using the multiple-regression algorithm, we get</p>
+</div>
+<div class="stemblock">
 <div class="content">
-<img src="mulreg2.jpg" alt="mulreg2">
+\[B = \begin{bmatrix}
+\alpha \\
+\beta
+\end{bmatrix} = \left( X^{T}X \right)^{- 1}X^{T}Y.\quad\quad(1)\]
 </div>
 </div>
-<div class="imageblock">
+<div class="paragraph">
+<p>and the predictor function is \(y = \alpha + \beta x\).</p>
+</div>
+<div class="paragraph">
+<p>We have</p>
+</div>
+<div class="stemblock">
 <div class="content">
-<img src="mulreg3.jpg" alt="mulreg3">
+\[X^{T} = \begin{pmatrix}
+1 &amp; \cdot &amp; \cdot &amp; \cdot \\
+x &amp; \cdot &amp; \cdot &amp; \cdot
+\end{pmatrix}\]
 </div>
 </div>
-<div class="imageblock">
+<div class="stemblock">
 <div class="content">
-<img src="mulreg4.jpg" alt="mulreg4">
+\[\therefore X^{T}X = \begin{pmatrix}
+1 &amp; \cdot &amp; \cdot &amp; \cdot \\
+x &amp; \cdot &amp; \cdot &amp; \cdot
+\end{pmatrix}\begin{pmatrix}
+1 &amp; x \\
+ \cdot &amp; \cdot \\
+ \cdot &amp; \cdot \\
+ \cdot &amp; \cdot
+\end{pmatrix} = \begin{pmatrix}
+n &amp; \Sigma x \\
+\Sigma x &amp; \Sigma x^{2}
+\end{pmatrix}\]
 </div>
+</div>
+<div class="paragraph">
+<p>We then have</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+\text{ det }X^{T}X &amp; = n\Sigma x^{2} - (\Sigma x)^{2} = \Delta\text{ (say) } \\
+\text{and }\quad\quad\text{ cof }X^{T}X &amp; = \begin{pmatrix}
+\Sigma x^{2} &amp; - \Sigma x \\
+ - \Sigma x &amp; n
+\end{pmatrix}
+\end{aligned}\]
+</div>
+</div>
+<div class="paragraph">
+<p>The adjoint of a matrix is the transpose of its cofactor matrix. So</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\text{ adj }X^{T}X = \left( \text{cof }X^{T}X \right)^{T}\]
+</div>
+</div>
+<div class="paragraph">
+<p>But \(\text{cof }X^{T}X\) is diagonally symmetric, so its
+transpose is itself. So</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\text{ adj }X^{T}X = \text{ cof }X^{T}X\]
+</div>
+</div>
+<div class="paragraph">
+<p>The inverse of a matrix is its adjoint divided by its determinant. So</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\left( X^{T}X \right)^{- 1} = \frac{\text{adj }X^{T}X}{\Delta} = \left( \frac{1}{\Delta} \right)\begin{pmatrix}
+\Sigma x^{2} &amp; - \Sigma x \\
+ - \Sigma x &amp; n
+\end{pmatrix}\]
+</div>
+</div>
+<div class="paragraph">
+<p>Putting all this in (1), we have</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+B &amp; = \left( \frac{1}{\Delta} \right)\begin{pmatrix}
+\Sigma x^{2} &amp; - \Sigma x \\
+ - \Sigma x &amp; n
+\end{pmatrix}\begin{pmatrix}
+1 &amp; \cdot &amp; \cdot &amp; \cdot \\
+x &amp; \cdot &amp; \cdot &amp; \cdot
+\end{pmatrix}\begin{pmatrix}
+y \\
+ \cdot \\
+ \cdot \\
+ \cdot
+\end{pmatrix} \\
+ &amp; = \left( \frac{1}{\Delta} \right)\begin{pmatrix}
+\Sigma x^{2} &amp; - \Sigma x \\
+ - \Sigma x &amp; n
+\end{pmatrix}\begin{pmatrix}
+\Sigma y \\
+\Sigma xy
+\end{pmatrix} \\
+ &amp; = \left( \frac{1}{\Delta} \right)\begin{pmatrix}
+\Sigma x^{2}\Sigma y - \Sigma x\Sigma xy \\
+ - \Sigma x\Sigma y + n\Sigma xy
+\end{pmatrix}
+\end{aligned}\]
+</div>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+\therefore\alpha &amp; = \frac{\Sigma x^{2}\Sigma y - \Sigma x\Sigma xy}{n\Sigma x^{2} - (\Sigma x)^{2}} \\
+\text{and }\beta &amp; = \frac{n\Sigma xy - \Sigma x\Sigma y}{n\Sigma x^{2} - (\Sigma x)^{2}}\quad\quad\ (2)\
+\end{aligned}\]
+</div>
+</div>
+<div class="paragraph">
+<p>Back to the original Pyret implementation. There we have</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+\beta &amp; = \frac{\Sigma xy - \frac{\Sigma x\Sigma y}{n}}{\Sigma x^{2} - \frac{(\Sigma x)^{2}}{n}} \\
+ &amp; = \frac{n\Sigma xy - \Sigma x\Sigma y}{n\Sigma x^{2} - (\Sigma x)^{2}}
+\end{aligned}\]
+</div>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+\text{ and }\quad\quad\alpha &amp; = \overline{y} - \beta\overline{x} \\
+ &amp; = \left( \frac{\Sigma y}{n} \right) - \left( \frac{n\Sigma xy - \Sigma x\Sigma y}{n\Sigma x^{2} - (\Sigma x)^{2}} \right)\left( \frac{\Sigma x}{n} \right) \\
+ &amp; = \left( \frac{\Sigma y}{n} \right) - \left( \frac{n\Sigma x\Sigma xy - (\Sigma x)^{2}\Sigma y}{n\left( n\Sigma x^{2} - (\Sigma x)^{2} \right)} \right) \\
+ &amp; = \frac{\Sigma y\left( n\Sigma x^{2} - (\Sigma x)^{2} \right) - n\Sigma x\Sigma xy + (\Sigma x)^{2}\Sigma y}{n\left( n\Sigma x^{2} - (\Sigma x)^{2} \right)} \\
+ &amp; = \frac{n\Sigma x^{2}\Sigma y - (\Sigma x)^{2}\Sigma y - n\Sigma x\Sigma xy + (\Sigma x)^{2}\Sigma y}{n\left( n\Sigma x^{2} - (\Sigma x)^{2} \right)} \\
+ &amp; = \frac{n\Sigma x^{2}\Sigma y - n\Sigma x\Sigma xy}{n\left( n\Sigma x^{2} - (\Sigma x)^{2} \right)} \\
+ &amp; = \frac{\Sigma x^{2}\Sigma y - \Sigma x\Sigma xy}{n\Sigma x^{2} - (\Sigma x)^{2}}
+\end{aligned}\]
+</div>
+</div>
+<div class="paragraph">
+<p>But these match exactly the values for \(\alpha,\beta\) in
+(2). \(\quad\quad\) QED.</p>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-05-24 12:35:09 -0400
+Last updated 2024-06-08 20:23:53 -0400
 </div>
 </div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>
