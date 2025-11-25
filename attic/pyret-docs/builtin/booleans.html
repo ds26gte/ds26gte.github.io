@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <style>
+     li.indent2 {
+       text-indent: 2em;
+     }
+     ul.toclist {
+       list-style-type: none;
+     }
+     .pyretexpr {
+       color: cornflowerblue;
+     }
+     .function {
+       font-family: monospace;
+       background-color: #6bccdf;
+     }
+  </style>
+  <head>
+    <title>Booleans</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><h1 id="Booleans" toclevel="1" tocentry="yes">Booleans</h1><p>  </p><div><div class="function">Boolean</div><p>The type of the values <tt class="pyretexpr">true</tt> and <tt class="pyretexpr">false</tt>.</p></div><p>  </p><h2 id="Boolean-Functions" toclevel="2" tocentry="yes">Boolean Functions</h2><p>  </p><div class="function">not :: <span>(Boolean) -&gt; Boolean</span></div><p>  Returns <tt class="pyretexpr">true</tt> when given <tt class="pyretexpr">false</tt> and vice versa.</p><pre>check:
+  not(true) is false
+  not(2 &lt; 1) is true
+end</pre><p>  </p><h2 id="Boolean-Operators" toclevel="2" tocentry="yes">Boolean Operators</h2><div><div class="function">left and right</div><p><margin-note>The <tt class="pyretexpr">and</tt> operator “short-circuits”: if <tt class="pyretexpr">left</tt> evaluates to <tt class="pyretexpr">false</tt>, then <tt class="pyretexpr">right</tt> is not evaluated at all and the result is <tt class="pyretexpr">false</tt>.</margin-note> Expects <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> to be <tt class="pyretexpr">Boolean</tt>s. If both are <tt class="pyretexpr">true</tt>, the result is <tt class="pyretexpr">true</tt>, if either is <tt class="pyretexpr">false</tt>, the result is <tt class="pyretexpr">false</tt>.</p><pre>examples:
+  true and true is true
+  true and false is false
+  false and true is false
+  false and false is false
+  (4 &lt; 5) and ("a" == "b") is false
+  (4 &lt; 5) and ((4 + 2) == 6) is true
+  (4 &gt; 5) and ((4 + 2) == 6) is false
+end</pre></div><div><div class="function">left or right</div><p><margin-note>The <tt class="pyretexpr">or</tt> operator “short-circuits”: if <tt class="pyretexpr">left</tt> evaluates to <tt class="pyretexpr">true</tt>, then <tt class="pyretexpr">right</tt> is not evaluated at all and the result is <tt class="pyretexpr">true</tt>.</margin-note> Expects <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> to be <tt class="pyretexpr">Boolean</tt>s. If either is <tt class="pyretexpr">true</tt>, the result is <tt class="pyretexpr">true</tt>, if both are <tt class="pyretexpr">false</tt>, the result is <tt class="pyretexpr">false</tt>.</p><pre>examples:
+  true or true is true
+  true or false is true
+  false or true is true
+  false or false is false
+  (4 &lt; 5) or ("a" == "b") is true
+  (4 &lt; 5) or ((4 + 2) == 6) is true
+  (4 &gt; 5) or ((4 + 2) == 6) is true
+  (4 &gt; 5) or ("a" == "b") is false
+end</pre></div></root>
+    <hr/>
+    The current page is builtin/booleans.html.
+    The previous page is <a href = "../builtin/numbers.html">../builtin/numbers.html</a>.
+    The next page is <a href = "../libraries-archived.html">../libraries-archived.html</a>.
+    </div>
+  </body>
+</html>
