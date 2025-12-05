@@ -224,7 +224,7 @@ end</pre><p>If we used reference equality on these functions, all of these tests
   ones == ones is true
   ones == mk-ones() raises "Attempted to compare functions"
   ones.rest() == mk-ones() raises "Attempted to compare functions"
-end</pre><p>The first test is true because two <tt class="pyretexpr">identical</tt> values are considered <tt class="pyretexpr">equal-always</tt>.  This is an interesting point in this design space that Pyret may explore more in the future–it isn’t clear if the benefits of this relationship between <tt class="pyretexpr">identical</tt> and <tt class="pyretexpr">equal-always</tt> are worth the slight brittleness in the above example.</p><p><para><bold>Note 1</bold>: Functions can be compared with non-function values and return <code>false</code>.  That is, the equality operators only throw the error if actual function values need to be compared to one another, not if a function value is compared to another type of value:</para></p><pre>check:
+end</pre><p>The first test is true because two <tt class="pyretexpr">identical</tt> values are considered <tt class="pyretexpr">equal-always</tt>.  This is an interesting point in this design space that Pyret may explore more in the future–it isn’t clear if the benefits of this relationship between <tt class="pyretexpr">identical</tt> and <tt class="pyretexpr">equal-always</tt> are worth the slight brittleness in the above example.</p><p><bold>Note 1</bold>: Functions can be compared with non-function values and return <code>false</code>.  That is, the equality operators only throw the error if actual function values need to be compared to one another, not if a function value is compared to another type of value:</p><pre>check:
   f = lam(): "no-op" end
   g = lam(): "also no-op" end
 
@@ -235,7 +235,7 @@ end</pre><p>The first test is true because two <tt class="pyretexpr">identical</
   5 is-not%(equal-always) f
 
   { x: 5 } is-not%(equal-always) { x: f }
-end</pre><p><para><bold>Note 2</bold>: This rule about functions interacts with structural equality. When comparing two values, it seems at first unclear whether the result should be <code>false</code> or an error for this test:</para></p><pre>check:
+end</pre><p><bold>Note 2</bold>: This rule about functions interacts with structural equality. When comparing two values, it seems at first unclear whether the result should be <code>false</code> or an error for this test:</p><pre>check:
   { x: 5, f: lam(): "no-op" end } is%(equal-always)
     { x: 6, f: lam(): "no-op" end }
 end</pre><p>This comparison will return <code>false</code>.  The rule is that if the equality algorithm can find values that differ without comparing functions, it will report the difference and return <code>false</code>.  However, if all of the non-function comparisons are <code>true</code>, and some functions were compared, then an error is raised.  A few more examples:</p><pre>
