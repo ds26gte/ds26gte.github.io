@@ -176,7 +176,7 @@ end</pre><div><tt>.reverse :: contract</tt></div><p>Produces a new <tt class="py
 check:
   [L.list: 1, 2, 3].reverse() is [L.list: 3, 2, 1]
   L.empty.reverse() is L.empty
-end</pre><div><tt>.sort :: contract</tt></div><p>Produces a new <tt class="pyretexpr">List</tt> whose contents are the same as those of the current <tt class="pyretexpr">List</tt>, sorted by <tt class="pyretexpr">&lt;equality</tt> and <tt class="pyretexpr">==equality</tt>.  This requires that the items of the <tt class="pyretexpr">List</tt> be comparable by <tt class="pyretexpr">&lt;equality</tt> (see <a href="UnDeFiNeD">UnDeFiNeD</a>).</p><pre>import lists as L
+end</pre><div><tt>.sort :: contract</tt></div><p>Produces a new <tt class="pyretexpr">List</tt> whose contents are the same as those of the current <tt class="pyretexpr">List</tt>, sorted by <tt class="pyretexpr">&lt;equality</tt> and <tt class="pyretexpr">==equality</tt>.  This requires that the items of the <tt class="pyretexpr">List</tt> be comparable by <tt class="pyretexpr">&lt;equality</tt> (see <a href="lang/forms.html#s:binop-expr">Binary Operators</a>).</p><pre>import lists as L
 
 check:
   [L.list: 1, 5, 3, 2, 4].sort() is [L.list: 1, 2, 3, 4, 5]
@@ -222,7 +222,7 @@ check:
   L.get(l, 0) is 1
   L.get(l, 4) raises "too large"
   L.get(l, -1) raises "invalid argument"
-end</pre><p>  </p><div class="function">set :: contract</div><div class="function"><p>sortProduces a new <tt class="pyretexpr">List</tt> whose contents are the same as those of the current <tt class="pyretexpr">List</tt>, sorted by <tt class="pyretexpr">&lt;equality</tt> and <tt class="pyretexpr">==equality</tt>.  This requires that the items of the <tt class="pyretexpr">List</tt> be comparable by <tt class="pyretexpr">&lt;equality</tt> (see <a href="UnDeFiNeD">UnDeFiNeD</a>).</p><pre>import lists as L
+end</pre><p>  </p><div class="function">set :: contract</div><div class="function"><p>sortProduces a new <tt class="pyretexpr">List</tt> whose contents are the same as those of the current <tt class="pyretexpr">List</tt>, sorted by <tt class="pyretexpr">&lt;equality</tt> and <tt class="pyretexpr">==equality</tt>.  This requires that the items of the <tt class="pyretexpr">List</tt> be comparable by <tt class="pyretexpr">&lt;equality</tt> (see <a href="lang/forms.html#s:binop-expr">Binary Operators</a>).</p><pre>import lists as L
 
 check:
   L.sort([L.list: 1, 5, 3, 2, 4]) is [L.list: 1, 2, 3, 4, 5]
