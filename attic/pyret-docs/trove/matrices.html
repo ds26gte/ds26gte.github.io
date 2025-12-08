@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <head>
+    <title>Untitled</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><div><h1 id="matrices" toclevel="1" tocentry="yes"></h1><p><a href="https://en.wikipedia.org/wiki/Matrix_(mathematics)"><emph>Matrices</emph></a> are rectangular grids of numbers, which define many useful mathematical operations.  Matrices can manipulate each other, and are also used to manipulate <a href="https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)"><emph>vectors</emph></a>, which are lists of numbers that likewise define many useful mathematical operations.</p><p>This library defines both the <tt class="pyretexpr">Vector</tt> datatype and the <tt class="pyretexpr">Matrix</tt> datatype.  All functionality in this library is defined both as methods on the data values and as analogous functions.</p><h2 id="The-Vector-Datatype" toclevel="2" tocentry="yes">The Vector Datatype</h2><div><div class="function">Vector&lt;&gt;</div><p>The <tt class="pyretexpr">Vector</tt> type represents mathematical vectors.</p></div><div><div class="function">Vector3D&lt;&gt;</div><p>Like <tt class="pyretexpr">Vector</tt>, but only allows 3-dimensional vectors.</p></div><div><div class="function">Nat&lt;&gt;</div><p>The type of natural numbers, i.e. non-negative integers.</p></div><div><div class="function">NonZeroNat&lt;&gt;</div><p>The type of positive integers.</p></div><p>collection-doc</p><p>Vector constructor which creates a vector instance with the given elements.</p><p>collection-doc</p><p>Vector constructor which only creates three-dimensional vector instances.</p><p>Vectors are defined to permit using addition and subtraction operators on them, whenever the lengths of the vectors are the same:</p><pre>check:
+  [vector: 1, 2, 3] + [vector: 4, 5, 6] is [vector: 5, 7, 9]
+  [vector: 1] + [vector: 1, 2] raises "vectors of different lengths"
+  [vector: 1, 2, 3] - [vector: 4, 5, 6] is [vector: -3, -3, -3]
+  [vector: 1] - [vector: 1, 2] raises "vectors of different lengths"
+end</pre><p>See also <tt class="pyretexpr">vec-add</tt> and <tt class="pyretexpr">vec-sub</tt>.</p><p>Two vectors are considered equal when their lengths are the same and their corresponding elements are equal, and obeys the same restrictions on comparing exact and rough numbers for equality:</p><pre>check:
+  ([vector: 1] == [vector: 1, 2]) is false
+  ([vector: 1, 2] == [vector: 1, 2]) is true
+  ([vector: ~1, ~2] == [vector: 1, 2]) raises "not allowed"
+  roughly-equal([vector: ~1, ~2], [vector: 1, 2]) is true
+end</pre><h2 id="Vector-Methods" toclevel="2" tocentry="yes">Vector Methods</h2><div><tt>.get :: contract</tt></div><p>Returns the item at the given index in this vector.</p><pre>check:
+  [vector: 3, 5].get(1) is 5
+end</pre><div><tt>.length :: contract</tt></div><p>Returns the length of this vector.</p><pre>check:
+  [vector: 1, 2, 3, 4].length() is 4
+end</pre><div><tt>.dot :: contract</tt></div><p>Returns the dot product of this vector with the given vector.</p><pre>check:
+  [vector: 1, 2, 3].dot([vector: 3, 2, 1]) is 10
+end</pre><div><tt>.magnitude :: contract</tt></div><p>Returns the magnitude of this vector.</p><pre>check:
+  [vector: 3, 4].magnitude() is 5
+  [vector: 4, 0].magnitude() is 4
+end</pre><div><tt>.cross :: contract</tt></div><p>Returns the cross product of this 3D vector and the given 3D vector. (Raises an error if either this or that vector are not 3-dimensional)</p><pre>check:
+  [vector: 2, -3, 1].cross([vector: -2, 1, 1]) is [vector: -4, -4, -4]
+end</pre><div><tt>.normalize :: contract</tt></div><p>Normalizes this vector into a unit vector.</p><pre>check:
+  [vector: 1, 2, 3].normalize()
+    is [vector: (1 / num-sqrt(14)), (2 / num-sqrt(14)), (3 / num-sqrt(14))]
+end</pre><div><tt>.scale :: contract</tt></div><p>Scales this vector by the given constant.</p><pre>check:
+  [vector: 1, 2, 3].scale(2) is [vector: 2, 4, 6]
+end</pre><div><tt>.to-row-matrix :: contract</tt></div><p>Converts this vector to a one-row matrix.</p><pre>check:
+  [vector: 4, 5, 6].to-row-matrix() is [matrix(1, 3): 4, 5, 6]
+end</pre><div><tt>.to-col-matrix :: contract</tt></div><p>Converts this vector to a one-column matrix.</p><pre>check:
+  [vector: 4, 5, 6].to-row-matrix() is [matrix(3, 1): 4, 5, 6]
+end</pre><h2 id="Vector-Functions" toclevel="2" tocentry="yes">Vector Functions</h2><div class="function">vec-get :: contract</div><p>Returns the item at the given index in the given vector.</p><pre>check:
+  vec-get([vector: 3, 5], 1) is 5
+end</pre><p>See pyret-method.</p><div class="function">vec-length :: contract</div><p>Returns the length of the given vector.</p><pre>check:
+  vec-length([vector: 1, 2, 3, 4]) is 4
+end</pre><p>See pyret-method.</p><div class="function">vec-dot :: contract</div><p>Returns the dot product of the first vector with the second vector.</p><pre>check:
+  vec-dot[vector: 1, 2, 3], ([vector: 3, 2, 1]) is 10
+end</pre><p>See pyret-method.</p><div class="function">vec-magnitude :: contract</div><p>Returns the magnitude of the given vector.</p><pre>check:
+  vec-magnitude([vector: 3, 4]) is 5
+  vec-magnitude([vector: 4, 0]) is 4
+end</pre><p>See pyret-method.</p><div class="function">vec-cross :: contract</div><p>Returns the cross product of the two given 3D vectors. (Raises an error if either vector is not 3-dimensional)</p><pre>check:
+  vec-cross([vector: 2, -3, 1], [vector: -2, 1, 1]) is [vector: -4, -4, -4]
+end</pre><p>See pyret-method.</p><div class="function">vec-normalize :: contract</div><p>Normalizes the given vector into a unit vector.</p><pre>check:
+  vec-normalize([vector: 1, 2, 3])
+    is [vector: (1 / num-sqrt(14)), (2 / num-sqrt(14)), (3 / num-sqrt(14))]
+end</pre><p>See pyret-method.</p><div class="function">vec-scale :: contract</div><p>Scales the given vector by the given constant.</p><pre>check:
+  vec-scale([vector: 1, 2, 3], 2) is [vector: 2, 4, 6]
+end</pre><p>See pyret-method.</p><div class="function">vec-add :: contract</div><p>Adds the second vector to first one.</p><pre>check:
+  vec-add([vector: 1, 2, 3], [vector: 4, 5, 6]) is [vector: 5, 7, 9]
+  vec-add([vector: 1], [vector: 1, 2]) raises "vectors of different lengths"
+end</pre><div class="function">vec-sub :: contract</div><p>Subtracts the second vector from first one.</p><pre>check:
+  vec-sub([vector: 1, 2, 3], [vector: 4, 5, 6]) is [vector: -3, -3, -3]
+  vec-sub([vector: 1], [vector: 1, 2]) raises "vectors of different lengths"
+end</pre><h2 id="The-Matrix-Datatype" toclevel="2" tocentry="yes">The Matrix Datatype</h2><div><div class="function">Matrix&lt;&gt;</div></div><p>The <tt class="pyretexpr">Matrix</tt> type represents mathematical matrices.</p><p><div class="function">is-matrix :: contract</div></p><p>Every matrix has a <tt class="pyretexpr">rows</tt> field and a <tt class="pyretexpr">cols</tt> field, which are the dimensions of the matrix.</p><pre>check:
+  [matrix(2, 3): 10, 20, 30, 40, 50, 60].rows is 2
+  [matrix(2, 3): 10, 20, 30, 40, 50, 60].cols is 3
+end</pre><h2 id="Matrix-Constructors" toclevel="2" tocentry="yes">Matrix Constructors</h2><p>collection-doc</p><p>Publicly exposed constructor which constructs a matrix of size <tt class="pyretexpr">rows</tt> by <tt class="pyretexpr">cols</tt> with the given elements, entered row by row.</p><p>The following example represents the matrix math-imtx:</p><pre>[matrix(2,3): 1, 2, 3, 4, 5, 6]</pre><p>Supplying an inconsistent quantity of elements for a given matrix dimension will produce an error:</p><pre>check:
+  [matrix(4, 2): 100] raises "Invalid 1x2 Matrix"
+end</pre><p>collection-doc</p><p>Constructor which returns a one-row matrix containing the given entries.</p><p>The following will construct the matrix math-imtx:</p><pre>check:
+  [row-matrix: 1, 2, 3] is [matrix(1,3): 1, 2, 3]
+end</pre><p>collection-doc</p><p>Constructor which returns a one-column matrix containing the given entries.</p><p>The following will construct the matrix math-imtx:</p><pre>check:
+  [col-matrix: 1, 2, 3] is [matrix(3,1): 1, 2, 3]
+end</pre><div class="function">identity-matrix :: contract</div><p>Constructs an <math-in>n \times n</math-in> identity matrix.</p><pre>check:
+  identity-matrix(2) is [matrix(2,2): 1, 0,
+                                      0, 1]
+  identity-matrix(3) is [matrix(3,3): 1, 0, 0,
+                                      0, 1, 0,
+                                      0, 0, 1]
+end</pre><div class="function">make-matrix :: contract</div><p>Constructs a matrix of the given size using only the given element.</p><pre>check:
+  make-matrix(2, 3, 1) is [matrix(2,3): 1, 1, 1,
+                                        1, 1, 1]
+  make-matrix(3, 2, 5) is [matrix(3,2): 5, 5,
+                                        5, 5,
+                                        5, 5]
+end</pre><div class="function">zero-matrix :: contract</div><p>Constructs a matrix of the given size containing only zeroes.</p><pre>check:
+  zero-matrix(2, 3) is [matrix(2,3): 0, 0, 0,
+                                     0, 0, 0]
+end</pre><div class="function">build-matrix :: contract</div><p>Constructs a matrix of the given size, where entry <math>(i,j)</math> is the result of <tt class="pyretexpr">proc(i,j)</tt>.</p><pre>check:
+  build-matrix(2, 3, lam(i,j): i + j end) is [matrix(3,2): 0, 1, 1, 2, 2, 3]
+end</pre><h2 id="Matrix-Methods" toclevel="2" tocentry="yes">Matrix Methods</h2><p>These methods are available on all matrices.</p><div><tt>.get :: contract</tt></div><p>Returns the matrix’s entry in the <math>i^th</math> row and the <math>j^th</math> column.</p><pre>check:
+  [matrix(3,2): 1, 2, 3, 4, 5, 6].get(1,1) is 4
+  [matrix(3,2): 1, 2, 3, 4, 5, 6].get(2,0) is 5
+  [matrix(1,1): 1].get(2, 0) raises "Index out of bounds for matrix dimensions"
+end</pre><div><tt>.to-list :: contract</tt></div><p>Returns the matrix as a list of numbers in row-major order.</p><p>For example, given the matrix math-imtx:</p><pre>check:
+  [matrix(3,3): 2, 4, 6,
+                8, 10, 12,
+                14, 16, 18].to-list()
+    is [list: 2, 4, 6, 8, 10, 12, 14, 16, 18]
+end</pre><div><tt>.to-vector :: contract</tt></div><p>Returns a one-row/one-column matrix as a vector.</p><pre>check:
+  [matrix(2,1): 4, 5].to-vector() is [vector: 4, 5]
+  [matrix(1,2): 4, 5].to-vector() is [matrix(2,1): 4, 5].to-vector()
+  [matrix(2,2): 1, 2, 3, 4].to-vector()
+    raises "Cannot convert non-vector matrix to vector"
+end</pre><div><tt>.to-lists :: contract</tt></div><p>Returns the matrix as a list of lists of numbers, with each list corresponding to one row.</p><pre>check:
+  [matrix(2,3): 1, 2, 3, 4, 5, 6].to-lists()
+    is [list: [list: 1, 2, 3],
+              [list: 4, 5, 6]]
+end</pre><div><tt>.to-vectors :: contract</tt></div><p>Returns the matrix as a list of lists of numbers (i.e. a list of <tt class="pyretexpr">Vectormatrices</tt>s), with each list corresponding to one column.</p><p>For example, the matrix math-imtx corresponds to the vectors math-imtx, math-imtx, and math-imtx:</p><pre>check:
+  [matrix(2,3): 1, 2, 3, 4, 5, 6].to-vectors()
+    is [list: [vector: 1, 4],
+              [vector: 2, 5],
+              [vector: 3, 6]]
+end</pre><div><tt>.row :: contract</tt></div><p>Returns a one-row matrix with the matrix’s given row.</p><pre>check:
+  [matrix(2,3): 1, 2, 3, 4, 5, 6].row(2)
+    is [matrix(1,3): 4, 5, 6]
+
+  [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].row(3)
+    is [matrix(1,3): 7, 8, 9]
+end</pre><div><tt>.col :: contract</tt></div><p>Returns a one-column matrix with the matrix’s given column.</p><pre>check:
+  [matrix(2,3): 1, 2, 3, 4, 5, 6].col(2)
+    is [matrix(2,1): 2, 5]
+
+  [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].col(3)
+    is [matrix(3,1): 3, 6, 9]
+end</pre><div><tt>.submatrix :: contract</tt></div><p>Returns the submatrix of the matrix comprised of the intersection of the given list of rows and the given list of columns.</p><p>For example, if our list of rows is <math-in>\{1, 2\}</math-in> and our list of columns is <math-in>\{2, 3\}</math-in>, then the positions in the resulting submatrix will be the elements with <math-in>(row,col)</math-in> positions <math-in>\{(1, 2), (1, 3), (2, 2), (2, 3)\}</math-in>.</p><p><math-in>\left[\begin{matrix}             a_{11} &amp; a_{12} &amp; a_{13} \\             a_{21} &amp; a_{22} &amp; a_{23} \\             a_{31} &amp; a_{32} &amp; a_{33}             \end{matrix}\right]</math-in><tt class="pyretexpr">.submatrix([list: 1, 2], [list: 2, 3])</tt>                                      <math-in>= \left[\begin{matrix} a_{12} &amp; a_{13} \\ a_{22} &amp; a_{23}\end{matrix}\right]</math-in></p><p>This is shown in the below example:</p><pre>check:
+  [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].submatrix([list: 1, 2], [list: 2, 3])
+    is [matrix(2,2): 2, 3, 4, 5]
+end</pre><div><tt>.transpose :: contract</tt></div><p>Returns the transposition of the matrix. For example, <math-disp>\begin{bmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{bmatrix}       \overrightarrow{Transpose}       \begin{bmatrix}1 &amp; 4 \\ 2 &amp; 5 \\ 3 &amp; 6\end{bmatrix}</math-disp></p><pre>check:
+  [matrix(2,3): 1, 2, 3, 4, 5, 6].transpose()
+    is [matrix(3,2): 1, 4, 2, 5, 3, 6]
+end</pre><div><tt>.hermitian :: contract</tt></div><p>Computes the conjugate-transpose of this matrix.  Since Pyret does not have complex numbers, this is synonymous with pyret-method.</p><div><tt>.diagonal :: contract</tt></div><p>Returns a one-row matrix containing the matrix’s diagonal entries.</p><pre>check:
+  [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].diagonal()
+    is [matrix(1,3): 1, 5, 9]
+
+  [matrix(3,2): 1, 2, 3, 4, 5, 6].diagonal()
+    is [matrix(1,2): 1, 5]
+end</pre><div><tt>.upper-triangle :: contract</tt></div><p>Returns the <emph>upper triangle</emph> of the matrix, if the matrix is square.  This consists of all the values on or above the main diagonal, and zeroes below it. For example, the upper triangle of math-imtx would be math-imtx.</p><pre>check:
+  [matrix(2,2): 1, 2,
+                3, 4].upper-triangle()
+    is [matrix(2,2): 1, 2,
+                     0, 4]
+
+  [matrix(3,3): 1, 2, 3,
+                4, 5, 6,
+                7, 8, 9].upper-triangle()
+    is [matrix(3,3): 1, 2, 3,
+                     0, 5, 6,
+                     0, 0, 9]
+end</pre><div><tt>.lower-triangle :: contract</tt></div><p>Returns the <emph>lower triangle</emph> of the matrix, if the matrix is square.  This consists of all the values on or below the main diagonal, and zeroes above it. For example, the upper triangle of math-imtx would be math-imtx.</p><pre>check:
+  [matrix(2,2): 1, 2,
+                3, 4].lower-triangle()
+    is [matrix(2,2): 1, 0,
+                     3, 4]
+
+  [matrix(3,3): 1, 2, 3,
+                4, 5, 6,
+                7, 8, 9].lower-triangle()
+    is [matrix(3,3): 1, 0, 0,
+                     4, 5, 0,
+                     7, 8, 9]
+end</pre><div><tt>.row-list :: contract</tt></div><p>Returns the matrix as a list of one-row matrices. (Very similar to pyret-method, except this method returns a list of matrices instead.)</p><pre>check:
+  [matrix(2,3): 1, 2, 3, 4, 5, 6].row-list()
+    is [list: [matrix(1,3): 1, 2, 3],
+              [matrix(1,3): 4, 5, 6]]
+end</pre><div><tt>.col-list :: contract</tt></div><p>Returns the matrix as a list of one-column matrices. (Very similar to pyret-method, except this method returns a list of matrices instead.)</p><pre>check:
+  [matrix(2,3): 1, 2, 3, 4, 5, 6].col-list()
+    is [list: [matrix(2,1): 1, 4],
+              [matrix(2,1): 2, 5],
+              [matrix(2,1): 3, 6]]
+end</pre><div><tt>.map :: contract</tt></div><p>Maps the given function entrywise over the matrix.</p><pre>check:
+  multTwo = lam(x): x * 2 end
+  [matrix(2,2): 1, 2, 3, 4].map(multTwo)
+    is [matrix(2,2): 2, 4, 6, 8]
+end</pre><div><tt>.map2 :: contract</tt></div><p>Maps the given function entrywise over corresponding elements of this and the given matrix.</p><pre>check:
+  m1 = [matrix(2,2): 10, 20, 30, 40]
+  m2 = [matrix(2,2): 4, 3, 2, 1]
+  m1.map2(m2, num-expt)
+    is [matrix(2,2): num-expt(10, 4), num-expt(20, 3),
+                     num-expt(30, 2), num-expt(40, 1)]
+end</pre><div><tt>.row-map :: contract</tt></div><p>Maps the given function over each row in the matrix.</p><pre>check:
+  # sumRow :: 1*n matrix
+  # Computes the total sum of all entries in the given row
+  sumRow = lam(row): [matrix(1,1): row.to-vector().foldr(_ + _)] end
+  [matrix(2,3): 1, 2, 3, 4, 5, 6].row-map(sumRow) is [matrix(2,1): 6, 15]
+end</pre><div><tt>.col-map :: contract</tt></div><p>Maps the given function over each column in the matrix.</p><pre>check:
+  # sumCol :: m*1 matrix
+  # Computes the total sum of all entries in the given column
+  sumCol = lam(col): [matrix(1,1): col.to-vector().foldr(_ + _)] end
+  [matrix(2,3): 1, 2, 3, 4, 5, 6].col-map(sumCol) is [matrix(1,3): 5, 7, 9]
+end</pre><div><tt>.augment :: contract</tt></div><p>Returns the matrix augmented with the given matrix. For example, augmenting the matrix math-imtx with the matrix math-imtx yields the matrix math-imtx.</p><pre>check:
+  [matrix(2,2): 1, 2,
+                4, 5].augment([matrix(2,1): 3,
+                                            6])
+    is [matrix(2,3): 1, 2, 3,
+                     4, 5, 6]
+end</pre><div><tt>.stack :: contract</tt></div><p>Returns the matrix stacked on top of the given matrix. For example, stacking the matrix math-imtx on top of the matrix math-imtx gives the matrix math-imtx.</p><pre>check:
+  [matrix(1,3): 1, 2, 3].stack([matrix(1,3): 4, 5, 6])
+    is [matrix(2,3): 1, 2, 3,
+                     4, 5, 6]
+end</pre><div><tt>.trace :: contract</tt></div><p>Returns the trace of the matrix (i.e. the sum of its diagonal values).</p><pre>check:
+  [matrix(3,3): 1, 2, 3,
+                4, 5, 6,
+                7, 8, 9].trace() is (1 + 5 + 9)
+  [matrix(2,2): 2, 4,
+                6, 8].trace() is (2 + 8)
+end</pre><div><tt>.scale :: contract</tt></div><p>Multiplies each entry in the matrix by the given value.</p><pre>check:
+  [matrix(2,2): 1, 2, 3, 4].scale(2) is [matrix(2,2): 2, 4, 6, 8]
+
+  [matrix(2,2): 2, 4, 6, 8].scale(1/2) is [matrix(2,2): 1, 2, 3, 4]
+end</pre><div><tt>.dot :: contract</tt></div><p>Returns the Frobenius Product of the matrix with the given matrix (for 1-dimensional matrices, this is simply the dot product). This is done by multiplying the matrix with the transposition of <tt class="pyretexpr">other</tt> and taking the trace of the result. An example of this calculation (<math-in>\ast</math-in> denotes matrix multiplication):</p><p><math-in>\left(\left[\begin{smallmatrix}1 &amp; 2 &amp; 3\end{smallmatrix}\right] \ast\left[\begin{smallmatrix}4\\ 2\\ ^4/_3 \end{smallmatrix}\right]\right)</math-in><tt class="pyretexpr">.trace()</tt> <math-in>= \underbrace{\left[\begin{smallmatrix}(1\cdot 4)+(2\cdot 2)+(3\cdot \frac{4}{3})\end{smallmatrix}\right]}_{ 1\times 1 \text{ matrix}}</math-in><tt class="pyretexpr">.trace()</tt><math-in>=12</math-in></p><pre>check:
+  [matrix(1,3): 1, 2, 3].dot([matrix(1,3): 4, 2, 4/3]) is 12
+  [matrix(1,3): 1, 2, 3].dot([matrix(1,3): 1, 1, 1]) is 6
+end</pre><div><tt>.expt :: contract</tt></div><p>Multiplies the matrix by itself the given number of times.</p><pre>check:
+  a = [matrix(2,2): 1, 2, 3, 4]
+  a.expt(1) is a
+  a.expt(2) is a * a
+  a.expt(3) is a * a * a
+end</pre><div><tt>.determinant :: contract</tt></div><p>Returns the determinant of the matrix, calculated via a recursive implementation of Laplace expansion.</p><pre>check:
+  [matrix(5,5): 1, 2, 1, 2, 3,
+                2, 3, 1, 0, 1,
+                2, 2, 1, 0, 0,
+                1, 1, 1, 1, 1,
+                0,-2, 0,-2,-2].determinant() is -2
+end</pre><div><tt>.is-invertible :: contract</tt></div><p>Returns true if the matrix is invertible, that is, it has a nonzero determinant.</p><div><tt>.is-orthonormal :: contract</tt></div><p> Returns true if the matrix is <a href="https://en.wikipedia.org/wiki/Orthogonal_matrix">orthonormal</a>, meaning that all rows (when treated as vectors) each have pyret-method 1, are all distinct, and distinct rows pyret-method of zero.  Mathematically, this computes whether <math-in>self * self^T</math-in> is the identity matrix.  Since numerical inaccuracy is quite likely, this check is performed using <tt class="pyretexpr">roughly-equalequality</tt>.</p><div><tt>.rref :: contract</tt></div><p>Returns the Reduced Row Echelon Form of the matrix. For example: <math-disp>\begin{bmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{bmatrix}       \overrightarrow{RREF}       \begin{bmatrix}1 &amp; 0 &amp; -1\\ 0 &amp; 1 &amp; 2\end{bmatrix}</math-disp></p><pre>check:
+  [matrix(2,3): 1, 2, 3, 4, 5, 6].rref() is [matrix(2,3): 1, 0,-1, 0, 1, 2]
+end</pre><div><tt>.inverse :: contract</tt></div><p>Returns the inverse of the matrix, if it is invertible (found by augmenting the matrix with itself and finding the reduced-row echelon form). For example: <math-disp>\begin{bmatrix}1 &amp; 0 &amp; 4\\ 1 &amp; 1 &amp; 6\\ -3 &amp; 0 &amp; -10\end{bmatrix}^{-1}       = \begin{bmatrix}-5 &amp; 0 &amp; -2\\ -4 &amp; 1 &amp; -1\\ ^3/_2 &amp; 0 &amp; ^1/_2\end{bmatrix}</math-disp></p><pre>check:
+  [matrix(3,3): 1, 0, 4, 1, 1, 6, -3, 0, -10].inverse()
+    is [matrix(3,3): -5, 0, -2, -4, 1, -1, 3/2, 0, 1/2]
+end</pre><div><tt>.solve :: contract</tt></div><p>Returns the matrix which, when multiplied on the right of this matrix, results in the given matrix. In other words, this returns the solution to the system of equations represented by this and the given matrix. This method only works on invertible matrices (Calculated by inverting itself and multiplying the given matrix on the right side of this inverse).</p><div><tt>.least-squares-solve :: contract</tt></div><p>Returns the least squares solution for this and the given matrix, calculated using QR decomposition.</p><div><tt>.lu-decomposition :: contract</tt></div><p> Computes the <a href="https://en.wikipedia.org/wiki/LU_decomposition">LU decomposition</a> of this matrix, if possible.  This returns a pair of matrices, <tt class="pyretexpr">L</tt> and <tt class="pyretexpr">U</tt>, that are respectively <a href="UnDeFiNeD">lower-triangular</a> and <a href="UnDeFiNeD">upper-triangular</a>, and whose product is this matrix:</p><p><math-disp>\begin{bmatrix}   a_{11} &amp; a_{12} &amp; a_{13} \\   a_{21} &amp; a_{22} &amp; a_{23} \\   a_{31} &amp; a_{32} &amp; a_{33} \end{bmatrix} = \begin{bmatrix}   \ell_{11} &amp;         0 &amp; 0         \\   \ell_{21} &amp; \ell_{22} &amp; 0         \\   \ell_{31} &amp; \ell_{32} &amp; \ell_{33} \end{bmatrix} \begin{bmatrix}   u_{11} &amp; u_{12} &amp; u_{13} \\        0 &amp; u_{22} &amp; u_{23} \\        0 &amp;      0 &amp; u_{33} \end{bmatrix}</math-disp></p><div><tt>.lp-norm :: contract</tt></div><p>Computes the <math>L^p</math> norm of the matrix using the given number.</p><div><tt>.l1-norm :: contract</tt></div><div><tt>.l2-norm :: contract</tt></div><div><tt>.l-inf-norm :: contract</tt></div><p>Computes the <math>L^1</math>, <math>L^2</math>, and <math>L</math><superscript>∞</superscript> norms of the matrix, respectively.</p><pre>check:
+  a = [matrix(3,1): 1, 2, 3]
+  b = [matrix(3,3): 1, 0, 0, 2, 0, 0, 3, 0, 0]
+
+  a.lp-norm(3) is-roughly num-expt(35, 1/3)
+  b.lp-norm(3) is-roughly (b * a).lp-norm(3)
+
+  a.l1-norm()  is-roughly 6
+  a.l2-norm()  is-roughly num-sqrt(14)
+  a.l-inf-norm() is 3
+end</pre><div><tt>.qr-decomposition :: contract</tt></div><p>Returns the <a href="https://en.wikipedia.org/wiki/QR_decomposition">QR decomposition</a> of this matrix, if possible.  This returns a pair of matrices, <tt class="pyretexpr">Q</tt> and <tt class="pyretexpr">R</tt>, where <tt class="pyretexpr">Q</tt> is <a href="UnDeFiNeD">orthogonal</a> and <tt class="pyretexpr">R</tt> is <a href="UnDeFiNeD">upper-triangular</a>, whose product is this matrix.</p><div><tt>.gram-schmidt :: contract</tt></div><p>Returns an orthogonal matrix whose image is the same as the span of the matrix’s columns. (The same as the first result of pyret-method)</p><h2 id="s:matrix-binary-ops" toclevel="2" tocentry="yes"><tt class="pyretexpr">Matrix</tt> Binary Operations</h2><p>Matrices are defined to permit using addition, subtraction, and multiplication operators on them, whenever the dimensions are compatible:</p><pre>check:
+  [matrix(2,2): 1, 2, 3, 4] + [matrix(2,2): 1, 2, 3, 4]
+    is [matrix(2,2): 2, 4, 6, 8]
+
+  [matrix(2,2): 1, 2, 3, 4] + [matrix(4, 1): 1, 2, 3, 4]
+    raises "different sized matrices"
+end</pre><pre>check:
+  [matrix(2,2): 1, 2, 3, 4] - [matrix(2,2): 0, 2, 3, 3]
+    is [matrix(2,2): 1, 0, 0, 1]
+
+  [matrix(2,2): 1, 2, 3, 4] - [matrix(4, 1): 1, 2, 3, 4]
+    raises "different sized matrices"
+end</pre><pre>check:
+  [matrix(2,2): 1, 2, 3, 4] * [matrix(2,2): 3, 0, 0, 3]
+    is [matrix(2,2): 3, 6, 9, 12]
+end</pre><h2 id="Matrix-Functions" toclevel="2" tocentry="yes">Matrix Functions</h2><p>The following functions are available to be performed on matrices.</p><div class="function">mtx-get :: contract</div><p>Returns the matrix’s entry in the <math>i^th</math> row and the <math>j^th</math> column. See pyret-method.</p><div class="function">mtx-to-list :: contract</div><p>Returns the matrix as a list of numbers in row-major order.  See pyret-method.</p><div class="function">mtx-to-vector :: contract</div><p>Returns a one-row/one-column matrix as a vector.  See pyret-method.</p><div class="function">mtx-to-lists :: contract</div><p>Returns the matrix as a list of lists of numbers, with each list corresponding to one row.  See pyret-method.</p><div class="function">mtx-to-vectors :: contract</div><p>Returns the matrix as a list of lists of numbers (i.e. a list of <tt class="pyretexpr">Vectormatrices</tt>s), with each list corresponding to one column.  See pyret-method.</p><div class="function">mtx-row :: contract</div><p>Returns a one-row matrix with the matrix’s given row.  See pyret-method.</p><div class="function">mtx-col :: contract</div><p>Returns a one-column matrix with the matrix’s given column.  See pyret-method.</p><div class="function">mtx-submatrix :: contract</div><p>Returns the submatrix of the matrix comprised of the intersection of the given list of rows and the given list of columns.  See pyret-method.</p><div class="function">mtx-transpose :: contract</div><p>See pyret-method.</p><div class="function">mtx-hermitian :: contract</div><p>See pyret-method.</p><div class="function">mtx-diagonal :: contract</div><p>Returns a one-row matrix containing the matrix’s diagonal entries.  See pyret-method.</p><div class="function">mtx-upper-triangle :: contract</div><p>Returns the <emph>upper triangle</emph> of the matrix, if the matrix is square.  See pyret-method.</p><div class="function">mtx-lower-triangle :: contract</div><p>Returns the <emph>lower triangle</emph> of the matrix, if the matrix is square.  See pyret-method.</p><div class="function">mtx-row-list :: contract</div><p>Returns the matrix as a list of one-row matrices.  See pyret-method.</p><div class="function">mtx-col-list :: contract</div><p>Returns the matrix as a list of one-column matrices.  See pyret-method.</p><div class="function">mtx-map :: contract</div><p>Maps the given function entrywise over the matrix.  See pyret-method.</p><div class="function">mtx-map2 :: contract</div><p>Maps the given function over the corresponding entries of the two given matrices.  See pyret-method.</p><div class="function">mtx-row-map :: contract</div><p>Maps the given function over each row in the matrix.  See pyret-method.</p><div class="function">mtx-col-map :: contract</div><p>Maps the given function over each column in the matrix.  See pyret-method.</p><div class="function">mtx-augment :: contract</div><p>Returns the first matrix augmented with the second matrix. See pyret-method.</p><div class="function">mtx-stack :: contract</div><p>Returns the first matrix stacked on top of the second matrix. See pyret-method.</p><div class="function">mtx-trace :: contract</div><p>Returns the trace of the matrix (i.e. the sum of its diagonal values).  See pyret-method.</p><div class="function">mtx-scale :: contract</div><p>Multiplies each entry in the matrix by the given value.  See pyret-method.</p><div class="function">mtx-dot :: contract</div><p>Returns the Frobenius Product of the two matrices.  See pyret-method.</p><div class="function">mtx-expt :: contract</div><p>Multiplies the matrix by itself the given number of times.  See pyret-method.</p><div class="function">mtx-determinant :: contract</div><p>Returns the determinant of the matrix.  See pyret-method.</p><div class="function">mtx-is-invertible :: contract</div><p>Returns true if the matrix is invertible.  See pyret-method.</p><div class="function">mtx-is-orthonormal :: contract</div><p>Returns true if the matrix is orthonormal.  See pyret-method.</p><div class="function">mtx-rref :: contract</div><p>Returns the Reduced Row Echelon Form of the matrix. See pyret-method.</p><div class="function">mtx-inverse :: contract</div><p>Returns the inverse of the matrix, if it is invertible.  See pyret-method.</p><div class="function">mtx-solve :: contract</div><p>Returns the matrix which, when multiplied on the right of the first matrix, results in the second matrix.  See pyret-method.</p><div class="function">mtx-least-squares-solve :: contract</div><p>Returns the least squares solution for the first and the second matrix, calculated using QR decomposition.  See pyret-method.</p><div class="function">mtx-lp-norm :: contract</div><p>Computes the <math>L^p</math> norm of the matrix using the given number.  See pyret-method.</p><div class="function">mtx-l1-norm :: contract</div><div class="function">mtx-l2-norm :: contract</div><div class="function">mtx-l-inf-norm :: contract</div><p>Computes the <math>L^1</math>, <math>L^2</math>, and <math>L</math><superscript>∞</superscript> norms of the matrix, respectively.  See pyret-method.</p><div class="function">mtx-qr-decomposition :: contract</div><p>See pyret-method.</p><div class="function">mtx-gram-schmidt :: contract</div><p>See pyret-method.</p><div class="function">mtx-add :: contract</div><div class="function">mtx-sub :: contract</div><div class="function">mtx-mult :: contract</div><p>Adds, subtracts, or multiplies the two matrices.  See <a href="trove/matrices.html#s:matrix-binary-ops"><tt class="pyretexpr">Matrix</tt> Binary Operations</a>.</p><h2 id="Matrix-Conversion-Functions" toclevel="2" tocentry="yes">Matrix Conversion Functions</h2><div class="function">is-row-matrix :: contract</div><p>Returns whether the matrix has exactly one row:</p><pre>check:
+  is-row-matrix([matrix(1, 3): 10, 20, 10]) is true
+  is-row-matrix([matrix(3, 1): 10, 20, 10]) is false
+end</pre><div class="function">is-col-matrix :: contract</div><p>Returns whether the matrix has exactly one column:</p><pre>check:
+  is-row-matrix([matrix(1, 3): 10, 20, 10]) is false
+  is-row-matrix([matrix(3, 1): 10, 20, 10]) is true
+end</pre><div class="function">is-square-matrixReturns true if the given matrix has the same number of rows and columns. :: contract</div><pre>check:
+  is-square-matrix([matrix(2, 2): 10, 20, 30, 40]) is true
+  is-square-matrix([matrix(4, 1): 10, 20, 30, 40]) is false
+end</pre><div class="function">vector-to-matrixConverts the given vector into a one-row matrix. :: contract</div><div class="function">list-to-matrixConverts the given list of numbers into a matrix of the given size. :: contract</div><div class="function">list-to-row-matrixConverts the given list of numbers into a one-row matrix. :: contract</div><div class="function">list-to-col-matrixConverts the given list of numbers into a one-column matrix. :: contract</div><div class="function">lists-to-matrixConverts the given list of lists into a matrix, with each list as a row. :: contract</div><div class="function">vectors-to-matrixConverts the given list of vectors into a matrix, with each vector as a column. :: contract</div><div class="function">matrix-withinReturns a comparison predicate which returns true if each entry in both matrices is within <tt class="pyretexpr">delta</tt> of each other. :: contract</div></div></root>
+    <hr/>
+    The current page is trove/matrices.html.
+    The previous page is <a href = "../trove/math.html">../trove/math.html</a>.
+    The next page is <a href = "../trove/timing.html">../trove/timing.html</a>.
+    </div>
+  </body>
+</html>

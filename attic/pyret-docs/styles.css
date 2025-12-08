@@ -12,7 +12,8 @@ ul.toclist {
 
 .function {
   font-family: monospace;
-  background-color: #6bccdf;
+  /* background-color: #6bccdf; */
+  background-color: #ffeeee;
 }
 
 .margin-note {

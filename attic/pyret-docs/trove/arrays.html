@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <head>
+    <title>Untitled</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><div><h1 id="arrays" toclevel="1" tocentry="yes"></h1><h2 id="The-Array-Type" toclevel="2" tocentry="yes">The Array Type</h2><div><div class="function">Array&lt;&gt;</div><p>A <tt class="pyretexpr">array</tt> is a mutable, fixed-length collection indexed by non-negative intgers. Accessing and mutating a <tt class="pyretexpr">array</tt> takes constant time in the size of the array.</p><p>By default, Pyret users should use this library. If, however, you need a higher-performant but potentially less ergonomic array library, look at <a href="UnDeFiNeD"></a> instead, which is primarily reserved for internal use and for building other libraries. However, do not use that library unless you really cannot get what you need out of this one.</p><p>Because arrays are <emph>mutable</emph>, equality is not straightforward. Learn more at <a href="lang/equality.html#equality"></a>.</p></div><h2 id="Using-Arrays-in-Programs" toclevel="2" tocentry="yes">Using Arrays in Programs</h2><p>Some of the names provided for arrays inevitably overlap with those provided for other data. Therefore, using the <tt class="pyretexpr">include</tt> form is likely to cause name-clashes. It is wiser to import arrays using a prefix name and use the names below through that prefix.</p><pre>import arrays as A
+
+check:
+  a = A.array-of("a", 3)
+  a is=~ [A.array: "a", "a", "a"]
+  A.array-length(a) is 3
+end</pre><h2 id="Constructing-Arrays" toclevel="2" tocentry="yes">Constructing Arrays</h2><p>collection-doc</p><p>Constructs an <tt class="pyretexpr">Array</tt> with the given elements.</p><p>Note that <tt class="pyretexpr">Array</tt>s are mutable, so comparisons using <a href="lang/equality.html#eq-fun-equal-always">Equal Always</a> will only return <tt class="pyretexpr">true</tt> on <tt class="pyretexpr">Array</tt>s when they are also <a href="lang/equality.html#eq-fun-identical">Identical</a>, regardless of their contents. Usually, the most appropriate comparison is <a href="lang/equality.html#eq-fun-equal-now">Equal Now</a>. Tests should correspondingly use <tt class="pyretexpr">is=~testing</tt>.</p><pre>import arrays as A
+
+check:
+  a = [A.array: 1, 2, 3]
+
+  a is a
+  a is== a
+
+  [A.array: 1, 2, 3] is-not a
+  [A.array: 1, 2, 3] is-not [A.array: 1, 2, 3]
+  [A.array: 1, 2, 3] is-not== a
+
+  [A.array: 1, 2, 3] is=~ a
+  [A.array: 1, 2, 3] is=~ [A.array: 1, 2, 3]
+end</pre><div class="function">array-of :: <span>aNumber -&gt; <A-of>a</A-of></span></div><p>Constructs an <tt class="pyretexpr">Array</tt> of length <tt class="pyretexpr">count</tt>, where every element is the value given as <tt class="pyretexpr">value</tt>.</p><p>Note that <tt class="pyretexpr">value</tt> is not <emph>copied</emph>, so, the elements of <tt class="pyretexpr">Array</tt>s created with <tt class="pyretexpr">array-of</tt> will always be <a href="lang/equality.html#eq-fun-identical">Identical</a>.</p><p>To create an array of arrays where each sub-array is independent of the other, use <tt class="pyretexpr">build-array</tt>.</p><p>Similar to <tt class="pyretexpr">raw-array-ofraw-arrays</tt>.</p><pre>import arrays as A
+
+check:
+  arr = A.array-of(true, 2)
+  arr is=~ [A.array: true, true]
+  arr is-not [A.array: true, true]
+  A.array-get-now(arr, 0) is&lt;=&gt; A.array-get-now(arr, 1)
+
+  A.array-set-now(arr, 1, false)
+  arr is=~ [A.array: true, false]
+
+  arr-of-arrs = A.array-of(arr, 3)
+  arr-of-arrs is=~
+  [A.array:
+    [A.array: true, false], [A.array: true, false], [A.array: true, false]]
+
+  A.array-set-now(arr, 0, false)
+  arr-of-arrs is=~
+  [A.array:
+    [A.array: false, false], [A.array: false, false], [A.array: false, false]]
+end</pre><div class="function">build-array :: <span><span>Number -&gt; a</span>Number -&gt; <A-of>a</A-of></span></div><p>Constructs an array of length <tt class="pyretexpr">size</tt>, and fills it with the result of calling the function <tt class="pyretexpr">f</tt> with each index from <tt class="pyretexpr">0</tt> to <tt class="pyretexpr">size - 1</tt>.</p><p>Similar to <tt class="pyretexpr">build-listlists</tt> and <tt class="pyretexpr">raw-array-buildraw-arrays</tt>.</p><pre>import arrays as A
+
+check:
+  fun sq(x): x * x end
+  A.build-array(sq, 4) is=~ [A.array: sq(0), sq(1), sq(2), sq(3)]
+end
+
+check:
+  fun build(n :: Number) -&gt; Array&lt;String&gt;:
+    A.array-of("_", 3)
+  end
+  a = A.build-array(build, 3)
+
+  a is=~ [A.array:
+    [A.array: "_", "_", "_"],
+    [A.array: "_", "_", "_"],
+    [A.array: "_", "_", "_"]]
+
+  a.get-now(0).set-now(0, "X")
+  a.get-now(1).set-now(1, "O")
+
+  a is=~ [A.array:
+    [A.array: "X", "_", "_"],
+    [A.array: "_", "O", "_"],
+    [A.array: "_", "_", "_"]]
+end</pre><div class="function">array-from-list :: <span>List&lt;a&gt; -&gt; <A-of>a</A-of></span></div><p>Converts a <tt class="pyretexpr">Listlists</tt> to an <tt class="pyretexpr">Array</tt> containing the same elements in the same order.</p><p>Similar to <tt class="pyretexpr">raw-array-from-listraw-arrays</tt>.</p><pre>import arrays as A
+import lists as L
+
+check:
+  A.array-from-list([L.list: 1, 2, 3]) is=~ [A.array: 1, 2, 3]
+end</pre><h2 id="Array-Methods" toclevel="2" tocentry="yes">Array Methods</h2><div><tt>.get-now :: <span><A-of>a</A-of>Number -&gt; a</span></tt></div><p>Returns the value at the given <tt class="pyretexpr">index</tt>.</p><p>This method has a <tt class="pyretexpr">-now</tt> suffix because its answer can change from one call to the next if, for example, pyret-method is used.</p><p>Using an index too large, negative, or not a whole number raises an error.</p><p>Similar to <tt class="pyretexpr">getlists</tt> and <tt class="pyretexpr">raw-array-getraw-arrays</tt>.</p><pre>import arrays as A
+
+check:
+  a = [A.array: "a", "b", "c"]
+  a.get-now(0) is "a"
+  a.get-now(1) is "b"
+
+  a.get-now(4) raises "index"
+  a.get-now(-1) raises "index"
+  a.get-now(1.2) raises "index"
+end</pre><div><tt>.set-now :: <span><A-of>a</A-of>Numbera -&gt; Nothing</span></tt></div><p>Updates the value at the given <tt class="pyretexpr">index</tt>, returning <tt class="pyretexpr">Nothing&lt;global&gt;</tt>.</p><p>The update is stateful, so all references to the array see the update.  Hence the <tt class="pyretexpr">-now</tt> suffix; in the example below, calling <tt class="pyretexpr">a.get-now()</tt> at two different points in the program produces two different results.</p><p>Using an index too large, negative, or not a whole number raises an error.</p><p>Similar to <tt class="pyretexpr">raw-array-setraw-arrays</tt>.</p><pre>import arrays as A
+
+check:
+  a = [A.array: "a", "b", "c"]
+  a.get-now(0) is "a"
+
+  a.set-now(0, "d")
+  a.get-now(0) is "d"
+
+  b = a
+  a.set-now(0, "f")
+  a is=~ [A.array: "f", "b", "c"]
+  b is=~ [A.array: "f", "b", "c"]
+
+  c = b.set-now(0, 'z')
+  c is nothing
+
+  b.set-now(4, "hi") raises "index"
+end</pre><div><tt>.length :: <span><A-of>a</A-of> -&gt; Number</span></tt></div><p>Returns the length of the array.  The length of an array is set when it is created and cannot be changed.</p><p>Similar to <tt class="pyretexpr">lengthlists</tt> and <tt class="pyretexpr">raw-array-lengthraw-arrays</tt>.</p><pre>import arrays as A
+
+check:
+  a = [A.array: "a", "b"]
+  a.length() is 2
+  b = [A.array: ]
+  b.length() is 0
+end</pre><div><tt>.filter :: <span><A-of>a</A-of><span>a -&gt; Boolean</span> -&gt; <A-of>a</A-of></span></tt></div><p>  Applies function <tt class="pyretexpr">f</tt> to each element of <tt class="pyretexpr">self</tt> from left to right,   constructing a new <tt class="pyretexpr">Array</tt> out of the elements for which <tt class="pyretexpr">f</tt>   returned <tt class="pyretexpr">true</tt>.</p><p>Similar to <tt class="pyretexpr">filterlists</tt> and <tt class="pyretexpr">raw-array-filterraw-arrays</tt>.</p><p>  </p><pre>import arrays as A
+
+check:
+  a = [A.array: "apple", "banana", "plum"]
+  p-words = a.filter({(s): string-contains(s, "p")})
+  p-words is=~ [A.array: "apple", "plum"]
+end</pre><div><tt>.map :: <span><A-of>a</A-of><span>a -&gt; b</span> -&gt; <A-of>b</A-of></span></tt></div><p>Applies function <tt class="pyretexpr">f</tt> to each element of the arrays from left to right, and constructs a new <tt class="pyretexpr">Array</tt> out of the return values in the corresponding order. The original array remains unchanged.</p><p><tt class="pyretexpr">a</tt> represents the type of the elements in the original <tt class="pyretexpr">Array</tt>, <tt class="pyretexpr">b</tt> is the type of the elements in the new <tt class="pyretexpr">Array</tt>.</p><p>Similar to <tt class="pyretexpr">maplists</tt> and <tt class="pyretexpr">raw-array-mapraw-arrays</tt>.</p><p>  </p><pre>import arrays as A
+
+check:
+  a = [A.array: "apple", "banana", "plum"]
+  lengths = a.map(string-length)
+  lengths is=~ [A.array: 5, 6, 4]
+  a is=~ [A.array: "apple", "banana", "plum"]
+end</pre><div><tt>.fold :: <span><A-of>a</A-of><span>baNumber -&gt; b</span>bNumber -&gt; b</span></tt></div><p>Combines the elements in the array with a function that accumulates each element with an intermediate result. Has an argument order that works with <tt class="pyretexpr">for</tt>. The numeric argument to the accumulator is the index of the current element.</p><p>Similar to <tt class="pyretexpr">foldlists</tt> and <tt class="pyretexpr">raw-array-foldraw-arrays</tt>.</p><p>  </p><pre>import arrays as A
+
+fun sum-even-minus-odd(a :: Array&lt;Number&gt;):
+  fun is-even(n): (n / 2) == num-floor(n / 2) end
+
+  fun sum-ith(sum-so-far :: Number, new-n :: Number, idx :: Number):
+    if is-even(idx):
+      sum-so-far + new-n
+    else:
+      sum-so-far - new-n
+    end
+  end
+
+  a.fold(sum-ith, 0, 0)
+end
+
+check:
+  sum-even-minus-odd([A.array: ]) is 0
+  sum-even-minus-odd([A.array: 1]) is 1
+  sum-even-minus-odd([A.array: 1, 2])
+    is -1 because (1 - 2)
+  sum-even-minus-odd([A.array: 1, 2, 3])
+    is 2 because (1 + 3) - 2
+  sum-even-minus-odd([A.array: 1, 2, 3, 4])
+    is -2 because ((1 + 3) - (2 + 4))
+end</pre><div><tt>.concat :: <span><A-of>a</A-of><A-of>a</A-of> -&gt; <A-of>a</A-of></span></tt></div><p>  Creates a new array with all the elements of the current array   followed by all the elements of <tt class="pyretexpr">other</tt>.</p><p>Similar to <tt class="pyretexpr">appendlists</tt> and <tt class="pyretexpr">raw-array-concatraw-arrays</tt>.</p><pre>import arrays as A
+
+check:
+  a = [A.array: "To", "be", "or"]
+  a.concat([A.array: "not", "to", "be"])
+    is=~ [A.array: "To", "be", "or", "not", "to", "be"]
+
+  a is=~ [A.array: "To", "be", "or"]
+
+  a is-not=~ [A.array: "To", "be", "or", "not", "to", "be"]
+end
+</pre><div><tt>.duplicate :: <span> -&gt; <A-of>a</A-of></span></tt></div><p>  Returns a copy of the given array, such that corresponding elements in the   result are <a href="lang/equality.html#eq-fun-identical">Identical</a> to those in the source array.</p><p>Similar to <tt class="pyretexpr">raw-array-duplicateraw-arrays</tt>.</p><pre>import arrays as A
+
+data Person: p(ref name :: String, ref age :: Number) end
+
+check:
+  ps1 = [A.array: p("Alice", 30), p("Bob", 40)]
+
+  ps2 = ps1.duplicate()
+
+  ps2.get-now(0) is ps1.get-now(0)
+
+  ps2.get-now(1)!{age: 57}
+  ps1.get-now(1)!age is 57
+end
+</pre><div><tt>.sort-nums :: <span><A-of>a</A-of> -&gt; Boolean</span></tt></div><p>  Sorts the given array <emph>in-place</emph> in ascending or descending order   according to the <tt class="pyretexpr">asc</tt> parameter. Returns a reference to the   original array, which will have its contents mutably updated.</p><p>Similar to <tt class="pyretexpr">raw-array-sort-numsraw-arrays</tt>.</p><pre>import arrays as A
+
+check:
+  a = [A.array: 3, 1, 4, 1, 5, 9, 2]
+
+  asc = a.sort-nums(true)
+  asc is&lt;=&gt; a
+  a is=~ [A.array: 1, 1, 2, 3, 4, 5, 9]
+
+  a.sort-nums(false)
+  a is=~ [A.array: 9, 5, 4, 3, 2, 1, 1]
+end</pre><div><tt>.sort-by :: <span><A-of>a</A-of><span>a -&gt; Number</span> -&gt; Boolean</span></tt></div><p>  Creates a new array containing the sorted contents of the given array. The sort   order is determined by calling the <tt class="pyretexpr">key</tt> function on each element to   get a number, and sorting the elements by their key value (in increasing key   order if <tt class="pyretexpr">asc</tt> is <tt class="pyretexpr">true</tt>, decreasing if <tt class="pyretexpr">false</tt>). Ties are   broken by the order in which the element is present in the initial array.</p><p>Similar to <tt class="pyretexpr">raw-array-sort-byraw-arrays</tt>.</p><pre>import arrays as A
+
+check:
+  a = [A.array: "let", "us", "go", "then", "you", "and", "i"]
+
+  asc = a.sort-by(string-length, true)
+  asc is=~ [A.array: "i", "us", "go", "let", "you", "and", "then"]
+  asc is-not=~ a
+
+  desc = a.sort-by(string-length, false)
+  desc is=~ [A.array: "then", "let", "you", "and", "us", "go", "i"]
+
+  a is=~ [A.array: "let", "us", "go", "then", "you", "and", "i"]
+end</pre><div><tt>.to-list-now :: <span><A-of>a</A-of> -&gt; List&lt;a&gt;</span></tt></div><p>    Converts a <tt class="pyretexpr">Array</tt> to a <tt class="pyretexpr">Listlists</tt> containing     the same elements in the same order. This method has a <tt class="pyretexpr">-now</tt> suffix because its answer can change from one call to the next if, for example, pyret-method is subsequently used.</p><p>    Note that it does <emph>not</emph> recursively convert <tt class="pyretexpr">Array</tt>s;     only the top-level is converted.</p><p>Similar to <tt class="pyretexpr">raw-array-to-listraw-arrays</tt>.</p><pre>import arrays as A
+import lists as L
+
+check:
+  a = [A.array: 1, 2, 3]
+  a.to-list-now() is [L.list: 1, 2, 3]
+
+  a2 = array-of([A.array: ], 3)
+  a2.to-list-now() is=~ [L.list: [A.array: ], [A.array: ], [A.array: ]]
+  a2.to-list-now() is-not=~ [L.list: [L.list: ], [L.list: ], [L.list: ]]
+
+  a.set-now(0, 5)
+  a.to-list-now() is [L.list: 5, 2, 3]
+end</pre><h2 id="Array-Functions" toclevel="2" tocentry="yes">Array Functions</h2><div class="function">array-get-now :: <span><A-of>a</A-of>Number -&gt; a</span></div><p>Equivalent to <tt class="pyretexpr">array</tt>pyret-method<tt class="pyretexpr">(index)</tt>.</p><pre>import arrays as A
+
+check:
+  a = [A.array: 0, 1, 2]
+  A.array-get-now(a, 1) is 1
+end</pre><div class="function">array-set-now :: <span><A-of>a</A-of>Numbera -&gt; <A-of>a</A-of></span></div><p>Equivalent to <tt class="pyretexpr">array</tt>pyret-method<tt class="pyretexpr">(index, value)</tt>.</p><pre>import arrays as A
+
+check:
+  a = A.array-of("a", 3)
+  a is=~ [A.array: "a", "a", "a"]
+
+  A.array-set-now(a, 1, "b")
+  a is=~ [A.array: "a", "b", "a"]
+end</pre><div class="function">array-length :: <span><A-of>a</A-of> -&gt; Number</span></div><p>Equivalent to <tt class="pyretexpr">array</tt>pyret-method<tt class="pyretexpr">()</tt>.</p><pre>import arrays as A
+
+check:
+  a = A.array-of("a", 3)
+  a is=~ [A.array: "a", "a", "a"]
+  A.array-length(a) is 3
+end</pre><div class="function">array-filter :: <span><span>a -&gt; Boolean</span> -&gt; <A-of>a</A-of></span></div><p>Equivalent to <tt class="pyretexpr">array</tt>pyret-method<tt class="pyretexpr">(f)</tt>, with an argument order designed for <tt class="pyretexpr">for</tt>.</p><div class="function">array-map :: <span><span>a -&gt; b</span> -&gt; <A-of>a</A-of></span></div><p>Equivalent to <tt class="pyretexpr">array</tt>pyret-method<tt class="pyretexpr">(f)</tt>, with an argument order designed for <tt class="pyretexpr">for</tt>.</p><div class="function">array-fold :: <span><span>ba -&gt; Number</span>b<A-of>a</A-of> -&gt; Number</span></div><p>Equivalent to <tt class="pyretexpr">array</tt>pyret-method<tt class="pyretexpr">(f, init, start-index)</tt>, with an argument order designed for <tt class="pyretexpr">for</tt>.</p><div class="function">array-concat :: <span><A-of>a</A-of> -&gt; <A-of>a</A-of></span></div><p>Equivalent to <tt class="pyretexpr">array1</tt>pyret-method<tt class="pyretexpr">(array2)</tt>.</p><div class="function">array-duplicate :: <span> -&gt; <A-of>a</A-of></span></div><p>Equivalent to <tt class="pyretexpr">array</tt>pyret-method<tt class="pyretexpr">()</tt>.</p><div class="function">array-sort-nums :: <span><A-of>a</A-of> -&gt; Boolean</span></div><p>Equivalent to <tt class="pyretexpr">array</tt>pyret-method<tt class="pyretexpr">(asc)</tt>.</p><pre>import arrays as A
+
+check:
+  a = [A.array: 3, 1, 4, 1, 5, 9, 2]
+
+  asc = A.array-sort-nums(a, true)
+  asc is&lt;=&gt; a
+  a is=~ [A.array: 1, 1, 2, 3, 4, 5, 9]
+
+  A.array-sort-nums(a, false)
+  a is=~ [A.array: 9, 5, 4, 3, 2, 1, 1]
+end</pre><div class="function">array-sort-by :: <span><A-of>a</A-of><span>a -&gt; Number</span> -&gt; Boolean</span></div><p>Equivalent to <tt class="pyretexpr">array</tt>pyret-method<tt class="pyretexpr">(key, asc)</tt>.</p><pre>import arrays as A
+
+check:
+  a = [A.array: "let", "us", "go", "then", "you", "and", "i"]
+
+  asc = A.array-sort-by(a, string-length, true)
+  asc is=~ [A.array: "i", "us", "go", "let", "you", "and", "then"]
+  asc is-not=~ a
+
+  desc = A.array-sort-by(a, string-length, false)
+  desc is=~ [A.array: "then", "let", "you", "and", "us", "go", "i"]
+
+  a is=~ [A.array: "let", "us", "go", "then", "you", "and", "i"]
+end</pre><div class="function">array-to-list-now :: <span><A-of>a</A-of> -&gt; List&lt;a&gt;</span></div><p>Equivalent to <tt class="pyretexpr">array</tt>pyret-method<tt class="pyretexpr">()</tt>.</p><pre>import arrays as A
+import lists as L
+
+check:
+  a = A.array-of("a", 3)
+  a is=~ [A.array: "a", "a", "a"]
+
+  A.array-set-now(a, 1, "b")
+  a is=~ [A.array: "a", "b", "a"]
+
+  l = A.array-to-list-now(a)
+  l is [L.list: "a", "b", "a"]
+end</pre></div></root>
+    <hr/>
+    The current page is trove/arrays.html.
+    The previous page is <a href = "../trove/sets.html">../trove/sets.html</a>.
+    The next page is <a href = "../trove/string-dict.html">../trove/string-dict.html</a>.
+    </div>
+  </body>
+</html>

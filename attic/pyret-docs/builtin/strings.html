@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <head>
+    <title>Strings</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><div><h1 id="strings" toclevel="1" tocentry="yes">Strings</h1><div><div class="function">String</div><p>The type of string values.</p></div><p>A <tt class="pyretexpr">String</tt> is a fixed-length array of characters.  This includes not only letters in the Latin alphabet and numerals, but any Unicode character, including languages using non-Latin characters, such as Arabic, Russian or Chinese, as well as emoji defined in the Unicode specification.</p><p><img src="src/builtin/valid-string.png"/></p><p><margin-note>If you click on printed strings in the interactive window, the display will toggle between the character itself and the relevant Unicode escape code or codes.</margin-note></p><p><img src="src/builtin/codes.png"/></p><p>Internally, a Pyret <tt class="pyretexpr">String</tt> is implemented as a JavaScript <tt class="pyretexpr">JSString</tt>.  See the <a href="internals/runtime.html#runtime"></a> for more context.</p><p><margin-note>One implication of how JavaScript handles Unicode characters is that characters that are identified by a Unicode code point greater than 65535 are sometimes treated as two characters by Pyret, as noted below.</margin-note></p><h2 id="String-Functions" toclevel="2" tocentry="yes">String Functions</h2><p>  </p><div class="function">string-equal :: <span>StringString -&gt; Boolean</span></div><p>Returns <tt class="pyretexpr">true</tt> if the two strings are equal.</p><pre>check:
+  string-equal("abc", "abc") is true
+  "abc" is%(string-equal) "abc"
+  "abc" == "abc" is true
+  string-equal("ab", "abc") is false
+  string-equal("abc     ", "abc") is false
+end</pre><p>  </p><div class="function">string-contains :: <span>StringString -&gt; Boolean</span></div><p>Returns <tt class="pyretexpr">true</tt> if <tt class="pyretexpr">string-to-find</tt> is contained in <tt class="pyretexpr">string-to-search</tt>.  Returns <tt class="pyretexpr">true</tt> if an empty string is passed as <tt class="pyretexpr">string-to-find</tt>.</p><pre>check:
+  string-contains("Ahoy, world!", "world") is true
+  string-contains("Ahoy, World!", "world") is false
+  string-contains("world", "Ahoy world") is false
+  string-contains("same string", "same string") is true
+  string-contains("", "") is true
+  string-contains("any string", "") is true
+end</pre><p>  </p><div class="function">string-find :: <span>String -&gt; String</span></div><p>Return the left-most index (starting from <tt class="pyretexpr">0</tt>) where the second argument is found in the first string.</p><p>If the string is not found, this raises an exception. Therefore, use this function only when you expect the second argument to be found in the first one. If you aren’t sure, use <tt class="pyretexpr">string-find-opt</tt>.</p><pre>check:
+  string-find("Hello", "ello") is 1
+  string-find("Hello", "H") is 0
+  string-find("Hello", "World") raises ""
+end</pre><p>  </p><div class="function">string-find-opt :: <span>String -&gt; String</span></div><p>Return the left-most index (starting from <tt class="pyretexpr">0</tt>) where the second argument is found in the first string.</p><p>This always returns an <tt class="pyretexpr">Option</tt> value. Therefore, this is useful when you aren’t sure whether the second argument will be found in the first or not. If you are confident it will be present, consider using <tt class="pyretexpr">string-find</tt>, which returns the number that you can directly use.</p><pre>check:
+  string-find("Hello", "ello") is some(1)
+  string-find("Hello", "H") is some(0)
+  string-find("Hello", "World") is none
+end</pre><p>  </p><div class="function">string-append :: <span>StringString -&gt; String</span></div><p>Returns a <tt class="pyretexpr">String</tt> where <tt class="pyretexpr">back</tt> is added to the right of <tt class="pyretexpr">front</tt>.</p><pre>check:
+  string-append("a", "b") is "ab"
+  string-append("same", "same") is "samesame"
+  string-append("", "") is ""
+  string-append("", "a") is "a"
+  string-append("a", "") is "a"
+end</pre><div><div class="function">front + back</div></div><p>When <tt class="pyretexpr">front</tt> and <tt class="pyretexpr">back</tt> are strings, has the same meaning as <tt class="pyretexpr">string-append</tt>.</p><p>  </p><div class="function">string-length :: <span>String -&gt; Number</span></div><p>Returns the number of characters in the string.</p><p><margin-note><tt class="pyretexpr">string-length</tt> reports a count of <tt class="pyretexpr">2</tt> for code points over 65535.</margin-note></p><pre>check:
+  string-length("") is 0
+  string-length("    ") is 4
+  string-length("four") is 4
+  string-length("🏏") is 2
+end</pre><p>  </p><div class="function">string-to-number :: <span>String -&gt; Number</span></div><p>Converts the argument string to a number, returning <tt class="pyretexpr">noneoption</tt> if it is not a valid numeric string, and <tt class="pyretexpr">someoption</tt> number if it is.</p><p><tt class="pyretexpr">string-to-number</tt> is strict about its inputs, and recognizes exactly the same numbers that Pyret itself does: no surrounding whitespace, extra punctuation, or trailing characters are allowed.</p><pre>check:
+  string-to-number("100") is some(100)
+  string-to-number("not-a-number") is none
+  string-to-number(" 100") is none
+  string-to-number("100abc") is none
+  string-to-number("1,000") is none
+  string-to-number("1-800-555-1212") is none
+end</pre><p>  </p><div class="function">string-repeat :: <span>StringNumber -&gt; String</span></div><pre>check:
+  string-repeat("a", 5) is "aaaaa"
+  string-repeat("", 1000000) is ""
+  string-repeat("word ", 3) is "word word word "
+  string-repeat("long string", 0) is ""
+end</pre><p>  </p><div class="function">string-substring :: <span>StringNumberNumber -&gt; String</span></div><p>Returns a new string created from the characters of the input string, starting from <tt class="pyretexpr">start-index</tt> (inclusive) and ending at <tt class="pyretexpr">end-index</tt> (exclusive). Raises an exception if <tt class="pyretexpr">start-index</tt> is greater than <tt class="pyretexpr">end-index</tt>, if <tt class="pyretexpr">start-index</tt> is greater than the length of the string, or if <tt class="pyretexpr">end-index</tt> is less than 0.</p><p>The returned string always has length <tt class="pyretexpr">end-index</tt> - <tt class="pyretexpr">start-index</tt>.</p><p><margin-note><tt class="pyretexpr">String</tt> indexes are counted starting from zero for the first character.</margin-note></p><pre>check:
+  string-substring("just the first", 0, 1) is "j"
+  string-substring("same index", 4, 4) is ""
+
+  tws = "length is 12"
+  string-substring(tws, 4, 6) is "th"
+  string-substring(tws, string-length(tws) - 1, string-length(tws)) is "2"
+  string-substring(tws, 6, 4) raises "index"
+  string-substring(tws, 6, 13) raises "index"
+  string-substring(tws, 13, 6) raises "index"
+  string-substring(tws, -1, 10) raises "index"
+end</pre><p>  </p><div class="function">string-index-of :: <span>StringString -&gt; Number</span></div><p>  Returns the index from the beginning of the string where   <tt class="pyretexpr">string-to-find</tt> <emph>first</emph> appears, or <tt class="pyretexpr">-1</tt> if the string   isn’t found.</p><pre>check:
+  string-index-of("Pyret", "P") is 0
+  string-index-of("012🤑45", "🤑") is 3
+  string-index-of("🤔🤔🤔", "🤒") is -1
+end</pre><p>  </p><div class="function">string-replace :: <span>StringStringString -&gt; String</span></div><p>Returns a string where each instance of <tt class="pyretexpr">string-to-find</tt> in the <tt class="pyretexpr">original-string</tt> is replaced by <tt class="pyretexpr">replacement-string</tt>.</p><p>If the string to find is empty <tt class="pyretexpr">“”</tt>, the <tt class="pyretexpr">replacement-string</tt> will be added between characters but not at the beginning or end of the string.</p><pre>check:
+  string-replace("spaces to hyphens", " ", "-") is "spaces-to-hyphens"
+  string-replace("remove: the: colons", ":", "") is "remove the colons"
+  string-replace("😊😊🤕😊", "🤕", "😊") is "😊😊😊😊"
+  string-replace("rinky dinky", "inky", "azzle") is "razzle dazzle"
+  string-replace("a string", "not found", "not replaced") is "a string"
+  string-replace("", "", "c") is ""
+  string-replace("aaa", "", "b") is "ababa"
+end</pre><p>  </p><div class="function">string-split :: <span>StringString -&gt; List&lt;String&gt;</span></div><p>  Searches for <tt class="pyretexpr">string-to-split-on</tt> in <tt class="pyretexpr">original-string</tt>.  If it is not found,   returns a <tt class="pyretexpr">Listlists</tt> containing <tt class="pyretexpr">original-string</tt> as its   single element.</p><p>  If it is found, it returns a two-element <tt class="pyretexpr">Listlists</tt>, whose   first element is the portion of the string before <emph>first</emph> occurence of   <tt class="pyretexpr">string-to-split-on</tt>.  The second element contains the portion of the string   after.  The <tt class="pyretexpr">string-to-split-on</tt> is <bold>not</bold> included in either string.  The   string before and the string after might be empty.</p><p>  For splitting beyond the first occurence of the string, see   <tt class="pyretexpr">string-split-all</tt>.</p><pre>check:
+  string-split("string", "not found") is [list: "string"]
+  string-split("string", "g") is [list: "strin", ""]
+  string-split("string", "") is [list: "", "string"]
+  string-split("a-b-c", "-") is [list: "a", "b-c"]
+end</pre><p>  </p><div class="function">string-split-all :: <span>String -&gt; String</span></div><p>  Searches for <tt class="pyretexpr">string-to-split-on</tt> in <tt class="pyretexpr">original-string</tt>.  If it is not found,   returns a <tt class="pyretexpr">Listlists</tt> containing <tt class="pyretexpr">original-string</tt> as its   single element.</p><p>  If it is found, it returns a <tt class="pyretexpr">Listlists</tt>, whose elements are   the portions of the string that appear in between occurences of   <tt class="pyretexpr">string-to-split-on</tt>.  A match at the beginning or end of the string will add   an empty string to the beginning or end of the list, respectively.  The empty   string matches in between every pair of characters.</p><pre>check:
+  string-split-all("string", "not found") is [list: "string"]
+  string-split-all("a-b-c", "-") is [list: "a", "b", "c"]
+  string-split-all("split on spaces", " ") is [list: "split", "on", "spaces"]
+  string-split-all("explode", "") is [list: "e", "x", "p", "l", "o", "d", "e"]
+  string-split-all("bananarama", "na") is [list: "ba", "", "rama"]
+  string-split-all("bananarama", "a") is [list: "b", "n", "n", "r", "m", ""]
+end</pre><p>  </p><div class="function">string-explode :: <span>String -&gt; List&lt;String&gt;</span></div><p>  A shorthand for <tt class="pyretexpr">string-split-all(s, “”)</tt>.</p><p>  </p><div class="function">string-char-at :: <span>StringNumber -&gt; String</span></div><p>Returns a <tt class="pyretexpr">String</tt> containing the character at the string index <tt class="pyretexpr">n</tt> from <tt class="pyretexpr">String</tt> <tt class="pyretexpr">n</tt>.</p><pre>check:
+  string-char-at("abc", 1) is "b"
+  string-char-at("a", 0) is "a"
+end</pre><p>  </p><div class="function">string-toupper :: <span>String -&gt; String</span></div><p>  The same as <tt class="pyretexpr">string-to-upper</tt>.</p><p>  </p><div class="function">string-to-upper :: <span>String -&gt; String</span></div><p><margin-note>Pyret uses JavaScript’s built-in string operations, and so will have the same behavior as <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase">toUpperCase</a>.</margin-note> Convert a string to all uppercase characters.  Punctuation and other characters without an uppercase equivalent are left alone.  Note that because of characters like <tt class="pyretexpr">ß</tt>, the length of the input is not guaranteed to match the length of the output.</p><pre>check:
+  string-to-upper("a") is "A"
+  string-to-upper("I'm not yelling!") is "I'M NOT YELLING!"
+  string-to-upper("ß") is "SS"
+  string-to-upper("λαμβδα") is "ΛΑΜΒΔΑ"
+  string-to-upper("😊") is "😊"
+  string-to-upper(" ﷵ‎") is " ﷵ‎"
+end</pre><p>When performing case-insensitive comparisons, it can be useful to convert both strings to uppercase first:</p><pre>check:
+  string-to-upper("E.E. Cummings") is string-to-upper("e.e. cummings")
+end</pre><p>  </p><div class="function">string-tolower :: <span>String -&gt; String</span></div><p>  The same as <tt class="pyretexpr">string-to-lower</tt>.</p><p>  </p><div class="function">string-to-lower :: <span>String -&gt; String</span></div><p>Converts a <tt class="pyretexpr">String</tt> to all lower case.</p><pre>check:
+  string-to-lower("A") is "a"
+  string-to-lower("I'M NOT YELLING!") is "i'm not yelling!"
+  string-to-lower("SS") is "ss"
+  string-to-lower("ΛΑΜΒΔΑ") is "λαμβδα"
+end</pre><p>  </p><div class="function">string-to-code-point :: <span>String -&gt; Number</span></div><p>  <note>For strings that contain a single character whose code point is greater than <tt class="pyretexpr">65535</tt>, this function raises an error. To get multiple codes at once for a longer string (or a string with larger code points), use <tt class="pyretexpr">string-to-code-points</tt>.</note></p><p>  Converts <tt class="pyretexpr">s</tt>, which must be a single-character <tt class="pyretexpr">String</tt>, to a character   code–a <tt class="pyretexpr">Number</tt> corresponding to its Unicode code point   (<url>http://en.wikipedia.org/wiki/Code_point</url>).</p><p>  </p><pre>check:
+  string-to-code-point("a") is 97
+  string-to-code-point("\n") is 10
+  string-to-code-point("λ") is 955
+end</pre><p>  </p><div class="function">string-to-code-points :: <span>String -&gt; List&lt;Number&gt;</span></div><p>  Converts the string (of any length) to a list of code points.  Note that   strings are encoded in such a way that some characters correspond to two code   points (see the note in <tt class="pyretexpr">string-to-code-point</tt>).</p><pre>check:
+  string-to-code-points("") is [list:]
+  string-to-code-points("abc") is [list: 97, 98, 99]
+  string-to-code-points("😊") is [list: 55357, 56842]
+  string-to-code-points("𝄞") is [list: 55348, 56606]
+end</pre><p>  </p><div class="function">string-from-code-point :: <span>Number -&gt; String</span></div><p>  <note>Code points greater than 65535 are not supported.  You must encode higher code points with a <a href="http://en.wikipedia.org/wiki/UTF-16">surrogate pair</a> in combination with <tt class="pyretexpr">string-from-code-points</tt> and <tt class="pyretexpr">string-to-code-points</tt>.</note></p><p>  Converts the code point <tt class="pyretexpr">code</tt> to a Pyret string.</p><pre>check:
+  string-from-code-point(97) is "a"
+  string-from-code-point(10) is "\n"
+  string-from-code-point(955) is "λ"
+end</pre><p>  </p><div class="function">string-from-code-points :: <span>List&lt;Number&gt; -&gt; String</span></div><p>  Converts from a list of code points to a Pyret string.</p><pre>check:
+  string-from-code-points([list:]) is ""
+  string-from-code-points([list: 97, 98, 99]) is "abc"
+  string-from-code-points([list: 55348, 56606]) is "𝄞"
+end</pre></div></root>
+    <hr/>
+    The current page is builtin/strings.html.
+    The previous page is <a href = "../builtin/numbers.html">../builtin/numbers.html</a>.
+    The next page is <a href = "../builtin/booleans.html">../builtin/booleans.html</a>.
+    </div>
+  </body>
+</html>

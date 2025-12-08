@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <head>
+    <title>Untitled</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><div><h1 id="lists" toclevel="1" tocentry="yes"></h1><p>  </p><p>  </p><h2 id="The-List-Datatype" toclevel="2" tocentry="yes">The List Datatype</h2><p>  <span>data-spec2</span></p><p>  </p><p><p><singleton-doc>ListemptyList&lt;a&gt;</singleton-doc>   <span>constructor-doc</span></p><p>  </p><div class="function">is-empty :: contract</div><p>  </p><div class="function">is-link :: contract</div><p>A <tt class="pyretexpr">List</tt> is an immutable, fixed-length collection indexed by non-negative integers.</p><p>As in most programming languages, you can use <tt class="pyretexpr">List</tt>s in Pyret without understanding much, if anything, about how they are implemented internally in the language.</p><p>However, in functional languages such as Pyret a particular implementation of lists—the linked list—has a central role for both historical and practical reasons, and a fuller understanding of linked lists goes hand in hand with a fuller understanding of Pyret.  If you have not encountered linked lists before and would like to know more, we recommend reading <a href="http://dcic-world.org/">the material on
+lists in DCIC</a>.</p><p>In lieu of a full explanation on this page, here are a few quick points to help parse some of the following examples: <itemlist><item>A <tt class="pyretexpr">List</tt> is made up of elements, usually referred to as <tt class="pyretexpr">elt</tt>s in examples.</item><item>Elements are of two types: <tt class="pyretexpr">link</tt> and <tt class="pyretexpr">empty</tt>.</item><item>Every <tt class="pyretexpr">link</tt> actually has two parts: a <bold>first</bold> value and the <bold>rest</bold> of the <tt class="pyretexpr">List</tt>.</item><item>The rest of the <tt class="pyretexpr">List</tt> is itself a <tt class="pyretexpr">link</tt>, or if you have reached the end of the <tt class="pyretexpr">List</tt>, the rest will be <tt class="pyretexpr">empty</tt>.</item></itemlist> and here are some illustrative examples:</p><pre>check:
+  l0 = empty
+  l1 = link(1, l0)
+  l2 = link(2, l1)
+  is-empty(l0) is true
+  is-link(l0) is false
+
+  is-empty(l1) is false
+  is-link(l1) is true
+
+  is-empty(l2) is false
+  is-link(l2) is true
+end</pre></p><h2 id="List-Creation-Functions" toclevel="2" tocentry="yes">List Creation Functions</h2><p>collection-doc</p><p><margin-note>This illustrates the underlying structure created when you define a <tt class="pyretexpr">List</tt> with <tt class="pyretexpr">[list: ...]</tt></margin-note></p><p>Constructs a <tt class="pyretexpr">List</tt> out of <tt class="pyretexpr">elt</tt>s by chaining <tt class="pyretexpr">link</tt>s, ending in a single <tt class="pyretexpr">empty</tt>.</p><pre>import lists as L
+
+check:
+  [L.list: ] is L.empty
+  [L.list: 1] is L.link(1, L.empty)
+  [L.list: 1, 2] is L.link(1, link(2, L.empty))
+end</pre><p>Though it is neither required nor enforced by the language, conventionally, when writing the empty list using the constructor notation, we write an extra spce between the <tt class="pyretexpr">:</tt> and <tt class="pyretexpr">]</tt>.</p><p><bold>Note</bold>: You should <emph>not</emph> write a trailing <tt class="pyretexpr">empty</tt> when using this constructor notation. Everything you write is an <emph>element</emph> of the list. Thus,</p><pre>import lists as L
+
+check:
+  [L.list: ] is-not [L.list: L.empty]
+  L.link(L.empty, L.empty) is [L.list: L.empty]
+end</pre><div class="function">build-list :: <span><span>Number -&gt; a</span>Number -&gt; List&lt;a&gt;</span></div><p>Constructs a list of length <tt class="pyretexpr">size</tt>, and fills it with the result of calling the function <tt class="pyretexpr">f</tt> with each index from <tt class="pyretexpr">0</tt> to <tt class="pyretexpr">size - 1</tt>.</p><p>Similar to <tt class="pyretexpr">build-arrayarrays</tt>.</p><pre>import lists as L
+
+check:
+  fun sq(x): x * x end
+  L.build-list(sq, 4)
+    is [L.list: 0, 1, 4, 9]
+    because [L.list: sq(0), sq(1), sq(2), sq(3)]
+end
+
+check:
+  fun build-from(base :: Number) -&gt; List&lt;String&gt;:
+    L.build-list({(n): base + n}, 3)
+  end
+
+  a = L.build-list(build-from, 3)
+
+  a is [L.list:
+    [L.list: 0, 1, 2],
+    [L.list: 1, 2, 3],
+    [L.list: 2, 3, 4]]
+end</pre><h2 id="List-Methods" toclevel="2" tocentry="yes">List Methods</h2><p>These methods are available on all <tt class="pyretexpr">List</tt>s whether empty or a link.</p><div><tt>.length :: contract</tt></div><p>Returns the number of elements in the <tt class="pyretexpr">List</tt>.</p><pre>import lists as L
+
+check:
+  [L.list: 'a', 'b'].length() is 2
+  L.empty.length() is 0
+  L.link("a", L.empty).length() is 1
+end</pre><div><tt>.map :: contract</tt></div><p>Applies function <tt class="pyretexpr">f</tt> to each element of the list from left to right, and constructs a new <tt class="pyretexpr">List</tt> out of the return values in the corresponding order.</p><p><tt class="pyretexpr">a</tt> represents the type of the elements in the original <tt class="pyretexpr">List</tt>, <tt class="pyretexpr">b</tt> is the type of the elements in the new <tt class="pyretexpr">List</tt>.</p><pre>import lists as L
+
+check:
+  [L.list: 1, 2].map(num-tostring) is [L.list: "1", "2"]
+  [L.list: 1, 2].map(lam(n): n + 1 end) is [L.list: 2, 3]
+  [L.list: 1, 2].map(_ + 1) is [L.list: 2, 3]
+  L.empty.map(lam(x): raise("This never happens!") end) is L.empty
+end</pre><div><tt>.each :: contract</tt></div><p>Applies <tt class="pyretexpr">f</tt> to each element of the <tt class="pyretexpr">List</tt> from left to right, and returns <tt class="pyretexpr">nothing</tt>.  Because it returns <tt class="pyretexpr">nothing</tt>, use <tt class="pyretexpr">each</tt> instead of <tt class="pyretexpr">map</tt> when the function <tt class="pyretexpr">f</tt> is needed only for its side-effects.</p><pre>import lists as L
+
+check:
+  var x = 1
+  [L.list: 1, 2].each(lam(n): x := x + n end) is nothing
+  x is 4
+end</pre><div><tt>.filter :: contract</tt></div><p>Applies function <tt class="pyretexpr">f</tt> to each element of <tt class="pyretexpr">List</tt> from left to right, constructing a new <tt class="pyretexpr">List</tt> out of the elements for which <tt class="pyretexpr">f</tt> returned <tt class="pyretexpr">true</tt>.</p><p>The original <tt class="pyretexpr">List</tt> elements are of type <tt class="pyretexpr">a</tt> and the function <tt class="pyretexpr">f</tt> must return a <tt class="pyretexpr">Boolean</tt>.</p><pre>import lists as L
+
+check:
+  fun length-is-one(s :: String) -&gt; Boolean:
+    string-length(s) == 1
+  end
+  [L.list: "ab", "a", "", "c"].filter(length-is-one) is [L.list: "a", "c"]
+  [L.list: L.empty, L.link(1, L.empty), L.empty].filter(L.is-link)
+    is [L.list: L.link(1, L.empty)]
+end</pre><div><tt>.push :: contract</tt></div><p>Returns <tt class="pyretexpr">link(elt, self)</tt>.</p><pre>import lists as L
+
+check:
+  L.empty.push("a") is L.link("a", L.empty)
+  L.link("a", L.empty).push("b") is L.link("b", L.link("a", L.empty))
+end</pre><p>In other words, returns a <tt class="pyretexpr">List</tt> with <tt class="pyretexpr">elt</tt> appended to the beginning of the original <tt class="pyretexpr">List</tt>.</p><pre>import lists as L
+
+check:
+  [L.list: 'a', 'b'].push('c') is [L.list: 'c', 'a', 'b']
+end</pre><div><tt>.split-at :: contract</tt></div><p>Produces a record containing two <tt class="pyretexpr">List</tt>s, consisting of the items before and the items at-or-after the splitting index of the current <tt class="pyretexpr">List</tt>.  The index is 0-based, so splitting a <tt class="pyretexpr">List</tt> at index <math>n</math> will produce a prefix of length exactly <math>n</math>.  Moreover, <tt class="pyretexpr">append</tt>ing the two <tt class="pyretexpr">List</tt>s together will be equivalent to the original <tt class="pyretexpr">List</tt>.</p><pre>import lists as L
+
+check:
+  [L.list: 'a', 'b', 'c', 'd'].split-at(2)
+    is {prefix: [L.list: "a", "b"], suffix: [L.list: "c", "d"]}
+  one-four = L.link(1, L.link(2, L.link(3, L.link(4, L.empty))))
+  one-four.split-at(0) is {prefix: L.empty, suffix: one-four}
+  one-four.split-at(4) is {prefix: one-four, suffix: L.empty}
+  one-four.split-at(2) is
+  {prefix: [L.list: 1, 2], suffix: [L.list: 3, 4]}
+  one-four.split-at(-1) raises "Invalid index"
+  one-four.split-at(5) raises "Index too large"
+end</pre><div><tt>.take :: contract</tt></div><p>Given a length <tt class="pyretexpr">n</tt>, returns a new <tt class="pyretexpr">List</tt> containing the first <tt class="pyretexpr">n</tt> items of the <tt class="pyretexpr">List</tt>.</p><pre>import lists as L
+
+check:
+  [L.list: 1, 2, 3, 4, 5, 6].take(3) is [L.list: 1, 2, 3]
+  [L.list: 1, 2, 3].take(6) raises "Index too large"
+  [L.list: 1, 2, 3].take(-1) raises "Invalid index"
+end</pre><div><tt>.drop :: contract</tt></div><p>Given a length <tt class="pyretexpr">n</tt>, returns a <tt class="pyretexpr">List</tt> containing all but the first <tt class="pyretexpr">n</tt> items of the <tt class="pyretexpr">List</tt>.</p><pre>import lists as L
+
+check:
+  [L.list: 1, 2, 3, 4, 5, 6].drop(3) is [L.list: 4, 5, 6]
+end</pre><div><tt>.get :: contract</tt></div><p>Returns the <tt class="pyretexpr">n</tt>th element of the given <tt class="pyretexpr">List</tt>.</p><p>Using an index too large, negative, or not a whole number raises an error.</p><pre>import lists as L
+
+check:
+  l = [L.list: 1, 2, 3]
+
+  l.get(0) is 1
+  l.get(4) raises "too large"
+  l.get(-1) raises "invalid argument"
+end</pre><div><tt>.set :: contract</tt></div><p>Returns a new <tt class="pyretexpr">List</tt> with the same values as the given <tt class="pyretexpr">List</tt> but with the <tt class="pyretexpr">n</tt>th element set to the given value, or raises an error if <tt class="pyretexpr">n</tt> is out of range.</p><pre>import lists as L
+
+check:
+  [L.list: 1, 2, 3].set(0, 5) is [L.list: 5, 2, 3]
+  [L.list: ].set(0, 5) raises "too large"
+end</pre><div><tt>.foldl :: contract</tt></div><p>Computes <tt class="pyretexpr">f(last-elt, ... f(second-elt, f(first-elt, base))...)</tt>.  For <tt class="pyretexpr">empty</tt>, returns <tt class="pyretexpr">base</tt>.</p><p>In other words, <tt class="pyretexpr">.foldl</tt> uses the function <tt class="pyretexpr">f</tt>, starting with the <tt class="pyretexpr">base</tt> value, of type <tt class="pyretexpr">Base</tt>, to calculate the return value of type <tt class="pyretexpr">Base</tt> from each item in the <tt class="pyretexpr">List</tt>, of input type <tt class="pyretexpr">Elt</tt>, starting the sequence from the <emph>left</emph> (hence, fold<bold>l</bold>).</p><pre>import lists as L
+
+check:
+  [L.list: 3, 2, 1].foldl(lam(elt, acc): elt + acc end, 10) is 16
+  fun combine(elt, acc) -&gt; String:
+    tostring(elt) + " - " + acc
+  end
+  [L.list: 3, 2, 1].foldl(combine, "END") is "1 - 2 - 3 - END"
+  L.empty.foldl(combine, "END") is "END"
+  [L.list: 3, 2, 1].foldl(L.link, L.empty) is [L.list: 1, 2, 3]
+end</pre><div><tt>.foldr :: contract</tt></div><p>Computes <tt class="pyretexpr">f(first-elt, f(second-elt, ... f(last-elt, base)))</tt>.  For <tt class="pyretexpr">empty</tt>, returns <tt class="pyretexpr">base</tt>.</p><p>In other words, <tt class="pyretexpr">.foldr</tt> uses the function <tt class="pyretexpr">f</tt>, starting with the <tt class="pyretexpr">base</tt> value, of type <tt class="pyretexpr">Base</tt>, to calculate the return value of type <tt class="pyretexpr">Base</tt> from each item in the <tt class="pyretexpr">List</tt>, of input type <tt class="pyretexpr">Elt</tt>, starting the sequence from the <emph>right</emph> (hence, fold<bold>r</bold>).</p><pre>import lists as L
+
+check:
+  [L.list: 3, 2, 1].foldr(lam(elt, acc): elt + acc end, 10) is 16
+  fun combine(elt, acc) -&gt; String:
+    tostring(elt) + " - " + acc
+  end
+  [L.list: 3, 2, 1].foldr(combine, "END") is "3 - 2 - 1 - END"
+  empty.foldr(combine, "END") is "END"
+  [L.list: 3, 2, 1].foldr(L.link, L.empty) is [L.list: 3, 2, 1]
+end</pre><div><tt>.member :: contract</tt></div><p><margin-note>Passing a <tt class="pyretexpr">Roughnum</tt> as an argument will raise an error.</margin-note> Returns true if the current <tt class="pyretexpr">List</tt> contains the given value, as compared by <tt class="pyretexpr">==</tt>.</p><pre>import lists as L
+
+check:
+  [L.list: 1, 2, 3].member(2) is true
+  [L.list: 2, 4, 6].member(3) is false
+  [L.list: ].member(L.empty) is false
+  [L.list: 1, 2, 3].member(~1) raises "Roughnums"
+  [L.list: ~1, 2, 3].member(1) raises "Roughnums"
+  [L.list: 1, 2, 3].member(4) is false
+  [L.list: 1, 2, 3].member(~4) raises "Roughnums"
+
+  [L.list: 'a'].member('a') is true
+  [L.list: false].member(false) is true
+  [L.list: nothing].member(nothing) is true
+end</pre><div><tt>.append :: contract</tt></div><p>Produces a new <tt class="pyretexpr">List</tt> with all the elements of the current <tt class="pyretexpr">List</tt>, followed by all the elements of the <tt class="pyretexpr">other</tt> <tt class="pyretexpr">List</tt>.</p><pre>import lists as L
+
+check:
+  [L.list: 1, 2].append([list: 3, 4]) is [L.list: 1, 2, 3, 4]
+  L.empty.append([L.list: 1, 2]) is [L.list: 1, 2]
+  [L.list: 1, 2].append(empty) is [L.list: 1, 2]
+end</pre><div><tt>.last :: contract</tt></div><p>Returns the last item of the <tt class="pyretexpr">List</tt>.</p><pre>import lists as L
+
+check:
+  [L.list: 1, 2, 3].last() is 3
+  L.empty.last() raises "last of empty list"
+end</pre><div><tt>.reverse :: contract</tt></div><p>Produces a new <tt class="pyretexpr">List</tt> with the items of the original <tt class="pyretexpr">List</tt> in reversed order.</p><pre>import lists as L
+
+check:
+  [L.list: 1, 2, 3].reverse() is [L.list: 3, 2, 1]
+  L.empty.reverse() is L.empty
+end</pre><div><tt>.sort :: contract</tt></div><p>Produces a new <tt class="pyretexpr">List</tt> whose contents are the same as those of the current <tt class="pyretexpr">List</tt>, sorted by <tt class="pyretexpr">&lt;equality</tt> and <tt class="pyretexpr">==equality</tt>.  This requires that the items of the <tt class="pyretexpr">List</tt> be comparable by <tt class="pyretexpr">&lt;equality</tt> (see <a href="UnDeFiNeD">UnDeFiNeD</a>).</p><pre>import lists as L
+
+check:
+  [L.list: 1, 5, 3, 2, 4].sort() is [L.list: 1, 2, 3, 4, 5]
+  [L.list: "aaaa", "B", "a"].sort() is [L.list: "B", "a", "aaaa"]
+  [L.list: 'a', 1].sort() raises "binop-error"
+  [L.list: true, false].sort() raises "binop-error"
+end</pre><div><tt>.sort-by :: contract</tt></div><p>Like <tt class="pyretexpr">sort</tt>, but the comparison and equality operators can be specified.  This allows for sorting <tt class="pyretexpr">List</tt>s whose contents are not comparable by <tt class="pyretexpr">&lt;</tt>, or sorting by custom comparisons, for example, sorting by string length instead of alphabetically.</p><pre>import lists as L
+
+check:
+  fun length-comparison(s1 :: String, s2 :: String) -&gt; Boolean:
+    string-length(s1) &gt; string-length(s2)
+  end
+  fun length-equality(s1 :: String, s2 :: String) -&gt; Boolean:
+    string-length(s1) == string-length(s2)
+  end
+  [L.list: 'a', 'aa', 'aaa'].sort-by(length-comparison, length-equality) is
+    [L.list: 'aaa', 'aa', 'a']
+end</pre><div><tt>.join-str :: contract</tt></div><p>Combines the values of the current <tt class="pyretexpr">List</tt> by converting them to strings with <tt class="pyretexpr">tostring</tt> and joining them with the given separator <tt class="pyretexpr">sep</tt>.</p><pre>import lists as L
+
+check:
+  [L.list: 1, 2, 3].join-str("; ") is "1; 2; 3"
+  [L.list: "a", true, ~5.3].join-str(" : ") is "a : true : ~5.3"
+  L.empty.join-str("nothing at all") is ""
+end</pre><div><tt>.join-str-last :: contract</tt></div><p>Combines the values of the current <tt class="pyretexpr">List</tt> by converting them to strings with <tt class="pyretexpr">tostring</tt> and joining them with the given separator <tt class="pyretexpr">sep</tt>. If the list has more than one element, the function will use <tt class="pyretexpr">last-sep</tt> to join the last element instead of the regular <tt class="pyretexpr">sep</tt>.</p><pre>import lists as L
+
+check:
+  [L.list: 1, 2, 3].join-str-last(", ", " and ") is "1, 2 and 3"
+  [L.list: "a", true, ~5.3].join-str-last(" : ", " # ") is "a : true # ~5.3"
+  L.empty.join-str-last("nothing at all", "really nothing") is ""
+  [L.list: 1, 2].join-str-last("a", "b") is "1b2"
+  [L.list: 1].join-str-last("a", "b") is "1"
+end</pre><h2 id="List-Functions" toclevel="2" tocentry="yes">List Functions</h2><p>  These functions are available on the <tt class="pyretexpr">lists</tt> module object.   Some of the functions require the <tt class="pyretexpr">lists</tt> module to be   <tt class="pyretexpr">import</tt>ed, as indicated in the examples.</p><p>  </p><div class="function"><p>length Returns the number of elements in the <tt class="pyretexpr">List</tt>.</p><pre>import lists as L
+
+check:
+  L.length([list: 'a', 'b']) is 2
+  L.length(L.empty) is 0
+  L.length(L.link("a", L.empty)) is 1
+end</pre><p> :: <span>List&lt;a&gt; -&gt; Number</span></p></div><p>  </p><div class="function">get :: contract</div><p>Equivalent to <tt class="pyretexpr">list</tt>pyret-method<tt class="pyretexpr">(n)</tt>.</p><pre>import lists as L
+
+check:
+  l = [L.list: 1, 2, 3]
+
+  L.get(l, 0) is 1
+  L.get(l, 4) raises "too large"
+  L.get(l, -1) raises "invalid argument"
+end</pre><p>  </p><div class="function">set :: contract</div><div class="function"><p>sortProduces a new <tt class="pyretexpr">List</tt> whose contents are the same as those of the current <tt class="pyretexpr">List</tt>, sorted by <tt class="pyretexpr">&lt;equality</tt> and <tt class="pyretexpr">==equality</tt>.  This requires that the items of the <tt class="pyretexpr">List</tt> be comparable by <tt class="pyretexpr">&lt;equality</tt> (see <a href="UnDeFiNeD">UnDeFiNeD</a>).</p><pre>import lists as L
+
+check:
+  L.sort([L.list: 1, 5, 3, 2, 4]) is [L.list: 1, 2, 3, 4, 5]
+  L.sort([L.list: "aaaa", "B", "a"]) is [L.list: "B", "a", "aaaa"]
+  L.sort([L.list: 'a', 1]) raises "binop-error"
+  L.sort([L.list: true, false]) raises "binop-error"
+end</pre><p> :: <span>List&lt;A&gt; -&gt; List&lt;A&gt;</span></p></div><div class="function"><p>sort-byLike <tt class="pyretexpr">sort</tt>, but the comparison and equality operators can be specified.  This allows for sorting <tt class="pyretexpr">List</tt>s whose contents are not comparable by <tt class="pyretexpr">&lt;equality</tt>,  or sorting by custom comparisons, for example, sorting by string length instead of alphabetically.</p><pre>import lists as L
+
+check:
+  fun length-comparison(s1 :: String, s2 :: String) -&gt; Boolean:
+    string-length(s1) &gt; string-length(s2)
+  end
+  fun length-equality(s1 :: String, s2 :: String) -&gt; Boolean:
+    string-length(s1) == string-length(s2)
+  end
+  L.sort-by([L.list: 'a', 'aa', 'aaa'], length-comparison, length-equality) is
+    [L.list: 'aaa', 'aa', 'a']
+end</pre><p> :: <span>List&lt;A&gt;<span>AA -&gt; Boolean</span><span>AA -&gt; Boolean</span> -&gt; List&lt;A&gt;</span></p></div><div class="function">join-str :: <span>List&lt;A&gt;String -&gt; String</span></div><p>  </p><div class="function">range :: contract</div><p>  </p><div class="function"><p>range-by</p><pre>import lists as L
+
+check:
+  L.range-by(1, 10, 4) is [L.list: 1, 5, 9]
+  L.range-by(10, 1, -4) is [L.list: 10, 6, 2]
+  L.range-by(3, 20, 9) is [L.list: 3, 12]
+  L.range-by(20, 3, 9) is L.empty
+  L.range-by(20, 3, -9) is [L.list: 20, 11]
+  L.range-by(2, 3, 0) raises "interval of 0"
+end</pre><p> :: contract</p></div><p>  </p><div class="function">repeat :: contract</div><p>  </p><div class="function"><p>distinct   Given a <tt class="pyretexpr">List</tt>, returns a new <tt class="pyretexpr">List</tt> containing only one copy of each element   that is duplicated in the <tt class="pyretexpr">List</tt>.</p><p>  The last (latest in the <tt class="pyretexpr">List</tt>) copy is kept.   <tt class="pyretexpr">Roughnums</tt> are not compared for equality, and so will always appear in the   output <tt class="pyretexpr">List</tt>.</p><pre>import lists as L
+
+check:
+  L.distinct([L.list: 3, 1, 2, 2, 3, 2]) is [L.list: 1, 3, 2]
+  L.distinct([L.list: ~1, ~1]) is-roughly [L.list: ~1, ~1]
+  L.distinct([L.list: ~1, ~1, 1]) is-roughly [L.list: ~1, ~1, 1]
+  L.distinct([L.list: ~1, ~1, 1, 1]) is-roughly [L.list: ~1, ~1, 1]
+  L.distinct([L.list: ~1, ~2, ~3]) is-roughly [L.list: ~1, ~2, ~3]
+end</pre><p> :: <span>List&lt;a&gt; -&gt; List&lt;a&gt;</span></p></div><p>  </p><div class="function">filter :: contract</div><p>  </p><div class="function">partition :: contract</div><div class="function">find :: contract</div><pre>import lists as L
+import option as O
+
+check:
+  L.find(num-is-integer,  [L.list: 2.5, 3.5, 100, 2, 4.5]) is O.some(100)
+  L.find(num-is-rational, [L.list: 2.5, 3.5, 100, 2, 4.5]) is O.some(2.5)
+  L.find(num-is-negative, [L.list: 2.5, 3.5, 100, 2, 4.5]) is O.none
+  L.find(lam(n): n &lt;= 2 end, [L.list: 2.5, 3.5, 100, 2, 4.5]) is O.some(2)
+  L.find(lam(n): n &lt; 1 end, [L.list: 2.5, 3.5, 100, 2, 4.5]) is O.none
+end</pre><p>  </p><div class="function">split-at :: contract</div><p>  </p><div class="function"><p>last Returns the last element in <tt class="pyretexpr">lst</tt>.  Raises an error if the <tt class="pyretexpr">List</tt> is empty.</p><pre>import lists as L
+
+check:
+  L.last([L.list: 1, 3, 5]) is 5
+  L.last([L.list: 1]) is 1
+  L.last([L.list: ]) raises "last of empty list"
+end</pre><p> :: <span>List&lt;A&gt; -&gt; A</span></p></div><div class="function"><p>pushConstructs a list with the given element prepended to the front of the given list.</p><pre>import lists as L
+
+check:
+  L.push(L.empty, "a") is L.link("a", L.empty)
+  L.push(L.link("a", empty), "b") is L.link("b", L.link("a", L.empty))
+end</pre><p> :: <span>List&lt;A&gt;A -&gt; List&lt;A&gt;</span></p></div><p>  </p><div class="function"><p>append Produce a new <tt class="pyretexpr">List</tt> with the elements of <tt class="pyretexpr">front</tt> followed by the elements of <tt class="pyretexpr">back</tt>.</p><pre class="good-ex">import lists as L
+
+check:
+  L.append([L.list: 1, 2, 3], [L.list: 4, 5, 6])
+    is [L.list: 1, 2, 3, 4, 5, 6]
+  L.append([L.list: ], [L.list: ]) is [L.list: ]
+  L.append([L.list: 1], [L.list: 2]) is [L.list: 1, 2]
+end</pre><p>Note that it does <emph>not</emph> change either <tt class="pyretexpr">List</tt>:</p><pre class="bad-ex">import lists as L
+
+check:
+  l = [L.list: 1, 2, 3]
+  L.append(l, [L.list: 4])
+  l is [L.list: 1, 2, 3, 4] # this test fails
+end</pre><p> :: <span>List&lt;A&gt;List&lt;A&gt; -&gt; List&lt;A&gt;</span></p></div><p>  </p><div class="function">any :: contract</div><p>  </p><div class="function">all :: contract</div><p>  </p><div class="function">all2 :: contract</div><p>When the <tt class="pyretexpr">List</tt>s are of different length, the function is only called when both <tt class="pyretexpr">List</tt>s have a value at a given index.  In other words, Pyret iterates over the shortest <tt class="pyretexpr">List</tt> and stops.</p><pre>import lists as L
+
+check:
+  L.all2(lam(n, m): n &gt; m end, [L.list: 1, 2, 3], [L.list: 0, 1, 2]) is true
+  L.all2(lam(n, m): (n + m) == 3 end, [L.list: 1, 2, 3], [L.list: 2, 1, 0]) is true
+  L.all2(lam(n, m): (n + m) == 3 end, [L.list: 1, 2], [L.list: 2, 1, 0]) is true
+  L.all2(lam(n, m): (n + m) == 3 end, [L.list: 1, 2, 6], [L.list: 2, 1]) is true
+  L.all2(lam(n, m): n &gt; m end, [L.list: 1, 2, 3], [L.list: 0, 1, 2]) is true
+  L.all2(lam(n, m): n &gt; m end, [L.list: 1, 2, 0], [L.list: 0, 1]) is true
+  L.all2(lam(n, m): n &lt; m end, [L.list: 1], [L.list: 2, 0]) is true
+  L.all2(lam(n, m): n &lt; m end, [L.list: 1, 2, 3], L.empty) is true
+end</pre><p>  </p><div class="function">map :: contract</div><pre>import lists as L
+
+check:
+  L.map(num-tostring, [L.list: 1, 2]) is [L.list: "1", "2"]
+  L.map(lam(x): x + 1 end, [L.list: 1, 2]) is [L.list: 2, 3]
+end</pre><p>  </p><div class="function">map2 :: contract</div><p>When the <tt class="pyretexpr">List</tt>s are of different length, the function is only called when both <tt class="pyretexpr">List</tt>s have a value at a given index.  In other words, Pyret iterates over the shortest <tt class="pyretexpr">List</tt> and stops.</p><pre>import lists as L
+
+check:
+  L.map2(string-append, [L.list: "mis", "mal"], [L.list: "fortune", "practice"])
+    is [L.list: "misfortune", "malpractice"]
+  L.map2(_ + _, [L.list: "mis", "mal"], [L.list: "fortune", "practice"])
+    is [L.list: "misfortune", "malpractice"]
+  L.map2(string-append, [L.list: "mis", "mal"], [L.list: "fortune"])
+    is [L.list: "misfortune"]
+  L.map2(string-append, [L.list: "mis", "mal"], L.empty)
+    is L.empty
+end</pre><p>  </p><div class="function">map3 :: contract</div><p>When the <tt class="pyretexpr">List</tt>s are of different length, the function is only called when all <tt class="pyretexpr">List</tt>s have a value at a given index.  In other words, Pyret iterates over the shortest <tt class="pyretexpr">List</tt> and stops.</p><pre>import lists as L
+
+check:
+  fun full-name(n1, n2, n3) -&gt; String:
+    n1 + " " + n2 + " " + n3
+  end
+  full-name("Thomas", "Alva", "Edison") is "Thomas Alva Edison"
+  L.map3(full-name, [L.list: "Martin", "Mohandas", "Pelé"],
+    [L.list: "Luther", "Karamchand"], [L.list: "King", "Gandhi"]) is
+  [L.list: "Martin Luther King", "Mohandas Karamchand Gandhi"]
+end</pre><p>  </p><div class="function">map4 :: contract</div><p>When the <tt class="pyretexpr">List</tt>s are of different length, the function is only called when all <tt class="pyretexpr">List</tt>s have a value at a given index.  In other words, Pyret iterates over the shortest <tt class="pyretexpr">List</tt> and stops.</p><pre>import lists as L
+
+check:
+  fun title-name(title, n1, n2, n3) -&gt; String:
+    title + " " + n1 + " " + n2 + " " + n3
+  end
+  L.map4(title-name, [L.list: "Reverend", "Mahātmā"],
+    [L.list: "Martin", "Mohandas", "Pele"],
+    [L.list: "Luther", "Karamchand"], [list: "King", "Gandhi"]) is
+  [L.list: "Reverend Martin Luther King", "Mahātmā Mohandas Karamchand Gandhi"]
+end</pre><p>  </p><div class="function">map_n :: contract</div><p>  Like map, but also includes a numeric argument for the position in the <tt class="pyretexpr">List</tt>   that is currently being mapped over.</p><p>  </p><pre>import lists as L
+
+check:
+  L.map_n(num-expt, 0, [L.list: 2, 2, 2, 2]) is [L.list: 0, 1, 4, 9]
+  L.map_n(lam(n, elem): n * elem end, 0, [L.list: 2, 2, 2, 2]) is [L.list: 0, 2, 4, 6]
+  L.map_n(_ * _, 0, [L.list: 2, 2, 2, 2]) is [L.list: 0, 2, 4, 6]
+  L.map_n(_ * _, 1, [L.list: 2, 2, 2, 2]) is [L.list: 2, 4, 6, 8]
+  L.map_n(_ + _, 10, [L.list: 2, 2, 2, 2]) is [L.list: 12, 13, 14, 15]
+end</pre><p>  </p><div class="function">map2_n :: contract</div><p>Like <tt class="pyretexpr">map_n</tt>, but for two-argument functions.</p><p>When the <tt class="pyretexpr">List</tt>s are of different length, the function is only called when all <tt class="pyretexpr">List</tt>s have a value at a given index.  In other words, Pyret iterates over the shortest <tt class="pyretexpr">List</tt> and stops.</p><pre>import lists as L
+
+check:
+  L.map2_n(lam(n, a, b): n * (a + b) end, 10,
+    [L.list: 2, 2, 2, 2], [L.list: 0, 3, 9, 12])
+    is [L.list: 20, 55, 132, 182]
+end</pre><p>  </p><div class="function">map3_n :: contract</div><p>When the <tt class="pyretexpr">List</tt>s are of different length, the function is only called when all <tt class="pyretexpr">List</tt>s have a value at a given index.  In other words, Pyret iterates over the shortest <tt class="pyretexpr">List</tt> and stops.</p><pre>import lists as L
+
+check:
+  fun combine(n, l1, l2, l3) -&gt; String:
+    string-repeat(l1, n) + string-repeat(l2, n) +
+    string-repeat(l3, n)
+  end
+  combine(2, 'a', 'b', 'c') is "aabbcc"
+  L.map3_n(combine, 1, [L.list: 'a', 'a'], [L.list: 'b', 'b'],
+    [L.list: 'c', 'c']) is [L.list: 'abc', 'aabbcc']
+end</pre><p>  </p><div class="function">map4_n :: contract</div><pre>import lists as L
+
+check:
+  fun combine(n, l1, l2, l3, l4) -&gt; String:
+    string-repeat(l1, n) + string-repeat(l2, n) +
+    string-repeat(l3, n) + string-repeat(l4, n)
+  end
+  combine(2, 'a', 'b', 'c', 'd') is "aabbccdd"
+  L.map4_n(combine, 1, L.repeat(3, 'a'), L.repeat(3, 'b'),
+    L.repeat(3, 'c'), L.repeat(3, 'd')) is
+  [L.list: 'abcd', 'aabbccdd', 'aaabbbcccddd']
+end</pre><p>  </p><div class="function">each :: contract</div><p>  </p><div class="function">each2 :: contract</div><pre>import lists as L
+
+check:
+  var counter = 0
+  L.each2(lam(x, y): counter := counter + x + y end,
+    [L.list: 1, 1, 1], [L.list: 10, 10, 10, 10])
+  counter is 33
+end</pre><p>  </p><div class="function">each3 :: contract</div><pre>import lists as L
+
+check:
+  var counter = 0
+  L.each3(lam(x, y, z): counter := counter + x + y + z end,
+    [L.list: 1, 1, 1], [L.list: 10, 10, 10, 10], [L.list: 100, 100])
+  counter is 222
+end</pre><p>  </p><div class="function">each4 :: contract</div><pre>import lists as L
+
+check:
+  var counter = 0
+  L.each4(lam(w, x, y, z): counter := counter + w + x + y + z end,
+    [L.list: 1, 1, 1],
+    [L.list: 10, 10, 10, 10],
+    [L.list: 100, 100],
+    [L.list: 1000, 1000])
+  counter is 2222
+end</pre><p>  </p><div class="function">each_n :: contract</div><p>Like <tt class="pyretexpr">each</tt>, but also includes a numeric argument for the current index in the <tt class="pyretexpr">List</tt>.</p><pre>import lists as L
+
+check:
+  var counter = 0
+  L.each_n(lam(i, w): counter := counter + (i * w) end,
+    1,
+    [L.list: 1, 1, 1])
+  counter is 6
+end</pre><p>  </p><div class="function">each2_n :: contract</div><pre>import lists as L
+
+check:
+  var counter = 0
+  L.each2_n(lam(i, w, x): counter := counter + (i * (w + x)) end,
+    1,
+    [L.list: 1, 1, 1],
+    [L.list: 10, 10, 10, 10])
+  counter is 66
+end</pre><p>  </p><div class="function">each3_n :: contract</div><pre>import lists as L
+
+check:
+  var counter = 0
+  L.each3_n(lam(i, w, x, y): counter := counter + (i * (w + x + y)) end,
+    1,
+    [L.list: 1, 1, 1],
+    [L.list: 10, 10, 10, 10],
+    [L.list: 100, 100, 100])
+  counter is 666
+end</pre><p>  </p><div class="function">each4_n :: contract</div><pre>import lists as L
+
+check:
+  var counter = 0
+  L.each4_n(lam(i, w, x, y, z): counter := counter + (i * (w + x + y + z)) end,
+    1,
+    [L.list: 1, 1, 1],
+    [L.list: 10, 10, 10, 10],
+    [L.list: 100, 100, 100],
+    [L.list: 1000, 1000, 1000])
+  counter is 6666
+end</pre><p>  </p><div class="function">fold-while :: contract</div><pre>import lists as L
+import either as EI
+
+check:
+  fun stop-at-not-one(acc :: Number, n :: Number) -&gt; EI.Either:
+    if n == 1:
+      EI.left(acc + n)
+    else:
+      EI.right(acc)
+    end
+  end
+
+  L.fold-while(stop-at-not-one, 0, [L.list: 1, 1, 1, 0, 1, 1]) is 3
+end</pre><p>  </p><div class="function"><p>fold <tt class="pyretexpr">fold</tt> computes <tt class="pyretexpr">f(... f(f(base, first-elt), second-elt) ..., last-elt)</tt>.  For <tt class="pyretexpr">empty</tt>, returns <tt class="pyretexpr">base</tt>.</p><p>In other words, <tt class="pyretexpr">fold</tt> uses the function <tt class="pyretexpr">f</tt>, starting with the <tt class="pyretexpr">base</tt> value, of type <tt class="pyretexpr">Base</tt>, to calculate the return value of type <tt class="pyretexpr">Base</tt> from each item in the <tt class="pyretexpr">List</tt>, of input type <tt class="pyretexpr">Elt</tt>, starting the sequence from the left. :: contract</p></div><pre>import lists as L
+
+check:
+  L.fold((lam(acc, elt): acc + elt end), 0, [L.list: 3, 2, 1]) is 6
+  L.fold((lam(acc, elt): acc + elt end), 10, [L.list: 3, 2, 1]) is 16
+
+  fun combine(acc, elt) -&gt; String:
+    tostring(elt) + " - " + acc
+  end
+  L.fold(combine, "END", [L.list: 3, 2, 1]) is "1 - 2 - 3 - END"
+  L.fold(combine, "END", L.empty) is "END"
+end</pre><p>  </p><div class="function">foldl :: contract</div><p>  Another name for <tt class="pyretexpr">fold</tt>.   </p><div class="function">foldr :: contract</div><p>Computes <tt class="pyretexpr">f(f(... f(base, last-elt) ..., second-elt), first-elt)</tt>.  For <tt class="pyretexpr">empty</tt>, returns <tt class="pyretexpr">base</tt>.  In other words, it uses <tt class="pyretexpr">f</tt> to combine <tt class="pyretexpr">base</tt> with each item in the <tt class="pyretexpr">List</tt> starting from the right.</p><p>In other words, <tt class="pyretexpr">foldr</tt> uses the function <tt class="pyretexpr">f</tt>, starting with the <tt class="pyretexpr">base</tt> value, of type <tt class="pyretexpr">Base</tt>, to calculate the return value of type <tt class="pyretexpr">Base</tt> from each item in the <tt class="pyretexpr">List</tt>, of input type <tt class="pyretexpr">Elt</tt>, starting the sequence from the right.</p><pre>import lists as L
+
+check:
+  L.foldr((lam(acc, elt): acc + elt end), 0, [L.list: 3, 2, 1]) is 6
+  L.foldr((lam(acc, elt): acc + elt end), 10, [L.list: 3, 2, 1]) is 16
+
+  fun combine(acc, elt) -&gt; String:
+    tostring(elt) + " - " + acc
+  end
+  L.foldr(combine, "END", [L.list: 3, 2, 1]) is "3 - 2 - 1 - END"
+  L.foldr(combine, "END", L.empty) is "END"
+end</pre><p>  </p><div class="function">fold2 :: contract</div><pre>import lists as L
+
+check:
+  L.fold2(lam(acc, elt1, elt2): acc + elt1 + elt2 end,
+    11,
+    [L.list: 1, 1, 1],
+    [L.list: 10, 10, 10, 10])
+    is 44
+end</pre><p>  </p><div class="function">fold3 :: contract</div><pre>import lists as L
+
+check:
+  fold3(lam(acc, elt1, elt2, elt3): acc + elt1 + elt2 + elt3 end,
+    111,
+    [L.list: 1, 1, 1],
+    [L.list: 10, 10, 10, 10],
+    [L.list: 100, 100, 100])
+    is 444
+end</pre><p>  </p><div class="function">fold4 :: contract</div><pre>import lists as L
+
+check:
+  L.fold4(lam(acc, elt1, elt2, elt3, elt4):
+    acc + elt1 + elt2 + elt3 + elt4 end,
+    1111,
+    [L.list: 1, 1, 1],
+    [L.list: 10, 10, 10, 10],
+    [L.list: 100, 100, 100],
+    [list: 1000, 1000])
+    is 3333
+end</pre><p>  </p><div class="function">fold_n Like <tt class="pyretexpr">fold</tt>, but takes a numeric argument for the position in the <tt class="pyretexpr">List</tt> that is currently being visited.  :: contract</div><p>  </p><div class="function">member :: contract</div><div class="function">member-always :: contract</div><div class="function">member-identical :: contract</div><div class="function">member-now :: contract</div><p><tt class="pyretexpr">member</tt> returns <tt class="pyretexpr">true</tt> if <tt class="pyretexpr">List</tt> <tt class="pyretexpr">lst</tt> contains the element <tt class="pyretexpr">elt</tt>, as compared by <tt class="pyretexpr">==</tt>. The other three functions are analogous to <tt class="pyretexpr">member</tt>, but use <tt class="pyretexpr">equal-alwaysequality</tt>, <tt class="pyretexpr">identicalequality</tt>, or <tt class="pyretexpr">equal-nowequality</tt> to perform the comparison. (Thus <tt class="pyretexpr">member-always</tt> is the same as <tt class="pyretexpr">member</tt>; the name is provided for completeness and in case the user wants to make their intent more explicit.)</p><p>Note that if a <tt class="pyretexpr">Roughnum</tt> is present, these functions will raise exceptions. To avoid that, use <tt class="pyretexpr">member3lists</tt> and the analogous related functions.</p><pre>import lists as L
+
+check:
+  L.member([L.list: 1, 2, 3], 2) is true
+  L.member([L.list: 2, 4, 6], 3) is false
+  L.member([L.list: ], L.empty) is false
+  L.member([L.list: 1, 2, 3], ~1) raises "Roughnums"
+  L.member([L.list: ~1, 2, 3], 1) raises "Roughnums"
+
+  L.member([L.list: 'a'], 'a') is true
+  L.member([L.list: false], false) is true
+  L.member([L.list: nothing], nothing) is true
+end</pre><div class="function">member3 :: contract</div><div class="function">member-always3 :: contract</div><div class="function">member-identical3 :: contract</div><div class="function">member-now3 :: contract</div><p>These functions are analogous to <tt class="pyretexpr">member</tt>, but use <tt class="pyretexpr">equal-always3equality</tt>, <tt class="pyretexpr">identical3equality</tt>, or <tt class="pyretexpr">equal-now3equality</tt> to perform the comparison. Thus, they do not raise an exception if a <tt class="pyretexpr">Roughnum</tt> is present.</p><pre>import lists as L
+import equality as EQ
+
+check:
+  L.member3([L.list: 1, 2, 3], ~1) satisfies EQ.is-Unknown
+  L.member3([L.list: ~1, 2, 3], 1) satisfies EQ.is-Unknown
+end</pre><div class="function">member-with :: contract</div><p><tt class="pyretexpr">member-with</tt> is <tt class="pyretexpr">member</tt> with a custom equality function. Returns an <tt class="pyretexpr">equality.Equal</tt> if the <tt class="pyretexpr">eq</tt> parameter returns <tt class="pyretexpr">equality.Equal</tt> for <tt class="pyretexpr">elt</tt> and any one element of <tt class="pyretexpr">List</tt> <tt class="pyretexpr">lst</tt>.</p><pre>import lists as L
+import equality as EQ
+
+check:
+  fun equal-length(a :: String, b :: String) -&gt; EQ.EqualityResult:
+    if string-length(a) == string-length(b):
+      EQ.Equal
+    else:
+      EQ.NotEqual("Different lengths.", a, b)
+    end
+  end
+  equal-length('tom', 'dad') is EQ.Equal
+  equal-length('tom', 'father') satisfies EQ.is-NotEqual
+
+  L.member-with([L.list: 'father', 'pater', 'dad'], 'tom', equal-length)
+    is EQ.Equal
+  L.member-with([L.list: 'father', 'pater'], 'tom', equal-length)
+    satisfies EQ.is-NotEqual
+end</pre><p>  </p><div class="function">reverse :: contract</div><p>Returns a new <tt class="pyretexpr">List</tt> with all the elements of the original <tt class="pyretexpr">List</tt> in reverse order.</p><pre>import lists as L
+
+check:
+  l = [L.list: 1, 2, 3, 4]
+  L.reverse(l) is [L.list: 4, 3, 2, 1]
+end</pre><div class="function">remove :: contract</div><p>Returns a new <tt class="pyretexpr">List</tt> with all the elements of the original that are not equal to the specified element (using <tt class="pyretexpr">==equality</tt> as the comparison).</p><pre>import lists as L
+
+check:
+  l = [L.list: 1, 2, 3, 4, 3, 2, 1]
+  L.remove(l, 2) is [L.list: 1, 3, 4, 3, 1]
+end</pre><p>  </p><div class="function">shuffle :: contract</div><p>  Returns a new <tt class="pyretexpr">List</tt> with all the elements of the original <tt class="pyretexpr">List</tt> in random   order.</p><pre>import lists as L
+import sets as S
+
+check:
+  l = [L.list: 1, 2, 3, 4]
+  l-mixed = L.shuffle(l)
+  S.list-to-set(l-mixed) is S.list-to-set(l)
+  l-mixed.length() is l.length()
+end</pre></div></root>
+    <hr/>
+    The current page is trove/lists.html.
+    The previous page is <a href = "../trove/pick.html">../trove/pick.html</a>.
+    The next page is <a href = "../trove/sets.html">../trove/sets.html</a>.
+    </div>
+  </body>
+</html>
