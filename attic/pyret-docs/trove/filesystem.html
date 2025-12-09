@@ -10,21 +10,21 @@
   </head>
   <body>
     <div class="container">
-    <root><p></p><p>The <tt class="pyretexpr">filesystem</tt> library provides functions for reading and writing files, as well as working with paths.</p><p>The examples on this page work against a small filesystem that is set up every time the page loads. The filesystem contains the contents below, and the working directory is <tt class="pyretexpr">/</tt>.</p><p>/ ├── hello.txt         “Hello, world!” ├── data/ │   ├── words         “apple\nbanana\ncherry” │   ├── numbers.txt   “1\n2\n3\n4\n5” │   └── story.txt     “A long time ago in a galaxy far, far away...”</p><div><h1 id="filesystem" toclevel="1" tocentry="yes"></h1><div class="function">read-file-string :: <span>String -&gt; String</span></div><pre>import filesystem as FS
+    <root><p></p><p>The <tt class="pyretexpr">filesystem</tt> library provides functions for reading and writing files, as well as working with paths.</p><p>The examples on this page work against a small filesystem that is set up every time the page loads. The filesystem contains the contents below, and the working directory is <tt class="pyretexpr">/</tt>.</p><p>/ ├── hello.txt         “Hello, world!” ├── data/ │   ├── words         “apple\nbanana\ncherry” │   ├── numbers.txt   “1\n2\n3\n4\n5” │   └── story.txt     “A long time ago in a galaxy far, far away...”</p><div><h1 id="filesystem" toclevel="1" tocentry="yes"></h1><div><div class="pyret-display">read-file-string :: (<span>path :: </span>) -&gt; return</div></div><pre>import filesystem as FS
 check:
   FS.read-file-string("hello.txt") is "Hello, world!"
   words = FS.read-file-string("data/words")
   string-split-all(words, "\n") is [list: "apple", "banana", "cherry"]
 
   FS.read-file-string("does-not-exist") raises "No such file or directory"
-end</pre><p>Reads the file at the given <tt class="pyretexpr">path</tt> and returns its contents as a <tt class="pyretexpr">String</tt>. Always assumes UTF-8 encoding.</p><p>Reports an error if the file is not found or is not readable.</p><div class="function">write-file-string :: <span>StringString -&gt; Nothing</span></div><p>Writes the given <tt class="pyretexpr">contents</tt> the file at the given <tt class="pyretexpr">path</tt>.  Always assumes UTF-8 encoding. If the file exists, it is overwritten, and if it does not exist, it is created.</p><p>Reports an error if the path refers to a non-existent directory, or if the file is present but not writable.</p><pre>import filesystem as FS
+end</pre><p>Reads the file at the given <tt class="pyretexpr">path</tt> and returns its contents as a <tt class="pyretexpr">String</tt>. Always assumes UTF-8 encoding.</p><p>Reports an error if the file is not found or is not readable.</p><div><div class="pyret-display">write-file-string :: (<span>path :: </span>, <span>contents :: </span>) -&gt; return</div></div><p>Writes the given <tt class="pyretexpr">contents</tt> the file at the given <tt class="pyretexpr">path</tt>.  Always assumes UTF-8 encoding. If the file exists, it is overwritten, and if it does not exist, it is created.</p><p>Reports an error if the path refers to a non-existent directory, or if the file is present but not writable.</p><pre>import filesystem as FS
 check:
   FS.read-file-string("goodbye.txt") raises "No such file or directory"
   FS.write-file-string("goodbye.txt", "Until next time!")
   FS.read-file-string("goodbye.txt") is "Until next time!"
   FS.write-file-string("goodbye.txt", "See ya!")
   FS.read-file-string("goodbye.txt") is "See ya!"
-end</pre><div class="function">stat :: <span>String -&gt; <a-record mtime="Number" ctime="Number" size="Number"></a-record></span></div><p><margin-note>There is also an optional field called <tt class="pyretexpr">native</tt> that may have additional information sometimes, depending on the platform. The three fields listed are guaranteed to be present across all platforms.</margin-note> Returns an object with statistics about the file: its modified time (<tt class="pyretexpr">mtime</tt>), its creation time (<tt class="pyretexpr">ctime</tt>), and its size in bytes (<tt class="pyretexpr">size</tt>).</p><pre>import filesystem as FS
+end</pre><div><div class="pyret-display">stat :: (<span>path :: </span>) -&gt; return</div></div><p><margin-note>There is also an optional field called <tt class="pyretexpr">native</tt> that may have additional information sometimes, depending on the platform. The three fields listed are guaranteed to be present across all platforms.</margin-note> Returns an object with statistics about the file: its modified time (<tt class="pyretexpr">mtime</tt>), its creation time (<tt class="pyretexpr">ctime</tt>), and its size in bytes (<tt class="pyretexpr">size</tt>).</p><pre>import filesystem as FS
 check:
   test-start-time = time-now() # gives the current time in milliseconds
   FS.write-file-string("fresh-file.txt", "Brand new!")

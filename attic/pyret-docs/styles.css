@@ -10,9 +10,21 @@ ul.toclist {
   color: cornflowerblue;
 }
 
+.pyret-display {
+  background-color: #eeffff;
+}
+
 .function {
-  font-family: monospace;
+  /* font-family: monospace; */
   /* background-color: #6bccdf; */
+  /* background-color: #ffeeee; */
+}
+
+.good-ex {
+  background-color: #eeffee;
+}
+
+.bad-ex {
   background-color: #ffeeee;
 }
 

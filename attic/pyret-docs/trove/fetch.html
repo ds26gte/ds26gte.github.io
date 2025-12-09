@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="fetch" toclevel="1" tocentry="yes"></h1><div class="function"><p>fetch   Fetches the content at the given <tt class="pyretexpr">url</tt> with HTTP GET, expecting that   the result is <tt class="pyretexpr">text/plain</tt>.</p><p>  If no errors occur, returns <tt class="pyretexpr">lefteither</tt> with the returned   string body. The user is expected to decompose this string   using <tt class="pyretexpr">stringString</tt> or other functions.</p><p>  If any errors occur, returns <tt class="pyretexpr">righteither</tt> with that error as a string.</p><pre>import fetch as F
+    <root><div><h1 id="fetch" toclevel="1" tocentry="yes"></h1><div><div class="pyret-display">fetch :: (<span>url :: </span>) -&gt; <E-of>StringString</E-of></div><p>  Fetches the content at the given <tt class="pyretexpr">url</tt> with HTTP GET, expecting that   the result is <tt class="pyretexpr">text/plain</tt>.</p><p>  If no errors occur, returns <tt class="pyretexpr">lefteither</tt> with the returned   string body. The user is expected to decompose this string   using <tt class="pyretexpr">stringString</tt> or other functions.</p><p>  If any errors occur, returns <tt class="pyretexpr">righteither</tt> with that error as a string.</p><pre>import fetch as F
 import either as Ei
 
 
@@ -22,7 +22,7 @@ check:
   bad-fetch = F.fetch("https://raw.githubusercontent.com/NO-SUCH-URL")
   bad-fetch satisfies Ei.is-right
   to-repr(bad-fetch) satisfies string-contains(_, "400")
-end</pre><p> :: <span>String -&gt; <E-of>StringString</E-of></span></p></div></div></root>
+end</pre></div></div></root>
     <hr/>
     The current page is trove/fetch.html.
     The previous page is <a href = "../trove/timing.html">../trove/timing.html</a>.

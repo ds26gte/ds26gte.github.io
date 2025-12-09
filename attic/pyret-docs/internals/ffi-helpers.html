@@ -16,7 +16,7 @@
   Any
   Handlers
 )
-→ Any</pre></div><p>This call emulates the functionality of the <tt class="pyretexpr">cases</tt> expression in a JavaScript context.  It takes a predicate to check (usually a function like <tt class="pyretexpr">is-List</tt>), a name for the predicate being checked, a <tt class="pyretexpr">data</tt> value, and an object containing handlers for its variants.  For example:</p><pre>function sum(l) {
+→ Any</pre></div><p>This call emulates the functionality of the <tt class="pyretexpr">cases</tt> expression in a JavaScript context.  It takes a predicate to check (usually a function like <tt class="pyretexpr">is-List</tt>), a name for the predicate being checked, a <tt class="pyretexpr">data</tt> value, and an object containing handlers for its variants.  For example:</p><pre class="nothing_special">function sum(l) {
   cases(runtime.getField(lists, "is-List"), "List", l, {
     empty: function() { return "Empty"; },
     link: function(f, r) { return f + sum(r); }

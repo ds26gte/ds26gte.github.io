@@ -10,9 +10,9 @@
   </head>
   <body>
     <div class="container">
-    <root><h1 id="runtime" toclevel="1" tocentry="yes">Runtime API</h1><p>Pyret exposes most of its internal operations on the <tt class="pyretexpr">runtime</tt> object; most JavaScript code that interacts with Pyret will need to know about the runtime.</p><p>The library that defines runtimes is in <tt class="pyretexpr">src/js/base/runtime-anf.js</tt>, and it is configured to be importable with <tt class="pyretexpr">js/runtime-anf</tt> via RequireJS:</p><pre>define(["js/runtime-anf"], function(runtimeLib) {
+    <root><h1 id="runtime" toclevel="1" tocentry="yes">Runtime API</h1><p>Pyret exposes most of its internal operations on the <tt class="pyretexpr">runtime</tt> object; most JavaScript code that interacts with Pyret will need to know about the runtime.</p><p>The library that defines runtimes is in <tt class="pyretexpr">src/js/base/runtime-anf.js</tt>, and it is configured to be importable with <tt class="pyretexpr">js/runtime-anf</tt> via RequireJS:</p><pre class="nothing_special">define(["js/runtime-anf"], function(runtimeLib) {
   // use runtimeLib
-});</pre><div><pre>RuntimeLib.create(options) → Runtime</pre></div><p>Create a new Pyret runtime.  The <tt class="pyretexpr">RuntimeLib</tt> value itself only exports this interface, and most other useful functions are referenced from the runtime objecs it creates.  The options are:</p><pre>options :: {
+});</pre><div><pre>RuntimeLib.create(options) → Runtime</pre></div><p>Create a new Pyret runtime.  The <tt class="pyretexpr">RuntimeLib</tt> value itself only exports this interface, and most other useful functions are referenced from the runtime objecs it creates.  The options are:</p><pre class="nothing_special">options :: {
   initialGas: Number,
   stdout: String → Undefined,
   stderr: String → Undefined

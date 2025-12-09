@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="csv" toclevel="1" tocentry="yes"></h1><div class="function"><p>csv-table-str   Reads CSV data from <tt class="pyretexpr">csv-str</tt> with the given <tt class="pyretexpr">options</tt>, returning   a <tt class="pyretexpr">TableLoadertables</tt> suitable for use with <tt class="pyretexpr">load-table:</tt></p><pre>include csv
+    <root><div><h1 id="csv" toclevel="1" tocentry="yes"></h1><div><div class="pyret-display">csv-table-str :: (<span>csv-str :: </span>, <span>options :: </span>) -&gt; TableLoader</div><p>  Reads CSV data from <tt class="pyretexpr">csv-str</tt> with the given <tt class="pyretexpr">options</tt>, returning   a <tt class="pyretexpr">TableLoadertables</tt> suitable for use with <tt class="pyretexpr">load-table:</tt></p><pre>include csv
 animals-data = ```
 Pet Name, Age (years), species, fixed
 Franklin,17,turtle,false
@@ -27,7 +27,7 @@ check:
     row: "Veronica", 2, "cat", false
     row: "Ada", 10, "dog", true
   end
-end</pre><p> :: <span>StringCSVOptions -&gt; TableLoader</span></p></div><div class="function">csv-table-file Reads CSV data from the file at path <tt class="pyretexpr">csv-path</tt> with the given <tt class="pyretexpr">options</tt>, returning a <tt class="pyretexpr">TableLoadertables</tt> suitable for use with <tt class="pyretexpr">load-table:</tt>  :: <span>StringCSVOptions -&gt; TableLoader</span></div><div class="function"><p>csv-table-url Reads CSV data from the url <tt class="pyretexpr">csv-url</tt> with the given <tt class="pyretexpr">options</tt>, returning a <tt class="pyretexpr">TableLoadertables</tt> suitable for use with <tt class="pyretexpr">load-table:</tt></p><pre>include csv
+end</pre></div><div><div class="pyret-display">csv-table-file :: (<span>csv-file :: </span>, <span>options :: </span>) -&gt; TableLoader</div><p>Reads CSV data from the file at path <tt class="pyretexpr">csv-path</tt> with the given <tt class="pyretexpr">options</tt>, returning a <tt class="pyretexpr">TableLoadertables</tt> suitable for use with <tt class="pyretexpr">load-table:</tt></p></div><div><div class="pyret-display">csv-table-url :: (<span>csv-url :: </span>, <span>options :: </span>) -&gt; TableLoader</div><p>Reads CSV data from the url <tt class="pyretexpr">csv-url</tt> with the given <tt class="pyretexpr">options</tt>, returning a <tt class="pyretexpr">TableLoadertables</tt> suitable for use with <tt class="pyretexpr">load-table:</tt></p><pre>include csv
 animals-csv = csv-table-url("https://raw.githubusercontent.com/brownplt/pyret-lang/refs/heads/horizon/tests/io-tests/tests/animals-ds-2024.csv", default-options)
 animals-table = load-table: name, species, sex, age, fixed, legs, weight, weeks
   source: animals-csv
@@ -35,7 +35,7 @@ end
 check:
   animals-table.row-n(0)["name"] is "Sasha"
   animals-table.row-n(0)["species"] is "cat"
-end</pre><p> :: <span>StringCSVOptions -&gt; TableLoader</span></p></div><div><div class="function">CSVOptions&lt;&gt;</div></div><p>The type of options for processing CSV strings.</p><p><value>default-optionsCSVOptions</value></p><p>The default options for processing CSV strings.</p><pre>include csv
+end</pre></div><div><div class="pyret-display">CSVOptions&lt;&gt;</div></div><p>The type of options for processing CSV strings.</p><p><value>default-optionsCSVOptions</value></p><p>The default options for processing CSV strings.</p><pre>include csv
 check:
   default-options is { header-row: true }
 end</pre></div></root>
