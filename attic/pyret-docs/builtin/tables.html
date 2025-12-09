@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script type="module" src="../embed-api.js"></script>
   <link rel="stylesheet" href="../styles.css">
   <head>
     <title>Tables</title>
@@ -118,7 +119,7 @@ end
 changes-by-year = extend test-scores using math-score, reading-score:
   math-change-from-previous: T.difference of math-score,
   reading-change-from-previous: T.difference of reading-score
-end</pre><p><img src="difference-table.png"/></p></value></p><div><div class="pyret-display">difference-from :: (<span>start-value :: Number</span>) -&gt; Reducer&lt;Number&gt;</div><p>Like <tt class="pyretexpr">difference</tt>, except the starting value is specified, instead of defaulting to 0.</p><pre># calculates velocity of a dropping ball
+end</pre><p><img src="difference-table.png"/></p></value></p><div><pre class="pyret-display">difference-from :: (<span>start-value :: Number</span>) -&gt; Reducer&lt;Number&gt;</pre><p>Like <tt class="pyretexpr">difference</tt>, except the starting value is specified, instead of defaulting to 0.</p><pre># calculates velocity of a dropping ball
 ball-info = table: pos-y
   row: 25
   row: 24
@@ -174,7 +175,7 @@ check:
     row: 1, 9, 1
     row: 10, 10, 1
   end
-end</pre><div><div class="pyret-display">running-fold :: (<span>start-value :: Result</span>, <span>combiner :: Result</span>) -&gt; Reducer&lt;Result&gt;</div></div><div><div class="pyret-display">running-reduce :: (<span>combiner :: <span>ColCol -&gt; Col</span></span>) -&gt; Reducer&lt;Col&gt;</div></div><p><tt class="pyretexpr">running-fold</tt> and <tt class="pyretexpr">running-reduce</tt> allow you to specify a function used to calculate the value in the new column, based on a running calculation of all the values in the selected column in the current row and above.</p><p>The difference between <tt class="pyretexpr">running-fold</tt> and <tt class="pyretexpr">running-reduce</tt> is that <tt class="pyretexpr">running-fold</tt> requires an explicit <tt class="pyretexpr">start-value</tt>.</p><pre>import tables as T
+end</pre><div><pre class="pyret-display">running-fold :: (<span>start-value :: Result</span>, <span>combiner :: Result</span>) -&gt; Reducer&lt;Result&gt;</pre></div><div><pre class="pyret-display">running-reduce :: (<span>combiner :: <span>ColCol -&gt; Col</span></span>) -&gt; Reducer&lt;Col&gt;</pre></div><p><tt class="pyretexpr">running-fold</tt> and <tt class="pyretexpr">running-reduce</tt> allow you to specify a function used to calculate the value in the new column, based on a running calculation of all the values in the selected column in the current row and above.</p><p>The difference between <tt class="pyretexpr">running-fold</tt> and <tt class="pyretexpr">running-reduce</tt> is that <tt class="pyretexpr">running-fold</tt> requires an explicit <tt class="pyretexpr">start-value</tt>.</p><pre>import tables as T
 count-if-driver = T.running-fold(0,
   lam(sum, col): if col &gt;= 16: 1 + sum else: sum end end)
 t = table: name, age
@@ -260,7 +261,7 @@ end</pre><p>collection-doc</p><p>A collection constructor that creates tables fr
   t.length() is 3
   t.column("a") is [list: 100, 200, 300]
   t.row-n(2) is [raw-row: {"a"; 300}, {"b"; true}]
-end</pre><div><div class="pyret-display">table-from-column :: (<span>column-name :: String</span>, <span>values :: String</span>) -&gt; Table</div><p>A function that creates a table of a single column from a column name, given as a <tt class="pyretexpr">String&lt;global&gt;</tt> and a <tt class="pyretexpr">Listlists</tt> of values.</p><pre>check:
+end</pre><div><pre class="pyret-display">table-from-column :: (<span>column-name :: String</span>, <span>values :: String</span>) -&gt; Table</pre><p>A function that creates a table of a single column from a column name, given as a <tt class="pyretexpr">String&lt;global&gt;</tt> and a <tt class="pyretexpr">Listlists</tt> of values.</p><pre>check:
   col = range(0, 100)
   tfc = table-from-column("a", col)
   tfc.length() is 100
