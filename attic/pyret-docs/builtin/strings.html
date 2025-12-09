@@ -66,7 +66,7 @@ end</pre><p>  </p><div><pre class="pyret-display">string-substring :: () -&gt; S
   string-substring(tws, 6, 13) raises "index"
   string-substring(tws, 13, 6) raises "index"
   string-substring(tws, -1, 10) raises "index"
-end</pre><p>  </p><div><pre class="pyret-display">string-index-of :: () -&gt; Number</pre></div><p>  Returns the index from the beginning of the string where   <tt class="pyretexpr">string-to-find</tt> <emph>first</emph> appears, or <tt class="pyretexpr">-1</tt> if the string   isn’t found.</p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">string-index-of :: () -&gt; Number</pre></div><p>  Returns the index from the beginning of the string where   <tt class="pyretexpr">string-to-find</tt> <i>first</i> appears, or <tt class="pyretexpr">-1</tt> if the string   isn’t found.</p><pre>check:
   string-index-of("Pyret", "P") is 0
   string-index-of("012🤑45", "🤑") is 3
   string-index-of("🤔🤔🤔", "🤒") is -1
@@ -78,7 +78,7 @@ end</pre><p>  </p><div><pre class="pyret-display">string-replace :: () -&gt; Str
   string-replace("a string", "not found", "not replaced") is "a string"
   string-replace("", "", "c") is ""
   string-replace("aaa", "", "b") is "ababa"
-end</pre><p>  </p><div><pre class="pyret-display">string-split :: () -&gt; List&lt;String&gt;</pre></div><p>  Searches for <tt class="pyretexpr">string-to-split-on</tt> in <tt class="pyretexpr">original-string</tt>.  If it is not found,   returns a <tt class="pyretexpr">Listlists</tt> containing <tt class="pyretexpr">original-string</tt> as its   single element.</p><p>  If it is found, it returns a two-element <tt class="pyretexpr">Listlists</tt>, whose   first element is the portion of the string before <emph>first</emph> occurence of   <tt class="pyretexpr">string-to-split-on</tt>.  The second element contains the portion of the string   after.  The <tt class="pyretexpr">string-to-split-on</tt> is <bold>not</bold> included in either string.  The   string before and the string after might be empty.</p><p>  For splitting beyond the first occurence of the string, see   <tt class="pyretexpr">string-split-all</tt>.</p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">string-split :: () -&gt; List&lt;String&gt;</pre></div><p>  Searches for <tt class="pyretexpr">string-to-split-on</tt> in <tt class="pyretexpr">original-string</tt>.  If it is not found,   returns a <tt class="pyretexpr">Listlists</tt> containing <tt class="pyretexpr">original-string</tt> as its   single element.</p><p>  If it is found, it returns a two-element <tt class="pyretexpr">Listlists</tt>, whose   first element is the portion of the string before <i>first</i> occurence of   <tt class="pyretexpr">string-to-split-on</tt>.  The second element contains the portion of the string   after.  The <tt class="pyretexpr">string-to-split-on</tt> is <bold>not</bold> included in either string.  The   string before and the string after might be empty.</p><p>  For splitting beyond the first occurence of the string, see   <tt class="pyretexpr">string-split-all</tt>.</p><pre>check:
   string-split("string", "not found") is [list: "string"]
   string-split("string", "g") is [list: "strin", ""]
   string-split("string", "") is [list: "", "string"]

@@ -50,7 +50,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: ] is L.empty 
     [L.list: 1] is L.link(1, L.empty) 
     [L.list: 1, 2] is L.link(1, link(2, L.empty)) 
- end">(Try it!)</a></p></div><p>Though it is neither required nor enforced by the language, conventionally, when writing the empty list using the constructor notation, we write an extra spce between the <tt class="pyretexpr">:</tt> and <tt class="pyretexpr">]</tt>.</p><p><bold>Note</bold>: You should <emph>not</emph> write a trailing <tt class="pyretexpr">empty</tt> when using this constructor notation. Everything you write is an <emph>element</emph> of the list. Thus,</p><div><pre>import lists as L
+ end">(Try it!)</a></p></div><p>Though it is neither required nor enforced by the language, conventionally, when writing the empty list using the constructor notation, we write an extra spce between the <tt class="pyretexpr">:</tt> and <tt class="pyretexpr">]</tt>.</p><p><bold>Note</bold>: You should <i>not</i> write a trailing <tt class="pyretexpr">empty</tt> when using this constructor notation. Everything you write is an <i>element</i> of the list. Thus,</p><div><pre>import lists as L
 
 check:
   [L.list: ] is-not [L.list: L.empty]
@@ -244,7 +244,7 @@ end</pre><p><a class="show-embed" code="import lists as L
  check: 
     [L.list: 1, 2, 3].set(0, 5) is [L.list: 5, 2, 3] 
     [L.list: ].set(0, 5) raises &quot;too large&quot; 
- end">(Try it!)</a></p></div><div><tt>.foldl :: contract</tt></div><p>Computes <tt class="pyretexpr">f(last-elt, ... f(second-elt, f(first-elt, base))...)</tt>.  For <tt class="pyretexpr">empty</tt>, returns <tt class="pyretexpr">base</tt>.</p><p>In other words, <tt class="pyretexpr">.foldl</tt> uses the function <tt class="pyretexpr">f</tt>, starting with the <tt class="pyretexpr">base</tt> value, of type <tt class="pyretexpr">Base</tt>, to calculate the return value of type <tt class="pyretexpr">Base</tt> from each item in the <tt class="pyretexpr">List</tt>, of input type <tt class="pyretexpr">Elt</tt>, starting the sequence from the <emph>left</emph> (hence, fold<bold>l</bold>).</p><div><pre>import lists as L
+ end">(Try it!)</a></p></div><div><tt>.foldl :: contract</tt></div><p>Computes <tt class="pyretexpr">f(last-elt, ... f(second-elt, f(first-elt, base))...)</tt>.  For <tt class="pyretexpr">empty</tt>, returns <tt class="pyretexpr">base</tt>.</p><p>In other words, <tt class="pyretexpr">.foldl</tt> uses the function <tt class="pyretexpr">f</tt>, starting with the <tt class="pyretexpr">base</tt> value, of type <tt class="pyretexpr">Base</tt>, to calculate the return value of type <tt class="pyretexpr">Base</tt> from each item in the <tt class="pyretexpr">List</tt>, of input type <tt class="pyretexpr">Elt</tt>, starting the sequence from the <i>left</i> (hence, fold<bold>l</bold>).</p><div><pre>import lists as L
 
 check:
   [L.list: 3, 2, 1].foldl(lam(elt, acc): elt + acc end, 10) is 16
@@ -264,7 +264,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 3, 2, 1].foldl(combine, &quot;END&quot;) is &quot;1 - 2 - 3 - END&quot; 
     L.empty.foldl(combine, &quot;END&quot;) is &quot;END&quot; 
     [L.list: 3, 2, 1].foldl(L.link, L.empty) is [L.list: 1, 2, 3] 
- end">(Try it!)</a></p></div><div><tt>.foldr :: contract</tt></div><p>Computes <tt class="pyretexpr">f(first-elt, f(second-elt, ... f(last-elt, base)))</tt>.  For <tt class="pyretexpr">empty</tt>, returns <tt class="pyretexpr">base</tt>.</p><p>In other words, <tt class="pyretexpr">.foldr</tt> uses the function <tt class="pyretexpr">f</tt>, starting with the <tt class="pyretexpr">base</tt> value, of type <tt class="pyretexpr">Base</tt>, to calculate the return value of type <tt class="pyretexpr">Base</tt> from each item in the <tt class="pyretexpr">List</tt>, of input type <tt class="pyretexpr">Elt</tt>, starting the sequence from the <emph>right</emph> (hence, fold<bold>r</bold>).</p><div><pre>import lists as L
+ end">(Try it!)</a></p></div><div><tt>.foldr :: contract</tt></div><p>Computes <tt class="pyretexpr">f(first-elt, f(second-elt, ... f(last-elt, base)))</tt>.  For <tt class="pyretexpr">empty</tt>, returns <tt class="pyretexpr">base</tt>.</p><p>In other words, <tt class="pyretexpr">.foldr</tt> uses the function <tt class="pyretexpr">f</tt>, starting with the <tt class="pyretexpr">base</tt> value, of type <tt class="pyretexpr">Base</tt>, to calculate the return value of type <tt class="pyretexpr">Base</tt> from each item in the <tt class="pyretexpr">List</tt>, of input type <tt class="pyretexpr">Elt</tt>, starting the sequence from the <i>right</i> (hence, fold<bold>r</bold>).</p><div><pre>import lists as L
 
 check:
   [L.list: 3, 2, 1].foldr(lam(elt, acc): elt + acc end, 10) is 16
@@ -553,7 +553,7 @@ check:
     is [L.list: 1, 2, 3, 4, 5, 6]
   L.append([L.list: ], [L.list: ]) is [L.list: ]
   L.append([L.list: 1], [L.list: 2]) is [L.list: 1, 2]
-end</pre><p>Note that it does <emph>not</emph> change either <tt class="pyretexpr">List</tt>:</p><pre class="bad-ex">import lists as L
+end</pre><p>Note that it does <i>not</i> change either <tt class="pyretexpr">List</tt>:</p><pre class="bad-ex">import lists as L
 
 check:
   l = [L.list: 1, 2, 3]

@@ -19,7 +19,7 @@ end</pre></div><p>  </p><div><pre class="pyret-display">median :: (<span>l :: Li
   median([list: ]) raises "Empty List"
   median([list: 2]) is 2
   median([list: -1, 0, 1, 2, 5]) is 1
-end</pre></div><p>  </p><div><pre class="pyret-display">modes :: (<span>l :: List&lt;Number&gt;</span>) -&gt; List&lt;Number&gt;</pre><p>    Calculates the modes of the numbers in <tt class="pyretexpr">l</tt>.  These are the numbers   that appear most often in the list.  If <emph>no</emph> number appears   more than once, returns the empty list.  The modes will be returned in sorted order.</p><p>Computing the mode of a list of values is unambiguous when there is a unique ``most common’’ element. Computer scientists and mathematicians agree that when two values are equally ``most common’’, they are both considered modes of the list. The natural generalization of this is that when all values occur equally often, they are all modes of the list. However, many high-school textbooks assert that when no element appears more than once, no element should be considered a mode. To avoid confusing high-school students, we adopt the definition they will find in their textbooks.</p><p>  </p><pre>check:
+end</pre></div><p>  </p><div><pre class="pyret-display">modes :: (<span>l :: List&lt;Number&gt;</span>) -&gt; List&lt;Number&gt;</pre><p>    Calculates the modes of the numbers in <tt class="pyretexpr">l</tt>.  These are the numbers   that appear most often in the list.  If <i>no</i> number appears   more than once, returns the empty list.  The modes will be returned in sorted order.</p><p>Computing the mode of a list of values is unambiguous when there is a unique ``most common’’ element. Computer scientists and mathematicians agree that when two values are equally ``most common’’, they are both considered modes of the list. The natural generalization of this is that when all values occur equally often, they are all modes of the list. However, many high-school textbooks assert that when no element appears more than once, no element should be considered a mode. To avoid confusing high-school students, we adopt the definition they will find in their textbooks.</p><p>  </p><pre>check:
   modes([list: ]) is [list: ]
   modes([list: 1, 2, 3, 4]) is [list: ]
   modes([list: 1, 2, 3, 1, 4]) is [list: 1]
@@ -48,15 +48,15 @@ end</pre></div><p>  </p><div><pre class="pyret-display">mode-any :: (<span>l :: 
   mode-any([list: 1, 2, 3, 4, 5]) raises "no duplicate values"
   mode-any([list: 1, 1, 2]) is 1
   mode-any([list: 1, 2, 1, 2]) satisfies lam(m): (m == 1) or (m == 2) end
-end</pre></div><p>  </p><div><pre class="pyret-display">stdev :: (<span>l :: List&lt;Number&gt;</span>) -&gt; Number</pre><p>Gives the <emph>population</emph> or <emph>uncorrected sample</emph> standard deviation of the data set represented by numbers in <tt class="pyretexpr">l</tt>.</p><pre>check:
+end</pre></div><p>  </p><div><pre class="pyret-display">stdev :: (<span>l :: List&lt;Number&gt;</span>) -&gt; Number</pre><p>Gives the <i>population</i> or <i>uncorrected sample</i> standard deviation of the data set represented by numbers in <tt class="pyretexpr">l</tt>.</p><pre>check:
   stdev([list: ]) raises "list is empty"
   stdev([list: 2]) is 0
   stdev([list: 2, 4, 4, 4, 5, 5, 7, 9]) is 2
-end</pre></div><p>  </p><div><pre class="pyret-display">stdev-sample :: (<span>l :: List&lt;Number&gt;</span>) -&gt; Number</pre><p>Gives the <emph>corrected sample</emph> standard deviation of the data set represented by numbers in <tt class="pyretexpr">l</tt>.</p><pre>check:
+end</pre></div><p>  </p><div><pre class="pyret-display">stdev-sample :: (<span>l :: List&lt;Number&gt;</span>) -&gt; Number</pre><p>Gives the <i>corrected sample</i> standard deviation of the data set represented by numbers in <tt class="pyretexpr">l</tt>.</p><pre>check:
   stdev-sample([list: ]) raises "list is empty"
   stdev-sample([list: 2]) raises "division by zero"
   stdev-sample([list: 2, 4, 4, 4, 5, 5, 7, 9]) is-roughly 2.1380899
-end</pre></div><p>  </p><h2 id="Statistical-Models" toclevel="2" tocentry="yes">Statistical Models</h2><p>  Pyret currently supports two functions for working with simple   linear-regression models.  Further support will be added over time.</p><div><pre class="pyret-display">linear-regression :: (<span>X :: List&lt;Number&gt;</span>, <span>Y :: List&lt;Number&gt;</span>) -&gt; <span>Number -&gt; Number</span></pre><p>Calculates a linear regression to model a simple independent -&gt; dependent variable relationship, using ordinary least squares regression.  Its result is a <emph>predictor function</emph> to predict a y-value given an x-value.</p><pre>check:
+end</pre></div><p>  </p><h2 id="Statistical-Models" toclevel="2" tocentry="yes">Statistical Models</h2><p>  Pyret currently supports two functions for working with simple   linear-regression models.  Further support will be added over time.</p><div><pre class="pyret-display">linear-regression :: (<span>X :: List&lt;Number&gt;</span>, <span>Y :: List&lt;Number&gt;</span>) -&gt; <span>Number -&gt; Number</span></pre><p>Calculates a linear regression to model a simple independent -&gt; dependent variable relationship, using ordinary least squares regression.  Its result is a <i>predictor function</i> to predict a y-value given an x-value.</p><pre>check:
   predictor = linear-regression([list: 0, 1, 2, 3], [list: 3, 2, 1, 0])
   predictor(1) is-roughly 2
   predictor(1.5) is-roughly 1.5
