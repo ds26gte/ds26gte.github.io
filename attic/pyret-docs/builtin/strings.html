@@ -107,7 +107,7 @@ end</pre><p>  </p><div><pre class="pyret-display">string-tolower :: () -&gt; Str
   string-to-lower("I'M NOT YELLING!") is "i'm not yelling!"
   string-to-lower("SS") is "ss"
   string-to-lower("ΛΑΜΒΔΑ") is "λαμβδα"
-end</pre><p>  </p><div><pre class="pyret-display">string-to-code-point :: () -&gt; Number</pre></div><p>  <note>For strings that contain a single character whose code point is greater than <tt class="pyretexpr">65535</tt>, this function raises an error. To get multiple codes at once for a longer string (or a string with larger code points), use <tt class="pyretexpr">string-to-code-points</tt>.</note></p><p>  Converts <tt class="pyretexpr">s</tt>, which must be a single-character <tt class="pyretexpr">String</tt>, to a character   code–a <tt class="pyretexpr">Number</tt> corresponding to its Unicode code point   (<url>http://en.wikipedia.org/wiki/Code_point</url>).</p><p>  </p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">string-to-code-point :: () -&gt; Number</pre></div><p>  <span class="margin-note">For strings that contain a single character whose code point is greater than <tt class="pyretexpr">65535</tt>, this function raises an error. To get multiple codes at once for a longer string (or a string with larger code points), use <tt class="pyretexpr">string-to-code-points</tt>.</span></p><p>  Converts <tt class="pyretexpr">s</tt>, which must be a single-character <tt class="pyretexpr">String</tt>, to a character   code–a <tt class="pyretexpr">Number</tt> corresponding to its Unicode code point   (<url>http://en.wikipedia.org/wiki/Code_point</url>).</p><p>  </p><pre>check:
   string-to-code-point("a") is 97
   string-to-code-point("\n") is 10
   string-to-code-point("λ") is 955
@@ -116,7 +116,7 @@ end</pre><p>  </p><div><pre class="pyret-display">string-to-code-points :: () -&
   string-to-code-points("abc") is [list: 97, 98, 99]
   string-to-code-points("😊") is [list: 55357, 56842]
   string-to-code-points("𝄞") is [list: 55348, 56606]
-end</pre><p>  </p><div><pre class="pyret-display">string-from-code-point :: () -&gt; String</pre></div><p>  <note>Code points greater than 65535 are not supported.  You must encode higher code points with a <a href="http://en.wikipedia.org/wiki/UTF-16">surrogate pair</a> in combination with <tt class="pyretexpr">string-from-code-points</tt> and <tt class="pyretexpr">string-to-code-points</tt>.</note></p><p>  Converts the code point <tt class="pyretexpr">code</tt> to a Pyret string.</p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">string-from-code-point :: () -&gt; String</pre></div><p>  <span class="margin-note">Code points greater than 65535 are not supported.  You must encode higher code points with a <a href="http://en.wikipedia.org/wiki/UTF-16">surrogate pair</a> in combination with <tt class="pyretexpr">string-from-code-points</tt> and <tt class="pyretexpr">string-to-code-points</tt>.</span></p><p>  Converts the code point <tt class="pyretexpr">code</tt> to a Pyret string.</p><pre>check:
   string-from-code-point(97) is "a"
   string-from-code-point(10) is "\n"
   string-from-code-point(955) is "λ"
