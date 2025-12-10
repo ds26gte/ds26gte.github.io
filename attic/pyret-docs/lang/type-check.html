@@ -7,11 +7,41 @@
   <script type="module" src="../embed-api.js"></script>
   <link rel="stylesheet" href="../styles.css">
   <head>
-    <title>Untitled</title>
+    <title>Type Checking</title>
   </head>
   <body>
     <div class="container">
-    <root>testing</root>
+    <root><div><h1 id="type-check" toclevel="1" tocentry="yes">Type Checking</h1><p>Pyret has an optional static type checker. On <url>https://code.pyret.org</url> it can be accessed as a drop down option under the Run button, and from the command line it can be run by adding the flag <tt class="pyretexpr">-type-check</tt>.</p><p>The type checker is built around the <a href="lang/forms.html#s:annotations">annotation</a> system, providing a static check that all annotations are correct and that all uses of annotated functions have the proper types passed to them.</p><h2 id="required-annotations" toclevel="2" tocentry="yes">Required Annotations</h2><p>When using the type checker annotations are required in two locations. Everywhere else they are optional (barring certain caveats). The first of the required locations is the arguments of top level functions.</p><p>The function <tt class="pyretexpr">foo</tt> type checks as an annotation is provided on the argument <tt class="pyretexpr">x</tt>. The return annotation is not necessary so the function <tt class="pyretexpr">bar</tt> also type checks. However, the function <tt class="pyretexpr">baz</tt> will fail to type check with an error requiring an annotation on the argument <tt class="pyretexpr">x</tt>.</p><pre class="nothing_special"># Type checks
+fun foo(x :: Number) -&gt; Number:
+  x
+end
+
+# Type checks
+fun bar(x :: Number):
+  x
+end
+
+# Fails
+fun baz(x):
+  x
+end</pre><p>The other place that annotations are required is on <a href="lang/forms.html#s:data-decl">data declarations</a>. Each field must be annotated with its type.</p><pre class="nothing_special"># Type checks
+data BTree:
+  | node(value :: Number, left :: BTree, right :: BTree)
+  | leaf(value :: Number)
+end</pre><h2 id="working-with-data-types" toclevel="2" tocentry="yes">Working with Data Types</h2><p>There are a couple important notes when working with polymorphic data types such as <tt class="pyretexpr">Option</tt> (defined below).</p><pre class="nothing_special">data Option&lt;A&gt;:
+  | none
+  | some(value :: A)
+end</pre><p>Whenever a value is being annotated with a polymorphic type, the type instantiation must be written. So <tt class="pyretexpr">x :: Option&lt;Number&gt; = some(1)</tt> is okay, but <tt class="pyretexpr">x :: Option = some(1)</tt> is not. The caveat to this is when writing <tt class="pyretexpr">cases</tt> statements. On these the instantiating type is not needed and you can simply write <tt class="pyretexpr">cases(Option) x:</tt>.</p><h2 id="record-types" toclevel="2" tocentry="yes">Record Types</h2><p>Record types such as <tt class="pyretexpr">{x :: Number, y :: String}</tt> have two meanings. The first one is that they are the type of records (<tt class="pyretexpr">{x: 1, y: “a”}</tt> has the type shown above). In addition, any data type where all variants have the fields <tt class="pyretexpr">x :: Number</tt> and <tt class="pyretexpr">y :: String</tt> would satisfy that type. For example, if we have the code shown below, the type checker will accept the program.</p><pre class="nothing_special">data Side:
+  | left(x :: Number)
+  | right(x :: Number)
+end
+
+fun f(thing :: {x :: Number}) -&gt; Number:
+  thing.x
+end
+
+side-thing :: Side = left(1)
+x :: Number = f(side-thing) # Type checks</pre></div></root>
     <hr/>
     The current page is lang/type-check.html.
     The previous page is <a href = "../lang/brands.html">../lang/brands.html</a>.
