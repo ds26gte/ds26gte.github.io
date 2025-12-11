@@ -28,7 +28,7 @@ end</pre><div><div class="pyret-display">Number</div><p><span><a name="Number-4"
 ~-2.718281828
 ~6.022e23 ~+6.022e23 ~6.022e+23 ~+6.022e+23
 ~-6.022e23 ~-6.022e+23
-~-6.022e-23</pre><p><tt class="pyretexpr">Roughnum</tt>s cannot be made arbitrarily precise. The absolute value ranges between 0 and 1.7976931348623157e+308 (JavaScript’s Number.MAX_VALUE) with a granularity of 5e-324 (JavaScript’s Number.MIN_VALUE).</p><h2 id="Number-Constants" toclevel="2" tocentry="yes">Number Constants</h2><div><p><a name="PI-13"></a></p><pre class="pyret-display">PI :: Roughnum</pre></div><p>The mathematical constant π, approximated as a <tt class="pyretexpr">Roughnum</tt>, or <tt class="pyretexpr">~3.141592653589793</tt>.</p><h2 id="Number-Operators" toclevel="2" tocentry="yes">Number Operators</h2><div><p><a name="+-(addition-operator)-14"></a></p><pre class="pyret-display">left + right</pre><p>  <margin-note>If either of the values in an arithmetic operator is a <tt class="pyretexpr">Roughnum</tt>, the result is a <tt class="pyretexpr">Roughnum</tt></margin-note>   When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, adds them and returns   the result.</p><div><pre>check:
+~-6.022e-23</pre><p><tt class="pyretexpr">Roughnum</tt>s cannot be made arbitrarily precise. The absolute value ranges between 0 and 1.7976931348623157e+308 (JavaScript’s Number.MAX_VALUE) with a granularity of 5e-324 (JavaScript’s Number.MIN_VALUE).</p><h2 id="Number-Constants" toclevel="2" tocentry="yes">Number Constants</h2><div><p><span><a name="PI-13"></a></span></p><pre class="pyret-display">PI :: Roughnum</pre></div><p>The mathematical constant π, approximated as a <tt class="pyretexpr">Roughnum</tt>, or <tt class="pyretexpr">~3.141592653589793</tt>.</p><h2 id="Number-Operators" toclevel="2" tocentry="yes">Number Operators</h2><div><p><span><a name="+-(addition-operator)-14"></a></span></p><pre class="pyret-display">left + right</pre><p>  <margin-note>If either of the values in an arithmetic operator is a <tt class="pyretexpr">Roughnum</tt>, the result is a <tt class="pyretexpr">Roughnum</tt></margin-note>   When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, adds them and returns   the result.</p><div><pre>check:
   2 + 2 is 4
   4/3 + 1/3 is 5/3
   0.1 + 0.2 is 0.3
@@ -36,7 +36,7 @@ end</pre><p><a class="show-embed" code="check:
     2 + 2 is 4 
     4/3 + 1/3 is 5/3 
     0.1 + 0.2 is 0.3 
- end">(Try it!)</a></p></div></div><div><p><a name="--(subtraction-operator)-15"></a></p><pre class="pyret-display">left - right</pre><p>  When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, subtracts   <tt class="pyretexpr">right</tt> from <tt class="pyretexpr">left</tt> and returns the result.</p><div><pre>check:
+ end">(Try it!)</a></p></div></div><div><p><span><a name="--(subtraction-operator)-15"></a></span></p><pre class="pyret-display">left - right</pre><p>  When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, subtracts   <tt class="pyretexpr">right</tt> from <tt class="pyretexpr">left</tt> and returns the result.</p><div><pre>check:
   6 - 2 is 4
   4/3 - 1/3 is 1
   0.3 - 0.2 is 0.1
@@ -44,7 +44,7 @@ end</pre><p><a class="show-embed" code="check:
     6 - 2 is 4 
     4/3 - 1/3 is 1 
     0.3 - 0.2 is 0.1 
- end">(Try it!)</a></p></div></div><div><p><a name="*-(multiplication-operator)-16"></a></p><pre class="pyret-display">left * right</pre><p>  When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, multiplies   them and returns the result.</p><div><pre>check:
+ end">(Try it!)</a></p></div></div><div><p><span><a name="*-(multiplication-operator)-16"></a></span></p><pre class="pyret-display">left * right</pre><p>  When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, multiplies   them and returns the result.</p><div><pre>check:
   2 * 2 is 4
   2 * 1/3 is 2/3
   0.3 * 0.2 is 0.06
@@ -52,7 +52,7 @@ end</pre><p><a class="show-embed" code="check:
     2 * 2 is 4 
     2 * 1/3 is 2/3 
     0.3 * 0.2 is 0.06 
- end">(Try it!)</a></p></div></div><div><p><a name="/-(division-operator)-17"></a></p><pre class="pyret-display">left / right</pre><p>  <margin-note>To be used as an operator, <tt class="pyretexpr">/</tt> has to have spaces around it. This means you need to write <tt class="pyretexpr">a / 3</tt> rather than <tt class="pyretexpr">a/3</tt> to divide the value stored in <tt class="pyretexpr">a</tt> by <tt class="pyretexpr">3</tt>. Things like <tt class="pyretexpr">4/3</tt> and <tt class="pyretexpr">1/2</tt> are read by Pyret as single numbers, and can’t have names or other expressions in them.</margin-note>   When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, divides <tt class="pyretexpr">left</tt>   by <tt class="pyretexpr">right</tt> and returns the result.</p><div><pre>check:
+ end">(Try it!)</a></p></div></div><div><p><span><a name="/-(division-operator)-17"></a></span></p><pre class="pyret-display">left / right</pre><p>  <margin-note>To be used as an operator, <tt class="pyretexpr">/</tt> has to have spaces around it. This means you need to write <tt class="pyretexpr">a / 3</tt> rather than <tt class="pyretexpr">a/3</tt> to divide the value stored in <tt class="pyretexpr">a</tt> by <tt class="pyretexpr">3</tt>. Things like <tt class="pyretexpr">4/3</tt> and <tt class="pyretexpr">1/2</tt> are read by Pyret as single numbers, and can’t have names or other expressions in them.</margin-note>   When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, divides <tt class="pyretexpr">left</tt>   by <tt class="pyretexpr">right</tt> and returns the result.</p><div><pre>check:
   8 / 2 is 4
   8/3 / 2 is 4/3
   0.3 / 10 is 0.03
@@ -60,7 +60,7 @@ end</pre><p><a class="show-embed" code="check:
     8 / 2 is 4 
     8/3 / 2 is 4/3 
     0.3 / 10 is 0.03 
- end">(Try it!)</a></p></div></div><div><p><a name="&lt;-(less)-18"></a></p><pre class="pyret-display">left &lt; right</pre></div><div><p><a name="&gt;-(greater)-19"></a></p><pre class="pyret-display">left &lt; right</pre></div><div><p><a name="&lt;=-(less-or-equal)-20"></a></p><pre class="pyret-display">left &lt; right</pre></div><div><p><a name="&gt;=-(greater-or-equal)-21"></a></p><pre class="pyret-display">left &lt; right</pre></div><div><p><a name="==-(equal)-22"></a></p><pre class="pyret-display">left &lt; right</pre></div><p>Comparison operators. See <a href="lang/equality.html#inequalities"></a>.</p><h2 id="Number-Functions" toclevel="2" tocentry="yes">Number Functions</h2><div><pre class="pyret-display">num-equal :: () -&gt; Boolean</pre><p>If both arguments are <tt class="pyretexpr">Exactnum</tt>s, returns a <tt class="pyretexpr">Boolean</tt>. If either argument is <tt class="pyretexpr">Roughnum</tt>, raises an error.</p><pre>check:
+ end">(Try it!)</a></p></div></div><div><p><span><a name="&lt;-(less)-18"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><div><p><span><a name="&gt;-(greater)-19"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><div><p><span><a name="&lt;=-(less-or-equal)-20"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><div><p><span><a name="&gt;=-(greater-or-equal)-21"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><div><p><span><a name="==-(equal)-22"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><p>Comparison operators. See <a href="lang/equality.html#inequalities"></a>.</p><h2 id="Number-Functions" toclevel="2" tocentry="yes">Number Functions</h2><div><pre class="pyret-display">num-equal :: () -&gt; Boolean</pre><p>If both arguments are <tt class="pyretexpr">Exactnum</tt>s, returns a <tt class="pyretexpr">Boolean</tt>. If either argument is <tt class="pyretexpr">Roughnum</tt>, raises an error.</p><pre>check:
   num-equal(2, 2) is true
   num-equal(2, 3) is false
   num-equal(1/2, 0.5) is true
