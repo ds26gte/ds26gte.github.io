@@ -95,7 +95,7 @@ batting-avg-and-slugging = extend batting
   batting-average: (singles + doubles + triples + home-runs) / at-bats,
   slugging-percentage: (singles + (doubles * 2) +
     (triples * 3) + (home-runs * 4)) / at-bats
-end</pre><p><img src="baseball.png"/></p><p><margin-note>As in <a href="lang/forms.html#s:tables:transform"><tt class="pyretexpr">transform</tt></a>, you must specify which columns will be used to calculate the value in the <tt class="pyretexpr">extend</tt> expression using the <tt class="pyretexpr">using</tt> keyword.</margin-note></p><h3 id="Reducers" toclevel="3" tocentry="yes">Reducers</h3><p>A “reducing” column is one whose information is computed from the row it is being added to <italic>and one or more of the rows above</italic> that row.  This is analogous to the <tt class="pyretexpr">foldlists</tt> function for <a href="trove/lists.html#lists"></a>.</p><p>The simplest examples of reducing use reducers built into Pyret.</p><p>For each reducer below, you will need to specify a name for the new column and which existing column new value will be based on.  You will also need to <tt class="pyretexpr">import</tt> or <tt class="pyretexpr">include</tt> <tt class="pyretexpr">tables</tt>.</p><p><value>running-sumReducer&lt;Number&gt;</value></p><p>Creates a new column where in each row, the running sum will be the added value of the cell in the selected column plus all the cells <italic>above</italic> the cell in the same column.</p><pre>import tables as T
+end</pre><p><img src="baseball.png"/></p><p><margin-note>As in <a href="lang/forms.html#s:tables:transform"><tt class="pyretexpr">transform</tt></a>, you must specify which columns will be used to calculate the value in the <tt class="pyretexpr">extend</tt> expression using the <tt class="pyretexpr">using</tt> keyword.</margin-note></p><h3 id="Reducers" toclevel="3" tocentry="yes">Reducers</h3><p>A “reducing” column is one whose information is computed from the row it is being added to <italic>and one or more of the rows above</italic> that row.  This is analogous to the <tt class="pyretexpr">foldlists</tt> function for <a href="trove/lists.html#lists"></a>.</p><p>The simplest examples of reducing use reducers built into Pyret.</p><p>For each reducer below, you will need to specify a name for the new column and which existing column new value will be based on.  You will also need to <tt class="pyretexpr">import</tt> or <tt class="pyretexpr">include</tt> <tt class="pyretexpr">tables</tt>.</p><div><p><a name="running-sum-14"></a></p><pre class="pyret-display">running-sum :: Reducer&lt;Number&gt;</pre></div><p>Creates a new column where in each row, the running sum will be the added value of the cell in the selected column plus all the cells <italic>above</italic> the cell in the same column.</p><pre>import tables as T
 dem-primary-delegates = table: state :: String, clinton :: Number,
   sanders :: Number
   row: "Iowa", 29, 21
@@ -108,7 +108,7 @@ running-total-delegates = extend dem-primary-delegates
   total-clinton: T.running-sum of clinton,
   total-sanders: T.running-sum of sanders
 end
-print(running-total-delegates)</pre><p><img src="primaries.png"/></p><p><value><p>differenceReducer&lt;Number&gt; The <tt class="pyretexpr">difference</tt> extender creates a new column containing the difference between the value in the current row (of the selected column) minus the value in <italic>only</italic> the row directly above.  In the first row, the value is unchanged. Since there’s no value before the first row, Pyret behaves as if it were zero.</p><p><margin-note>Both <tt class="pyretexpr">difference</tt> and <tt class="pyretexpr">difference-from</tt> do <italic>not</italic> calculate a running difference, only the difference between the selected row and the single row above.</margin-note></p><pre>import tables as T
+print(running-total-delegates)</pre><p><img src="primaries.png"/></p><div><p><a name="difference-15"></a></p><pre class="pyret-display">difference :: Reducer&lt;Number&gt;</pre><p>The <tt class="pyretexpr">difference</tt> extender creates a new column containing the difference between the value in the current row (of the selected column) minus the value in <italic>only</italic> the row directly above.  In the first row, the value is unchanged. Since there’s no value before the first row, Pyret behaves as if it were zero.</p><p><margin-note>Both <tt class="pyretexpr">difference</tt> and <tt class="pyretexpr">difference-from</tt> do <italic>not</italic> calculate a running difference, only the difference between the selected row and the single row above.</margin-note></p><pre>import tables as T
 test-scores = table: year :: Number,
   math-score :: Number, reading-score :: Number
   row: 2014, 87, 89
@@ -119,7 +119,7 @@ end
 changes-by-year = extend test-scores using math-score, reading-score:
   math-change-from-previous: T.difference of math-score,
   reading-change-from-previous: T.difference of reading-score
-end</pre><p><img src="difference-table.png"/></p></value></p><div><pre class="pyret-display">difference-from :: (<span>start-value :: Number</span>) -&gt; Reducer&lt;Number&gt;</pre><p>Like <tt class="pyretexpr">difference</tt>, except the starting value is specified, instead of defaulting to 0.</p><pre># calculates velocity of a dropping ball
+end</pre><p><img src="difference-table.png"/></p></div><div><pre class="pyret-display">difference-from :: (<span>start-value :: Number</span>) -&gt; Reducer&lt;Number&gt;</pre><p>Like <tt class="pyretexpr">difference</tt>, except the starting value is specified, instead of defaulting to 0.</p><pre># calculates velocity of a dropping ball
 ball-info = table: pos-y
   row: 25
   row: 24
@@ -138,7 +138,7 @@ check:
     row: 16, -5
     row: 0, -16
   end
-end</pre></div><p><value>running-meanReducer&lt;Number&gt;</value></p><p>Creates a new column  where the value in each row is equal to the mean of <italic>all</italic> values in the designated column in the current row and above.</p><pre>import tables as T
+end</pre></div><div><p><a name="running-mean-16"></a></p><pre class="pyret-display">running-mean :: Reducer&lt;Number&gt;</pre></div><p>Creates a new column  where the value in each row is equal to the mean of <italic>all</italic> values in the designated column in the current row and above.</p><pre>import tables as T
 my-grades = table: score :: Number
   row: 87
   row: 91
@@ -156,7 +156,7 @@ check:
     row: 98, 92
     row: 82, 89.5
   end
-end</pre><p><value>running-maxReducer&lt;Number&gt;</value> <value>running-minReducer&lt;Number&gt;</value></p><p>Creates a new column that contains the maximum or minimum value in the selected column in the current row or above.</p><pre>some-numbers = table: n :: Number
+end</pre><div><p><a name="running-max-17"></a></p><pre class="pyret-display">running-max :: Reducer&lt;Number&gt;</pre></div><div><p><a name="running-min-18"></a></p><pre class="pyret-display">running-min :: Reducer&lt;Number&gt;</pre></div><p>Creates a new column that contains the maximum or minimum value in the selected column in the current row or above.</p><pre>some-numbers = table: n :: Number
   row: 4
   row: 9
   row: 3

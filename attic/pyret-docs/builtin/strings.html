@@ -38,7 +38,7 @@ end</pre><p>  </p><div><pre class="pyret-display">string-append :: () -&gt; Stri
   string-append("", "") is ""
   string-append("", "a") is "a"
   string-append("a", "") is "a"
-end</pre><div><pre class="pyret-display">front + back</pre></div><p>When <tt class="pyretexpr">front</tt> and <tt class="pyretexpr">back</tt> are strings, has the same meaning as <tt class="pyretexpr">string-append</tt>.</p><p>  </p><div><pre class="pyret-display">string-length :: () -&gt; Number</pre></div><p>Returns the number of characters in the string.</p><p><margin-note><tt class="pyretexpr">string-length</tt> reports a count of <tt class="pyretexpr">2</tt> for code points over 65535.</margin-note></p><pre>check:
+end</pre><div><p><a name="+-(concatenation)-13"></a></p><pre class="pyret-display">front + back</pre></div><p>When <tt class="pyretexpr">front</tt> and <tt class="pyretexpr">back</tt> are strings, has the same meaning as <tt class="pyretexpr">string-append</tt>.</p><p>  </p><div><pre class="pyret-display">string-length :: () -&gt; Number</pre></div><p>Returns the number of characters in the string.</p><p><margin-note><tt class="pyretexpr">string-length</tt> reports a count of <tt class="pyretexpr">2</tt> for code points over 65535.</margin-note></p><pre>check:
   string-length("") is 0
   string-length("    ") is 4
   string-length("four") is 4
