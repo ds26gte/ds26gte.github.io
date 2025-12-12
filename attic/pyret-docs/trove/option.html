@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script type="module" src="../embed-api.js"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <head>
+    <title>Untitled</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><div><h1 id="option" toclevel="1" tocentry="yes"></h1><p>  </p><h2 id="The-Option-Datatype" toclevel="2" tocentry="yes">The Option Datatype</h2><p>  </p><pre><tt>Option&lt;(a)&gt;:</tt>
+<div><tt>   | <span>| none</span></tt>
+<tt>   | <span>some(<span>value :: a</span>)</span></tt></div><tt>end</tt></pre><p>  </p><p><div><p><span><a name="none-60"></a></span></p><div class="pyret-display">none :: Option&lt;a&gt;</div></div><div><p><span><a name="some-61"></a></span></p><div class="pyret-display">some :: <span>(value :: contract)</span> -&gt; Option&lt;a&gt;</div></div><div><pre class="pyret-display">is-none :: </pre></div><div><pre class="pyret-display">is-some :: </pre></div></p><p><tt class="pyretexpr">Option</tt> implements a functional programming idiom that is often used when a function may or may not return a valid or meaningful value.  If there is no return value, the function returns <tt class="pyretexpr">none</tt>.  If there is a meaningful return value, it returns that value wrapped in the <tt class="pyretexpr">some</tt> variant.</p><p>Some Pyret library functions return <tt class="pyretexpr">Option</tt> values, such as <tt class="pyretexpr">string-to-number</tt>.  When the string is not a valid numeric value, it returns <tt class="pyretexpr">none</tt>; otherwise, it returns the numeric value wrapped in <tt class="pyretexpr">some</tt>.  A <tt class="pyretexpr">cases</tt> expression can be used to evaluate both <tt class="pyretexpr">Option</tt> response variants.</p><pre>fun set-angle(s :: String) -&gt; Number:
+  doc: "If s is not a numeric string, default to 0."
+  cases(Option) string-to-number(s):
+    | some(a) =&gt; a
+    | none =&gt; 0
+  end
+where:
+  set-angle("90") is 90
+  set-angle("") is 0
+  set-angle("x") is 0
+end</pre><p>In contrast, <tt class="pyretexpr">string-index-of</tt> does <italic>not</italic> return an <tt class="pyretexpr">Option</tt> return value.Instead , it returns a <tt class="pyretexpr">Number</tt> that is either a valid index <tt class="pyretexpr">Number</tt> or <tt class="pyretexpr">-1</tt> if the string is not found:</p><pre>fun find-smiley(s :: String) -&gt; String:
+  i = string-index-of(s, "😊")
+  ask:
+    | i == -1 then: "No smiley!"
+    | otherwise: string-append("Smiley at ", num-to-string(i))
+  end
+where:
+  find-smiley("abcd") is "No smiley!"
+  find-smiley("a😊cd") is "Smiley at 1"
+end</pre><p>We can create a version of <tt class="pyretexpr">find-smiley</tt> that returns an <tt class="pyretexpr">Option</tt> value, such as this:</p><pre>fun option-smiley(s :: String) -&gt; Option&lt;Number&gt;:
+  i = string-index-of(s, "😊")
+  ask:
+    | i == -1 then: none
+    | otherwise: some(i)
+  end
+where:
+  option-smiley("abcd") is none
+  option-smiley("a😊cd") is some(1)
+end</pre><h2 id="Option-Methods" toclevel="2" tocentry="yes">Option Methods</h2><p>  </p><div><tt>.and-then :: contract</tt></div><p>  For <tt class="pyretexpr">none</tt>, returns <tt class="pyretexpr">none</tt>.  For <tt class="pyretexpr">some</tt>, applies   <tt class="pyretexpr">f</tt> to the <tt class="pyretexpr">value</tt> field and returns a new <tt class="pyretexpr">some</tt> with the   updated value.</p><pre>check:
+  add1 = lam(n): n + 1 end
+  n = none
+  n.and-then(add1) is none
+  s = some(5)
+  s.and-then(add1) is some(6)
+end</pre><p>  </p><div><tt>.or-else :: contract</tt></div><p>  For <tt class="pyretexpr">none</tt>, returns <tt class="pyretexpr">v</tt>.  For <tt class="pyretexpr">some</tt>, returns the   <tt class="pyretexpr">value</tt> field.  Useful for providing default values.</p><pre>check:
+  n = none
+  n.or-else(42) is 42
+
+  s = some(5)
+  s.or-else(10) is 5
+end</pre><p>Therefore, our example above of <tt class="pyretexpr">set-angle</tt>, which defaults to <tt class="pyretexpr">0</tt>, could be writen this way:</p><pre>fun set-angle(s :: String) -&gt; Number:
+  doc: "If s is not a numeric string, default to 0."
+  string-to-number(s).or-else(0)
+where:
+  set-angle("90") is 90
+  set-angle("") is 0
+  set-angle("x") is 0
+end</pre></div></root>
+    <hr/>
+    The current page is trove/option.html.
+    The previous page is <a href = "../builtin/booleans.html">../builtin/booleans.html</a>.
+    The next page is <a href = "../trove/either.html">../trove/either.html</a>.
+    </div>
+  </body>
+</html>
