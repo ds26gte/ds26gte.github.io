@@ -23,7 +23,7 @@
 
   [raw-array: 1, 2, 3] is=~ ra
   [raw-array: 1, 2, 3] is=~ [raw-array: 1, 2, 3]
-end</pre><p>  </p><div><pre class="pyret-display">raw-array-of :: () -&gt; return</pre></div><p>Constructs an <tt class="pyretexpr">RawArray</tt> of length <tt class="pyretexpr">count</tt>, where every element is the value given as <tt class="pyretexpr">value</tt>.</p><p>Note that <tt class="pyretexpr">value</tt> is not <i>copied</i>, so, the elements of <tt class="pyretexpr">RawArray</tt>s created with <tt class="pyretexpr">raw-array-of</tt> will always be <tt class="pyretexpr">identicalequality</tt> (with the usual caveats if the <tt class="pyretexpr">value</tt> was a function or method).</p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">raw-array-of :: <span>a, Number -&gt; <RA-of>a</RA-of></span></pre></div><p>Constructs an <tt class="pyretexpr">RawArray</tt> of length <tt class="pyretexpr">count</tt>, where every element is the value given as <tt class="pyretexpr">value</tt>.</p><p>Note that <tt class="pyretexpr">value</tt> is not <i>copied</i>, so, the elements of <tt class="pyretexpr">RawArray</tt>s created with <tt class="pyretexpr">raw-array-of</tt> will always be <tt class="pyretexpr">identicalequality</tt> (with the usual caveats if the <tt class="pyretexpr">value</tt> was a function or method).</p><pre>check:
   arr = raw-array-of(true, 2)
   arr is=~ [raw-array: true, true]
   arr is-not [raw-array: true, true]
@@ -40,12 +40,12 @@ end</pre><p>  </p><div><pre class="pyret-display">raw-array-of :: () -&gt; retur
   arr-of-arrs is=~ [raw-array: [raw-array: false, false],
     [raw-array: false, false], [raw-array: false, false]]
 end
-</pre><p>  </p><div><pre class="pyret-display">raw-array-get :: () -&gt; a</pre></div><p>Returns the value at the given <tt class="pyretexpr">index</tt>.</p><p>Using an index too large, negative, or not a whole number raises an error.</p><pre>check:
+</pre><p>  </p><div><pre class="pyret-display">raw-array-get :: <span><RA-of>a</RA-of>, Number -&gt; a</span></pre></div><p>Returns the value at the given <tt class="pyretexpr">index</tt>.</p><p>Using an index too large, negative, or not a whole number raises an error.</p><pre>check:
   a = [raw-array: "a", "b", "c"]
   raw-array-get(a, 0) is "a"
   raw-array-get(a, 1) is "b"
   raw-array-get(a, 2) is "c"
-end</pre><p>  </p><div><pre class="pyret-display">raw-array-set :: () -&gt; <RA-of>a</RA-of></pre></div><p>Updates the value at the given <tt class="pyretexpr">index</tt>, returning the new value.  The update is stateful, so all references to the <tt class="pyretexpr">RawArray</tt> see the update.</p><p>Using an index too large, negative, or not a whole number raises an error.</p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">raw-array-set :: <span><RA-of>a</RA-of>, Number, a -&gt; <RA-of>a</RA-of></span></pre></div><p>Updates the value at the given <tt class="pyretexpr">index</tt>, returning the new value.  The update is stateful, so all references to the <tt class="pyretexpr">RawArray</tt> see the update.</p><p>Using an index too large, negative, or not a whole number raises an error.</p><pre>check:
   a = [raw-array: "a", "b", "c"]
   raw-array-get(a, 0) is "a"
 
@@ -56,47 +56,47 @@ end</pre><p>  </p><div><pre class="pyret-display">raw-array-set :: () -&gt; <RA-
 
   c = raw-array-set(a, 0, "z")
   c is=~ [raw-array: "z", "b", "c"]
-end</pre><p>  </p><div><pre class="pyret-display">raw-array-length :: () -&gt; Number</pre></div><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">raw-array-length :: <span><RA-of>a</RA-of> -&gt; Number</span></pre></div><pre>check:
   a = [raw-array: "a", "b"]
   raw-array-length(a) is 2
   b = [raw-array:]
   raw-array-length(b) is 0
-end</pre><p>  </p><div><pre class="pyret-display">raw-array-to-list :: () -&gt; List&lt;a&gt;</pre></div><p>    Converts a <tt class="pyretexpr">RawArray</tt> to a <tt class="pyretexpr">Listlists</tt> containing     the same elements in the same order.</p><p>    Note that it does <i>not</i> recursively convert <tt class="pyretexpr">RawArray</tt>s;     only the top-level is converted.</p><p>    </p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">raw-array-to-list :: <span><RA-of>a</RA-of> -&gt; List&lt;a&gt;</span></pre></div><p>    Converts a <tt class="pyretexpr">RawArray</tt> to a <tt class="pyretexpr">Listlists</tt> containing     the same elements in the same order.</p><p>    Note that it does <i>not</i> recursively convert <tt class="pyretexpr">RawArray</tt>s;     only the top-level is converted.</p><p>    </p><pre>check:
   a = [raw-array: 1, 2, 3]
   raw-array-to-list(a) is [list: 1, 2, 3]
 
   a2 = raw-array-of([raw-array:], 3)
   raw-array-to-list(a2) is=~ [list: [raw-array:], [raw-array:], [raw-array:]]
   raw-array-to-list(a2) is-not=~ [list: [list:], [list:], [list:]]
-end</pre><p>  </p><div><pre class="pyret-display">raw-array-from-list :: () -&gt; <RA-of>a</RA-of></pre></div><p>    Converts a <tt class="pyretexpr">Listlists</tt> to a <tt class="pyretexpr">RawArray</tt> containing     the same elements in the same order.</p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">raw-array-from-list :: <span>List&lt;a&gt; -&gt; <RA-of>a</RA-of></span></pre></div><p>    Converts a <tt class="pyretexpr">Listlists</tt> to a <tt class="pyretexpr">RawArray</tt> containing     the same elements in the same order.</p><pre>check:
   raw-array-from-list(empty) is=~ [raw-array: ]
   raw-array-from-list(empty) is-not [raw-array: ]
 
   raw-array-from-list([list: 1, 2, 3]) is=~ [raw-array: 1, 2, 3]
   raw-array-from-list([list: 1, 2, 3]) is-not [raw-array: 1, 2, 3]
-end</pre><p>  </p><div><pre class="pyret-display">raw-array-build :: () -&gt; <RA-of>a</RA-of></pre></div><p>    Constructs an array of length <tt class="pyretexpr">size</tt>, and fills it with the result of     calling the function <tt class="pyretexpr">f</tt> with each index from <tt class="pyretexpr">0</tt> to <tt class="pyretexpr">size - 1</tt>.</p><p>  </p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">raw-array-build :: <span><span>Number -&gt; a</span>, Number -&gt; <RA-of>a</RA-of></span></pre></div><p>    Constructs an array of length <tt class="pyretexpr">size</tt>, and fills it with the result of     calling the function <tt class="pyretexpr">f</tt> with each index from <tt class="pyretexpr">0</tt> to <tt class="pyretexpr">size - 1</tt>.</p><p>  </p><pre>check:
   fun sq(x): x * x end
   raw-array-build(sq, 4) is=~ [raw-array: sq(0), sq(1), sq(2), sq(3)]
-end</pre><p>  </p><div><pre class="pyret-display">raw-array-build-opt :: () -&gt; <RA-of>Any</RA-of></pre></div><p>    Constructs an array based on the results of     calling the function <tt class="pyretexpr">f</tt> with each index from <tt class="pyretexpr">0</tt> to <tt class="pyretexpr">size - 1</tt>. For each index, if the result of <tt class="pyretexpr">f</tt> is <tt class="pyretexpr">some(value)</tt>,     then <tt class="pyretexpr">value</tt> is included in the resulting array (it is not included     for <tt class="pyretexpr">none</tt>). The size of the resulting array is equal to the number of     <tt class="pyretexpr">some</tt> results.</p><p>    </p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">raw-array-build-opt :: <span><span>Number -&gt; Option&lt;Any&gt;</span> -&gt; Number</span></pre></div><p>    Constructs an array based on the results of     calling the function <tt class="pyretexpr">f</tt> with each index from <tt class="pyretexpr">0</tt> to <tt class="pyretexpr">size - 1</tt>. For each index, if the result of <tt class="pyretexpr">f</tt> is <tt class="pyretexpr">some(value)</tt>,     then <tt class="pyretexpr">value</tt> is included in the resulting array (it is not included     for <tt class="pyretexpr">none</tt>). The size of the resulting array is equal to the number of     <tt class="pyretexpr">some</tt> results.</p><p>    </p><pre>check:
   fun even(n):
     if num-modulo(n, 2) == 0: some(n)
     else: none
     end
   end
   raw-array-build-opt(even, 10) is=~ [raw-array: 0, 2, 4, 6, 8]
-end</pre><p>  </p><div><pre class="pyret-display">raw-array-map :: () -&gt; <RA-of>b</RA-of></pre></div><p>  Creates a new array by applying <tt class="pyretexpr">f</tt> to each element of the array.   Similar to <tt class="pyretexpr">maplists</tt>. Has an argument order that works with   <tt class="pyretexpr">for</tt>.</p><p>  </p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">raw-array-map :: <span><span>a -&gt; b</span> -&gt; <RA-of>a</RA-of></span></pre></div><p>  Creates a new array by applying <tt class="pyretexpr">f</tt> to each element of the array.   Similar to <tt class="pyretexpr">maplists</tt>. Has an argument order that works with   <tt class="pyretexpr">for</tt>.</p><p>  </p><pre>check:
   a = [raw-array: "apple", "banana", "plum"]
   lengths = for raw-array-map(s from a):
     string-length(s)
   end
   lengths is=~ [raw-array: 5, 6, 4]
-end</pre><p>  Note that the test uses <tt class="pyretexpr">is=~testing</tt>, because raw arrays are   mutable and so the two values in the shown test are not   <tt class="pyretexpr">equal-alwaysequality</tt>, they are <tt class="pyretexpr">equal-nowequality</tt>.</p><p>  </p><div><pre class="pyret-display">raw-array-filter :: () -&gt; <RA-of>a</RA-of></pre></div><p>  Applies function <tt class="pyretexpr">f</tt> to each element of <tt class="pyretexpr">array</tt> from left to right,   constructing a new <tt class="pyretexpr">RawArray</tt> out of the elements for which <tt class="pyretexpr">f</tt>   returned <tt class="pyretexpr">true</tt>.   Similar to <tt class="pyretexpr">filterlists</tt>. Has an argument order that works with   <tt class="pyretexpr">for</tt>.</p><p>  </p><pre>check:
+end</pre><p>  Note that the test uses <tt class="pyretexpr">is=~testing</tt>, because raw arrays are   mutable and so the two values in the shown test are not   <tt class="pyretexpr">equal-alwaysequality</tt>, they are <tt class="pyretexpr">equal-nowequality</tt>.</p><p>  </p><div><pre class="pyret-display">raw-array-filter :: <span><span>a -&gt; Boolean</span> -&gt; <RA-of>a</RA-of></span></pre></div><p>  Applies function <tt class="pyretexpr">f</tt> to each element of <tt class="pyretexpr">array</tt> from left to right,   constructing a new <tt class="pyretexpr">RawArray</tt> out of the elements for which <tt class="pyretexpr">f</tt>   returned <tt class="pyretexpr">true</tt>.   Similar to <tt class="pyretexpr">filterlists</tt>. Has an argument order that works with   <tt class="pyretexpr">for</tt>.</p><p>  </p><pre>check:
   a = [raw-array: "apple", "banana", "plum"]
   p-words = for raw-array-filter(s from a):
     string-contains(s, "p")
   end
   p-words is=~ [raw-array: "apple", "plum"]
-end</pre><p>  </p><div><pre class="pyret-display">raw-array-sort-nums :: () -&gt; <RA-of>Number</RA-of></pre></div><p>  Sorts the given array <i>in-place</i> in ascending or descending order   according to the <tt class="pyretexpr">asc</tt> parameter. Returns a reference to the   original array, which will have its contents mutably updated.</p><p>  </p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">raw-array-sort-nums :: <span><RA-of>Number</RA-of> -&gt; Boolean</span></pre></div><p>  Sorts the given array <i>in-place</i> in ascending or descending order   according to the <tt class="pyretexpr">asc</tt> parameter. Returns a reference to the   original array, which will have its contents mutably updated.</p><p>  </p><pre>check:
   a = [raw-array: 3, 1, 4, 1, 5, 9, 2]
 
   asc = raw-array-sort-nums(a, true)
@@ -105,7 +105,7 @@ end</pre><p>  </p><div><pre class="pyret-display">raw-array-sort-nums :: () -&gt
 
   raw-array-sort-nums(a, false)
   a is=~ [raw-array: 9, 5, 4, 3, 2, 1, 1]
-end</pre><p>  </p><div><pre class="pyret-display">raw-array-sort-by :: () -&gt; <RA-of>a</RA-of></pre></div><p>  Creates a new array containing the sorted contents of the given array. The sort   order is determined by calling the <tt class="pyretexpr">key</tt> function on each element to   get a number, and sorting the elements by their key value (in increasing key   order if <tt class="pyretexpr">asc</tt> is <tt class="pyretexpr">true</tt>, decreasing if <tt class="pyretexpr">false</tt>). Ties are   broken by the order in which the element is present in the initial array.</p><p>  </p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">raw-array-sort-by :: <span><RA-of>a</RA-of>, <span>a -&gt; Number</span> -&gt; Boolean</span></pre></div><p>  Creates a new array containing the sorted contents of the given array. The sort   order is determined by calling the <tt class="pyretexpr">key</tt> function on each element to   get a number, and sorting the elements by their key value (in increasing key   order if <tt class="pyretexpr">asc</tt> is <tt class="pyretexpr">true</tt>, decreasing if <tt class="pyretexpr">false</tt>). Ties are   broken by the order in which the element is present in the initial array.</p><p>  </p><pre>check:
   a = [raw-array: "let", "us", "go", "then", "you", "and", "i"]
 
   asc = raw-array-sort-by(a, string-length, true)
@@ -116,7 +116,7 @@ end</pre><p>  </p><div><pre class="pyret-display">raw-array-sort-by :: () -&gt; 
   desc is=~ [raw-array: "then", "let", "you", "and", "us", "go", "i"]
 
   a is=~ [raw-array: "let", "us", "go", "then", "you", "and", "i"]
-end</pre><p>  </p><div><pre class="pyret-display">raw-array-fold :: () -&gt; b</pre></div><p>  Combines the elements in the array with a function that accumulates each   element with an intermediate result.   The numeric argument to   the accumulator is the index of the current element.</p><p>  Similar to <tt class="pyretexpr">fold_nlists</tt>.</p><p>  </p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">raw-array-fold :: <span><span>b, a, Number -&gt; b</span>, b, <RA-of>a</RA-of>, Number -&gt; b</span></pre></div><p>  Combines the elements in the array with a function that accumulates each   element with an intermediate result.   The numeric argument to   the accumulator is the index of the current element.</p><p>  Similar to <tt class="pyretexpr">fold_nlists</tt>.</p><p>  </p><pre>check:
   a = [raw-array: "a", "b", "c"]
   str = for raw-array-fold(str from "", elt from a, i from 0):
     if i &lt; (raw-array-length(a) - 1):
@@ -126,7 +126,7 @@ end</pre><p>  </p><div><pre class="pyret-display">raw-array-fold :: () -&gt; b</
     end
   end
   str is "a: 0, b: 1, c: 2"
-end</pre><p>  </p><div><pre class="pyret-display">raw-array-concat :: () -&gt; <RA-of>a</RA-of></pre></div><p>  Creates a new array with all the elements of <tt class="pyretexpr">array1</tt> followed by all   the elements of <tt class="pyretexpr">array2</tt>.</p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">raw-array-concat :: <span><RA-of>a</RA-of> -&gt; <RA-of>a</RA-of></span></pre></div><p>  Creates a new array with all the elements of <tt class="pyretexpr">array1</tt> followed by all   the elements of <tt class="pyretexpr">array2</tt>.</p><pre>check:
   a1 = [raw-array: 5, 6, 7]
   a2 = [raw-array: 0, 3, 99, -1, 7]
 
@@ -135,7 +135,7 @@ end</pre><p>  </p><div><pre class="pyret-display">raw-array-concat :: () -&gt; <
 
   a1 is=~ [raw-array: 5, 6, 7]
   a2 is=~ [raw-array: 0, 3, 99, -1, 7]
-end</pre><p>  </p><div><pre class="pyret-display">raw-array-duplicate :: () -&gt; return</pre></div><p>  Returns a copy of the given array, such that corresponding elements in the   result are <a href="lang/equality.html#eq-fun-identical"></a> to those in the source array.</p><p>  </p><pre>check:
+end</pre><p>  </p><div><pre class="pyret-display">raw-array-duplicate :: </pre></div><p>  Returns a copy of the given array, such that corresponding elements in the   result are <a href="lang/equality.html#eq-fun-identical"></a> to those in the source array.</p><p>  </p><pre>check:
   a = [raw-array: 1, 2, 3]
   b = raw-array-duplicate(a)
   a is=~ b

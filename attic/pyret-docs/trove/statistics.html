@@ -11,57 +11,57 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="statistics" toclevel="1" tocentry="yes"></h1><p>  The Pyret Statistics library.  It consists of functions that calculate   relevant statistical values of data sets, and functions for statistical   modeling of numerical data.</p><p>  Every function in this library is available on the <tt class="pyretexpr">statistics</tt> module   object.  For example, if you used <tt class="pyretexpr">import statistics as S</tt>, you would   write <tt class="pyretexpr">S.median</tt> to access <tt class="pyretexpr">median</tt> below.  If you used   <tt class="pyretexpr">include</tt>, then you can refer to identifiers without writing <tt class="pyretexpr">S.</tt>   as a prefix.</p><p>  </p><h2 id="Basic-Statistical-Values" toclevel="2" tocentry="yes">Basic Statistical Values</h2><p>  </p><div><pre class="pyret-display">mean :: (<span>l :: List&lt;Number&gt;</span>) -&gt; Number</pre><p>Calculates the arithmetic mean, also known as the average, of the numbers in <tt class="pyretexpr">l</tt>.  This is simply the sum of all the values in the list, divided by its length.</p><pre>check:
+    <root><div><h1 id="statistics" toclevel="1" tocentry="yes"></h1><p>  The Pyret Statistics library.  It consists of functions that calculate   relevant statistical values of data sets, and functions for statistical   modeling of numerical data.</p><p>  Every function in this library is available on the <tt class="pyretexpr">statistics</tt> module   object.  For example, if you used <tt class="pyretexpr">import statistics as S</tt>, you would   write <tt class="pyretexpr">S.median</tt> to access <tt class="pyretexpr">median</tt> below.  If you used   <tt class="pyretexpr">include</tt>, then you can refer to identifiers without writing <tt class="pyretexpr">S.</tt>   as a prefix.</p><p>  </p><h2 id="Basic-Statistical-Values" toclevel="2" tocentry="yes">Basic Statistical Values</h2><p>  </p><div><pre class="pyret-display">mean :: <span>(<span>l -&gt; List&lt;Number&gt;</span>)</span></pre><p>Calculates the arithmetic mean, also known as the average, of the numbers in <tt class="pyretexpr">l</tt>.  This is simply the sum of all the values in the list, divided by its length.</p><pre>check:
   mean([list: ]) raises "Empty List"
   mean([list: 1]) is 1
   mean([list: 2, 2, 4.5, 1.5, 1, 1]) is 2
-end</pre></div><p>  </p><div><pre class="pyret-display">median :: (<span>l :: List&lt;Number&gt;</span>) -&gt; Number</pre><p>Calculates the median of the numbers in <tt class="pyretexpr">l</tt>.  This is the ``middle-most’’ value in the list, if the values were sorted.  If the list is of even length, returns the average of the two middle-most values.</p><pre>check:
+end</pre></div><p>  </p><div><pre class="pyret-display">median :: <span>(<span>l -&gt; List&lt;Number&gt;</span>)</span></pre><p>Calculates the median of the numbers in <tt class="pyretexpr">l</tt>.  This is the ``middle-most’’ value in the list, if the values were sorted.  If the list is of even length, returns the average of the two middle-most values.</p><pre>check:
   median([list: ]) raises "Empty List"
   median([list: 2]) is 2
   median([list: -1, 0, 1, 2, 5]) is 1
-end</pre></div><p>  </p><div><pre class="pyret-display">modes :: (<span>l :: List&lt;Number&gt;</span>) -&gt; List&lt;Number&gt;</pre><p>    Calculates the modes of the numbers in <tt class="pyretexpr">l</tt>.  These are the numbers   that appear most often in the list.  If <i>no</i> number appears   more than once, returns the empty list.  The modes will be returned in sorted order.</p><p>Computing the mode of a list of values is unambiguous when there is a unique ``most common’’ element. Computer scientists and mathematicians agree that when two values are equally ``most common’’, they are both considered modes of the list. The natural generalization of this is that when all values occur equally often, they are all modes of the list. However, many high-school textbooks assert that when no element appears more than once, no element should be considered a mode. To avoid confusing high-school students, we adopt the definition they will find in their textbooks.</p><p>  </p><pre>check:
+end</pre></div><p>  </p><div><pre class="pyret-display">modes :: <span>(<span>l -&gt; List&lt;Number&gt;</span>)</span></pre><p>    Calculates the modes of the numbers in <tt class="pyretexpr">l</tt>.  These are the numbers   that appear most often in the list.  If <i>no</i> number appears   more than once, returns the empty list.  The modes will be returned in sorted order.</p><p>Computing the mode of a list of values is unambiguous when there is a unique ``most common’’ element. Computer scientists and mathematicians agree that when two values are equally ``most common’’, they are both considered modes of the list. The natural generalization of this is that when all values occur equally often, they are all modes of the list. However, many high-school textbooks assert that when no element appears more than once, no element should be considered a mode. To avoid confusing high-school students, we adopt the definition they will find in their textbooks.</p><p>  </p><pre>check:
   modes([list: ]) is [list: ]
   modes([list: 1, 2, 3, 4]) is [list: ]
   modes([list: 1, 2, 3, 1, 4]) is [list: 1]
   modes([list: 1, 2, 1, 2, 2, 1]) is [list: 1, 2]
   modes([list: 1, 2, 2, 1, 2, 1]) is [list: 1, 2]
-end</pre></div><p>  </p><div><pre class="pyret-display">has-mode :: (<span>l :: List&lt;Number&gt;</span>) -&gt; Boolean</pre><p>  Determines if a list of numbers has any modes, i.e., any repeated values.</p><pre>check:
+end</pre></div><p>  </p><div><pre class="pyret-display">has-mode :: <span>(<span>l -&gt; List&lt;Number&gt;</span>)</span></pre><p>  Determines if a list of numbers has any modes, i.e., any repeated values.</p><pre>check:
   has-mode([list: ]) is false
   has-mode([list: 1, 2, 3, 4]) is false
   has-mode([list: 1, 2, 2, 1, 2, 2]) is true
   has-mode([list: 1, 2, 3, 2]) is true
-end</pre></div><p>  </p><div><pre class="pyret-display">mode-smallest :: (<span>l :: List&lt;Number&gt;</span>) -&gt; Number</pre><p>  Returns the smallest mode of a list of numbers, if any is present.</p><pre>check:
+end</pre></div><p>  </p><div><pre class="pyret-display">mode-smallest :: <span>(<span>l -&gt; List&lt;Number&gt;</span>)</span></pre><p>  Returns the smallest mode of a list of numbers, if any is present.</p><pre>check:
   mode-smallest([list: ]) raises "empty"
   mode-smallest([list: 1]) raises "no duplicate values"
   mode-smallest([list: 1, 2, 3, 4, 5]) raises "no duplicate values"
   mode-smallest([list: 1, 1, 2]) is 1
   mode-smallest([list: 1, 2, 1, 2]) is 1
-end</pre></div><p>  </p><div><pre class="pyret-display">mode-largest :: (<span>l :: List&lt;Number&gt;</span>) -&gt; Number</pre><p>  Returns the largest mode of a list of numbers, if any is present.</p><pre>check:
+end</pre></div><p>  </p><div><pre class="pyret-display">mode-largest :: <span>(<span>l -&gt; List&lt;Number&gt;</span>)</span></pre><p>  Returns the largest mode of a list of numbers, if any is present.</p><pre>check:
   mode-smallest([list: ]) raises "empty"
   mode-smallest([list: 1]) raises "no duplicate values"
   mode-smallest([list: 1, 2, 3, 4, 5]) raises "no duplicate values"
   mode-smallest([list: 1, 1, 2]) is 1
   mode-smallest([list: 1, 2, 1, 2]) is 2
-end</pre></div><p>  </p><div><pre class="pyret-display">mode-any :: (<span>l :: List&lt;Number&gt;</span>) -&gt; Number</pre><p>  Returns an arbitrary mode of a list of numbers, if any is present.</p><pre>check:
+end</pre></div><p>  </p><div><pre class="pyret-display">mode-any :: <span>(<span>l -&gt; List&lt;Number&gt;</span>)</span></pre><p>  Returns an arbitrary mode of a list of numbers, if any is present.</p><pre>check:
   mode-any([list: ]) raises "empty"
   mode-any([list: 1]) raises "no duplicate values"
   mode-any([list: 1, 2, 3, 4, 5]) raises "no duplicate values"
   mode-any([list: 1, 1, 2]) is 1
   mode-any([list: 1, 2, 1, 2]) satisfies lam(m): (m == 1) or (m == 2) end
-end</pre></div><p>  </p><div><pre class="pyret-display">stdev :: (<span>l :: List&lt;Number&gt;</span>) -&gt; Number</pre><p>Gives the <i>population</i> or <i>uncorrected sample</i> standard deviation of the data set represented by numbers in <tt class="pyretexpr">l</tt>.</p><pre>check:
+end</pre></div><p>  </p><div><pre class="pyret-display">stdev :: <span>(<span>l -&gt; List&lt;Number&gt;</span>)</span></pre><p>Gives the <i>population</i> or <i>uncorrected sample</i> standard deviation of the data set represented by numbers in <tt class="pyretexpr">l</tt>.</p><pre>check:
   stdev([list: ]) raises "list is empty"
   stdev([list: 2]) is 0
   stdev([list: 2, 4, 4, 4, 5, 5, 7, 9]) is 2
-end</pre></div><p>  </p><div><pre class="pyret-display">stdev-sample :: (<span>l :: List&lt;Number&gt;</span>) -&gt; Number</pre><p>Gives the <i>corrected sample</i> standard deviation of the data set represented by numbers in <tt class="pyretexpr">l</tt>.</p><pre>check:
+end</pre></div><p>  </p><div><pre class="pyret-display">stdev-sample :: <span>(<span>l -&gt; List&lt;Number&gt;</span>)</span></pre><p>Gives the <i>corrected sample</i> standard deviation of the data set represented by numbers in <tt class="pyretexpr">l</tt>.</p><pre>check:
   stdev-sample([list: ]) raises "list is empty"
   stdev-sample([list: 2]) raises "division by zero"
   stdev-sample([list: 2, 4, 4, 4, 5, 5, 7, 9]) is-roughly 2.1380899
-end</pre></div><p>  </p><h2 id="Statistical-Models" toclevel="2" tocentry="yes">Statistical Models</h2><p>  Pyret currently supports two functions for working with simple   linear-regression models.  Further support will be added over time.</p><div><pre class="pyret-display">linear-regression :: (<span>X :: List&lt;Number&gt;</span>, <span>Y :: List&lt;Number&gt;</span>) -&gt; <span>Number -&gt; Number</span></pre><p>Calculates a linear regression to model a simple independent -&gt; dependent variable relationship, using ordinary least squares regression.  Its result is a <i>predictor function</i> to predict a y-value given an x-value.</p><pre>check:
+end</pre></div><p>  </p><h2 id="Statistical-Models" toclevel="2" tocentry="yes">Statistical Models</h2><p>  Pyret currently supports two functions for working with simple   linear-regression models.  Further support will be added over time.</p><div><pre class="pyret-display">linear-regression :: <span>(<span>X -&gt; List&lt;Number&gt;</span>, <span>Y -&gt; List&lt;Number&gt;</span>)</span></pre><p>Calculates a linear regression to model a simple independent -&gt; dependent variable relationship, using ordinary least squares regression.  Its result is a <i>predictor function</i> to predict a y-value given an x-value.</p><pre>check:
   predictor = linear-regression([list: 0, 1, 2, 3], [list: 3, 2, 1, 0])
   predictor(1) is-roughly 2
   predictor(1.5) is-roughly 1.5
   predictor(1000) is-roughly -997
-end</pre></div><div><pre class="pyret-display">r-squared :: (<span>X :: List&lt;Number&gt;</span>, <span>Y :: List&lt;Number&gt;</span>, <span>f :: List&lt;Number&gt;</span>) -&gt; Number</pre><p>Calculates the coefficient of determination for a simple linear model, which measures how well the predictor function (from linear-regression) matches the given actual function (the argument <tt class="pyretexpr">f</tt>).</p><pre>PI = ~3.1415926535
+end</pre></div><div><pre class="pyret-display">r-squared :: <span>(<span>X -&gt; List&lt;Number&gt;</span>, <span>Y -&gt; List&lt;Number&gt;</span>, <span>f -&gt; List&lt;Number&gt;</span>)</span></pre><p>Calculates the coefficient of determination for a simple linear model, which measures how well the predictor function (from linear-regression) matches the given actual function (the argument <tt class="pyretexpr">f</tt>).</p><pre>PI = ~3.1415926535
 
 fun f-good(x): 3 - x end
 fun f-poor(x): 3 * num-cos((x * PI) / 6) end

@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="fetch" toclevel="1" tocentry="yes"></h1><div><pre class="pyret-display">fetch :: (<span>url :: </span>) -&gt; <E-of>StringString</E-of></pre><p>  Fetches the content at the given <tt class="pyretexpr">url</tt> with HTTP GET, expecting that   the result is <tt class="pyretexpr">text/plain</tt>.</p><p>  If no errors occur, returns <tt class="pyretexpr">lefteither</tt> with the returned   string body. The user is expected to decompose this string   using <tt class="pyretexpr">stringString</tt> or other functions.</p><p>  If any errors occur, returns <tt class="pyretexpr">righteither</tt> with that error as a string.</p><div><pre>import fetch as F
+    <root><div><h1 id="fetch" toclevel="1" tocentry="yes"></h1><div><pre class="pyret-display">fetch :: <span>(<span>url :: </span>)</span></pre><p>  Fetches the content at the given <tt class="pyretexpr">url</tt> with HTTP GET, expecting that   the result is <tt class="pyretexpr">text/plain</tt>.</p><p>  If no errors occur, returns <tt class="pyretexpr">lefteither</tt> with the returned   string body. The user is expected to decompose this string   using <tt class="pyretexpr">stringString</tt> or other functions.</p><p>  If any errors occur, returns <tt class="pyretexpr">righteither</tt> with that error as a string.</p><div><pre>import fetch as F
 import either as Ei
 
 
