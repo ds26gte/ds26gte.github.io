@@ -51,7 +51,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     [S.tree-set: 1, 2, 3] is [S.tree-set: 1, 2, 3] 
     [S.tree-set: 1, 2, 2] is [S.tree-set: 1, 2] 
     [S.tree-set: [L.list: 1], [L.list: 1], [L.list: 2]] raises &quot;binop-error&quot; 
- end">(Try it!)</a></p></div><div><p><span><a name="empty-tree-set-70"></a></span></p><div class="pyret-display">empty-tree-set :: <S-of>a</S-of></div></div><p>An empty set, represented as a tree.</p><p>collection-doc</p><p>Another name for <tt class="pyretexpr">list-set</tt>.</p><div><pre class="pyret-display">list-to-list-set :: <span>(<span>lst -&gt; List&lt;a&gt;</span>)</span></pre></div><p>Constructs a list-set out of the elements in the list.</p><div><pre>import sets as S
+ end">(Try it!)</a></p></div><div><p><span><a name="empty-tree-set-70"></a></span></p><div class="pyret-display">empty-tree-set :: <S-of>a</S-of></div></div><p>An empty set, represented as a tree.</p><p>collection-doc</p><p>Another name for <tt class="pyretexpr">list-set</tt>.</p><div><pre class="pyret-display">list-to-list-set :: <span>(<span>lst -&gt; <span>List&lt;a&gt;</span></span>)</span></pre></div><p>Constructs a list-set out of the elements in the list.</p><div><pre>import sets as S
 import lists as L
 
 check:
@@ -63,7 +63,7 @@ end</pre><p><a class="show-embed" code="import sets as S
  check: 
     s1 = S.list-to-list-set([L.list: 1, 2, 3, 3, 3]) 
     s1 is [S.list-set: 1, 2, 3] 
- end">(Try it!)</a></p></div><div><pre class="pyret-display">list-to-tree-set :: <span>(<span>lst -&gt; List&lt;a&gt;</span>)</span></pre></div><p>Constructs a tree-set out of the elements in the list.</p><div><pre>import sets as S
+ end">(Try it!)</a></p></div><div><pre class="pyret-display">list-to-tree-set :: <span>(<span>lst -&gt; <span>List&lt;a&gt;</span></span>)</span></pre></div><p>Constructs a tree-set out of the elements in the list.</p><div><pre>import sets as S
 import lists as L
 
 check:
@@ -75,7 +75,7 @@ end</pre><p><a class="show-embed" code="import sets as S
  check: 
     s1 = S.list-to-tree-set([L.list: 1, 2, 3, 3, 3]) 
     s1 is [S.tree-set: 1, 2, 3] 
- end">(Try it!)</a></p></div><div><pre class="pyret-display">list-to-set :: <span>(<span>lst -&gt; List&lt;a&gt;</span>)</span></pre></div><p>Another name for <tt class="pyretexpr">list-to-list-set</tt>.</p><h2 id="Set-Methods" toclevel="2" tocentry="yes">Set Methods</h2><div><tt>.add :: contract</tt></div><p>Constructs a new set containing the added element if it was not already present.</p><div><pre>import sets as S
+ end">(Try it!)</a></p></div><div><pre class="pyret-display">list-to-set :: <span>(<span>lst -&gt; <span>List&lt;a&gt;</span></span>)</span></pre></div><p>Another name for <tt class="pyretexpr">list-to-list-set</tt>.</p><h2 id="Set-Methods" toclevel="2" tocentry="yes">Set Methods</h2><div><tt>.add :: contract</tt></div><p>Constructs a new set containing the added element if it was not already present.</p><div><pre>import sets as S
 
 check:
   s1 = [S.set: 1, 2, 3]

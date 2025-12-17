@@ -11,13 +11,13 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="string-dict" toclevel="1" tocentry="yes"></h1><h2 id="The-StringDict-Type" toclevel="2" tocentry="yes">The StringDict Type</h2><div><div class="pyret-display">StringDict&lt;a&gt;</div><p><span><a name="StringDict&lt;a&gt;-72"></a></span> <tt class="pyretexpr">StringDict</tt>s keep track of a mapping from <tt class="pyretexpr">Stringstrings</tt>s to any Pyret value. A <tt class="pyretexpr">StringDict</tt> is immutable, i.e., a mapping cannot be changed; however, a new <tt class="pyretexpr">StringDict</tt> can be fashioned from an existing <tt class="pyretexpr">StringDict</tt> with a new, omitted, or changed mapping.</p><p>A <tt class="pyretexpr">StringDict</tt> can be unfrozen, i.e.,  used as the basis for <tt class="pyretexpr">MutableStringDict</tt>, which does allow modification (see below).</p><p>There are no variants for <tt class="pyretexpr">StringDict</tt>s, and programs cannot use <tt class="pyretexpr">cases</tt> statements with <tt class="pyretexpr">StringDict</tt>s.  Instead, they can be created with the constructors below, and manipulated with the methods and functions below.</p></div><h2 id="StringDict-Constructor" toclevel="2" tocentry="yes">StringDict Constructor</h2><p>collection-doc</p><p>Creates a string-dict with the given <tt class="pyretexpr">elt</tt>s.</p><pre>sd1 = [string-dict: "a", 5, "b", 10]</pre><h2 id="StringDict-Methods" toclevel="2" tocentry="yes">StringDict Methods</h2><div><tt>.get :: <span>StringDict&lt;a&gt;, String -&gt; Option&lt;a&gt;</span></tt></div><p>Returns <tt class="pyretexpr">noneoption</tt> if the key is not in the dictionary, and a <tt class="pyretexpr">someoption</tt> containing the value the key maps to if the key is in the dictionary.</p><pre>check:
+    <root><div><h1 id="string-dict" toclevel="1" tocentry="yes"></h1><h2 id="The-StringDict-Type" toclevel="2" tocentry="yes">The StringDict Type</h2><div><div class="pyret-display">StringDict&lt;a&gt;</div><p><span><a name="StringDict&lt;a&gt;-72"></a></span> <tt class="pyretexpr">StringDict</tt>s keep track of a mapping from <tt class="pyretexpr">Stringstrings</tt>s to any Pyret value. A <tt class="pyretexpr">StringDict</tt> is immutable, i.e., a mapping cannot be changed; however, a new <tt class="pyretexpr">StringDict</tt> can be fashioned from an existing <tt class="pyretexpr">StringDict</tt> with a new, omitted, or changed mapping.</p><p>A <tt class="pyretexpr">StringDict</tt> can be unfrozen, i.e.,  used as the basis for <tt class="pyretexpr">MutableStringDict</tt>, which does allow modification (see below).</p><p>There are no variants for <tt class="pyretexpr">StringDict</tt>s, and programs cannot use <tt class="pyretexpr">cases</tt> statements with <tt class="pyretexpr">StringDict</tt>s.  Instead, they can be created with the constructors below, and manipulated with the methods and functions below.</p></div><h2 id="StringDict-Constructor" toclevel="2" tocentry="yes">StringDict Constructor</h2><p>collection-doc</p><p>Creates a string-dict with the given <tt class="pyretexpr">elt</tt>s.</p><pre>sd1 = [string-dict: "a", 5, "b", 10]</pre><h2 id="StringDict-Methods" toclevel="2" tocentry="yes">StringDict Methods</h2><div><tt>.get :: <span><span>StringDict&lt;a&gt;</span>, String -&gt; <span>Option&lt;a&gt;</span></span></tt></div><p>Returns <tt class="pyretexpr">noneoption</tt> if the key is not in the dictionary, and a <tt class="pyretexpr">someoption</tt> containing the value the key maps to if the key is in the dictionary.</p><pre>check:
   [string-dict: "a", 5].get("a") is some(5)
   [string-dict: "a", 5].get("b") is none
-end</pre><div><tt>.get-value :: <span>StringDict&lt;a&gt;, String -&gt; a</span></tt></div><p>Returns the value that <tt class="pyretexpr">key</tt> maps to if it is present, and throws an exception otherwise.</p><pre>check:
+end</pre><div><tt>.get-value :: <span><span>StringDict&lt;a&gt;</span>, String -&gt; a</span></tt></div><p>Returns the value that <tt class="pyretexpr">key</tt> maps to if it is present, and throws an exception otherwise.</p><pre>check:
   [string-dict: "a", 5].get-value("a") is 5
   [string-dict: "a", 5].get-value("b") raises "Key b not found"
-end</pre><div><tt>.set :: <span>StringDict&lt;a&gt;, String, a -&gt; StringDict&lt;a&gt;</span></tt></div><p>Returns a new string-dict that maps <tt class="pyretexpr">key</tt> to <tt class="pyretexpr">value</tt> and is otherwise similar to the original string-dict.</p><pre>check:
+end</pre><div><tt>.set :: <span><span>StringDict&lt;a&gt;</span>, String, a -&gt; <span>StringDict&lt;a&gt;</span></span></tt></div><p>Returns a new string-dict that maps <tt class="pyretexpr">key</tt> to <tt class="pyretexpr">value</tt> and is otherwise similar to the original string-dict.</p><pre>check:
   sd1 = [string-dict: "a", 5, "b", 10]
   sd1.get-value("a") is 5
   sd1.get-value("b") is 10
@@ -29,75 +29,75 @@ end</pre><p>Setting a value is not restricted to existing keys.</p><pre>check:
   s2 = s1.set("Hello", "World")
   s1.get("Hello") is none
   s2.get("Hello") is some("World")
-end</pre><div><tt>.has-key :: <span>StringDict&lt;a&gt;, String -&gt; Boolean</span></tt></div><p>Returns <tt class="pyretexpr">true</tt> if <tt class="pyretexpr">key</tt> is in the string-dict; <tt class="pyretexpr">false</tt> if not.</p><pre>check:
+end</pre><div><tt>.has-key :: <span><span>StringDict&lt;a&gt;</span>, String -&gt; Boolean</span></tt></div><p>Returns <tt class="pyretexpr">true</tt> if <tt class="pyretexpr">key</tt> is in the string-dict; <tt class="pyretexpr">false</tt> if not.</p><pre>check:
   sd1 = [string-dict: "a", 5]
   sd1.has-key("a") is true
   sd1.has-key("b") is false
-end</pre><div><tt>.keys :: <span>StringDict&lt;a&gt; -&gt; <S-of>String</S-of></span></tt></div><p>Returns the set of keys in the string-dict.</p><pre>check:
+end</pre><div><tt>.keys :: <span><span>StringDict&lt;a&gt;</span> -&gt; <S-of>String</S-of></span></tt></div><p>Returns the set of keys in the string-dict.</p><pre>check:
   sd1 = [string-dict: "a", 5, "b", 10]
   sd1.keys() is [tree-set: "a", "b"]
   sd1.keys() is [tree-set: "b", "a"]
-end</pre><div><tt>.remove :: <span>StringDict&lt;a&gt;, String -&gt; StringDict&lt;a&gt;</span></tt></div><p>Returns a new string-dict that doesn’t have the argument key but is otherwise similar to the original string-dict.</p><pre>check:
+end</pre><div><tt>.remove :: <span><span>StringDict&lt;a&gt;</span>, String -&gt; <span>StringDict&lt;a&gt;</span></span></tt></div><p>Returns a new string-dict that doesn’t have the argument key but is otherwise similar to the original string-dict.</p><pre>check:
   sd1 = [string-dict: "a", 5, "b", 10]
   sd1.has-key("a") is true
   sd1.has-key("b") is true
   sd2 = sd1.remove("b")
   sd2.has-key("a") is true
   sd2.has-key("b") is false
-end</pre><div><tt>.count :: <span>StringDict&lt;a&gt; -&gt; Number</span></tt></div><p>Returns the number of keys in the string-dict.</p><pre>check:
+end</pre><div><tt>.count :: <span><span>StringDict&lt;a&gt;</span> -&gt; Number</span></tt></div><p>Returns the number of keys in the string-dict.</p><pre>check:
   sd1 = [string-dict: "a", 5, "b", 10]
   sd1.count() is 2
   sd2 = sd1.set("c", 15)
   sd2.count() is 3
   sd3 = sd1.remove("a")
   sd3.count() is 1
-end</pre><div><tt>.unfreeze :: <span>StringDict&lt;a&gt; -&gt; MutableStringDict&lt;a&gt;</span></tt></div><p>Returns a mutable string-dict that has the same keys and values as the original string-dict.</p><pre>check:
+end</pre><div><tt>.unfreeze :: <span><span>StringDict&lt;a&gt;</span> -&gt; <span>MutableStringDict&lt;a&gt;</span></span></tt></div><p>Returns a mutable string-dict that has the same keys and values as the original string-dict.</p><pre>check:
   sd1 = [string-dict: "a", 5, "b", 10]
   msd1 = sd1.unfreeze()
   msd1.set-now("a", 0)
   msd1.get-value-now("a") is 0
-end</pre><h2 id="The-MutableStringDict-Type" toclevel="2" tocentry="yes">The MutableStringDict Type</h2><div><div class="pyret-display">MutableStringDict&lt;a&gt;</div><p><span><a name="MutableStringDict&lt;a&gt;-73"></a></span> <tt class="pyretexpr">MutableStringDict</tt>s keep track of a mapping from <tt class="pyretexpr">Stringstrings</tt>s to any Pyret value. In contrast to <tt class="pyretexpr">StringDict</tt>s, a <tt class="pyretexpr">MutableStringDict</tt> can have mappings added, deleted, or changed.</p><p>A <tt class="pyretexpr">MutableStringDict</tt> can be sealed to produce a variant that is read-only. A <tt class="pyretexpr">MutableStringDict</tt> can also be frozen to produce an immutable <tt class="pyretexpr">StringDict</tt> (see above).</p><p>There are no variants for <tt class="pyretexpr">MutableStringDict</tt>s, and programs cannot use <tt class="pyretexpr">cases</tt> statements with <tt class="pyretexpr">MutableStringDict</tt>s. Instead, they can be created with the constructors below, and manipulated with the methods and functions below.</p></div><h2 id="MutableStringDict-Constructor" toclevel="2" tocentry="yes">MutableStringDict Constructor</h2><p>collection-doc</p><p>Creates an mutable string-dict with the given <tt class="pyretexpr">elt</tt>s.</p><pre>msd1 = [mutable-string-dict: "a", 5, "b", 10]</pre><h2 id="MutableStringDict-Methods" toclevel="2" tocentry="yes">MutableStringDict Methods</h2><div><tt>.get-now :: <span>MutableStringDict&lt;a&gt;, String -&gt; Option&lt;a&gt;</span></tt></div><p>Returns <tt class="pyretexpr">noneoption</tt> if the key is not in the dictionary, and a <tt class="pyretexpr">someoption</tt> containing the value the key maps to if the key is in the dictionary.</p><pre>check:
+end</pre><h2 id="The-MutableStringDict-Type" toclevel="2" tocentry="yes">The MutableStringDict Type</h2><div><div class="pyret-display">MutableStringDict&lt;a&gt;</div><p><span><a name="MutableStringDict&lt;a&gt;-73"></a></span> <tt class="pyretexpr">MutableStringDict</tt>s keep track of a mapping from <tt class="pyretexpr">Stringstrings</tt>s to any Pyret value. In contrast to <tt class="pyretexpr">StringDict</tt>s, a <tt class="pyretexpr">MutableStringDict</tt> can have mappings added, deleted, or changed.</p><p>A <tt class="pyretexpr">MutableStringDict</tt> can be sealed to produce a variant that is read-only. A <tt class="pyretexpr">MutableStringDict</tt> can also be frozen to produce an immutable <tt class="pyretexpr">StringDict</tt> (see above).</p><p>There are no variants for <tt class="pyretexpr">MutableStringDict</tt>s, and programs cannot use <tt class="pyretexpr">cases</tt> statements with <tt class="pyretexpr">MutableStringDict</tt>s. Instead, they can be created with the constructors below, and manipulated with the methods and functions below.</p></div><h2 id="MutableStringDict-Constructor" toclevel="2" tocentry="yes">MutableStringDict Constructor</h2><p>collection-doc</p><p>Creates an mutable string-dict with the given <tt class="pyretexpr">elt</tt>s.</p><pre>msd1 = [mutable-string-dict: "a", 5, "b", 10]</pre><h2 id="MutableStringDict-Methods" toclevel="2" tocentry="yes">MutableStringDict Methods</h2><div><tt>.get-now :: <span><span>MutableStringDict&lt;a&gt;</span>, String -&gt; <span>Option&lt;a&gt;</span></span></tt></div><p>Returns <tt class="pyretexpr">noneoption</tt> if the key is not in the dictionary, and a <tt class="pyretexpr">someoption</tt> containing the value the key maps to if the key is in the dictionary.</p><pre>check:
   [mutable-string-dict: "a", 5].get-now("a") is some(5)
   [mutable-string-dict: "a", 5].get-now("b") is none
-end</pre><div><tt>.get-value-now :: <span>MutableStringDict&lt;a&gt;, String -&gt; a</span></tt></div><p>Returns the value that <tt class="pyretexpr">key</tt> maps to if it is present, and throws an exception otherwise.</p><pre>check:
+end</pre><div><tt>.get-value-now :: <span><span>MutableStringDict&lt;a&gt;</span>, String -&gt; a</span></tt></div><p>Returns the value that <tt class="pyretexpr">key</tt> maps to if it is present, and throws an exception otherwise.</p><pre>check:
   [mutable-string-dict: "a", 5].get-value-now("a") is 5
   [mutable-string-dict: "a", 5].get-value-now("b") raises "Key b not found"
-end</pre><div><tt>.set-now :: <span>MutableStringDict&lt;a&gt;, String, a -&gt; Nothing</span></tt></div><p>Modifies the mutable-string-dict so that it now maps <tt class="pyretexpr">key</tt> to <tt class="pyretexpr">value</tt>. This method is called only for its side-effect and so returns <tt class="pyretexpr">nothing</tt></p><pre>check:
+end</pre><div><tt>.set-now :: <span><span>MutableStringDict&lt;a&gt;</span>, String, a -&gt; Nothing</span></tt></div><p>Modifies the mutable-string-dict so that it now maps <tt class="pyretexpr">key</tt> to <tt class="pyretexpr">value</tt>. This method is called only for its side-effect and so returns <tt class="pyretexpr">nothing</tt></p><pre>check:
   msd1 = [mutable-string-dict: "a", 5, "b", 10]
   msd1.get-value-now("a") is 5
   msd1.get-value-now("b") is 10
   msd1.set-now("a", 15) is nothing
   msd1.get-value-now("a") is 15
   msd1.get-value-now("b") is 10
-end</pre><div><tt>.has-key-now :: <span>MutableStringDict&lt;a&gt;, String -&gt; Boolean</span></tt></div><p>Returns <tt class="pyretexpr">true</tt> if <tt class="pyretexpr">key</tt> is in the string-dict; <tt class="pyretexpr">false</tt> if not.</p><pre>check:
+end</pre><div><tt>.has-key-now :: <span><span>MutableStringDict&lt;a&gt;</span>, String -&gt; Boolean</span></tt></div><p>Returns <tt class="pyretexpr">true</tt> if <tt class="pyretexpr">key</tt> is in the string-dict; <tt class="pyretexpr">false</tt> if not.</p><pre>check:
   msd1 = [mutable-string-dict: "a", 5]
   msd1.has-key-now("a") is true
   msd1.has-key-now("b") is false
-end</pre><div><tt>.keys-now :: <span>MutableStringDict&lt;a&gt; -&gt; <S-of>String</S-of></span></tt></div><p>Returns the set of keys in the string-dict.</p><pre>check:
+end</pre><div><tt>.keys-now :: <span><span>MutableStringDict&lt;a&gt;</span> -&gt; <S-of>String</S-of></span></tt></div><p>Returns the set of keys in the string-dict.</p><pre>check:
   msd1 = [mutable-string-dict: "a", 5, "b", 10]
   msd1.keys-now() is [tree-set: "a", "b"]
   msd1.keys-now() is [tree-set: "b", "a"]
-end</pre><div><tt>.remove-now :: <span>MutableStringDict&lt;a&gt;, String -&gt; Nothing</span></tt></div><p>Modifies the mutable-string-dict so that it no longer has the argument <tt class="pyretexpr">key</tt>.</p><pre>check:
+end</pre><div><tt>.remove-now :: <span><span>MutableStringDict&lt;a&gt;</span>, String -&gt; Nothing</span></tt></div><p>Modifies the mutable-string-dict so that it no longer has the argument <tt class="pyretexpr">key</tt>.</p><pre>check:
   msd1 = [mutable-string-dict: "a", 5, "b", 10]
   msd1.has-key-now("a") is true
   msd1.has-key-now("b") is true
   msd1.remove-now("b") is nothing
   msd1.has-key-now("a") is true
   msd1.has-key-now("b") is false
-end</pre><div><tt>.count-now :: <span>MutableStringDict&lt;a&gt; -&gt; Number</span></tt></div><p>Returns the number of keys in the mutable-string-dict.</p><pre>check:
+end</pre><div><tt>.count-now :: <span><span>MutableStringDict&lt;a&gt;</span> -&gt; Number</span></tt></div><p>Returns the number of keys in the mutable-string-dict.</p><pre>check:
   msd1 = [mutable-string-dict: "a", 5, "b", 10]
   msd1.count-now() is 2
   msd1.set-now("c", 15)
   msd1.count-now() is 3
   msd1.remove-now("a")
   msd1.count-now() is 2
-end</pre><div><tt>.freeze :: <span>MutableStringDict&lt;a&gt; -&gt; StringDict&lt;a&gt;</span></tt></div><p>Returns an immutable string-dict that has the same keys and values as the mutable one.</p><pre>check:
+end</pre><div><tt>.freeze :: <span><span>MutableStringDict&lt;a&gt;</span> -&gt; <span>StringDict&lt;a&gt;</span></span></tt></div><p>Returns an immutable string-dict that has the same keys and values as the mutable one.</p><pre>check:
   msd1 = [mutable-string-dict: "a", 5, "b", 10]
   sd1 = msd1.freeze()
   sd2 = sd1.set("a", 10)
   sd2.get-value("a") is 10
   sd1.get-value("a") is 5
-end</pre><div><tt>.seal :: <span>MutableStringDict&lt;a&gt; -&gt; MutableStringDict&lt;a&gt;</span></tt></div><p>Returns a sealed version of the mutable-string-dict that has the same keys and values, but does not allow modification. The original mutable-string-dict continues to be modifiable, and such modifications will be visible in the sealed one.</p><pre>check:
+end</pre><div><tt>.seal :: <span><span>MutableStringDict&lt;a&gt;</span> -&gt; <span>MutableStringDict&lt;a&gt;</span></span></tt></div><p>Returns a sealed version of the mutable-string-dict that has the same keys and values, but does not allow modification. The original mutable-string-dict continues to be modifiable, and such modifications will be visible in the sealed one.</p><pre>check:
   msd1 = [mutable-string-dict: "a", 5, "b", 10]
   smsd1 = msd1.seal()
   smsd1.get-value-now("a") is 5
