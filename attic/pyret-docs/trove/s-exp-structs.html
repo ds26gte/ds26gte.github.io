@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="s-exp-structs" toclevel="1" tocentry="yes"></h1><h2 id="S-Exp_DataTypes" toclevel="2" tocentry="yes">The S-Exp Datatype</h2><p>This datatype defines the result of parsing s-expressions.  See read-s-exp for more details and examples.</p><pre><tt>S-Exp&lt;()&gt;:</tt>
+    <root><div><h1 id="s-exp-structs" toclevel="1" tocentry="yes"></h1><h2 id="S-Exp_DataTypes" toclevel="2" tocentry="yes">The S-Exp Datatype</h2><p>This datatype defines the result of parsing s-expressions.  See read-s-exp for more details and examples.</p><pre class="pyret-display"><span>data S-Exp:</span>
 <div><tt>   | <span>s-list(<span>exps :: <span>List&lt;S-Exp&gt;</span></span>)</span></tt>
 <tt>   | <span>s-num(<span>n :: Number</span>)</span></tt>
 <tt>   | <span>s-str(<span>s :: String</span>)</span></tt>

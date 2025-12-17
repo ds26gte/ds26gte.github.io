@@ -27,7 +27,7 @@ singletons</a>, and by <a href="lang/forms.html#s:obj-expr">object literals</a>.
   is-boolean(true) is true
   is-boolean(false) is true
   is-boolean(0) is false
-end</pre><div><pre class="pyret-display">is-number :: <span>Any -&gt; Boolean</span></pre></div><p>Returns <tt class="pyretexpr">true</tt> if the provided argument is a <tt class="pyretexpr">Number</tt>,  <tt class="pyretexpr">false</tt> if not.</p><p>  Numbers are <itemlist><item>Integers, e.g. <tt class="pyretexpr">345</tt> or <tt class="pyretexpr">-321</tt></item><item>Rationals, e.g. <tt class="pyretexpr">355/113</tt> or <tt class="pyretexpr">-321/6789</tt></item><item>Inexact numbers, e.g. <tt class="pyretexpr">123.4567</tt> or <tt class="pyretexpr">-0.987</tt></item><item>Complex numbers, e.g. <tt class="pyretexpr">1+2i</tt>, where the real and imaginary components may be integers, rationals or inexact numbers</item></itemlist></p><pre>check:
+end</pre><div><pre class="pyret-display">is-number :: <span>Any -&gt; Boolean</span></pre></div><p>Returns <tt class="pyretexpr">true</tt> if the provided argument is a <tt class="pyretexpr">Number</tt>,  <tt class="pyretexpr">false</tt> if not.</p><p>  Numbers are </p><ul><li>Integers, e.g. <tt class="pyretexpr">345</tt> or <tt class="pyretexpr">-321</tt></li><li>Rationals, e.g. <tt class="pyretexpr">355/113</tt> or <tt class="pyretexpr">-321/6789</tt></li><li>Inexact numbers, e.g. <tt class="pyretexpr">123.4567</tt> or <tt class="pyretexpr">-0.987</tt></li><li>Complex numbers, e.g. <tt class="pyretexpr">1+2i</tt>, where the real and imaginary components may be integers, rationals or inexact numbers</li></ul><pre>check:
   is-number(-42) is true
   is-number(~6.022e+23) is true
   is-number(num-sqrt(2)) is true

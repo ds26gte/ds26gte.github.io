@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="either" toclevel="1" tocentry="yes"></h1><h2 id="either_DataTypes" toclevel="2" tocentry="yes">Data types</h2><pre><tt>Either&lt;(a ,  b)&gt;:</tt>
+    <root><div><h1 id="either" toclevel="1" tocentry="yes"></h1><h2 id="either_DataTypes" toclevel="2" tocentry="yes">Data types</h2><pre class="pyret-display"><span>data Either&lt;(a ,  b)&gt;:</span>
 <div><tt>   | <span>left(<span>v :: a</span>)</span></tt>
 <tt>   | <span>right(<span>v :: b</span>)</span></tt></div><tt>end</tt></pre><p><div><p><span><a name="left-62"></a></span></p><div class="pyret-display">left :: <span>(v :: contract)</span> -&gt; <E-of>ab</E-of></div></div><div><p><span><a name="right-63"></a></span></p><div class="pyret-display">right :: <span>(v :: contract)</span> -&gt; <E-of>ab</E-of></div></div><div><pre class="pyret-display">is-left :: </pre></div><div><pre class="pyret-display">is-right :: </pre></div></p></div><p><tt class="pyretexpr">Either</tt> implements a functional programming idiom that is often used when a function may return either a meaningful value or an error message. By convention, the <tt class="pyretexpr">left</tt> variant is used to return an error, usually as a string, and the <tt class="pyretexpr">right</tt> variant returns a valid value.</p><p>The following example is based on a function that searches for a student with a specific numeric id in a list.  <tt class="pyretexpr">find-person-from-id</tt> returns <tt class="pyretexpr">Either</tt> a valid <tt class="pyretexpr">Person</tt> as <tt class="pyretexpr">right</tt> or one of two error messages as <tt class="pyretexpr">String</tt>s in <tt class="pyretexpr">left</tt>.</p><pre>import either as E
 
