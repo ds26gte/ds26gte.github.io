@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="csv" toclevel="1" tocentry="yes"></h1><div><pre class="pyret-display">csv-table-str :: <span>(<span>csv-str :: </span>, <span>options :: </span>)</span></pre><p>  Reads CSV data from <tt class="pyretexpr">csv-str</tt> with the given <tt class="pyretexpr">options</tt>, returning   a <tt class="pyretexpr">TableLoadertables</tt> suitable for use with <tt class="pyretexpr">load-table:</tt></p><pre>include csv
+    <root><div><h1 id="csv" toclevel="1" tocentry="yes"></h1><div><pre class="pyret-display">csv-table-str :: <span>(<span>csv-str :: </span>, <span>options :: </span>)</span></pre><p>  Reads CSV data from <tt class="pyretexpr">csv-str</tt> with the given <tt class="pyretexpr">options</tt>, returning   a <tt class="pyretexpr">TableLoadertables</tt> suitable for use with <tt class="pyretexpr">load-table:</tt></p><div><p><b>Examples:</b></p><pre>include csv
 animals-data = ```
 Pet Name, Age (years), species, fixed
 Franklin,17,turtle,false
@@ -28,7 +28,7 @@ check:
     row: "Veronica", 2, "cat", false
     row: "Ada", 10, "dog", true
   end
-end</pre></div><div><pre class="pyret-display">csv-table-file :: <span>(<span>csv-file :: </span>, <span>options :: </span>)</span></pre><p>Reads CSV data from the file at path <tt class="pyretexpr">csv-path</tt> with the given <tt class="pyretexpr">options</tt>, returning a <tt class="pyretexpr">TableLoadertables</tt> suitable for use with <tt class="pyretexpr">load-table:</tt></p></div><div><pre class="pyret-display">csv-table-url :: <span>(<span>csv-url :: </span>, <span>options :: </span>)</span></pre><p>Reads CSV data from the url <tt class="pyretexpr">csv-url</tt> with the given <tt class="pyretexpr">options</tt>, returning a <tt class="pyretexpr">TableLoadertables</tt> suitable for use with <tt class="pyretexpr">load-table:</tt></p><pre>include csv
+end</pre></div></div><div><pre class="pyret-display">csv-table-file :: <span>(<span>csv-file :: </span>, <span>options :: </span>)</span></pre><p>Reads CSV data from the file at path <tt class="pyretexpr">csv-path</tt> with the given <tt class="pyretexpr">options</tt>, returning a <tt class="pyretexpr">TableLoadertables</tt> suitable for use with <tt class="pyretexpr">load-table:</tt></p></div><div><pre class="pyret-display">csv-table-url :: <span>(<span>csv-url :: </span>, <span>options :: </span>)</span></pre><p>Reads CSV data from the url <tt class="pyretexpr">csv-url</tt> with the given <tt class="pyretexpr">options</tt>, returning a <tt class="pyretexpr">TableLoadertables</tt> suitable for use with <tt class="pyretexpr">load-table:</tt></p><div><p><b>Examples:</b></p><pre>include csv
 animals-csv = csv-table-url("https://raw.githubusercontent.com/brownplt/pyret-lang/refs/heads/horizon/tests/io-tests/tests/animals-ds-2024.csv", default-options)
 animals-table = load-table: name, species, sex, age, fixed, legs, weight, weeks
   source: animals-csv
@@ -36,10 +36,10 @@ end
 check:
   animals-table.row-n(0)["name"] is "Sasha"
   animals-table.row-n(0)["species"] is "cat"
-end</pre></div><div><div class="pyret-display">CSVOptions&lt;&gt;</div><p><span><a name="CSVOptions&lt;&gt;-76"></a></span></p></div><p>The type of options for processing CSV strings.</p><div><p><span><a name="default-options-77"></a></span></p><pre class="pyret-display">default-options :: CSVOptions</pre></div><p>The default options for processing CSV strings.</p><pre>include csv
+end</pre></div></div><div><pre class="pyret-display">CSVOptions&lt;&gt;</pre><p><span><a name="CSVOptions&lt;&gt;-76"></a></span></p></div><p>The type of options for processing CSV strings.</p><div><p><span><a name="default-options-77"></a></span></p><pre class="pyret-display">default-options :: CSVOptions</pre></div><p>The default options for processing CSV strings.</p><div><p><b>Examples:</b></p><pre>include csv
 check:
   default-options is { header-row: true }
-end</pre></div></root>
+end</pre></div></div></root>
     <hr/>
     The current page is trove/csv.html.
     The previous page is <a href = "../trove/gdrive-sheets.html">../trove/gdrive-sheets.html</a>.

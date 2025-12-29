@@ -11,9 +11,9 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="numbers" toclevel="1" tocentry="yes">Numbers</h1><p>—<a href="https://pyret.org/docs/latest/_global_.html">Original doc link</a></p><p>Pyret numbers are of two kinds: exact numbers, or <tt class="pyretexpr">Exactnum</tt>s, and rough numbers or <tt class="pyretexpr">Roughnum</tt>s. Both are real; finite; and written in base ten.</p><p><margin-note>Note that imaginary numbers were implemented in earlier versions of Pyret, but are not currently supported.</margin-note></p><p><tt class="pyretexpr">Exactnum</tt>s are arbitrarily precise rational numbers, including integers and rational fractions.  For integers whose magnitude is less than <tt class="pyretexpr">(num-expt(2, 53) - 1)</tt>, Pyret internally uses JavaScript <tt class="pyretexpr">fixnum</tt>s, in order to optimize basic arithmetic.</p><p><tt class="pyretexpr">Roughnum</tt>s are numbers that are necessarily or deliberately imprecise. These correspond to the same set of values covered by JavaScript <tt class="pyretexpr">fixnum</tt>s (a.k.a. doubles), and thus cover a large but limited range (magnitude less than <tt class="pyretexpr">1.7976931348623157e308</tt>).</p><p>Operations on <tt class="pyretexpr">Exactnum</tt>s typically return <tt class="pyretexpr">Exactnum</tt>s. However, if the operation can yield irrationals, and it is not possible to determine that a particular result is definitely rational, that result is returned as a <tt class="pyretexpr">Roughnum</tt>. Thus, trigonometric functions on <tt class="pyretexpr">Exactnum</tt>s typically yield <tt class="pyretexpr">Roughnum</tt> answers, except for well-known edge cases such as the sine or cosine of zero. Fractional powers of rationals are usually <tt class="pyretexpr">Roughnum</tt>, except for small roots where it can be ascertained that an exact root is possible.</p><p>Operations that are non-casting and with at least one argument that is <tt class="pyretexpr">Roughnum</tt> automatically coerce the result to be a <tt class="pyretexpr">Roughnum</tt>. This is known as <tt class="pyretexpr">Roughnum</tt> contagion.</p><p><tt class="pyretexpr">Exactnum</tt>s allow the usual comparison predicates. <tt class="pyretexpr">Roughnum</tt>s do too, with the significant exception that trying to compare <tt class="pyretexpr">Roughnum</tt>s for equality throws an error.  To write an equality function that handles <tt class="pyretexpr">Roughnum</tt>s, use <tt class="pyretexpr">within</tt>, as documented in <a href="lang/equality.html#s:bounded-equalities"></a>.</p><p>An operation whose numerical result is not determinate or finite throws an error, with the message signaling either an overflow or some more specific problem.</p><h2 id="Number-Annotations" toclevel="2" tocentry="yes">Number Annotations</h2><p>Several specific type annotations are provided for numbers to allow more precise value requirements to be specified.</p><pre>fun round-distance(d :: NumNonNegative) -&gt; Exactnum:
+    <root><div><h1 id="numbers" toclevel="1" tocentry="yes">Numbers</h1><p>—<a href="https://pyret.org/docs/latest/_global_.html">Original doc link</a></p><p>Pyret numbers are of two kinds: exact numbers, or <tt class="pyretexpr">Exactnum</tt>s, and rough numbers or <tt class="pyretexpr">Roughnum</tt>s. Both are real; finite; and written in base ten.</p><p><span class="margin-note">Note that imaginary numbers were implemented in earlier versions of Pyret, but are not currently supported.</span></p><p><tt class="pyretexpr">Exactnum</tt>s are arbitrarily precise rational numbers, including integers and rational fractions.  For integers whose magnitude is less than <tt class="pyretexpr">(num-expt(2, 53) - 1)</tt>, Pyret internally uses JavaScript <tt class="pyretexpr">fixnum</tt>s, in order to optimize basic arithmetic.</p><p><tt class="pyretexpr">Roughnum</tt>s are numbers that are necessarily or deliberately imprecise. These correspond to the same set of values covered by JavaScript <tt class="pyretexpr">fixnum</tt>s (a.k.a. doubles), and thus cover a large but limited range (magnitude less than <tt class="pyretexpr">1.7976931348623157e308</tt>).</p><p>Operations on <tt class="pyretexpr">Exactnum</tt>s typically return <tt class="pyretexpr">Exactnum</tt>s. However, if the operation can yield irrationals, and it is not possible to determine that a particular result is definitely rational, that result is returned as a <tt class="pyretexpr">Roughnum</tt>. Thus, trigonometric functions on <tt class="pyretexpr">Exactnum</tt>s typically yield <tt class="pyretexpr">Roughnum</tt> answers, except for well-known edge cases such as the sine or cosine of zero. Fractional powers of rationals are usually <tt class="pyretexpr">Roughnum</tt>, except for small roots where it can be ascertained that an exact root is possible.</p><p>Operations that are non-casting and with at least one argument that is <tt class="pyretexpr">Roughnum</tt> automatically coerce the result to be a <tt class="pyretexpr">Roughnum</tt>. This is known as <tt class="pyretexpr">Roughnum</tt> contagion.</p><p><tt class="pyretexpr">Exactnum</tt>s allow the usual comparison predicates. <tt class="pyretexpr">Roughnum</tt>s do too, with the significant exception that trying to compare <tt class="pyretexpr">Roughnum</tt>s for equality throws an error.  To write an equality function that handles <tt class="pyretexpr">Roughnum</tt>s, use <tt class="pyretexpr">within</tt>, as documented in <a href="lang/equality.html#s:bounded-equalities"></a>.</p><p>An operation whose numerical result is not determinate or finite throws an error, with the message signaling either an overflow or some more specific problem.</p><h2 id="Number-Annotations" toclevel="2" tocentry="yes">Number Annotations</h2><p>Several specific type annotations are provided for numbers to allow more precise value requirements to be specified.</p><div><p><b>Examples:</b></p><pre>fun round-distance(d :: NumNonNegative) -&gt; Exactnum:
   num-round(d)
-end</pre><div><div class="pyret-display">Number</div><p><span><a name="Number-4"></a></span>The type of number values.</p></div><div><div class="pyret-display">Exactnum</div><p><span><a name="Exactnum-5"></a></span>The type of exact number values.</p></div><div><div class="pyret-display">Roughnum</div><p><span><a name="Roughnum-6"></a></span>The type of necessarily or deliberately imprecise values.</p></div><div><div class="pyret-display">NumInteger</div><p><span><a name="NumInteger-7"></a></span>The type of <tt class="pyretexpr">Exactnum</tt> integer values.</p></div><div><div class="pyret-display">NumRational</div><p><span><a name="NumRational-8"></a></span>The type of exact rational number values. Same as <tt class="pyretexpr">Exactnum</tt>.</p></div><div><div class="pyret-display">NumPositive</div><p><span><a name="NumPositive-9"></a></span>The type of number values that are greater than zero.</p></div><div><div class="pyret-display">NumNegative</div><p><span><a name="NumNegative-10"></a></span>The type of number values that are less than zero.</p></div><div><div class="pyret-display">NumNonPositive</div><p><span><a name="NumNonPositive-11"></a></span>The type of number values that are less than or equal to zero.</p></div><div><div class="pyret-display">NumNonNegative</div><p><span><a name="NumNonNegative-12"></a></span>The type of number values that are equal to or greater than zero.</p></div><h2 id="Number-Literals" toclevel="2" tocentry="yes">Number Literals</h2><p><tt class="pyretexpr">Exactnum</tt>s can be integers,  fractions represented with a solidus, or decimals, with an optional exponent. In the following, the numerals on the same line all denote the same Pyret number.</p><pre>42 +42
+end</pre></div><div><pre class="pyret-display">Number</pre><p><span><a name="Number-4"></a></span>The type of number values.</p></div><div><pre class="pyret-display">Exactnum</pre><p><span><a name="Exactnum-5"></a></span>The type of exact number values.</p></div><div><pre class="pyret-display">Roughnum</pre><p><span><a name="Roughnum-6"></a></span>The type of necessarily or deliberately imprecise values.</p></div><div><pre class="pyret-display">NumInteger</pre><p><span><a name="NumInteger-7"></a></span>The type of <tt class="pyretexpr">Exactnum</tt> integer values.</p></div><div><pre class="pyret-display">NumRational</pre><p><span><a name="NumRational-8"></a></span>The type of exact rational number values. Same as <tt class="pyretexpr">Exactnum</tt>.</p></div><div><pre class="pyret-display">NumPositive</pre><p><span><a name="NumPositive-9"></a></span>The type of number values that are greater than zero.</p></div><div><pre class="pyret-display">NumNegative</pre><p><span><a name="NumNegative-10"></a></span>The type of number values that are less than zero.</p></div><div><pre class="pyret-display">NumNonPositive</pre><p><span><a name="NumNonPositive-11"></a></span>The type of number values that are less than or equal to zero.</p></div><div><pre class="pyret-display">NumNonNegative</pre><p><span><a name="NumNonNegative-12"></a></span>The type of number values that are equal to or greater than zero.</p></div><h2 id="Number-Literals" toclevel="2" tocentry="yes">Number Literals</h2><p><tt class="pyretexpr">Exactnum</tt>s can be integers,  fractions represented with a solidus, or decimals, with an optional exponent. In the following, the numerals on the same line all denote the same Pyret number.</p><div><p><b>Examples:</b></p><pre>42 +42
 -42
 22/7
 -22/7
@@ -22,13 +22,13 @@ end</pre><div><div class="pyret-display">Number</div><p><span><a name="Number-4"
 1/2 0.5
 6.022e23 +6.022e23 6.022e+23 +6.022e+23
 -6.022e23 -6.022e+23
--6.022e-23</pre><p><tt class="pyretexpr">Exactnum</tt>s are of arbitrary precision.</p><p><tt class="pyretexpr">Roughnum</tt>s are represented with a leading tilde.  You can think of the tilde as representing a person waving his or her hands vaguely.</p><p>They are integers, fractions or decimals, with an optional exponent.</p><pre>~42 ~+42
+-6.022e-23</pre></div><p><tt class="pyretexpr">Exactnum</tt>s are of arbitrary precision.</p><p><tt class="pyretexpr">Roughnum</tt>s are represented with a leading tilde.  You can think of the tilde as representing a person waving his or her hands vaguely.</p><p>They are integers, fractions or decimals, with an optional exponent.</p><div><p><b>Examples:</b></p><pre>~42 ~+42
 ~-42
 ~2.718281828 ~+2.718281828
 ~-2.718281828
 ~6.022e23 ~+6.022e23 ~6.022e+23 ~+6.022e+23
 ~-6.022e23 ~-6.022e+23
-~-6.022e-23</pre><p><tt class="pyretexpr">Roughnum</tt>s cannot be made arbitrarily precise. The absolute value ranges between 0 and 1.7976931348623157e+308 (JavaScript’s Number.MAX_VALUE) with a granularity of 5e-324 (JavaScript’s Number.MIN_VALUE).</p><h2 id="Number-Constants" toclevel="2" tocentry="yes">Number Constants</h2><div><p><span><a name="PI-13"></a></span></p><pre class="pyret-display">PI :: Roughnum</pre></div><p>The mathematical constant π, approximated as a <tt class="pyretexpr">Roughnum</tt>, or <tt class="pyretexpr">~3.141592653589793</tt>.</p><h2 id="Number-Operators" toclevel="2" tocentry="yes">Number Operators</h2><div><p><span><a name="+-(addition-operator)-14"></a></span></p><pre class="pyret-display">left + right</pre><p>  <margin-note>If either of the values in an arithmetic operator is a <tt class="pyretexpr">Roughnum</tt>, the result is a <tt class="pyretexpr">Roughnum</tt></margin-note>   When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, adds them and returns   the result.</p><div><pre>check:
+~-6.022e-23</pre></div><p><tt class="pyretexpr">Roughnum</tt>s cannot be made arbitrarily precise. The absolute value ranges between 0 and 1.7976931348623157e+308 (JavaScript’s Number.MAX_VALUE) with a granularity of 5e-324 (JavaScript’s Number.MIN_VALUE).</p><h2 id="Number-Constants" toclevel="2" tocentry="yes">Number Constants</h2><div><p><span><a name="PI-13"></a></span></p><pre class="pyret-display">PI :: Roughnum</pre></div><p>The mathematical constant π, approximated as a <tt class="pyretexpr">Roughnum</tt>, or <tt class="pyretexpr">~3.141592653589793</tt>.</p><h2 id="Number-Operators" toclevel="2" tocentry="yes">Number Operators</h2><div><p><span><a name="+-(addition-operator)-14"></a></span></p><pre class="pyret-display">left + right</pre><p>  <span class="margin-note">If either of the values in an arithmetic operator is a <tt class="pyretexpr">Roughnum</tt>, the result is a <tt class="pyretexpr">Roughnum</tt></span>   When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, adds them and returns   the result.</p><div><p><b>Examples:</b></p><pre>check:
   2 + 2 is 4
   4/3 + 1/3 is 5/3
   0.1 + 0.2 is 0.3
@@ -36,7 +36,7 @@ end</pre><p><a class="show-embed" code="check:
     2 + 2 is 4 
     4/3 + 1/3 is 5/3 
     0.1 + 0.2 is 0.3 
- end">(Try it!)</a></p></div></div><div><p><span><a name="--(subtraction-operator)-15"></a></span></p><pre class="pyret-display">left - right</pre><p>  When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, subtracts   <tt class="pyretexpr">right</tt> from <tt class="pyretexpr">left</tt> and returns the result.</p><div><pre>check:
+ end">(Try it!)</a></p></div></div><div><p><span><a name="--(subtraction-operator)-15"></a></span></p><pre class="pyret-display">left - right</pre><p>  When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, subtracts   <tt class="pyretexpr">right</tt> from <tt class="pyretexpr">left</tt> and returns the result.</p><div><p><b>Examples:</b></p><pre>check:
   6 - 2 is 4
   4/3 - 1/3 is 1
   0.3 - 0.2 is 0.1
@@ -44,7 +44,7 @@ end</pre><p><a class="show-embed" code="check:
     6 - 2 is 4 
     4/3 - 1/3 is 1 
     0.3 - 0.2 is 0.1 
- end">(Try it!)</a></p></div></div><div><p><span><a name="*-(multiplication-operator)-16"></a></span></p><pre class="pyret-display">left * right</pre><p>  When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, multiplies   them and returns the result.</p><div><pre>check:
+ end">(Try it!)</a></p></div></div><div><p><span><a name="*-(multiplication-operator)-16"></a></span></p><pre class="pyret-display">left * right</pre><p>  When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, multiplies   them and returns the result.</p><div><p><b>Examples:</b></p><pre>check:
   2 * 2 is 4
   2 * 1/3 is 2/3
   0.3 * 0.2 is 0.06
@@ -52,7 +52,7 @@ end</pre><p><a class="show-embed" code="check:
     2 * 2 is 4 
     2 * 1/3 is 2/3 
     0.3 * 0.2 is 0.06 
- end">(Try it!)</a></p></div></div><div><p><span><a name="/-(division-operator)-17"></a></span></p><pre class="pyret-display">left / right</pre><p>  <margin-note>To be used as an operator, <tt class="pyretexpr">/</tt> has to have spaces around it. This means you need to write <tt class="pyretexpr">a / 3</tt> rather than <tt class="pyretexpr">a/3</tt> to divide the value stored in <tt class="pyretexpr">a</tt> by <tt class="pyretexpr">3</tt>. Things like <tt class="pyretexpr">4/3</tt> and <tt class="pyretexpr">1/2</tt> are read by Pyret as single numbers, and can’t have names or other expressions in them.</margin-note>   When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, divides <tt class="pyretexpr">left</tt>   by <tt class="pyretexpr">right</tt> and returns the result.</p><div><pre>check:
+ end">(Try it!)</a></p></div></div><div><p><span><a name="/-(division-operator)-17"></a></span></p><pre class="pyret-display">left / right</pre><p>  <span class="margin-note">To be used as an operator, <tt class="pyretexpr">/</tt> has to have spaces around it. This means you need to write <tt class="pyretexpr">a / 3</tt> rather than <tt class="pyretexpr">a/3</tt> to divide the value stored in <tt class="pyretexpr">a</tt> by <tt class="pyretexpr">3</tt>. Things like <tt class="pyretexpr">4/3</tt> and <tt class="pyretexpr">1/2</tt> are read by Pyret as single numbers, and can’t have names or other expressions in them.</span>   When <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> evaluate to numbers, divides <tt class="pyretexpr">left</tt>   by <tt class="pyretexpr">right</tt> and returns the result.</p><div><p><b>Examples:</b></p><pre>check:
   8 / 2 is 4
   8/3 / 2 is 4/3
   0.3 / 10 is 0.03
@@ -60,7 +60,7 @@ end</pre><p><a class="show-embed" code="check:
     8 / 2 is 4 
     8/3 / 2 is 4/3 
     0.3 / 10 is 0.03 
- end">(Try it!)</a></p></div></div><div><p><span><a name="&lt;-(less)-18"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><div><p><span><a name="&gt;-(greater)-19"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><div><p><span><a name="&lt;=-(less-or-equal)-20"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><div><p><span><a name="&gt;=-(greater-or-equal)-21"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><div><p><span><a name="==-(equal)-22"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><p>Comparison operators. See <a href="lang/equality.html#inequalities"></a>.</p><h2 id="Number-Functions" toclevel="2" tocentry="yes">Number Functions</h2><div><pre class="pyret-display">num-equal :: <span>Number, Number -&gt; Boolean</span></pre><p>If both arguments are <tt class="pyretexpr">Exactnum</tt>s, returns a <tt class="pyretexpr">Boolean</tt>. If either argument is <tt class="pyretexpr">Roughnum</tt>, raises an error.</p><pre>check:
+ end">(Try it!)</a></p></div></div><div><p><span><a name="&lt;-(less)-18"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><div><p><span><a name="&gt;-(greater)-19"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><div><p><span><a name="&lt;=-(less-or-equal)-20"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><div><p><span><a name="&gt;=-(greater-or-equal)-21"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><div><p><span><a name="==-(equal)-22"></a></span></p><pre class="pyret-display">left &lt; right</pre></div><p>Comparison operators. See <a href="lang/equality.html#inequalities"></a>.</p><h2 id="Number-Functions" toclevel="2" tocentry="yes">Number Functions</h2><div><pre class="pyret-display">num-equal :: <span>Number, Number -&gt; Boolean</span></pre><p>If both arguments are <tt class="pyretexpr">Exactnum</tt>s, returns a <tt class="pyretexpr">Boolean</tt>. If either argument is <tt class="pyretexpr">Roughnum</tt>, raises an error.</p><div><p><b>Examples:</b></p><pre>check:
   num-equal(2, 2) is true
   num-equal(2, 3) is false
   num-equal(1/2, 0.5) is true
@@ -68,45 +68,45 @@ end</pre><p><a class="show-embed" code="check:
   num-equal(1/3, 0.33) is false
   num-equal(1/3, ~0.33)
     raises "roughnums cannot be compared for equality"
-end</pre></div><p>  </p><div><pre class="pyret-display">num-max :: <span>Number, Number -&gt; Number</span></pre><p>Returns the greater of the two arguments.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-max :: <span>Number, Number -&gt; Number</span></pre><p>Returns the greater of the two arguments.</p><div><p><b>Examples:</b></p><pre>check:
   num-max(1, 2) is 2
   num-max(2, ~3) is-roughly ~3
   num-max(4, ~4) is 4
   num-max(~4, 4) is-roughly ~4
   num-max(-1.1, 0) is 0
-end</pre></div><p>  </p><div><pre class="pyret-display">num-min :: <span>Number, Number -&gt; Number</span></pre><p>Returns the lesser of the two arguments.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-min :: <span>Number, Number -&gt; Number</span></pre><p>Returns the lesser of the two arguments.</p><div><p><b>Examples:</b></p><pre>check:
   num-min(1, 2) is 1
   num-min(2, ~3) is 2
   num-min(4, ~4) is 4
   num-min(~4, 4) is-roughly ~4
   num-min(-1.1, 0) is -1.1
-end</pre></div><p>  </p><div><pre class="pyret-display">num-abs :: <span>Number -&gt; Number</span></pre><p>Returns the absolute value of the argument. The result is an   <tt class="pyretexpr">Exactnum</tt> only if the argument is.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-abs :: <span>Number -&gt; Number</span></pre><p>Returns the absolute value of the argument. The result is an   <tt class="pyretexpr">Exactnum</tt> only if the argument is.</p><div><p><b>Examples:</b></p><pre>check:
   num-abs(2) is 2
   num-abs(-2.1) is 2.1
   num-abs(~2) is-roughly ~2
   num-abs(~-2.1) is-roughly ~2.1
-end</pre></div><p>  </p><div><pre class="pyret-display">num-sin :: <span>Number -&gt; Number</span></pre><p>Returns the sine of the argument (an angle in radians), usually as a <tt class="pyretexpr">Roughnum</tt>.   If the argument is <tt class="pyretexpr">Exactnum</tt> 0, the result is <tt class="pyretexpr">Exactnum</tt> 0 too.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-sin :: <span>Number -&gt; Number</span></pre><p>Returns the sine of the argument (an angle in radians), usually as a <tt class="pyretexpr">Roughnum</tt>.   If the argument is <tt class="pyretexpr">Exactnum</tt> 0, the result is <tt class="pyretexpr">Exactnum</tt> 0 too.</p><div><p><b>Examples:</b></p><pre>check:
   num-sin(0) is 0
   num-sin(1) is%(within-abs(0.01)) 0.84
-end</pre></div><p>  </p><div><pre class="pyret-display">num-cos :: <span>Number -&gt; Number</span></pre><p>Returns the cosine of the argument (an angle in radians), usually as a <tt class="pyretexpr">Roughnum</tt>. If the argument is <tt class="pyretexpr">Exactnum</tt> 0, the result is <tt class="pyretexpr">Exactnum</tt> 1.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-cos :: <span>Number -&gt; Number</span></pre><p>Returns the cosine of the argument (an angle in radians), usually as a <tt class="pyretexpr">Roughnum</tt>. If the argument is <tt class="pyretexpr">Exactnum</tt> 0, the result is <tt class="pyretexpr">Exactnum</tt> 1.</p><div><p><b>Examples:</b></p><pre>check:
   num-cos(0) is 1
   num-cos(1) is%(within-abs(0.01)) 0.54
-end</pre></div><p>  </p><div><pre class="pyret-display">num-tan :: <span>Number -&gt; Number</span></pre><p>Returns the tangent of the argument (an angle in radians), usually as a <tt class="pyretexpr">Roughnum</tt>. If the argument is <tt class="pyretexpr">Exactnum</tt> 0, the result is <tt class="pyretexpr">Exactnum</tt> 1.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-tan :: <span>Number -&gt; Number</span></pre><p>Returns the tangent of the argument (an angle in radians), usually as a <tt class="pyretexpr">Roughnum</tt>. If the argument is <tt class="pyretexpr">Exactnum</tt> 0, the result is <tt class="pyretexpr">Exactnum</tt> 1.</p><div><p><b>Examples:</b></p><pre>check:
   num-tan(0) is 0
   num-tan(1) is%(within-abs(0.01)) 1.56
-end</pre></div><p>  </p><div><pre class="pyret-display">num-asin :: <span>Number -&gt; Number</span></pre><p>Returns the arcsine of the argument as an angle in radians in the range [-π/2, π/2], usually as a <tt class="pyretexpr">Roughnum</tt>. If the argument is <tt class="pyretexpr">Exactnum</tt> 0, the result is <tt class="pyretexpr">Exactnum</tt> 0.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-asin :: <span>Number -&gt; Number</span></pre><p>Returns the arcsine of the argument as an angle in radians in the range [-π/2, π/2], usually as a <tt class="pyretexpr">Roughnum</tt>. If the argument is <tt class="pyretexpr">Exactnum</tt> 0, the result is <tt class="pyretexpr">Exactnum</tt> 0.</p><div><p><b>Examples:</b></p><pre>check:
   num-asin(0) is 0
   num-asin(0.84) is%(within-abs(0.01)) 1
-end</pre></div><p>  </p><div><pre class="pyret-display">num-acos :: <span>Number -&gt; Number</span></pre><p>Returns the arccosine of the argument as an angle in radians in the range [0, π], usually as a <tt class="pyretexpr">Roughnum</tt>. However, if the argument is <tt class="pyretexpr">Exactnum</tt> 1, the result is <tt class="pyretexpr">Exactnum</tt> 0.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-acos :: <span>Number -&gt; Number</span></pre><p>Returns the arccosine of the argument as an angle in radians in the range [0, π], usually as a <tt class="pyretexpr">Roughnum</tt>. However, if the argument is <tt class="pyretexpr">Exactnum</tt> 1, the result is <tt class="pyretexpr">Exactnum</tt> 0.</p><div><p><b>Examples:</b></p><pre>check:
   num-acos(1) is 0
   num-acos(0.54) is%(within-abs(0.01)) 1
-end</pre></div><p>  </p><div><pre class="pyret-display">num-atan :: <span>Number -&gt; Number</span></pre><p>Returns the arctangent of the argument as an angle in radians in the range (-π/2, π/2), usually as a <tt class="pyretexpr">Roughnum</tt>. However, if the argument is <tt class="pyretexpr">Exactnum</tt> 0, the result is <tt class="pyretexpr">Exactnum</tt> 0.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-atan :: <span>Number -&gt; Number</span></pre><p>Returns the arctangent of the argument as an angle in radians in the range (-π/2, π/2), usually as a <tt class="pyretexpr">Roughnum</tt>. However, if the argument is <tt class="pyretexpr">Exactnum</tt> 0, the result is <tt class="pyretexpr">Exactnum</tt> 0.</p><div><p><b>Examples:</b></p><pre>check:
   num-atan(0) is 0
   num-atan(1) is-roughly (3.141592 * 1/4) # 45 degrees = π/4 radians
   num-atan(-1) is-roughly (-3.141592 * 1/4) # 315 degrees = -π/4 radians
   num-atan(100000000000) is-roughly (3.141592 / 2) # 90 degrees = π/2 radians
   num-atan(-100000000000) is-roughly (-3.141592 / 2) # 270 degrees = -π/2 radians
-end</pre></div><p>  </p><div><pre class="pyret-display">num-atan2 :: <span>Number, Number -&gt; Number</span></pre><p>The <tt class="pyretexpr">num-atan</tt> function takes a tangent value and returns <i>a</i> corresponding angle, but it is not clear which angle to return: for example, both <tt class="pyretexpr">num-tan(3.141592 * 1/4)</tt> and <tt class="pyretexpr">num-tan(3.141592 * 5/4)</tt> have a tangent of <tt class="pyretexpr">~1</tt>.  The <tt class="pyretexpr">num-atan2</tt> function produces an angle in radians in the range [0, 2π], where the tangent value is the <i>ratio</i> of the two arguments: the two arguments represent the (signed) <i>height</i> and <i>width</i> of a triangle whose angle is unknown (i.e., their ratio is the “rise over run”, defining the tangent of that angle).  The return value of <tt class="pyretexpr">num-atan2</tt> chooses which angle to return based on the following table:</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-atan2 :: <span>Number, Number -&gt; Number</span></pre><p>The <tt class="pyretexpr">num-atan</tt> function takes a tangent value and returns <i>a</i> corresponding angle, but it is not clear which angle to return: for example, both <tt class="pyretexpr">num-tan(3.141592 * 1/4)</tt> and <tt class="pyretexpr">num-tan(3.141592 * 5/4)</tt> have a tangent of <tt class="pyretexpr">~1</tt>.  The <tt class="pyretexpr">num-atan2</tt> function produces an angle in radians in the range [0, 2π], where the tangent value is the <i>ratio</i> of the two arguments: the two arguments represent the (signed) <i>height</i> and <i>width</i> of a triangle whose angle is unknown (i.e., their ratio is the “rise over run”, defining the tangent of that angle).  The return value of <tt class="pyretexpr">num-atan2</tt> chooses which angle to return based on the following table:</p><div><p><b>Examples:</b></p><pre>check:
   num-atan2(0, 1) is 0
   num-atan2(1, 1) is-roughly (3.141592 * 1/4) # 45 degrees
   num-atan2(1, -1) is-roughly (3.141592 * 3/4) # 135 degrees
@@ -114,66 +114,66 @@ end</pre></div><p>  </p><div><pre class="pyret-display">num-atan2 :: <span>Numbe
   num-atan2(-1, 1) is-roughly (3.141592 * 7/4) # 315 degrees
   num-atan2(1, 0) is-roughly (3.141592 * 1/2) # 90 degrees
   num-atan2(-1, 0) is-roughly (3.141592 * 3/2) # 270 degrees
-end</pre></div><p>  </p><div><pre class="pyret-display">num-modulo :: <span>Number, Number -&gt; Number</span></pre><p>Returns the modulus of the first argument with respect to the second, i.e. the remainder when dividing the first number by the second.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-modulo :: <span>Number, Number -&gt; Number</span></pre><p>Returns the modulus of the first argument with respect to the second, i.e. the remainder when dividing the first number by the second.</p><div><p><b>Examples:</b></p><pre>check:
   num-modulo(5, 2) is 1
   num-modulo(-5, 2) is 1
   num-modulo(-5, -2) is -1
   num-modulo(7, 3) is 1
   num-modulo(0, 5) is 0
   num-modulo(-7, 3) is 2
-end</pre><p>It is useful for calculating if one number is a multiple of another, by checking for a zero remainder.</p><pre>fun is-even(n :: Number) -&gt; Boolean:
+end</pre></div><p>It is useful for calculating if one number is a multiple of another, by checking for a zero remainder.</p><div><p><b>Examples:</b></p><pre>fun is-even(n :: Number) -&gt; Boolean:
   num-modulo(n, 2) == 0
 where:
   is-even(6) is true
   is-even(3) is false
-end</pre></div><p>  </p><div><pre class="pyret-display">num-truncate :: <span>Number -&gt; Number</span></pre><p>Returns the integer part of its argument by cutting off any decimal part. Does not do any rounding.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-truncate :: <span>Number -&gt; Number</span></pre><p>Returns the integer part of its argument by cutting off any decimal part. Does not do any rounding.</p><div><p><b>Examples:</b></p><pre>check:
   num-truncate(3.14) is 3
   num-truncate(-3.14) is -3
   num-truncate(~3.14) is-roughly ~3
   num-truncate(~-3.14) is-roughly ~-3
-end</pre></div><p>  </p><div><pre class="pyret-display">num-sqrt :: <span>Number -&gt; Number</span></pre><p>Returns the square root of the given argument.  If the argument is an <tt class="pyretexpr">Exactnum</tt> and a perfect square, the result is an <tt class="pyretexpr">Exactnum</tt>, otherwise, it is a <tt class="pyretexpr">Roughnum</tt>.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-sqrt :: <span>Number -&gt; Number</span></pre><p>Returns the square root of the given argument.  If the argument is an <tt class="pyretexpr">Exactnum</tt> and a perfect square, the result is an <tt class="pyretexpr">Exactnum</tt>, otherwise, it is a <tt class="pyretexpr">Roughnum</tt>.</p><div><p><b>Examples:</b></p><pre>check:
   num-sqrt(4) is 2
   num-sqrt(5) is%(within-abs(0.001)) ~2.236
   num-sqrt(~4) is%(within-abs(0.001)) ~2
   num-sqrt(~5) is%(within-abs(0.001)) ~2.236
   num-sqrt(0.04) is 1/5
   num-sqrt(-1) raises "negative argument"
-end</pre></div><p>  </p><div><pre class="pyret-display">num-sqr :: <span>Number -&gt; Number</span></pre><p>Returns the square of the given argument.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-sqr :: <span>Number -&gt; Number</span></pre><p>Returns the square of the given argument.</p><div><p><b>Examples:</b></p><pre>check:
   num-sqr(4) is 16
   num-sqr(5) is 25
   num-sqr(-4) is 16
   num-sqr(~4) is-roughly ~16
   num-sqr(0.04) is 1/625
-end</pre></div><p>  </p><div><pre class="pyret-display">num-ceiling :: <span>Number -&gt; Exactnum</span></pre><p>Returns the smallest integer <tt class="pyretexpr">Exactnum</tt> greater than or equal to the argument.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-ceiling :: <span>Number -&gt; Exactnum</span></pre><p>Returns the smallest integer <tt class="pyretexpr">Exactnum</tt> greater than or equal to the argument.</p><div><p><b>Examples:</b></p><pre>check:
   num-ceiling(4.2) is 5
   num-ceiling(-4.2) is -4
-end</pre></div><p>  </p><div><pre class="pyret-display">num-floor :: <span>Number -&gt; Exactnum</span></pre><p>Returns the largest integer <tt class="pyretexpr">Exactnum</tt> less than or equal to the argument.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-floor :: <span>Number -&gt; Exactnum</span></pre><p>Returns the largest integer <tt class="pyretexpr">Exactnum</tt> less than or equal to the argument.</p><div><p><b>Examples:</b></p><pre>check:
   num-floor(4.2) is 4
   num-floor(-4.2) is -5
-end</pre></div><p>  </p><div><pre class="pyret-display">num-round :: <span>Number -&gt; Exactnum</span></pre><p>Returns the closest integer <tt class="pyretexpr">Exactnum</tt> to the argument.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-round :: <span>Number -&gt; Exactnum</span></pre><p>Returns the closest integer <tt class="pyretexpr">Exactnum</tt> to the argument.</p><div><p><b>Examples:</b></p><pre>check:
   num-round(4.2) is 4
   num-round(4.8) is 5
   num-round(-4.2) is -4
   num-round(-4.8) is -5
-end</pre><p>If the argument is midway between integers, returns the integer further away from zero.</p><pre>check:
+end</pre></div><p>If the argument is midway between integers, returns the integer further away from zero.</p><div><p><b>Examples:</b></p><pre>check:
   num-round(3.5) is 4
   num-round(2.5) is 3
-end</pre></div><p>  </p><div><pre class="pyret-display">num-round-even :: <span>Number -&gt; Exactnum</span></pre><p>Similar to <tt class="pyretexpr">num-round</tt>, except that if the argument is midway between integers, returns the even integer <tt class="pyretexpr">Exactnum</tt>.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-round-even :: <span>Number -&gt; Exactnum</span></pre><p>Similar to <tt class="pyretexpr">num-round</tt>, except that if the argument is midway between integers, returns the even integer <tt class="pyretexpr">Exactnum</tt>.</p><div><p><b>Examples:</b></p><pre>check:
   num-round-even(3.5) is 4
   num-round-even(2.5) is 2
-end</pre></div><p>  </p><div><pre class="pyret-display">num-log :: <span>Number -&gt; Number</span></pre><p>Returns the natural logarithm (ln) of the argument, usually as a <tt class="pyretexpr">Roughnum</tt>. If the argument is <tt class="pyretexpr">Exactnum</tt> 1, the result is <tt class="pyretexpr">Exactnum</tt> 0. If the argument is non-positive, an error is thrown.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-log :: <span>Number -&gt; Number</span></pre><p>Returns the natural logarithm (ln) of the argument, usually as a <tt class="pyretexpr">Roughnum</tt>. If the argument is <tt class="pyretexpr">Exactnum</tt> 1, the result is <tt class="pyretexpr">Exactnum</tt> 0. If the argument is non-positive, an error is thrown.</p><div><p><b>Examples:</b></p><pre>check:
   num-log(1) is 0
   num-log(0) raises "non-positive argument"
   num-log(-1) raises "non-positive argument"
   num-log(2.718281828) is%(within-abs(0.01)) 1
   num-log(10) is%(within-abs(0.1)) 2.3
-end</pre></div><p>  </p><div><pre class="pyret-display">num-exp :: <span>Number -&gt; Number</span></pre><p>Returns e raised to the argument, usually as a <tt class="pyretexpr">Roughnum</tt>.  However, if the argument is <tt class="pyretexpr">Exactnum</tt> 0, the result is <tt class="pyretexpr">Exactnum</tt> 1.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-exp :: <span>Number -&gt; Number</span></pre><p>Returns e raised to the argument, usually as a <tt class="pyretexpr">Roughnum</tt>.  However, if the argument is <tt class="pyretexpr">Exactnum</tt> 0, the result is <tt class="pyretexpr">Exactnum</tt> 1.</p><div><p><b>Examples:</b></p><pre>check:
   num-exp(-1) is%(within-abs(0.0001)) (1 / num-exp(1))
   num-exp(0) is 1
   num-exp(1) is%(within-abs(0.0001)) 2.718281828
   num-exp(3) is%(within-abs(0.0001)) num-expt(2.718281828, 3)
   num-exp(710) raises "exp: argument too large: 710"
-end</pre></div><p>  </p><div><pre class="pyret-display">num-expt :: <span>Number, Number -&gt; Number</span></pre><p>Returns the first argument raised to the second argument.  An error is thrown if the first argument is 0 and the second is negative. If the first argument is <tt class="pyretexpr">Exactnum</tt> 0 or 1, or the second argument is <tt class="pyretexpr">Exactnum</tt> 0, then the result is an <tt class="pyretexpr">Exactnum</tt> even if the other argument is a <tt class="pyretexpr">Roughnum</tt>.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-expt :: <span>Number, Number -&gt; Number</span></pre><p>Returns the first argument raised to the second argument.  An error is thrown if the first argument is 0 and the second is negative. If the first argument is <tt class="pyretexpr">Exactnum</tt> 0 or 1, or the second argument is <tt class="pyretexpr">Exactnum</tt> 0, then the result is an <tt class="pyretexpr">Exactnum</tt> even if the other argument is a <tt class="pyretexpr">Roughnum</tt>.</p><div><p><b>Examples:</b></p><pre>check:
   num-expt(3, 0) is 1
   num-expt(1, 3) is 1
   num-expt(0, 0) is 1
@@ -181,65 +181,65 @@ end</pre></div><p>  </p><div><pre class="pyret-display">num-expt :: <span>Number
   num-expt(0, -3) raises "division by zero"
   num-expt(2, 3) is 8
   num-expt(2, -3) is 1/8
-end</pre></div><p>  </p><div><pre class="pyret-display">num-to-roughnum :: <span>Number -&gt; Roughnum</span></pre><p>Given a number, returns the <tt class="pyretexpr">Roughnum</tt> version.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-to-roughnum :: <span>Number -&gt; Roughnum</span></pre><p>Given a number, returns the <tt class="pyretexpr">Roughnum</tt> version.</p><div><p><b>Examples:</b></p><pre>check:
   num-is-roughnum(num-to-roughnum(3.14)) is true
   num-is-roughnum(num-to-roughnum(~3.14)) is true
-end</pre></div><p>  </p><div><pre class="pyret-display">num-is-integer :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is an <tt class="pyretexpr">Exactnum</tt> integer.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-is-integer :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is an <tt class="pyretexpr">Exactnum</tt> integer.</p><div><p><b>Examples:</b></p><pre>check:
   num-is-integer(2) is true
   num-is-integer(1/2) is false
   num-is-integer(1.609) is false
   num-is-integer(~2) is false
-end</pre></div><p>  </p><div><pre class="pyret-display">num-is-rational :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is an <tt class="pyretexpr">Exactnum</tt> rational.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-is-rational :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is an <tt class="pyretexpr">Exactnum</tt> rational.</p><div><p><b>Examples:</b></p><pre>check:
   num-is-rational(2) is true
   num-is-rational(1/2) is true
   num-is-rational(1.609) is true
   num-is-rational(~2) is false
-end</pre></div><p>  </p><div><pre class="pyret-display">num-is-roughnum :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is a <tt class="pyretexpr">Roughnum</tt>.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-is-roughnum :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is a <tt class="pyretexpr">Roughnum</tt>.</p><div><p><b>Examples:</b></p><pre>check:
   num-is-roughnum(2) is false
   num-is-roughnum(1/2) is false
   num-is-roughnum(1.609) is false
   num-is-roughnum(~2) is true
-end</pre></div><p>  </p><div><pre class="pyret-display">num-is-positive :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is greater than zero.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-is-positive :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is greater than zero.</p><div><p><b>Examples:</b></p><pre>check:
   num-is-positive(~-2) is false
   num-is-positive(-2) is false
   num-is-positive(0) is false
   num-is-positive(-0) is false
   num-is-positive(2) is true
   num-is-positive(~2) is true
-end</pre></div><p>  </p><div><pre class="pyret-display">num-is-negative :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is less than zero.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-is-negative :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is less than zero.</p><div><p><b>Examples:</b></p><pre>check:
   num-is-negative(~-2) is true
   num-is-negative(-2) is true
   num-is-negative(0) is false
   num-is-negative(-0) is false
   num-is-negative(2) is false
   num-is-negative(~2) is false
-end</pre></div><p>  </p><div><pre class="pyret-display">num-is-non-positive :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is less than or equal to zero.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-is-non-positive :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is less than or equal to zero.</p><div><p><b>Examples:</b></p><pre>check:
   num-is-non-positive(~-2) is true
   num-is-non-positive(-2) is true
   num-is-non-positive(0) is true
   num-is-non-positive(-0) is true
   num-is-non-positive(2) is false
   num-is-non-positive(~2) is false
-end</pre></div><p>  </p><div><pre class="pyret-display">num-is-non-negative :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is greater than or equal to zero.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-is-non-negative :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if argument is greater than or equal to zero.</p><div><p><b>Examples:</b></p><pre>check:
   num-is-non-negative(~-2) is false
   num-is-non-negative(-2) is false
   num-is-non-negative(0) is true
   num-is-non-negative(-0) is true
   num-is-non-negative(2) is true
   num-is-non-negative(~2) is true
-end</pre></div><p>  </p><div><pre class="pyret-display">num-to-string :: <span>Number -&gt; String</span></pre><p>Returns a <tt class="pyretexpr">String</tt> representing a literal form of the number.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-to-string :: <span>Number -&gt; String</span></pre><p>Returns a <tt class="pyretexpr">String</tt> representing a literal form of the number.</p><div><p><b>Examples:</b></p><pre>check:
   num-to-string(2.5) is "5/2"
   num-to-string(2) is "2"
   num-to-string(2/3) is "2/3"
   num-to-string(~2.718) is "~2.718"
   num-to-string(~6.022e23) is "~6.022e+23"
-end</pre></div><p>  </p><div><pre class="pyret-display">num-to-string-digits :: <span>Number, Number -&gt; String</span></pre><p>Converts the number to a <tt class="pyretexpr">String</tt>, providing <tt class="pyretexpr">digits</tt> precision in the output.  If <tt class="pyretexpr">digits</tt> is positive, provides that many digits to the right of the decimal point (including adding zeroes beyond the actual precision of the number).  If <tt class="pyretexpr">digits</tt> is negative, rounds that many positions to the <i>left</i> of the decimal, replacing them with zeroes.</p><p>Note that <tt class="pyretexpr">num-to-string-digits</tt> is only for formatting, and its output’s apparent precision may be unrelated to the actual precision of the input number, which may have been an approximation, or unrepresentable in decimal.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-to-string-digits :: <span>Number, Number -&gt; String</span></pre><p>Converts the number to a <tt class="pyretexpr">String</tt>, providing <tt class="pyretexpr">digits</tt> precision in the output.  If <tt class="pyretexpr">digits</tt> is positive, provides that many digits to the right of the decimal point (including adding zeroes beyond the actual precision of the number).  If <tt class="pyretexpr">digits</tt> is negative, rounds that many positions to the <i>left</i> of the decimal, replacing them with zeroes.</p><p>Note that <tt class="pyretexpr">num-to-string-digits</tt> is only for formatting, and its output’s apparent precision may be unrelated to the actual precision of the input number, which may have been an approximation, or unrepresentable in decimal.</p><div><p><b>Examples:</b></p><pre>check:
   num-to-string-digits(2/3, 3) is "0.667"
   num-to-string-digits(-2/3, 3) is "-0.667"
   num-to-string-digits(5, 2) is "5.00"
   num-to-string-digits(5, 0) is "5"
   num-to-string-digits(555, -2) is "600"
-end</pre></div><p>  </p><div><pre class="pyret-display">num-within-abs :: <span>Number -&gt; <span>Number, Number -&gt; Boolean</span></span></pre><p>Returns a predicate that checks if the difference of its two arguments is less than <tt class="pyretexpr">tol</tt>.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-within-abs :: <span>Number -&gt; <span>Number, Number -&gt; Boolean</span></span></pre><p>Returns a predicate that checks if the difference of its two arguments is less than <tt class="pyretexpr">tol</tt>.</p><div><p><b>Examples:</b></p><pre>check:
    1  is%(num-within-abs(0.1))       1
    1  is%(num-within-abs(0.1))      ~1
   ~3  is%(num-within-abs(0.1))      ~3
@@ -250,10 +250,10 @@ end</pre></div><p>  </p><div><pre class="pyret-display">num-within-abs :: <span>
    5  is%(num-within-abs(4))         3
 
    num-within-abs(-0.1)(1, 1.05) raises "negative tolerance"
-end</pre></div><p>  </p><div><pre class="pyret-display">num-within-rel :: <span>Number -&gt; <span>Number, Number -&gt; Boolean</span></span></pre><p>Returns a predicate that checks that its first number argument is no more than the fraction <tt class="pyretexpr">tol</tt> off from its second argument.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-within-rel :: <span>Number -&gt; <span>Number, Number -&gt; Boolean</span></span></pre><p>Returns a predicate that checks that its first number argument is no more than the fraction <tt class="pyretexpr">tol</tt> off from its second argument.</p><div><p><b>Examples:</b></p><pre>check:
   100000 is%(num-within-rel(0.1)) 95000
   100000 is-not%(num-within-rel(0.1)) 85000
-end</pre></div><p>  </p><div><pre class="pyret-display">num-within :: <span>Number -&gt; <span>Number, Number -&gt; Boolean</span></span></pre><p>An alias for <tt class="pyretexpr">num-within-relnumbers</tt>, much as <tt class="pyretexpr">withinequality</tt> and <tt class="pyretexpr">within-relequality</tt> are synonyms.</p></div><p>  </p><div><pre class="pyret-display">within :: <span>Number -&gt; <a-arrow>AnyAnyBoolean</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-abs :: <span>Number -&gt; <a-arrow>AnyAnyBoolean</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-rel :: <span>Number -&gt; <a-arrow>AnyAnyBoolean</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-abs-now :: <span>Number -&gt; <a-arrow>AnyAnyBoolean</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-rel-now :: <span>Number -&gt; <a-arrow>AnyAnyBoolean</a-arrow></span></pre></div><p>  These comparison functions compare both numbers and structures, and are   documented in <a href="lang/equality.html#s:bounded-equalities"></a>.</p><p>  </p><div><pre class="pyret-display">within-abs3 :: <span>Number -&gt; <a-arrow>AnyAnyEqualityResult</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-rel3 :: <span>Number -&gt; <a-arrow>AnyAnyEqualityResult</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-abs-now3 :: <span>Number -&gt; <a-arrow>AnyAnyEqualityResult</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-rel-now3 :: <span>Number -&gt; <a-arrow>AnyAnyEqualityResult</a-arrow></span></pre></div><p>  These comparison functions are like the ones above, but return   <tt class="pyretexpr">EqualityResultequality</tt>s, and are documented in <a href="lang/equality.html#s:total-equality-predicates"></a>.</p><h2 id="Random-Numbers" toclevel="2" tocentry="yes">Random Numbers</h2><p>  </p><div><pre class="pyret-display">num-random :: <span>Number -&gt; Number</span></pre><p>  Returns a pseudo-random integer from <tt class="pyretexpr">0</tt> to <tt class="pyretexpr">max - 1</tt>.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-within :: <span>Number -&gt; <span>Number, Number -&gt; Boolean</span></span></pre><p>An alias for <tt class="pyretexpr">num-within-relnumbers</tt>, much as <tt class="pyretexpr">withinequality</tt> and <tt class="pyretexpr">within-relequality</tt> are synonyms.</p></div><p>  </p><div><pre class="pyret-display">within :: <span>Number -&gt; <a-arrow>AnyAnyBoolean</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-abs :: <span>Number -&gt; <a-arrow>AnyAnyBoolean</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-rel :: <span>Number -&gt; <a-arrow>AnyAnyBoolean</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-abs-now :: <span>Number -&gt; <a-arrow>AnyAnyBoolean</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-rel-now :: <span>Number -&gt; <a-arrow>AnyAnyBoolean</a-arrow></span></pre></div><p>  These comparison functions compare both numbers and structures, and are   documented in <a href="lang/equality.html#s:bounded-equalities"></a>.</p><p>  </p><div><pre class="pyret-display">within-abs3 :: <span>Number -&gt; <a-arrow>AnyAnyEqualityResult</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-rel3 :: <span>Number -&gt; <a-arrow>AnyAnyEqualityResult</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-abs-now3 :: <span>Number -&gt; <a-arrow>AnyAnyEqualityResult</a-arrow></span></pre></div><p>  </p><div><pre class="pyret-display">within-rel-now3 :: <span>Number -&gt; <a-arrow>AnyAnyEqualityResult</a-arrow></span></pre></div><p>  These comparison functions are like the ones above, but return   <tt class="pyretexpr">EqualityResultequality</tt>s, and are documented in <a href="lang/equality.html#s:total-equality-predicates"></a>.</p><h2 id="Random-Numbers" toclevel="2" tocentry="yes">Random Numbers</h2><p>  </p><div><pre class="pyret-display">num-random :: <span>Number -&gt; Number</span></pre><p>  Returns a pseudo-random integer from <tt class="pyretexpr">0</tt> to <tt class="pyretexpr">max - 1</tt>.</p><div><p><b>Examples:</b></p><pre>check:
   fun between(min, max):
     lam(v): (v &gt;= min) and (v &lt;= max) end
   end
@@ -264,7 +264,7 @@ end</pre></div><p>  </p><div><pre class="pyret-display">num-within :: <span>Numb
       n satisfies between(0, 10 - 1)
     end
   end
-end</pre></div><p>  </p><div><pre class="pyret-display">num-random-seed :: <span>Number -&gt; Nothing</span></pre><p>Sets the random seed.  Setting the seed to a particular number makes all future uses of random produce the same sequence of numbers.  Useful for testing and debugging functions that have random behavior.</p><pre>check:
+end</pre></div></div><p>  </p><div><pre class="pyret-display">num-random-seed :: <span>Number -&gt; Nothing</span></pre><p>Sets the random seed.  Setting the seed to a particular number makes all future uses of random produce the same sequence of numbers.  Useful for testing and debugging functions that have random behavior.</p><div><p><b>Examples:</b></p><pre>check:
   num-random-seed(0)
   n = num-random(1000)
   n2 = num-random(1000)
@@ -276,22 +276,22 @@ end</pre></div><p>  </p><div><pre class="pyret-display">num-random-seed :: <span
   n3 is n
   n4 = num-random(1000)
   n4 is n2
-end</pre></div><p>The random seed is set globally.  If it is set in tests in a game or another program that should not run the same way every time, add an identifier you can set as a flag indicating if you are running the code in testing or production.</p><pre>
+end</pre></div></div><p>The random seed is set globally.  If it is set in tests in a game or another program that should not run the same way every time, add an identifier you can set as a flag indicating if you are running the code in testing or production.</p><div><p><b>Examples:</b></p><pre>
 IS-TESTING = true  # change as needed
 
 when IS-TESTING:
   num-random-seed(...)
-end</pre><h2 id="Other-Number-Functions" toclevel="2" tocentry="yes">Other Number Functions</h2><p>  A few other number functions are useful in limited cases that don’t come up   in most programs.</p><p>  </p><div><pre class="pyret-display">num-is-fixnum :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if the argument is represented directly as a primitive JavaScript number (i.e., JavaScript double).</p><pre>check:
+end</pre></div><h2 id="Other-Number-Functions" toclevel="2" tocentry="yes">Other Number Functions</h2><p>  A few other number functions are useful in limited cases that don’t come up   in most programs.</p><p>  </p><div><pre class="pyret-display">num-is-fixnum :: <span>Number -&gt; Boolean</span></pre><p>Returns <tt class="pyretexpr">true</tt> if the argument is represented directly as a primitive JavaScript number (i.e., JavaScript double).</p><div><p><b>Examples:</b></p><pre>check:
   num-is-fixnum(10) is true
   num-is-fixnum(~10) is false
   num-is-fixnum(1000000000000000) is true
   num-is-fixnum(10000000000000000) is false
   num-is-fixnum(1.5) is false
-end</pre><p><margin-note>Pyret represents <tt class="pyretexpr">Exactnums</tt> that are non-integers as tuples, and hence even small rationals such as 1.5 are considered non-<tt class="pyretexpr">fixnum</tt>, although they could be represented as JavaScript doubles.</margin-note></p></div><p>  </p><div><pre class="pyret-display">num-exact :: <span>Number -&gt; Exactnum</span></pre></div><p>  </p><div><pre class="pyret-display">num-to-rational :: <span>Number -&gt; Exactnum</span></pre></div><p>Given a <tt class="pyretexpr">Roughnum</tt>, returns an <tt class="pyretexpr">Exactnum</tt> number most equal to it. Given an <tt class="pyretexpr">Exactnum</tt> num, returns it directly.</p><p><margin-note>It is not good practice to indiscriminately convert <tt class="pyretexpr">Roughnum</tt>s to <tt class="pyretexpr">Exactnum</tt>s to make comparison easier. Use <tt class="pyretexpr">within()</tt> or <tt class="pyretexpr">is-roughly</tt>.</margin-note></p><pre>check:
+end</pre></div><p><span class="margin-note">Pyret represents <tt class="pyretexpr">Exactnums</tt> that are non-integers as tuples, and hence even small rationals such as 1.5 are considered non-<tt class="pyretexpr">fixnum</tt>, although they could be represented as JavaScript doubles.</span></p></div><p>  </p><div><pre class="pyret-display">num-exact :: <span>Number -&gt; Exactnum</span></pre></div><p>  </p><div><pre class="pyret-display">num-to-rational :: <span>Number -&gt; Exactnum</span></pre></div><p>Given a <tt class="pyretexpr">Roughnum</tt>, returns an <tt class="pyretexpr">Exactnum</tt> number most equal to it. Given an <tt class="pyretexpr">Exactnum</tt> num, returns it directly.</p><p><span class="margin-note">It is not good practice to indiscriminately convert <tt class="pyretexpr">Roughnum</tt>s to <tt class="pyretexpr">Exactnum</tt>s to make comparison easier. Use <tt class="pyretexpr">within()</tt> or <tt class="pyretexpr">is-roughly</tt>.</span></p><div><p><b>Examples:</b></p><pre>check:
   num-sqrt(2) is%(within-abs(0.000001)) ~1.4142135623730951
   num-exact(num-sqrt(2)) is 1.4142135623730951
   num-to-rational(num-sqrt(2)) is 1.4142135623730951
-end</pre></div></root>
+end</pre></div></div></root>
     <hr/>
     The current page is builtin/numbers.html.
     The previous page is <a href = "../trove/globals.html">../trove/globals.html</a>.

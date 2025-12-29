@@ -14,7 +14,7 @@
     <root><div><h1 id="s-exp" toclevel="1" tocentry="yes"></h1><p>  </p><p>This module re-exports the constructors from S-Exp, which defines the result of parsing an s-exp.</p><p>  </p><div><pre class="pyret-display">read-s-exp :: <span>(<span>sexp-str :: </span>)</span></pre><p>    Reads an <i>s-expression</i> as a string, and returns it as a Pyret value.</p><p>    An s-expression is a string that satisfies the following grammar:</p><p>    </p><pre class="nothing_special">s-exp = "(" s-exp ... ")"
       | &lt;number&gt;
       | &lt;string&gt;
-      | &lt;id&gt;</pre><p>    The first form parses to a s-list containing the nested     sub-expression results.  Numbers become s-nums, strings become     s-strs, and all other names not inside quotes     become s-syms.</p><pre>import s-exp as S
+      | &lt;id&gt;</pre><p>    The first form parses to a s-list containing the nested     sub-expression results.  Numbers become s-nums, strings become     s-strs, and all other names not inside quotes     become s-syms.</p><div><p><b>Examples:</b></p><pre>import s-exp as S
 
 p = S.read-s-exp
 s-list = S.s-list
@@ -61,7 +61,7 @@ check:
   p("(()") raises "Invalid"
   p("(a')") raises "Invalid"
 
-end</pre></div></div></root>
+end</pre></div></div></div></root>
     <hr/>
     The current page is trove/s-exp.html.
     The previous page is <a href = "../trove/pprint.html">../trove/pprint.html</a>.
