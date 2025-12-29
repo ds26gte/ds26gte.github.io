@@ -21,7 +21,7 @@ end</pre><p><a class="show-embed" code="import sets as S
 
  check: 
     S.list-to-list-set([L.list: 1, 2, 1, 2]) is [S.list-set: 2, 1] 
- end">(Try it!)</a></p></div><h2 id="Constructing-Sets" toclevel="2" tocentry="yes">Constructing Sets</h2><p>collection-doc</p><p>Constructs a set out of the <tt class="pyretexpr">elt</tt>s, representing them as a list. Raises an exception if the elements don’t support equality.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><h2 id="Constructing-Sets" toclevel="2" tocentry="yes">Constructing Sets</h2><pre class="pyret-display">[list-set: <span class="pyret-display">elt :: a</span>, ...] -&gt; <span>Set&lt;<span>a</span>&gt;</span></pre><p>Constructs a set out of the <tt class="pyretexpr">elt</tt>s, representing them as a list. Raises an exception if the elements don’t support equality.</p><div><p><b>Examples:</b></p><pre>import sets as S
 import lists as L
 
 check:
@@ -37,7 +37,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     [S.list-set: 1, 2, 2] is [S.list-set: 1, 2] 
     [S.list-set: [L.list: 1], [L.list: 1], [L.list: 2]] is 
       [S.list-set: [L.list: 2], [L.list: 1]] 
- end">(Try it!)</a></p></div><div><p><span><a name="empty-list-set-69"></a></span></p><pre class="pyret-display">empty-list-set :: <S-of>a</S-of></pre></div><p>An empty set, represented as a list.</p><p>collection-doc</p><p>Constructs a set out of the <tt class="pyretexpr">elt</tt>s, representing them as a tree. Raises an exception if the elements don’t support the <tt class="pyretexpr">&lt;</tt> operator via <tt class="pyretexpr">_lessthan</tt>.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div><p><span><a name="empty-list-set-69"></a></span></p><pre class="pyret-display">empty-list-set :: <span>Set&lt;<span>a</span>&gt;</span></pre></div><p>An empty set, represented as a list.</p><pre class="pyret-display">[tree-set: <span class="pyret-display">elt :: a</span>, ...] -&gt; <span>Set&lt;<span>a</span>&gt;</span></pre><p>Constructs a set out of the <tt class="pyretexpr">elt</tt>s, representing them as a tree. Raises an exception if the elements don’t support the <tt class="pyretexpr">&lt;</tt> operator via <tt class="pyretexpr">_lessthan</tt>.</p><div><p><b>Examples:</b></p><pre>import sets as S
 import lists as L
 
 check:
@@ -51,7 +51,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     [S.tree-set: 1, 2, 3] is [S.tree-set: 1, 2, 3] 
     [S.tree-set: 1, 2, 2] is [S.tree-set: 1, 2] 
     [S.tree-set: [L.list: 1], [L.list: 1], [L.list: 2]] raises &quot;binop-error&quot; 
- end">(Try it!)</a></p></div><div><p><span><a name="empty-tree-set-70"></a></span></p><pre class="pyret-display">empty-tree-set :: <S-of>a</S-of></pre></div><p>An empty set, represented as a tree.</p><p>collection-doc</p><p>Another name for <tt class="pyretexpr">list-set</tt>.</p><div><pre class="pyret-display">list-to-list-set :: <span>(<span>lst :: <span>List&lt;<span>a</span>&gt;</span></span>)</span></pre></div><p>Constructs a list-set out of the elements in the list.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div><p><span><a name="empty-tree-set-70"></a></span></p><pre class="pyret-display">empty-tree-set :: <span>Set&lt;<span>a</span>&gt;</span></pre></div><p>An empty set, represented as a tree.</p><pre class="pyret-display">[set: <span class="pyret-display">elt :: a</span>, ...] -&gt; <span>Set&lt;<span>a</span>&gt;</span></pre><p>Another name for <tt class="pyretexpr">list-set</tt>.</p><div><pre class="pyret-display">list-to-list-set :: <span><span><span class="pyret-display">(lst :: <span>List&lt;<span>a</span>&gt;</span>)</span></span> -&gt; <span>Set&lt;<span>a</span>&gt;</span></span></pre></div><p>Constructs a list-set out of the elements in the list.</p><div><p><b>Examples:</b></p><pre>import sets as S
 import lists as L
 
 check:
@@ -63,7 +63,7 @@ end</pre><p><a class="show-embed" code="import sets as S
  check: 
     s1 = S.list-to-list-set([L.list: 1, 2, 3, 3, 3]) 
     s1 is [S.list-set: 1, 2, 3] 
- end">(Try it!)</a></p></div><div><pre class="pyret-display">list-to-tree-set :: <span>(<span>lst :: <span>List&lt;<span>a</span>&gt;</span></span>)</span></pre></div><p>Constructs a tree-set out of the elements in the list.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div><pre class="pyret-display">list-to-tree-set :: <span><span><span class="pyret-display">(lst :: <span>List&lt;<span>a</span>&gt;</span>)</span></span> -&gt; <span>Set&lt;<span>a</span>&gt;</span></span></pre></div><p>Constructs a tree-set out of the elements in the list.</p><div><p><b>Examples:</b></p><pre>import sets as S
 import lists as L
 
 check:
@@ -75,7 +75,7 @@ end</pre><p><a class="show-embed" code="import sets as S
  check: 
     s1 = S.list-to-tree-set([L.list: 1, 2, 3, 3, 3]) 
     s1 is [S.tree-set: 1, 2, 3] 
- end">(Try it!)</a></p></div><div><pre class="pyret-display">list-to-set :: <span>(<span>lst :: <span>List&lt;<span>a</span>&gt;</span></span>)</span></pre></div><p>Another name for <tt class="pyretexpr">list-to-list-set</tt>.</p><h2 id="Set-Methods" toclevel="2" tocentry="yes">Set Methods</h2><div class="pyret-display"><tt>.add :: contract</tt></div><p>Constructs a new set containing the added element if it was not already present.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div><pre class="pyret-display">list-to-set :: <span><span><span class="pyret-display">(lst :: <span>List&lt;<span>a</span>&gt;</span>)</span></span> -&gt; <span>Set&lt;<span>a</span>&gt;</span></span></pre></div><p>Another name for <tt class="pyretexpr">list-to-list-set</tt>.</p><h2 id="Set-Methods" toclevel="2" tocentry="yes">Set Methods</h2><div class="pyret-display"><tt>.add :: <span><span><span class="pyret-display">(elt :: a)</span></span> -&gt; <span>Set&lt;<span>a</span>&gt;</span></span></tt></div><p>Constructs a new set containing the added element if it was not already present.</p><div><p><b>Examples:</b></p><pre>import sets as S
 
 check:
   s1 = [S.set: 1, 2, 3]
@@ -97,7 +97,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     s1.size() is 3 
     s2.size() is 4 
     s3.size() is 3 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.remove :: contract</tt></div><p>Constructs a new set removing the element if it was present. It is <i>not</i> an error to remove an element that is not in the set; it simply leaves the set unchanged.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.remove :: <span><span><span class="pyret-display">(elt :: a)</span></span> -&gt; <span>Set&lt;<span>a</span>&gt;</span></span></tt></div><p>Constructs a new set removing the element if it was present. It is <i>not</i> an error to remove an element that is not in the set; it simply leaves the set unchanged.</p><div><p><b>Examples:</b></p><pre>import sets as S
 
 check:
   s1 = [S.set: 1, 2, 3]
@@ -119,7 +119,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     s1.size() is 3 
     s2.size() is 2 
     s3.size() is 3 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.size :: <span><S-of>a</S-of> -&gt; Number</span></tt></div><p>Computes the number of elements in the set.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.size :: <span>() -&gt; Number</span></tt></div><p>Computes the number of elements in the set.</p><div><p><b>Examples:</b></p><pre>import sets as S
 
 check:
   [S.set: 1, 2, 3].size() is 3
@@ -131,7 +131,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     [S.set: 1, 2, 3].size() is 3 
     [S.tree-set: 1, 2, 3].size() is 3 
     [S.list-set: 1, 2, 3].size() is 3 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.member :: contract</tt></div><p>Checks if <tt class="pyretexpr">elt</tt> is contained within this set (checking membership with <tt class="pyretexpr">equal-alwaysequality</tt>).</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.member :: <span><span><span class="pyret-display">(elt :: a)</span></span> -&gt; Boolean</span></tt></div><p>Checks if <tt class="pyretexpr">elt</tt> is contained within this set (checking membership with <tt class="pyretexpr">equal-alwaysequality</tt>).</p><div><p><b>Examples:</b></p><pre>import sets as S
 
 check:
   s1 = [S.set: 1, 2, 3]
@@ -143,7 +143,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     s1 = [S.set: 1, 2, 3] 
     s1.member(1) is true 
     s1.member(4) is false 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.pick :: <span><S-of>a</S-of> -&gt; <P-of>a<S-of>a</S-of></P-of></span></tt></div><p><i>Picks</i> an arbitrary element out of the set, and returns a <tt class="pyretexpr">Pickpick</tt> data structure.  If the set is empty, then <tt class="pyretexpr">.pick</tt> returns a <tt class="pyretexpr">pick-nonepick</tt>. Otherwise it returns a <tt class="pyretexpr">pick-somepick</tt>, whose <tt class="pyretexpr">elt</tt> field stores the picked value and whose <tt class="pyretexpr">rest</tt> field stores the rest of the set.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.pick :: <span>() -&gt; <span>Pick&lt;<span>a, <span>Set&lt;<span>a</span>&gt;</span></span>&gt;</span></span></tt></div><p><i>Picks</i> an arbitrary element out of the set, and returns a <tt class="pyretexpr">Pickpick</tt> data structure.  If the set is empty, then <tt class="pyretexpr">.pick</tt> returns a <tt class="pyretexpr">pick-nonepick</tt>. Otherwise it returns a <tt class="pyretexpr">pick-somepick</tt>, whose <tt class="pyretexpr">elt</tt> field stores the picked value and whose <tt class="pyretexpr">rest</tt> field stores the rest of the set.</p><div><p><b>Examples:</b></p><pre>import sets as S
 import pick as P
 
 check:
@@ -201,7 +201,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     [S.set: 1, 2].pick().elt is%(one-of) [L.list: 1, 2] 
     [S.set: 1, 2].pick().rest is%(one-of) 
     [L.list: [S.set: 1], [S.set: 2]] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.union :: contract</tt></div><p>Computes the union of two sets.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.union :: <span><span><span class="pyret-display">(other :: <span>Set&lt;<span>a</span>&gt;</span>)</span></span> -&gt; <span>Set&lt;<span>a</span>&gt;</span></span></tt></div><p>Computes the union of two sets.</p><div><p><b>Examples:</b></p><pre>import sets as S
 
 check:
   [S.list-set: 1, 2, 3].union([S.tree-set: 2, 3, 4])
@@ -217,7 +217,7 @@ end</pre><p><a class="show-embed" code="import sets as S
 
     S.empty-tree-set.union([S.list-set: 3, 4, 4]) 
       is [S.tree-set: 3, 4] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.intersect :: contract</tt></div><p>Computes the intersection of two sets.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.intersect :: <span><span><span class="pyret-display">(other :: <span>Set&lt;<span>a</span>&gt;</span>)</span></span> -&gt; <span>Set&lt;<span>a</span>&gt;</span></span></tt></div><p>Computes the intersection of two sets.</p><div><p><b>Examples:</b></p><pre>import sets as S
 
 check:
   [S.list-set: 1, 2, 3].intersect([S.tree-set: 2, 3, 4])
@@ -233,7 +233,7 @@ end</pre><p><a class="show-embed" code="import sets as S
 
     S.empty-tree-set.intersect([S.list-set: 3, 4, 4]) 
       is [S.tree-set: ] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.difference :: contract</tt></div><p>Computes the difference of two sets.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.difference :: <span><span><span class="pyret-display">(other :: <span>Set&lt;<span>a</span>&gt;</span>)</span></span> -&gt; <span>Set&lt;<span>a</span>&gt;</span></span></tt></div><p>Computes the difference of two sets.</p><div><p><b>Examples:</b></p><pre>import sets as S
 
 check:
   [S.list-set: 1, 2, 3].difference([S.tree-set: 2, 3, 4])
@@ -249,7 +249,7 @@ end</pre><p><a class="show-embed" code="import sets as S
 
     S.empty-tree-set.difference([S.list-set: 3, 4, 4]) 
       is [S.tree-set: ] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.symmetric-difference :: contract</tt></div><p>Computes the symmetric difference of two sets.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.symmetric-difference :: <span><span><span class="pyret-display">(other :: <span>Set&lt;<span>a</span>&gt;</span>)</span></span> -&gt; <span>Set&lt;<span>a</span>&gt;</span></span></tt></div><p>Computes the symmetric difference of two sets.</p><div><p><b>Examples:</b></p><pre>import sets as S
 
 check:
   [S.list-set: 1, 2, 3].symmetric-difference([S.tree-set: 2, 3, 4])
@@ -265,7 +265,7 @@ end</pre><p><a class="show-embed" code="import sets as S
 
     S.empty-tree-set.symmetric-difference([S.list-set: 3, 4, 4]) 
       is [S.tree-set: 3, 4] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.to-list :: contract</tt></div><p>Converts the set into a list. There is no guarantee about the order of elements in the list.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.to-list :: <span>() -&gt; <span>List&lt;<span>a</span>&gt;</span></span></tt></div><p>Converts the set into a list. There is no guarantee about the order of elements in the list.</p><div><p><b>Examples:</b></p><pre>import sets as S
 
 check:
   [S.list-set: 3, 1, 4, 1, 5, 9, 2].to-list().length() is 6
@@ -275,7 +275,7 @@ end</pre><p><a class="show-embed" code="import sets as S
  check: 
     [S.list-set: 3, 1, 4, 1, 5, 9, 2].to-list().length() is 6 
     [S.tree-set: 8, 6, 7, 5, 3, 0, 9].to-list().length() is 7 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.fold :: contract</tt></div><p>Applies <tt class="pyretexpr">f</tt> to each element of the set along with the accumulator (starting with <tt class="pyretexpr">base</tt>) to produce a new value.  Traverses elements in an unspecified order.</p><div><p><b>Examples:</b></p><pre>import sets as S
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.fold :: <span>(<span><span class="pyret-display">f :: <span>(<span>(<span>b, a</span>) -&gt; b</span>)</span></span>, <span class="pyret-display">base :: b</span></span>) -&gt; b</span></tt></div><p>Applies <tt class="pyretexpr">f</tt> to each element of the set along with the accumulator (starting with <tt class="pyretexpr">base</tt>) to produce a new value.  Traverses elements in an unspecified order.</p><div><p><b>Examples:</b></p><pre>import sets as S
 import lists as L
 
 check:

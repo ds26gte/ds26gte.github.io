@@ -33,7 +33,7 @@ end</pre></div><div class="pyret-display"><tt>.has-key :: <span><span>StringDict
   sd1 = [string-dict: "a", 5]
   sd1.has-key("a") is true
   sd1.has-key("b") is false
-end</pre></div><div class="pyret-display"><tt>.keys :: <span><span>StringDict&lt;<span>a</span>&gt;</span> -&gt; <S-of>String</S-of></span></tt></div><p>Returns the set of keys in the string-dict.</p><div><p><b>Examples:</b></p><pre>check:
+end</pre></div><div class="pyret-display"><tt>.keys :: <span><span>StringDict&lt;<span>a</span>&gt;</span> -&gt; <span>Set&lt;<span>String</span>&gt;</span></span></tt></div><p>Returns the set of keys in the string-dict.</p><div><p><b>Examples:</b></p><pre>check:
   sd1 = [string-dict: "a", 5, "b", 10]
   sd1.keys() is [tree-set: "a", "b"]
   sd1.keys() is [tree-set: "b", "a"]
@@ -73,7 +73,7 @@ end</pre></div><div class="pyret-display"><tt>.has-key-now :: <span><span>Mutabl
   msd1 = [mutable-string-dict: "a", 5]
   msd1.has-key-now("a") is true
   msd1.has-key-now("b") is false
-end</pre></div><div class="pyret-display"><tt>.keys-now :: <span><span>MutableStringDict&lt;<span>a</span>&gt;</span> -&gt; <S-of>String</S-of></span></tt></div><p>Returns the set of keys in the string-dict.</p><div><p><b>Examples:</b></p><pre>check:
+end</pre></div><div class="pyret-display"><tt>.keys-now :: <span><span>MutableStringDict&lt;<span>a</span>&gt;</span> -&gt; <span>Set&lt;<span>String</span>&gt;</span></span></tt></div><p>Returns the set of keys in the string-dict.</p><div><p><b>Examples:</b></p><pre>check:
   msd1 = [mutable-string-dict: "a", 5, "b", 10]
   msd1.keys-now() is [tree-set: "a", "b"]
   msd1.keys-now() is [tree-set: "b", "a"]

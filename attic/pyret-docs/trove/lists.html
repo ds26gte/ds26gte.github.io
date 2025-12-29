@@ -13,7 +13,7 @@
     <div class="container">
     <root><div><h1 id="lists" toclevel="1" tocentry="yes"></h1><p>  </p><p>  </p><h2 id="The-List-Datatype" toclevel="2" tocentry="yes">The List Datatype</h2><p>  </p><pre class="pyret-display"><span>data List&lt;a&gt;:</span>
 <div><tt>   | <span>empty</span></tt>
-<tt>   | <span>link(<span>first :: a</span>, <span>rest :: <span>List&lt;<span>a</span>&gt;</span></span>)</span></tt></div><tt>end</tt></pre><p>  </p><div class="insetpara nested"><div><p><span><a name="empty-66"></a></span></p><pre class="pyret-display">empty :: <span>List&lt;<span>a</span>&gt;</span></pre></div><p>  </p><div><p><span><a name="link-67"></a></span></p><pre class="pyret-display">link :: (<span>first :: a</span>, <span>rest :: <span>List&lt;<span>a</span>&gt;</span></span>) -&gt; <span>List&lt;<span>a</span>&gt;</span></pre><p></p></div><p>  </p><div><pre class="pyret-display">is-empty :: <span><span class="pyret-display">(val :: Any)</span> -&gt; Boolean</span></pre></div><p>  </p><div><pre class="pyret-display">is-link :: <span><span class="pyret-display">(val :: Any)</span> -&gt; Boolean</span></pre></div><p>A <tt class="pyretexpr">List</tt> is an immutable, fixed-length collection indexed by non-negative integers.</p><p>As in most programming languages, you can use <tt class="pyretexpr">List</tt>s in Pyret without understanding much, if anything, about how they are implemented internally in the language.</p><p>However, in functional languages such as Pyret a particular implementation of lists—the linked list—has a central role for both historical and practical reasons, and a fuller understanding of linked lists goes hand in hand with a fuller understanding of Pyret.  If you have not encountered linked lists before and would like to know more, we recommend reading <a href="http://dcic-world.org/">the material on
+<tt>   | <span>link(<span>first :: a</span>, <span>rest :: <span>List&lt;<span>a</span>&gt;</span></span>)</span></tt></div><tt>end</tt></pre><p>  </p><div class="insetpara nested"><div><p><span><a name="empty-66"></a></span></p><pre class="pyret-display">empty :: <span>List&lt;<span>a</span>&gt;</span></pre></div><p>  </p><div><p><span><a name="link-67"></a></span></p><pre class="pyret-display">link :: (<span>first :: a</span>, <span>rest :: <span>List&lt;<span>a</span>&gt;</span></span>) -&gt; <span>List&lt;<span>a</span>&gt;</span></pre><p></p></div><p>  </p><div><pre class="pyret-display">is-empty :: <span><span><span class="pyret-display">(val :: Any)</span></span> -&gt; Boolean</span></pre></div><p>  </p><div><pre class="pyret-display">is-link :: <span><span><span class="pyret-display">(val :: Any)</span></span> -&gt; Boolean</span></pre></div><p>A <tt class="pyretexpr">List</tt> is an immutable, fixed-length collection indexed by non-negative integers.</p><p>As in most programming languages, you can use <tt class="pyretexpr">List</tt>s in Pyret without understanding much, if anything, about how they are implemented internally in the language.</p><p>However, in functional languages such as Pyret a particular implementation of lists—the linked list—has a central role for both historical and practical reasons, and a fuller understanding of linked lists goes hand in hand with a fuller understanding of Pyret.  If you have not encountered linked lists before and would like to know more, we recommend reading <a href="http://dcic-world.org/">the material on
 lists in DCIC</a>.</p><p>In lieu of a full explanation on this page, here are a few quick points to help parse some of the following examples:</p><ul><li>A <tt class="pyretexpr">List</tt> is made up of elements, usually referred to as <tt class="pyretexpr">elt</tt>s in examples.</li><li>Elements are of two types: <tt class="pyretexpr">link</tt> and <tt class="pyretexpr">empty</tt>.</li><li>Every <tt class="pyretexpr">link</tt> actually has two parts: a <bold>first</bold> value and the <bold>rest</bold> of the <tt class="pyretexpr">List</tt>.</li><li>The rest of the <tt class="pyretexpr">List</tt> is itself a <tt class="pyretexpr">link</tt>, or if you have reached the end of the <tt class="pyretexpr">List</tt>, the rest will be <tt class="pyretexpr">empty</tt>.</li></ul><p>and here are some illustrative examples:</p><div><p><b>Examples:</b></p><pre>check:
   l0 = empty
   l1 = link(1, l0)
@@ -60,7 +60,7 @@ end</pre><p><a class="show-embed" code="import lists as L
  check: 
     [L.list: ] is-not [L.list: L.empty] 
     L.link(L.empty, L.empty) is [L.list: L.empty] 
- end">(Try it!)</a></p></div><div><pre class="pyret-display">build-list :: <span>(<span><span class="pyret-display">f :: <span>Number -&gt; a</span></span>, <span class="pyret-display">size :: Number</span></span>) -&gt; <span>List&lt;<span>a</span>&gt;</span></span></pre></div><p>Constructs a list of length <tt class="pyretexpr">size</tt>, and fills it with the result of calling the function <tt class="pyretexpr">f</tt> with each index from <tt class="pyretexpr">0</tt> to <tt class="pyretexpr">size - 1</tt>.</p><p>Similar to <tt class="pyretexpr">build-arrayarrays</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><pre class="pyret-display">build-list :: <span>(<span><span class="pyret-display">f :: <span><span>Number</span> -&gt; a</span></span>, <span class="pyret-display">size :: Number</span></span>) -&gt; <span>List&lt;<span>a</span>&gt;</span></span></pre></div><p>Constructs a list of length <tt class="pyretexpr">size</tt>, and fills it with the result of calling the function <tt class="pyretexpr">f</tt> with each index from <tt class="pyretexpr">0</tt> to <tt class="pyretexpr">size - 1</tt>.</p><p>Similar to <tt class="pyretexpr">build-arrayarrays</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   fun sq(x): x * x end
@@ -112,7 +112,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 'a', 'b'].length() is 2 
     L.empty.length() is 0 
     L.link(&quot;a&quot;, L.empty).length() is 1 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.map :: <span><span class="pyret-display">(f :: <span>(<span><span>a</span> -&gt; b</span>)</span>)</span> -&gt; <span>List&lt;<span>b</span>&gt;</span></span></tt></div><p>Applies function <tt class="pyretexpr">f</tt> to each element of the list from left to right, and constructs a new <tt class="pyretexpr">List</tt> out of the return values in the corresponding order.</p><p><tt class="pyretexpr">a</tt> represents the type of the elements in the original <tt class="pyretexpr">List</tt>, <tt class="pyretexpr">b</tt> is the type of the elements in the new <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.map :: <span><span><span class="pyret-display">(f :: <span>(<span><span>a</span> -&gt; b</span>)</span>)</span></span> -&gt; <span>List&lt;<span>b</span>&gt;</span></span></tt></div><p>Applies function <tt class="pyretexpr">f</tt> to each element of the list from left to right, and constructs a new <tt class="pyretexpr">List</tt> out of the return values in the corresponding order.</p><p><tt class="pyretexpr">a</tt> represents the type of the elements in the original <tt class="pyretexpr">List</tt>, <tt class="pyretexpr">b</tt> is the type of the elements in the new <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2].map(num-tostring) is [L.list: "1", "2"]
@@ -198,7 +198,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     {prefix: [L.list: 1, 2], suffix: [L.list: 3, 4]} 
     one-four.split-at(-1) raises &quot;Invalid index&quot; 
     one-four.split-at(5) raises &quot;Index too large&quot; 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.take :: <span><span class="pyret-display">(n :: Number)</span> -&gt; <span>List&lt;<span>a</span>&gt;</span></span></tt></div><p>Given a length <tt class="pyretexpr">n</tt>, returns a new <tt class="pyretexpr">List</tt> containing the first <tt class="pyretexpr">n</tt> items of the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.take :: <span><span><span class="pyret-display">(n :: Number)</span></span> -&gt; <span>List&lt;<span>a</span>&gt;</span></span></tt></div><p>Given a length <tt class="pyretexpr">n</tt>, returns a new <tt class="pyretexpr">List</tt> containing the first <tt class="pyretexpr">n</tt> items of the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2, 3, 4, 5, 6].take(3) is [L.list: 1, 2, 3]
@@ -210,7 +210,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 1, 2, 3, 4, 5, 6].take(3) is [L.list: 1, 2, 3] 
     [L.list: 1, 2, 3].take(6) raises &quot;Index too large&quot; 
     [L.list: 1, 2, 3].take(-1) raises &quot;Invalid index&quot; 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.drop :: <span><span class="pyret-display">(n :: Number)</span> -&gt; <span>List&lt;<span>a</span>&gt;</span></span></tt></div><p>] Given a length <tt class="pyretexpr">n</tt>, returns a <tt class="pyretexpr">List</tt> containing all but the first <tt class="pyretexpr">n</tt> items of the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.drop :: <span><span><span class="pyret-display">(n :: Number)</span></span> -&gt; <span>List&lt;<span>a</span>&gt;</span></span></tt></div><p>] Given a length <tt class="pyretexpr">n</tt>, returns a <tt class="pyretexpr">List</tt> containing all but the first <tt class="pyretexpr">n</tt> items of the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2, 3, 4, 5, 6].drop(3) is [L.list: 4, 5, 6]
@@ -218,7 +218,7 @@ end</pre><p><a class="show-embed" code="import lists as L
 
  check: 
     [L.list: 1, 2, 3, 4, 5, 6].drop(3) is [L.list: 4, 5, 6] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.get :: <span><span class="pyret-display">(n :: Number)</span> -&gt; a</span></tt></div><p>Returns the <tt class="pyretexpr">n</tt>th element of the given <tt class="pyretexpr">List</tt>.</p><p>Using an index too large, negative, or not a whole number raises an error.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.get :: <span><span><span class="pyret-display">(n :: Number)</span></span> -&gt; a</span></tt></div><p>Returns the <tt class="pyretexpr">n</tt>th element of the given <tt class="pyretexpr">List</tt>.</p><p>Using an index too large, negative, or not a whole number raises an error.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   l = [L.list: 1, 2, 3]
@@ -284,7 +284,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 3, 2, 1].foldr(combine, &quot;END&quot;) is &quot;3 - 2 - 1 - END&quot; 
     empty.foldr(combine, &quot;END&quot;) is &quot;END&quot; 
     [L.list: 3, 2, 1].foldr(L.link, L.empty) is [L.list: 3, 2, 1] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.member :: <span><span class="pyret-display">(elt :: a)</span> -&gt; Boolean</span></tt></div><p><span class="margin-note">Passing a <tt class="pyretexpr">Roughnum</tt> as an argument will raise an error.</span> Returns true if the current <tt class="pyretexpr">List</tt> contains the given value, as compared by <tt class="pyretexpr">==</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.member :: <span><span><span class="pyret-display">(elt :: a)</span></span> -&gt; Boolean</span></tt></div><p><span class="margin-note">Passing a <tt class="pyretexpr">Roughnum</tt> as an argument will raise an error.</span> Returns true if the current <tt class="pyretexpr">List</tt> contains the given value, as compared by <tt class="pyretexpr">==</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2, 3].member(2) is true
@@ -312,7 +312,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 'a'].member('a') is true 
     [L.list: false].member(false) is true 
     [L.list: nothing].member(nothing) is true 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.append :: <span><span class="pyret-display">(other :: <span>List&lt;<span>a</span>&gt;</span>)</span> -&gt; <span>List&lt;<span>a</span>&gt;</span></span></tt></div><p>Produces a new <tt class="pyretexpr">List</tt> with all the elements of the current <tt class="pyretexpr">List</tt>, followed by all the elements of the <tt class="pyretexpr">other</tt> <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.append :: <span><span><span class="pyret-display">(other :: <span>List&lt;<span>a</span>&gt;</span>)</span></span> -&gt; <span>List&lt;<span>a</span>&gt;</span></span></tt></div><p>Produces a new <tt class="pyretexpr">List</tt> with all the elements of the current <tt class="pyretexpr">List</tt>, followed by all the elements of the <tt class="pyretexpr">other</tt> <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2].append([list: 3, 4]) is [L.list: 1, 2, 3, 4]
@@ -380,7 +380,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     end 
     [L.list: 'a', 'aa', 'aaa'].sort-by(length-comparison, length-equality) is 
       [L.list: 'aaa', 'aa', 'a'] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.join-str :: <span><span class="pyret-display">(sep :: String)</span> -&gt; String</span></tt></div><p>Combines the values of the current <tt class="pyretexpr">List</tt> by converting them to strings with <tt class="pyretexpr">tostring</tt> and joining them with the given separator <tt class="pyretexpr">sep</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div class="pyret-display"><tt>.join-str :: <span><span><span class="pyret-display">(sep :: String)</span></span> -&gt; String</span></tt></div><p>Combines the values of the current <tt class="pyretexpr">List</tt> by converting them to strings with <tt class="pyretexpr">tostring</tt> and joining them with the given separator <tt class="pyretexpr">sep</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2, 3].join-str("; ") is "1; 2; 3"
@@ -408,7 +408,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     L.empty.join-str-last(&quot;nothing at all&quot;, &quot;really nothing&quot;) is &quot;&quot; 
     [L.list: 1, 2].join-str-last(&quot;a&quot;, &quot;b&quot;) is &quot;1b2&quot; 
     [L.list: 1].join-str-last(&quot;a&quot;, &quot;b&quot;) is &quot;1&quot; 
- end">(Try it!)</a></p></div><h2 id="List-Functions" toclevel="2" tocentry="yes">List Functions</h2><p>  These functions are available on the <tt class="pyretexpr">lists</tt> module object.   Some of the functions require the <tt class="pyretexpr">lists</tt> module to be   <tt class="pyretexpr">import</tt>ed, as indicated in the examples.</p><p>  </p><div><pre class="pyret-display">length :: <span><span class="pyret-display">(lst :: <span>List&lt;<span>a</span>&gt;</span>)</span> -&gt; Number</span></pre><p>Returns the number of elements in the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><h2 id="List-Functions" toclevel="2" tocentry="yes">List Functions</h2><p>  These functions are available on the <tt class="pyretexpr">lists</tt> module object.   Some of the functions require the <tt class="pyretexpr">lists</tt> module to be   <tt class="pyretexpr">import</tt>ed, as indicated in the examples.</p><p>  </p><div><pre class="pyret-display">length :: <span><span><span class="pyret-display">(lst :: <span>List&lt;<span>a</span>&gt;</span>)</span></span> -&gt; Number</span></pre><p>Returns the number of elements in the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   L.length([list: 'a', 'b']) is 2
@@ -441,7 +441,7 @@ end</pre><p><a class="show-embed" code="import lists as L
 check:
   L.set([L.list: 1, 2, 3], 0, 5) is [L.list: 5, 2, 3]
   L.set([L.list: ], 0, 5) raises "too large"
-end</pre></div><div><pre class="pyret-display">sort :: <span>(<span>lst :: <span>List&lt;<span>A</span>&gt;</span></span>)</span></pre><p>Produces a new <tt class="pyretexpr">List</tt> whose contents are the same as those of the current <tt class="pyretexpr">List</tt>, sorted by <tt class="pyretexpr">&lt;equality</tt> and <tt class="pyretexpr">==equality</tt>.  This requires that the items of the <tt class="pyretexpr">List</tt> be comparable by <tt class="pyretexpr">&lt;equality</tt> (see <a href="lang/forms.html#s:binop-expr">Binary Operators</a>).</p><div><p><b>Examples:</b></p><pre>import lists as L
+end</pre></div><div><pre class="pyret-display">sort :: <span>(<span>lst :: <span><span>List&lt;<span>A</span>&gt;</span></span></span>)</span></pre><p>Produces a new <tt class="pyretexpr">List</tt> whose contents are the same as those of the current <tt class="pyretexpr">List</tt>, sorted by <tt class="pyretexpr">&lt;equality</tt> and <tt class="pyretexpr">==equality</tt>.  This requires that the items of the <tt class="pyretexpr">List</tt> be comparable by <tt class="pyretexpr">&lt;equality</tt> (see <a href="lang/forms.html#s:binop-expr">Binary Operators</a>).</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   L.sort([L.list: 1, 5, 3, 2, 4]) is [L.list: 1, 2, 3, 4, 5]
@@ -455,7 +455,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     L.sort([L.list: &quot;aaaa&quot;, &quot;B&quot;, &quot;a&quot;]) is [L.list: &quot;B&quot;, &quot;a&quot;, &quot;aaaa&quot;] 
     L.sort([L.list: 'a', 1]) raises &quot;binop-error&quot; 
     L.sort([L.list: true, false]) raises &quot;binop-error&quot; 
- end">(Try it!)</a></p></div></div><div><pre class="pyret-display">sort-by :: <span>(<span>lst :: <span>List&lt;<span>A</span>&gt;</span></span>, <span>cmp :: <span>List&lt;<span>A</span>&gt;</span></span>, <span>eq :: <span>List&lt;<span>A</span>&gt;</span></span>)</span></pre><p>Like <tt class="pyretexpr">sort</tt>, but the comparison and equality operators can be specified.  This allows for sorting <tt class="pyretexpr">List</tt>s whose contents are not comparable by <tt class="pyretexpr">&lt;equality</tt>,  or sorting by custom comparisons, for example, sorting by string length instead of alphabetically.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div></div><div><pre class="pyret-display">sort-by :: <span>(<span>lst :: (</span>, <span>cmp :: (</span>, <span>eq :: (</span>)</span></pre><p>Like <tt class="pyretexpr">sort</tt>, but the comparison and equality operators can be specified.  This allows for sorting <tt class="pyretexpr">List</tt>s whose contents are not comparable by <tt class="pyretexpr">&lt;equality</tt>,  or sorting by custom comparisons, for example, sorting by string length instead of alphabetically.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   fun length-comparison(s1 :: String, s2 :: String) -&gt; Boolean:
@@ -512,7 +512,7 @@ check:
   L.repeat(3, -1) is [L.list: -1, -1, -1]
   L.repeat(1, "foo") is L.link("foo", L.empty)
   L.repeat(3, L.empty) is [L.list: [L.list: ], [L.list: ], [L.list: ]]
-end</pre></div><p>  </p><div><pre class="pyret-display">distinct :: <span><span class="pyret-display">(lst :: <span>List&lt;<span>a</span>&gt;</span>)</span> -&gt; <span>List&lt;<span>a</span>&gt;</span></span></pre><p>  Given a <tt class="pyretexpr">List</tt>, returns a new <tt class="pyretexpr">List</tt> containing only one copy of each element   that is duplicated in the <tt class="pyretexpr">List</tt>.</p><p>  The last (latest in the <tt class="pyretexpr">List</tt>) copy is kept.   <tt class="pyretexpr">Roughnums</tt> are not compared for equality, and so will always appear in the   output <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+end</pre></div><p>  </p><div><pre class="pyret-display">distinct :: <span><span><span class="pyret-display">(lst :: <span>List&lt;<span>a</span>&gt;</span>)</span></span> -&gt; <span>List&lt;<span>a</span>&gt;</span></span></pre><p>  Given a <tt class="pyretexpr">List</tt>, returns a new <tt class="pyretexpr">List</tt> containing only one copy of each element   that is duplicated in the <tt class="pyretexpr">List</tt>.</p><p>  The last (latest in the <tt class="pyretexpr">List</tt>) copy is kept.   <tt class="pyretexpr">Roughnums</tt> are not compared for equality, and so will always appear in the   output <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   L.distinct([L.list: 3, 1, 2, 2, 3, 2]) is [L.list: 1, 3, 2]
@@ -578,7 +578,7 @@ check:
     is {prefix: [L.list: 1, 2], suffix: [L.list: 3, 4]}
   L.split-at(-1, [L.list: 1, 2, 3, 4]) raises "Invalid index"
   L.split-at(5, [L.list: 1, 2, 3, 4]) raises "Index too large"
-end</pre></div><p>  </p><div><pre class="pyret-display">last :: <span>(<span>lst :: <span class="pyret-display">lst :: <span>List&lt;<span>A</span>&gt;</span></span></span>)</span></pre><p>Returns the last element in <tt class="pyretexpr">lst</tt>.  Raises an error if the <tt class="pyretexpr">List</tt> is empty.</p><div><p><b>Examples:</b></p><pre>import lists as L
+end</pre></div><p>  </p><div><pre class="pyret-display">last :: <span>(<span>lst :: <span><span class="pyret-display">lst :: <span>List&lt;<span>A</span>&gt;</span></span></span></span>)</span></pre><p>Returns the last element in <tt class="pyretexpr">lst</tt>.  Raises an error if the <tt class="pyretexpr">List</tt> is empty.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   L.last([L.list: 1, 3, 5]) is 5
@@ -590,7 +590,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     L.last([L.list: 1, 3, 5]) is 5 
     L.last([L.list: 1]) is 1 
     L.last([L.list: ]) raises &quot;last of empty list&quot; 
- end">(Try it!)</a></p></div></div><div><pre class="pyret-display">push :: <span>(<span>l :: <span class="pyret-display">l :: <span>List&lt;<span>A</span>&gt;</span></span></span>, <span>elt :: <span class="pyret-display">l :: <span>List&lt;<span>A</span>&gt;</span></span></span>)</span></pre><p>Constructs a list with the given element prepended to the front of the given list.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div></div><div><pre class="pyret-display">push :: <span>(<span>l :: (</span>, <span>elt :: (</span>)</span></pre><p>Constructs a list with the given element prepended to the front of the given list.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   L.push(L.empty, "a") is L.link("a", L.empty)
@@ -600,7 +600,7 @@ end</pre><p><a class="show-embed" code="import lists as L
  check: 
     L.push(L.empty, &quot;a&quot;) is L.link(&quot;a&quot;, L.empty) 
     L.push(L.link(&quot;a&quot;, empty), &quot;b&quot;) is L.link(&quot;b&quot;, L.link(&quot;a&quot;, L.empty)) 
- end">(Try it!)</a></p></div></div><p>  </p><div><pre class="pyret-display">append :: <span>(<span>front :: <span class="pyret-display">front :: <span>List&lt;<span>A</span>&gt;</span></span></span>, <span>back :: <span class="pyret-display">front :: <span>List&lt;<span>A</span>&gt;</span></span></span>)</span></pre><p>Produce a new <tt class="pyretexpr">List</tt> with the elements of <tt class="pyretexpr">front</tt> followed by the elements of <tt class="pyretexpr">back</tt>.</p><pre class="good-ex">import lists as L
+ end">(Try it!)</a></p></div></div><p>  </p><div><pre class="pyret-display">append :: <span>(<span>front :: (</span>, <span>back :: (</span>)</span></pre><p>Produce a new <tt class="pyretexpr">List</tt> with the elements of <tt class="pyretexpr">front</tt> followed by the elements of <tt class="pyretexpr">back</tt>.</p><pre class="good-ex">import lists as L
 
 check:
   L.append([L.list: 1, 2, 3], [L.list: 4, 5, 6])
