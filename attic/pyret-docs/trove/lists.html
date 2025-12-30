@@ -420,7 +420,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     L.length([list: 'a', 'b']) is 2 
     L.length(L.empty) is 0 
     L.length(L.link(&quot;a&quot;, L.empty)) is 1 
- end">(Try it!)</a></p></div></div><p>  </p><div><pre class="pyret-display">get :: <span>(<span><span class="pyret-display">lst :: <span>List&lt;<span>a</span>&gt;</span></span>, <span class="pyret-display">n :: Number</span></span>) -&gt; a</span></pre></div><p>Equivalent to <tt class="pyretexpr">list</tt>pyret-method<tt class="pyretexpr">(n)</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div></div><p>  </p><div><pre class="pyret-display">get :: <span>(<span><span class="pyret-display">lst :: <span>List&lt;<span>a</span>&gt;</span></span>, <span class="pyret-display">n :: Number</span></span>) -&gt; a</span></pre></div><p>Equivalent to <tt class="pyretexpr">list</tt><tt>.get</tt><tt class="pyretexpr">(n)</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   l = [L.list: 1, 2, 3]
