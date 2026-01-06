@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="s-exp" toclevel="1" tocentry="yes"></h1><p>  </p><p>This module re-exports the constructors from S-Exp, which defines the result of parsing an s-exp.</p><p>  </p><div><p><span><a name="read-s-exp-389"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp.html#read-s-exp-389">read-s-exp</a> :: <span>(<span>sexp-str :: </span>)</span></pre><p>    Reads an <i>s-expression</i> as a string, and returns it as a Pyret value.</p><p>    An s-expression is a string that satisfies the following grammar:</p><p>    </p><pre class="nothing_special">s-exp = "(" s-exp ... ")"
+    <root><div><h1 id="s-exp" toclevel="1" tocentry="yes"></h1><p>  </p><p>This module re-exports the constructors from S-Exp, which defines the result of parsing an s-exp.</p><p>  </p><div><p><span><a name="read-s-exp-415"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp.html#read-s-exp-415">read-s-exp</a> :: <span>(<span>sexp-str :: </span>)</span></pre><p>    Reads an <i>s-expression</i> as a string, and returns it as a Pyret value.</p><p>    An s-expression is a string that satisfies the following grammar:</p><p>    </p><pre class="nothing_special">s-exp = "(" s-exp ... ")"
       | &lt;number&gt;
       | &lt;string&gt;
       | &lt;id&gt;</pre><p>    The first form parses to a s-list containing the nested     sub-expression results.  Numbers become s-nums, strings become     s-strs, and all other names not inside quotes     become s-syms.</p><div><p><b>Examples:</b></p><pre>import s-exp as S

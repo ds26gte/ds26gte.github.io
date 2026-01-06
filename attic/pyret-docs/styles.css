@@ -124,3 +124,12 @@ ul.toclist {
   margin-left: 1em;
   margin-right: 1em;
 }
+
+.glossary-sep {
+  margin-top: 1em;
+}
+
+ul.glossary {
+  list-style-type: none;
+}
+
