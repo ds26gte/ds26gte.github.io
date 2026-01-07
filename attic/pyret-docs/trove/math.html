@@ -7,11 +7,11 @@
   <script type="module" src="../embed-api.js"></script>
   <link rel="stylesheet" href="../styles.css">
   <head>
-    <title>Untitled</title>
+    <title>math</title>
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="math" toclevel="1" tocentry="yes"></h1><p>The Pyret Math library.  It consists of functions for arithmetic calculations, optimization, and more to come!</p><p>Every function in this library is available on the <tt class="pyretexpr">math</tt> module object.  For example, if you used <tt class="pyretexpr">import math as M</tt>, you would write <tt class="pyretexpr">M.arg-max</tt> to access <tt class="pyretexpr">arg-max</tt> below.  If you used <tt class="pyretexpr">include</tt>, then you can refer to identifiers without writing <tt class="pyretexpr">M.</tt> as a prefix.</p><h2 id="Arithmetic-Functions" toclevel="2" tocentry="yes">Arithmetic Functions</h2><div><p><span><a name="sum"></a></span></p><pre class="pyret-display"><a href="../trove/math.html#sum">sum</a> :: <span>(<span>l :: <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span></span>)</span></pre><p>Calculates the arithmetic sum of the Numbers in <tt class="pyretexpr">l</tt>.  If <tt class="pyretexpr">l</tt> contains at least one RoughNum, then the output will be a RoughNum.</p><div><p><b>Examples:</b></p><pre>check:
+    <root><div><h1 id="math" toclevel="1" tocentry="yes"></h1><div><p>Usage:</p><p><tt>include math</tt></p><p><tt>import math as ...</tt></p></div><p>The Pyret Math library.  It consists of functions for arithmetic calculations, optimization, and more to come!</p><p>Every function in this library is available on the <tt class="pyretexpr">math</tt> module object.  For example, if you used <tt class="pyretexpr">import math as M</tt>, you would write <tt class="pyretexpr">M.arg-max</tt> to access <tt class="pyretexpr">arg-max</tt> below.  If you used <tt class="pyretexpr">include</tt>, then you can refer to identifiers without writing <tt class="pyretexpr">M.</tt> as a prefix.</p><h2 id="Arithmetic-Functions" toclevel="2" tocentry="yes">Arithmetic Functions</h2><div><p><span><a name="sum"></a></span></p><pre class="pyret-display"><a href="../trove/math.html#sum">sum</a> :: <span>(<span>l :: <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span></span>)</span></pre><p>Calculates the arithmetic sum of the Numbers in <tt class="pyretexpr">l</tt>.  If <tt class="pyretexpr">l</tt> contains at least one RoughNum, then the output will be a RoughNum.</p><div><p><b>Examples:</b></p><pre>check:
   sum([list: ]) is 0
   sum([list: 0, 2, 4]) is 6
   sum([list: -1, 1, ~2]) is-roughly ~2

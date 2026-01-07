@@ -7,11 +7,11 @@
   <script type="module" src="../embed-api.js"></script>
   <link rel="stylesheet" href="../styles.css">
   <head>
-    <title>Untitled</title>
+    <title>s-exp</title>
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="s-exp" toclevel="1" tocentry="yes"></h1><p>  </p><p>This module re-exports the constructors from <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a>, which defines the result of parsing an s-exp.</p><p>  </p><div><p><span><a name="read-s-exp"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp.html#read-s-exp">read-s-exp</a> :: <span>(<span>sexp-str :: </span>)</span></pre><p>    Reads an <i>s-expression</i> as a string, and returns it as a Pyret value.</p><p>    An s-expression is a string that satisfies the following grammar:</p><p>    </p><pre class="nothing_special">s-exp = "(" s-exp ... ")"
+    <root><div><h1 id="s-exp" toclevel="1" tocentry="yes"></h1><div><p>Usage:</p><p><tt>include s-exp</tt></p><p><tt>import s-exp as ...</tt></p></div><p>  </p><p>This module re-exports the constructors from <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a>, which defines the result of parsing an s-exp.</p><p>  </p><div><p><span><a name="read-s-exp"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp.html#read-s-exp">read-s-exp</a> :: <span>(<span>sexp-str :: </span>)</span></pre><p>    Reads an <i>s-expression</i> as a string, and returns it as a Pyret value.</p><p>    An s-expression is a string that satisfies the following grammar:</p><p>    </p><pre class="nothing_special">s-exp = "(" s-exp ... ")"
       | &lt;number&gt;
       | &lt;string&gt;
       | &lt;id&gt;</pre><p>    The first form parses to a <a href="../trove/s-exp-structs.html#s-list">s-list</a> containing the nested     sub-expression results.  Numbers become <a href="../trove/s-exp-structs.html#s-num">s-num</a>s, strings become     <a href="../trove/s-exp-structs.html#s-str">s-str</a>s, and all other names not inside quotes     become <a href="../trove/s-exp-structs.html#s-sym">s-sym</a>s.</p><div><p><b>Examples:</b></p><pre>import s-exp as S
