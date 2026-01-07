@@ -107,7 +107,7 @@ end</pre></div><h3 id="Exception-Test-Operators" toclevel="3" tocentry="yes">Exc
   string-length("too", "many", "strings") raises "arity-mismatch"
 
   {}.x raises "field-not-found"
-end</pre></div><p><bold>Warning!</bold> These two tests are not equivalent:</p><pre class="nothing_special">check "actually catches the error":
+end</pre></div><p><b>Warning!</b> These two tests are not equivalent:</p><pre class="nothing_special">check "actually catches the error":
   raise("error!") raises "error!"
 end
 
