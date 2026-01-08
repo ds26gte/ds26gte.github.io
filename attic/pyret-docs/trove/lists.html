@@ -100,7 +100,7 @@ end</pre><p><a class="show-embed" code="import lists as L
       [L.list: 0, 1, 2], 
       [L.list: 1, 2, 3], 
       [L.list: 2, 3, 4]] 
- end">(Try it!)</a></p></div><h2 id="List-Methods" toclevel="2" tocentry="yes">List Methods</h2><p>These methods are available on all <tt class="pyretexpr">List</tt>s whether empty or a link.</p><div class="pyret-display"><tt>.length :: <span>(<span></span>) -&gt; <a href="../trove/globals.html#Number">Number</a></span></tt></div><p>Returns the number of elements in the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><h2 id="List-Methods" toclevel="2" tocentry="yes">List Methods</h2><p>These methods are available on all <tt class="pyretexpr">List</tt>s whether empty or a link.</p><div><p><span><a name=".length"></a></span></p><pre class="pyret-display">.length :: <span>(<span></span>) -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre></div><p>Returns the number of elements in the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 'a', 'b'].length() is 2
@@ -112,7 +112,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 'a', 'b'].length() is 2 
     L.empty.length() is 0 
     L.link(&quot;a&quot;, L.empty).length() is 1 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.map :: <span>(<span><span class="pyret-content">f :: <span>(<span>(<span>a</span>) -&gt; b</span>)</span></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>b</span>&gt;</span></span></tt></div><p>Applies function <tt class="pyretexpr">f</tt> to each element of the list from left to right, and constructs a new <tt class="pyretexpr">List</tt> out of the return values in the corresponding order.</p><p><tt class="pyretexpr">a</tt> represents the type of the elements in the original <tt class="pyretexpr">List</tt>, <tt class="pyretexpr">b</tt> is the type of the elements in the new <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".map"></a></span></p><pre class="pyret-display">.map :: <span>(<span><span class="pyret-content">f :: <span>(<span>(<span>a</span>) -&gt; b</span>)</span></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>b</span>&gt;</span></span></pre></div><p>Applies function <tt class="pyretexpr">f</tt> to each element of the list from left to right, and constructs a new <tt class="pyretexpr">List</tt> out of the return values in the corresponding order.</p><p><tt class="pyretexpr">a</tt> represents the type of the elements in the original <tt class="pyretexpr">List</tt>, <tt class="pyretexpr">b</tt> is the type of the elements in the new <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2].map(num-tostring) is [L.list: "1", "2"]
@@ -126,7 +126,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 1, 2].map(lam(n): n + 1 end) is [L.list: 2, 3] 
     [L.list: 1, 2].map(_ + 1) is [L.list: 2, 3] 
     L.empty.map(lam(x): raise(&quot;This never happens!&quot;) end) is L.empty 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.each :: <span>(<span><span class="pyret-content">f :: <span>(<span>(<span>a</span>) -&gt; <a href="../trove/globals.html#Nothing">Nothing</a></span>)</span></span></span>) -&gt; <a href="../trove/globals.html#Nothing">Nothing</a></span></tt></div><p>Applies <tt class="pyretexpr">f</tt> to each element of the <tt class="pyretexpr">List</tt> from left to right, and returns <tt class="pyretexpr">nothing</tt>.  Because it returns <tt class="pyretexpr">nothing</tt>, use <a href="../trove/lists.html#each"><tt class="pyretexpr">each</tt></a> instead of <a href="../trove/lists.html#map"><tt class="pyretexpr">map</tt></a> when the function <tt class="pyretexpr">f</tt> is needed only for its side-effects.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".each"></a></span></p><pre class="pyret-display">.each :: <span>(<span><span class="pyret-content">f :: <span>(<span>(<span>a</span>) -&gt; <a href="../trove/globals.html#Nothing">Nothing</a></span>)</span></span></span>) -&gt; <a href="../trove/globals.html#Nothing">Nothing</a></span></pre></div><p>Applies <tt class="pyretexpr">f</tt> to each element of the <tt class="pyretexpr">List</tt> from left to right, and returns <tt class="pyretexpr">nothing</tt>.  Because it returns <tt class="pyretexpr">nothing</tt>, use <a href="../trove/lists.html#each"><tt class="pyretexpr">each</tt></a> instead of <a href="../trove/lists.html#map"><tt class="pyretexpr">map</tt></a> when the function <tt class="pyretexpr">f</tt> is needed only for its side-effects.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   var x = 1
@@ -138,7 +138,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     var x = 1 
     [L.list: 1, 2].each(lam(n): x := x + n end) is nothing 
     x is 4 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.filter :: <span>(<span><span class="pyret-content">f :: <span>(<span>(<span>a</span>) -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span>)</span></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></tt></div><p>Applies function <tt class="pyretexpr">f</tt> to each element of <tt class="pyretexpr">List</tt> from left to right, constructing a new <tt class="pyretexpr">List</tt> out of the elements for which <tt class="pyretexpr">f</tt> returned <tt class="pyretexpr">true</tt>.</p><p>The original <tt class="pyretexpr">List</tt> elements are of type <tt class="pyretexpr">a</tt> and the function <tt class="pyretexpr">f</tt> must return a <tt class="pyretexpr">Boolean</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".filter"></a></span></p><pre class="pyret-display">.filter :: <span>(<span><span class="pyret-content">f :: <span>(<span>(<span>a</span>) -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span>)</span></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Applies function <tt class="pyretexpr">f</tt> to each element of <tt class="pyretexpr">List</tt> from left to right, constructing a new <tt class="pyretexpr">List</tt> out of the elements for which <tt class="pyretexpr">f</tt> returned <tt class="pyretexpr">true</tt>.</p><p>The original <tt class="pyretexpr">List</tt> elements are of type <tt class="pyretexpr">a</tt> and the function <tt class="pyretexpr">f</tt> must return a <tt class="pyretexpr">Boolean</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   fun length-is-one(s :: String) -&gt; Boolean:
@@ -156,7 +156,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: &quot;ab&quot;, &quot;a&quot;, &quot;&quot;, &quot;c&quot;].filter(length-is-one) is [L.list: &quot;a&quot;, &quot;c&quot;] 
     [L.list: L.empty, L.link(1, L.empty), L.empty].filter(L.is-link) 
       is [L.list: L.link(1, L.empty)] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.push :: <span>(<span><span class="pyret-content">elt :: a</span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></tt></div><p>Returns <tt class="pyretexpr">link(elt, self)</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".push"></a></span></p><pre class="pyret-display">.push :: <span>(<span><span class="pyret-content">elt :: a</span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Returns <tt class="pyretexpr">link(elt, self)</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   L.empty.push("a") is L.link("a", L.empty)
@@ -174,7 +174,7 @@ end</pre><p><a class="show-embed" code="import lists as L
 
  check: 
     [L.list: 'a', 'b'].push('c') is [L.list: 'c', 'a', 'b'] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.split-at :: <span>(<span><span class="pyret-content">n :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <span>{<span class="pyret-content">prefix :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span>, <span class="pyret-content">suffix :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span>}</span></span></tt></div><p>Produces a record containing two <tt class="pyretexpr">List</tt>s, consisting of the items before and the items at-or-after the splitting index of the current <tt class="pyretexpr">List</tt>.  The index is 0-based, so splitting a <tt class="pyretexpr">List</tt> at index <math>n</math> will produce a prefix of length exactly <math>n</math>.  Moreover, <a href="../trove/lists.html#append"><tt class="pyretexpr">append</tt></a>ing the two <tt class="pyretexpr">List</tt>s together will be equivalent to the original <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".split-at"></a></span></p><pre class="pyret-display">.split-at :: <span>(<span><span class="pyret-content">n :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <span>{<span class="pyret-content">prefix :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span>, <span class="pyret-content">suffix :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span>}</span></span></pre></div><p>Produces a record containing two <tt class="pyretexpr">List</tt>s, consisting of the items before and the items at-or-after the splitting index of the current <tt class="pyretexpr">List</tt>.  The index is 0-based, so splitting a <tt class="pyretexpr">List</tt> at index <math>n</math> will produce a prefix of length exactly <math>n</math>.  Moreover, <a href="../trove/lists.html#append"><tt class="pyretexpr">append</tt></a>ing the two <tt class="pyretexpr">List</tt>s together will be equivalent to the original <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 'a', 'b', 'c', 'd'].split-at(2)
@@ -198,7 +198,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     {prefix: [L.list: 1, 2], suffix: [L.list: 3, 4]} 
     one-four.split-at(-1) raises &quot;Invalid index&quot; 
     one-four.split-at(5) raises &quot;Index too large&quot; 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.take :: <span>(<span><span class="pyret-content">n :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></tt></div><p>Given a length <tt class="pyretexpr">n</tt>, returns a new <tt class="pyretexpr">List</tt> containing the first <tt class="pyretexpr">n</tt> items of the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".take"></a></span></p><pre class="pyret-display">.take :: <span>(<span><span class="pyret-content">n :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Given a length <tt class="pyretexpr">n</tt>, returns a new <tt class="pyretexpr">List</tt> containing the first <tt class="pyretexpr">n</tt> items of the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2, 3, 4, 5, 6].take(3) is [L.list: 1, 2, 3]
@@ -210,7 +210,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 1, 2, 3, 4, 5, 6].take(3) is [L.list: 1, 2, 3] 
     [L.list: 1, 2, 3].take(6) raises &quot;Index too large&quot; 
     [L.list: 1, 2, 3].take(-1) raises &quot;Invalid index&quot; 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.drop :: <span>(<span><span class="pyret-content">n :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></tt></div><p>] Given a length <tt class="pyretexpr">n</tt>, returns a <tt class="pyretexpr">List</tt> containing all but the first <tt class="pyretexpr">n</tt> items of the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".drop"></a></span></p><pre class="pyret-display">.drop :: <span>(<span><span class="pyret-content">n :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>] Given a length <tt class="pyretexpr">n</tt>, returns a <tt class="pyretexpr">List</tt> containing all but the first <tt class="pyretexpr">n</tt> items of the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2, 3, 4, 5, 6].drop(3) is [L.list: 4, 5, 6]
@@ -218,7 +218,7 @@ end</pre><p><a class="show-embed" code="import lists as L
 
  check: 
     [L.list: 1, 2, 3, 4, 5, 6].drop(3) is [L.list: 4, 5, 6] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.get :: <span>(<span><span class="pyret-content">n :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; a</span></tt></div><p>Returns the <tt class="pyretexpr">n</tt>th element of the given <tt class="pyretexpr">List</tt>.</p><p>Using an index too large, negative, or not a whole number raises an error.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".get"></a></span></p><pre class="pyret-display">.get :: <span>(<span><span class="pyret-content">n :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; a</span></pre></div><p>Returns the <tt class="pyretexpr">n</tt>th element of the given <tt class="pyretexpr">List</tt>.</p><p>Using an index too large, negative, or not a whole number raises an error.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   l = [L.list: 1, 2, 3]
@@ -234,7 +234,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     l.get(0) is 1 
     l.get(4) raises &quot;too large&quot; 
     l.get(-1) raises &quot;invalid argument&quot; 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.set :: <span>(<span><span class="pyret-content">n :: <a href="../trove/globals.html#Number">Number</a></span>, <span class="pyret-content">e :: a</span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></tt></div><p>Returns a new <tt class="pyretexpr">List</tt> with the same values as the given <tt class="pyretexpr">List</tt> but with the <tt class="pyretexpr">n</tt>th element set to the given value, or raises an error if <tt class="pyretexpr">n</tt> is out of range.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".set"></a></span></p><pre class="pyret-display">.set :: <span>(<span><span class="pyret-content">n :: <a href="../trove/globals.html#Number">Number</a></span>, <span class="pyret-content">e :: a</span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Returns a new <tt class="pyretexpr">List</tt> with the same values as the given <tt class="pyretexpr">List</tt> but with the <tt class="pyretexpr">n</tt>th element set to the given value, or raises an error if <tt class="pyretexpr">n</tt> is out of range.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2, 3].set(0, 5) is [L.list: 5, 2, 3]
@@ -244,7 +244,7 @@ end</pre><p><a class="show-embed" code="import lists as L
  check: 
     [L.list: 1, 2, 3].set(0, 5) is [L.list: 5, 2, 3] 
     [L.list: ].set(0, 5) raises &quot;too large&quot; 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.foldl :: <span>(<span><span class="pyret-content">f :: <span>(<span>(<span>a, Base</span>) -&gt; Base</span>)</span></span>, <span class="pyret-content">base :: Base</span></span>) -&gt; Base</span></tt></div><p>Computes <tt class="pyretexpr">f(last-elt, ... f(second-elt, f(first-elt, base))...)</tt>.  For <a href="../trove/lists.html#empty"><tt class="pyretexpr">empty</tt></a>, returns <tt class="pyretexpr">base</tt>.</p><p>In other words, <tt class="pyretexpr">.foldl</tt> uses the function <tt class="pyretexpr">f</tt>, starting with the <tt class="pyretexpr">base</tt> value, of type <tt class="pyretexpr">Base</tt>, to calculate the return value of type <tt class="pyretexpr">Base</tt> from each item in the <tt class="pyretexpr">List</tt>, of input type <tt class="pyretexpr">Elt</tt>, starting the sequence from the <i>left</i> (hence, fold<b>l</b>).</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".foldl"></a></span></p><pre class="pyret-display">.foldl :: <span>(<span><span class="pyret-content">f :: <span>(<span>(<span>a, Base</span>) -&gt; Base</span>)</span></span>, <span class="pyret-content">base :: Base</span></span>) -&gt; Base</span></pre></div><p>Computes <tt class="pyretexpr">f(last-elt, ... f(second-elt, f(first-elt, base))...)</tt>.  For <a href="../trove/lists.html#empty"><tt class="pyretexpr">empty</tt></a>, returns <tt class="pyretexpr">base</tt>.</p><p>In other words, <tt class="pyretexpr">.foldl</tt> uses the function <tt class="pyretexpr">f</tt>, starting with the <tt class="pyretexpr">base</tt> value, of type <tt class="pyretexpr">Base</tt>, to calculate the return value of type <tt class="pyretexpr">Base</tt> from each item in the <tt class="pyretexpr">List</tt>, of input type <tt class="pyretexpr">Elt</tt>, starting the sequence from the <i>left</i> (hence, fold<b>l</b>).</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 3, 2, 1].foldl(lam(elt, acc): elt + acc end, 10) is 16
@@ -264,7 +264,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 3, 2, 1].foldl(combine, &quot;END&quot;) is &quot;1 - 2 - 3 - END&quot; 
     L.empty.foldl(combine, &quot;END&quot;) is &quot;END&quot; 
     [L.list: 3, 2, 1].foldl(L.link, L.empty) is [L.list: 1, 2, 3] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.foldr :: <span>(<span><span class="pyret-content">f :: <span>(<span>(<span>a, Base</span>) -&gt; Base</span>)</span></span>, <span class="pyret-content">base :: Base</span></span>) -&gt; Base</span></tt></div><p>Computes <tt class="pyretexpr">f(first-elt, f(second-elt, ... f(last-elt, base)))</tt>.  For <a href="../trove/lists.html#empty"><tt class="pyretexpr">empty</tt></a>, returns <tt class="pyretexpr">base</tt>.</p><p>In other words, <tt class="pyretexpr">.foldr</tt> uses the function <tt class="pyretexpr">f</tt>, starting with the <tt class="pyretexpr">base</tt> value, of type <tt class="pyretexpr">Base</tt>, to calculate the return value of type <tt class="pyretexpr">Base</tt> from each item in the <tt class="pyretexpr">List</tt>, of input type <tt class="pyretexpr">Elt</tt>, starting the sequence from the <i>right</i> (hence, fold<b>r</b>).</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".foldr"></a></span></p><pre class="pyret-display">.foldr :: <span>(<span><span class="pyret-content">f :: <span>(<span>(<span>a, Base</span>) -&gt; Base</span>)</span></span>, <span class="pyret-content">base :: Base</span></span>) -&gt; Base</span></pre></div><p>Computes <tt class="pyretexpr">f(first-elt, f(second-elt, ... f(last-elt, base)))</tt>.  For <a href="../trove/lists.html#empty"><tt class="pyretexpr">empty</tt></a>, returns <tt class="pyretexpr">base</tt>.</p><p>In other words, <tt class="pyretexpr">.foldr</tt> uses the function <tt class="pyretexpr">f</tt>, starting with the <tt class="pyretexpr">base</tt> value, of type <tt class="pyretexpr">Base</tt>, to calculate the return value of type <tt class="pyretexpr">Base</tt> from each item in the <tt class="pyretexpr">List</tt>, of input type <tt class="pyretexpr">Elt</tt>, starting the sequence from the <i>right</i> (hence, fold<b>r</b>).</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 3, 2, 1].foldr(lam(elt, acc): elt + acc end, 10) is 16
@@ -284,7 +284,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 3, 2, 1].foldr(combine, &quot;END&quot;) is &quot;3 - 2 - 1 - END&quot; 
     empty.foldr(combine, &quot;END&quot;) is &quot;END&quot; 
     [L.list: 3, 2, 1].foldr(L.link, L.empty) is [L.list: 3, 2, 1] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.member :: <span>(<span><span class="pyret-content">elt :: a</span></span>) -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></tt></div><p><span class="margin-note">Passing a <tt class="pyretexpr">Roughnum</tt> as an argument will raise an error.</span> Returns true if the current <tt class="pyretexpr">List</tt> contains the given value, as compared by <tt class="pyretexpr">==</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".member"></a></span></p><pre class="pyret-display">.member :: <span>(<span><span class="pyret-content">elt :: a</span></span>) -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div><p><span class="margin-note">Passing a <tt class="pyretexpr">Roughnum</tt> as an argument will raise an error.</span> Returns true if the current <tt class="pyretexpr">List</tt> contains the given value, as compared by <tt class="pyretexpr">==</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2, 3].member(2) is true
@@ -312,7 +312,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 'a'].member('a') is true 
     [L.list: false].member(false) is true 
     [L.list: nothing].member(nothing) is true 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.append :: <span>(<span><span class="pyret-content">other :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></tt></div><p>Produces a new <tt class="pyretexpr">List</tt> with all the elements of the current <tt class="pyretexpr">List</tt>, followed by all the elements of the <tt class="pyretexpr">other</tt> <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".append"></a></span></p><pre class="pyret-display">.append :: <span>(<span><span class="pyret-content">other :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Produces a new <tt class="pyretexpr">List</tt> with all the elements of the current <tt class="pyretexpr">List</tt>, followed by all the elements of the <tt class="pyretexpr">other</tt> <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2].append([list: 3, 4]) is [L.list: 1, 2, 3, 4]
@@ -324,7 +324,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 1, 2].append([list: 3, 4]) is [L.list: 1, 2, 3, 4] 
     L.empty.append([L.list: 1, 2]) is [L.list: 1, 2] 
     [L.list: 1, 2].append(empty) is [L.list: 1, 2] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.last :: <span>(<span></span>) -&gt; a</span></tt></div><p>Returns the last item of the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".last"></a></span></p><pre class="pyret-display">.last :: <span>(<span></span>) -&gt; a</span></pre></div><p>Returns the last item of the <tt class="pyretexpr">List</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2, 3].last() is 3
@@ -334,7 +334,7 @@ end</pre><p><a class="show-embed" code="import lists as L
  check: 
     [L.list: 1, 2, 3].last() is 3 
     L.empty.last() raises &quot;last of empty list&quot; 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.reverse :: <span>(<span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></tt></div><p>Produces a new <tt class="pyretexpr">List</tt> with the items of the original <tt class="pyretexpr">List</tt> in reversed order.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".reverse"></a></span></p><pre class="pyret-display">.reverse :: <span>(<span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Produces a new <tt class="pyretexpr">List</tt> with the items of the original <tt class="pyretexpr">List</tt> in reversed order.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2, 3].reverse() is [L.list: 3, 2, 1]
@@ -344,7 +344,7 @@ end</pre><p><a class="show-embed" code="import lists as L
  check: 
     [L.list: 1, 2, 3].reverse() is [L.list: 3, 2, 1] 
     L.empty.reverse() is L.empty 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.sort :: <span>(<span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></tt></div><p>Produces a new <tt class="pyretexpr">List</tt> whose contents are the same as those of the current <tt class="pyretexpr">List</tt>, sorted by <a href="../lang/equality.html#&lt;"><tt class="pyretexpr">&lt;</tt></a> and <a href="../lang/equality.html#=="><tt class="pyretexpr">==</tt></a>.  This requires that the items of the <tt class="pyretexpr">List</tt> be comparable by <a href="../lang/equality.html#&lt;"><tt class="pyretexpr">&lt;</tt></a> (see <a href="lang/forms.html#s:binop-expr">Binary Operators</a>).</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".sort"></a></span></p><pre class="pyret-display">.sort :: <span>(<span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Produces a new <tt class="pyretexpr">List</tt> whose contents are the same as those of the current <tt class="pyretexpr">List</tt>, sorted by <a href="../lang/equality.html#&lt;"><tt class="pyretexpr">&lt;</tt></a> and <a href="../lang/equality.html#=="><tt class="pyretexpr">==</tt></a>.  This requires that the items of the <tt class="pyretexpr">List</tt> be comparable by <a href="../lang/equality.html#&lt;"><tt class="pyretexpr">&lt;</tt></a> (see <a href="lang/forms.html#s:binop-expr">Binary Operators</a>).</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 5, 3, 2, 4].sort() is [L.list: 1, 2, 3, 4, 5]
@@ -358,7 +358,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: &quot;aaaa&quot;, &quot;B&quot;, &quot;a&quot;].sort() is [L.list: &quot;B&quot;, &quot;a&quot;, &quot;aaaa&quot;] 
     [L.list: 'a', 1].sort() raises &quot;binop-error&quot; 
     [L.list: true, false].sort() raises &quot;binop-error&quot; 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.sort-by :: <span>(<span><span class="pyret-content">cmp :: <span>(<span>a, a</span>) -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></span>, <span class="pyret-content">eq :: <span>(<span>a, a</span>) -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></tt></div><p>Like <a href="../trove/lists.html#sort"><tt class="pyretexpr">sort</tt></a>, but the comparison and equality operators can be specified.  This allows for sorting <tt class="pyretexpr">List</tt>s whose contents are not comparable by <tt class="pyretexpr">&lt;</tt>, or sorting by custom comparisons, for example, sorting by string length instead of alphabetically.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".sort-by"></a></span></p><pre class="pyret-display">.sort-by :: <span>(<span><span class="pyret-content">cmp :: <span>(<span>a, a</span>) -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></span>, <span class="pyret-content">eq :: <span>(<span>a, a</span>) -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Like <a href="../trove/lists.html#sort"><tt class="pyretexpr">sort</tt></a>, but the comparison and equality operators can be specified.  This allows for sorting <tt class="pyretexpr">List</tt>s whose contents are not comparable by <tt class="pyretexpr">&lt;</tt>, or sorting by custom comparisons, for example, sorting by string length instead of alphabetically.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   fun length-comparison(s1 :: String, s2 :: String) -&gt; Boolean:
@@ -380,7 +380,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     end 
     [L.list: 'a', 'aa', 'aaa'].sort-by(length-comparison, length-equality) is 
       [L.list: 'aaa', 'aa', 'a'] 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.join-str :: <span>(<span><span class="pyret-content">sep :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../trove/globals.html#String">String</a></span></tt></div><p>Combines the values of the current <tt class="pyretexpr">List</tt> by converting them to strings with <tt class="pyretexpr">tostring</tt> and joining them with the given separator <tt class="pyretexpr">sep</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".join-str"></a></span></p><pre class="pyret-display">.join-str :: <span>(<span><span class="pyret-content">sep :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../trove/globals.html#String">String</a></span></pre></div><p>Combines the values of the current <tt class="pyretexpr">List</tt> by converting them to strings with <tt class="pyretexpr">tostring</tt> and joining them with the given separator <tt class="pyretexpr">sep</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2, 3].join-str("; ") is "1; 2; 3"
@@ -392,7 +392,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 1, 2, 3].join-str(&quot;; &quot;) is &quot;1; 2; 3&quot; 
     [L.list: &quot;a&quot;, true, ~5.3].join-str(&quot; : &quot;) is &quot;a : true : ~5.3&quot; 
     L.empty.join-str(&quot;nothing at all&quot;) is &quot;&quot; 
- end">(Try it!)</a></p></div><div class="pyret-display"><tt>.join-str-last :: <span>(<span><span class="pyret-content">sep :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">last-sep :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../trove/globals.html#String">String</a></span></tt></div><p>Combines the values of the current <tt class="pyretexpr">List</tt> by converting them to strings with <tt class="pyretexpr">tostring</tt> and joining them with the given separator <tt class="pyretexpr">sep</tt>. If the list has more than one element, the function will use <tt class="pyretexpr">last-sep</tt> to join the last element instead of the regular <tt class="pyretexpr">sep</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".join-str-last"></a></span></p><pre class="pyret-display">.join-str-last :: <span>(<span><span class="pyret-content">sep :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">last-sep :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../trove/globals.html#String">String</a></span></pre></div><p>Combines the values of the current <tt class="pyretexpr">List</tt> by converting them to strings with <tt class="pyretexpr">tostring</tt> and joining them with the given separator <tt class="pyretexpr">sep</tt>. If the list has more than one element, the function will use <tt class="pyretexpr">last-sep</tt> to join the last element instead of the regular <tt class="pyretexpr">sep</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2, 3].join-str-last(", ", " and ") is "1, 2 and 3"
@@ -420,7 +420,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     L.length([list: 'a', 'b']) is 2 
     L.length(L.empty) is 0 
     L.length(L.link(&quot;a&quot;, L.empty)) is 1 
- end">(Try it!)</a></p></div></div><p>  </p><div><p><span><a name="get"></a></span></p><pre class="pyret-display"><a href="../trove/lists.html#get">get</a> :: <span>(<span><span class="pyret-content">lst :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span>, <span class="pyret-content">n :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; a</span></pre></div><p>Equivalent to <tt class="pyretexpr">list</tt><tt>.get</tt><tt class="pyretexpr">(n)</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div></div><p>  </p><div><p><span><a name="get"></a></span></p><pre class="pyret-display"><a href="../trove/lists.html#get">get</a> :: <span>(<span><span class="pyret-content">lst :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span>, <span class="pyret-content">n :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; a</span></pre></div><p>Equivalent to <tt class="pyretexpr">list</tt><a href="../trove/lists.html#.get">.get</a><tt class="pyretexpr">(n)</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   l = [L.list: 1, 2, 3]

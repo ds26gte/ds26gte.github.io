@@ -41,13 +41,13 @@ end</pre></div><p>We can create a version of <tt class="pyretexpr">find-smiley</
 where:
   option-smiley("abcd") is none
   option-smiley("a😊cd") is some(1)
-end</pre></div><h2 id="Option-Methods" toclevel="2" tocentry="yes">Option Methods</h2><p>  </p><div class="pyret-display"><tt>.and-then :: <span><span class="pyret-content">(f :: <span class="pyret-content">(a :: b)</span>)</span> -&gt; <span><a href="../trove/option.html#Option">Option</a>&lt;<span>b</span>&gt;</span></span></tt></div><p>  For <a href="../trove/option.html#none"><tt class="pyretexpr">none</tt></a>, returns <a href="../trove/option.html#none"><tt class="pyretexpr">none</tt></a>.  For <a href="../trove/option.html#some"><tt class="pyretexpr">some</tt></a>, applies   <tt class="pyretexpr">f</tt> to the <tt class="pyretexpr">value</tt> field and returns a new <a href="../trove/option.html#some"><tt class="pyretexpr">some</tt></a> with the   updated value.</p><div><p><b>Examples:</b></p><pre>check:
+end</pre></div><h2 id="Option-Methods" toclevel="2" tocentry="yes">Option Methods</h2><p>  </p><div><p><span><a name=".and-then"></a></span></p><pre class="pyret-display">.and-then :: <span><span class="pyret-content">(f :: <span class="pyret-content">(a :: b)</span>)</span> -&gt; <span><a href="../trove/option.html#Option">Option</a>&lt;<span>b</span>&gt;</span></span></pre></div><p>  For <a href="../trove/option.html#none"><tt class="pyretexpr">none</tt></a>, returns <a href="../trove/option.html#none"><tt class="pyretexpr">none</tt></a>.  For <a href="../trove/option.html#some"><tt class="pyretexpr">some</tt></a>, applies   <tt class="pyretexpr">f</tt> to the <tt class="pyretexpr">value</tt> field and returns a new <a href="../trove/option.html#some"><tt class="pyretexpr">some</tt></a> with the   updated value.</p><div><p><b>Examples:</b></p><pre>check:
   add1 = lam(n): n + 1 end
   n = none
   n.and-then(add1) is none
   s = some(5)
   s.and-then(add1) is some(6)
-end</pre></div><p>  </p><div class="pyret-display"><tt>.or-else :: <span><span class="pyret-content">(v :: a)</span> -&gt; a</span></tt></div><p>  For <a href="../trove/option.html#none"><tt class="pyretexpr">none</tt></a>, returns <tt class="pyretexpr">v</tt>.  For <a href="../trove/option.html#some"><tt class="pyretexpr">some</tt></a>, returns the   <tt class="pyretexpr">value</tt> field.  Useful for providing default values.</p><div><p><b>Examples:</b></p><pre>check:
+end</pre></div><p>  </p><div><p><span><a name=".or-else"></a></span></p><pre class="pyret-display">.or-else :: <span><span class="pyret-content">(v :: a)</span> -&gt; a</span></pre></div><p>  For <a href="../trove/option.html#none"><tt class="pyretexpr">none</tt></a>, returns <tt class="pyretexpr">v</tt>.  For <a href="../trove/option.html#some"><tt class="pyretexpr">some</tt></a>, returns the   <tt class="pyretexpr">value</tt> field.  Useful for providing default values.</p><div><p><b>Examples:</b></p><pre>check:
   n = none
   n.or-else(42) is 42
 
