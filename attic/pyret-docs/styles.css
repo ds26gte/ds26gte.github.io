@@ -2,6 +2,14 @@ li.indent2 {
   text-indent: 2em;
 }
 
+li.indent3 {
+  text-indent: 4em;
+}
+
+li.indent4 {
+  text-indent: 6em;
+}
+
 ul.toclist {
   list-style-type: none;
 }
