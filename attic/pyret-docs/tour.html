@@ -50,7 +50,7 @@ end</pre><h2 id="Strings" toclevel="2" tocentry="yes">Strings</h2><p>Strings can
     string
     ```
   s is "a\n    multi\n    line\n    string"
-end</pre><h2 id="Lists" toclevel="2" tocentry="yes">Lists</h2><p>Lists aren’t primitive values, but they come up a lot in Pyret programs. Pyret’s list are of the head-and-tail variety found in many functional languages.  They are most easily written as a comma-separated list of values enclosed in square brackets and using the <a href="missing_gloss"><tt class="pyretexpr">list</tt></a> constructor.  The elements of a list can be accessed through the dot lookup expression, via the members called `first` and `rest`:</p><pre class="nothing_special">check:
+end</pre><h2 id="Lists" toclevel="2" tocentry="yes">Lists</h2><p>Lists aren’t primitive values, but they come up a lot in Pyret programs. Pyret’s list are of the head-and-tail variety found in many functional languages.  They are most easily written as a comma-separated list of values enclosed in square brackets and using the <a href="trove/lists.html#list"><tt class="pyretexpr">list</tt></a> constructor.  The elements of a list can be accessed through the dot lookup expression, via the members called `first` and `rest`:</p><pre class="nothing_special">check:
   [list: 1,2,3].first is 1
   [list: 1,2,3].rest  is [list: 2,3]
 end</pre><p>It is an error to access a field that isn’t there; for example trying to access <tt class="pyretexpr">first</tt> on a list with no elements.  We can use the <a href="lang/testing.html#raises"><tt class="pyretexpr">raises</tt></a> test assertion to check the error that’s signalled:</p><pre class="nothing_special">check:
