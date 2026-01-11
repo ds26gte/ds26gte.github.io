@@ -38,7 +38,7 @@ end</pre><p><a class="show-embed" code="check:
 
     is-empty(l2) is false 
     is-link(l2) is true 
- end">(Try it!)</a></p></div></div><h2 id="List-Creation-Functions" toclevel="2" tocentry="yes">List Creation Functions</h2><div><p><span><a name="list"></a></span></p><pre class="pyret-display">[<a href="../trove/lists.html#list">list</a><span></span>: <span class="pyret-content">elt :: a</span>, ...] -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></pre></div><p><span class="margin-note">This illustrates the underlying structure created when you define a <tt class="pyretexpr">List</tt> with <tt class="pyretexpr">[list: ...]</tt></span></p><p>Constructs a <tt class="pyretexpr">List</tt> out of <tt class="pyretexpr">elt</tt>s by chaining <a href="../trove/lists.html#link"><tt class="pyretexpr">link</tt></a>s, ending in a single <a href="../trove/lists.html#empty"><tt class="pyretexpr">empty</tt></a>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div></div><h2 id="List-Creation-Functions" toclevel="2" tocentry="yes">List Creation Functions</h2><div><p><span><a name="list"></a></span></p><pre class="pyret-display">[<a href="../trove/lists.html#list">list</a><span></span>: <span class="pyret-content">elt :: a</span>, ...] -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></pre></div><div class="margin-note">This illustrates the underlying structure created when you define a <tt class="pyretexpr">List</tt> with <tt class="pyretexpr">[list: ...]</tt></div><p>Constructs a <tt class="pyretexpr">List</tt> out of <tt class="pyretexpr">elt</tt>s by chaining <a href="../trove/lists.html#link"><tt class="pyretexpr">link</tt></a>s, ending in a single <a href="../trove/lists.html#empty"><tt class="pyretexpr">empty</tt></a>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: ] is L.empty
@@ -284,7 +284,7 @@ end</pre><p><a class="show-embed" code="import lists as L
     [L.list: 3, 2, 1].foldr(combine, &quot;END&quot;) is &quot;3 - 2 - 1 - END&quot; 
     empty.foldr(combine, &quot;END&quot;) is &quot;END&quot; 
     [L.list: 3, 2, 1].foldr(L.link, L.empty) is [L.list: 3, 2, 1] 
- end">(Try it!)</a></p></div><div><p><span><a name=".member"></a></span></p><pre class="pyret-display">.member :: <span>(<span><span class="pyret-content">elt :: a</span></span>) -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div><p><span class="margin-note">Passing a <tt class="pyretexpr">Roughnum</tt> as an argument will raise an error.</span> Returns true if the current <tt class="pyretexpr">List</tt> contains the given value, as compared by <tt class="pyretexpr">==</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
+ end">(Try it!)</a></p></div><div><p><span><a name=".member"></a></span></p><pre class="pyret-display">.member :: <span>(<span><span class="pyret-content">elt :: a</span></span>) -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div><div class="margin-note">Passing a <tt class="pyretexpr">Roughnum</tt> as an argument will raise an error.</div><p>Returns true if the current <tt class="pyretexpr">List</tt> contains the given value, as compared by <tt class="pyretexpr">==</tt>.</p><div><p><b>Examples:</b></p><pre>import lists as L
 
 check:
   [L.list: 1, 2, 3].member(2) is true
