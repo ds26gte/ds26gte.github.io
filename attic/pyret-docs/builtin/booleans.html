@@ -3,18 +3,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   <script type="module" src="../embed-api.js"></script>
-  <link rel="stylesheet" href="../styles.css">
+  <script src="../codemirror.js"></script>
+  <script src="../runmode.js"></script>
+  <script src="../pyret.js"></script>
+  <script src="../hilite.js"></script>
+  <link rel="stylesheet" type="text/css" href="../codemirror.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../pyret.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../styles.css" title="default"/>
   <head>
     <title>Booleans</title>
   </head>
   <body>
     <div class="container">
-    <root><h1 id="Booleans" toclevel="1" tocentry="yes">Booleans</h1><p>  </p><div><p><span><a name="Boolean"></a></span></p><pre class="pyret-display">Boolean</pre><p>The type of the values <tt class="pyretexpr">true</tt> and <tt class="pyretexpr">false</tt>.</p></div><p>  </p><h2 id="Boolean-Functions" toclevel="2" tocentry="yes">Boolean Functions</h2><p>  </p><div><p><span><a name="not"></a></span></p><pre class="pyret-display"><a href="../builtin/booleans.html#not">not</a> :: <span>(<span><span class="pyret-content">b :: <a href="../trove/globals.html#Boolean">Boolean</a></span></span>) -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div><p>  Returns <tt class="pyretexpr">true</tt> when given <tt class="pyretexpr">false</tt> and vice versa.</p><div><p><b>Examples:</b></p><pre>check:
+    <root><h1 id="Booleans" toclevel="1" tocentry="yes">Booleans</h1><p>  </p><div><p><span><a name="Boolean"></a></span></p><pre class="pyret-display">Boolean</pre><p>The type of the values <tt class="pyretexpr">true</tt> and <tt class="pyretexpr">false</tt>.</p></div><p>  </p><h2 id="Boolean-Functions" toclevel="2" tocentry="yes">Boolean Functions</h2><p>  </p><div><p><span><a name="not"></a></span></p><pre class="pyret-display"><a href="../builtin/booleans.html#not">not</a> :: <span>(<span><span class="pyret-content">b :: <a href="../trove/globals.html#Boolean">Boolean</a></span></span>) -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div><p>  Returns <tt class="pyretexpr">true</tt> when given <tt class="pyretexpr">false</tt> and vice versa.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   not(true) is false
   not(2 &lt; 1) is true
-end</pre></div><p>  </p><h2 id="Boolean-Operators" toclevel="2" tocentry="yes">Boolean Operators</h2><div><p><span><a name="and"></a></span></p><pre class="pyret-display">left and right</pre><div class="margin-note">The <tt class="pyretexpr">and</tt> operator “short-circuits”: if <tt class="pyretexpr">left</tt> evaluates to <tt class="pyretexpr">false</tt>, then <tt class="pyretexpr">right</tt> is not evaluated at all and the result is <tt class="pyretexpr">false</tt>.</div><p>Expects <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> to be <tt class="pyretexpr">Boolean</tt>s. If both are <tt class="pyretexpr">true</tt>, the result is <tt class="pyretexpr">true</tt>, if either is <tt class="pyretexpr">false</tt>, the result is <tt class="pyretexpr">false</tt>.</p><div><p><b>Examples:</b></p><pre>examples:
+end</pre></div><p>  </p><h2 id="Boolean-Operators" toclevel="2" tocentry="yes">Boolean Operators</h2><div><p><span><a name="and"></a></span></p><pre class="pyret-display">left and right</pre><div class="margin-note">The <tt class="pyretexpr">and</tt> operator “short-circuits”: if <tt class="pyretexpr">left</tt> evaluates to <tt class="pyretexpr">false</tt>, then <tt class="pyretexpr">right</tt> is not evaluated at all and the result is <tt class="pyretexpr">false</tt>.</div><p>Expects <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> to be <tt class="pyretexpr">Boolean</tt>s. If both are <tt class="pyretexpr">true</tt>, the result is <tt class="pyretexpr">true</tt>, if either is <tt class="pyretexpr">false</tt>, the result is <tt class="pyretexpr">false</tt>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">examples:
   true and true is true
   true and false is false
   false and true is false
@@ -30,7 +37,7 @@ end</pre><p><a class="show-embed" code="examples:
     (4 &lt; 5) and (&quot;a&quot; == &quot;b&quot;) is false 
     (4 &lt; 5) and ((4 + 2) == 6) is true 
     (4 &gt; 5) and ((4 + 2) == 6) is false 
- end">(Try it!)</a></p></div></div><div><p><span><a name="or"></a></span></p><pre class="pyret-display">left or right</pre><div class="margin-note">The <tt class="pyretexpr">or</tt> operator “short-circuits”: if <tt class="pyretexpr">left</tt> evaluates to <tt class="pyretexpr">true</tt>, then <tt class="pyretexpr">right</tt> is not evaluated at all and the result is <tt class="pyretexpr">true</tt>.</div><p>Expects <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> to be <tt class="pyretexpr">Boolean</tt>s. If either is <tt class="pyretexpr">true</tt>, the result is <tt class="pyretexpr">true</tt>, if both are <tt class="pyretexpr">false</tt>, the result is <tt class="pyretexpr">false</tt>.</p><div><p><b>Examples:</b></p><pre>examples:
+ end">(Try it!)</a></p></div></div><div><p><span><a name="or"></a></span></p><pre class="pyret-display">left or right</pre><div class="margin-note">The <tt class="pyretexpr">or</tt> operator “short-circuits”: if <tt class="pyretexpr">left</tt> evaluates to <tt class="pyretexpr">true</tt>, then <tt class="pyretexpr">right</tt> is not evaluated at all and the result is <tt class="pyretexpr">true</tt>.</div><p>Expects <tt class="pyretexpr">left</tt> and <tt class="pyretexpr">right</tt> to be <tt class="pyretexpr">Boolean</tt>s. If either is <tt class="pyretexpr">true</tt>, the result is <tt class="pyretexpr">true</tt>, if both are <tt class="pyretexpr">false</tt>, the result is <tt class="pyretexpr">false</tt>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">examples:
   true or true is true
   true or false is true
   false or true is true

@@ -3,9 +3,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   <script type="module" src="../embed-api.js"></script>
-  <link rel="stylesheet" href="../styles.css">
+  <script src="../codemirror.js"></script>
+  <script src="../runmode.js"></script>
+  <script src="../pyret.js"></script>
+  <script src="../hilite.js"></script>
+  <link rel="stylesheet" type="text/css" href="../codemirror.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../pyret.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../styles.css" title="default"/>
   <head>
     <title>either</title>
   </head>
@@ -13,7 +20,7 @@
     <div class="container">
     <root><div><h1 id="either" toclevel="1" tocentry="yes"></h1><div><p>Usage:</p><p><tt>include either</tt></p><p><tt>import either as ...</tt></p></div><h2 id="either_DataTypes" toclevel="2" tocentry="yes">Data types</h2><pre class="pyret-display"><span><a name="Either"></a></span><span>data <a href="../trove/either.html#Either">Either</a>&lt;a, b&gt;</span>
 <div><tt>   | <span><a href="../trove/either.html#left">left</a>(<span>v :: a</span>)</span></tt>
-<tt>   | <span><a href="../trove/either.html#right">right</a>(<span>v :: b</span>)</span></tt></div><tt>end</tt></pre><div class="insetpara nested"><div><p><span><a name="left"></a></span></p><pre class="pyret-display"><a href="../trove/either.html#left">left</a> :: (<span>v :: a</span>) -&gt; <span><a href="../trove/either.html#Either">Either</a>&lt;<span>a, b</span>&gt;</span></pre><p></p></div><div><p><span><a name="right"></a></span></p><pre class="pyret-display"><a href="../trove/either.html#right">right</a> :: (<span>v :: b</span>) -&gt; <span><a href="../trove/either.html#Either">Either</a>&lt;<span>a, b</span>&gt;</span></pre><p></p></div><div><p><span><a name="is-left"></a></span></p><pre class="pyret-display"><a href="../trove/either.html#is-left">is-left</a> :: <span><span class="pyret-content">(val :: Any)</span> -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div><div><p><span><a name="is-right"></a></span></p><pre class="pyret-display"><a href="../trove/either.html#is-right">is-right</a> :: <span><span class="pyret-content">(val :: Any)</span> -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div></div></div><p><tt class="pyretexpr">Either</tt> implements a functional programming idiom that is often used when a function may return either a meaningful value or an error message. By convention, the <tt class="pyretexpr">left</tt> variant is used to return an error, usually as a string, and the <tt class="pyretexpr">right</tt> variant returns a valid value.</p><p>The following example is based on a function that searches for a student with a specific numeric id in a list.  <tt class="pyretexpr">find-person-from-id</tt> returns <tt class="pyretexpr">Either</tt> a valid <tt class="pyretexpr">Person</tt> as <tt class="pyretexpr">right</tt> or one of two error messages as <tt class="pyretexpr">String</tt>s in <tt class="pyretexpr">left</tt>.</p><div><p><b>Examples:</b></p><pre>import either as E
+<tt>   | <span><a href="../trove/either.html#right">right</a>(<span>v :: b</span>)</span></tt></div><tt>end</tt></pre><div class="insetpara nested"><div><p><span><a name="left"></a></span></p><pre class="pyret-display"><a href="../trove/either.html#left">left</a> :: (<span>v :: a</span>) -&gt; <span><a href="../trove/either.html#Either">Either</a>&lt;<span>a, b</span>&gt;</span></pre><p></p></div><div><p><span><a name="right"></a></span></p><pre class="pyret-display"><a href="../trove/either.html#right">right</a> :: (<span>v :: b</span>) -&gt; <span><a href="../trove/either.html#Either">Either</a>&lt;<span>a, b</span>&gt;</span></pre><p></p></div><div><p><span><a name="is-left"></a></span></p><pre class="pyret-display"><a href="../trove/either.html#is-left">is-left</a> :: <span><span class="pyret-content">(val :: Any)</span> -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div><div><p><span><a name="is-right"></a></span></p><pre class="pyret-display"><a href="../trove/either.html#is-right">is-right</a> :: <span><span class="pyret-content">(val :: Any)</span> -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div></div></div><p><tt class="pyretexpr">Either</tt> implements a functional programming idiom that is often used when a function may return either a meaningful value or an error message. By convention, the <tt class="pyretexpr">left</tt> variant is used to return an error, usually as a string, and the <tt class="pyretexpr">right</tt> variant returns a valid value.</p><p>The following example is based on a function that searches for a student with a specific numeric id in a list.  <tt class="pyretexpr">find-person-from-id</tt> returns <tt class="pyretexpr">Either</tt> a valid <tt class="pyretexpr">Person</tt> as <tt class="pyretexpr">right</tt> or one of two error messages as <tt class="pyretexpr">String</tt>s in <tt class="pyretexpr">left</tt>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import either as E
 
 data Person:
   | student(id :: Number, name :: String)
@@ -37,7 +44,7 @@ where:
   find-person-from-id(people, 007) is E.left("Not found error.")
   find-person-from-id(people, 001) is E.right(student(001, "Charlie Brown"))
   find-person-from-id(people, 003) is E.left("Duplicate ID error.")
-end</pre></div><p>Typically, the <tt class="pyretexpr">Either</tt> variants are processed by a <tt class="pyretexpr">cases</tt> expression, for example:</p><div><p><b>Examples:</b></p><pre>fun search(id :: Number):
+end</pre></div><p>Typically, the <tt class="pyretexpr">Either</tt> variants are processed by a <tt class="pyretexpr">cases</tt> expression, for example:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun search(id :: Number):
   doc: "Hypothetical function calls resulting from either result."
   result = find-person-from-id(people, id)
   cases(E.Either) result:

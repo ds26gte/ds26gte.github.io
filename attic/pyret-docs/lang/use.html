@@ -3,15 +3,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   <script type="module" src="../embed-api.js"></script>
-  <link rel="stylesheet" href="../styles.css">
+  <script src="../codemirror.js"></script>
+  <script src="../runmode.js"></script>
+  <script src="../pyret.js"></script>
+  <script src="../hilite.js"></script>
+  <link rel="stylesheet" type="text/css" href="../codemirror.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../pyret.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../styles.css" title="default"/>
   <head>
     <title>Use</title>
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="use" toclevel="1" tocentry="yes">Use</h1><p><span></span></p><h2 id="s:use:context" toclevel="2" tocentry="yes">Contexts</h2><div><p><span><a name="use-context"></a></span></p><pre class="pyret-display">use context &lt;import&gt;</pre><p><a href="lang/modules.html#modules">Modules</a> are a useful mechanism for providing and including names between different parts of a program that is split across files. One limitation of modules is that importing or including names from a module is strictly <b>additive</b>–including can only make <b>more names</b> available. For different course contexts and applications, sometimes we want more control over exactly which names are available, including leaving some out, or redefining some common names ourselves.</p><p>This is what <tt class="pyretexpr">use context</tt> is for. The meaning of <tt class="pyretexpr">use context</tt> is to start the program in an context with no names at all available, and then adding only what’s provided from the module listed after <tt class="pyretexpr">context</tt> <tt class="pyretexpr">&lt;import&gt;</tt>. The <tt class="pyretexpr">&lt;import&gt;</tt> part of  <tt class="pyretexpr">use context</tt> line can use any of the <a href="lang/modules.html#s:modules:finding-modules">dependency types</a>.</p></div><p>As an example, consider an assignment where students write their own implementation of lists, defining functions named <tt class="pyretexpr">map</tt>, <tt class="pyretexpr">filter</tt>, and so on. In this case, the context they use should not be the default context (because it already has <tt class="pyretexpr">map</tt> and so on):</p><pre class="bad-ex">use context essentials2021
+    <root><div><h1 id="use" toclevel="1" tocentry="yes">Use</h1><p><span></span></p><h2 id="s:use:context" toclevel="2" tocentry="yes">Contexts</h2><div><p><span><a name="use-context"></a></span></p><pre class="pyret-display">use context &lt;import&gt;</pre><p><a href="lang/modules.html#modules">Modules</a> are a useful mechanism for providing and including names between different parts of a program that is split across files. One limitation of modules is that importing or including names from a module is strictly <b>additive</b>–including can only make <b>more names</b> available. For different course contexts and applications, sometimes we want more control over exactly which names are available, including leaving some out, or redefining some common names ourselves.</p><p>This is what <tt class="pyretexpr">use context</tt> is for. The meaning of <tt class="pyretexpr">use context</tt> is to start the program in an context with no names at all available, and then adding only what’s provided from the module listed after <tt class="pyretexpr">context</tt> <tt class="pyretexpr">&lt;import&gt;</tt>. The <tt class="pyretexpr">&lt;import&gt;</tt> part of  <tt class="pyretexpr">use context</tt> line can use any of the <a href="lang/modules.html#s:modules:finding-modules">dependency types</a>.</p></div><p>As an example, consider an assignment where students write their own implementation of lists, defining functions named <tt class="pyretexpr">map</tt>, <tt class="pyretexpr">filter</tt>, and so on. In this case, the context they use should not be the default context (because it already has <tt class="pyretexpr">map</tt> and so on):</p><pre class="bad-ex pyret-highlight">use context essentials2021
 
 data List&lt;A&gt;:
   | empty
@@ -19,7 +26,7 @@ data List&lt;A&gt;:
 end
 
 # causes a shadowing error because empty and link already are defined and
-# provided by essentials2021</pre><p>You could create a context with just a limited set of global names, and publish it as a <tt class="pyretexpr">shared-gdrive</tt> module:</p><pre class="good-ex"># In file "list-assignment-context.arr"
+# provided by essentials2021</pre><p>You could create a context with just a limited set of global names, and publish it as a <tt class="pyretexpr">shared-gdrive</tt> module:</p><pre class="good-ex pyret-highlight"># In file "list-assignment-context.arr"
 use context global # This is a good default environment to use when constructing namespaces
 # Basic functions/types like num-max, to-string, Number, String
 import global as G
@@ -31,7 +38,7 @@ import option as O
 provide from O: *, type * end
 
 import either as E
-provide from E: *, type * end</pre><p>Then students could use that module as their context:</p><pre class="good-ex">use context shared-gdrive("list-assignment-context.arr", "google-id-goes-here")
+provide from E: *, type * end</pre><p>Then students could use that module as their context:</p><pre class="good-ex pyret-highlight">use context shared-gdrive("list-assignment-context.arr", "google-id-goes-here")
 
 data List&lt;A&gt;:
   | empty
