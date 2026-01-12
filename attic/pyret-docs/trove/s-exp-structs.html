@@ -18,7 +18,7 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="s-exp-structs" toclevel="1" tocentry="yes"></h1><div><p>Usage:</p><p><tt>include s-exp-structs</tt></p><p><tt>import s-exp-structs as ...</tt></p></div><h2 id="S-Exp_DataTypes" toclevel="2" tocentry="yes">The S-Exp Datatype</h2><p>This datatype defines the result of parsing s-expressions.  See <a href="../trove/s-exp.html#read-s-exp">read-s-exp</a> for more details and examples.</p><pre class="pyret-display"><span><a name="S-Exp"></a></span><span>data <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></span>
+    <root><div><h1 id="s-exp-structs" toclevel="1" tocentry="yes"></h1><div><p>Usage:</p><pre class="pyret-highlight">include s-exp-structs</pre><pre class="pyret-highlight">import s-exp-structs as ...</pre></div><h2 id="S-Exp_DataTypes" toclevel="2" tocentry="yes">The S-Exp Datatype</h2><p>This datatype defines the result of parsing s-expressions.  See <a href="../trove/s-exp.html#read-s-exp">read-s-exp</a> for more details and examples.</p><pre class="pyret-display"><span><a name="S-Exp"></a></span><span>data <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></span>
 <div><tt>   | <span><a href="../trove/s-exp-structs.html#s-list">s-list</a>(<span>exps :: <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></span>&gt;</span></span>)</span></tt>
 <tt>   | <span><a href="../trove/s-exp-structs.html#s-num">s-num</a>(<span>n :: <a href="../trove/globals.html#Number">Number</a></span>)</span></tt>
 <tt>   | <span><a href="../trove/s-exp-structs.html#s-str">s-str</a>(<span>s :: <a href="../trove/globals.html#String">String</a></span>)</span></tt>
