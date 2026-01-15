@@ -177,8 +177,8 @@ ul.glossary {
    z-index: 1;
    vertical-align: baseline;
    display: inline-block;
-   -webkit-mask-image: url(./paint.svg);
-   mask-image: url(./paint.svg);
+   -webkit-mask-image: url(trove/paint.svg);
+   mask-image: url(trove/paint.svg);
    -webkit-mask-size: contain;
    mask-size: 100% 100%;
    mask-type: luminance;

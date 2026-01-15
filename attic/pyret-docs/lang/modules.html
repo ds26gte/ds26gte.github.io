@@ -180,7 +180,20 @@ include from SD:
   type *    # includes all types defined in the string-dict module
   data *    # includes all data definitions from the string-dict module
   module *  # includes any modules provided by the string-dict module
-end</pre><h2 id="Converting-between-shorthand-and-expanded-syntax" toclevel="2" tocentry="yes">Converting between shorthand and expanded syntax</h2><p>Pyret used to have, and supports for backwards compatibility, a few other syntaxes for modules. The short guide below shows how to convert from this old syntax to the new. Of the old syntax, we only recommend the continued use of <tt class="pyretexpr">include &lt;some-module&gt;</tt>, which is a convenient first line of many student-facing starter files.</p><table><tr><td><span>Shorthand syntax</span></td><td><span>Expanded form</span></td></tr><tr><td><span>&pre;</span></td><td><span>&pre;</span></td></tr><tr><td><span>&pre;</span></td><td><span>&pre;</span></td></tr><tr><td><span>&pre;</span></td><td><span>&pre;</span></td></tr><tr><td><span>&pre;</span></td><td><span>&pre;</span></td></tr></table></div></root>
+end</pre><h2 id="Converting-between-shorthand-and-expanded-syntax" toclevel="2" tocentry="yes">Converting between shorthand and expanded syntax</h2><p>Pyret used to have, and supports for backwards compatibility, a few other syntaxes for modules. The short guide below shows how to convert from this old syntax to the new. Of the old syntax, we only recommend the continued use of <tt class="pyretexpr">include &lt;some-module&gt;</tt>, which is a convenient first line of many student-facing starter files.</p><table class="table table-sm"><tbody><tr><td>Shorthand syntax</td><td>Expanded form</td></tr><tr><td><pre class="pyret-highlight">provide *</pre></td><td><pre class="pyret-highlight">provide:
+  *
+end</pre></td></tr><tr><td><pre class="pyret-highlight">provide-types *</pre></td><td><pre class="pyret-highlight">provide:
+  type *
+end</pre></td></tr><tr><td><pre class="pyret-highlight">include &lt;some-module&gt;</pre></td><td><pre class="pyret-highlight">import &lt;some-module&gt; as &lt;some-name&gt;
+include from &lt;some-name&gt;:
+  *,
+  type *,
+  data *,
+  module *
+end</pre></td></tr><tr><td><pre class="pyret-highlight">import name1, ... from &lt;some-module&gt;</pre></td><td><pre class="pyret-highlight">import &lt;some-module&gt; as &lt;some-name&gt;
+include from &lt;some-name&gt;:
+  name1, ...
+end</pre></td></tr></tbody></table></div></root>
     <hr/>
     The current page is lang/modules.html.
     The previous page is <a href = "../lang/op-precedence.html">../lang/op-precedence.html</a>.
