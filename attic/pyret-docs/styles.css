@@ -183,3 +183,12 @@ ul.glossary {
    mask-size: 100% 100%;
    mask-type: luminance;
 }
+.checkersBlob {
+   margin-right: -2.5em;
+   width: 2.5em;
+   height: 1.5em;
+   position: absolute;
+   background-image: url(trove/checkers.svg);
+   background-size: 2.5em 1.5em;
+   display: inline-block;
+}
