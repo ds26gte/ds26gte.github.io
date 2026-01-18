@@ -1,6 +1,6 @@
 == Dorai Sitaram’s Home Page
 
-`ds26gte at yahoo dot com`
+`ds26gte at gmail dot com`
 
 Here are some Scheme- and Common-Lisp-related code and documentation.
 Everything presented here is freely distributable and freely usable, and
