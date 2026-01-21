@@ -192,3 +192,14 @@ ul.glossary {
    background-size: 2.5em 1.5em;
    display: inline-block;
 }
+
+.container {
+  width: 100%;
+}
+
+@media (min-width: 800px) {
+  .container {
+    max-width: 72ch;
+    margin: 0 auto;
+  }
+}
