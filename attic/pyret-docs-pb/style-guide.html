@@ -48,7 +48,7 @@ end</pre><p>You can even write an arbitrary predicate when a built-in annotation
   n &gt;= 0
 end</pre><p>and then use it as follows:</p><pre class="nothing_special">fun sqrt(n :: Number%(non-negative)) -&gt; Number:
   # ...
-end</pre><h3 id="Testing" toclevel="3" tocentry="yes">Testing</h3><p>You should test every function you write for both general cases and edge cases.</p><p>As we have discussed earlier [<a href="/Users/ds26gte/src/pyret-docs-pb/style-guide.html#eg-tests">Example and Tests</a>], you can write these using <code class="uncolored-code">examples</code> and <code class="uncolored-code">check</code>. In addition, you can also write examples and tests of functions as part of the function declaration, using <code class="uncolored-code">where</code>:</p><pre class="nothing_special">fun double(n :: Number) -&gt; Number:
+end</pre><h3 id="Testing" toclevel="3" tocentry="yes">Testing</h3><p>You should test every function you write for both general cases and edge cases.</p><p>As we have discussed earlier [<a href="style-guide.html#eg-tests">Example and Tests</a>], you can write these using <code class="uncolored-code">examples</code> and <code class="uncolored-code">check</code>. In addition, you can also write examples and tests of functions as part of the function declaration, using <code class="uncolored-code">where</code>:</p><pre class="nothing_special">fun double(n :: Number) -&gt; Number:
   n * 2
 where:
   double(0) is 0
