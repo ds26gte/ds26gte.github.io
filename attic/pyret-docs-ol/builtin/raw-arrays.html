@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script type="module" src="../embed-api.js"></script>
+  <script src="../codemirror.js"></script>
+  <script src="../runmode.js"></script>
+  <script src="../pyret.js"></script>
+  <script src="../hilite.js"></script>
+  <link rel="stylesheet" type="text/css" href="../codemirror.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../pyret.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../styles.css" title="default"/>
+  <head>
+    <title>RawArray</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><div><h1 id="raw-arrays" toclevel="1" tocentry="yes">RawArray</h1><p><span></span>   </p><div><p><span><a name="RawArray"></a></span></p><pre class="pyret-display"><span><a href="../builtin/raw-arrays.html#RawArray">RawArray</a>&lt;a&gt;</span></pre><div align="center"><p><b>This is an internal library.</b></p><p><i>The <a href="trove/arrays.html#arrays"></a> library provides the user-facing version of this library.</i></p><p>By default, Pyret users should use <a href="trove/arrays.html#arrays"></a> instead. It is primarily designed to be user-facing. This library provides higher performance, but is instead primarily meant for internal use and for building other libaries. Only use this if <span class="pyret-highlight"><tt class="pyretexpr">Array</tt></span>s are not sufficiently performant for your needs. This library may not provide all the same functionality as <a href="trove/arrays.html#arrays"></a>, so you may need to modify your code to use it: i.e., you can’t simply replace an <span class="pyret-highlight"><tt class="pyretexpr">array</tt></span> with a <span class="pyret-highlight"><tt class="pyretexpr">RawArray</tt></span> and expect the program to continue to work.</p></div><p>   A <span class="pyret-highlight"><tt class="pyretexpr">RawArray</tt></span> is a mutable, fixed-length collection indexed    by non-negative intgers. Accessing and mutating a <span class="pyret-highlight"><tt class="pyretexpr">RawArray</tt></span> takes    constant time in the size of the array.</p></div><p>     </p><h2 id="RawArray-Functions" toclevel="2" tocentry="yes">RawArray Functions</h2><div><p><span><a name="raw-array"></a></span></p><pre class="pyret-display">[<a href="../builtin/raw-arrays.html#raw-array">raw-array</a><span></span>: <span class="pyret-content">value :: a</span>, ...] -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></pre></div><p>Constructs a <a href="../builtin/raw-arrays.html#RawArray"><span class="pyret-highlight"><tt class="pyretexpr">RawArray</tt></span></a> with the given elements.</p><p>Note that <a href="../builtin/raw-arrays.html#RawArray"><span class="pyret-highlight"><tt class="pyretexpr">RawArray</tt></span></a>s are mutable, so comparisons using <a href="lang/equality.html#eq-fun-equal-always">Equal Always</a> will only return <span class="pyret-highlight"><tt class="pyretexpr">true</tt></span> on <a href="../builtin/raw-arrays.html#RawArray"><span class="pyret-highlight"><tt class="pyretexpr">RawArray</tt></span></a>s when they are also <a href="lang/equality.html#eq-fun-identical">Identical</a>, regardless of their contents. Usually, the most appropriate comparison is <a href="lang/equality.html#eq-fun-equal-now">Equal Now</a>. Tests should correspondingly use <a href="../lang/testing.html#is=~"><span class="pyret-highlight"><tt class="pyretexpr">is=~</tt></span></a>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  ra = [raw-array: 1, 2, 3]
+
+  ra is ra
+  ra is== ra
+
+  [raw-array: 1, 2, 3] is-not ra
+  [raw-array: 1, 2, 3] is-not [raw-array: 1, 2, 3]
+  [raw-array: 1, 2, 3] is-not== ra
+
+  [raw-array: 1, 2, 3] is=~ ra
+  [raw-array: 1, 2, 3] is=~ [raw-array: 1, 2, 3]
+end</pre></div><p>  </p><div><p><span><a name="raw-array-of"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-of">raw-array-of</a> :: <span>(<span><span class="pyret-content">value :: a</span>, <span class="pyret-content">count :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Constructs an <span class="pyret-highlight"><tt class="pyretexpr">RawArray</tt></span> of length <span class="pyret-highlight"><tt class="pyretexpr">count</tt></span>, where every element is the value given as <span class="pyret-highlight"><tt class="pyretexpr">value</tt></span>.</p><p>Note that <span class="pyret-highlight"><tt class="pyretexpr">value</tt></span> is not <i>copied</i>, so, the elements of <span class="pyret-highlight"><tt class="pyretexpr">RawArray</tt></span>s created with <a href="../builtin/raw-arrays.html#raw-array-of"><span class="pyret-highlight"><tt class="pyretexpr">raw-array-of</tt></span></a> will always be <a href="../lang/equality.html#identical"><span class="pyret-highlight"><tt class="pyretexpr">identical</tt></span></a> (with the usual caveats if the <span class="pyret-highlight"><tt class="pyretexpr">value</tt></span> was a function or method).</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  arr = raw-array-of(true, 2)
+  arr is=~ [raw-array: true, true]
+  arr is-not [raw-array: true, true]
+  raw-array-get(arr, 0) is&lt;=&gt; raw-array-get(arr, 1)
+
+  raw-array-set(arr, 1, false)
+  arr is=~ [raw-array: true, false]
+
+  arr-of-arrs = raw-array-of(arr, 3)
+  arr-of-arrs is=~ [raw-array: [raw-array: true, false],
+    [raw-array: true, false], [raw-array: true, false]]
+
+  raw-array-set(arr, 0, false)
+  arr-of-arrs is=~ [raw-array: [raw-array: false, false],
+    [raw-array: false, false], [raw-array: false, false]]
+end
+</pre></div><p>  </p><div><p><span><a name="raw-array-get"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-get">raw-array-get</a> :: <span>(<span><span class="pyret-content">array :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span>, <span class="pyret-content">index :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; a</span></pre></div><p>Returns the value at the given <span class="pyret-highlight"><tt class="pyretexpr">index</tt></span>.</p><p>Using an index too large, negative, or not a whole number raises an error.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  a = [raw-array: "a", "b", "c"]
+  raw-array-get(a, 0) is "a"
+  raw-array-get(a, 1) is "b"
+  raw-array-get(a, 2) is "c"
+end</pre></div><p>  </p><div><p><span><a name="raw-array-set"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-set">raw-array-set</a> :: <span>(<span><span class="pyret-content">array :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span>, <span class="pyret-content">index :: <a href="../trove/globals.html#Number">Number</a></span>, <span class="pyret-content">new-value :: a</span></span>) -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Updates the value at the given <span class="pyret-highlight"><tt class="pyretexpr">index</tt></span>, returning the new value.  The update is stateful, so all references to the <span class="pyret-highlight"><tt class="pyretexpr">RawArray</tt></span> see the update.</p><p>Using an index too large, negative, or not a whole number raises an error.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  a = [raw-array: "a", "b", "c"]
+  raw-array-get(a, 0) is "a"
+
+  b = a
+  raw-array-set(a, 0, "d")
+  a is=~ [raw-array: "d", "b", "c"]
+  b is=~ [raw-array: "d", "b", "c"]
+
+  c = raw-array-set(a, 0, "z")
+  c is=~ [raw-array: "z", "b", "c"]
+end</pre></div><p>  </p><div><p><span><a name="raw-array-length"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-length">raw-array-length</a> :: <span>(<span><span class="pyret-content">array :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre></div><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  a = [raw-array: "a", "b"]
+  raw-array-length(a) is 2
+  b = [raw-array:]
+  raw-array-length(b) is 0
+end</pre></div><p>  </p><div><p><span><a name="raw-array-to-list"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-to-list">raw-array-to-list</a> :: <span>(<span><span class="pyret-content">array :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>    Converts a <a href="../builtin/raw-arrays.html#RawArray"><span class="pyret-highlight"><tt class="pyretexpr">RawArray</tt></span></a> to a <a href="../trove/lists.html#List"><span class="pyret-highlight"><tt class="pyretexpr">List</tt></span></a> containing     the same elements in the same order.</p><p>    Note that it does <i>not</i> recursively convert <a href="../builtin/raw-arrays.html#RawArray"><span class="pyret-highlight"><tt class="pyretexpr">RawArray</tt></span></a>s;     only the top-level is converted.</p><p>    </p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  a = [raw-array: 1, 2, 3]
+  raw-array-to-list(a) is [list: 1, 2, 3]
+
+  a2 = raw-array-of([raw-array:], 3)
+  raw-array-to-list(a2) is=~ [list: [raw-array:], [raw-array:], [raw-array:]]
+  raw-array-to-list(a2) is-not=~ [list: [list:], [list:], [list:]]
+end</pre></div><p>  </p><div><p><span><a name="raw-array-from-list"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-from-list">raw-array-from-list</a> :: <span>(<span><span class="pyret-content">lst :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>    Converts a <a href="../trove/lists.html#List"><span class="pyret-highlight"><tt class="pyretexpr">List</tt></span></a> to a <a href="../builtin/raw-arrays.html#RawArray"><span class="pyret-highlight"><tt class="pyretexpr">RawArray</tt></span></a> containing     the same elements in the same order.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  raw-array-from-list(empty) is=~ [raw-array: ]
+  raw-array-from-list(empty) is-not [raw-array: ]
+
+  raw-array-from-list([list: 1, 2, 3]) is=~ [raw-array: 1, 2, 3]
+  raw-array-from-list([list: 1, 2, 3]) is-not [raw-array: 1, 2, 3]
+end</pre></div><p>  </p><div><p><span><a name="raw-array-build"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-build">raw-array-build</a> :: <span>(<span><span class="pyret-content">f :: <span>(<span><a href="../trove/globals.html#Number">Number</a> -&gt; a</span>)</span></span>, <span class="pyret-content">size :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>    Constructs an array of length <span class="pyret-highlight"><tt class="pyretexpr">size</tt></span>, and fills it with the result of     calling the function <span class="pyret-highlight"><tt class="pyretexpr">f</tt></span> with each index from <span class="pyret-highlight"><tt class="pyretexpr">0</tt></span> to <span class="pyret-highlight"><tt class="pyretexpr">size - 1</tt></span>.</p><p>  </p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  fun sq(x): x * x end
+  raw-array-build(sq, 4) is=~ [raw-array: sq(0), sq(1), sq(2), sq(3)]
+end</pre></div><p>  </p><div><p><span><a name="raw-array-build-opt"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-build-opt">raw-array-build-opt</a> :: <span>(<span><span class="pyret-content">f :: <span>(<span><a href="../trove/globals.html#Number">Number</a> -&gt; <span><a href="../trove/option.html#Option">Option</a>&lt;<span>Any</span>&gt;</span></span>)</span></span>, <span class="pyret-content">size :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>    Constructs an array based on the results of     calling the function <span class="pyret-highlight"><tt class="pyretexpr">f</tt></span> with each index from <span class="pyret-highlight"><tt class="pyretexpr">0</tt></span> to <span class="pyret-highlight"><tt class="pyretexpr">size - 1</tt></span>. For each index, if the result of <span class="pyret-highlight"><tt class="pyretexpr">f</tt></span> is <span class="pyret-highlight"><tt class="pyretexpr">some(value)</tt></span>,     then <span class="pyret-highlight"><tt class="pyretexpr">value</tt></span> is included in the resulting array (it is not included     for <span class="pyret-highlight"><tt class="pyretexpr">none</tt></span>). The size of the resulting array is equal to the number of     <span class="pyret-highlight"><tt class="pyretexpr">some</tt></span> results.</p><p>    </p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  fun even(n):
+    if num-modulo(n, 2) == 0: some(n)
+    else: none
+    end
+  end
+  raw-array-build-opt(even, 10) is=~ [raw-array: 0, 2, 4, 6, 8]
+end</pre></div><p>  </p><div><p><span><a name="raw-array-map"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-map">raw-array-map</a> :: <span>(<span><span class="pyret-content">f :: <span>(<span>a -&gt; b</span>)</span></span>, <span class="pyret-content">array :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>  Creates a new array by applying <span class="pyret-highlight"><tt class="pyretexpr">f</tt></span> to each element of the array.   Similar to <a href="../trove/lists.html#map"><span class="pyret-highlight"><tt class="pyretexpr">map</tt></span></a>. Has an argument order that works with   <span class="pyret-highlight"><tt class="pyretexpr">for</tt></span>.</p><p>  </p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  a = [raw-array: "apple", "banana", "plum"]
+  lengths = for raw-array-map(s from a):
+    string-length(s)
+  end
+  lengths is=~ [raw-array: 5, 6, 4]
+end</pre></div><p>  Note that the test uses <a href="../lang/testing.html#is=~"><span class="pyret-highlight"><tt class="pyretexpr">is=~</tt></span></a>, because raw arrays are   mutable and so the two values in the shown test are not   <a href="../lang/equality.html#equal-always"><span class="pyret-highlight"><tt class="pyretexpr">equal-always</tt></span></a>, they are <a href="../lang/equality.html#equal-now"><span class="pyret-highlight"><tt class="pyretexpr">equal-now</tt></span></a>.</p><p>  </p><div><p><span><a name="raw-array-filter"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-filter">raw-array-filter</a> :: <span>(<span><span class="pyret-content">f :: <span>(<span>a -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span>)</span></span>, <span class="pyret-content">array :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>  Applies function <span class="pyret-highlight"><tt class="pyretexpr">f</tt></span> to each element of <span class="pyret-highlight"><tt class="pyretexpr">array</tt></span> from left to right,   constructing a new <span class="pyret-highlight"><tt class="pyretexpr">RawArray</tt></span> out of the elements for which <span class="pyret-highlight"><tt class="pyretexpr">f</tt></span>   returned <span class="pyret-highlight"><tt class="pyretexpr">true</tt></span>.   Similar to <a href="../trove/lists.html#filter"><span class="pyret-highlight"><tt class="pyretexpr">filter</tt></span></a>. Has an argument order that works with   <span class="pyret-highlight"><tt class="pyretexpr">for</tt></span>.</p><p>  </p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  a = [raw-array: "apple", "banana", "plum"]
+  p-words = for raw-array-filter(s from a):
+    string-contains(s, "p")
+  end
+  p-words is=~ [raw-array: "apple", "plum"]
+end</pre></div><p>  </p><div><p><span><a name="raw-array-sort-nums"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-sort-nums">raw-array-sort-nums</a> :: <span>(<span><span class="pyret-content">array :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span></span>, <span class="pyret-content">asc :: <a href="../trove/globals.html#Boolean">Boolean</a></span></span>) -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span></span></pre></div><p>  Sorts the given array <i>in-place</i> in ascending or descending order   according to the <span class="pyret-highlight"><tt class="pyretexpr">asc</tt></span> parameter. Returns a reference to the   original array, which will have its contents mutably updated.</p><p>  </p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  a = [raw-array: 3, 1, 4, 1, 5, 9, 2]
+
+  asc = raw-array-sort-nums(a, true)
+  asc is&lt;=&gt; a
+  a is=~ [raw-array: 1, 1, 2, 3, 4, 5, 9]
+
+  raw-array-sort-nums(a, false)
+  a is=~ [raw-array: 9, 5, 4, 3, 2, 1, 1]
+end</pre></div><p>  </p><div><p><span><a name="raw-array-sort-by"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-sort-by">raw-array-sort-by</a> :: <span>(<span><span class="pyret-content">array :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span>, <span class="pyret-content">key :: <span>(<span>a -&gt; <a href="../trove/globals.html#Number">Number</a></span>)</span></span>, <span class="pyret-content">asc :: <a href="../trove/globals.html#Boolean">Boolean</a></span></span>) -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>  Creates a new array containing the sorted contents of the given array. The sort   order is determined by calling the <span class="pyret-highlight"><tt class="pyretexpr">key</tt></span> function on each element to   get a number, and sorting the elements by their key value (in increasing key   order if <span class="pyret-highlight"><tt class="pyretexpr">asc</tt></span> is <span class="pyret-highlight"><tt class="pyretexpr">true</tt></span>, decreasing if <span class="pyret-highlight"><tt class="pyretexpr">false</tt></span>). Ties are   broken by the order in which the element is present in the initial array.</p><p>  </p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  a = [raw-array: "let", "us", "go", "then", "you", "and", "i"]
+
+  asc = raw-array-sort-by(a, string-length, true)
+  asc is=~ [raw-array: "i", "us", "go", "let", "you", "and", "then"]
+  asc is-not=~ a
+
+  desc = raw-array-sort-by(a, string-length, false)
+  desc is=~ [raw-array: "then", "let", "you", "and", "us", "go", "i"]
+
+  a is=~ [raw-array: "let", "us", "go", "then", "you", "and", "i"]
+end</pre></div><p>  </p><div><p><span><a name="raw-array-fold"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-fold">raw-array-fold</a> :: <span>(<span><span class="pyret-content">f :: <span>(<span>b, a, <a href="../trove/globals.html#Number">Number</a> -&gt; b</span>)</span></span>, <span class="pyret-content">init :: b</span>, <span class="pyret-content">array :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span>, <span class="pyret-content">start-index :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; b</span></pre></div><p>  Combines the elements in the array with a function that accumulates each   element with an intermediate result.   The numeric argument to   the accumulator is the index of the current element.</p><p>  Similar to <a href="../trove/lists.html#fold_n"><span class="pyret-highlight"><tt class="pyretexpr">fold_n</tt></span></a>.</p><p>  </p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  a = [raw-array: "a", "b", "c"]
+  str = for raw-array-fold(str from "", elt from a, i from 0):
+    if i &lt; (raw-array-length(a) - 1):
+      str + elt + ": " + tostring(i) + ", "
+    else:
+      str + elt + ": " + tostring(i)
+    end
+  end
+  str is "a: 0, b: 1, c: 2"
+end</pre></div><p>  </p><div><p><span><a name="raw-array-concat"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-concat">raw-array-concat</a> :: <span>(<span><span class="pyret-content">array1 :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span>, <span class="pyret-content">array2 :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>  Creates a new array with all the elements of <span class="pyret-highlight"><tt class="pyretexpr">array1</tt></span> followed by all   the elements of <span class="pyret-highlight"><tt class="pyretexpr">array2</tt></span>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  a1 = [raw-array: 5, 6, 7]
+  a2 = [raw-array: 0, 3, 99, -1, 7]
+
+  c = raw-array-concat(a1, a2)
+  c is=~ [raw-array: 5, 6, 7, 0, 3, 99, -1, 7]
+
+  a1 is=~ [raw-array: 5, 6, 7]
+  a2 is=~ [raw-array: 0, 3, 99, -1, 7]
+end</pre></div><p>  </p><div><p><span><a name="raw-array-duplicate"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-duplicate">raw-array-duplicate</a> :: <span>(<span><span class="pyret-content">array :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>  Returns a copy of the given array, such that corresponding elements in the   result are <a href="../missing_gloss"><span class="pyret-highlight"><tt class="pyretexpr">eq-fun-identical</tt></span></a> to those in the source array.</p><p>  </p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  a = [raw-array: 1, 2, 3]
+  b = raw-array-duplicate(a)
+  a is=~ b
+  b is=~ a
+
+  a is&lt;=&gt; a
+  a is-not&lt;=&gt; b
+  b is-not&lt;=&gt; a
+  b is&lt;=&gt; b
+
+  raw-array-set(a, 1, 1)
+
+  raw-array-get(a, 1) is 1
+  raw-array-get(b, 1) is 2
+
+  c = [raw-array: {1; 2}, {3; 4}]
+  d = raw-array-duplicate(c)
+
+  c is-not&lt;=&gt; d
+  raw-array-get(c, 0) is&lt;=&gt; raw-array-get(d, 0)
+  raw-array-get(c, 1) is&lt;=&gt; raw-array-get(d, 1)
+end</pre></div></div></root>
+    <hr/>
+    The current page is builtin/raw-arrays.html.
+    The previous page is <a href = "../libraries-internal.html">../libraries-internal.html</a>.
+    The next page is <a href = "../trove/data-source.html">../trove/data-source.html</a>.
+    </div>
+  </body>
+</html>

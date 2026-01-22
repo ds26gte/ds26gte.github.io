@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script type="module" src="../embed-api.js"></script>
+  <script src="../codemirror.js"></script>
+  <script src="../runmode.js"></script>
+  <script src="../pyret.js"></script>
+  <script src="../hilite.js"></script>
+  <link rel="stylesheet" type="text/css" href="../codemirror.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../pyret.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../styles.css" title="default"/>
+  <head>
+    <title>Modules</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><div><h1 id="modules" toclevel="1" tocentry="yes">Modules</h1><p><span></span> As programs get larger, it becomes intractable to manage the entirety of a program in a single file: we often want to separate programs into independent pieces.  Doing so has a number of benefits, giving us the abilities to:</p><ul><li>provide library code to students (unseen to them).</li><li>logically separate responsibilities of a program into different files to make it easier for programmers to understand the code’s layout.</li><li>provide a boundary over which it’s relatively simple to substitute one implementation of a library for another.</li><li>provide a boundary where the two sides may be implemented in different languages, but can still share values.</li><li>provide only a subset of defined names to a different part of a program.</li><li>manage names when the same (good) names may be in use in different parts of the same program.</li><li>support incremental compilation.</li></ul><p>Not all of these require a module system, but a module system can help with all of them, and these use cases (and others) motivate Pyret’s.</p><p>This section describes the components of Pyret’s module system and how to use it.</p><h2 id="s:modules:quick-start" toclevel="2" tocentry="yes">Quick Start</h2><p>The shortest way to get started using the module system is to understand three key ideas:</p><ul><li>How to <i>provide</i> names from a module</li><li>How to tell Pyret to <i>locate</i> one module from a different module</li><li>How to <i>include</i> names from a located module</li></ul><p>Here’s a simple example that demonstrates all three.</p><p>In a file called <span class="pyret-highlight"><tt class="pyretexpr">list-helpers.arr</tt></span>:</p><pre class="pyret-highlight">provide: * end
+
+concat :: &lt;A&gt; List&lt;A&gt;, List&lt;A&gt; -&gt; List&lt;A&gt;
+fun concat(l1, l2):
+  l.append(l1, l2)
+end</pre><p>In a file in the same directory called <span class="pyret-highlight"><tt class="pyretexpr">list-user.arr</tt></span>:</p><pre class="pyret-highlight">include file("list-helpers.arr")
+
+check:
+  concat([list: 1, 2], [list: 3, 4]) is [list: 1, 2, 3, 4]
+end</pre><p>The <span class="pyret-highlight"><tt class="pyretexpr">provide: * end</tt></span> declaration tells Pyret to make <i>all</i> the names of functions and values defined in the <span class="pyret-highlight"><tt class="pyretexpr">list-helpers.arr</tt></span> module available to any module that imports it. The <span class="pyret-highlight"><tt class="pyretexpr">include file(“list-helper.arr”)</tt></span> declaration tells Pyret to find the module at the path given in quotes, and then make all the names it provides available in the top-level of the module the <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span> appears in.</p><p>In general, <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">provide: * end</tt></span> are handy ways to provide a collection of definitions to another context across modules.</p><p>Note that <span class="pyret-highlight"><tt class="pyretexpr">provide: * end</tt></span> only provides <i>values</i>.  If you want to provide <i>type definitions</i>, then you may use a related declaration:</p><p>In a file called <span class="pyret-highlight"><tt class="pyretexpr">mypos-provider.arr</tt></span>:</p><pre class="pyret-highlight">provide:
+  *,       # This line provides `pos2d`, `pos3d`, `is-pos2d` and `is-pos3d`
+  type *   # This line provides the type named `MyPos`
+end
+
+data MyPos:
+  | pos2d(x, y)
+  | pos3d(x, y, z)
+end
+
+favorite-spot = pos3d(3, 4, 5)</pre><p>In a file in the same directory called <span class="pyret-highlight"><tt class="pyretexpr">mypos-user.arr</tt></span>:</p><pre class="pyret-highlight">include file("mypos-provider.arr")
+
+cases(MyPos) favorite-spot:
+  | pos2d(x, y) =&gt; "Two dimensions"
+  | pos3d(x, y, z) =&gt; "Three dimensions"
+end</pre><p>The <span class="pyret-highlight"><tt class="pyretexpr">type *</tt></span> declaration is needed for the <span class="pyret-highlight"><tt class="pyretexpr">cases</tt></span> expression to recognize the name <span class="pyret-highlight"><tt class="pyretexpr">MyPos</tt></span> as a type name.</p><h2 id="s:modules:finding-modules" toclevel="2" tocentry="yes">Finding Modules</h2><p>Each <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span> or <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span> statement indicates a <deftech>dependency</deftech> of the current module on some other module.  The syntax of each <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span> statement tells Pyret how to find the module.</p><p>There are currently five types of <tech>dependencies</tech> supported, though the compiler can be configured to support some, all, or other types of <tech>dependency</tech>; for example, the <a href="UnDeFiNeD"><span class="pyret-highlight"><tt class="pyretexpr">gdrive</tt></span>  dependencies</a> (below) only work in <url>code.pyret.org</url>, where it is assumed the user is authenticated to Google Drive.</p><p>The meaning of the currently supported forms are:</p><div><p><span><a name="&lt;id-import&gt;"></a></span></p><pre class="pyret-display">&lt;id-of-builtin&gt;</pre><pre class="good-ex pyret-highlight">include string-dict</pre><p>Imports the given builtin module. Many built-in modules are documented in this documentation.</p></div><div><p><span><a name="file"></a></span></p><pre class="pyret-display">file(&lt;path&gt;)</pre><pre class="good-ex pyret-highlight">include file("path/to/a/file.arr")</pre><p>Find the module at the given <span class="pyret-highlight"><tt class="pyretexpr">path</tt></span>. If <span class="pyret-highlight"><tt class="pyretexpr">path</tt></span> is relative, it is interpreted relative to the module the import statement appears in.</p></div><div><p><span><a name="js-file"></a></span></p><pre class="pyret-display">js-file(&lt;path&gt;)</pre><pre class="good-ex pyret-highlight">include js-file("path/to/a/file.arr.js")</pre><p>Like <span class="pyret-highlight"><tt class="pyretexpr">file</tt></span>, but expects the contents of the file to contain a definition in <a href="internals/modules.html#s:single-module">JavaScript module format</a>.</p></div><div><p><span><a name="my-gdrive"></a></span></p><pre class="pyret-display">my-gdrive(&lt;name&gt;)</pre><pre class="good-ex pyret-highlight">include my-gdrive("stored-in-gdrive.arr")</pre><p>Looks for a Pyret file with the given filename in the user’s <span class="pyret-highlight"><tt class="pyretexpr">code.pyret.org/</tt></span> directory in the root of Google Drive.</p></div><div><p><span><a name="shared-gdrive"></a></span></p><pre class="pyret-display">shared-gdrive(&lt;name&gt;, &lt;id&gt;)</pre><pre class="good-ex pyret-highlight">include shared-gdrive("public-in-gdrive.arr", "ABCDEF12345")</pre><p>Looks for a Pyret file with the given id in Google Drive. The file must have the sharing settings set to “Public on the Web”. The name must match the actual name of the underlying file. These dependencies can be most easily generated by using the “Publish” menu from <span class="pyret-highlight"><tt class="pyretexpr">code.pyret.org</tt></span></p></div><div><p><span><a name="url"></a></span></p><pre class="pyret-display">url(&lt;url&gt;)</pre><pre class="good-ex pyret-highlight">import url("https://raw.githubusercontent.com/brownplt/pyret-lang/refs/heads/horizon/tests/io-tests/tests/library-code.arr") as L</pre><p>Look for a Pyret file at the given URL. For loading files from URLs in the browser (e.g. on code.pyret.org), the server must support <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS#simple_requests">simple CORS</a>. From the command-line, any publicly available URL that serves Pyret code in a text/plain response is an appropriate target.</p><p>Browsers, code.pyret.org, and command-line Pyret <i>may</i> cache the result of fetching a <span class="pyret-highlight"><tt class="pyretexpr">url</tt></span> import in memory or on disk. As a result, <span class="pyret-highlight"><tt class="pyretexpr">url</tt></span> imports are <i>not</i> recommended for resources that may frequently update during development: use <span class="pyret-highlight"><tt class="pyretexpr">url-file</tt></span> for this. These are intended as easy-to-use import links for starter code or library code for students who will likely not need to see or change the code at the link.</p></div><div><p><span><a name="url-file"></a></span></p><pre class="pyret-display">url-file(&lt;url&gt;, &lt;rel-path&gt;)</pre><pre class="good-ex pyret-highlight">import url("https://raw.githubusercontent.com/brownplt/pyret-lang/refs/heads/horizon/tests/io-tests/tests/", "library-code.arr") as L</pre><p>If a file is present at the given <span class="pyret-highlight"><tt class="pyretexpr">&lt;rel-path&gt;</tt></span>, the import acts just like a <span class="pyret-highlight"><tt class="pyretexpr">file</tt></span> import with the given <span class="pyret-highlight"><tt class="pyretexpr">&lt;rel-path&gt;</tt></span> as the path. If no file is present at this path, the import acts just like a <span class="pyret-highlight"><tt class="pyretexpr">url</tt></span> import with the concatenation of <span class="pyret-highlight"><tt class="pyretexpr">&lt;url&gt;</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">&lt;rel-path&gt;</tt></span> as the URL.</p><p>The intended use of <span class="pyret-highlight"><tt class="pyretexpr">url-file</tt></span> is for developing starter code and library code that students will access through URLs, while allowing the assignment author to have a quick development process. Edits to the corresponding file will be immediately seen on the next run when <span class="pyret-highlight"><tt class="pyretexpr">local-only</tt></span> or <span class="pyret-highlight"><tt class="pyretexpr">local-if-present</tt></span> is set, avoiding the need to continuously publish in order to see updates. In addition, in contrast to using plain <span class="pyret-highlight"><tt class="pyretexpr">file</tt></span> imports, the existing version of the program can be directly published without needing to, for example, change all <span class="pyret-highlight"><tt class="pyretexpr">file</tt></span> imports to <span class="pyret-highlight"><tt class="pyretexpr">url</tt></span> imports.</p><p>The default behavior can be overridden with options:</p><ul><li><span class="pyret-highlight"><tt class="pyretexpr">remote-only</tt></span>: The import acts just like a <span class="pyret-highlight"><tt class="pyretexpr">url</tt></span> import with the concatenation of <span class="pyret-highlight"><tt class="pyretexpr">&lt;url&gt;</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">&lt;rel-path&gt;</tt></span> as the URL.</li><li><span class="pyret-highlight"><tt class="pyretexpr">local-only</tt></span>: The import acts just like a <span class="pyret-highlight"><tt class="pyretexpr">file</tt></span> import with the given <span class="pyret-highlight"><tt class="pyretexpr">&lt;rel-path&gt;</tt></span> as the path.</li><li><span class="pyret-highlight"><tt class="pyretexpr">local-if-present</tt></span>: </li></ul><p>At the command-line, the <span class="pyret-highlight"><tt class="pyretexpr">–url-file-mode</tt></span> option can be one of these, and in the Visual Studio Code Extension, this option can be set from the Pyret settings menu.</p></div><h2 id="Detailed-Control-of-Names" toclevel="2" tocentry="yes">Detailed Control of Names</h2><p>In larger programs, or in more sophisticated libraries for students, it is often useful to have quite precise control over which names are provided and included across module boundaries. A programmer may want to provide only a subset of the names defined in a module to maintain an abstraction, or to avoid cluttering namespaces with definitions intended only for use internal to a module.</p><p>To this end, Pyret supports several forms for controlling names of various kinds:</p><ul><li><a href="lang/modules.html#s:modules:import">Importing another module and referring   to it by name</a>.  This approach for name control is simple but syntactically heavyweight on the importing side.</li><li><a href="lang/modules.html#s:modules:provide-fewer">More precisely exporting only a   subset of the values defined in a module</a></li><li><a href="lang/modules.html#s:modules:provide-other">Providing other kinds of   definitions besides values</a></li><li><a href="lang/modules.html#s:modules:provide-fewer">More precisely importing only a   subset of the values provided by a module</a></li><li><a href="lang/modules.html#s:modules:provide-other">Importing other kinds of   definitions besides values</a></li></ul><h2 id="s:modules:import" toclevel="2" tocentry="yes"><span class="pyret-highlight"><tt class="pyretexpr">import</tt></span> and Module Identifiers</h2><p>In <a href="lang/modules.html#s:modules:quick-start">Quick Start</a> we showed <span class="pyret-highlight"><tt class="pyretexpr">provide: * end</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span> <techlink key="dependency"><i>&lt;dependency&gt;</i></techlink> as a quick way to get names from one module to another. This is convenient and often a good choice. However, there are situations where this is inadequate. For example, what if we wish to use functions from two different list-helper libraries, but some of the names overlap?</p><p>Consider:</p><pre class="pyret-highlight"># list-helpers.arr
+provide: * end
+fun concat(l1, l2): l1.append(l2) end
+fun every-other(l): ... end</pre><pre class="pyret-highlight"># list-helpers2.arr
+provide: * end
+concat :: &lt;A&gt; List&lt;List&lt;A&gt;&gt; -&gt; List&lt;A&gt;
+fun concat(list-of-lists):
+  for fold(acc from empty, l from list-of-lists): acc.append(l) end
+end
+fun is-odd-length(l): ... end</pre><pre class="pyret-highlight"># in a separate file
+include file("list-helpers.arr")
+include file("list-helpers2.arr")
+
+concat(???)</pre><p>In this example, the name <span class="pyret-highlight"><tt class="pyretexpr">concat</tt></span> could have one of two meanings. Since this is ambiguous, this program results in an error that reports the conflict between names.</p><p>Neither of the list-helpers modules is <i>wrong</i>: they each define a function named <span class="pyret-highlight"><tt class="pyretexpr">concat</tt></span> that is internally consistent within each helper module.  Instead, the client module that uses both helpers simply needs more control in order to use the right behavior from each. One way to get this control is to use <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span>, rather than <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span>, which allows the programmer to give a name to the imported module. This name can then be used with <span class="pyret-highlight"><tt class="pyretexpr">.</tt></span> to refer to the names within the imported module.</p><pre class="pyret-highlight">import file("list-helpers.arr") as LH1
+import file("list-helpers2.arr") as LH2
+
+check:
+  LH1.concat([list: 1, 2], [list: 3, 4]) is [list: 1, 2, 3, 4]
+  LH2.concat([list: [list: 1, 2], [list: 3]]) is [list: 1, 2, 3]
+end</pre><p>Using <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span> to define a module identifier is a simple way to unambiguously refer to individual modules’ exported names, and avoids conflicting names. It is always a straightforward way to resolve these ambiguities.</p><p>Using <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span> and module ids comes with some downsides:</p><ul><li>It introduces verbosity, by forcing programmers to type <span class="pyret-highlight"><tt class="pyretexpr">LH1.</tt></span> every time they want to use a name from that module.</li><li>In teaching settings, it forces teachers to introduce the syntactic form <span class="pyret-highlight"><tt class="pyretexpr">a.b</tt></span> before it’s strictly necessary, causing a needless curricular dependency.</li></ul><p>For situations where these issues become too onerous, Pyret provides more ways to control names.</p><h2 id="s:modules:provide-fewer" toclevel="2" tocentry="yes">Providing Fewer (and More) Names</h2><p>It is not required that a module provide <i>all</i> of its defined names. To provide fewer names than <span class="pyret-highlight"><tt class="pyretexpr">provide: * end</tt></span>, a module can use one or more <deftech>provide blocks</deftech>. The overall set of features allowed is quite broad, and simple examples follow:</p><p><bnf><p>&PyretModules;COLON: ”:” STAR: “*” AS: “as” PARENSPACE: “(” RPAREN: ”)” COMMA: ”,” TYPE: “type” DATA: “data” MODULE: “module” DOT: ”.” HIDING: “hiding” END: “end” PROVIDECOLON: “provide:” PROVIDE: “provide” FROM: “from” provide-block: PROVIDECOLON [provide-spec (COMMA provide-spec)* [COMMA]] END | ...</p><p>provide-spec: provide-value-spec | ...</p><p>name-spec: STAR [hiding-spec] | module-ref | module-ref AS NAME</p><p>provide-value-spec: name-spec</p><p>hiding-spec: HIDING PARENSPACE [(NAME COMMA)* NAME] RPAREN</p><p>module-ref: (NAME DOT)* NAME</p></bnf></p><p>A <tech>provide block</tech> contains one or more <deftech>provide specifications</deftech> indicating what to names supply, and any module may specify zero or more provide blocks as needed.  For now we focus on just one category of provide specifications, which provide names of values (functions, variables, etc.).</p><ul><li><p>A module might provide all of its values:</p><pre class="pyret-highlight">provide:
+  *
+end</pre></li><li><p>A module might define several names of values, and only provide a few:</p><pre class="pyret-highlight"># A module that includes this one will only see concat and is-odd-length, and
+# won't see concat-helper because it is not provided
+provide:
+  concat,
+  is-odd-length
+end
+
+fun concat-helper(element, lst): ... end
+fun concat(list1, list2): ... end
+fun is-odd-length(l): ... end</pre></li><li><p>A module might provide all of its values and exclude a few:</p><pre class="pyret-highlight"># This module provides the same exports as the one above
+provide:
+  * hiding (concat-helper)
+end
+
+fun concat-helper(element, lst): ... end
+fun concat(list1, list2): ... end
+fun is-odd-length(l): ... end</pre></li><li><p>A module might rename some of the values it exports:</p><pre class="pyret-highlight"># This module provides two names: is-odd-length and append
+provide:
+  * hiding (concat-helper, concat),
+  concat as append
+end
+
+fun concat-helper(element, lst): ... end
+fun concat(list1, list2): ... end
+fun is-odd-length(l): ... end</pre></li></ul><h3 id="Re-exporting-values" toclevel="3" tocentry="yes">Re-exporting values</h3><p>A module can also re-export values that it imported, and it can do so using module ids:</p><p><bnf>&PyretModules;PROVIDE: “provide” FROM: “from” END: “end” COLON: ”:” COMMA: ”,” provide-block: ... | PROVIDE FROM module-ref COLON [provide-spec (COMMA provide-spec)* [COMMA]] END</bnf></p><p>For example, this module exports both one name it defines, and all the names from <span class="pyret-highlight"><tt class="pyretexpr">string-dict</tt></span>:</p><pre class="pyret-highlight">import string-dict as SD
+provide from SD: * end
+provide: my-string-dict-helper end
+fun my-string-dict-helper(): ... end</pre><p>Combining provides from multiple modules can be an effective way to put together a library for students. For example, an introductory course in data science may benefit from a helper library that gives access to the image, chart, and table libraries:</p><pre class="pyret-highlight">import tables as T
+import chart as C
+import image as I
+provide from T: * end
+provide from C: * end
+provide from I: * end</pre><p>A student library that <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span>s this module would have access to all of the names from these three modules.</p><h2 id="s:modules:provide-other" toclevel="2" tocentry="yes">Providing more than just values</h2><p>Modules can give names to other things besides values: they may define new types or new datatypes, or they may import another module and give it a name. The syntax above can be used to provide them as well.</p><h3 id="Types" toclevel="3" tocentry="yes">Types</h3><p><bnf><p>&PyretModules;COLON: ”:” STAR: “*” AS: “as” PARENSPACE: “(” RPAREN: ”)” COMMA: ”,” TYPE: “type” DATA: “data” MODULE: “module” DOT: ”.” HIDING: “hiding” END: “end” PROVIDECOLON: “provide:” PROVIDE: “provide” FROM: “from”</p><p>provide-spec: ... | provide-type-spec | ... provide-type-spec: TYPE name-spec</p></bnf></p><p>Providing a <a href="lang/forms.html#s:type-decl">type definition</a> is analogous to providing a value definition:</p><pre class="pyret-highlight"># A module that includes this one will see the name NumPair as a type
+provide:
+  type NumPair
+end
+
+type NumPair = {Number; Number}</pre><p>Just as with <prod-link>&PyretModules;provide-value-spec</prod-link> above, a <prod-link>&PyretModules;provide-type-spec</prod-link> can use <span class="pyret-highlight"><tt class="pyretexpr">type *</tt></span> as shorthand to supply all of its types, optionally <span class="pyret-highlight"><tt class="pyretexpr">hiding</tt></span> some of them, or renaming some types.</p><h3 id="Modules" toclevel="3" tocentry="yes">Modules</h3><p><bnf><p>&PyretModules;COLON: ”:” STAR: “*” AS: “as” PARENSPACE: “(” RPAREN: ”)” COMMA: ”,” TYPE: “type” DATA: “data” MODULE: “module” DOT: ”.” HIDING: “hiding” END: “end” PROVIDECOLON: “provide:” PROVIDE: “provide” FROM: “from”</p><p>provide-spec: ... | provide-module-spec | ... provide-module-spec: MODULE name-spec</p></bnf></p><p>Providing a module id is also quite similar</p><pre class="pyret-highlight"># A module that includes this one will see the name SD as a module id,
+# just as if it had written `import string-dict as SD` itself.
+provide:
+  module SD
+end
+
+import string-dict as SD</pre><p>The ability to re-provide imported modules is useful for large programs, where a single file can conveniently give access to all the submodules of the program.</p><h3 id="Data-definitions" toclevel="3" tocentry="yes">Data definitions</h3><p><bnf><p>&PyretModules;COLON: ”:” STAR: “*” AS: “as” PARENSPACE: “(” RPAREN: ”)” COMMA: ”,” TYPE: “type” DATA: “data” MODULE: “module” DOT: ”.” HIDING: “hiding” END: “end” PROVIDECOLON: “provide:” PROVIDE: “provide” FROM: “from”</p><p>provide-spec: ... | provide-data-spec provide-data-spec: DATA data-name-spec [hiding-spec] data-name-spec: STAR | module-ref</p></bnf></p><p>Providing a <a href="lang/forms.html#s:data-decl">data definition</a> is more sophisticated, since data definitions implicitly define types and values.  The following two programs are equivalent in meaning:</p><pre class="pyret-highlight">provide:
+  data MyPosn
+end
+
+data MyPosn:
+  | pos2d(x, y)
+  | pos3d(x, y, z)
+end</pre><p>means the same thing as the much longer</p><pre class="pyret-highlight">provide:
+  # constructors
+  pos2d, pos3d,
+  # type tester
+  is-MyPosn,
+  # variant testers
+  is-pos2d, is-pos3d,
+  # the type declaration itself
+  type MyPosn
+end
+
+data MyPosn:
+  | pos2d(x, y)
+  | pos3d(x, y, z)
+end</pre><p>Similarly to how we could hide some names before, providing data definitions also permits hiding names:</p><pre class="pyret-highlight">provide:
+  data MyPosn hiding (pos2d, pos3d)
+end
+
+data MyPosn:
+  | pos2d(x, y)
+  | pos3d(x, y, z)
+end</pre><p>will not provide the constructors for this data definition.  Clients will therefore not be able to construct new values of this data type, but they will still be able to manipulate any values they do receive.  This can be useful in combination with providing <i>other</i> functions that do construct these values.  For instance, the following program will only allow clients to construct points with positive coordinates, by combining providing data, hiding some elements of it, and providing other values and renaming them:</p><pre class="pyret-highlight">provide:
+  data MyPosn hiding (pos2d, pos3d)
+  smart-pos2d as pos2d,
+  smart-pos3d as pos3d
+end
+
+data MyPosn:
+  | pos2d(x, y)
+  | pos3d(x, y, z)
+end
+
+fun smart-pos2d(x, y):
+  pos2d(num-max(x, 0), num-max(y, 0))
+end
+fun smart-pos3d(x, y, z):
+  pos2d(num-max(x, 0), num-max(y, 0), num-max(z, 0))
+end</pre><p>Clients of this module will see the “smart” versions of these functions with the same names as the constructors, and will therefore never be able to construct invalid values.</p><p>As with values and types, a module may use <span class="pyret-highlight"><tt class="pyretexpr">data *</tt></span> as a shorthand to export all the data definitions it contains.  <b>Note</b> that trying to write <span class="pyret-highlight"><tt class="pyretexpr">data D1 as D2</tt></span> is not allowed syntax. You could export with a different name for the type alias (e.g. <span class="pyret-highlight"><tt class="pyretexpr">type D1 as D2</tt></span>) if you want to refer to one type with a different name in another context.</p><h2 id="s:modules:include-fewer" toclevel="2" tocentry="yes">Including Fewer (and More) Names</h2><p>There are forms for <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span> with the same structure as <span class="pyret-highlight"><tt class="pyretexpr">provide</tt></span> for including particular names from other modules. All <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span> forms take a <i>module id</i> and a list of specifications of names to include. (That module id must first have been <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span>ed and given a name.)</p><p><bnf><p>&PyretModules;COLON: ”:” STAR: “*” AS: “as” LPAREN: “(” RPAREN: ”)” COMMA: ”,” TYPE: “type” DATA: “data” MODULE: “module” DOT: ”.” HIDING: “hiding” END: “end” INCLUDECOLON: “include:” INCLUDE: “include” IMPORT: “import” FROM: “from”</p><p>import-stmt: INCLUDE import-source            | INCLUDE FROM module-ref COLON [include-spec (COMMA include-spec)* [COMMA]] END            | IMPORT import-source AS NAME            | IMPORT NAME (COMMA NAME)*  FROM import-source import-source: import-special | import-name import-special: NAME LPAREN STRING (COMMA STRING)* RPAREN import-name: NAME</p><p>include-spec: include-name-spec | include-type-spec | include-data-spec | include-module-spec</p><p>include-name-spec: name-spec include-type-spec: TYPE name-spec include-data-spec: DATA data-name-spec [hiding-spec] include-module-spec: MODULE name-spec</p></bnf></p><p>Some examples:</p><pre class="pyret-highlight"># This program puts just two names from the builtin string-dict module into
+# scope.
+import string-dict as SD
+include from SD:
+  mutable-string-dict,
+  make-mutable-string-dict
+end</pre><pre class="pyret-highlight"># This program imports and renames two values from the string-dict module
+import string-dict as SD
+include from SD:
+  mutable-string-dict as dict,
+  make-mutable-string-dict as make-dict
+end</pre><pre class="pyret-highlight"># This program includes all the value names from the string-dict module
+import string-dict as SD
+include from SD: * end</pre><p>It is an error to include the same name with different meanings. For example, we could not include the <span class="pyret-highlight"><tt class="pyretexpr">map</tt></span> function from the <span class="pyret-highlight"><tt class="pyretexpr">lists</tt></span> library <i>and</i> import the <span class="pyret-highlight"><tt class="pyretexpr">string-dict</tt></span> constructor as <span class="pyret-highlight"><tt class="pyretexpr">map</tt></span>:</p><pre class="bad-ex pyret-highlight">import lists as L
+import string-dict as SD
+include from L: map end
+include from SD: mutable-string-dict as map end</pre><p>However, it is <i>not</i> an error to include the same name multiple times if it has the same meaning:</p><pre class="good-ex pyret-highlight"># in "student-helpers.arr"
+provide from L: map, filter, fold end
+import lists as L
+
+# in "student-code.arr"
+include file("student-helpers.arr")
+import lists as L
+include from L: map end
+# map included again here, but it's OK because the other map is the same</pre><h2 id="s:modules:import-other" toclevel="2" tocentry="yes">Importing more than just values</h2><p>Just as we can provide types, data definitions, and module ids, so too we can import them or include them from other modules.  The syntax is analogous to the providing syntax: a client module may write</p><pre class="pyret-highlight">import string-dict as SD
+include from SD:
+  *         # includes all values defined in the string-dict module
+  type *    # includes all types defined in the string-dict module
+  data *    # includes all data definitions from the string-dict module
+  module *  # includes any modules provided by the string-dict module
+end</pre><h2 id="Converting-between-shorthand-and-expanded-syntax" toclevel="2" tocentry="yes">Converting between shorthand and expanded syntax</h2><p>Pyret used to have, and supports for backwards compatibility, a few other syntaxes for modules. The short guide below shows how to convert from this old syntax to the new. Of the old syntax, we only recommend the continued use of <span class="pyret-highlight"><tt class="pyretexpr">include &lt;some-module&gt;</tt></span>, which is a convenient first line of many student-facing starter files.</p><table class="table table-sm"><tbody><tr><td>Shorthand syntax</td><td>Expanded form</td></tr><tr><td><pre class="pyret-highlight">provide *</pre></td><td><pre class="pyret-highlight">provide:
+  *
+end</pre></td></tr><tr><td><pre class="pyret-highlight">provide-types *</pre></td><td><pre class="pyret-highlight">provide:
+  type *
+end</pre></td></tr><tr><td><pre class="pyret-highlight">include &lt;some-module&gt;</pre></td><td><pre class="pyret-highlight">import &lt;some-module&gt; as &lt;some-name&gt;
+include from &lt;some-name&gt;:
+  *,
+  type *,
+  data *,
+  module *
+end</pre></td></tr><tr><td><pre class="pyret-highlight">import name1, ... from &lt;some-module&gt;</pre></td><td><pre class="pyret-highlight">import &lt;some-module&gt; as &lt;some-name&gt;
+include from &lt;some-name&gt;:
+  name1, ...
+end</pre></td></tr></tbody></table></div></root>
+    <hr/>
+    The current page is lang/modules.html.
+    The previous page is <a href = "../lang/op-precedence.html">../lang/op-precedence.html</a>.
+    The next page is <a href = "../lang/use.html">../lang/use.html</a>.
+    </div>
+  </body>
+</html>

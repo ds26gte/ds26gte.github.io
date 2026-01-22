@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script type="module" src="../embed-api.js"></script>
+  <script src="../codemirror.js"></script>
+  <script src="../runmode.js"></script>
+  <script src="../pyret.js"></script>
+  <script src="../hilite.js"></script>
+  <link rel="stylesheet" type="text/css" href="../codemirror.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../pyret.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../styles.css" title="default"/>
+  <head>
+    <title>s-exp-structs</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><div><h1 id="s-exp-structs" toclevel="1" tocentry="yes">s-exp-structs</h1><div><p>Usage:</p><pre class="pyret-highlight">include s-exp-structs</pre><pre class="pyret-highlight">import s-exp-structs as ...</pre></div><h2 id="S-Exp_DataTypes" toclevel="2" tocentry="yes">The S-Exp Datatype</h2><p>This datatype defines the result of parsing s-expressions.  See <a href="../trove/s-exp.html#read-s-exp">read-s-exp</a> for more details and examples.</p><pre class="pyret-display"><span><a name="S-Exp"></a></span><span>data <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></span>
+<div><tt>   | <span><a href="../trove/s-exp-structs.html#s-list">s-list</a>(<span>exps :: <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></span>&gt;</span></span>)</span></tt>
+<tt>   | <span><a href="../trove/s-exp-structs.html#s-num">s-num</a>(<span>n :: <a href="../trove/globals.html#Number">Number</a></span>)</span></tt>
+<tt>   | <span><a href="../trove/s-exp-structs.html#s-str">s-str</a>(<span>s :: <a href="../trove/globals.html#String">String</a></span>)</span></tt>
+<tt>   | <span><a href="../trove/s-exp-structs.html#s-sym">s-sym</a>(<span>s :: <a href="../trove/globals.html#String">String</a></span>)</span></tt></div><tt>end</tt></pre><div class="insetpara nested"><div><p><span><a name="s-list"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp-structs.html#s-list">s-list</a> :: (<span>exps :: <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></span>&gt;</span></span>) -&gt; <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></pre><p></p></div><div><p><span><a name="s-num"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp-structs.html#s-num">s-num</a> :: (<span>n :: <a href="../trove/globals.html#Number">Number</a></span>) -&gt; <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></pre><p></p></div><div><p><span><a name="s-str"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp-structs.html#s-str">s-str</a> :: (<span>s :: <a href="../trove/globals.html#String">String</a></span>) -&gt; <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></pre><p></p></div><div><p><span><a name="s-sym"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp-structs.html#s-sym">s-sym</a> :: (<span>s :: <a href="../trove/globals.html#String">String</a></span>) -&gt; <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></pre><p></p></div><div><p><span><a name="is-s-list"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp-structs.html#is-s-list">is-s-list</a> :: unspecified_contract</pre></div><div><p><span><a name="is-s-num"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp-structs.html#is-s-num">is-s-num</a> :: unspecified_contract</pre></div><div><p><span><a name="is-s-str"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp-structs.html#is-s-str">is-s-str</a> :: unspecified_contract</pre></div><div><p><span><a name="is-s-sym"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp-structs.html#is-s-sym">is-s-sym</a> :: unspecified_contract</pre></div></div></div></root>
+    <hr/>
+    The current page is trove/s-exp-structs.html.
+    The previous page is <a href = "../trove/s-exp.html">../trove/s-exp.html</a>.
+    The next page is <a href = "../style-guide.html">../style-guide.html</a>.
+    </div>
+  </body>
+</html>

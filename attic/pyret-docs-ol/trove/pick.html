@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script type="module" src="../embed-api.js"></script>
+  <script src="../codemirror.js"></script>
+  <script src="../runmode.js"></script>
+  <script src="../pyret.js"></script>
+  <script src="../hilite.js"></script>
+  <link rel="stylesheet" type="text/css" href="../codemirror.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../pyret.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../styles.css" title="default"/>
+  <head>
+    <title>pick</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><div><h1 id="pick" toclevel="1" tocentry="yes">pick</h1><div><p>Usage:</p><pre class="pyret-highlight">include pick</pre><pre class="pyret-highlight">import pick as ...</pre></div><p>  </p><h2 id="The-Pick-Datatype" toclevel="2" tocentry="yes">The Pick Datatype</h2><p>  </p><pre class="pyret-display"><span><a name="Pick"></a></span><span>data <a href="../trove/pick.html#Pick">Pick</a>&lt;a, b&gt;</span>
+<div><tt>   | <span>pick-none</span></tt>
+<tt>   | <span><a href="../trove/pick.html#pick-some">pick-some</a>(<span>elt :: a</span>, <span>rest :: b</span>)</span></tt></div><tt>end</tt></pre><p>  </p><div class="insetpara nested"><div><p><span><a name="pick-none"></a></span></p><pre class="pyret-display">pick-none :: <span><a href="../trove/pick.html#Pick">Pick</a>&lt;<span>a, b</span>&gt;</span></pre></div><div><p><span><a name="pick-some"></a></span></p><pre class="pyret-display"><a href="../trove/pick.html#pick-some">pick-some</a> :: (<span>elt :: a</span>, <span>rest :: b</span>) -&gt; <span><a href="../trove/pick.html#Pick">Pick</a>&lt;<span>a, b</span>&gt;</span></pre><p></p></div><div><p><span><a name="is-pick-none"></a></span></p><pre class="pyret-display"><a href="../trove/pick.html#is-pick-none">is-pick-none</a> :: <span><span class="pyret-content">(val :: Any)</span> -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div><div><p><span><a name="is-pick-some"></a></span></p><pre class="pyret-display"><a href="../trove/pick.html#is-pick-some">is-pick-some</a> :: <span><span class="pyret-content">(val :: Any)</span> -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div></div><p>The primary use of <span class="pyret-highlight"><tt class="pyretexpr">pick</tt></span> is as a way of obtaining values from sets. See the documentation of <a href="../trove/sets.html#.pick">.pick</a>.</p><p>However, nothing precludes other datatypes from also implementing the <span class="pyret-highlight"><tt class="pyretexpr">Pick</tt></span> interface. For instance, here’s a simple queue definition that provides a <span class="pyret-highlight"><tt class="pyretexpr">pick</tt></span> method:</p><pre class="pyret-highlight">import pick as P
+
+data Queue&lt;T&gt;:
+  | queue(elts :: List&lt;T&gt;) with:
+    method pick(self):
+      cases (List) self.elts:
+        | empty =&gt; P.pick-none
+        | link(f, r) =&gt; P.pick-some(f, queue(r))
+      end
+    end
+end</pre><p>We can then write a function that uses that method to traverse the queue:</p><pre class="pyret-highlight">fun sum-queue(q :: Queue) -&gt; Number:
+  cases (P.Pick) q.pick():
+    | pick-none =&gt; 0
+    | pick-some(e, r) =&gt; e + sum-queue(r)
+  end
+end</pre><p>with the expected behavior:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  q = queue([list: 1, 2, 3])
+  sum-queue(q) is 6
+end</pre></div></div></root>
+    <hr/>
+    The current page is trove/pick.html.
+    The previous page is <a href = "../trove/either.html">../trove/either.html</a>.
+    The next page is <a href = "../trove/lists.html">../trove/lists.html</a>.
+    </div>
+  </body>
+</html>

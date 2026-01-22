@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script type="module" src="../embed-api.js"></script>
+  <script src="../codemirror.js"></script>
+  <script src="../runmode.js"></script>
+  <script src="../pyret.js"></script>
+  <script src="../hilite.js"></script>
+  <link rel="stylesheet" type="text/css" href="../codemirror.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../pyret.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../styles.css" title="default"/>
+  <head>
+    <title>Spies</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><h1 id="s:spies" toclevel="1" tocentry="yes">Spies</h1><p>Spies are used for convenient display of values for print-style debugging. See <a href="lang/spies.html#s:spies:rationale">Rationale</a> for why this is particularly useful in Pyret.</p><h2 id="Examples" toclevel="2" tocentry="yes">Examples</h2><p>The shortest use of a <span class="pyret-highlight"><tt class="pyretexpr">spy</tt></span> statement is to print the value of a name:</p><pre class="pyret-highlight">x = 10
+spy: x end</pre><p>This will produce a message like:</p><div class="margin-note">The filename will be the name of the file containing the <span class="pyret-highlight"><tt class="pyretexpr">spy</tt></span> statement, not <span class="pyret-highlight"><tt class="pyretexpr">spies.arr</tt></span> as shown here</div><pre class="nothing_special">Spying (at file:///spies.arr:2:0-2:10)
+  x: 10</pre><p>On code.pyret.org, you’ll see output like:</p><p><img src="src/lang/simple-spy.png"/></p><p>Both of these outputs indicate that the name was <span class="pyret-highlight"><tt class="pyretexpr">x</tt></span> and the value was <span class="pyret-highlight"><tt class="pyretexpr">10</tt></span>. In the text output, the line and column information is printed (this happened at line 2). In the visual output, the <span class="pyret-highlight"><tt class="pyretexpr">x</tt></span> is underlined–clicking it will scroll the editor to the line of the spy statement and highlight the corresponding use of <span class="pyret-highlight"><tt class="pyretexpr">x</tt></span>.</p><p>A <span class="pyret-highlight"><tt class="pyretexpr">spy</tt></span> statement can contain more than one name, and will print out all their values:</p><pre class="pyret-highlight">x = 10
+y = [list: 1, 2, 3]
+spy: x, y end</pre><pre class="nothing_special">Spying (at file:///spies.arr:3:0-3:13)
+  x: 10
+  y: [list: 1, 2, 3]</pre><p>A spy statement can also contain a message. This can be helpful for distinguishing between spy statements without looking at their corresponding line numbers:</p><pre class="pyret-highlight">fun square(x):
+  spy "in square": x end
+  x * x
+end
+
+fun cube(x):
+  spy "in cube": x end
+  x * x * x
+end
+
+square(x)
+cube(x)
+square(x)</pre><p>Will produce:</p><pre class="nothing_special">Spying "in square" (at file:///spies.arr:2:2-2:24)
+  x: 3
+Spying "in cube" (at file:///spies.arr:7:2-7:22)
+  x: 2
+Spying "in square" (at file:///spies.arr:2:2-2:24)
+  x: 2</pre><p>If we want to <span class="pyret-highlight"><tt class="pyretexpr">spy</tt></span> on an expression, rather than just names, we can give the expression a name within the <span class="pyret-highlight"><tt class="pyretexpr">spy</tt></span> statement:</p><pre class="pyret-highlight">fun &lt;A&gt; reverse(lst :: List&lt;A&gt;, sofar :: List&lt;A&gt;) -&gt; List&lt;A&gt;:
+  spy "lengths":
+    lst-length: lst.length(),
+    sofar-length: sofar.length(),
+    sum: lst.length() + sofar.length()
+  end
+  cases(List&lt;A&gt;) lst:
+    | empty =&gt; sofar
+    | link(first, rest) =&gt;
+      reverse(rest, link(first, sofar))
+  end
+end
+
+check:
+  reverse([list: "a", "b", "c"], empty) is [list: "c", "b", "a"]
+end
+</pre><p>This produces:</p><pre class="nothing_special">Spying "lengths" (at file:///spies.arr:2:2-6:5)
+  lst-length: 3
+  sofar-length: 0
+  sum: 3
+Spying "lengths" (at file://spies.arr:2:2-6:5)
+  lst-length: 2
+  sofar-length: 1
+  sum: 3
+Spying "lengths" (at file:///spies.arr:2:2-6:5)
+  lst-length: 1
+  sofar-length: 2
+  sum: 3
+Spying "lengths" (at file:///spies.arr:2:2-6:5)
+  lst-length: 0
+  sofar-length: 3
+  sum: 3</pre><h2 id="Minor-Notes-and-Corner-Cases" toclevel="2" tocentry="yes">Minor Notes and Corner Cases</h2><p>Both types of spy fields can be used in a single spy statement:</p><pre class="pyret-highlight">x = 10
+spy:
+  x,
+  y: 20
+end</pre><p>Each value that is spied upon is required to have a name. That is, it’s an error to write:</p><pre class="bad-ex pyret-highlight">spy:
+  2 + 2
+end</pre><p>The message position can contain expressions, not just string constants, so the message can be computed:</p><pre class="pyret-highlight">fun f(n):
+  n * n
+end
+for each(i from range(0, 10)):
+  result = f(i)
+  spy "iteration " + to-string(i):
+    result
+  end
+  result
+end</pre><h2 id="Grammar" toclevel="2" tocentry="yes">Grammar</h2><p>The grammar of <span class="pyret-highlight"><tt class="pyretexpr">spy</tt></span> statements is:</p><p><bnf>&Pyret;SPY: “spy” END: “end” COLON: ”:” COMMA: ”,” spy-stmt: SPY [expr] COLON spy-body END spy-body: spy-field [COMMA spy-field]* spy-field: NAME | NAME COLON binop-expr</bnf></p><h2 id="s:spies:rationale" toclevel="2" tocentry="yes">Rationale</h2><p>Often, when debugging or explaining a program, it’s useful to display values during execution. It’s common to do this with functions like <a href="../trove/globals.html#print"><span class="pyret-highlight"><tt class="pyretexpr">print</tt></span></a>. However, both in general, and specifically in Pyret, using a regular function call for debug printing leaves something to be desired. For example, just printing doesn’t track the line and column something was printed at, and when the value of an identifier is printed, its name is lost in the output, forcing the programmer to add extra string output describing the value. More annoyingly in Pyret, since we often add print statements to already-existing code, it becomes a nuisance to add <a href="lang/forms.html#s:blocky-blocks">Block Shorthand</a> just to get a debugging print.</p><p>For example, consider the <span class="pyret-highlight"><tt class="pyretexpr">reverse</tt></span> example from above:</p><pre class="pyret-highlight">fun reverse(lst, sofar):
+  cases(List&lt;A&gt;) lst:
+    | empty =&gt; sofar
+    | link(first, rest) =&gt;
+      reverse(rest, link(first, sofar))
+  end
+end</pre><p>We might try to add uses of <a href="../trove/globals.html#print"><span class="pyret-highlight"><tt class="pyretexpr">print</tt></span></a> to do what the spy statement did:</p><pre class="bad-ex pyret-highlight">fun reverse(lst, sofar):
+  print(lst.length())
+  print(sofar.length())
+  print(lst.length() + sofar.length())
+  cases(List&lt;A&gt;) lst:
+    | empty =&gt; sofar
+    | link(first, rest) =&gt;
+      reverse(rest, link(first, sofar))
+  end
+end</pre><p>This has a few problems. First, because Pyret restricts function bodies to have no more than one expression unless <a href="lang/forms.html#s:blocky-blocks">Block Shorthand</a> is used, this is an immediate syntax error. We could change the first line to include <span class="pyret-highlight"><tt class="pyretexpr">block:</tt></span> to let Pyret know we want to allow multiple statements.</p><pre class="pyret-highlight">fun reverse(lst, sofar) block:</pre><p>Second, the uses of <a href="../trove/globals.html#print"><span class="pyret-highlight"><tt class="pyretexpr">print</tt></span></a> lack context. With this version, we’d simply see sequences of numbers print out, and it would be difficult to discern which came from which print statement, or what the values meant. We could add more string information into the output to label the outputs, which leads to clunky string concatenation expressions like</p><pre class="pyret-highlight">print("lst-length: " + to-string(lst.length()))</pre><p>This ends up being onerous and error prone.</p><p>Finally, for rich values like tables and images, the string representation produced by <a href="../trove/globals.html#print"><span class="pyret-highlight"><tt class="pyretexpr">print</tt></span></a> isn’t as useful as the rich rendering that Pyret provides in an interface like code.pyret.org.</p><p>The <span class="pyret-highlight"><tt class="pyretexpr">spy</tt></span> statement is designed to make it natural and useful to add printed observations to the program, supporting and enhancing the practice of “printf-debugging”.</p></root>
+    <hr/>
+    The current page is lang/spies.html.
+    The previous page is <a href = "../lang/type-check.html">../lang/type-check.html</a>.
+    The next page is <a href = "../libraries.html">../libraries.html</a>.
+    </div>
+  </body>
+</html>

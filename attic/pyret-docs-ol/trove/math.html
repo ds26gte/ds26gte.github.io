@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script type="module" src="../embed-api.js"></script>
+  <script src="../codemirror.js"></script>
+  <script src="../runmode.js"></script>
+  <script src="../pyret.js"></script>
+  <script src="../hilite.js"></script>
+  <link rel="stylesheet" type="text/css" href="../codemirror.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../pyret.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../styles.css" title="default"/>
+  <head>
+    <title>math</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><div><h1 id="math" toclevel="1" tocentry="yes">math</h1><div><p>Usage:</p><pre class="pyret-highlight">include math</pre><pre class="pyret-highlight">import math as ...</pre></div><p>The Pyret Math library.  It consists of functions for arithmetic calculations, optimization, and more to come!</p><p>Every function in this library is available on the <span class="pyret-highlight"><tt class="pyretexpr">math</tt></span> module object.  For example, if you used <span class="pyret-highlight"><tt class="pyretexpr">import math as M</tt></span>, you would write <span class="pyret-highlight"><tt class="pyretexpr">M.arg-max</tt></span> to access <span class="pyret-highlight"><tt class="pyretexpr">arg-max</tt></span> below.  If you used <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span>, then you can refer to identifiers without writing <span class="pyret-highlight"><tt class="pyretexpr">M.</tt></span> as a prefix.</p><h2 id="Arithmetic-Functions" toclevel="2" tocentry="yes">Arithmetic Functions</h2><div><p><span><a name="sum"></a></span></p><pre class="pyret-display"><a href="../trove/math.html#sum">sum</a> :: <span><span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span> -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre><p>Calculates the arithmetic sum of the Numbers in <span class="pyret-highlight"><tt class="pyretexpr">l</tt></span>.  If <span class="pyret-highlight"><tt class="pyretexpr">l</tt></span> contains at least one RoughNum, then the output will be a RoughNum.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  sum([list: ]) is 0
+  sum([list: 0, 2, 4]) is 6
+  sum([list: -1, 1, ~2]) is-roughly ~2
+end</pre></div></div><h2 id="Minimization-&amp;-Maximization" toclevel="2" tocentry="yes">Minimization &amp; Maximization</h2><div><p><span><a name="max"></a></span></p><pre class="pyret-display"><a href="../trove/math.html#max">max</a> :: <span><span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span> -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre><p>Calculates the maximal element of the set of Numbers in <span class="pyret-highlight"><tt class="pyretexpr">l</tt></span>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  max([list: ]) raises "Empty List"
+  max([list: 10]) is 10
+  max([list: 2.1, 2, 4.5, ~1.5, -1, 1]) is-roughly 4.5
+end</pre></div></div><div><p><span><a name="min"></a></span></p><pre class="pyret-display"><a href="../trove/math.html#min">min</a> :: <span><span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span> -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre><p>Calculates the minimal element of the set of Numbers in <span class="pyret-highlight"><tt class="pyretexpr">l</tt></span>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  min([list: ]) raises "Empty List"
+  min([list: 2]) is 2
+  min([list: -1, 0, ~1, 2, 5]) is-roughly -1
+end</pre></div></div><div><p><span><a name="arg-max"></a></span></p><pre class="pyret-display"><a href="../trove/math.html#arg-max">arg-max</a> :: <span><span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span> -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre><p>Calculates the index of the maximal element within <span class="pyret-highlight"><tt class="pyretexpr">l</tt></span>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  arg-max([list: ]) raises "Empty List"
+  arg-max([list: 2]) is 0
+  arg-max([list: -1, 0, ~1, 5, 2]) is 3
+end</pre></div></div><div><p><span><a name="arg-min"></a></span></p><pre class="pyret-display"><a href="../trove/math.html#arg-min">arg-min</a> :: <span><span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span> -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre><p>Calculates the index of the minimal element within <span class="pyret-highlight"><tt class="pyretexpr">l</tt></span>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  arg-max([list: ]) raises "Empty List"
+  arg-max([list: 8]) is 0
+  arg-max([list: -1, 0, ~1, -3, 5]) is 3
+end</pre></div></div></div></root>
+    <hr/>
+    The current page is trove/math.html.
+    The previous page is <a href = "../trove/statistics.html">../trove/statistics.html</a>.
+    The next page is <a href = "../trove/matrices.html">../trove/matrices.html</a>.
+    </div>
+  </body>
+</html>

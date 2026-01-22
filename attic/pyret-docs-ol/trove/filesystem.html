@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script type="module" src="../embed-api.js"></script>
+  <script src="../codemirror.js"></script>
+  <script src="../runmode.js"></script>
+  <script src="../pyret.js"></script>
+  <script src="../hilite.js"></script>
+  <link rel="stylesheet" type="text/css" href="../codemirror.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../pyret.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../styles.css" title="default"/>
+  <head>
+    <title>filesystem</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><div class="insetpara nested"></div><p>The <span class="pyret-highlight"><tt class="pyretexpr">filesystem</tt></span> library provides functions for reading and writing files, as well as working with paths.</p><p>The examples on this page work against a small filesystem that is set up every time the page loads. The filesystem contains the contents below, and the working directory is <span class="pyret-highlight"><tt class="pyretexpr">/</tt></span>.</p><div class="insetpara nested">/ ├── hello.txt         “Hello, world!” ├── data/ │   ├── words         “apple\nbanana\ncherry” │   ├── numbers.txt   “1\n2\n3\n4\n5” │   └── story.txt     “A long time ago in a galaxy far, far away...”</div><div><h1 id="filesystem" toclevel="1" tocentry="yes">filesystem</h1><div><p>Usage:</p><pre class="pyret-highlight">include filesystem</pre><pre class="pyret-highlight">import filesystem as ...</pre></div><div><p><span><a name="read-file-string"></a></span></p><pre class="pyret-display"><a href="../trove/filesystem.html#read-file-string">read-file-string</a> :: <span><a href="../trove/globals.html#String">String</a> -&gt; <a href="../trove/globals.html#String">String</a></span></pre></div><div><p><b>Examples:</b></p><pre class="pyret-highlight">import filesystem as FS
+check:
+  FS.read-file-string("hello.txt") is "Hello, world!"
+  words = FS.read-file-string("data/words")
+  string-split-all(words, "\n") is [list: "apple", "banana", "cherry"]
+
+  FS.read-file-string("does-not-exist") raises "No such file or directory"
+end</pre><p><a class="show-embed" code="import filesystem as FS 
+ check: 
+    FS.read-file-string(&quot;hello.txt&quot;) is &quot;Hello, world!&quot; 
+    words = FS.read-file-string(&quot;data/words&quot;) 
+    string-split-all(words, &quot;\n&quot;) is [list: &quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;] 
+
+    FS.read-file-string(&quot;does-not-exist&quot;) raises &quot;No such file or directory&quot; 
+ end">(Try it!)</a></p></div><p>Reads the file at the given <span class="pyret-highlight"><tt class="pyretexpr">path</tt></span> and returns its contents as a <span class="pyret-highlight"><tt class="pyretexpr">String</tt></span>. Always assumes UTF-8 encoding.</p><p>Reports an error if the file is not found or is not readable.</p><div><p><span><a name="write-file-string"></a></span></p><pre class="pyret-display"><a href="../trove/filesystem.html#write-file-string">write-file-string</a> :: <span><a href="../trove/globals.html#String">String</a>, <a href="../trove/globals.html#String">String</a> -&gt; <a href="../trove/globals.html#Nothing">Nothing</a></span></pre></div><p>Writes the given <span class="pyret-highlight"><tt class="pyretexpr">contents</tt></span> the file at the given <span class="pyret-highlight"><tt class="pyretexpr">path</tt></span>.  Always assumes UTF-8 encoding. If the file exists, it is overwritten, and if it does not exist, it is created.</p><p>Reports an error if the path refers to a non-existent directory, or if the file is present but not writable.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import filesystem as FS
+check:
+  FS.read-file-string("goodbye.txt") raises "No such file or directory"
+  FS.write-file-string("goodbye.txt", "Until next time!")
+  FS.read-file-string("goodbye.txt") is "Until next time!"
+  FS.write-file-string("goodbye.txt", "See ya!")
+  FS.read-file-string("goodbye.txt") is "See ya!"
+end</pre><p><a class="show-embed" code="import filesystem as FS 
+ check: 
+    FS.read-file-string(&quot;goodbye.txt&quot;) raises &quot;No such file or directory&quot; 
+    FS.write-file-string(&quot;goodbye.txt&quot;, &quot;Until next time!&quot;) 
+    FS.read-file-string(&quot;goodbye.txt&quot;) is &quot;Until next time!&quot; 
+    FS.write-file-string(&quot;goodbye.txt&quot;, &quot;See ya!&quot;) 
+    FS.read-file-string(&quot;goodbye.txt&quot;) is &quot;See ya!&quot; 
+ end">(Try it!)</a></p></div><div><p><span><a name="stat"></a></span></p><pre class="pyret-display"><a href="../trove/filesystem.html#stat">stat</a> :: <span>(<span><span class="pyret-content">path :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <span>{<span class="pyret-content">mtime :: <a href="../trove/globals.html#Number">Number</a></span>, <span class="pyret-content">ctime :: <a href="../trove/globals.html#Number">Number</a></span>, <span class="pyret-content">size :: <a href="../trove/globals.html#Number">Number</a></span>}</span></span></pre></div><div class="margin-note">There is also an optional field called <span class="pyret-highlight"><tt class="pyretexpr">native</tt></span> that may have additional information sometimes, depending on the platform. The three fields listed are guaranteed to be present across all platforms.</div><p>Returns an object with statistics about the file: its modified time (<span class="pyret-highlight"><tt class="pyretexpr">mtime</tt></span>), its creation time (<span class="pyret-highlight"><tt class="pyretexpr">ctime</tt></span>), and its size in bytes (<span class="pyret-highlight"><tt class="pyretexpr">size</tt></span>).</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import filesystem as FS
+check:
+  test-start-time = time-now() # gives the current time in milliseconds
+  FS.write-file-string("fresh-file.txt", "Brand new!")
+  stats = FS.stat("fresh-file.txt")
+
+  spy: stats end
+
+  stats.size is string-length("Brand new!")
+
+  # these tests are just indicating that the file was created and modified after
+  # the test started
+  stats.mtime is%(_ &gt;= _) test-start-time
+  stats.ctime is%(_ &gt;= _) test-start-time
+end
+</pre><p><a class="show-embed" code="import filesystem as FS 
+ check: 
+    test-start-time = time-now() # gives the current time in milliseconds 
+    FS.write-file-string(&quot;fresh-file.txt&quot;, &quot;Brand new!&quot;) 
+    stats = FS.stat(&quot;fresh-file.txt&quot;) 
+
+    spy: stats end 
+
+    stats.size is string-length(&quot;Brand new!&quot;) 
+
+    # these tests are just indicating that the file was created and modified after 
+    # the test started 
+    stats.mtime is%(_ &gt;= _) test-start-time 
+    stats.ctime is%(_ &gt;= _) test-start-time 
+ end 
+">(Try it!)</a></p></div></div></root>
+    <hr/>
+    The current page is trove/filesystem.html.
+    The previous page is <a href = "../trove/fetch.html">../trove/fetch.html</a>.
+    The next page is <a href = "../libraries-archived.html">../libraries-archived.html</a>.
+    </div>
+  </body>
+</html>
