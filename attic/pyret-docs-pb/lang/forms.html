@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script type="module" src="../embed-api.js"></script>
+  <script src="../codemirror.js"></script>
+  <script src="../runmode.js"></script>
+  <script src="../pyret.js"></script>
+  <script src="../hilite.js"></script>
+  <link rel="stylesheet" type="text/css" href="../codemirror.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../pyret.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../styles.css" title="default"/>
+  <head>
+    <title>Language Constructs</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><h1 id="s:forms" toclevel="1" tocentry="yes">Language Constructs</h1><p>This section contains information on the various language forms in Pyret, from binary operators to data definitions to functions.  This is a more detailed reference to the grammar of expressions and statements and their evaluation, rather than to</p><ul class="toclist"></ul><h2 id="s:literals" toclevel="2" tocentry="yes">Primitives and Literals</h2><p>There are several different literal token types referred to in this documentation.</p><h3 id="Names" toclevel="3" tocentry="yes">Names</h3><p>Names in Pyret match the following regular expression:</p><div class="insetpara nested"><pre class="nothing_special">^[_a-zA-Z][_a-zA-Z0-9]*(?:-+[_a-zA-Z0-9]+)*</pre></div><div class="margin-note">The convention in Pyret is that <span class="pyret-highlight"><tt class="pyretexpr">kebab-case-names</tt></span> are used for names of values and fields, and <span class="pyret-highlight"><tt class="pyretexpr">TitleCaseNames</tt></span> are used for annotations.</div><p> That is, they start with an alphabetical character or an underscore, followed by any number of alphanumeric characters mixed with underscores and hyphens, ending in a non-hyphen.  So, for example, the following are valid names (though not necessarily good style):</p><pre class="good-ex pyret-highlight">a
+a1
+a-1
+abc
+ABC
+a----------b
+a-_-_-_-__--b
+a--_
+_a
+__</pre><p>The following are not valid names:</p><pre class="bad-ex pyret-highlight">_-
+-_
+a-
+-a
+-a-
+-abc
+a1-
+a-1-
+a_1-
+α
+1abc
+$abc</pre><h3 id="String-Literals" toclevel="3" tocentry="yes">String Literals</h3><p>&lt;&lt;BNF pending&gt;&gt;</p><p>Strings in Pyret come in several forms.  First, they can be enclosed in double quotes:</p><pre class="good-ex pyret-highlight">"a string"
+"a string\" with escapes"
+"'single quotes' are allowed unescaped or \' escaped"</pre><p>They can also be enclosed in single quotes:</p><pre class="good-ex pyret-highlight">'a string'
+'a string\' with escapes'
+'"double quotes" are allowed unescaped or \" escaped'</pre><p>String literals with single or double quotes must terminate by the end of the line:</p><pre class="bad-ex pyret-highlight">"multi-line
+strings not
+allowed with double quotes"</pre><p>Finally, multi-line string literals can be created by starting and ending them with three backticks (<span class="pyret-highlight"><tt class="pyretexpr">```</tt></span>).  For example:</p><pre class="good-ex pyret-highlight">```
+This string
+spans
+multiple lines
+```</pre><p>Multi-line string literals strip all whitespace before the first non-whitespace character and after the last non-whitespace character.  All whitespace at the beginning of intermediate lines is preserved.</p><h3 id="f:number_literals" toclevel="3" tocentry="yes">Number Literals</h3><p>&lt;&lt;BNF pending&gt;&gt;</p><p>Pyret has several types of number literals.  The most traditional allows for decimal numbers, negation, and an exponent:</p><div class="insetpara nested"><pre class="nothing_special">^[-+]?[0-9]+(?:\\.[0-9]+)?(?:[eE][-+]?[0-9]+)?</pre></div><p>That is, an optional sign, then some number of digits, optionally followed by a decimal point and more digits, optionally followed by an exponent.  These are valid number literals:</p><pre class="good-ex pyret-highlight">0.1
+1
+1e100
+1.1e100
++1.1e100
+-1.1e-100
+1.1230e-0
+10
+19
+19.0</pre><p>Note that a number literal cannot start with a decimal point; some leading digits are required.  These are not number literals:</p><pre class="bad-ex pyret-highlight">.1
+1.1.1
+1.+1
+0.1+100</pre><p>This first kind of number literal represents an <i>exact</i> number, or <a href="../../../../../..//Users/ds26gte/src/pyret-docs-pb/builtin/numbers.html#Exactnum"><span class="pyret-highlight"><tt class="pyretexpr">Exactnum</tt></span></a>.  Number literals can also be prefixed with a tilde, to indicate that the number is an approximation, or a <a href="../../../../../..//Users/ds26gte/src/pyret-docs-pb/builtin/numbers.html#Roughnum"><span class="pyret-highlight"><tt class="pyretexpr">Roughnum</tt></span></a>.  So these are all valid rough number literals:</p><pre class="good-ex pyret-highlight">~0.1
+~1
+~1e100
+~1.1e100
+~+1.1e100
+~-1.1e-100
+~1.1230e-0
+~10
+~19
+~19.0</pre><p>And these are not valid:</p><pre class="bad-ex pyret-highlight">~.1
+~1.1.1
+~1.+1
+~0.1+100</pre><p>Finally, numbers can be written as exact ratios of whole numbers:</p><div class="insetpara nested"><pre class="nothing_special">^[-+]?[0-9]+/[0-9]+</pre></div><p>These numbers are interpreted as <a href="../../../../../..//Users/ds26gte/src/pyret-docs-pb/builtin/numbers.html#Exactnum"><span class="pyret-highlight"><tt class="pyretexpr">Exactnum</tt></span></a>s.  These are valid rational literals:</p><pre class="good-ex pyret-highlight">1/2
+-1/2
++1/4
+1234/9
+0/1234</pre><p>It is a syntax error to use zero as the denominator in a fraction literal. These are not valid rational literals:</p><pre class="bad-ex pyret-highlight">1+1/2
+-1/0
+1.1/9
+1/-3</pre><h3 id="Boolean-Literals" toclevel="3" tocentry="yes">Boolean Literals</h3><p>&lt;&lt;BNF pending&gt;&gt;</p><p>Boolean literals are the lowercase words <span class="pyret-highlight"><tt class="pyretexpr">true</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">false</tt></span>.</p><h2 id="s:comments" toclevel="2" tocentry="yes">Comments</h2><p>Pyret supports two forms of comments:</p><ul><li><p><i>Single-line comments</i> begin with a <span class="pyret-highlight"><tt class="pyretexpr">#</tt></span> symbol and extend to the end of the line:</p><pre class="pyret-highlight"># This is an example of a single-line, standalone comment
+fun example(n):
+  1 + n # This single-line comment starts after some code
+end</pre></li><li><p><i>Block comments</i> begin with a <span class="pyret-highlight"><tt class="pyretexpr">#|</tt></span> symbol and end with a matching <span class="pyret-highlight"><tt class="pyretexpr">|#</tt></span>.</p><pre class="pyret-highlight">fun example(n):
+  #|
+     This comment can extend
+     over multiple lines
+  |#
+  1 + n
+end</pre><p>While the text of a comment block contains everything between the <span class="pyret-highlight"><tt class="pyretexpr">#|</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">|#</tt></span> symbols, it is preferred to put them on their own lines, so they are visually distinctive and can easily be added or removed:</p><pre class="good-ex pyret-highlight">#|
+  prefer this
+  style
+|#</pre><pre class="ok-ex pyret-highlight">#| instead of
+   this style |#</pre><p>The one exception is when block comments are being used to comment out sections of a single line of code:</p><pre class="good-ex pyret-highlight">rectangle(30 #|width|#, 40 #|height|#, "solid", "red")</pre><p>They can be nested within each other, so long as the delimiters are matched:</p><pre class="pyret-highlight">fun example(n):
+  #| this is in a comment
+     #| so is this
+        and this
+     |#
+     and this
+  |#
+  1 + n
+end</pre><p>Within a block comment, single-line comments are ignored:</p><pre class="ok-ex pyret-highlight">fun example(n):
+  #| This is a block comment.
+     Even though the next line starts a single-line comment
+     # the block-comment ends here |#
+  1 + n
+end</pre><p>(Naturally, this style isn’t preferred, as it is easy to ignore the end-of-comment marker when reading quickly!)</p></li></ul><h2 id="s:program" toclevel="2" tocentry="yes">Programs</h2><p>Programs consist of a sequence of import or provide statements, followed by a block:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><h2 id="Import-Statements" toclevel="2" tocentry="yes">Import Statements</h2><p>Import statements come in a few forms:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>The form with <ref-gloss>‹import-name›</ref-gloss> looks for a file with that name in the built-in libraries of Pyret, and it is an error if there is no such library.</p><p>Example:</p><pre class="pyret-highlight">import equality as EQ
+check:
+  f = lam(): "" end
+  equal-always3(f, f) is EQ.Unknown
+end</pre><h2 id="Provide-Statements" toclevel="2" tocentry="yes">Provide Statements</h2><p>&lt;&lt;BNF pending&gt;&gt;</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p><span class="pyret-highlight"><tt class="pyretexpr">provide</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">provide-types</tt></span> statements specify which bindings and declarations in the program are available to other Pyret programs via <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span> statements.</p><p><span class="pyret-highlight"><tt class="pyretexpr">provide</tt></span> statements must be the first non-comment code in the program or a syntax error will be raised.  <span class="pyret-highlight"><tt class="pyretexpr">provide</tt></span> statements have no effect when the program is run as the top-level program.</p><p>When the program is in a file that is evaluated via <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span>, the program is run, and then the <span class="pyret-highlight"><tt class="pyretexpr">provide</tt></span> statement is run in top-level scope to determine the value bound to the identifier in the <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span> statement.</p><div class="margin-note">Any interactive windows spawned by code in the <span class="pyret-highlight"><tt class="pyretexpr">providing</tt></span> program will appear when its code is <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span>ed.</div><p>In the first form, the <span class="pyret-highlight"><tt class="pyretexpr">stmt</tt></span> internal to the provide is evaluated, and the resulting value is provided.  This is usually done via an object literal, where the key represents the binding passed to the external program and the value after the colon is the local identifier.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">provide {
+  x : x,
+  draw-character : draw-character,
+  external-funct-name : internal-funct-name
+}
+end</pre></div><p>Types can only be <span class="pyret-highlight"><tt class="pyretexpr">provide</tt></span>d by <span class="pyret-highlight"><tt class="pyretexpr">provide-types</tt></span> statements.  If types are included in a <span class="pyret-highlight"><tt class="pyretexpr">provide</tt></span> statement they are ignored.  In practice, types shared via <span class="pyret-highlight"><tt class="pyretexpr">provide-types</tt></span> also need to share detector functions to fully work as anticipated in <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span>ing programs.</p><p>The second wildcard <b>*</b> form is syntactic sugar for sharing all top level bindings and declarations other than types defined in the file.</p><p>To share all bindings and declarations in a file:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">provide *
+provide-types *</pre></div><div class="margin-note">While the wildcard form is somewhat simpler, specifying which names are to be shared explicitly through the object literal syntax can prevent namespace pollution, especially if you expect programmers (students) to use <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span> to add the names directly to their top level namespace.</div><p>Programmers working through <url>http://code.pyret.org</url> can <span class="pyret-highlight"><tt class="pyretexpr">provide</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span> code via Google Drive sharing integrated into the development environment.</p><p>To allow other programs to <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span> the <span class="pyret-highlight"><tt class="pyretexpr">provide</tt></span>d values in a program, click the <b>Publish</b> button at the top of the window for the providing program and then the blue <b>Publish</b> button on the resulting dialog.</p><p>The published code can now be <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span>ed using the provided code:</p><p><img src="publish.png"/></p><p>Any time you make changes to the providing program that you want to be available to <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span>ing programs, you must re-publish the providing program, and reload any open instances of the <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span>ing programs.</p><h2 id="Bindings" toclevel="2" tocentry="yes">Bindings</h2><p>Many syntactic forms in Pyret need to designate names for values.  These are uniformly represented as <ref-gloss>‹binding›</ref-gloss>s:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><h3 id="Name-bindings" toclevel="3" tocentry="yes">Name bindings</h3><p>The simplest form of binding is a <ref-gloss>‹name-binding›</ref-gloss>.  This form simply associates a name with a given value:</p><pre class="good-ex pyret-highlight">PI = ~3.141592
+five = num-sqrt((3 * 3) + (4 * 4))
+hw = string-append("Hello", " world")</pre><h3 id="s:annotated-binding" toclevel="3" tocentry="yes">Annotated bindings</h3><p>Slightly more complicated, a name binding may also specify an <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:annotations">annotation</a>, that will ensure that the value being bound has the correct type:</p><pre class="good-ex pyret-highlight">PI :: Number = ~3.141592
+hw :: String = string-append("Hello", "world")
+
+this-will-fail :: Boolean = 5</pre><p>That last line will fail at runtime with an annotation error.</p><p>Note that the annotation always comes after the name, not the value; this is not allowed, for instance:</p><pre class="bad-ex pyret-highlight">PI = ~3.14 :: Number</pre><h3 id="s:shadowing" toclevel="3" tocentry="yes">Shadowing</h3><p>Pyret does not permit a program to implicitly bind the same name multiple times in the same scope, as this can be confusing or ambiguous: which name was meant?</p><pre class="bad-ex pyret-highlight">ans = 3 + 4
+ans = true # did you mean to use a different name here?
+
+ans # which one was meant?</pre><p>Pyret will signal an error on the second binding of <span class="pyret-highlight"><tt class="pyretexpr">ans</tt></span> above, saying that it <i>shadows</i> the earlier definition.  The same rule applies to names defined in nested scopes, like functions.  This program is disallowed by the shadowing rule, as well:</p><pre class="bad-ex pyret-highlight">ans = 3 + 4
+
+fun oops(x):
+  ans = x * 2  # Shadows the outer ans
+  ans
+end
+
+fun another-oops(ans): # Also shadows the outer ans
+  if ans: 3 else: 4 end
+end</pre><p>The general rule for shadowing is to look “upward and leftward”, i.e. looking outward from the current scope to any enclosing scopes, to see if there are any existing bindings of the same name.</p><p>But sometimes, redefining the same name makes the most sense.  In this case, a program can explicitly specify that it means to hide the outer definition, using the <span class="pyret-highlight"><tt class="pyretexpr">shadow</tt></span> keyword:</p><pre class="good-ex pyret-highlight">ans = 3 + 4
+fun oops(x):
+  shadow ans = x * 2 # &lt;-------------------------+
+  ans    # uses the ans defined the line above --+
+end
+fun another-oops(shadow ans):
+  if ans: 3 else: 3 end # uses the function's parameter
+end</pre><h3 id="Tuple-bindings" toclevel="3" tocentry="yes">Tuple bindings</h3><p>Tuples are useful to package up several Pyret values into a single value, which can then be passed around and manipulated as a single entity.  But often, the most useful manipulation is to break the tuple apart into its components.  While there are <ref-gloss>‹tuple-get›</ref-gloss> expressions to access individual components, it’s often easiest to give all the components names.  We do this with a <ref-gloss>‹tuple-binding›</ref-gloss>, which binds each component of a tuple to its own name. The number of bindings must match the length of the given tuple:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  {x; y} = {1; 2}
+  x is 1
+  y is 2
+
+  fun sum-two({k; v}, {a; b; c}):
+    k + v + a + b + c
+  end
+
+  sum-two({10; 12}, {1; 4; 5}) is 32
+
+  fun sum-vals(elts) block:
+    var sum = 0
+    for each({k; v} from elts):
+      sum := sum + v
+    end
+    sum
+  end
+
+  elts = [list: {"a"; 5}, {"b"; 6}, {"c"; 7}]
+  sum-vals(elts) is 18
+end</pre></div><p>It is also possible to <i>nest</i> tuple bindings, if the tuple being bound has tuples nested inside it:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  {{w; x}; {y; z}} = {{~5; true}; {"hello"; 4}}
+  w is-roughly ~5
+  x is true
+  y is "hello"
+  z is 4
+end</pre></div><p>Nested bindings likewise must match the number of components in the tuple being bound, and follow the same rules of shadowing as normal name bindings.</p><p>With nested tuples, it is sometimes also useful to not only decompose the nested tuples into their components, but to give a name to the nested tuple itself:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  {{w; x} as wx; {y; z} as yz} as wxyz = {{~5; true}; {"hello"; 4}}
+  w is-roughly ~5
+  x is true
+  y is "hello"
+  z is 4
+  wx is-roughly {~5; true}
+  yz is {"hello"; 4}
+  wxyz is {wx; yz}
+end</pre></div><p>As with any other name bindings, you can provide annotations on any of these components.  The rule of annotations adjacent to names applies–the tuple components and the <span class="pyret-highlight"><tt class="pyretexpr">as</tt></span> name can have annotations.  We demonstrate both permitted styles of annotation below:</p><pre class="good-ex pyret-highlight">check:
+  {
+    {w :: Number; x :: Boolean} as wx;
+    {y; z} as yz :: {String; Number}
+  } as wxyz = {{~5; true}; {"hello"; 4}}
+  w is-roughly ~5
+  x is true
+  y is "hello"
+  z is 4
+  wx is-roughly {~5; true}
+  yz is {"hello"; 4}
+  wxyz is {wx; yz}
+end</pre><p>But this is not allowed, because the <span class="pyret-highlight"><tt class="pyretexpr">{Number; Boolean}</tt></span> annotation is not adjacent to a name:</p><pre class="bad-ex pyret-highlight">check:
+  {{w; x} :: {Number; Boolean} as wx; yz} = {{~5; true}; {"hello"; 4}}
+  w is ~5
+  x is true
+end</pre><h2 id="Blocks" toclevel="2" tocentry="yes">Blocks</h2><p>A block’s syntax is a list of statements:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>Blocks serve two roles in Pyret:</p><ul><li>Sequencing of operations</li><li>Units of lexical scope</li></ul><p>The <ref-gloss>‹let-decl›</ref-gloss>, <ref-gloss>‹fun-decl›</ref-gloss>, <ref-gloss>‹data-decl›</ref-gloss>, and <ref-gloss>‹var-decl›</ref-gloss> forms are handled specially and non-locally within blocks.  A detailed description of scope will appear here soon.</p><p>Blocks evaluate each of their statements in order, and evaluate to the value of the final statement in the block.</p><p>The <ref-gloss>‹user-block-expr›</ref-gloss> form <i>additionally</i> creates a scope for any names bound inside it.  That is, definitions within such a block are visible only within that block:</p><pre class="pyret-highlight">x = 10
+ans = block:
+  y = 5 + x # x is visible here
+  42 # value result of the block
+end
+z = y + ans # error: y is not in scope here</pre><h3 id="s:blocky-blocks" toclevel="3" tocentry="yes">Block Shorthand</h3><p>Many expressions in Pyret include one or more blocks within them.  For example, the body of a function is defined as a block.  Technically, this means the following program is legal:</p><pre class="bad-ex pyret-highlight">fun weather-reaction(forecast, temp):
+  ask:
+    | forecast == "sunny" then: "sunglasses"
+    | forecast == "rainy" then: "umbrella"
+    | otherwise: ""
+  end
+  ask:
+    | temp &gt; 85 then: "shorts"
+    | temp &gt; 50 then: "jeans"
+    | temp &gt; 0 then: "parka"
+    | otherwise: "stay inside!"
+  end
+end</pre><p>However, the program probably won’t behave as expected: rather than returning some combination of “sunglasses” and “shorts” for a warm, sunny day, it will evaluate the first <span class="pyret-highlight"><tt class="pyretexpr">ask</tt></span> expression, <i>discard the result</i>, and then evaluate the second <span class="pyret-highlight"><tt class="pyretexpr">ask</tt></span> expression and return its result.</p><p>Pyret will warn the programmer if it encounters programs like these, and complain that the block contains multiple expressions.  Often as in this case, it signals a real mistake, and the programmer ought to revise the code to comprise a single expression—say, by concatenating the two results above.  Sometimes, though, multiple expressions are deliberate:</p><pre class="bad-ex pyret-highlight">if some-condition():
+  temp = some-complicated-expression()
+  print(temp) # make sure we got it right!
+  do-something-with(temp)
+else:
+  do-something-else()
+end</pre><p>To tell Pyret that these multiple statements are intentional, we could write an explicit <span class="pyret-highlight"><tt class="pyretexpr">block</tt></span> form:</p><pre class="ok-ex pyret-highlight">if some-condition():
+  block:
+    temp = some-complicated-expression()
+    print(temp) # make sure we got it right!
+    do-something-with(temp)
+  end
+else:
+  do-something-else()
+end</pre><p>...but that is syntactically annoying for a straightforward situation! Instead, Pyret allows for block <i>shorthands</i>: writing <span class="pyret-highlight"><tt class="pyretexpr">block</tt></span> before the opening colon of a blocky expression signals that the expression is deliberate.</p><pre class="good-ex pyret-highlight">if some-condition() block:
+  temp = some-complicated-expression()
+  print(temp) # make sure we got it right!
+  do-something-with(temp)
+else:
+  do-something-else()
+end</pre><p>The leading <span class="pyret-highlight"><tt class="pyretexpr">block</tt></span> allows for multiple statements in <i>all</i> of the blocks of this expression.  Analogous markers exist for <ref-gloss>‹ask-expr›</ref-gloss>, <ref-gloss>‹cases-expr›</ref-gloss>, <ref-gloss>‹fun-decl›</ref-gloss>, etc.</p><p>However, even this marker is sometimes too much.  Suppose we eliminated the <span class="pyret-highlight"><tt class="pyretexpr">print</tt></span> call in the example above:</p><pre class="pyret-highlight">if some-condition() block:
+  temp = some-complicated-expression()
+  do-something-with(temp)
+else:
+  do-something-else()
+end</pre><p>Why should this expression be penalized, but the equivalent one, where we inline the definition of <span class="pyret-highlight"><tt class="pyretexpr">temp</tt></span>, not be?  After all, this one is clearer to read!  In fact, Pyret will <i>not</i> complain about this block containing multiple expressions.  Instead, Pyret will consider the following to be valid “non-blocky” blocks:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>Any sequence of let-bindings followed by exactly one expression is fine, as is any block containing even a single template-expression, or (obviously) an explicit <span class="pyret-highlight"><tt class="pyretexpr">block</tt></span> expression.  All other blocks will trigger the multiple-expressions warning and require either an explicit block or a block-shorthand to fix.</p><h2 id="s:declarations" toclevel="2" tocentry="yes">Declarations</h2><p>There are a number of forms that can only appear as statements in <span class="pyret-highlight"><tt class="pyretexpr">block</tt></span>s (rather than anywhere an expression can appear).  Several of these are <i>declarations</i>, which define new names within their enclosing block. <ref-gloss>‹data-decl›</ref-gloss> and <ref-gloss>‹contract›</ref-gloss> are exceptions, and can appear only at the top level.</p><p>&lt;&lt;BNF pending&gt;&gt;</p><h3 id="s:let-decl" toclevel="3" tocentry="yes">Let Declarations</h3><p>Let declarations are written with an equals sign:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>A let statement causes the name in the <span class="pyret-highlight"><tt class="pyretexpr">binding</tt></span> to be put in scope in the current block, and upon evaluation sets the value to be the result of evaluating the <span class="pyret-highlight"><tt class="pyretexpr">binop-expr</tt></span>.  The resulting binding cannot be changed via an <ref-gloss>‹assign-stmt›</ref-gloss>, and cannot be shadowed by other bindings within the same or nested scopes:</p><pre class="pyret-highlight">x = 5
+x := 10
+# Error: x is not assignable
+</pre><pre class="pyret-highlight">x = 5
+x = 10
+# Error: x defined twice
+</pre><pre class="pyret-highlight">x = 5
+fun f():
+  x = 10
+  x
+end
+# Error: can't use the name x in two nested scopes
+</pre><pre class="pyret-highlight">fun f():
+  x = 10
+  x
+end
+fun g():
+  x = 22
+  x
+end
+# Not an error: x is used in two scopes that are not nested</pre><p>A binding also has a case with tuples, where several names can be given in a binding which can then be assigned to values in a tuple.</p><pre class="pyret-highlight">{x;y;z} = {"he" + "llo"; true; 42}
+x = "hi"
+#Error: x defined twice
+</pre><pre class="pyret-highlight">{x;y;z} = {10; 12}
+#Error: The number of names must match the length of the tuple
+</pre><h3 id="s:rec-decl" toclevel="3" tocentry="yes">Recursive Let Declarations</h3><p>&lt;&lt;BNF pending&gt;&gt;</p><p>A recursive let-binding is just like a normal let-binding, except that the name being defined is in scope in the definition itself, rather than only after it. That is:</p><pre class="bad-ex pyret-highlight">countdown-bad = lam(n):
+  if n == 0: true
+  else: countdown-bad(n - 1) # countdown-bad is not in scope
+  end
+end
+# countdown-bad is in scope here</pre><pre class="good-ex pyret-highlight">rec countdown-good =
+  # countdown-good is in scope here, because of the 'rec'
+  lam(n):
+    if n == 0: true
+    else: countdown-good(n - 1) # so this call is fine
+    end
+  end
+# countdown-good is in scope here</pre><h3 id="s:fun-decl" toclevel="3" tocentry="yes">Function Declaration Expressions</h3><p>Function declarations have a number of pieces:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>Function declarations are statements used to define functions with a given name, parameters and signature, optional documentation, body, and optional tests. For example, the following code:</p><pre class="pyret-highlight">fun is-even(n):
+  num-modulo(n, 2) == 0
+end</pre><p>defines a minimal function, with just its name, parameter names, and body.  A more complete example:</p><pre class="pyret-highlight">fun fact(n :: NumNonNegative) -&gt; Number:
+  doc: "Returns n! = 1 * 2 * 3 ... * n"
+  if n == 0: 1
+  else:      n * fact(n - 1)
+  end
+where:
+  fact(1) is 1
+  fact(5) is 120
+end</pre><p>defines a recursive function with a fully-annotated signature (the types of its parameter and return value are specified), documents the purpose of the function with a doc-string, and includes a where-block definine some simple tests of the function.</p><p>Function declarations are statements that can only appear either at the top level of a file, or within a block scope.  (This is commonly used for defining local helper functions within another one.)</p><h4 id="Scope" toclevel="4" tocentry="yes">Scope</h4><p>Once defined, the name of the function is visible for the remainder of the scope in which it is defined.  Additionall, the function is in scope within its own body, to enable recursive functions like <span class="pyret-highlight"><tt class="pyretexpr">fact</tt></span> above:</p><pre class="pyret-highlight">fun outer-function(a, b, c):
+  ...
+  # outer-function is in scope here
+  # as are parameters a, b, and c
+  ...
+  fun inner-helper(d, e, f):
+    ...
+    # inner-helper is in scope here,
+    # as are parameters d, e, and f
+    # and also outer-helper, a, b and c
+    ...
+  end
+  ...
+  # outer-function, a, b, and c are in scope here,
+  # and so is inner-helper, but *not* d, e or f
+  ...
+end</pre><p>As with all Pyret identifiers, these function and parameter names cannot be mutated, and they cannot be redefined while in scope unless they are explicitly <span class="pyret-highlight"><tt class="pyretexpr">shadow</tt></span>ed.</p><h4 id="Where-blocks" toclevel="4" tocentry="yes">Where blocks</h4><p>If a function defines a <span class="pyret-highlight"><tt class="pyretexpr">where:</tt></span> block, it can incorporate unit tests directly inline with its definition.  This helps to document the code in terms of executable examples.  Additionally, whenever the function declaration is executed, the tests will be executed as well.  This helps ensure that the code and tests don’t fall out of synch with each other.  (The clarification about “whenever the declaration is executed” allows writing tests for nested functions that might rely on the parameters of their containing function: in the example above, <span class="pyret-highlight"><tt class="pyretexpr">inner-helper</tt></span> might have a test case that relied on the parameters <span class="pyret-highlight"><tt class="pyretexpr">a</tt></span>, <span class="pyret-highlight"><tt class="pyretexpr">b</tt></span> or <span class="pyret-highlight"><tt class="pyretexpr">c</tt></span> from the surrounding call to <span class="pyret-highlight"><tt class="pyretexpr">outer-function</tt></span>.) See the documentation for <a href="/Users/ds26gte/src/pyret-docs-pb/lang/testing.html#testing-blocks"><span class="pyret-highlight"><tt class="pyretexpr">check:</tt></span>  and  <span class="pyret-highlight"><tt class="pyretexpr">where:</tt></span>  blocks</a> for more details.</p><h4 id="Syntactic-sugar" toclevel="4" tocentry="yes">Syntactic sugar</h4><p>Function declarations are not a primitive concept in the language.  Instead, they can be thought of as an idiomatic declaration of a recursively-scoped let binding to a lambda expression.  That is, the following two definitions are equivalent:</p><pre class="pyret-highlight">fun fact(n):
+  if n == 1: 1 else: n * fact(n - 1) end
+end</pre><pre class="pyret-highlight">rec fact = lam(n):
+  if n == 1: 1 else n * fact(n - 1) end
+end</pre><p>See the <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:lam-expr">documentation</a> for more information about <ref-gloss>‹lam-expr›</ref-gloss>s, and also see <ref-gloss>‹rec-decl›</ref-gloss>s above for more information about recursive bindings.</p><h3 id="s:data-decl" toclevel="3" tocentry="yes">Data Declarations</h3><p>Data declarations define a number of related functions for creating and manipulating a data type.  Their grammar is:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>A <ref-gloss>‹data-decl›</ref-gloss> causes a number of new names to be bound in the scope of the block it is defined in:</p><ul><li>The <span class="pyret-highlight"><tt class="pyretexpr">NAME</tt></span> of the data definition</li><li><span class="pyret-highlight"><tt class="pyretexpr">NAME</tt></span>, for each variant of the data definition</li><li><span class="pyret-highlight"><tt class="pyretexpr">is-NAME</tt></span>, for the data definition and each variant of the data definition</li></ul><p>For example, in this data definition:</p><pre class="pyret-highlight">data BTree:
+  | node(value :: Number, left :: BTree, right :: BTree)
+  | leaf(value :: Number)
+end</pre><p>These names are defined, with the given types:</p><pre class="pyret-highlight">is-BTree :: (Any -&gt; Bool)
+node :: (Number, BTree, BTree -&gt; BTree)
+is-node :: (Any -&gt; Bool)
+leaf :: (Number -&gt; BTree)
+is-leaf :: (Any -&gt; Bool)</pre><p>We call <span class="pyret-highlight"><tt class="pyretexpr">node</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">leaf</tt></span> the <i>constructors</i> of <span class="pyret-highlight"><tt class="pyretexpr">BTree</tt></span>, and they construct values with the named fields.  They will refuse to create the value if fields that don’t match the annotations are given.  As with all annotations, they are optional.  The constructed values can have their fields accessed with <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:dot-expr">dot expressions</a>.</p><p>The function <span class="pyret-highlight"><tt class="pyretexpr">is-BTree</tt></span> is a <i>detector</i> for values created from this data definition.  <span class="pyret-highlight"><tt class="pyretexpr">is-BTree</tt></span> returns <span class="pyret-highlight"><tt class="pyretexpr">true</tt></span> when provided values created by <span class="pyret-highlight"><tt class="pyretexpr">node</tt></span> or <span class="pyret-highlight"><tt class="pyretexpr">leaf</tt></span>, but no others.  <span class="pyret-highlight"><tt class="pyretexpr">BTree</tt></span> can be used as an annotation to check for values created by the constructors of <span class="pyret-highlight"><tt class="pyretexpr">BTree</tt></span>.</p><p>The functions <span class="pyret-highlight"><tt class="pyretexpr">is-node</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">is-leaf</tt></span> are detectors for the values created by the individual constructors: <span class="pyret-highlight"><tt class="pyretexpr">is-node</tt></span> will only return <span class="pyret-highlight"><tt class="pyretexpr">true</tt></span> for values created by calling <span class="pyret-highlight"><tt class="pyretexpr">node</tt></span>, and <span class="pyret-highlight"><tt class="pyretexpr">is-leaf</tt></span> correspondingly for <span class="pyret-highlight"><tt class="pyretexpr">leaf</tt></span>.</p><p>Here is a longer example of the behavior of detectors, field access, and constructors:</p><pre class="pyret-highlight">data BTree:
+  | node(value :: Number, left :: BTree, right :: BTree)
+  | leaf(value :: Number)
+where:
+  a-btree = node(1, leaf(2), node(3, leaf(4), leaf(5)))
+
+  is-BTree(a-btree) is true
+  is-BTree("not-a-tree") is false
+  is-BTree(leaf(5)) is true
+  is-leaf(leaf(5)) is true
+  is-leaf(a-btree) is false
+  is-leaf("not-a-tree") is false
+  is-node(leaf(5)) is false
+  is-node(a-btree) is true
+  is-node("not-a-tree") is false
+
+  a-btree.value is 1
+  a-btree.left.value is 2
+  a-btree.right.value is 3
+  a-btree.right.left.value is 4
+  a-btree.right.right.value is 5
+
+end</pre><p>A data definition can also define, for each instance as well as for the data definition as a whole, a set of methods.  This is done with the keywords <span class="pyret-highlight"><tt class="pyretexpr">with:</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">sharing:</tt></span>.  Methods defined on a variant via <span class="pyret-highlight"><tt class="pyretexpr">with:</tt></span> will only be defined for instances of that variant, while methods defined on the union of all the variants with <span class="pyret-highlight"><tt class="pyretexpr">sharing:</tt></span> are defined on all instances.  For example:</p><pre class="pyret-highlight">data BTree:
+  | node(value :: Number, left :: BTree, right :: BTree) with:
+    method size(self): 1 + self.left.size() + self.right.size() end
+  | leaf(value :: Number) with:
+    method size(self): 1 end,
+    method increment(self): leaf(self.value + 1) end
+sharing:
+  method values-equal(self, other):
+    self.value == other.value
+  end
+where:
+  a-btree = node(1, leaf(2), node(3, leaf(4), leaf(2)))
+  a-btree.values-equal(leaf(1)) is true
+  leaf(1).values-equal(a-btree) is true
+  a-btree.size() is 5
+  leaf(0).size() is 1
+  leaf(1).increment() is leaf(2)
+  a-btree.increment() # raises error: field increment not found.
+end</pre><p>When you have a single kind of datum in a data definition, instead of writing:</p><pre class="pyret-highlight">data Point:
+  | pt(x, y)
+end</pre><p>You can drop the | and simply write:</p><pre class="pyret-highlight">data Point: pt(x, y) end</pre><h3 id="s:var-decl" toclevel="3" tocentry="yes">Variable Declarations</h3><p>Variable declarations look like <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:let-decl">let bindings</a>, but with an extra <span class="pyret-highlight"><tt class="pyretexpr">var</tt></span> keyword in the beginning:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>A <span class="pyret-highlight"><tt class="pyretexpr">var</tt></span> expression creates a new <i>assignable variable</i> in the current scope, initialized to the value of the expression on the right of the <span class="pyret-highlight"><tt class="pyretexpr">=</tt></span>. It can be accessed simply by using the variable name, which will always evaluate to the last-assigned value of the variable.  <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:assign-stmt">Assignment statements</a> can be used to update the value stored in an assignable variable.</p><p>If the <span class="pyret-highlight"><tt class="pyretexpr">binding</tt></span> contains an annotation, the initial value is checked against the annotation, and all <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:assign-stmt">assignment
+statements</a> to the variable check the annotation on the new value before updating.</p><h3 id="s:type-decl" toclevel="3" tocentry="yes">Type Declarations</h3><p>Pyret provides two means of defining new type names. &lt;&lt;BNF pending&gt;&gt;</p><p>A <ref-gloss>‹type-stmt›</ref-gloss> declares an alias to an existing type.  This allows for creating convenient names for types, especially when type parameters are involved.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">type Predicate&lt;a&gt; = (a -&gt; Boolean)
+# Now we can use this alias to make the signatures for other functions more readable:
+fun filter&lt;a&gt;(pred :: Predicate&lt;a&gt;, elts :: List&lt;a&gt;) -&gt; List&lt;a&gt;: ... end
+
+# We can specialize types, too:
+type NumList = List&lt;Number&gt;
+type StrPred = Predicate&lt;String&gt;</pre></div><h3 id="s:newtype-decl" toclevel="3" tocentry="yes">Newtype Declarations</h3><p>By contrast, sometimes we need to declare brand-new types, that are not easily describable using <ref-gloss>‹data-decl›</ref-gloss> or other existing types.  (For one common example, we might want to build an object-oriented type that encapsulates details of its internals.)  To do that we need to specify both a <i>static name</i> to use as annotations to describe our data, and a <i>dynamic brand</i> to mark the data and ensure that we can recognize it again when we see it. &lt;&lt;BNF pending&gt;&gt; When we write</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">newtype MytypeBrander as MyType</pre></div><p>we define both of these components.  See <a href="/Users/ds26gte/src/pyret-docs-pb/lang/brands.html#brands">Brands</a> for more information about branders.</p><h2 id="s:contracts" toclevel="2" tocentry="yes">Contracts</h2><p>As part of its support for the systematic design of functions, Pyret allows developers to specify an annotation for a name, before that name is defined. The general grammar for standalone contracts is:</p><p>For example,</p><pre class="good-ex pyret-highlight">the-answer :: Number
+the-answer = 42
+
+double :: String -&gt; String
+fun double(s): s + s end
+
+vals-to-string :: &lt;T, S&gt; (S, T -&gt; String)
+fun vals-to-string(val1, val2):
+  to-string(val1) + ", " + to-string(val2)
+end</pre><p>In all of these cases, the definition itself (of <span class="pyret-highlight"><tt class="pyretexpr">the-answer</tt></span>, <span class="pyret-highlight"><tt class="pyretexpr">double</tt></span>, and <span class="pyret-highlight"><tt class="pyretexpr">vals-to-string</tt></span>) is preceded by a <i>contract</i> statement, asserting the signature of the definition to follow.  Pyret treats these contracts specially, and weaves them in to the definitions: the previous examples are equivalent to</p><pre class="good-ex pyret-highlight">the-answer :: Number = 42
+
+fun double(s :: String) -&gt; String: s + s end
+
+fun vals-to-string&lt;T,S&gt;(val1 :: T, val2 :: S) -&gt; String:
+  to-string(val1) + ", " + to-string(val2)
+end</pre><p>The grammar for these contracts looks nearly identical to that of <ref-gloss>‹name-binding›</ref-gloss>s.  Function annotations are given a slightly more relaxed treatment: the outermost set of parentheses are optional.</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>When weaving function annotations onto functions, Pyret enforces a few restrictions:</p><ul><li><p>For a standalone function, the contract must immediately precede the function definition, or must immediately precede an <a href="/Users/ds26gte/src/pyret-docs-pb/lang/testing.html#testing-blocks"><span class="pyret-highlight"><tt class="pyretexpr">examples</tt></span>  or  <span class="pyret-highlight"><tt class="pyretexpr">check</tt></span>  block</a> that immediately precedes the function definition.  (Whitespace or comments are not important; extraneous definitions are.)</p><pre class="good-ex pyret-highlight">is-even :: Number -&gt; Boolean
+
+check:
+  is-even(2) is true
+end
+
+fun is-even(n): num-modulo(n, 2) == 0 end</pre><pre class="bad-ex pyret-highlight">is-even :: Number -&gt; Boolean
+
+something-irrelevant = 12345
+
+fun is-even(n): num-modulo(n, 2) == 0 end</pre></li><li><p>For mutually recursive functions, the contracts must be adjacent to the functions, and must precede them.</p><pre class="good-ex pyret-highlight"># Contracts
+is-even :: Number -&gt; Boolean
+is-odd :: Number -&gt; Boolean
+# Implementations
+fun is-even(n): if n == 0: true else: is-odd(n - 1) end end
+fun is-odd(n): if n == 0: false else: is-even(n - 1) end end</pre><pre class="good-ex pyret-highlight"># Is even?
+is-even :: Number -&gt; Boolean
+fun is-even(n): if n == 0: true else: is-odd(n - 1) end end
+# Is odd?
+is-odd :: Number -&gt; Boolean
+fun is-odd(n): if n == 0: false else: is-even(n - 1) end end</pre><pre class="bad-ex pyret-highlight">is-odd :: Number -&gt; Boolean
+fun is-even(n): if n == 0: true else: is-odd(n - 1) end end
+is-even :: Number -&gt; Boolean  ## Does not precede definition of is-even
+fun is-odd(n): if n == 0: false else: is-even(n - 1) end end</pre></li><li><p>If a contract specifies argument names, then the names must match those used by the function.</p><pre class="good-ex pyret-highlight">is-even :: (n :: Number) -&gt; Boolean
+fun is-even(n): num-modulo(n, 2) == 0 end</pre><pre class="bad-ex pyret-highlight">is-even :: (x :: Number) -&gt; Boolean # name does not match
+fun is-even(n): ... end</pre></li><li><p>If a contract is used for a function, then the function must not itself be annotated.</p><pre class="good-ex pyret-highlight">is-even :: (n :: Number) -&gt; Boolean
+fun is-even(n): num-modulo(n, 2) == 0 end</pre><pre class="bad-ex pyret-highlight">is-even :: (n :: Number) -&gt; Boolean # Redundant argument annotation
+fun is-even(n :: Number): ... end</pre><pre class="bad-ex pyret-highlight">is-even :: (n :: Number) -&gt; Boolean # Redundant return annotation
+fun is-even(n) -&gt; Boolean: ... end</pre></li></ul><p>Note that using a contract on a function is <i>more expressive</i> than using an annotated binding for a lambda.  <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:annotated-binding">Annotated bindings</a> do not enforce all the components of an <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:arrow-ann">arrow annotation</a>; they merely ensure that the value being bound is in fact a function.  By contrast, function contracts ensure the arguments and return values are annotated and checked.</p><h2 id="Statements" toclevel="2" tocentry="yes">Statements</h2><p>There are just a few forms that can only appear as statements in <span class="pyret-highlight"><tt class="pyretexpr">block</tt></span>s that aren’t declarations:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><h3 id="s:when-stmt" toclevel="3" tocentry="yes">When Statements</h3><p>A when expression has a single test condition with a corresponding block.</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>For example:</p><pre class="pyret-highlight">when x == 42:
+  print("answer")
+end</pre><p>If the test condition is true, the block is evaluated. If the test condition is false, nothing is done, and <span class="pyret-highlight"><tt class="pyretexpr">nothing</tt></span> is returned.</p><h3 id="s:assign-stmt" toclevel="3" tocentry="yes">Assignment Statements</h3><p>Assignment statements have a name on the left, and an expression on the right of <span class="pyret-highlight"><tt class="pyretexpr">:=</tt></span>:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>If <span class="pyret-highlight"><tt class="pyretexpr">NAME</tt></span> is not declared in the same or an outer scope of the assignment expression with a <span class="pyret-highlight"><tt class="pyretexpr">var</tt></span> declaration, the program fails with a static error.</p><p>At runtime, an assignment expression changes the value of the assignable variable <span class="pyret-highlight"><tt class="pyretexpr">NAME</tt></span> to the result of the right-hand side expression.</p><h3 id="Binop-Expression-“Statements”" toclevel="3" tocentry="yes">Binop Expression “Statements”</h3><p>The <ref-gloss>‹binop-expr›</ref-gloss> production is included in <ref-gloss>‹stmt›</ref-gloss> because any expression can appear where a statement can (subject to restrictions from well-formedness checking).</p><h2 id="Expressions" toclevel="2" tocentry="yes">Expressions</h2><p>The following are all the expression forms of Pyret:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><h3 id="s:lam-expr" toclevel="3" tocentry="yes">Lambda Expressions</h3><p>The grammar for a lambda expression is:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>A lambda expression creates a function value that can be applied with <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:app-expr">application expressions</a>.  The arguments in <span class="pyret-highlight"><tt class="pyretexpr">args</tt></span> are bound to their arguments as immutable identifiers as in a <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:let-decl">let expression</a>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  f = lam(x, y): x - y end
+  f(5, 3) is 2
+end
+
+check:
+  f = lam({x;y}): x - y end
+  f({5;3}) is 2
+end</pre></div><p>These identifiers follow the same rules of no shadowing and no assignment.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">x = 12
+f = lam(x): x end  # ERROR: x shadows a previous definition
+g = lam(y):
+  y := 10   # ERROR: y is not a variable and cannot be assigned
+  y + 1
+end</pre></div><p>If the arguments have <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:annotations">annotations</a> associated with them, they are checked before the body of the function starts evaluating, in order from left to right.  If an annotation fails, an exception is thrown.</p><pre class="pyret-highlight">add1 = lam(x :: Number):
+  x + 1
+end
+add1("not-a-number")
+# Error: expected a Number and got "not-a-number"</pre><p>A lambda expression can have a <i>return</i> annotation as well, which is checked before evaluating to the final value:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">add1 = lam(x) -&gt; Number:
+  tostring(x) + "1"
+end
+add1(5)
+# Error: expected a Number and got "51"</pre></div><p>Lambda expressions remember, or close over, the values of other identifiers that are in scope when they are defined.  So, for example:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  x = 10
+  f = lam(y): y + x end
+  f(5) is 15
+end</pre></div><h3 id="s:curly-lam-expr" toclevel="3" tocentry="yes">Curly-Brace Lambda Shorthand</h3><p>Lambda expressions can also be written with a curly-brace shorthand:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  x = 10
+  f = {(y :: Number) -&gt; Number: x + y}
+  f(5) is 15
+end</pre></div><h3 id="s:method-expr" toclevel="3" tocentry="yes">Anonymous Method Expressions</h3><p>An anonymous method expression looks much like an anonymous function (defined with <span class="pyret-highlight"><tt class="pyretexpr">lam</tt></span>):</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>All the same rules for bindings, including annotations and shadowing, apply the same to <ref-gloss>‹method-expr›</ref-gloss>s as they do to <ref-gloss>‹lam-expr›</ref-gloss>s.</p><p>It is a well-formedness error for a method to have no arguments.</p><p>At runtime, a <ref-gloss>‹method-expr›</ref-gloss> evaluates to a method value.  Method values cannot be applied directly:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  m = method(self): self end
+  m(5) raises "non-function"
+end</pre></div><p>Instead, methods must be included as object fields, where they can then be bound and invoked.  A method value can be used in multiple objects:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  m = method(self): self.x end
+  o = { a-method-name: m, x: 20 }
+  o2 = { a-method-name: m, x: 30 }
+  o.a-method-name() is 20
+  o2.a-method-name() is 30
+end</pre></div><h3 id="s:app-expr" toclevel="3" tocentry="yes">Application Expressions</h3><p>Function application expressions have the following grammar:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>An application expression is an expression followed by a comma-separated list of arguments enclosed in parentheses.  It first evaluates the arguments in left-to-right order, then evaluates the function position.  If the function position is a function value, the number of provided arguments is checked against the number of arguments that the function expects.  If they match, the arguments names are bound to the provided values.  If they don’t, an exception is thrown.</p><p>Note that there is <i>no space</i> allowed before the opening parenthesis of the application.  If you make a mistake, Pyret will complain:</p><pre class="pyret-highlight">f(1) # This is the function application expression f(1)
+f (1) # This is the id-expr f, followed by the paren-expr (1)
+# The second form yields a well-formedness error that there
+# are two expressions on the same line</pre><h3 id="s:curried-apply-expr" toclevel="3" tocentry="yes">Curried Application Expressions</h3><p>Suppose a function is defined with multiple arguments:</p><pre class="pyret-highlight">fun f(v, w, x, y, z): ... end</pre><p>Sometimes, it is particularly convenient to define a new function that calls <span class="pyret-highlight"><tt class="pyretexpr">f</tt></span> with some arguments pre-specified:</p><pre class="pyret-highlight">call-f-with-123 = lam(y, z): f(1, 2, 3, y, z) end</pre><p>Pyret provides syntactic sugar to make writing such helper functions easier:</p><pre class="pyret-highlight">call-f-with-123 = f(1, 2, 3, _, _) # same as the fun expression above</pre><p>Specifically, when Pyret code contains a function application some of whose arguments are underscores, it constructs an lambda expression with the same number of arguments as there were underscores in the original expression, whose body is simply the original function application, with the underscores replaced by the names of the arguments to the anonymous function.</p><p>This syntactic sugar also works with operators.  For example, the following are two ways to sum a list of numbers:</p><pre class="pyret-highlight">[list: 1, 2, 3, 4].foldl(lam(a, b): a + b end, 0)
+
+[list: 1, 2, 3, 4].foldl(_ + _, 0)</pre><p>Likewise, the following are two ways to compare two lists for equality:</p><pre class="pyret-highlight">list.map_2(lam(x, y): x == y end, first-list, second-list)
+
+list.map_2(_ == _, first-list, second-list)</pre><p>Note that there are some limitations to this syntactic sugar.  You cannot use it with the <span class="pyret-highlight"><tt class="pyretexpr">is</tt></span> or <span class="pyret-highlight"><tt class="pyretexpr">raises</tt></span> expressions in check blocks, since both test expressions and expected outcomes are known when writing tests.  Also, note that the sugar is applied only to one function application at a time.  As a result, the following code:</p><pre class="pyret-highlight">_ + _ + _</pre><p>desugars to</p><pre class="pyret-highlight">lam(z):
+  (lam(x, y): x + y end) + z
+end</pre><p>which is probably not what was intended.  You can still write the intended expression manually:</p><pre class="pyret-highlight">lam(x, y, z): x + y + z end</pre><p>Pyret just does not provide syntactic sugar to help in this case (or other more complicated ones).</p><h3 id="s:cannonball-expr" toclevel="3" tocentry="yes">Chaining Application</h3><p><index>^ (Chained Application)</index></p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>The expression <span class="pyret-highlight"><tt class="pyretexpr">e1 ^ e2</tt></span> is equivalent to <span class="pyret-highlight"><tt class="pyretexpr">e2(e1)</tt></span>.  It’s just another way of writing a function application to a single argument.</p><p>Sometimes, composing functions doesn’t produce readable code.  For example, if say we have a <span class="pyret-highlight"><tt class="pyretexpr">Tree</tt></span> datatype, and we have an <span class="pyret-highlight"><tt class="pyretexpr">add</tt></span> operation on it, defined via a function.  To build up a tree with a series of adds, we’d write something like:</p><pre class="pyret-highlight">t = add(add(add(add(empty-tree, 1), 2), 3), 4)</pre><p>Or maybe</p><pre class="pyret-highlight">t1 = add(empty-tree, 1)
+t2 = add(t1, 2)
+t3 = add(t2, 3)
+t  = add(t3, 4)</pre><p>If <span class="pyret-highlight"><tt class="pyretexpr">add</tt></span> were a method, we could write:</p><pre class="pyret-highlight">t = empty-tree.add(1).add(2).add(3).add(4)</pre><p>which would be more readable, but since <span class="pyret-highlight"><tt class="pyretexpr">add</tt></span> is a function, this doesn’t work.</p><p>In this case, we can write instead:</p><pre class="pyret-highlight">t = empty-tree ^ add(_, 1) ^ add(_, 2) ^ add(_, 3)</pre><p>This uses <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:curried-apply-expr">curried application</a> to create a single argument function, and chaining application to apply it.  This can be more readable across several lines of initialization as well, when compared to composing “inside-out” or using several intermediate names:</p><pre class="pyret-highlight">t = empty-tree
+  ^ add(_, 1)
+  ^ add(_, 2)
+  ^ add(_, 3)
+  # and so on</pre><h3 id="s:inst-expr" toclevel="3" tocentry="yes">Instantiation Expressions</h3><p>Functions may be defined with parametric signatures.  Calling those functions does not require specifying the type parameter, but supplying it might aid in readability, or may aid the static type checker.  You can supply the type arguments just between the function name and the left-paren of the function call.  Spaces are not permitted before the left-angle bracket or after the right-angle bracket</p><p>&lt;&lt;BNF pending&gt;&gt;</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun is-even(n :: Number) -&gt; Boolean: num-modulo(n, 2) == 0 end
+check:
+  map&lt;Number, Boolean&gt;(is-even, [list: 1, 2, 3]) is [list: false, true, false]
+end</pre></div><h3 id="s:binop-expr" toclevel="3" tocentry="yes">Binary Operators</h3><p>There are a number of binary operators in Pyret.  A binary operator expression is a series of expressions joined by binary operators. An expression itself is also a binary operator expression.</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>Pyret supports the following operations, shown by example:</p><pre class="pyret-highlight">examples:
+  1 + 1  is 2
+  1 - 1  is 0
+  2 * 4  is 8
+  6 / 3  is 2
+  1 &lt; 2  is true
+  1 &lt;= 1 is true
+  1 &gt; 1  is false
+  1 &gt;= 1 is true
+  1 == 1 is true
+  true and true is true
+  false or true is true
+  not(false) is true
+end</pre><div class="margin-note">There are additional equality operators in Pyret, which also call methods, but are somewhat more complex.  They are documented in detail in <a href="/Users/ds26gte/src/pyret-docs-pb/lang/equality.html#equality"></a>.</div><p>The arithmetic and comparison operators examine their arguments.  For primitive numbers and strings, the operation happens internally to Pyret.  If the arguments are objects, however, the operators are syntactic sugar for a particular method call, as follows:</p><table class="table table-sm"><tbody><tr><td><span class="pyret-highlight"><tt class="pyretexpr">left + right</tt></span></td><td><span class="pyret-highlight"><tt class="pyretexpr">left._plus(right)</tt></span></td></tr><tr><td><span class="pyret-highlight"><tt class="pyretexpr">left - right</tt></span></td><td><span class="pyret-highlight"><tt class="pyretexpr">left._minus(right)</tt></span></td></tr><tr><td><span class="pyret-highlight"><tt class="pyretexpr">left * right</tt></span></td><td><span class="pyret-highlight"><tt class="pyretexpr">left._times(right)</tt></span></td></tr><tr><td><span class="pyret-highlight"><tt class="pyretexpr">left / right</tt></span></td><td><span class="pyret-highlight"><tt class="pyretexpr">left._divide(right)</tt></span></td></tr><tr><td><span class="pyret-highlight"><tt class="pyretexpr">left &lt;= right</tt></span></td><td><span class="pyret-highlight"><tt class="pyretexpr">left._lessequal(right)</tt></span></td></tr><tr><td><span class="pyret-highlight"><tt class="pyretexpr">left &lt; right</tt></span></td><td><span class="pyret-highlight"><tt class="pyretexpr">left._lessthan(right)</tt></span></td></tr><tr><td><span class="pyret-highlight"><tt class="pyretexpr">left &gt;= right</tt></span></td><td><span class="pyret-highlight"><tt class="pyretexpr">left._greaterequal(right)</tt></span></td></tr><tr><td><span class="pyret-highlight"><tt class="pyretexpr">left &gt; right</tt></span></td><td><span class="pyret-highlight"><tt class="pyretexpr">left._greaterthan(right)</tt></span></td></tr></tbody></table><p>Logical operators do not have a corresponding method call, since they only apply to primitive boolean values.</p><h3 id="s:tuple-expr" toclevel="3" tocentry="yes">Tuple Expressions</h3><p>Tuples are an immutable, fixed-length collection of expressions indexed by non-negative integers:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>A semicolon-separated sequence of fields enclosed in <span class="pyret-highlight"><tt class="pyretexpr">{}</tt></span> creates a tuple.</p><h3 id="s:tuple-get-expr" toclevel="3" tocentry="yes">Tuple Access Expressions</h3><p>&lt;&lt;BNF pending&gt;&gt;</p><p>A tuple-get expression evaluates the <span class="pyret-highlight"><tt class="pyretexpr">expr</tt></span> to a value <span class="pyret-highlight"><tt class="pyretexpr">val</tt></span>, and then does one of three things:</p><div class="margin-note">A static well-formedness error is raised if the index is negative</div><ul><li>Raises an exception, if <span class="pyret-highlight"><tt class="pyretexpr">expr</tt></span> is not a tuple</li><li>Raises an exception, if <span class="pyret-highlight"><tt class="pyretexpr">NUMBER</tt></span> is equal to or greater than the length of the given tuple</li><li>Evaluates the expression, returning the <span class="pyret-highlight"><tt class="pyretexpr">val</tt></span> at the given index.  The first index is <span class="pyret-highlight"><tt class="pyretexpr">0</tt></span></li></ul><p>For example:</p><pre class="good-ex pyret-highlight">check:
+  t = {"a";"b";true}
+  t.{0} is "a"
+  t.{1} is "b"
+  t.{2} is true
+end</pre><p>Note that the index is restricted <i>syntactically</i> to being a number.  So this program is a parse error:</p><pre class="bad-ex pyret-highlight">t = {"a";"b";"c"}
+t.{1 + 1}</pre><p>This restriction ensures that tuple access is typable.</p><h3 id="s:obj-expr" toclevel="3" tocentry="yes">Object Expressions</h3><p>Object expressions map field names to values:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>A comma-separated sequence of fields enclosed in <span class="pyret-highlight"><tt class="pyretexpr">{}</tt></span> creates an object; we refer to the expression as an <i>object literal</i>.  There are two types of fields: <i>data</i> fields and <i>method</i> fields.  A data field in an object literal simply creates a field with that name on the resulting object, with its value equal to the right-hand side of the field. A method field</p><div class="insetpara nested"><pre class="nothing_special">"method" key fun-header ":" doc-string block where-clause "end"</pre></div><p>is syntactic sugar for:</p><div class="insetpara nested"><pre class="nothing_special">key ":" "method" fun-header ":" doc-string block where-clause "end"</pre></div><p>That is, it’s just special syntax for a data field that contains a method value.</p><p>The fields are evaluated in the order they appear.  If the same field appears more than once, it is a compile-time error.</p><h3 id="s:dot-expr" toclevel="3" tocentry="yes">Dot Expressions</h3><p>A dot expression is any expression, followed by a dot and name:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>A dot expression evaluates the <span class="pyret-highlight"><tt class="pyretexpr">expr</tt></span> to a value <span class="pyret-highlight"><tt class="pyretexpr">val</tt></span>, and then does one of three things:</p><ul><li>Raises an exception, if <span class="pyret-highlight"><tt class="pyretexpr">NAME</tt></span> is not a field of <span class="pyret-highlight"><tt class="pyretexpr">expr</tt></span></li><li>Evaluates to the value stored in <span class="pyret-highlight"><tt class="pyretexpr">NAME</tt></span>, if <span class="pyret-highlight"><tt class="pyretexpr">NAME</tt></span> is present and not a method</li><li><p>If the <span class="pyret-highlight"><tt class="pyretexpr">NAME</tt></span> field is a method value, evaluates to a function that is the <i>method binding</i> of the method value to <span class="pyret-highlight"><tt class="pyretexpr">val</tt></span>.  For a method</p><pre class="pyret-highlight">m = method(self, x): body end</pre><p>The <i>method binding</i> of <span class="pyret-highlight"><tt class="pyretexpr">m</tt></span> to a value <span class="pyret-highlight"><tt class="pyretexpr">v</tt></span> is equivalent to:</p><pre class="pyret-highlight">(lam(self): lam(x): body end end)(v)</pre><p>What this detail means is that you can look up a method and it automatically closes over the value on the left-hand side of the dot.  This bound method can be freely used as a function.</p><p>For example:</p><pre class="pyret-highlight">o = { method m(self, x): self.y + x end, y: 22 }
+check:
+  the-m-method-closed-over-o = o.m
+  the-m-method-closed-over-o(5) is 27
+end</pre><p>Note that a method binding is not a itself a method value. Creating new objects from method bindings will not behave the same as using method values directly.</p><p>For example:</p><pre class="pyret-highlight">code = method(self, x): self.y + x end
+p = { y: 10, m: code }
+q = p.{ y: 15 }
+r = { y: 20, m: p.m } # m given method binding, not a method
+check:
+  p.m(5) is 15
+  q.m(5) is 20 # self.y dynamically resolved when code runs
+  r.m(5) is 15 # but this is not 25, because r.m is p.m
+end</pre></li></ul><h3 id="s:extend-expr" toclevel="3" tocentry="yes">Extend Expressions</h3><p>The extend expression consists of an base expression and a list of fields to extend it with:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>The extend expression first evaluates <span class="pyret-highlight"><tt class="pyretexpr">expr</tt></span> to a value <span class="pyret-highlight"><tt class="pyretexpr">val</tt></span>, and then creates a new object with all the fields of <span class="pyret-highlight"><tt class="pyretexpr">val</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">fields</tt></span>.  If a field is present in both, the new field is used.</p><p>Examples:</p><pre class="pyret-highlight">check:
+  o = {x : "original-x", y: "original-y"}
+  o2 = o.{x : "new-x", z : "new-z"}
+  o2.x is "new-x"
+  o2.y is "original-y"
+  o2.z is "new-z"
+end</pre><h3 id="s:if-expr" toclevel="3" tocentry="yes">If Expressions</h3><p>An if expression has a number of test conditions and an optional else case.</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>For example, this if expression has an “else:”</p><pre class="pyret-highlight">if x == 0:
+  1
+else if x &gt; 0:
+  x
+else:
+  x * -1
+end</pre><p>This one does not:</p><pre class="pyret-highlight">if x == 0:
+  1
+else if x &gt; 0:
+  x
+end</pre><p>Both are valid.  The conditions are tried in order, and the block corresponding to the first one to return <span class="pyret-highlight"><tt class="pyretexpr">true</tt></span> is evaluated.  If no condition matches, the else branch is evaluated if present.  If no condition matches and no else branch is present, an error is thrown.  If a condition evaluates to a value other than <span class="pyret-highlight"><tt class="pyretexpr">true</tt></span> or <span class="pyret-highlight"><tt class="pyretexpr">false</tt></span>, a runtime error is thrown.</p><h3 id="s:ask-expr" toclevel="3" tocentry="yes">Ask Expressions</h3><p>An <span class="pyret-highlight"><tt class="pyretexpr">ask</tt></span> expression is a different way of writing an <span class="pyret-highlight"><tt class="pyretexpr">if</tt></span> expression that can be easier to read in some cases.</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>This ask expression:</p><pre class="pyret-highlight">ask:
+  | x == 0 then: 1
+  | x &gt; 0 then: x
+  | otherwise: x * -1
+end</pre><p>is equivalent to</p><pre class="pyret-highlight">if x == 0:
+  1
+else if x &gt; 0:
+  x
+else:
+  x * -1
+end</pre><p>Similar to <span class="pyret-highlight"><tt class="pyretexpr">if</tt></span>, if an <span class="pyret-highlight"><tt class="pyretexpr">otherwise:</tt></span> branch isn’t specified and no branch matches, a runtime error results.</p><h3 id="s:cases-expr" toclevel="3" tocentry="yes">Cases Expressions</h3><p>A cases expression consists of a datatype (in parentheses), an expression to inspect (before the colon), and a number of branches.  It is intended to be used in a structure parallel to a data definition.</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>The <span class="pyret-highlight"><tt class="pyretexpr">check-ann</tt></span> must be a type, like <a href="../../../../../../missing_gloss"><span class="pyret-highlight"><tt class="pyretexpr">List</tt></span></a>.  Then <span class="pyret-highlight"><tt class="pyretexpr">expr</tt></span> is evaluated and checked against the given annotation.  If it has the right type, the cases are then checked.</p><p>Cases should use the names of the variants of the given data type as the <span class="pyret-highlight"><tt class="pyretexpr">NAME</tt></span>s of each branch.  In the branch that matches, the fields of the variant are bound, in order, to the provided <span class="pyret-highlight"><tt class="pyretexpr">args</tt></span>, and the right-hand side of the <span class="pyret-highlight"><tt class="pyretexpr">=&gt;</tt></span> is evaluated in that extended environment.  An exception results if the wrong number of arguments are given.</p><p>An optional <span class="pyret-highlight"><tt class="pyretexpr">else</tt></span> clause can be provided, which is evaluated if no cases match.  If no <span class="pyret-highlight"><tt class="pyretexpr">else</tt></span> clause is provided, a runtime error results.</p><p>For example, some cases expression on lists looks like:</p><pre class="pyret-highlight">check:
+  result = cases(List) [list: 1,2,3]:
+    | empty =&gt; "empty"
+    | link(f, r) =&gt; "link"
+  end
+  result is "link"
+
+  result2 = cases(List) [list: 1,2,3]:
+    | empty =&gt; "empty"
+    | else =&gt; "else"
+  end
+  result2 is "else"
+
+  result3 = cases(List) empty:
+    | empty =&gt; "empty"
+    | else =&gt; "else"
+  end
+  result3 is "empty"
+end</pre><p>If a field of the variant is a tuple, it can also be bound using a tuple binding.</p><p>For example, a cases expression on a list with tuples looks like:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+  result4 = cases(List) [list: {"a"; 1}, {"b"; 2}, {"c"; 3}]:
+    | empty =&gt; "empty"
+    | link({x;y}, r) =&gt; x
+    | else =&gt; "else"
+  end
+
+  result4 is "a"
+end</pre></div><h3 id="s:for-expr" toclevel="3" tocentry="yes">For Expressions</h3><p>For expressions consist of the <span class="pyret-highlight"><tt class="pyretexpr">for</tt></span> keyword, followed by a list of <span class="pyret-highlight"><tt class="pyretexpr">binding from expr</tt></span> clauses in parentheses, followed by a block:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>The for expression is just syntactic sugar for a <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:lam-expr"><span class="pyret-highlight"><tt class="pyretexpr">lam-expr</tt></span></a> and a <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:app-expr"><span class="pyret-highlight"><tt class="pyretexpr">app-expr</tt></span></a>.  An expression</p><pre class="pyret-highlight">for fexpr(arg1 :: ann1 from expr1, ...) -&gt; ann-return:
+  block
+end</pre><p>is equivalent to:</p><pre class="pyret-highlight">fexpr(lam(arg1 :: ann1, ...) -&gt; ann-return: block end, expr1, ...)</pre><p>Using a <span class="pyret-highlight"><tt class="pyretexpr">for-expr</tt></span> can be a more natural way to call, for example, list iteration functions because it puts the identifier of the function and the value it draws from closer to one another.  Use of <span class="pyret-highlight"><tt class="pyretexpr">for-expr</tt></span> is a matter of style; here is an example that compares <span class="pyret-highlight"><tt class="pyretexpr">fold</tt></span> with and without <span class="pyret-highlight"><tt class="pyretexpr">for</tt></span>:</p><pre class="pyret-highlight">for fold(sum from 0, number from [list: 1,2,3,4]):
+  sum + number
+end
+
+fold(lam(sum, number): sum + number end, 0, [list: 1,2,3,4])</pre><h3 id="s:template-expr" toclevel="3" tocentry="yes">Template (...) Expressions</h3><p>A template expression is three dots in a row:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>It is useful for a placeholder for other expressions in code-in-progress.  When it is evaluated, it raises a runtime exception that indicates the expression it is standing in for isn’t yet implemented:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun list-sum(l :: List&lt;Number&gt;) -&gt; Number:
+  cases(List&lt;Number&gt;) l:
+    | empty =&gt; 0
+    | link(first, rest) =&gt; first + ...
+  end
+end
+check:
+  list-sum(empty) is 0
+  list-sum(link(1, empty)) raises "template-not-finished"
+end</pre></div><p>This is handy for starting a function (especially one with many cases) with some tests written and others to be completed.</p><div class="margin-note">These other positions for <span class="pyret-highlight"><tt class="pyretexpr">...</tt></span> may be included in the future.</div><p>The <span class="pyret-highlight"><tt class="pyretexpr">...</tt></span> expression can only appear where <i>expressions</i> can appear. So it is not allowed in binding positions or annotation positions.  These are not allowed:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun f(...): # parse error
+  "todo"
+end
+x :: ... = 5 # parse error</pre></div><p>Because templates are by definition unfinished, the presence of a template expression in a block exempts that block from <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:blocky-blocks">explicit-blockiness checking</a>.</p><h3 id="s:table-exprs" toclevel="3" tocentry="yes">Tables</h3><p>Tables precise syntax is documented here.  For helper functions and data structures, see <a href="/Users/ds26gte/src/pyret-docs-pb/builtin/tables.html#s:tables">Creating Tables</a>.</p><p>Table expressions consist of a list of column names followed by one or more rows of data:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>&lt;&lt;BNF pending&gt;&gt;</p><h4 id="s:tables:order" toclevel="4" tocentry="yes">Sorting Table Rows</h4><p>&lt;&lt;BNF pending&gt;&gt;</p><h4 id="s:tables:transform" toclevel="4" tocentry="yes">Transforming Table Rows</h4><p>&lt;&lt;BNF pending&gt;&gt;</p><h4 id="s:tables:extract" toclevel="4" tocentry="yes">Extracting Table Columns</h4><p>&lt;&lt;BNF pending&gt;&gt;</p><h4 id="s:tables:extend" toclevel="4" tocentry="yes">Adding Table Columns</h4><p>&lt;&lt;BNF pending&gt;&gt;</p><h3 id="s:table-loading" toclevel="3" tocentry="yes">Table Loading Expressions</h3><p>A table loading expression constructs a table using a data source and zero or more data sanitizers: &lt;&lt;BNF pending&gt;&gt;</p><h3 id="s:reactor-expr" toclevel="3" tocentry="yes">Reactor Expressions</h3><p>&lt;&lt;BNF pending&gt;&gt;</p><p>Reactors are described in detail in <a href="/Users/ds26gte/src/pyret-docs-pb/builtin/reactors.html#s:reactors">Creating Reactors</a>.</p><h3 id="s:reference-fields" toclevel="3" tocentry="yes">Mutable fields</h3><p>Pyret allows creating data definitions whose fields are mutable.  Accordingly, it provides syntax for accessing and modifying those fields. &lt;&lt;BNF pending&gt;&gt;</p><p>By analogy with how <ref-gloss>‹dot-expr›</ref-gloss> accesses normal fields, <ref-gloss>‹get-bang-expr›</ref-gloss> accesses mutable fields—but more emphatically so, because mutable fields, by their nature, might change.  Dot-access to mutable fields also works, but does not return the field’s value: it returns the reference itself, which is a Pyret value that’s mostly inert and difficult to work with outside the context of its host object.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">data MutX:
+  | mut-x(ref x, y)
+end
+
+ex1 = mut-x(1, 2)
+
+check:
+  ex1!x is 1      # this access the value inside the reference
+  ex1.x is-not 1  # this does not
+end</pre></div><p>To update a reference value, we use syntax similar to <ref-gloss>‹extend-expr›</ref-gloss>, likewise made more emphatic:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">ex1!{x: 42}
+check:
+  ex1!x is 42
+end</pre></div><h3 id="s:construct-expr" toclevel="3" tocentry="yes">Construction expressions</h3><p>Individual Pyret data values are syntactically simple to construct: they look similar to function calls.  But arbitrarily-sized data is not as obvious.  For instance, we could write</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">link(1, link(2, link(3, link(4, empty))))</pre></div><p>to construct a 4-element list of numbers, but this gets tiresome quite quickly.  Many languages provide built-in syntactic support for constructing lists, but in Pyret we want all data types to be treated equally.  Accordingly, we can write the above example as</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">[list: 1, 2, 3, 4]</pre></div><p>where <i><span class="pyret-highlight"><tt class="pyretexpr">list</tt></span> is not a syntactic keyword</i> in the language.  Instead, this is one example of a <i>construction expression</i>, whose syntax is simply &lt;&lt;BNF pending&gt;&gt;</p><p>Pyret defines several of these constructors for you: lists, sets, arrays, and string-dictionaries all have the same syntax.</p><p>The expression before the initial colon is a Pyret object that has a particular set of methods available.  Users can define their own constructors as well.</p><pre class="pyret-highlight">type Constructor&lt;A&gt; = {
+  make0 :: ( -&gt; A),
+  make1 :: (Any -&gt; A),
+  make2 :: (Any, Any -&gt; A),
+  make3 :: (Any, Any, Any -&gt; A),
+  make4 :: (Any, Any, Any, Any -&gt; A),
+  make5 :: (Any, Any, Any, Any, Any -&gt; A),
+  make  :: (RawArray&lt;Any&gt; -&gt; A),
+}</pre><p>When Pyret encounters a construction expression, it will call the appropriately-numbered method on the constructor objects, depending on the number of arguments it received.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">weird :: Constructor&lt;String&gt; = {
+  make0: lam(): "nothing at all" end,
+  make1: lam(a): "just " + tostring(a) end,
+  make2: lam(a, b): tostring(a) + " and " + tostring(b) end,
+  make3: lam(a, b, c): "several things" end,
+  make4: lam(a, b, c, d): "four things" end,
+  make5: lam(a, b, c, d, e): "five things" end,
+  make : lam(args): "too many things" end
+}
+check:
+  [weird: ] is "nothing at all"
+  [weird: true] is "just true"
+  [weird: 5, 6.24] is "5 and 156/25"
+  [weird: true, false, 5] is "several things"
+  [weird: 1, 2, 3, 4] is "four things"
+  [weird: 1, 1, 1, 1, 1] is "five things"
+  [weird: "a", "b", "c", true, false, 5] is "too many things"
+end</pre></div><h3 id="s:binding-expressions" toclevel="3" tocentry="yes">Expression forms of bindings</h3><p>Every definition in Pyret is visible until the end of its scope, which is usually the nearest enclosing block.  To limit that scope, you can wrap definitions in explicit <ref-gloss>‹user-block-expr›</ref-gloss>s, but this is sometimes awkward to read.  Pyret allows for three additional forms that combine bindings with expression blocks in a manner that is sometimes more legible:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>These define their bindings only for the scope of the following block.  A <ref-gloss>‹multi-let-expr›</ref-gloss> defines a sequence of either let- or variable-bindings, each of which are in scope for subsequent ones.  A <ref-gloss>‹letrec-expr›</ref-gloss> defines a set of mutually-recursive let-bindings that may refer to each other in a well-formed way (i.e., no definition may rely on other definitions before they’ve been fully evaluated).  These are akin to the <ref-gloss>‹let-decl›</ref-gloss> and <ref-gloss>‹var-decl›</ref-gloss> forms seen earlier, but with more explicitly-visible scoping rules.</p><p>Finally, <ref-gloss>‹type-let-expr›</ref-gloss> defines local type aliases or new types, akin to <ref-gloss>‹type-stmt›</ref-gloss>.</p><h2 id="s:annotations" toclevel="2" tocentry="yes">Annotations</h2><p>&lt;&lt;BNF pending&gt;&gt;</p><p>Annotations in Pyret express intended types values will have at runtime. They appear next to identifiers anywhere a <span class="pyret-highlight"><tt class="pyretexpr">binding</tt></span> is specified in the grammar, and if an annotation is present adjacent to an identifier, the program is compiled to raise an error if the value bound to that identifier would behave in a way that violates the annotation.  The annotation provides a <i>guarantee</i> that either the value will behave in a particular way, or the program will raise an exception. In addition, annotations can be checked by Pyret’s <a href="/Users/ds26gte/src/pyret-docs-pb/lang/type-check.html#type-check">type checker</a> to ensure that all values have the expected types and are used correctly.</p><h3 id="s:name-ann" toclevel="3" tocentry="yes">Name Annotations</h3><p>&lt;&lt;BNF pending&gt;&gt; Some annotations are simply names.  For example, a <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:data-decl"><span class="pyret-highlight"><tt class="pyretexpr">data declaration</tt></span></a> binds the name of the declaration as a value suitable for use as a name annotation.  There are built-in name annotations, too:</p><div class="insetpara nested"><pre class="nothing_special">Any
+Number
+String
+Boolean</pre></div><p>Each of these names represents a particular type of runtime value, and using them in annotation position will check each time the identifier is bound that the value is of the right type.</p><pre class="pyret-highlight">x :: Number = "not-a-number"
+# Error: expected Number and got "not-a-number"</pre><p><span class="pyret-highlight"><tt class="pyretexpr">Any</tt></span> is an annotation that allows any value to be used.  It’s semantically equivalent to not putting an annotation on an identifier, but it allows a program to clearly signal that no restrictions are intended for the identifier it annotates.</p><p>Dot-annotations allow for importing types from modules:</p><pre class="pyret-highlight">import equality as EQ
+eq-reqult :: EQ.EqualityResult = equal-always3(5, 6)</pre><h3 id="s:app-ann" toclevel="3" tocentry="yes">Parametric Annotations</h3><p>&lt;&lt;BNF pending&gt;&gt;</p><p>Many data definitions are parametric, meaning they can contain any uniform type of data, such as lists of numbers.  Accordingly, while the following annotation isn’t quite wrong, it is incomplete:</p><pre class="ok-ex pyret-highlight">list-of-nums :: List = [list: 1, 2, 3]</pre><p>To properly express the constraint on the contents, we need to specialize the list annotation:</p><pre class="good-ex pyret-highlight">list-of-nums :: List&lt;Number&gt; = [list: 1, 2, 3]</pre><p>Note that this annotation will <i>not dynamically check</i> that every item in the list is in fact a <span class="pyret-highlight"><tt class="pyretexpr">Number</tt></span>—that would be infeasibly expensive.  However, the <a href="/Users/ds26gte/src/pyret-docs-pb/lang/type-check.html#type-check">static type checker</a> will make use of this information more fully.</p><h3 id="s:arrow-ann" toclevel="3" tocentry="yes">Arrow Annotations</h3><p>An arrow annotation is used to describe the behavior of functions.  It consists of a list of comma-separated argument types followed by an ASCII arrow and return type.  Optionally, the annotation can specify argument names as well:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>When an arrow annotation appears in a binding, that binding position simply checks that the value is a function.  To enforce a more detailed check, use <a href="/Users/ds26gte/src/pyret-docs-pb/lang/forms.html#s:contracts"></a>.</p><h3 id="s:pred-ann" toclevel="3" tocentry="yes">Predicate Annotations</h3><p>A predicate annotation is used to <i>refine</i> the annotations describing the a value.</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>For example, a function might only work on non-empty lists.  We might write this as</p><pre class="good-ex pyret-highlight">fun do-something-with&lt;a&gt;(non-empty-list :: List&lt;a&gt;%(is-link)) -&gt; a: ... end</pre><p>If we want to write customized predicates, we can easily do so.  Those predicates must be defined <i>before</i> being used in an annotation position, and must be refered to by name.</p><h3 id="s:tuple-ann" toclevel="3" tocentry="yes">Tuple Annotations</h3><p>Annotating a tuple is syntactically very similar to writing a tuple value:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>Each component is itself an annotation.</p><p>For example we could write</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">num-bool :: {Number; Boolean} = {3; true}
+num-bool--string-list :: {{Number; Boolean}; {String; List&lt;Any&gt;}} = {{3; true}; {"hi"; empty}}</pre></div><h3 id="s:record-ann" toclevel="3" tocentry="yes">Record Annotations</h3><p>Annotating a record is syntactically very similar to writing a record value, but where the single-colon separators between field names and their values have been replaced with the double-colon of all annotations:</p><p>&lt;&lt;BNF pending&gt;&gt;</p><p>As with object literals, the order of fields does not matter.  For example,</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">my-obj :: {n :: Number, s :: String, b :: Boolean} = {s: "Hello", b: true, n: 42}</pre></div></root>
+    <hr/>
+    <!-- The current page is lang/forms.html. -->
+    <a class="floatleft" href="../language-concepts.html">⏴⏴⏴</a>
+    <a class="floatright" href="../lang/testing.html">⏵⏵⏵</a>
+    </div>
+  </body>
+</html>

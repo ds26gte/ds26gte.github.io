@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script type="module" src="../embed-api.js"></script>
+  <script src="../codemirror.js"></script>
+  <script src="../runmode.js"></script>
+  <script src="../pyret.js"></script>
+  <script src="../hilite.js"></script>
+  <link rel="stylesheet" type="text/css" href="../codemirror.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../pyret.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href="../styles.css" title="default"/>
+  <head>
+    <title>csv</title>
+  </head>
+  <body>
+    <div class="container">
+    <root><div><h1 id="csv" toclevel="1" tocentry="yes">csv</h1><div><p>Usage:</p><pre class="pyret-highlight">include csv</pre><pre class="pyret-highlight">import csv as ...</pre></div><div><p><span><a name="csv-table-str"></a></span></p><pre class="pyret-display"><a href="../../../../../../missing_gloss">csv-table-str</a> :: <span>(<span><span class="pyret-content">csv-string :: <a href="../../../../../../missing_gloss">String</a></span>, <span class="pyret-content">options :: <a href="../../../../../../missing_gloss">CSVOptions</a></span></span>) -&gt; <a href="../../../../../..//Users/ds26gte/src/pyret-docs-pb/builtin/tables.html#TableLoader">TableLoader</a></span></pre><p>  Reads CSV data from <span class="pyret-highlight"><tt class="pyretexpr">csv-str</tt></span> with the given <span class="pyret-highlight"><tt class="pyretexpr">options</tt></span>, returning   a <a href="../../../../../..//Users/ds26gte/src/pyret-docs-pb/builtin/tables.html#TableLoader"><span class="pyret-highlight"><tt class="pyretexpr">TableLoader</tt></span></a> suitable for use with <span class="pyret-highlight"><tt class="pyretexpr">load-table:</tt></span></p><div><p><b>Examples:</b></p><pre class="pyret-highlight">include csv
+animals-data = ```
+Pet Name, Age (years), species, fixed
+Franklin,17,turtle,false
+Veronica,2,cat,false
+Ada,10,dog,true
+```
+
+check:
+  t = load-table: name, age, species, fixed
+    source: csv-table-str(animals-data, default-options)
+  end
+  t is table: name, age, species, fixed
+    row: "Franklin", 17, "turtle", false
+    row: "Veronica", 2, "cat", false
+    row: "Ada", 10, "dog", true
+  end
+end</pre></div></div><div><p><span><a name="csv-table-file"></a></span></p><pre class="pyret-display"><a href="../../../../../../missing_gloss">csv-table-file</a> :: <span>(<span><span class="pyret-content">csv-file :: <a href="../../../../../../missing_gloss">String</a></span>, <span class="pyret-content">options :: <a href="../../../../../../missing_gloss">CSVOptions</a></span></span>) -&gt; <a href="../../../../../..//Users/ds26gte/src/pyret-docs-pb/builtin/tables.html#TableLoader">TableLoader</a></span></pre><p>Reads CSV data from the file at path <span class="pyret-highlight"><tt class="pyretexpr">csv-path</tt></span> with the given <span class="pyret-highlight"><tt class="pyretexpr">options</tt></span>, returning a <a href="../../../../../..//Users/ds26gte/src/pyret-docs-pb/builtin/tables.html#TableLoader"><span class="pyret-highlight"><tt class="pyretexpr">TableLoader</tt></span></a> suitable for use with <span class="pyret-highlight"><tt class="pyretexpr">load-table:</tt></span></p></div><div><p><span><a name="csv-table-url"></a></span></p><pre class="pyret-display"><a href="../../../../../../missing_gloss">csv-table-url</a> :: <span>(<span><span class="pyret-content">csv-file :: <a href="../../../../../../missing_gloss">String</a></span>, <span class="pyret-content">options :: <a href="../../../../../../missing_gloss">CSVOptions</a></span></span>) -&gt; <a href="../../../../../..//Users/ds26gte/src/pyret-docs-pb/builtin/tables.html#TableLoader">TableLoader</a></span></pre><p>Reads CSV data from the url <span class="pyret-highlight"><tt class="pyretexpr">csv-url</tt></span> with the given <span class="pyret-highlight"><tt class="pyretexpr">options</tt></span>, returning a <a href="../../../../../..//Users/ds26gte/src/pyret-docs-pb/builtin/tables.html#TableLoader"><span class="pyret-highlight"><tt class="pyretexpr">TableLoader</tt></span></a> suitable for use with <span class="pyret-highlight"><tt class="pyretexpr">load-table:</tt></span></p><div><p><b>Examples:</b></p><pre class="pyret-highlight">include csv
+animals-csv = csv-table-url("https://raw.githubusercontent.com/brownplt/pyret-lang/refs/heads/horizon/tests/io-tests/tests/animals-ds-2024.csv", default-options)
+animals-table = load-table: name, species, sex, age, fixed, legs, weight, weeks
+  source: animals-csv
+end
+check:
+  animals-table.row-n(0)["name"] is "Sasha"
+  animals-table.row-n(0)["species"] is "cat"
+end</pre></div></div><div><p><span><a name="CSVOptions"></a></span></p><pre class="pyret-display"><a href="../../../../../../missing_gloss">CSVOptions</a></pre></div><p>The type of options for processing CSV strings.</p><div><p><span><a name="default-options"></a></span></p><pre class="pyret-display">default-options :: <a href="../../../../../../missing_gloss">CSVOptions</a></pre></div><p>The default options for processing CSV strings.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">include csv
+check:
+  default-options is { header-row: true }
+end</pre></div></div></root>
+    <hr/>
+    <!-- The current page is trove/csv.html. -->
+    <a class="floatleft" href="../trove/gdrive-sheets.html">⏴⏴⏴</a>
+    <a class="floatright" href="../trove/color.html">⏵⏵⏵</a>
+    </div>
+  </body>
+</html>
