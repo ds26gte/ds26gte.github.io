@@ -255,4 +255,5 @@ h4 {
   margin-bottom: .8em;
   border-left: 2px solid gray;
   padding-left: 1em;
+  white-space: pre;
 }

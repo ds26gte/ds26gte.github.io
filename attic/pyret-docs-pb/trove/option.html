@@ -30,7 +30,7 @@ where:
   set-angle("90") is 90
   set-angle("") is 0
   set-angle("x") is 0
-end</pre></div><p>In contrast, <span class="pyret-highlight"><tt class="pyretexpr">string-index-of</tt></span> does <italic>not</italic> return an <span class="pyret-highlight"><tt class="pyretexpr">Option</tt></span> return value.Instead , it returns a <span class="pyret-highlight"><tt class="pyretexpr">Number</tt></span> that is either a valid index <span class="pyret-highlight"><tt class="pyretexpr">Number</tt></span> or <span class="pyret-highlight"><tt class="pyretexpr">-1</tt></span> if the string is not found:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun find-smiley(s :: String) -&gt; String:
+end</pre></div><p>In contrast, <span class="pyret-highlight"><tt class="pyretexpr">string-index-of</tt></span> does <italic>not</italic> return an <span class="pyret-highlight"><tt class="pyretexpr">Option</tt></span> return value.Instead , it returns a <span class="pyret-highlight"><tt class="pyretexpr">Number</tt></span> that is either a valid index <span class="pyret-highlight"><tt class="pyretexpr">Number</tt></span> or <tt>-1</tt> if the string is not found:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun find-smiley(s :: String) -&gt; String:
   i = string-index-of(s, "😊")
   ask:
     | i == -1 then: "No smiley!"
@@ -39,7 +39,7 @@ end</pre></div><p>In contrast, <span class="pyret-highlight"><tt class="pyretexp
 where:
   find-smiley("abcd") is "No smiley!"
   find-smiley("a😊cd") is "Smiley at 1"
-end</pre></div><p>We can create a version of <span class="pyret-highlight"><tt class="pyretexpr">find-smiley</tt></span> that returns an <span class="pyret-highlight"><tt class="pyretexpr">Option</tt></span> value, such as this:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun option-smiley(s :: String) -&gt; Option&lt;Number&gt;:
+end</pre></div><p>We can create a version of <tt>find-smiley</tt> that returns an <span class="pyret-highlight"><tt class="pyretexpr">Option</tt></span> value, such as this:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun option-smiley(s :: String) -&gt; Option&lt;Number&gt;:
   i = string-index-of(s, "😊")
   ask:
     | i == -1 then: none
@@ -60,7 +60,7 @@ end</pre></div><p>  </p><div><p><span><a name=".or-else"></a></span></p><pre cla
 
   s = some(5)
   s.or-else(10) is 5
-end</pre></div><p>Therefore, our example above of <span class="pyret-highlight"><tt class="pyretexpr">set-angle</tt></span>, which defaults to <span class="pyret-highlight"><tt class="pyretexpr">0</tt></span>, could be written this way:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun set-angle(s :: String) -&gt; Number:
+end</pre></div><p>Therefore, our example above of <tt>set-angle</tt>, which defaults to <tt>0</tt>, could be written this way:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun set-angle(s :: String) -&gt; Number:
   doc: "If s is not a numeric string, default to 0."
   string-to-number(s).or-else(0)
 where:
