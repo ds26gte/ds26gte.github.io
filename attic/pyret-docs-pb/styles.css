@@ -241,5 +241,18 @@ h2 {
 }
 
 h3 {
+  margin-top: 1em;
   font-size: 20px;
+}
+
+h4 { 
+  margin-top: 1em;
+  font-size: 20px;
+}
+
+.bnf {
+  margin-top: .8em;
+  margin-bottom: .8em;
+  border-left: 2px solid gray;
+  padding-left: 1em;
 }
