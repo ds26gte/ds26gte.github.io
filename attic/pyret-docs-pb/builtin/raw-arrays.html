@@ -142,7 +142,7 @@ end</pre></div><p>  </p><div><p><span><a name="raw-array-concat"></a></span></p>
 
   a1 is=~ [raw-array: 5, 6, 7]
   a2 is=~ [raw-array: 0, 3, 99, -1, 7]
-end</pre></div><p>  </p><div><p><span><a name="raw-array-duplicate"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-duplicate">raw-array-duplicate</a> :: <span>(<span><span class="pyret-content">array :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>  Returns a copy of the given array, such that corresponding elements in the   result are <a href="../missing_gloss"><span class="pyret-highlight"><tt class="pyretexpr">eq-fun-identical</tt></span></a> to those in the source array.</p><p>  </p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre></div><p>  </p><div><p><span><a name="raw-array-duplicate"></a></span></p><pre class="pyret-display"><a href="../builtin/raw-arrays.html#raw-array-duplicate">raw-array-duplicate</a> :: <span>(<span><span class="pyret-content">array :: <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/globals.html#RawArray">RawArray</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>  Returns a copy of the given array, such that corresponding elements in the   result are <a href="../lang/equality.html#eq-fun-identical">Identical</a> to those in the source array.</p><p>  </p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   a = [raw-array: 1, 2, 3]
   b = raw-array-duplicate(a)
   a is=~ b
