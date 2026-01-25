@@ -18,7 +18,7 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="s-exp" toclevel="1" tocentry="yes">s-exp</h1><div><p>Usage:</p><pre class="pyret-highlight">include s-exp</pre><pre class="pyret-highlight">import s-exp as ...</pre></div><p>  </p><p>This module re-exports the constructors from <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a>, which defines the result of parsing an s-exp.</p><p>  </p><div><p><span><a name="read-s-exp"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp.html#read-s-exp">read-s-exp</a> :: <span><a href="../trove/globals.html#String">String</a> -&gt; <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></span></pre><p>    Reads an <i>s-expression</i> as a string, and returns it as a Pyret value.</p><p>    An s-expression is a string that satisfies the following grammar:</p><p>    </p><pre class="nothing_special">s-exp = "(" s-exp ... ")"
+    <root><div><h1 id="s-exp" toclevel="1" tocentry="yes">s-exp</h1><div><p>Usage:</p><pre class="pyret-highlight">include s-exp</pre><pre class="pyret-highlight">import s-exp as ...</pre></div><p>  </p><p>This module re-exports the constructors from <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a>, which defines the result of parsing an s-exp.</p><p>  </p><div><p><span><a name="read-s-exp"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp.html#read-s-exp">read-s-exp</a> :: <span>(<span><span class="pyret-content">sexp-str :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></span></pre><p>    Reads an <i>s-expression</i> as a string, and returns it as a Pyret value.</p><p>    An s-expression is a string that satisfies the following grammar:</p><p>    </p><pre class="nothing_special">s-exp = "(" s-exp ... ")"
       | &lt;number&gt;
       | &lt;string&gt;
       | &lt;id&gt;</pre><p>    The first form parses to a <a href="../trove/s-exp-structs.html#s-list">s-list</a> containing the nested     sub-expression results.  Numbers become <a href="../trove/s-exp-structs.html#s-num">s-num</a>s, strings become     <a href="../trove/s-exp-structs.html#s-str">s-str</a>s, and all other names not inside quotes     become <a href="../trove/s-exp-structs.html#s-sym">s-sym</a>s.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import s-exp as S
@@ -68,7 +68,54 @@ check:
   p("(()") raises "Invalid"
   p("(a')") raises "Invalid"
 
-end</pre></div></div></div></root>
+end</pre><p><a class="show-embed" code="import s-exp as S 
+
+ p = S.read-s-exp 
+ s-list = S.s-list 
+ s-num = S.s-num 
+ s-str = S.s-str 
+ s-sym = S.s-sym 
+
+ check: 
+    p(&quot;()&quot;) is s-list(empty) 
+    p(&quot;(5)&quot;) is s-list([list: s-num(5)]) 
+    p(&quot;(5 4)&quot;) is s-list([list: s-num(5), s-num(4)]) 
+    p(&quot;(a 5)&quot;) is s-list([list: s-sym(&quot;a&quot;), s-num(5)]) 
+    p(&quot;a&quot;) is s-sym(&quot;a&quot;) 
+    p(&quot;\&quot;a\&quot;&quot;) is s-str(&quot;a&quot;) 
+    p(&quot;(a (b c))&quot;) is 
+      s-list([list: 
+        s-sym(&quot;a&quot;), 
+        s-list([list: s-sym(&quot;b&quot;), s-sym(&quot;c&quot;)]) 
+      ]) 
+    p(&quot;(\&quot;a\&quot; (5 (4) ()) \&quot;b\&quot;)&quot;) is 
+      s-list([list: 
+        s-str(&quot;a&quot;), 
+        s-list([list: 
+          s-num(5), 
+          s-list([list: s-num(4)]), 
+          s-list(empty) 
+        ]), 
+        s-str(&quot;b&quot;) 
+      ]) 
+
+    p(&quot;-5&quot;) is s-num(-5) 
+    p(&quot;-4.4&quot;) is s-num(-4.4) 
+    p(&quot;-3.&quot;) is s-num(-3.0) 
+    # Make sure bignums parse correctly 
+    p(num-tostring(num-expt(100, 100))) is 
+      s-num(num-expt(100, 100)) 
+    p(&quot;-abc3.3&quot;) is s-sym(&quot;-abc3.3&quot;) 
+
+    p(&quot;())&quot;) raises &quot;Invalid&quot; 
+    p(&quot;('a' 5)&quot;) raises &quot;'quote'&quot; 
+    p(&quot;(a&quot;) raises &quot;Invalid&quot; 
+    p(&quot;)&quot;) raises &quot;Invalid&quot; 
+    p(&quot;('a)&quot;) raises &quot;Invalid&quot; 
+    p(&quot;(()&quot;) raises &quot;Invalid&quot; 
+    p(&quot;(a')&quot;) raises &quot;Invalid&quot; 
+
+ end">(Try it!)</a></p></div></div></div></root>
     <hr/>
     <!-- The current page is trove/s-exp.html. -->
     <a class="floatleft" href="../trove/pprint.html">⏴⏴⏴</a>

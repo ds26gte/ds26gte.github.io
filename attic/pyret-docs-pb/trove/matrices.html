@@ -18,132 +18,257 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="matrices" toclevel="1" tocentry="yes">matrices</h1><div><p>Usage:</p><pre class="pyret-highlight">include matrices</pre><pre class="pyret-highlight">import matrices as ...</pre></div><p><a href="https://en.wikipedia.org/wiki/Matrix_(mathematics)"><i>Matrices</i></a> are rectangular grids of numbers, which define many useful mathematical operations.  Matrices can manipulate each other, and are also used to manipulate <a href="https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)"><i>vectors</i></a>, which are lists of numbers that likewise define many useful mathematical operations.</p><p>This library defines both the <a href="../trove/matrices.html#Vector"><span class="pyret-highlight"><tt class="pyretexpr">Vector</tt></span></a> datatype and the <a href="../trove/matrices.html#Matrix"><span class="pyret-highlight"><tt class="pyretexpr">Matrix</tt></span></a> datatype.  All functionality in this library is defined both as methods on the data values and as analogous functions.</p><h2 id="The-Vector-Datatype" toclevel="2" tocentry="yes">The Vector Datatype</h2><div><p><span><a name="Vector"></a></span></p><pre class="pyret-display">Vector</pre><p>The <span class="pyret-highlight"><tt class="pyretexpr">Vector</tt></span> type represents mathematical vectors.</p></div><div><p><span><a name="Vector3D"></a></span></p><pre class="pyret-display">Vector3D</pre><p>Like <span class="pyret-highlight"><tt class="pyretexpr">Vector</tt></span>, but only allows 3-dimensional vectors.</p></div><div><p><span><a name="Nat"></a></span></p><pre class="pyret-display">Nat</pre><p>The type of natural numbers, i.e. non-negative integers.</p></div><div><p><span><a name="NonZeroNat"></a></span></p><pre class="pyret-display">NonZeroNat</pre><p>The type of positive integers.</p></div><div><p><span><a name="vector"></a></span></p><pre class="pyret-display">[<a href="../trove/matrices.html#vector">vector</a><span></span>: <span class="pyret-content">elt :: <a href="../trove/globals.html#Number">Number</a></span>, ...] -&gt; <a href="../trove/matrices.html#Vector">Vector</a></pre></div><p>Vector constructor which creates a vector instance with the given elements.</p><div><p><span><a name="vector3d"></a></span></p><pre class="pyret-display">[<a href="../trove/matrices.html#vector3d">vector3d</a><span></span>: <span class="pyret-content">elt1 :: <a href="../trove/globals.html#Number">Number</a></span>, <span class="pyret-content">elt2 :: <a href="../trove/globals.html#Number">Number</a></span>, <span class="pyret-content">elt3 :: <a href="../trove/globals.html#Number">Number</a></span>, ...] -&gt; <a href="../trove/matrices.html#Vector">Vector</a></pre></div><p>Vector constructor which only creates three-dimensional vector instances.</p><p>Vectors are defined to permit using addition and subtraction operators on them, whenever the lengths of the vectors are the same:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+    <root><div><h1 id="matrices" toclevel="1" tocentry="yes">matrices</h1><div><p>Usage:</p><pre class="pyret-highlight">include matrices</pre><pre class="pyret-highlight">import matrices as ...</pre></div><p><a href="https://en.wikipedia.org/wiki/Matrix_(mathematics)"><i>Matrices</i></a> are rectangular grids of numbers, which define many useful mathematical operations.  Matrices can manipulate each other, and are also used to manipulate <a href="https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)"><i>vectors</i></a>, which are lists of numbers that likewise define many useful mathematical operations.</p><p>This library defines both the <a href="../trove/matrices.html#Vector"><tt class="pyret-highlight">Vector</tt></a> datatype and the <a href="../trove/matrices.html#Matrix"><tt class="pyret-highlight">Matrix</tt></a> datatype.  All functionality in this library is defined both as methods on the data values and as analogous functions.</p><h2 id="The-Vector-Datatype" toclevel="2" tocentry="yes">The Vector Datatype</h2><div><p><span><a name="Vector"></a></span></p><pre class="pyret-display">Vector</pre><p>The <tt class="pyret-highlight">Vector</tt> type represents mathematical vectors.</p></div><div><p><span><a name="Vector3D"></a></span></p><pre class="pyret-display">Vector3D</pre><p>Like <tt class="pyret-highlight">Vector</tt>, but only allows 3-dimensional vectors.</p></div><div><p><span><a name="Nat"></a></span></p><pre class="pyret-display">Nat</pre><p>The type of natural numbers, i.e. non-negative integers.</p></div><div><p><span><a name="NonZeroNat"></a></span></p><pre class="pyret-display">NonZeroNat</pre><p>The type of positive integers.</p></div><div><p><span><a name="vector"></a></span></p><pre class="pyret-display">[<a href="../trove/matrices.html#vector">vector</a><span></span>: <span class="pyret-content">elt :: <a href="../trove/globals.html#Number">Number</a></span>, ...] -&gt; <a href="../trove/matrices.html#Vector">Vector</a></pre></div><p>Vector constructor which creates a vector instance with the given elements.</p><div><p><span><a name="vector3d"></a></span></p><pre class="pyret-display">[<a href="../trove/matrices.html#vector3d">vector3d</a><span></span>: <span class="pyret-content">elt1 :: <a href="../trove/globals.html#Number">Number</a></span>, <span class="pyret-content">elt2 :: <a href="../trove/globals.html#Number">Number</a></span>, <span class="pyret-content">elt3 :: <a href="../trove/globals.html#Number">Number</a></span>, ...] -&gt; <a href="../trove/matrices.html#Vector">Vector</a></pre></div><p>Vector constructor which only creates three-dimensional vector instances.</p><p>Vectors are defined to permit using addition and subtraction operators on them, whenever the lengths of the vectors are the same:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [vector: 1, 2, 3] + [vector: 4, 5, 6] is [vector: 5, 7, 9]
   [vector: 1] + [vector: 1, 2] raises "vectors of different lengths"
   [vector: 1, 2, 3] - [vector: 4, 5, 6] is [vector: -3, -3, -3]
   [vector: 1] - [vector: 1, 2] raises "vectors of different lengths"
-end</pre></div><p>See also <a href="../trove/matrices.html#vec-add"><span class="pyret-highlight"><tt class="pyretexpr">vec-add</tt></span></a> and <a href="../trove/matrices.html#vec-sub"><span class="pyret-highlight"><tt class="pyretexpr">vec-sub</tt></span></a>.</p><p>Two vectors are considered equal when their lengths are the same and their corresponding elements are equal, and obeys the same restrictions on comparing exact and rough numbers for equality:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [vector: 1, 2, 3] + [vector: 4, 5, 6] is [vector: 5, 7, 9] 
+    [vector: 1] + [vector: 1, 2] raises &quot;vectors of different lengths&quot; 
+    [vector: 1, 2, 3] - [vector: 4, 5, 6] is [vector: -3, -3, -3] 
+    [vector: 1] - [vector: 1, 2] raises &quot;vectors of different lengths&quot; 
+ end">(Try it!)</a></p></div><p>See also <a href="../trove/matrices.html#vec-add"><tt class="pyret-highlight">vec-add</tt></a> and <a href="../trove/matrices.html#vec-sub"><tt class="pyret-highlight">vec-sub</tt></a>.</p><p>Two vectors are considered equal when their lengths are the same and their corresponding elements are equal, and obeys the same restrictions on comparing exact and rough numbers for equality:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   ([vector: 1] == [vector: 1, 2]) is false
   ([vector: 1, 2] == [vector: 1, 2]) is true
   ([vector: ~1, ~2] == [vector: 1, 2]) raises "not allowed"
   roughly-equal([vector: ~1, ~2], [vector: 1, 2]) is true
-end</pre></div><h2 id="Vector-Methods" toclevel="2" tocentry="yes">Vector Methods</h2><div><p><span><a name=".get"></a></span></p><pre class="pyret-display">.get :: unspecified_contract</pre></div><p>Returns the item at the given index in this vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    ([vector: 1] == [vector: 1, 2]) is false 
+    ([vector: 1, 2] == [vector: 1, 2]) is true 
+    ([vector: ~1, ~2] == [vector: 1, 2]) raises &quot;not allowed&quot; 
+    roughly-equal([vector: ~1, ~2], [vector: 1, 2]) is true 
+ end">(Try it!)</a></p></div><h2 id="Vector-Methods" toclevel="2" tocentry="yes">Vector Methods</h2><div><p><span><a name=".get"></a></span></p><pre class="pyret-display">.get :: unspecified_contract</pre></div><p>Returns the item at the given index in this vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [vector: 3, 5].get(1) is 5
-end</pre></div><div><p><span><a name=".length"></a></span></p><pre class="pyret-display">.length :: unspecified_contract</pre></div><p>Returns the length of this vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [vector: 3, 5].get(1) is 5 
+ end">(Try it!)</a></p></div><div><p><span><a name=".length"></a></span></p><pre class="pyret-display">.length :: unspecified_contract</pre></div><p>Returns the length of this vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [vector: 1, 2, 3, 4].length() is 4
-end</pre></div><div><p><span><a name=".dot"></a></span></p><pre class="pyret-display">.dot :: unspecified_contract</pre></div><p>Returns the dot product of this vector with the given vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [vector: 1, 2, 3, 4].length() is 4 
+ end">(Try it!)</a></p></div><div><p><span><a name=".dot"></a></span></p><pre class="pyret-display">.dot :: unspecified_contract</pre></div><p>Returns the dot product of this vector with the given vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [vector: 1, 2, 3].dot([vector: 3, 2, 1]) is 10
-end</pre></div><div><p><span><a name=".magnitude"></a></span></p><pre class="pyret-display">.magnitude :: unspecified_contract</pre></div><p>Returns the magnitude of this vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [vector: 1, 2, 3].dot([vector: 3, 2, 1]) is 10 
+ end">(Try it!)</a></p></div><div><p><span><a name=".magnitude"></a></span></p><pre class="pyret-display">.magnitude :: unspecified_contract</pre></div><p>Returns the magnitude of this vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [vector: 3, 4].magnitude() is 5
   [vector: 4, 0].magnitude() is 4
-end</pre></div><div><p><span><a name=".cross"></a></span></p><pre class="pyret-display">.cross :: unspecified_contract</pre></div><p>Returns the cross product of this 3D vector and the given 3D vector. (Raises an error if either this or that vector are not 3-dimensional)</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [vector: 3, 4].magnitude() is 5 
+    [vector: 4, 0].magnitude() is 4 
+ end">(Try it!)</a></p></div><div><p><span><a name=".cross"></a></span></p><pre class="pyret-display">.cross :: unspecified_contract</pre></div><p>Returns the cross product of this 3D vector and the given 3D vector. (Raises an error if either this or that vector are not 3-dimensional)</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [vector: 2, -3, 1].cross([vector: -2, 1, 1]) is [vector: -4, -4, -4]
-end</pre></div><div><p><span><a name=".normalize"></a></span></p><pre class="pyret-display">.normalize :: unspecified_contract</pre></div><p>Normalizes this vector into a unit vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [vector: 2, -3, 1].cross([vector: -2, 1, 1]) is [vector: -4, -4, -4] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".normalize"></a></span></p><pre class="pyret-display">.normalize :: unspecified_contract</pre></div><p>Normalizes this vector into a unit vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [vector: 1, 2, 3].normalize()
     is [vector: (1 / num-sqrt(14)), (2 / num-sqrt(14)), (3 / num-sqrt(14))]
-end</pre></div><div><p><span><a name=".scale"></a></span></p><pre class="pyret-display">.scale :: unspecified_contract</pre></div><p>Scales this vector by the given constant.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [vector: 1, 2, 3].normalize() 
+      is [vector: (1 / num-sqrt(14)), (2 / num-sqrt(14)), (3 / num-sqrt(14))] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".scale"></a></span></p><pre class="pyret-display">.scale :: unspecified_contract</pre></div><p>Scales this vector by the given constant.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [vector: 1, 2, 3].scale(2) is [vector: 2, 4, 6]
-end</pre></div><div><p><span><a name=".to-row-matrix"></a></span></p><pre class="pyret-display">.to-row-matrix :: unspecified_contract</pre></div><p>Converts this vector to a one-row matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [vector: 1, 2, 3].scale(2) is [vector: 2, 4, 6] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".to-row-matrix"></a></span></p><pre class="pyret-display">.to-row-matrix :: unspecified_contract</pre></div><p>Converts this vector to a one-row matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [vector: 4, 5, 6].to-row-matrix() is [matrix(1, 3): 4, 5, 6]
-end</pre></div><div><p><span><a name=".to-col-matrix"></a></span></p><pre class="pyret-display">.to-col-matrix :: unspecified_contract</pre></div><p>Converts this vector to a one-column matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [vector: 4, 5, 6].to-row-matrix() is [matrix(1, 3): 4, 5, 6] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".to-col-matrix"></a></span></p><pre class="pyret-display">.to-col-matrix :: unspecified_contract</pre></div><p>Converts this vector to a one-column matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [vector: 4, 5, 6].to-row-matrix() is [matrix(3, 1): 4, 5, 6]
-end</pre></div><h2 id="Vector-Functions" toclevel="2" tocentry="yes">Vector Functions</h2><div><p><span><a name="vec-get"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-get">vec-get</a> :: unspecified_contract</pre></div><p>Returns the item at the given index in the given vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [vector: 4, 5, 6].to-row-matrix() is [matrix(3, 1): 4, 5, 6] 
+ end">(Try it!)</a></p></div><h2 id="Vector-Functions" toclevel="2" tocentry="yes">Vector Functions</h2><div><p><span><a name="vec-get"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-get">vec-get</a> :: unspecified_contract</pre></div><p>Returns the item at the given index in the given vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   vec-get([vector: 3, 5], 1) is 5
-end</pre></div><p>See <a href="../trove/matrices.html#.get">.get</a>.</p><div><p><span><a name="vec-length"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-length">vec-length</a> :: unspecified_contract</pre></div><p>Returns the length of the given vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    vec-get([vector: 3, 5], 1) is 5 
+ end">(Try it!)</a></p></div><p>See <a href="../trove/matrices.html#.get">.get</a>.</p><div><p><span><a name="vec-length"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-length">vec-length</a> :: unspecified_contract</pre></div><p>Returns the length of the given vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   vec-length([vector: 1, 2, 3, 4]) is 4
-end</pre></div><p>See <a href="../trove/matrices.html#.length">.length</a>.</p><div><p><span><a name="vec-dot"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-dot">vec-dot</a> :: unspecified_contract</pre></div><p>Returns the dot product of the first vector with the second vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    vec-length([vector: 1, 2, 3, 4]) is 4 
+ end">(Try it!)</a></p></div><p>See <a href="../trove/matrices.html#.length">.length</a>.</p><div><p><span><a name="vec-dot"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-dot">vec-dot</a> :: unspecified_contract</pre></div><p>Returns the dot product of the first vector with the second vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   vec-dot[vector: 1, 2, 3], ([vector: 3, 2, 1]) is 10
-end</pre></div><p>See <a href="../trove/matrices.html#.dot">.dot</a>.</p><div><p><span><a name="vec-magnitude"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-magnitude">vec-magnitude</a> :: unspecified_contract</pre></div><p>Returns the magnitude of the given vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    vec-dot[vector: 1, 2, 3], ([vector: 3, 2, 1]) is 10 
+ end">(Try it!)</a></p></div><p>See <a href="../trove/matrices.html#.dot">.dot</a>.</p><div><p><span><a name="vec-magnitude"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-magnitude">vec-magnitude</a> :: unspecified_contract</pre></div><p>Returns the magnitude of the given vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   vec-magnitude([vector: 3, 4]) is 5
   vec-magnitude([vector: 4, 0]) is 4
-end</pre></div><p>See <a href="../trove/matrices.html#.magnitude">.magnitude</a>.</p><div><p><span><a name="vec-cross"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-cross">vec-cross</a> :: unspecified_contract</pre></div><p>Returns the cross product of the two given 3D vectors. (Raises an error if either vector is not 3-dimensional)</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    vec-magnitude([vector: 3, 4]) is 5 
+    vec-magnitude([vector: 4, 0]) is 4 
+ end">(Try it!)</a></p></div><p>See <a href="../trove/matrices.html#.magnitude">.magnitude</a>.</p><div><p><span><a name="vec-cross"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-cross">vec-cross</a> :: unspecified_contract</pre></div><p>Returns the cross product of the two given 3D vectors. (Raises an error if either vector is not 3-dimensional)</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   vec-cross([vector: 2, -3, 1], [vector: -2, 1, 1]) is [vector: -4, -4, -4]
-end</pre></div><p>See <a href="../trove/matrices.html#.cross">.cross</a>.</p><div><p><span><a name="vec-normalize"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-normalize">vec-normalize</a> :: unspecified_contract</pre></div><p>Normalizes the given vector into a unit vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    vec-cross([vector: 2, -3, 1], [vector: -2, 1, 1]) is [vector: -4, -4, -4] 
+ end">(Try it!)</a></p></div><p>See <a href="../trove/matrices.html#.cross">.cross</a>.</p><div><p><span><a name="vec-normalize"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-normalize">vec-normalize</a> :: unspecified_contract</pre></div><p>Normalizes the given vector into a unit vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   vec-normalize([vector: 1, 2, 3])
     is [vector: (1 / num-sqrt(14)), (2 / num-sqrt(14)), (3 / num-sqrt(14))]
-end</pre></div><p>See <a href="../trove/matrices.html#.normalize">.normalize</a>.</p><div><p><span><a name="vec-scale"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-scale">vec-scale</a> :: unspecified_contract</pre></div><p>Scales the given vector by the given constant.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    vec-normalize([vector: 1, 2, 3]) 
+      is [vector: (1 / num-sqrt(14)), (2 / num-sqrt(14)), (3 / num-sqrt(14))] 
+ end">(Try it!)</a></p></div><p>See <a href="../trove/matrices.html#.normalize">.normalize</a>.</p><div><p><span><a name="vec-scale"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-scale">vec-scale</a> :: unspecified_contract</pre></div><p>Scales the given vector by the given constant.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   vec-scale([vector: 1, 2, 3], 2) is [vector: 2, 4, 6]
-end</pre></div><p>See <a href="../trove/matrices.html#.scale">.scale</a>.</p><div><p><span><a name="vec-add"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-add">vec-add</a> :: unspecified_contract</pre></div><p>Adds the second vector to first one.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    vec-scale([vector: 1, 2, 3], 2) is [vector: 2, 4, 6] 
+ end">(Try it!)</a></p></div><p>See <a href="../trove/matrices.html#.scale">.scale</a>.</p><div><p><span><a name="vec-add"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-add">vec-add</a> :: unspecified_contract</pre></div><p>Adds the second vector to first one.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   vec-add([vector: 1, 2, 3], [vector: 4, 5, 6]) is [vector: 5, 7, 9]
   vec-add([vector: 1], [vector: 1, 2]) raises "vectors of different lengths"
-end</pre></div><div><p><span><a name="vec-sub"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-sub">vec-sub</a> :: unspecified_contract</pre></div><p>Subtracts the second vector from first one.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    vec-add([vector: 1, 2, 3], [vector: 4, 5, 6]) is [vector: 5, 7, 9] 
+    vec-add([vector: 1], [vector: 1, 2]) raises &quot;vectors of different lengths&quot; 
+ end">(Try it!)</a></p></div><div><p><span><a name="vec-sub"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vec-sub">vec-sub</a> :: unspecified_contract</pre></div><p>Subtracts the second vector from first one.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   vec-sub([vector: 1, 2, 3], [vector: 4, 5, 6]) is [vector: -3, -3, -3]
   vec-sub([vector: 1], [vector: 1, 2]) raises "vectors of different lengths"
-end</pre></div><h2 id="The-Matrix-Datatype" toclevel="2" tocentry="yes">The Matrix Datatype</h2><div><p><span><a name="Matrix"></a></span></p><pre class="pyret-display">Matrix</pre></div><p>The <span class="pyret-highlight"><tt class="pyretexpr">Matrix</tt></span> type represents mathematical matrices.</p><div class="insetpara nested"><div><p><span><a name="is-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#is-matrix">is-matrix</a> :: unspecified_contract</pre></div></div><p>Every matrix has a <span class="pyret-highlight"><tt class="pyretexpr">rows</tt></span> field and a <span class="pyret-highlight"><tt class="pyretexpr">cols</tt></span> field, which are the dimensions of the matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    vec-sub([vector: 1, 2, 3], [vector: 4, 5, 6]) is [vector: -3, -3, -3] 
+    vec-sub([vector: 1], [vector: 1, 2]) raises &quot;vectors of different lengths&quot; 
+ end">(Try it!)</a></p></div><h2 id="The-Matrix-Datatype" toclevel="2" tocentry="yes">The Matrix Datatype</h2><div><p><span><a name="Matrix"></a></span></p><pre class="pyret-display">Matrix</pre></div><p>The <tt class="pyret-highlight">Matrix</tt> type represents mathematical matrices.</p><div class="insetpara nested"><div><p><span><a name="is-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#is-matrix">is-matrix</a> :: unspecified_contract</pre></div></div><p>Every matrix has a <tt class="pyret-highlight">rows</tt> field and a <tt class="pyret-highlight">cols</tt> field, which are the dimensions of the matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2, 3): 10, 20, 30, 40, 50, 60].rows is 2
   [matrix(2, 3): 10, 20, 30, 40, 50, 60].cols is 3
-end</pre></div><h2 id="Matrix-Constructors" toclevel="2" tocentry="yes">Matrix Constructors</h2><div><p><span><a name="matrix"></a></span></p><pre class="pyret-display">[<a href="../trove/matrices.html#matrix">matrix</a><span>(<span class="pyret-content">rows :: <a href="../trove/matrices.html#NonZeroNat">NonZeroNat</a></span>, <span class="pyret-content">cols :: <a href="../trove/matrices.html#NonZeroNat">NonZeroNat</a></span>)</span>: <span class="pyret-content">elt :: <a href="../trove/globals.html#Number">Number</a></span>, ...] -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></pre></div><p>Publicly exposed constructor which constructs a matrix of size <span class="pyret-highlight"><tt class="pyretexpr">rows</tt></span> by <span class="pyret-highlight"><tt class="pyretexpr">cols</tt></span> with the given elements, entered row by row.</p><p>The following example represents the matrix math-imtx:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">[matrix(2,3): 1, 2, 3, 4, 5, 6]</pre></div><p>Supplying an inconsistent quantity of elements for a given matrix dimension will produce an error:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2, 3): 10, 20, 30, 40, 50, 60].rows is 2 
+    [matrix(2, 3): 10, 20, 30, 40, 50, 60].cols is 3 
+ end">(Try it!)</a></p></div><h2 id="Matrix-Constructors" toclevel="2" tocentry="yes">Matrix Constructors</h2><div><p><span><a name="matrix"></a></span></p><pre class="pyret-display">[<a href="../trove/matrices.html#matrix">matrix</a><span>(<span class="pyret-content">rows :: <a href="../trove/matrices.html#NonZeroNat">NonZeroNat</a></span>, <span class="pyret-content">cols :: <a href="../trove/matrices.html#NonZeroNat">NonZeroNat</a></span>)</span>: <span class="pyret-content">elt :: <a href="../trove/globals.html#Number">Number</a></span>, ...] -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></pre></div><p>Publicly exposed constructor which constructs a matrix of size <tt class="pyret-highlight">rows</tt> by <tt class="pyret-highlight">cols</tt> with the given elements, entered row by row.</p><p>The following example represents the matrix math-imtx:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">[matrix(2,3): 1, 2, 3, 4, 5, 6]</pre><p><a class="show-embed" code="[matrix(2,3): 1, 2, 3, 4, 5, 6]">(Try it!)</a></p></div><p>Supplying an inconsistent quantity of elements for a given matrix dimension will produce an error:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(4, 2): 100] raises "Invalid 1x2 Matrix"
-end</pre></div><div><p><span><a name="row-matrix"></a></span></p><pre class="pyret-display">[<a href="../trove/matrices.html#row-matrix">row-matrix</a><span></span>: <span class="pyret-content">elt :: <a href="../trove/globals.html#Number">Number</a></span>, ...] -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></pre></div><p>Constructor which returns a one-row matrix containing the given entries.</p><p>The following will construct the matrix math-imtx:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(4, 2): 100] raises &quot;Invalid 1x2 Matrix&quot; 
+ end">(Try it!)</a></p></div><div><p><span><a name="row-matrix"></a></span></p><pre class="pyret-display">[<a href="../trove/matrices.html#row-matrix">row-matrix</a><span></span>: <span class="pyret-content">elt :: <a href="../trove/globals.html#Number">Number</a></span>, ...] -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></pre></div><p>Constructor which returns a one-row matrix containing the given entries.</p><p>The following will construct the matrix math-imtx:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [row-matrix: 1, 2, 3] is [matrix(1,3): 1, 2, 3]
-end</pre></div><div><p><span><a name="col-matrix"></a></span></p><pre class="pyret-display">[<a href="../trove/matrices.html#col-matrix">col-matrix</a><span></span>: <span class="pyret-content">elt :: <a href="../trove/globals.html#Number">Number</a></span>, ...] -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></pre></div><p>Constructor which returns a one-column matrix containing the given entries.</p><p>The following will construct the matrix math-imtx:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [row-matrix: 1, 2, 3] is [matrix(1,3): 1, 2, 3] 
+ end">(Try it!)</a></p></div><div><p><span><a name="col-matrix"></a></span></p><pre class="pyret-display">[<a href="../trove/matrices.html#col-matrix">col-matrix</a><span></span>: <span class="pyret-content">elt :: <a href="../trove/globals.html#Number">Number</a></span>, ...] -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></pre></div><p>Constructor which returns a one-column matrix containing the given entries.</p><p>The following will construct the matrix math-imtx:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [col-matrix: 1, 2, 3] is [matrix(3,1): 1, 2, 3]
-end</pre></div><div><p><span><a name="identity-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#identity-matrix">identity-matrix</a> :: unspecified_contract</pre></div><p>Constructs an <math-in>n \times n</math-in> identity matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [col-matrix: 1, 2, 3] is [matrix(3,1): 1, 2, 3] 
+ end">(Try it!)</a></p></div><div><p><span><a name="identity-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#identity-matrix">identity-matrix</a> :: unspecified_contract</pre></div><p>Constructs an <math-in>n \times n</math-in> identity matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   identity-matrix(2) is [matrix(2,2): 1, 0,
                                       0, 1]
   identity-matrix(3) is [matrix(3,3): 1, 0, 0,
                                       0, 1, 0,
                                       0, 0, 1]
-end</pre></div><div><p><span><a name="make-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#make-matrix">make-matrix</a> :: unspecified_contract</pre></div><p>Constructs a matrix of the given size using only the given element.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    identity-matrix(2) is [matrix(2,2): 1, 0, 
+                                        0, 1] 
+    identity-matrix(3) is [matrix(3,3): 1, 0, 0, 
+                                        0, 1, 0, 
+                                        0, 0, 1] 
+ end">(Try it!)</a></p></div><div><p><span><a name="make-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#make-matrix">make-matrix</a> :: unspecified_contract</pre></div><p>Constructs a matrix of the given size using only the given element.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   make-matrix(2, 3, 1) is [matrix(2,3): 1, 1, 1,
                                         1, 1, 1]
   make-matrix(3, 2, 5) is [matrix(3,2): 5, 5,
                                         5, 5,
                                         5, 5]
-end</pre></div><div><p><span><a name="zero-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#zero-matrix">zero-matrix</a> :: unspecified_contract</pre></div><p>Constructs a matrix of the given size containing only zeroes.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    make-matrix(2, 3, 1) is [matrix(2,3): 1, 1, 1, 
+                                          1, 1, 1] 
+    make-matrix(3, 2, 5) is [matrix(3,2): 5, 5, 
+                                          5, 5, 
+                                          5, 5] 
+ end">(Try it!)</a></p></div><div><p><span><a name="zero-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#zero-matrix">zero-matrix</a> :: unspecified_contract</pre></div><p>Constructs a matrix of the given size containing only zeroes.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   zero-matrix(2, 3) is [matrix(2,3): 0, 0, 0,
                                      0, 0, 0]
-end</pre></div><div><p><span><a name="build-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#build-matrix">build-matrix</a> :: unspecified_contract</pre></div><p>Constructs a matrix of the given size, where entry <math>(i,j)</math> is the result of <span class="pyret-highlight"><tt class="pyretexpr">proc(i,j)</tt></span>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    zero-matrix(2, 3) is [matrix(2,3): 0, 0, 0, 
+                                       0, 0, 0] 
+ end">(Try it!)</a></p></div><div><p><span><a name="build-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#build-matrix">build-matrix</a> :: unspecified_contract</pre></div><p>Constructs a matrix of the given size, where entry <math>(i,j)</math> is the result of <tt class="pyret-highlight">proc(i,j)</tt>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   build-matrix(2, 3, lam(i,j): i + j end) is [matrix(3,2): 0, 1, 1, 2, 2, 3]
-end</pre></div><h2 id="Matrix-Methods" toclevel="2" tocentry="yes">Matrix Methods</h2><p>These methods are available on all matrices.</p><div><p><span><a name=".get"></a></span></p><pre class="pyret-display">.get :: unspecified_contract</pre></div><p>Returns the matrix’s entry in the <math>i^th</math> row and the <math>j^th</math> column.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    build-matrix(2, 3, lam(i,j): i + j end) is [matrix(3,2): 0, 1, 1, 2, 2, 3] 
+ end">(Try it!)</a></p></div><h2 id="Matrix-Methods" toclevel="2" tocentry="yes">Matrix Methods</h2><p>These methods are available on all matrices.</p><div><p><span><a name=".get"></a></span></p><pre class="pyret-display">.get :: unspecified_contract</pre></div><p>Returns the matrix’s entry in the <math>i^th</math> row and the <math>j^th</math> column.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(3,2): 1, 2, 3, 4, 5, 6].get(1,1) is 4
   [matrix(3,2): 1, 2, 3, 4, 5, 6].get(2,0) is 5
   [matrix(1,1): 1].get(2, 0) raises "Index out of bounds for matrix dimensions"
-end</pre></div><div><p><span><a name=".to-list"></a></span></p><pre class="pyret-display">.to-list :: unspecified_contract</pre></div><p>Returns the matrix as a list of numbers in row-major order.</p><p>For example, given the matrix math-imtx:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(3,2): 1, 2, 3, 4, 5, 6].get(1,1) is 4 
+    [matrix(3,2): 1, 2, 3, 4, 5, 6].get(2,0) is 5 
+    [matrix(1,1): 1].get(2, 0) raises &quot;Index out of bounds for matrix dimensions&quot; 
+ end">(Try it!)</a></p></div><div><p><span><a name=".to-list"></a></span></p><pre class="pyret-display">.to-list :: unspecified_contract</pre></div><p>Returns the matrix as a list of numbers in row-major order.</p><p>For example, given the matrix math-imtx:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(3,3): 2, 4, 6,
                 8, 10, 12,
                 14, 16, 18].to-list()
     is [list: 2, 4, 6, 8, 10, 12, 14, 16, 18]
-end</pre></div><div><p><span><a name=".to-vector"></a></span></p><pre class="pyret-display">.to-vector :: unspecified_contract</pre></div><p>Returns a one-row/one-column matrix as a vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(3,3): 2, 4, 6, 
+                  8, 10, 12, 
+                  14, 16, 18].to-list() 
+      is [list: 2, 4, 6, 8, 10, 12, 14, 16, 18] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".to-vector"></a></span></p><pre class="pyret-display">.to-vector :: unspecified_contract</pre></div><p>Returns a one-row/one-column matrix as a vector.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,1): 4, 5].to-vector() is [vector: 4, 5]
   [matrix(1,2): 4, 5].to-vector() is [matrix(2,1): 4, 5].to-vector()
   [matrix(2,2): 1, 2, 3, 4].to-vector()
     raises "Cannot convert non-vector matrix to vector"
-end</pre></div><div><p><span><a name=".to-lists"></a></span></p><pre class="pyret-display">.to-lists :: unspecified_contract</pre></div><p>Returns the matrix as a list of lists of numbers, with each list corresponding to one row.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,1): 4, 5].to-vector() is [vector: 4, 5] 
+    [matrix(1,2): 4, 5].to-vector() is [matrix(2,1): 4, 5].to-vector() 
+    [matrix(2,2): 1, 2, 3, 4].to-vector() 
+      raises &quot;Cannot convert non-vector matrix to vector&quot; 
+ end">(Try it!)</a></p></div><div><p><span><a name=".to-lists"></a></span></p><pre class="pyret-display">.to-lists :: unspecified_contract</pre></div><p>Returns the matrix as a list of lists of numbers, with each list corresponding to one row.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,3): 1, 2, 3, 4, 5, 6].to-lists()
     is [list: [list: 1, 2, 3],
               [list: 4, 5, 6]]
-end</pre></div><div><p><span><a name=".to-vectors"></a></span></p><pre class="pyret-display">.to-vectors :: unspecified_contract</pre></div><p>Returns the matrix as a list of lists of numbers (i.e. a list of <a href="../trove/matrices.html#Vector"><span class="pyret-highlight"><tt class="pyretexpr">Vector</tt></span></a>s), with each list corresponding to one column.</p><p>For example, the matrix math-imtx corresponds to the vectors math-imtx, math-imtx, and math-imtx:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,3): 1, 2, 3, 4, 5, 6].to-lists() 
+      is [list: [list: 1, 2, 3], 
+                [list: 4, 5, 6]] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".to-vectors"></a></span></p><pre class="pyret-display">.to-vectors :: unspecified_contract</pre></div><p>Returns the matrix as a list of lists of numbers (i.e. a list of <a href="../trove/matrices.html#Vector"><tt class="pyret-highlight">Vector</tt></a>s), with each list corresponding to one column.</p><p>For example, the matrix math-imtx corresponds to the vectors math-imtx, math-imtx, and math-imtx:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,3): 1, 2, 3, 4, 5, 6].to-vectors()
     is [list: [vector: 1, 4],
               [vector: 2, 5],
               [vector: 3, 6]]
-end</pre></div><div><p><span><a name=".row"></a></span></p><pre class="pyret-display">.row :: unspecified_contract</pre></div><p>Returns a one-row matrix with the matrix’s given row.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,3): 1, 2, 3, 4, 5, 6].to-vectors() 
+      is [list: [vector: 1, 4], 
+                [vector: 2, 5], 
+                [vector: 3, 6]] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".row"></a></span></p><pre class="pyret-display">.row :: unspecified_contract</pre></div><p>Returns a one-row matrix with the matrix’s given row.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,3): 1, 2, 3, 4, 5, 6].row(2)
     is [matrix(1,3): 4, 5, 6]
 
   [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].row(3)
     is [matrix(1,3): 7, 8, 9]
-end</pre></div><div><p><span><a name=".col"></a></span></p><pre class="pyret-display">.col :: unspecified_contract</pre></div><p>Returns a one-column matrix with the matrix’s given column.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,3): 1, 2, 3, 4, 5, 6].row(2) 
+      is [matrix(1,3): 4, 5, 6] 
+
+    [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].row(3) 
+      is [matrix(1,3): 7, 8, 9] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".col"></a></span></p><pre class="pyret-display">.col :: unspecified_contract</pre></div><p>Returns a one-column matrix with the matrix’s given column.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,3): 1, 2, 3, 4, 5, 6].col(2)
     is [matrix(2,1): 2, 5]
 
   [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].col(3)
     is [matrix(3,1): 3, 6, 9]
-end</pre></div><div><p><span><a name=".submatrix"></a></span></p><pre class="pyret-display">.submatrix :: unspecified_contract</pre></div><p>Returns the submatrix of the matrix comprised of the intersection of the given list of rows and the given list of columns.</p><p>For example, if our list of rows is <math-in>\{1, 2\}</math-in> and our list of columns is <math-in>\{2, 3\}</math-in>, then the positions in the resulting submatrix will be the elements with <math-in>(row,col)</math-in> positions <math-in>\{(1, 2), (1, 3), (2, 2), (2, 3)\}</math-in>.</p><p><math-in>\left[\begin{matrix}             a_{11} &amp; a_{12} &amp; a_{13} \\             a_{21} &amp; a_{22} &amp; a_{23} \\             a_{31} &amp; a_{32} &amp; a_{33}             \end{matrix}\right]</math-in><span class="pyret-highlight"><tt class="pyretexpr">.submatrix([list: 1, 2], [list: 2, 3])</tt></span>                                      <math-in>= \left[\begin{matrix} a_{12} &amp; a_{13} \\ a_{22} &amp; a_{23}\end{matrix}\right]</math-in></p><p>This is shown in the below example:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,3): 1, 2, 3, 4, 5, 6].col(2) 
+      is [matrix(2,1): 2, 5] 
+
+    [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].col(3) 
+      is [matrix(3,1): 3, 6, 9] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".submatrix"></a></span></p><pre class="pyret-display">.submatrix :: unspecified_contract</pre></div><p>Returns the submatrix of the matrix comprised of the intersection of the given list of rows and the given list of columns.</p><p>For example, if our list of rows is <math-in>\{1, 2\}</math-in> and our list of columns is <math-in>\{2, 3\}</math-in>, then the positions in the resulting submatrix will be the elements with <math-in>(row,col)</math-in> positions <math-in>\{(1, 2), (1, 3), (2, 2), (2, 3)\}</math-in>.</p><p><math-in>\left[\begin{matrix}             a_{11} &amp; a_{12} &amp; a_{13} \\             a_{21} &amp; a_{22} &amp; a_{23} \\             a_{31} &amp; a_{32} &amp; a_{33}             \end{matrix}\right]</math-in><tt class="pyret-highlight">.submatrix([list: 1, 2], [list: 2, 3])</tt>                                      <math-in>= \left[\begin{matrix} a_{12} &amp; a_{13} \\ a_{22} &amp; a_{23}\end{matrix}\right]</math-in></p><p>This is shown in the below example:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].submatrix([list: 1, 2], [list: 2, 3])
     is [matrix(2,2): 2, 3, 4, 5]
-end</pre></div><div><p><span><a name=".transpose"></a></span></p><pre class="pyret-display">.transpose :: unspecified_contract</pre></div><p>Returns the transposition of the matrix. For example, <math-disp>\begin{bmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{bmatrix}       \overrightarrow{Transpose}       \begin{bmatrix}1 &amp; 4 \\ 2 &amp; 5 \\ 3 &amp; 6\end{bmatrix}</math-disp></p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].submatrix([list: 1, 2], [list: 2, 3]) 
+      is [matrix(2,2): 2, 3, 4, 5] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".transpose"></a></span></p><pre class="pyret-display">.transpose :: unspecified_contract</pre></div><p>Returns the transposition of the matrix. For example, <math-disp>\begin{bmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{bmatrix}       \overrightarrow{Transpose}       \begin{bmatrix}1 &amp; 4 \\ 2 &amp; 5 \\ 3 &amp; 6\end{bmatrix}</math-disp></p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,3): 1, 2, 3, 4, 5, 6].transpose()
     is [matrix(3,2): 1, 4, 2, 5, 3, 6]
-end</pre></div><div><p><span><a name=".hermitian"></a></span></p><pre class="pyret-display">.hermitian :: unspecified_contract</pre></div><p>Computes the conjugate-transpose of this matrix.  Since Pyret does not have complex numbers, this is synonymous with <a href="../trove/matrices.html#.transpose">.transpose</a>.</p><div><p><span><a name=".diagonal"></a></span></p><pre class="pyret-display">.diagonal :: unspecified_contract</pre></div><p>Returns a one-row matrix containing the matrix’s diagonal entries.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,3): 1, 2, 3, 4, 5, 6].transpose() 
+      is [matrix(3,2): 1, 4, 2, 5, 3, 6] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".hermitian"></a></span></p><pre class="pyret-display">.hermitian :: unspecified_contract</pre></div><p>Computes the conjugate-transpose of this matrix.  Since Pyret does not have complex numbers, this is synonymous with <a href="../trove/matrices.html#.transpose">.transpose</a>.</p><div><p><span><a name=".diagonal"></a></span></p><pre class="pyret-display">.diagonal :: unspecified_contract</pre></div><p>Returns a one-row matrix containing the matrix’s diagonal entries.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].diagonal()
     is [matrix(1,3): 1, 5, 9]
 
   [matrix(3,2): 1, 2, 3, 4, 5, 6].diagonal()
     is [matrix(1,2): 1, 5]
-end</pre></div><div><p><span><a name=".upper-triangle"></a></span></p><pre class="pyret-display">.upper-triangle :: unspecified_contract</pre></div><p>Returns the <i>upper triangle</i> of the matrix, if the matrix is square.  This consists of all the values on or above the main diagonal, and zeroes below it. For example, the upper triangle of math-imtx would be math-imtx.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].diagonal() 
+      is [matrix(1,3): 1, 5, 9] 
+
+    [matrix(3,2): 1, 2, 3, 4, 5, 6].diagonal() 
+      is [matrix(1,2): 1, 5] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".upper-triangle"></a></span></p><pre class="pyret-display">.upper-triangle :: unspecified_contract</pre></div><p>Returns the <i>upper triangle</i> of the matrix, if the matrix is square.  This consists of all the values on or above the main diagonal, and zeroes below it. For example, the upper triangle of math-imtx would be math-imtx.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,2): 1, 2,
                 3, 4].upper-triangle()
     is [matrix(2,2): 1, 2,
@@ -155,7 +280,19 @@ end</pre></div><div><p><span><a name=".upper-triangle"></a></span></p><pre class
     is [matrix(3,3): 1, 2, 3,
                      0, 5, 6,
                      0, 0, 9]
-end</pre></div><div><p><span><a name=".lower-triangle"></a></span></p><pre class="pyret-display">.lower-triangle :: unspecified_contract</pre></div><p>Returns the <i>lower triangle</i> of the matrix, if the matrix is square.  This consists of all the values on or below the main diagonal, and zeroes above it. For example, the upper triangle of math-imtx would be math-imtx.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,2): 1, 2, 
+                  3, 4].upper-triangle() 
+      is [matrix(2,2): 1, 2, 
+                       0, 4] 
+
+    [matrix(3,3): 1, 2, 3, 
+                  4, 5, 6, 
+                  7, 8, 9].upper-triangle() 
+      is [matrix(3,3): 1, 2, 3, 
+                       0, 5, 6, 
+                       0, 0, 9] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".lower-triangle"></a></span></p><pre class="pyret-display">.lower-triangle :: unspecified_contract</pre></div><p>Returns the <i>lower triangle</i> of the matrix, if the matrix is square.  This consists of all the values on or below the main diagonal, and zeroes above it. For example, the upper triangle of math-imtx would be math-imtx.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,2): 1, 2,
                 3, 4].lower-triangle()
     is [matrix(2,2): 1, 0,
@@ -167,75 +304,155 @@ end</pre></div><div><p><span><a name=".lower-triangle"></a></span></p><pre class
     is [matrix(3,3): 1, 0, 0,
                      4, 5, 0,
                      7, 8, 9]
-end</pre></div><div><p><span><a name=".row-list"></a></span></p><pre class="pyret-display">.row-list :: unspecified_contract</pre></div><p>Returns the matrix as a list of one-row matrices. (Very similar to <a href="../trove/matrices.html#.to-lists">.to-lists</a>, except this method returns a list of matrices instead.)</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,2): 1, 2, 
+                  3, 4].lower-triangle() 
+      is [matrix(2,2): 1, 0, 
+                       3, 4] 
+
+    [matrix(3,3): 1, 2, 3, 
+                  4, 5, 6, 
+                  7, 8, 9].lower-triangle() 
+      is [matrix(3,3): 1, 0, 0, 
+                       4, 5, 0, 
+                       7, 8, 9] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".row-list"></a></span></p><pre class="pyret-display">.row-list :: unspecified_contract</pre></div><p>Returns the matrix as a list of one-row matrices. (Very similar to <a href="../trove/matrices.html#.to-lists">.to-lists</a>, except this method returns a list of matrices instead.)</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,3): 1, 2, 3, 4, 5, 6].row-list()
     is [list: [matrix(1,3): 1, 2, 3],
               [matrix(1,3): 4, 5, 6]]
-end</pre></div><div><p><span><a name=".col-list"></a></span></p><pre class="pyret-display">.col-list :: unspecified_contract</pre></div><p>Returns the matrix as a list of one-column matrices. (Very similar to <a href="../trove/matrices.html#.to-vectors">.to-vectors</a>, except this method returns a list of matrices instead.)</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,3): 1, 2, 3, 4, 5, 6].row-list() 
+      is [list: [matrix(1,3): 1, 2, 3], 
+                [matrix(1,3): 4, 5, 6]] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".col-list"></a></span></p><pre class="pyret-display">.col-list :: unspecified_contract</pre></div><p>Returns the matrix as a list of one-column matrices. (Very similar to <a href="../trove/matrices.html#.to-vectors">.to-vectors</a>, except this method returns a list of matrices instead.)</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,3): 1, 2, 3, 4, 5, 6].col-list()
     is [list: [matrix(2,1): 1, 4],
               [matrix(2,1): 2, 5],
               [matrix(2,1): 3, 6]]
-end</pre></div><div><p><span><a name=".map"></a></span></p><pre class="pyret-display">.map :: unspecified_contract</pre></div><p>Maps the given function entrywise over the matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,3): 1, 2, 3, 4, 5, 6].col-list() 
+      is [list: [matrix(2,1): 1, 4], 
+                [matrix(2,1): 2, 5], 
+                [matrix(2,1): 3, 6]] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".map"></a></span></p><pre class="pyret-display">.map :: unspecified_contract</pre></div><p>Maps the given function entrywise over the matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   multTwo = lam(x): x * 2 end
   [matrix(2,2): 1, 2, 3, 4].map(multTwo)
     is [matrix(2,2): 2, 4, 6, 8]
-end</pre></div><div><p><span><a name=".map2"></a></span></p><pre class="pyret-display">.map2 :: unspecified_contract</pre></div><p>Maps the given function entrywise over corresponding elements of this and the given matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    multTwo = lam(x): x * 2 end 
+    [matrix(2,2): 1, 2, 3, 4].map(multTwo) 
+      is [matrix(2,2): 2, 4, 6, 8] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".map2"></a></span></p><pre class="pyret-display">.map2 :: unspecified_contract</pre></div><p>Maps the given function entrywise over corresponding elements of this and the given matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   m1 = [matrix(2,2): 10, 20, 30, 40]
   m2 = [matrix(2,2): 4, 3, 2, 1]
   m1.map2(m2, num-expt)
     is [matrix(2,2): num-expt(10, 4), num-expt(20, 3),
                      num-expt(30, 2), num-expt(40, 1)]
-end</pre></div><div><p><span><a name=".row-map"></a></span></p><pre class="pyret-display">.row-map :: unspecified_contract</pre></div><p>Maps the given function over each row in the matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    m1 = [matrix(2,2): 10, 20, 30, 40] 
+    m2 = [matrix(2,2): 4, 3, 2, 1] 
+    m1.map2(m2, num-expt) 
+      is [matrix(2,2): num-expt(10, 4), num-expt(20, 3), 
+                       num-expt(30, 2), num-expt(40, 1)] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".row-map"></a></span></p><pre class="pyret-display">.row-map :: unspecified_contract</pre></div><p>Maps the given function over each row in the matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   # sumRow :: 1*n matrix
   # Computes the total sum of all entries in the given row
   sumRow = lam(row): [matrix(1,1): row.to-vector().foldr(_ + _)] end
   [matrix(2,3): 1, 2, 3, 4, 5, 6].row-map(sumRow) is [matrix(2,1): 6, 15]
-end</pre></div><div><p><span><a name=".col-map"></a></span></p><pre class="pyret-display">.col-map :: unspecified_contract</pre></div><p>Maps the given function over each column in the matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    # sumRow :: 1*n matrix 
+    # Computes the total sum of all entries in the given row 
+    sumRow = lam(row): [matrix(1,1): row.to-vector().foldr(_ + _)] end 
+    [matrix(2,3): 1, 2, 3, 4, 5, 6].row-map(sumRow) is [matrix(2,1): 6, 15] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".col-map"></a></span></p><pre class="pyret-display">.col-map :: unspecified_contract</pre></div><p>Maps the given function over each column in the matrix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   # sumCol :: m*1 matrix
   # Computes the total sum of all entries in the given column
   sumCol = lam(col): [matrix(1,1): col.to-vector().foldr(_ + _)] end
   [matrix(2,3): 1, 2, 3, 4, 5, 6].col-map(sumCol) is [matrix(1,3): 5, 7, 9]
-end</pre></div><div><p><span><a name=".augment"></a></span></p><pre class="pyret-display">.augment :: unspecified_contract</pre></div><p>Returns the matrix augmented with the given matrix. For example, augmenting the matrix math-imtx with the matrix math-imtx yields the matrix math-imtx.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    # sumCol :: m*1 matrix 
+    # Computes the total sum of all entries in the given column 
+    sumCol = lam(col): [matrix(1,1): col.to-vector().foldr(_ + _)] end 
+    [matrix(2,3): 1, 2, 3, 4, 5, 6].col-map(sumCol) is [matrix(1,3): 5, 7, 9] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".augment"></a></span></p><pre class="pyret-display">.augment :: unspecified_contract</pre></div><p>Returns the matrix augmented with the given matrix. For example, augmenting the matrix math-imtx with the matrix math-imtx yields the matrix math-imtx.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,2): 1, 2,
                 4, 5].augment([matrix(2,1): 3,
                                             6])
     is [matrix(2,3): 1, 2, 3,
                      4, 5, 6]
-end</pre></div><div><p><span><a name=".stack"></a></span></p><pre class="pyret-display">.stack :: unspecified_contract</pre></div><p>Returns the matrix stacked on top of the given matrix. For example, stacking the matrix math-imtx on top of the matrix math-imtx gives the matrix math-imtx.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,2): 1, 2, 
+                  4, 5].augment([matrix(2,1): 3, 
+                                              6]) 
+      is [matrix(2,3): 1, 2, 3, 
+                       4, 5, 6] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".stack"></a></span></p><pre class="pyret-display">.stack :: unspecified_contract</pre></div><p>Returns the matrix stacked on top of the given matrix. For example, stacking the matrix math-imtx on top of the matrix math-imtx gives the matrix math-imtx.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(1,3): 1, 2, 3].stack([matrix(1,3): 4, 5, 6])
     is [matrix(2,3): 1, 2, 3,
                      4, 5, 6]
-end</pre></div><div><p><span><a name=".trace"></a></span></p><pre class="pyret-display">.trace :: unspecified_contract</pre></div><p>Returns the trace of the matrix (i.e. the sum of its diagonal values).</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(1,3): 1, 2, 3].stack([matrix(1,3): 4, 5, 6]) 
+      is [matrix(2,3): 1, 2, 3, 
+                       4, 5, 6] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".trace"></a></span></p><pre class="pyret-display">.trace :: unspecified_contract</pre></div><p>Returns the trace of the matrix (i.e. the sum of its diagonal values).</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(3,3): 1, 2, 3,
                 4, 5, 6,
                 7, 8, 9].trace() is (1 + 5 + 9)
   [matrix(2,2): 2, 4,
                 6, 8].trace() is (2 + 8)
-end</pre></div><div><p><span><a name=".scale"></a></span></p><pre class="pyret-display">.scale :: unspecified_contract</pre></div><p>Multiplies each entry in the matrix by the given value.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(3,3): 1, 2, 3, 
+                  4, 5, 6, 
+                  7, 8, 9].trace() is (1 + 5 + 9) 
+    [matrix(2,2): 2, 4, 
+                  6, 8].trace() is (2 + 8) 
+ end">(Try it!)</a></p></div><div><p><span><a name=".scale"></a></span></p><pre class="pyret-display">.scale :: unspecified_contract</pre></div><p>Multiplies each entry in the matrix by the given value.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,2): 1, 2, 3, 4].scale(2) is [matrix(2,2): 2, 4, 6, 8]
 
   [matrix(2,2): 2, 4, 6, 8].scale(1/2) is [matrix(2,2): 1, 2, 3, 4]
-end</pre></div><div><p><span><a name=".dot"></a></span></p><pre class="pyret-display">.dot :: unspecified_contract</pre></div><p>Returns the Frobenius Product of the matrix with the given matrix (for 1-dimensional matrices, this is simply the dot product). This is done by multiplying the matrix with the transposition of <span class="pyret-highlight"><tt class="pyretexpr">other</tt></span> and taking the trace of the result. An example of this calculation (<math-in>\ast</math-in> denotes matrix multiplication):</p><p><math-in>\left(\left[\begin{smallmatrix}1 &amp; 2 &amp; 3\end{smallmatrix}\right] \ast\left[\begin{smallmatrix}4\\ 2\\ ^4/_3 \end{smallmatrix}\right]\right)</math-in><span class="pyret-highlight"><tt class="pyretexpr">.trace()</tt></span> <math-in>= \underbrace{\left[\begin{smallmatrix}(1\cdot 4)+(2\cdot 2)+(3\cdot \frac{4}{3})\end{smallmatrix}\right]}_{ 1\times 1 \text{ matrix}}</math-in><span class="pyret-highlight"><tt class="pyretexpr">.trace()</tt></span><math-in>=12</math-in></p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,2): 1, 2, 3, 4].scale(2) is [matrix(2,2): 2, 4, 6, 8] 
+
+    [matrix(2,2): 2, 4, 6, 8].scale(1/2) is [matrix(2,2): 1, 2, 3, 4] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".dot"></a></span></p><pre class="pyret-display">.dot :: unspecified_contract</pre></div><p>Returns the Frobenius Product of the matrix with the given matrix (for 1-dimensional matrices, this is simply the dot product). This is done by multiplying the matrix with the transposition of <tt class="pyret-highlight">other</tt> and taking the trace of the result. An example of this calculation (<math-in>\ast</math-in> denotes matrix multiplication):</p><p><math-in>\left(\left[\begin{smallmatrix}1 &amp; 2 &amp; 3\end{smallmatrix}\right] \ast\left[\begin{smallmatrix}4\\ 2\\ ^4/_3 \end{smallmatrix}\right]\right)</math-in><tt class="pyret-highlight">.trace()</tt> <math-in>= \underbrace{\left[\begin{smallmatrix}(1\cdot 4)+(2\cdot 2)+(3\cdot \frac{4}{3})\end{smallmatrix}\right]}_{ 1\times 1 \text{ matrix}}</math-in><tt class="pyret-highlight">.trace()</tt><math-in>=12</math-in></p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(1,3): 1, 2, 3].dot([matrix(1,3): 4, 2, 4/3]) is 12
   [matrix(1,3): 1, 2, 3].dot([matrix(1,3): 1, 1, 1]) is 6
-end</pre></div><div><p><span><a name=".expt"></a></span></p><pre class="pyret-display">.expt :: unspecified_contract</pre></div><p>Multiplies the matrix by itself the given number of times.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(1,3): 1, 2, 3].dot([matrix(1,3): 4, 2, 4/3]) is 12 
+    [matrix(1,3): 1, 2, 3].dot([matrix(1,3): 1, 1, 1]) is 6 
+ end">(Try it!)</a></p></div><div><p><span><a name=".expt"></a></span></p><pre class="pyret-display">.expt :: unspecified_contract</pre></div><p>Multiplies the matrix by itself the given number of times.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   a = [matrix(2,2): 1, 2, 3, 4]
   a.expt(1) is a
   a.expt(2) is a * a
   a.expt(3) is a * a * a
-end</pre></div><div><p><span><a name=".determinant"></a></span></p><pre class="pyret-display">.determinant :: unspecified_contract</pre></div><p>Returns the determinant of the matrix, calculated via a recursive implementation of Laplace expansion.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    a = [matrix(2,2): 1, 2, 3, 4] 
+    a.expt(1) is a 
+    a.expt(2) is a * a 
+    a.expt(3) is a * a * a 
+ end">(Try it!)</a></p></div><div><p><span><a name=".determinant"></a></span></p><pre class="pyret-display">.determinant :: unspecified_contract</pre></div><p>Returns the determinant of the matrix, calculated via a recursive implementation of Laplace expansion.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(5,5): 1, 2, 1, 2, 3,
                 2, 3, 1, 0, 1,
                 2, 2, 1, 0, 0,
                 1, 1, 1, 1, 1,
                 0,-2, 0,-2,-2].determinant() is -2
-end</pre></div><div><p><span><a name=".is-invertible"></a></span></p><pre class="pyret-display">.is-invertible :: unspecified_contract</pre></div><p>Returns true if the matrix is invertible, that is, it has a nonzero determinant.</p><div><p><span><a name=".is-orthonormal"></a></span></p><pre class="pyret-display">.is-orthonormal :: unspecified_contract</pre></div><p> Returns true if the matrix is <a href="https://en.wikipedia.org/wiki/Orthogonal_matrix">orthonormal</a>, meaning that all rows (when treated as vectors) each have <a href="../trove/matrices.html#.magnitude">.magnitude</a> 1, are all distinct, and distinct rows <a href="../trove/matrices.html#.dot">.dot</a> of zero.  Mathematically, this computes whether <math-in>self * self^T</math-in> is the identity matrix.  Since numerical inaccuracy is quite likely, this check is performed using <a href="../lang/equality.html#roughly-equal"><span class="pyret-highlight"><tt class="pyretexpr">roughly-equal</tt></span></a>.</p><div><p><span><a name=".rref"></a></span></p><pre class="pyret-display">.rref :: unspecified_contract</pre></div><p>Returns the Reduced Row Echelon Form of the matrix. For example: <math-disp>\begin{bmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{bmatrix}       \overrightarrow{RREF}       \begin{bmatrix}1 &amp; 0 &amp; -1\\ 0 &amp; 1 &amp; 2\end{bmatrix}</math-disp></p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(5,5): 1, 2, 1, 2, 3, 
+                  2, 3, 1, 0, 1, 
+                  2, 2, 1, 0, 0, 
+                  1, 1, 1, 1, 1, 
+                  0,-2, 0,-2,-2].determinant() is -2 
+ end">(Try it!)</a></p></div><div><p><span><a name=".is-invertible"></a></span></p><pre class="pyret-display">.is-invertible :: unspecified_contract</pre></div><p>Returns true if the matrix is invertible, that is, it has a nonzero determinant.</p><div><p><span><a name=".is-orthonormal"></a></span></p><pre class="pyret-display">.is-orthonormal :: unspecified_contract</pre></div><p> Returns true if the matrix is <a href="https://en.wikipedia.org/wiki/Orthogonal_matrix">orthonormal</a>, meaning that all rows (when treated as vectors) each have <a href="../trove/matrices.html#.magnitude">.magnitude</a> 1, are all distinct, and distinct rows <a href="../trove/matrices.html#.dot">.dot</a> of zero.  Mathematically, this computes whether <math-in>self * self^T</math-in> is the identity matrix.  Since numerical inaccuracy is quite likely, this check is performed using <a href="../lang/equality.html#roughly-equal"><tt class="pyret-highlight">roughly-equal</tt></a>.</p><div><p><span><a name=".rref"></a></span></p><pre class="pyret-display">.rref :: unspecified_contract</pre></div><p>Returns the Reduced Row Echelon Form of the matrix. For example: <math-disp>\begin{bmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{bmatrix}       \overrightarrow{RREF}       \begin{bmatrix}1 &amp; 0 &amp; -1\\ 0 &amp; 1 &amp; 2\end{bmatrix}</math-disp></p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,3): 1, 2, 3, 4, 5, 6].rref() is [matrix(2,3): 1, 0,-1, 0, 1, 2]
-end</pre></div><div><p><span><a name=".inverse"></a></span></p><pre class="pyret-display">.inverse :: unspecified_contract</pre></div><p>Returns the inverse of the matrix, if it is invertible (found by augmenting the matrix with itself and finding the reduced-row echelon form). For example: <math-disp>\begin{bmatrix}1 &amp; 0 &amp; 4\\ 1 &amp; 1 &amp; 6\\ -3 &amp; 0 &amp; -10\end{bmatrix}^{-1}       = \begin{bmatrix}-5 &amp; 0 &amp; -2\\ -4 &amp; 1 &amp; -1\\ ^3/_2 &amp; 0 &amp; ^1/_2\end{bmatrix}</math-disp></p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,3): 1, 2, 3, 4, 5, 6].rref() is [matrix(2,3): 1, 0,-1, 0, 1, 2] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".inverse"></a></span></p><pre class="pyret-display">.inverse :: unspecified_contract</pre></div><p>Returns the inverse of the matrix, if it is invertible (found by augmenting the matrix with itself and finding the reduced-row echelon form). For example: <math-disp>\begin{bmatrix}1 &amp; 0 &amp; 4\\ 1 &amp; 1 &amp; 6\\ -3 &amp; 0 &amp; -10\end{bmatrix}^{-1}       = \begin{bmatrix}-5 &amp; 0 &amp; -2\\ -4 &amp; 1 &amp; -1\\ ^3/_2 &amp; 0 &amp; ^1/_2\end{bmatrix}</math-disp></p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(3,3): 1, 0, 4, 1, 1, 6, -3, 0, -10].inverse()
     is [matrix(3,3): -5, 0, -2, -4, 1, -1, 3/2, 0, 1/2]
-end</pre></div><div><p><span><a name=".solve"></a></span></p><pre class="pyret-display">.solve :: unspecified_contract</pre></div><p>Returns the matrix which, when multiplied on the right of this matrix, results in the given matrix. In other words, this returns the solution to the system of equations represented by this and the given matrix. This method only works on invertible matrices (Calculated by inverting itself and multiplying the given matrix on the right side of this inverse).</p><div><p><span><a name=".least-squares-solve"></a></span></p><pre class="pyret-display">.least-squares-solve :: unspecified_contract</pre></div><p>Returns the least squares solution for this and the given matrix, calculated using QR decomposition.</p><div><p><span><a name=".lu-decomposition"></a></span></p><pre class="pyret-display">.lu-decomposition :: unspecified_contract</pre></div><p> Computes the <a href="https://en.wikipedia.org/wiki/LU_decomposition">LU decomposition</a> of this matrix, if possible.  This returns a pair of matrices, <span class="pyret-highlight"><tt class="pyretexpr">L</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">U</tt></span>, that are respectively <a href="../UnDeFiNeD">lower-triangular</a> and <a href="../UnDeFiNeD">upper-triangular</a>, and whose product is this matrix:</p><p><math-disp>\begin{bmatrix}   a_{11} &amp; a_{12} &amp; a_{13} \\   a_{21} &amp; a_{22} &amp; a_{23} \\   a_{31} &amp; a_{32} &amp; a_{33} \end{bmatrix} = \begin{bmatrix}   \ell_{11} &amp;         0 &amp; 0         \\   \ell_{21} &amp; \ell_{22} &amp; 0         \\   \ell_{31} &amp; \ell_{32} &amp; \ell_{33} \end{bmatrix} \begin{bmatrix}   u_{11} &amp; u_{12} &amp; u_{13} \\        0 &amp; u_{22} &amp; u_{23} \\        0 &amp;      0 &amp; u_{33} \end{bmatrix}</math-disp></p><div><p><span><a name=".lp-norm"></a></span></p><pre class="pyret-display">.lp-norm :: unspecified_contract</pre></div><p>Computes the <math>L^p</math> norm of the matrix using the given number.</p><div><p><span><a name=".l1-norm"></a></span></p><pre class="pyret-display">.l1-norm :: unspecified_contract</pre></div><div><p><span><a name=".l2-norm"></a></span></p><pre class="pyret-display">.l2-norm :: unspecified_contract</pre></div><div><p><span><a name=".l-inf-norm"></a></span></p><pre class="pyret-display">.l-inf-norm :: unspecified_contract</pre></div><p>Computes the <math>L^1</math>, <math>L^2</math>, and <math>L</math><superscript>∞</superscript> norms of the matrix, respectively.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(3,3): 1, 0, 4, 1, 1, 6, -3, 0, -10].inverse() 
+      is [matrix(3,3): -5, 0, -2, -4, 1, -1, 3/2, 0, 1/2] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".solve"></a></span></p><pre class="pyret-display">.solve :: unspecified_contract</pre></div><p>Returns the matrix which, when multiplied on the right of this matrix, results in the given matrix. In other words, this returns the solution to the system of equations represented by this and the given matrix. This method only works on invertible matrices (Calculated by inverting itself and multiplying the given matrix on the right side of this inverse).</p><div><p><span><a name=".least-squares-solve"></a></span></p><pre class="pyret-display">.least-squares-solve :: unspecified_contract</pre></div><p>Returns the least squares solution for this and the given matrix, calculated using QR decomposition.</p><div><p><span><a name=".lu-decomposition"></a></span></p><pre class="pyret-display">.lu-decomposition :: unspecified_contract</pre></div><p> Computes the <a href="https://en.wikipedia.org/wiki/LU_decomposition">LU decomposition</a> of this matrix, if possible.  This returns a pair of matrices, <tt class="pyret-highlight">L</tt> and <tt class="pyret-highlight">U</tt>, that are respectively <a href="../UnDeFiNeD">lower-triangular</a> and <a href="../UnDeFiNeD">upper-triangular</a>, and whose product is this matrix:</p><p><math-disp>\begin{bmatrix}   a_{11} &amp; a_{12} &amp; a_{13} \\   a_{21} &amp; a_{22} &amp; a_{23} \\   a_{31} &amp; a_{32} &amp; a_{33} \end{bmatrix} = \begin{bmatrix}   \ell_{11} &amp;         0 &amp; 0         \\   \ell_{21} &amp; \ell_{22} &amp; 0         \\   \ell_{31} &amp; \ell_{32} &amp; \ell_{33} \end{bmatrix} \begin{bmatrix}   u_{11} &amp; u_{12} &amp; u_{13} \\        0 &amp; u_{22} &amp; u_{23} \\        0 &amp;      0 &amp; u_{33} \end{bmatrix}</math-disp></p><div><p><span><a name=".lp-norm"></a></span></p><pre class="pyret-display">.lp-norm :: unspecified_contract</pre></div><p>Computes the <math>L^p</math> norm of the matrix using the given number.</p><div><p><span><a name=".l1-norm"></a></span></p><pre class="pyret-display">.l1-norm :: unspecified_contract</pre></div><div><p><span><a name=".l2-norm"></a></span></p><pre class="pyret-display">.l2-norm :: unspecified_contract</pre></div><div><p><span><a name=".l-inf-norm"></a></span></p><pre class="pyret-display">.l-inf-norm :: unspecified_contract</pre></div><p>Computes the <math>L^1</math>, <math>L^2</math>, and <math>L</math><superscript>∞</superscript> norms of the matrix, respectively.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   a = [matrix(3,1): 1, 2, 3]
   b = [matrix(3,3): 1, 0, 0, 2, 0, 0, 3, 0, 0]
 
@@ -245,31 +462,65 @@ end</pre></div><div><p><span><a name=".solve"></a></span></p><pre class="pyret-d
   a.l1-norm()  is-roughly 6
   a.l2-norm()  is-roughly num-sqrt(14)
   a.l-inf-norm() is 3
-end</pre></div><div><p><span><a name=".qr-decomposition"></a></span></p><pre class="pyret-display">.qr-decomposition :: unspecified_contract</pre></div><p>Returns the <a href="https://en.wikipedia.org/wiki/QR_decomposition">QR decomposition</a> of this matrix, if possible.  This returns a pair of matrices, <span class="pyret-highlight"><tt class="pyretexpr">Q</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">R</tt></span>, where <span class="pyret-highlight"><tt class="pyretexpr">Q</tt></span> is <a href="../UnDeFiNeD">orthogonal</a> and <span class="pyret-highlight"><tt class="pyretexpr">R</tt></span> is <a href="../UnDeFiNeD">upper-triangular</a>, whose product is this matrix.</p><div><p><span><a name=".gram-schmidt"></a></span></p><pre class="pyret-display">.gram-schmidt :: unspecified_contract</pre></div><p>Returns an orthogonal matrix whose image is the same as the span of the matrix’s columns. (The same as the first result of <a href="../trove/matrices.html#.qr-decomposition">.qr-decomposition</a>)</p><h2 id="s:matrix-binary-ops" toclevel="2" tocentry="yes"><span class="pyret-highlight"><tt class="pyretexpr">Matrix</tt></span> Binary Operations</h2><p>Matrices are defined to permit using addition, subtraction, and multiplication operators on them, whenever the dimensions are compatible:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    a = [matrix(3,1): 1, 2, 3] 
+    b = [matrix(3,3): 1, 0, 0, 2, 0, 0, 3, 0, 0] 
+
+    a.lp-norm(3) is-roughly num-expt(35, 1/3) 
+    b.lp-norm(3) is-roughly (b * a).lp-norm(3) 
+
+    a.l1-norm()  is-roughly 6 
+    a.l2-norm()  is-roughly num-sqrt(14) 
+    a.l-inf-norm() is 3 
+ end">(Try it!)</a></p></div><div><p><span><a name=".qr-decomposition"></a></span></p><pre class="pyret-display">.qr-decomposition :: unspecified_contract</pre></div><p>Returns the <a href="https://en.wikipedia.org/wiki/QR_decomposition">QR decomposition</a> of this matrix, if possible.  This returns a pair of matrices, <tt class="pyret-highlight">Q</tt> and <tt class="pyret-highlight">R</tt>, where <tt class="pyret-highlight">Q</tt> is <a href="../UnDeFiNeD">orthogonal</a> and <tt class="pyret-highlight">R</tt> is <a href="../UnDeFiNeD">upper-triangular</a>, whose product is this matrix.</p><div><p><span><a name=".gram-schmidt"></a></span></p><pre class="pyret-display">.gram-schmidt :: unspecified_contract</pre></div><p>Returns an orthogonal matrix whose image is the same as the span of the matrix’s columns. (The same as the first result of <a href="../trove/matrices.html#.qr-decomposition">.qr-decomposition</a>)</p><h2 id="s:matrix-binary-ops" toclevel="2" tocentry="yes"><tt class="pyret-highlight">Matrix</tt> Binary Operations</h2><p>Matrices are defined to permit using addition, subtraction, and multiplication operators on them, whenever the dimensions are compatible:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,2): 1, 2, 3, 4] + [matrix(2,2): 1, 2, 3, 4]
     is [matrix(2,2): 2, 4, 6, 8]
 
   [matrix(2,2): 1, 2, 3, 4] + [matrix(4, 1): 1, 2, 3, 4]
     raises "different sized matrices"
-end</pre></div><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,2): 1, 2, 3, 4] + [matrix(2,2): 1, 2, 3, 4] 
+      is [matrix(2,2): 2, 4, 6, 8] 
+
+    [matrix(2,2): 1, 2, 3, 4] + [matrix(4, 1): 1, 2, 3, 4] 
+      raises &quot;different sized matrices&quot; 
+ end">(Try it!)</a></p></div><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,2): 1, 2, 3, 4] - [matrix(2,2): 0, 2, 3, 3]
     is [matrix(2,2): 1, 0, 0, 1]
 
   [matrix(2,2): 1, 2, 3, 4] - [matrix(4, 1): 1, 2, 3, 4]
     raises "different sized matrices"
-end</pre></div><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,2): 1, 2, 3, 4] - [matrix(2,2): 0, 2, 3, 3] 
+      is [matrix(2,2): 1, 0, 0, 1] 
+
+    [matrix(2,2): 1, 2, 3, 4] - [matrix(4, 1): 1, 2, 3, 4] 
+      raises &quot;different sized matrices&quot; 
+ end">(Try it!)</a></p></div><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,2): 1, 2, 3, 4] * [matrix(2,2): 3, 0, 0, 3]
     is [matrix(2,2): 3, 6, 9, 12]
-end</pre></div><h2 id="Matrix-Functions" toclevel="2" tocentry="yes">Matrix Functions</h2><p>The following functions are available to be performed on matrices.</p><div><p><span><a name="mtx-get"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-get">mtx-get</a> :: unspecified_contract</pre></div><p>Returns the matrix’s entry in the <math>i^th</math> row and the <math>j^th</math> column. See <a href="../trove/matrices.html#.get">.get</a>.</p><div><p><span><a name="mtx-to-list"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-to-list">mtx-to-list</a> :: unspecified_contract</pre></div><p>Returns the matrix as a list of numbers in row-major order.  See <a href="../trove/matrices.html#.to-list">.to-list</a>.</p><div><p><span><a name="mtx-to-vector"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-to-vector">mtx-to-vector</a> :: unspecified_contract</pre></div><p>Returns a one-row/one-column matrix as a vector.  See <a href="../trove/matrices.html#.to-vector">.to-vector</a>.</p><div><p><span><a name="mtx-to-lists"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-to-lists">mtx-to-lists</a> :: unspecified_contract</pre></div><p>Returns the matrix as a list of lists of numbers, with each list corresponding to one row.  See <a href="../trove/matrices.html#.to-lists">.to-lists</a>.</p><div><p><span><a name="mtx-to-vectors"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-to-vectors">mtx-to-vectors</a> :: unspecified_contract</pre></div><p>Returns the matrix as a list of lists of numbers (i.e. a list of <a href="../trove/matrices.html#Vector"><span class="pyret-highlight"><tt class="pyretexpr">Vector</tt></span></a>s), with each list corresponding to one column.  See <a href="../trove/matrices.html#.to-vectors">.to-vectors</a>.</p><div><p><span><a name="mtx-row"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-row">mtx-row</a> :: unspecified_contract</pre></div><p>Returns a one-row matrix with the matrix’s given row.  See <a href="../trove/matrices.html#.row">.row</a>.</p><div><p><span><a name="mtx-col"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-col">mtx-col</a> :: unspecified_contract</pre></div><p>Returns a one-column matrix with the matrix’s given column.  See <a href="../trove/matrices.html#.col">.col</a>.</p><div><p><span><a name="mtx-submatrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-submatrix">mtx-submatrix</a> :: unspecified_contract</pre></div><p>Returns the submatrix of the matrix comprised of the intersection of the given list of rows and the given list of columns.  See <a href="../trove/matrices.html#.submatrix">.submatrix</a>.</p><div><p><span><a name="mtx-transpose"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-transpose">mtx-transpose</a> :: unspecified_contract</pre></div><p>See <a href="../trove/matrices.html#.transpose">.transpose</a>.</p><div><p><span><a name="mtx-hermitian"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-hermitian">mtx-hermitian</a> :: unspecified_contract</pre></div><p>See <a href="../trove/matrices.html#.hermitian">.hermitian</a>.</p><div><p><span><a name="mtx-diagonal"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-diagonal">mtx-diagonal</a> :: unspecified_contract</pre></div><p>Returns a one-row matrix containing the matrix’s diagonal entries.  See <a href="../trove/matrices.html#.diagonal">.diagonal</a>.</p><div><p><span><a name="mtx-upper-triangle"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-upper-triangle">mtx-upper-triangle</a> :: unspecified_contract</pre></div><p>Returns the <i>upper triangle</i> of the matrix, if the matrix is square.  See <a href="../trove/matrices.html#.upper-triangle">.upper-triangle</a>.</p><div><p><span><a name="mtx-lower-triangle"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-lower-triangle">mtx-lower-triangle</a> :: unspecified_contract</pre></div><p>Returns the <i>lower triangle</i> of the matrix, if the matrix is square.  See <a href="../trove/matrices.html#.lower-triangle">.lower-triangle</a>.</p><div><p><span><a name="mtx-row-list"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-row-list">mtx-row-list</a> :: unspecified_contract</pre></div><p>Returns the matrix as a list of one-row matrices.  See <a href="../trove/matrices.html#.row-list">.row-list</a>.</p><div><p><span><a name="mtx-col-list"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-col-list">mtx-col-list</a> :: unspecified_contract</pre></div><p>Returns the matrix as a list of one-column matrices.  See <a href="../trove/matrices.html#.col-list">.col-list</a>.</p><div><p><span><a name="mtx-map"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-map">mtx-map</a> :: unspecified_contract</pre></div><p>Maps the given function entrywise over the matrix.  See <a href="../trove/matrices.html#.map">.map</a>.</p><div><p><span><a name="mtx-map2"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-map2">mtx-map2</a> :: unspecified_contract</pre></div><p>Maps the given function over the corresponding entries of the two given matrices.  See <a href="../trove/matrices.html#.map2">.map2</a>.</p><div><p><span><a name="mtx-row-map"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-row-map">mtx-row-map</a> :: unspecified_contract</pre></div><p>Maps the given function over each row in the matrix.  See <a href="../trove/matrices.html#.row-map">.row-map</a>.</p><div><p><span><a name="mtx-col-map"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-col-map">mtx-col-map</a> :: unspecified_contract</pre></div><p>Maps the given function over each column in the matrix.  See <a href="../trove/matrices.html#.col-map">.col-map</a>.</p><div><p><span><a name="mtx-augment"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-augment">mtx-augment</a> :: unspecified_contract</pre></div><p>Returns the first matrix augmented with the second matrix. See <a href="../trove/matrices.html#.augment">.augment</a>.</p><div><p><span><a name="mtx-stack"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-stack">mtx-stack</a> :: unspecified_contract</pre></div><p>Returns the first matrix stacked on top of the second matrix. See <a href="../trove/matrices.html#.stack">.stack</a>.</p><div><p><span><a name="mtx-trace"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-trace">mtx-trace</a> :: unspecified_contract</pre></div><p>Returns the trace of the matrix (i.e. the sum of its diagonal values).  See <a href="../trove/matrices.html#.trace">.trace</a>.</p><div><p><span><a name="mtx-scale"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-scale">mtx-scale</a> :: unspecified_contract</pre></div><p>Multiplies each entry in the matrix by the given value.  See <a href="../trove/matrices.html#.scale">.scale</a>.</p><div><p><span><a name="mtx-dot"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-dot">mtx-dot</a> :: unspecified_contract</pre></div><p>Returns the Frobenius Product of the two matrices.  See <a href="../trove/matrices.html#.dot">.dot</a>.</p><div><p><span><a name="mtx-expt"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-expt">mtx-expt</a> :: unspecified_contract</pre></div><p>Multiplies the matrix by itself the given number of times.  See <a href="../trove/matrices.html#.expt">.expt</a>.</p><div><p><span><a name="mtx-determinant"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-determinant">mtx-determinant</a> :: unspecified_contract</pre></div><p>Returns the determinant of the matrix.  See <a href="../trove/matrices.html#.determinant">.determinant</a>.</p><div><p><span><a name="mtx-is-invertible"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-is-invertible">mtx-is-invertible</a> :: unspecified_contract</pre></div><p>Returns true if the matrix is invertible.  See <a href="../trove/matrices.html#.is-invertible">.is-invertible</a>.</p><div><p><span><a name="mtx-is-orthonormal"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-is-orthonormal">mtx-is-orthonormal</a> :: unspecified_contract</pre></div><p>Returns true if the matrix is orthonormal.  See <a href="../trove/matrices.html#.is-orthonormal">.is-orthonormal</a>.</p><div><p><span><a name="mtx-rref"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-rref">mtx-rref</a> :: unspecified_contract</pre></div><p>Returns the Reduced Row Echelon Form of the matrix. See <a href="../trove/matrices.html#.rref">.rref</a>.</p><div><p><span><a name="mtx-inverse"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-inverse">mtx-inverse</a> :: unspecified_contract</pre></div><p>Returns the inverse of the matrix, if it is invertible.  See <a href="../trove/matrices.html#.inverse">.inverse</a>.</p><div><p><span><a name="mtx-solve"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-solve">mtx-solve</a> :: unspecified_contract</pre></div><p>Returns the matrix which, when multiplied on the right of the first matrix, results in the second matrix.  See <a href="../trove/matrices.html#.solve">.solve</a>.</p><div><p><span><a name="mtx-least-squares-solve"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-least-squares-solve">mtx-least-squares-solve</a> :: unspecified_contract</pre></div><p>Returns the least squares solution for the first and the second matrix, calculated using QR decomposition.  See <a href="../trove/matrices.html#.least-squares-solve">.least-squares-solve</a>.</p><div><p><span><a name="mtx-lp-norm"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-lp-norm">mtx-lp-norm</a> :: unspecified_contract</pre></div><p>Computes the <math>L^p</math> norm of the matrix using the given number.  See <a href="../trove/matrices.html#.lp-norm">.lp-norm</a>.</p><div><p><span><a name="mtx-l1-norm"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-l1-norm">mtx-l1-norm</a> :: unspecified_contract</pre></div><div><p><span><a name="mtx-l2-norm"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-l2-norm">mtx-l2-norm</a> :: unspecified_contract</pre></div><div><p><span><a name="mtx-l-inf-norm"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-l-inf-norm">mtx-l-inf-norm</a> :: unspecified_contract</pre></div><p>Computes the <math>L^1</math>, <math>L^2</math>, and <math>L</math><superscript>∞</superscript> norms of the matrix, respectively.  See <a href="../trove/matrices.html#.l1-norm">.l1-norm</a>.</p><div><p><span><a name="mtx-qr-decomposition"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-qr-decomposition">mtx-qr-decomposition</a> :: unspecified_contract</pre></div><p>See <a href="../trove/matrices.html#.qr-decomposition">.qr-decomposition</a>.</p><div><p><span><a name="mtx-gram-schmidt"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-gram-schmidt">mtx-gram-schmidt</a> :: unspecified_contract</pre></div><p>See <a href="../trove/matrices.html#.gram-schmidt">.gram-schmidt</a>.</p><div><p><span><a name="mtx-add"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-add">mtx-add</a> :: unspecified_contract</pre></div><div><p><span><a name="mtx-sub"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-sub">mtx-sub</a> :: unspecified_contract</pre></div><div><p><span><a name="mtx-mult"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-mult">mtx-mult</a> :: unspecified_contract</pre></div><p>Adds, subtracts, or multiplies the two matrices.  See <a href="../trove/matrices.html#s:matrix-binary-ops"><span class="pyret-highlight"><tt class="pyretexpr">Matrix</tt></span> Binary Operations</a>.</p><h2 id="Matrix-Conversion-Functions" toclevel="2" tocentry="yes">Matrix Conversion Functions</h2><div><p><span><a name="is-row-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#is-row-matrix">is-row-matrix</a> :: unspecified_contract</pre></div><p>Returns whether the matrix has exactly one row:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    [matrix(2,2): 1, 2, 3, 4] * [matrix(2,2): 3, 0, 0, 3] 
+      is [matrix(2,2): 3, 6, 9, 12] 
+ end">(Try it!)</a></p></div><h2 id="Matrix-Functions" toclevel="2" tocentry="yes">Matrix Functions</h2><p>The following functions are available to be performed on matrices.</p><div><p><span><a name="mtx-get"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-get">mtx-get</a> :: unspecified_contract</pre></div><p>Returns the matrix’s entry in the <math>i^th</math> row and the <math>j^th</math> column. See <a href="../trove/matrices.html#.get">.get</a>.</p><div><p><span><a name="mtx-to-list"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-to-list">mtx-to-list</a> :: unspecified_contract</pre></div><p>Returns the matrix as a list of numbers in row-major order.  See <a href="../trove/matrices.html#.to-list">.to-list</a>.</p><div><p><span><a name="mtx-to-vector"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-to-vector">mtx-to-vector</a> :: unspecified_contract</pre></div><p>Returns a one-row/one-column matrix as a vector.  See <a href="../trove/matrices.html#.to-vector">.to-vector</a>.</p><div><p><span><a name="mtx-to-lists"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-to-lists">mtx-to-lists</a> :: unspecified_contract</pre></div><p>Returns the matrix as a list of lists of numbers, with each list corresponding to one row.  See <a href="../trove/matrices.html#.to-lists">.to-lists</a>.</p><div><p><span><a name="mtx-to-vectors"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-to-vectors">mtx-to-vectors</a> :: unspecified_contract</pre></div><p>Returns the matrix as a list of lists of numbers (i.e. a list of <a href="../trove/matrices.html#Vector"><tt class="pyret-highlight">Vector</tt></a>s), with each list corresponding to one column.  See <a href="../trove/matrices.html#.to-vectors">.to-vectors</a>.</p><div><p><span><a name="mtx-row"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-row">mtx-row</a> :: unspecified_contract</pre></div><p>Returns a one-row matrix with the matrix’s given row.  See <a href="../trove/matrices.html#.row">.row</a>.</p><div><p><span><a name="mtx-col"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-col">mtx-col</a> :: unspecified_contract</pre></div><p>Returns a one-column matrix with the matrix’s given column.  See <a href="../trove/matrices.html#.col">.col</a>.</p><div><p><span><a name="mtx-submatrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-submatrix">mtx-submatrix</a> :: unspecified_contract</pre></div><p>Returns the submatrix of the matrix comprised of the intersection of the given list of rows and the given list of columns.  See <a href="../trove/matrices.html#.submatrix">.submatrix</a>.</p><div><p><span><a name="mtx-transpose"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-transpose">mtx-transpose</a> :: unspecified_contract</pre></div><p>See <a href="../trove/matrices.html#.transpose">.transpose</a>.</p><div><p><span><a name="mtx-hermitian"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-hermitian">mtx-hermitian</a> :: unspecified_contract</pre></div><p>See <a href="../trove/matrices.html#.hermitian">.hermitian</a>.</p><div><p><span><a name="mtx-diagonal"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-diagonal">mtx-diagonal</a> :: unspecified_contract</pre></div><p>Returns a one-row matrix containing the matrix’s diagonal entries.  See <a href="../trove/matrices.html#.diagonal">.diagonal</a>.</p><div><p><span><a name="mtx-upper-triangle"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-upper-triangle">mtx-upper-triangle</a> :: unspecified_contract</pre></div><p>Returns the <i>upper triangle</i> of the matrix, if the matrix is square.  See <a href="../trove/matrices.html#.upper-triangle">.upper-triangle</a>.</p><div><p><span><a name="mtx-lower-triangle"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-lower-triangle">mtx-lower-triangle</a> :: unspecified_contract</pre></div><p>Returns the <i>lower triangle</i> of the matrix, if the matrix is square.  See <a href="../trove/matrices.html#.lower-triangle">.lower-triangle</a>.</p><div><p><span><a name="mtx-row-list"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-row-list">mtx-row-list</a> :: unspecified_contract</pre></div><p>Returns the matrix as a list of one-row matrices.  See <a href="../trove/matrices.html#.row-list">.row-list</a>.</p><div><p><span><a name="mtx-col-list"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-col-list">mtx-col-list</a> :: unspecified_contract</pre></div><p>Returns the matrix as a list of one-column matrices.  See <a href="../trove/matrices.html#.col-list">.col-list</a>.</p><div><p><span><a name="mtx-map"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-map">mtx-map</a> :: unspecified_contract</pre></div><p>Maps the given function entrywise over the matrix.  See <a href="../trove/matrices.html#.map">.map</a>.</p><div><p><span><a name="mtx-map2"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-map2">mtx-map2</a> :: unspecified_contract</pre></div><p>Maps the given function over the corresponding entries of the two given matrices.  See <a href="../trove/matrices.html#.map2">.map2</a>.</p><div><p><span><a name="mtx-row-map"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-row-map">mtx-row-map</a> :: unspecified_contract</pre></div><p>Maps the given function over each row in the matrix.  See <a href="../trove/matrices.html#.row-map">.row-map</a>.</p><div><p><span><a name="mtx-col-map"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-col-map">mtx-col-map</a> :: unspecified_contract</pre></div><p>Maps the given function over each column in the matrix.  See <a href="../trove/matrices.html#.col-map">.col-map</a>.</p><div><p><span><a name="mtx-augment"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-augment">mtx-augment</a> :: unspecified_contract</pre></div><p>Returns the first matrix augmented with the second matrix. See <a href="../trove/matrices.html#.augment">.augment</a>.</p><div><p><span><a name="mtx-stack"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-stack">mtx-stack</a> :: unspecified_contract</pre></div><p>Returns the first matrix stacked on top of the second matrix. See <a href="../trove/matrices.html#.stack">.stack</a>.</p><div><p><span><a name="mtx-trace"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-trace">mtx-trace</a> :: unspecified_contract</pre></div><p>Returns the trace of the matrix (i.e. the sum of its diagonal values).  See <a href="../trove/matrices.html#.trace">.trace</a>.</p><div><p><span><a name="mtx-scale"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-scale">mtx-scale</a> :: unspecified_contract</pre></div><p>Multiplies each entry in the matrix by the given value.  See <a href="../trove/matrices.html#.scale">.scale</a>.</p><div><p><span><a name="mtx-dot"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-dot">mtx-dot</a> :: unspecified_contract</pre></div><p>Returns the Frobenius Product of the two matrices.  See <a href="../trove/matrices.html#.dot">.dot</a>.</p><div><p><span><a name="mtx-expt"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-expt">mtx-expt</a> :: unspecified_contract</pre></div><p>Multiplies the matrix by itself the given number of times.  See <a href="../trove/matrices.html#.expt">.expt</a>.</p><div><p><span><a name="mtx-determinant"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-determinant">mtx-determinant</a> :: unspecified_contract</pre></div><p>Returns the determinant of the matrix.  See <a href="../trove/matrices.html#.determinant">.determinant</a>.</p><div><p><span><a name="mtx-is-invertible"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-is-invertible">mtx-is-invertible</a> :: unspecified_contract</pre></div><p>Returns true if the matrix is invertible.  See <a href="../trove/matrices.html#.is-invertible">.is-invertible</a>.</p><div><p><span><a name="mtx-is-orthonormal"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-is-orthonormal">mtx-is-orthonormal</a> :: unspecified_contract</pre></div><p>Returns true if the matrix is orthonormal.  See <a href="../trove/matrices.html#.is-orthonormal">.is-orthonormal</a>.</p><div><p><span><a name="mtx-rref"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-rref">mtx-rref</a> :: unspecified_contract</pre></div><p>Returns the Reduced Row Echelon Form of the matrix. See <a href="../trove/matrices.html#.rref">.rref</a>.</p><div><p><span><a name="mtx-inverse"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-inverse">mtx-inverse</a> :: unspecified_contract</pre></div><p>Returns the inverse of the matrix, if it is invertible.  See <a href="../trove/matrices.html#.inverse">.inverse</a>.</p><div><p><span><a name="mtx-solve"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-solve">mtx-solve</a> :: unspecified_contract</pre></div><p>Returns the matrix which, when multiplied on the right of the first matrix, results in the second matrix.  See <a href="../trove/matrices.html#.solve">.solve</a>.</p><div><p><span><a name="mtx-least-squares-solve"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-least-squares-solve">mtx-least-squares-solve</a> :: unspecified_contract</pre></div><p>Returns the least squares solution for the first and the second matrix, calculated using QR decomposition.  See <a href="../trove/matrices.html#.least-squares-solve">.least-squares-solve</a>.</p><div><p><span><a name="mtx-lp-norm"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-lp-norm">mtx-lp-norm</a> :: unspecified_contract</pre></div><p>Computes the <math>L^p</math> norm of the matrix using the given number.  See <a href="../trove/matrices.html#.lp-norm">.lp-norm</a>.</p><div><p><span><a name="mtx-l1-norm"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-l1-norm">mtx-l1-norm</a> :: unspecified_contract</pre></div><div><p><span><a name="mtx-l2-norm"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-l2-norm">mtx-l2-norm</a> :: unspecified_contract</pre></div><div><p><span><a name="mtx-l-inf-norm"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-l-inf-norm">mtx-l-inf-norm</a> :: unspecified_contract</pre></div><p>Computes the <math>L^1</math>, <math>L^2</math>, and <math>L</math><superscript>∞</superscript> norms of the matrix, respectively.  See <a href="../trove/matrices.html#.l1-norm">.l1-norm</a>.</p><div><p><span><a name="mtx-qr-decomposition"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-qr-decomposition">mtx-qr-decomposition</a> :: unspecified_contract</pre></div><p>See <a href="../trove/matrices.html#.qr-decomposition">.qr-decomposition</a>.</p><div><p><span><a name="mtx-gram-schmidt"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-gram-schmidt">mtx-gram-schmidt</a> :: unspecified_contract</pre></div><p>See <a href="../trove/matrices.html#.gram-schmidt">.gram-schmidt</a>.</p><div><p><span><a name="mtx-add"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-add">mtx-add</a> :: unspecified_contract</pre></div><div><p><span><a name="mtx-sub"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-sub">mtx-sub</a> :: unspecified_contract</pre></div><div><p><span><a name="mtx-mult"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#mtx-mult">mtx-mult</a> :: unspecified_contract</pre></div><p>Adds, subtracts, or multiplies the two matrices.  See <a href="../trove/matrices.html#s:matrix-binary-ops"><tt class="pyret-highlight">Matrix</tt> Binary Operations</a>.</p><h2 id="Matrix-Conversion-Functions" toclevel="2" tocentry="yes">Matrix Conversion Functions</h2><div><p><span><a name="is-row-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#is-row-matrix">is-row-matrix</a> :: unspecified_contract</pre></div><p>Returns whether the matrix has exactly one row:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   is-row-matrix([matrix(1, 3): 10, 20, 10]) is true
   is-row-matrix([matrix(3, 1): 10, 20, 10]) is false
-end</pre></div><div><p><span><a name="is-col-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#is-col-matrix">is-col-matrix</a> :: unspecified_contract</pre></div><p>Returns whether the matrix has exactly one column:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    is-row-matrix([matrix(1, 3): 10, 20, 10]) is true 
+    is-row-matrix([matrix(3, 1): 10, 20, 10]) is false 
+ end">(Try it!)</a></p></div><div><p><span><a name="is-col-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#is-col-matrix">is-col-matrix</a> :: unspecified_contract</pre></div><p>Returns whether the matrix has exactly one column:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   is-row-matrix([matrix(1, 3): 10, 20, 10]) is false
   is-row-matrix([matrix(3, 1): 10, 20, 10]) is true
-end</pre></div><div><p><span><a name="is-square-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#is-square-matrix">is-square-matrix</a> :: unspecified_contract</pre><p>Returns true if the given matrix has the same number of rows and columns.</p></div><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    is-row-matrix([matrix(1, 3): 10, 20, 10]) is false 
+    is-row-matrix([matrix(3, 1): 10, 20, 10]) is true 
+ end">(Try it!)</a></p></div><div><p><span><a name="is-square-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#is-square-matrix">is-square-matrix</a> :: unspecified_contract</pre><p>Returns true if the given matrix has the same number of rows and columns.</p></div><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   is-square-matrix([matrix(2, 2): 10, 20, 30, 40]) is true
   is-square-matrix([matrix(4, 1): 10, 20, 30, 40]) is false
-end</pre></div><div><p><span><a name="vector-to-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vector-to-matrix">vector-to-matrix</a> :: unspecified_contract</pre><p>Converts the given vector into a one-row matrix.</p></div><div><p><span><a name="list-to-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#list-to-matrix">list-to-matrix</a> :: unspecified_contract</pre><p>Converts the given list of numbers into a matrix of the given size.</p></div><div><p><span><a name="list-to-row-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#list-to-row-matrix">list-to-row-matrix</a> :: unspecified_contract</pre><p>Converts the given list of numbers into a one-row matrix.</p></div><div><p><span><a name="list-to-col-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#list-to-col-matrix">list-to-col-matrix</a> :: unspecified_contract</pre><p>Converts the given list of numbers into a one-column matrix.</p></div><div><p><span><a name="lists-to-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#lists-to-matrix">lists-to-matrix</a> :: unspecified_contract</pre><p>Converts the given list of lists into a matrix, with each list as a row.</p></div><div><p><span><a name="vectors-to-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vectors-to-matrix">vectors-to-matrix</a> :: unspecified_contract</pre><p>Converts the given list of vectors into a matrix, with each vector as a column.</p></div><div><p><span><a name="matrix-within"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#matrix-within">matrix-within</a> :: unspecified_contract</pre><p>Returns a comparison predicate which returns true if each entry in both matrices is within <span class="pyret-highlight"><tt class="pyretexpr">delta</tt></span> of each other.</p></div></div></root>
+end</pre><p><a class="show-embed" code="check: 
+    is-square-matrix([matrix(2, 2): 10, 20, 30, 40]) is true 
+    is-square-matrix([matrix(4, 1): 10, 20, 30, 40]) is false 
+ end">(Try it!)</a></p></div><div><p><span><a name="vector-to-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vector-to-matrix">vector-to-matrix</a> :: unspecified_contract</pre><p>Converts the given vector into a one-row matrix.</p></div><div><p><span><a name="list-to-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#list-to-matrix">list-to-matrix</a> :: unspecified_contract</pre><p>Converts the given list of numbers into a matrix of the given size.</p></div><div><p><span><a name="list-to-row-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#list-to-row-matrix">list-to-row-matrix</a> :: unspecified_contract</pre><p>Converts the given list of numbers into a one-row matrix.</p></div><div><p><span><a name="list-to-col-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#list-to-col-matrix">list-to-col-matrix</a> :: unspecified_contract</pre><p>Converts the given list of numbers into a one-column matrix.</p></div><div><p><span><a name="lists-to-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#lists-to-matrix">lists-to-matrix</a> :: unspecified_contract</pre><p>Converts the given list of lists into a matrix, with each list as a row.</p></div><div><p><span><a name="vectors-to-matrix"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#vectors-to-matrix">vectors-to-matrix</a> :: unspecified_contract</pre><p>Converts the given list of vectors into a matrix, with each vector as a column.</p></div><div><p><span><a name="matrix-within"></a></span></p><pre class="pyret-display"><a href="../trove/matrices.html#matrix-within">matrix-within</a> :: unspecified_contract</pre><p>Returns a comparison predicate which returns true if each entry in both matrices is within <tt class="pyret-highlight">delta</tt> of each other.</p></div></div></root>
     <hr/>
     <!-- The current page is trove/matrices.html. -->
     <a class="floatleft" href="../trove/math.html">⏴⏴⏴</a>

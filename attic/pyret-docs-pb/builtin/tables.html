@@ -18,17 +18,27 @@
   </head>
   <body>
     <div class="container">
-    <root><div><h1 id="tables" toclevel="1" tocentry="yes">Tables</h1><div><p>Usage:</p><pre class="pyret-highlight">include tables</pre><pre class="pyret-highlight">import tables as ...</pre></div><p>There are many examples of tables in computing, with spreadsheets being the most obvious.</p><p>A <a href="../builtin/tables.html#Table"><span class="pyret-highlight"><tt class="pyretexpr">Table</tt></span></a> is made up of <b>rows</b> and <b>columns</b>. All rows have the same number of columns, in the same order. Each column has a name.  Each column may also be assigned a type via an annotation; if so, all entries in a column will then be checked against the annotation.  Unsurprisingly, they are useful for representing tabular data from sources like spreadsheets or CSV files.</p><p><b>Note:</b> The <a href="../builtin/tables.html#Table"><span class="pyret-highlight"><tt class="pyretexpr">Table</tt></span></a> data type and the syntax for manipulating tables is built in to Pyret without needing any imports; however, using the <a href="../builtin/tables.html#Reducers">Reducers</a> or the functions in <a href="../builtin/tables.html#s:tables:methods">Advanced Table Manipulation</a> require the <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span> line above.</p><p>  </p><h2 id="s:tables" toclevel="2" tocentry="yes">Creating Tables</h2><p>A simple <a href="../builtin/tables.html#Table"><span class="pyret-highlight"><tt class="pyretexpr">Table</tt></span></a> can be directly created with a <span class="pyret-highlight"><tt class="pyretexpr">table:</tt></span> expression, which lists any number of columns, with optional annotations, and then any number of rows.  For example, this expression creates a table with three columns, <span class="pyret-highlight"><tt class="pyretexpr">name</tt></span>, <span class="pyret-highlight"><tt class="pyretexpr">age</tt></span>, and <span class="pyret-highlight"><tt class="pyretexpr">favorite-color</tt></span>, and three rows:</p><p>  </p><div><p><b>Examples:</b></p><pre class="pyret-highlight">my-table = table: name :: String, age :: Number, favorite-color :: String
+    <root><div><h1 id="tables" toclevel="1" tocentry="yes">Tables</h1><div><p>Usage:</p><pre class="pyret-highlight">include tables</pre><pre class="pyret-highlight">import tables as ...</pre></div><p>There are many examples of tables in computing, with spreadsheets being the most obvious.</p><p>A <a href="../builtin/tables.html#Table"><tt class="pyret-highlight">Table</tt></a> is made up of <b>rows</b> and <b>columns</b>. All rows have the same number of columns, in the same order. Each column has a name.  Each column may also be assigned a type via an annotation; if so, all entries in a column will then be checked against the annotation.  Unsurprisingly, they are useful for representing tabular data from sources like spreadsheets or CSV files.</p><p><b>Note:</b> The <a href="../builtin/tables.html#Table"><tt class="pyret-highlight">Table</tt></a> data type and the syntax for manipulating tables is built in to Pyret without needing any imports; however, using the <a href="../builtin/tables.html#Reducers">Reducers</a> or the functions in <a href="../builtin/tables.html#s:tables:methods">Advanced Table Manipulation</a> require the <tt class="pyret-highlight">import</tt> line above.</p><p>  </p><h2 id="s:tables" toclevel="2" tocentry="yes">Creating Tables</h2><p>A simple <a href="../builtin/tables.html#Table"><tt class="pyret-highlight">Table</tt></a> can be directly created with a <tt class="pyret-highlight">table:</tt> expression, which lists any number of columns, with optional annotations, and then any number of rows.  For example, this expression creates a table with three columns, <tt class="pyret-highlight">name</tt>, <tt class="pyret-highlight">age</tt>, and <tt class="pyret-highlight">favorite-color</tt>, and three rows:</p><p>  </p><div><p><b>Examples:</b></p><pre class="pyret-highlight">my-table = table: name :: String, age :: Number, favorite-color :: String
   row: "Bob", 12, "blue"
   row: "Alice", 17, "green"
   row: "Eve", 13, "red"
-end</pre></div><div class="margin-note">Indeed, <span class="pyret-highlight"><tt class="pyretexpr">my-table</tt></span> is used as a running example in much of the following.</div><p>Evaluating <span class="pyret-highlight"><tt class="pyretexpr">my-table</tt></span> in the interactions window after running the program above will display a formatted version of the table:</p><p><img src="table-print.png"/></p><p>  </p><h2 id="s:tables:loading" toclevel="2" tocentry="yes">Loading Tables</h2><p>Pyret supports loading spreadsheets from Google Sheets and interpreting them as Pyret tables.</p><p>You can import most relevant file types, including .xlsx, into Google Sheets, and then into Pyret, so you should be able to get almost any tabular data into Pyret with a little effort.</p><div class="margin-note">In Google Sheets, you create a file, referred to as a “spreadsheet” that contains one or more grids called “sheets.”  Excel refers to the file as a “workbook” and each grid as a “worksheet.”  We will follow Google Sheets’ nomenclature.</div><p>Pyret assumes each sheet contains only one table of neatly formatted data, without skipping columns or extra comments other than an optional single header row at the top.</p><p>As a simple and consistent example, let’s say we wanted to import the <tt>my-table</tt> data from a spreadsheet.</p><p><img src="gsheet-1.png"/></p><p>To import this data into a Pyret program, you need to get the spreadsheet’s unique Google ID.  The easiest way to do this is to click on the blue <tt>Share</tt> button in the upper right.</p><p><img src="gsheet-2.png"/></p><p>If you don’t want to share your spreadsheet with anyone else, click <tt>Advanced</tt> in the lower right of the <tt>Share with others</tt> dialog, then copy the <tt>Link to share</tt>, highlighted in orange below, and paste it into your Pyret definitions area (or another editor).</p><p><img src="gsheet-3.png"/></p><p>The URL will look something like</p><p><tt>https://docs.google.com/spreadsheets/d/1BAexzf08Q5o8bXb_k8PwuE3tMKezxRfbKBKT-4L6UzI/edit?usp=sharing</tt></p><p>The Google ID is the part between <tt>/d/</tt> and <tt>/edit...</tt>, in this case:</p><p><tt>1BAexzf08Q5o8bXb_k8PwuE3tMKezxRfbKBKT-4L6UzI</tt></p><div class="margin-note">If you do want to share the spreadsheet with others, click on the blue <tt>Share</tt> button as above, and then click <tt>Get sharable link</tt>, choose the appropriate level of sharing, and copy the URL to get the Google ID as above.</div><p>Now you can load the spreadsheet into your Pyret program:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import gdrive-sheets as GS
+end</pre><p><a class="show-embed" code="my-table = table: name :: String, age :: Number, favorite-color :: String 
+    row: &quot;Bob&quot;, 12, &quot;blue&quot; 
+    row: &quot;Alice&quot;, 17, &quot;green&quot; 
+    row: &quot;Eve&quot;, 13, &quot;red&quot; 
+ end">(Try it!)</a></p></div><div class="margin-note">Indeed, <tt class="pyret-highlight">my-table</tt> is used as a running example in much of the following.</div><p>Evaluating <tt class="pyret-highlight">my-table</tt> in the interactions window after running the program above will display a formatted version of the table:</p><p><img src="table-print.png"/></p><p>  </p><h2 id="s:tables:loading" toclevel="2" tocentry="yes">Loading Tables</h2><p>Pyret supports loading spreadsheets from Google Sheets and interpreting them as Pyret tables.</p><p>You can import most relevant file types, including .xlsx, into Google Sheets, and then into Pyret, so you should be able to get almost any tabular data into Pyret with a little effort.</p><div class="margin-note">In Google Sheets, you create a file, referred to as a “spreadsheet” that contains one or more grids called “sheets.”  Excel refers to the file as a “workbook” and each grid as a “worksheet.”  We will follow Google Sheets’ nomenclature.</div><p>Pyret assumes each sheet contains only one table of neatly formatted data, without skipping columns or extra comments other than an optional single header row at the top.</p><p>As a simple and consistent example, let’s say we wanted to import the <tt>my-table</tt> data from a spreadsheet.</p><p><img src="gsheet-1.png"/></p><p>To import this data into a Pyret program, you need to get the spreadsheet’s unique Google ID.  The easiest way to do this is to click on the blue <tt>Share</tt> button in the upper right.</p><p><img src="gsheet-2.png"/></p><p>If you don’t want to share your spreadsheet with anyone else, click <tt>Advanced</tt> in the lower right of the <tt>Share with others</tt> dialog, then copy the <tt>Link to share</tt>, highlighted in orange below, and paste it into your Pyret definitions area (or another editor).</p><p><img src="gsheet-3.png"/></p><p>The URL will look something like</p><p><tt>https://docs.google.com/spreadsheets/d/1BAexzf08Q5o8bXb_k8PwuE3tMKezxRfbKBKT-4L6UzI/edit?usp=sharing</tt></p><p>The Google ID is the part between <tt>/d/</tt> and <tt>/edit...</tt>, in this case:</p><p><tt>1BAexzf08Q5o8bXb_k8PwuE3tMKezxRfbKBKT-4L6UzI</tt></p><div class="margin-note">If you do want to share the spreadsheet with others, click on the blue <tt>Share</tt> button as above, and then click <tt>Get sharable link</tt>, choose the appropriate level of sharing, and copy the URL to get the Google ID as above.</div><p>Now you can load the spreadsheet into your Pyret program:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import gdrive-sheets as GS
 
 imported-my-table =
-  GS.load-spreadsheet("1BAexzf08Q5o8bXb_k8PwuE3tMKezxRfbKBKT-4L6UzI")</pre></div><p>You can use <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span> instead of <span class="pyret-highlight"><tt class="pyretexpr">import as...</tt></span> to cut down on some typing by omitting the <tt>GS.</tt> before the <span class="pyret-highlight"><tt class="pyretexpr">tables</tt></span> module functions.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">include gdrive-sheets
+  GS.load-spreadsheet("1BAexzf08Q5o8bXb_k8PwuE3tMKezxRfbKBKT-4L6UzI")</pre><p><a class="show-embed" code="import gdrive-sheets as GS 
+
+ imported-my-table = 
+    GS.load-spreadsheet(&quot;1BAexzf08Q5o8bXb_k8PwuE3tMKezxRfbKBKT-4L6UzI&quot;)">(Try it!)</a></p></div><p>You can use <tt class="pyret-highlight">include</tt> instead of <tt class="pyret-highlight">import as...</tt> to cut down on some typing by omitting the <tt>GS.</tt> before the <tt class="pyret-highlight">tables</tt> module functions.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">include gdrive-sheets
 
 imported-my-table =
-  load-spreadsheet("1BAexzf08Q5o8bXb_k8PwuE3tMKezxRfbKBKT-4L6UzI")</pre></div><div class="margin-note">We’ll use <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span> and the prefix <tt>GS.</tt> in the following examples.  If you use <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span>, omit <tt>GS.</tt> where used below.</div><p>When data is loaded into a table, we recommend using <italic>sanitizers</italic> to properly load each entry of the table as the correct Pyret type.  The supported sanitizers are imported from the <span class="pyret-highlight"><tt class="pyretexpr">data-source</tt></span> module.</p><p>The sanitizers currently provided by Pyret are:</p><ul><li><b>string-sanitizer</b> tries to convert anything to a <a href="../UnDeFiNeD"></a></li><li><b>num-sanitizer</b> tries to convert  numbers, strings and booleans to <a href="../UnDeFiNeD"></a>s</li><li><b>bool-sanitizer</b> tries to convert numbers, strings and booleans to <a href="../UnDeFiNeD"></a>s</li><li><b>strict-num-sanitizer</b> tries to convert numbers and strings (not booleans) to <a href="../UnDeFiNeD"></a>s</li><li><b>strings-only</b> converts only strings to <a href="../UnDeFiNeD"></a>s</li><li><b>numbers-only</b> converts only numbers to <a href="../UnDeFiNeD"></a>s</li><li><b>booleans-only</b> converts only booleans to <a href="../UnDeFiNeD"></a>s</li><li><b>empty-only</b> converts only empty cells to <a href="../trove/option.html#none"><span class="pyret-highlight"><tt class="pyretexpr">none</tt></span></a>s</li></ul><div class="margin-note">While the <tt>data-source</tt> library provides sanitizers which should cover most use cases, there may be times when one would like to create a custom data sanitizer. To do so, one must simply create a function which conforms to the <a href="../trove/data-source.html#Sanitizer"><span class="pyret-highlight"><tt class="pyretexpr">Sanitizer</tt></span></a> type in the <tt>data-source</tt> module.</div><p>Use the <span class="pyret-highlight"><tt class="pyretexpr">load-table:</tt></span> expression to create a table from an imported sheet.</p><p>Each spreadsheet file contains multiple, named sheets, displayed as tabs across the bottom of the Sheets user interface.  When you start working with the data in an imported spreadsheet, you need to indentify which sheet you are using as the data source.</p><p>The <span class="pyret-highlight"><tt class="pyretexpr">source:</tt></span> expression should be followed by the imported spreadsheet, calling the <a href="../trove/gdrive-sheets.html#.sheet-by-name">.sheet-by-name</a> method with two arguments, the sheet name and a boolean flag indicating whether or not there is a header row in the sheet that should be ignored.  In our example above,  <tt>imported-my-table</tt> contains one sheet, called <tt>3-rows</tt>, and there is a header row that should be ignored by the importer, so the <span class="pyret-highlight"><tt class="pyretexpr">source:</tt></span> expression would be written as illustrated below.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import gdrive-sheets as GS
+  load-spreadsheet("1BAexzf08Q5o8bXb_k8PwuE3tMKezxRfbKBKT-4L6UzI")</pre><p><a class="show-embed" code="include gdrive-sheets 
+
+ imported-my-table = 
+    load-spreadsheet(&quot;1BAexzf08Q5o8bXb_k8PwuE3tMKezxRfbKBKT-4L6UzI&quot;)">(Try it!)</a></p></div><div class="margin-note">We’ll use <tt class="pyret-highlight">import</tt> and the prefix <tt>GS.</tt> in the following examples.  If you use <tt class="pyret-highlight">include</tt>, omit <tt>GS.</tt> where used below.</div><p>When data is loaded into a table, we recommend using <italic>sanitizers</italic> to properly load each entry of the table as the correct Pyret type.  The supported sanitizers are imported from the <tt class="pyret-highlight">data-source</tt> module.</p><p>The sanitizers currently provided by Pyret are:</p><ul><li><b>string-sanitizer</b> tries to convert anything to a <a href="../UnDeFiNeD"></a></li><li><b>num-sanitizer</b> tries to convert  numbers, strings and booleans to <a href="../UnDeFiNeD"></a>s</li><li><b>bool-sanitizer</b> tries to convert numbers, strings and booleans to <a href="../UnDeFiNeD"></a>s</li><li><b>strict-num-sanitizer</b> tries to convert numbers and strings (not booleans) to <a href="../UnDeFiNeD"></a>s</li><li><b>strings-only</b> converts only strings to <a href="../UnDeFiNeD"></a>s</li><li><b>numbers-only</b> converts only numbers to <a href="../UnDeFiNeD"></a>s</li><li><b>booleans-only</b> converts only booleans to <a href="../UnDeFiNeD"></a>s</li><li><b>empty-only</b> converts only empty cells to <a href="../trove/option.html#none"><tt class="pyret-highlight">none</tt></a>s</li></ul><div class="margin-note">While the <tt>data-source</tt> library provides sanitizers which should cover most use cases, there may be times when one would like to create a custom data sanitizer. To do so, one must simply create a function which conforms to the <a href="../trove/data-source.html#Sanitizer"><tt class="pyret-highlight">Sanitizer</tt></a> type in the <tt>data-source</tt> module.</div><p>Use the <tt class="pyret-highlight">load-table:</tt> expression to create a table from an imported sheet.</p><p>Each spreadsheet file contains multiple, named sheets, displayed as tabs across the bottom of the Sheets user interface.  When you start working with the data in an imported spreadsheet, you need to indentify which sheet you are using as the data source.</p><p>The <tt class="pyret-highlight">source:</tt> expression should be followed by the imported spreadsheet, calling the <a href="../trove/gdrive-sheets.html#.sheet-by-name">.sheet-by-name</a> method with two arguments, the sheet name and a boolean flag indicating whether or not there is a header row in the sheet that should be ignored.  In our example above,  <tt>imported-my-table</tt> contains one sheet, called <tt>3-rows</tt>, and there is a header row that should be ignored by the importer, so the <tt class="pyret-highlight">source:</tt> expression would be written as illustrated below.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import gdrive-sheets as GS
 import data-source as DS
 
 imported-my-table =
@@ -39,24 +49,42 @@ my-table = load-table: name :: String, age :: Number, favorite-color :: String
   sanitize name using DS.string-sanitizer
   sanitize age using DS.strict-num-sanitizer
   sanitize favorite-color using DS.string-sanitizer
-end</pre></div><p>In general, it is <italic>safest</italic> to sanitize <italic>every</italic> input column, since it is the only way to guarantee that the data source will not guess the column’s type incorrectly.</p><p>Note that Google Sheets, and other spreadsheets, themselves assign or infer types to data in a way that often is not apparent to the user and is a common source of errors when exporting from or between spreadsheet applications.</p><div><p><span><a name="TableLoader"></a></span></p><pre class="pyret-display">TableLoader</pre></div><p>The type of values that can be loaded using <span class="pyret-highlight"><tt class="pyretexpr">load-table</tt></span>. Common ways to generate a <span class="pyret-highlight"><tt class="pyretexpr">TableLoader</tt></span> are:</p><ul><li><a href="../trove/gdrive-sheets.html#.sheet-by-name">.sheet-by-name</a> and <a href="../trove/gdrive-sheets.html#.sheet-by-index">.sheet-by-index</a></li><li><a href="../trove/csv.html#csv-table-str"><span class="pyret-highlight"><tt class="pyretexpr">csv-table-str</tt></span></a> and <a href="../trove/csv.html#csv-table-file"><span class="pyret-highlight"><tt class="pyretexpr">csv-table-file</tt></span></a></li></ul><p>  </p><h2 id="s:tables:select" toclevel="2" tocentry="yes">Selecting Columns</h2><p>The <span class="pyret-highlight"><tt class="pyretexpr">select</tt></span> expression can be used to create a new table from a subset of the columns of an existing one.  For example, we can get just the names and ages from <span class="pyret-highlight"><tt class="pyretexpr">my-table</tt></span> above:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">names-and-ages = select name, age from my-table end
+end</pre><p><a class="show-embed" code="import gdrive-sheets as GS 
+ import data-source as DS 
+
+ imported-my-table = 
+    GS.load-spreadsheet(&quot;1BAexzf08Q5o8bXb_k8PwuE3tMKezxRfbKBKT-4L6UzI&quot;) 
+
+ my-table = load-table: name :: String, age :: Number, favorite-color :: String 
+    source: imported-my-table.sheet-by-name(&quot;3-rows&quot;, true) 
+    sanitize name using DS.string-sanitizer 
+    sanitize age using DS.strict-num-sanitizer 
+    sanitize favorite-color using DS.string-sanitizer 
+ end">(Try it!)</a></p></div><p>In general, it is <italic>safest</italic> to sanitize <italic>every</italic> input column, since it is the only way to guarantee that the data source will not guess the column’s type incorrectly.</p><p>Note that Google Sheets, and other spreadsheets, themselves assign or infer types to data in a way that often is not apparent to the user and is a common source of errors when exporting from or between spreadsheet applications.</p><div><p><span><a name="TableLoader"></a></span></p><pre class="pyret-display">TableLoader</pre></div><p>The type of values that can be loaded using <tt class="pyret-highlight">load-table</tt>. Common ways to generate a <tt class="pyret-highlight">TableLoader</tt> are:</p><ul><li><a href="../trove/gdrive-sheets.html#.sheet-by-name">.sheet-by-name</a> and <a href="../trove/gdrive-sheets.html#.sheet-by-index">.sheet-by-index</a></li><li><a href="../trove/csv.html#csv-table-str"><tt class="pyret-highlight">csv-table-str</tt></a> and <a href="../trove/csv.html#csv-table-file"><tt class="pyret-highlight">csv-table-file</tt></a></li></ul><p>  </p><h2 id="s:tables:select" toclevel="2" tocentry="yes">Selecting Columns</h2><p>The <tt class="pyret-highlight">select</tt> expression can be used to create a new table from a subset of the columns of an existing one.  For example, we can get just the names and ages from <tt class="pyret-highlight">my-table</tt> above:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">names-and-ages = select name, age from my-table end
 check:
   names-and-ages is table: name, age
     row: "Bob", 12
     row: "Alice", 17
     row: "Eve", 13
   end
-end</pre></div><p>  </p><h2 id="Filtering-Tables" toclevel="2" tocentry="yes">Filtering Tables</h2><p>The <span class="pyret-highlight"><tt class="pyretexpr">sieve</tt></span> mechanism allows for filtering out rows of tables based on some criteria. The <span class="pyret-highlight"><tt class="pyretexpr">using</tt></span> keyword specifies which columns may be used in the body of the <span class="pyret-highlight"><tt class="pyretexpr">sieve</tt></span> expression.</p><p>For instance, we can find the individuals in <span class="pyret-highlight"><tt class="pyretexpr">my-table</tt></span> who are old enough to drive in the United States.</p><pre class="good-ex pyret-highlight">can-drive = sieve my-table using age:
+end</pre><p><a class="show-embed" code="names-and-ages = select name, age from my-table end 
+ check: 
+    names-and-ages is table: name, age 
+      row: &quot;Bob&quot;, 12 
+      row: &quot;Alice&quot;, 17 
+      row: &quot;Eve&quot;, 13 
+    end 
+ end">(Try it!)</a></p></div><p>  </p><h2 id="Filtering-Tables" toclevel="2" tocentry="yes">Filtering Tables</h2><p>The <tt class="pyret-highlight">sieve</tt> mechanism allows for filtering out rows of tables based on some criteria. The <tt class="pyret-highlight">using</tt> keyword specifies which columns may be used in the body of the <tt class="pyret-highlight">sieve</tt> expression.</p><p>For instance, we can find the individuals in <tt class="pyret-highlight">my-table</tt> who are old enough to drive in the United States.</p><pre class="good-ex pyret-highlight">can-drive = sieve my-table using age:
   age &gt;= 16
 end
 check:
   can-drive is table: name, age, favorite-color
     row: "Alice", 17, "green"
   end
-end</pre><p>Note that the <span class="pyret-highlight"><tt class="pyretexpr">sieve</tt></span> block must explicitly list the columns used to filter out values with <span class="pyret-highlight"><tt class="pyretexpr">using</tt></span>.  The following would signal an undefined name error for <span class="pyret-highlight"><tt class="pyretexpr">age</tt></span>, because names being used in the expression body must be listed:</p><pre class="bad-ex pyret-highlight">can-drive = sieve my-table using name:
+end</pre><p>Note that the <tt class="pyret-highlight">sieve</tt> block must explicitly list the columns used to filter out values with <tt class="pyret-highlight">using</tt>.  The following would signal an undefined name error for <tt class="pyret-highlight">age</tt>, because names being used in the expression body must be listed:</p><pre class="bad-ex pyret-highlight">can-drive = sieve my-table using name:
   # age is not visible inside of this expression
   age &gt;= 16
-end</pre><p>  </p><h2 id="Ordering-Tables" toclevel="2" tocentry="yes">Ordering Tables</h2><p>To arrange the rows of a table in some particular order, use an <span class="pyret-highlight"><tt class="pyretexpr">order</tt></span> expression.  This can be done with any column whose type supports the use of <span class="pyret-highlight"><tt class="pyretexpr">&lt;</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">&gt;</tt></span>, including <a href="../UnDeFiNeD"></a>s.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">name-ordered = order my-table:
+end</pre><p>  </p><h2 id="Ordering-Tables" toclevel="2" tocentry="yes">Ordering Tables</h2><p>To arrange the rows of a table in some particular order, use an <tt class="pyret-highlight">order</tt> expression.  This can be done with any column whose type supports the use of <tt class="pyret-highlight">&lt;</tt> and <tt class="pyret-highlight">&gt;</tt>, including <a href="../UnDeFiNeD"></a>s.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">name-ordered = order my-table:
   name ascending
 end
 check:
@@ -65,11 +93,20 @@ check:
     row: "Bob", 12, "blue"
     row: "Eve", 13, "red"
   end
-end</pre></div><p>Tables can be sorted by multiple columns.  In general you may select as many columns as desired, and can mix and match <span class="pyret-highlight"><tt class="pyretexpr">ascending</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">descending</tt></span> sorts.  No column can be mentioned more than once.</p><pre class="pyret-highlight">order some-table:
+end</pre><p><a class="show-embed" code="name-ordered = order my-table: 
+    name ascending 
+ end 
+ check: 
+    name-ordered is table: name, age, favorite-color 
+      row: &quot;Alice&quot;, 17, &quot;green&quot; 
+      row: &quot;Bob&quot;, 12, &quot;blue&quot; 
+      row: &quot;Eve&quot;, 13, &quot;red&quot; 
+    end 
+ end">(Try it!)</a></p></div><p>Tables can be sorted by multiple columns.  In general you may select as many columns as desired, and can mix and match <tt class="pyret-highlight">ascending</tt> and <tt class="pyret-highlight">descending</tt> sorts.  No column can be mentioned more than once.</p><pre class="pyret-highlight">order some-table:
   column1 ascending,
   column3 descending,
   column2 ascending
-end</pre><p>This example will first sort the data in increasing order on <tt>column1</tt>.  If there are any duplicate values in <tt>column1</tt>, each such group of rows will be sorted in decreasing order by <tt>column3</tt>.  If there are any duplicates in both columns, each remaining group will be sorted in increasing order by <tt>column2</tt>.</p><p>  </p><h2 id="Transforming-Tables" toclevel="2" tocentry="yes">Transforming Tables</h2><p>The <span class="pyret-highlight"><tt class="pyretexpr">transform</tt></span> expression allows the changing of columns within a table, similar to the <a href="../trove/lists.html#map"><span class="pyret-highlight"><tt class="pyretexpr">map</tt></span></a> function over lists (and, just like <a href="../trove/lists.html#map"><span class="pyret-highlight"><tt class="pyretexpr">map</tt></span></a>, <span class="pyret-highlight"><tt class="pyretexpr">transform</tt></span> expressions do not mutate the table, but instead return a new one).</p><p>Suppose we find out that <span class="pyret-highlight"><tt class="pyretexpr">my-table</tt></span> is wrong and everyone is actually a year older than it says they are. We can fix our data as follows:</p><pre class="pyret-highlight">age-fixed = transform my-table using age:
+end</pre><p>This example will first sort the data in increasing order on <tt>column1</tt>.  If there are any duplicate values in <tt>column1</tt>, each such group of rows will be sorted in decreasing order by <tt>column3</tt>.  If there are any duplicates in both columns, each remaining group will be sorted in increasing order by <tt>column2</tt>.</p><p>  </p><h2 id="Transforming-Tables" toclevel="2" tocentry="yes">Transforming Tables</h2><p>The <tt class="pyret-highlight">transform</tt> expression allows the changing of columns within a table, similar to the <a href="../trove/lists.html#map"><tt class="pyret-highlight">map</tt></a> function over lists (and, just like <a href="../trove/lists.html#map"><tt class="pyret-highlight">map</tt></a>, <tt class="pyret-highlight">transform</tt> expressions do not mutate the table, but instead return a new one).</p><p>Suppose we find out that <tt class="pyret-highlight">my-table</tt> is wrong and everyone is actually a year older than it says they are. We can fix our data as follows:</p><pre class="pyret-highlight">age-fixed = transform my-table using age:
   age: age + 1
 end
 check:
@@ -78,10 +115,10 @@ check:
     row: "Alice", 18, "green"
     row: "Eve", 14, "red"
   end
-end</pre><h2 id="Extracting-Columns-from-Tables" toclevel="2" tocentry="yes">Extracting Columns from Tables</h2><p>A large number of Pyret modules work on <a href="../trove/lists.html#lists"></a> instead of tables, so it may be desired to pull the contents of one column of a table as a list to use it elsewhere. The <span class="pyret-highlight"><tt class="pyretexpr">extract</tt></span> mechanism allows this ability, and serves as the primary link between processing tabular data and non-tabular Pyret functions.</p><p>Suppose, for example, we wanted just the names of each person in <span class="pyret-highlight"><tt class="pyretexpr">my-table</tt></span>. We could pull those names out as follows:</p><pre class="pyret-highlight">name-list = extract name from my-table end
+end</pre><h2 id="Extracting-Columns-from-Tables" toclevel="2" tocentry="yes">Extracting Columns from Tables</h2><p>A large number of Pyret modules work on <a href="../trove/lists.html#lists"></a> instead of tables, so it may be desired to pull the contents of one column of a table as a list to use it elsewhere. The <tt class="pyret-highlight">extract</tt> mechanism allows this ability, and serves as the primary link between processing tabular data and non-tabular Pyret functions.</p><p>Suppose, for example, we wanted just the names of each person in <tt class="pyret-highlight">my-table</tt>. We could pull those names out as follows:</p><pre class="pyret-highlight">name-list = extract name from my-table end
 check:
   name-list is [list: "Bob", "Alice", "Eve"]
-end</pre><h2 id="Extending-Tables" toclevel="2" tocentry="yes">Extending Tables</h2><p>“Extending” a table means to create a new table with an additional, calculated column. There are two types of extensions which can be made to tables: mapping extensions and reducing extensions.</p><h3 id="Mapping-extensions" toclevel="3" tocentry="yes">Mapping extensions</h3><p>A mapping column is one whose contents are calculated from other columns only in the row it is being added to.  This is analogous to the map function for <a href="../trove/lists.html#lists"></a>.</p><p>In a mapping expression, the body of the expression defines the name of the new column or columns followed by an expression which calculates the new value to be placed in each row of the new column.</p><p>One example of this is a column which tells whether the <span class="pyret-highlight"><tt class="pyretexpr">age</tt></span> field of a given row in <span class="pyret-highlight"><tt class="pyretexpr">my-table</tt></span> indicates that the person in that row is old enough drive in the United States or not, that is, whether that person is at least 16:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">can-drive-col = extend my-table using age:
+end</pre><h2 id="Extending-Tables" toclevel="2" tocentry="yes">Extending Tables</h2><p>“Extending” a table means to create a new table with an additional, calculated column. There are two types of extensions which can be made to tables: mapping extensions and reducing extensions.</p><h3 id="Mapping-extensions" toclevel="3" tocentry="yes">Mapping extensions</h3><p>A mapping column is one whose contents are calculated from other columns only in the row it is being added to.  This is analogous to the map function for <a href="../trove/lists.html#lists"></a>.</p><p>In a mapping expression, the body of the expression defines the name of the new column or columns followed by an expression which calculates the new value to be placed in each row of the new column.</p><p>One example of this is a column which tells whether the <tt class="pyret-highlight">age</tt> field of a given row in <tt class="pyret-highlight">my-table</tt> indicates that the person in that row is old enough drive in the United States or not, that is, whether that person is at least 16:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">can-drive-col = extend my-table using age:
   can-drive: age &gt;= 16
 end
 check:
@@ -90,7 +127,16 @@ check:
     row: "Alice", 17, true
     row: "Eve", 13, false
   end
-end</pre></div><p>Another example creates a new table including baseball players’ calculated batting average and slugging percentage in extended columns:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">batting = table: batter :: String,
+end</pre><p><a class="show-embed" code="can-drive-col = extend my-table using age: 
+    can-drive: age &gt;= 16 
+ end 
+ check: 
+    can-drive-col is table: name, age, can-drive 
+      row: &quot;Bob&quot;, 12, false 
+      row: &quot;Alice&quot;, 17, true 
+      row: &quot;Eve&quot;, 13, false 
+    end 
+ end">(Try it!)</a></p></div><p>Another example creates a new table including baseball players’ calculated batting average and slugging percentage in extended columns:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">batting = table: batter :: String,
   at-bats :: Number, singles :: Number, doubles :: Number,
   triples :: Number, home-runs :: Number
   row: "Julia", 20, 4, 2, 0, 0
@@ -102,7 +148,19 @@ batting-avg-and-slugging = extend batting
   batting-average: (singles + doubles + triples + home-runs) / at-bats,
   slugging-percentage: (singles + (doubles * 2) +
     (triples * 3) + (home-runs * 4)) / at-bats
-end</pre></div><p><img src="baseball.png"/></p><div class="margin-note">As in <a href="../lang/forms.html#s:tables:transform"><span class="pyret-highlight"><tt class="pyretexpr">transform</tt></span></a>, you must specify which columns will be used to calculate the value in the <span class="pyret-highlight"><tt class="pyretexpr">extend</tt></span> expression using the <span class="pyret-highlight"><tt class="pyretexpr">using</tt></span> keyword.</div><h3 id="Reducers" toclevel="3" tocentry="yes">Reducers</h3><p>A “reducing” column is one whose information is computed from the row it is being added to <italic>and one or more of the rows above</italic> that row.  This is analogous to the <a href="../trove/lists.html#fold"><span class="pyret-highlight"><tt class="pyretexpr">fold</tt></span></a> function for <a href="../trove/lists.html#lists"></a>.</p><p>The simplest examples of reducing use reducers built into Pyret.</p><p>For each reducer below, you will need to specify a name for the new column and which existing column new value will be based on.  You will also need to <span class="pyret-highlight"><tt class="pyretexpr">import</tt></span> or <span class="pyret-highlight"><tt class="pyretexpr">include</tt></span> <span class="pyret-highlight"><tt class="pyretexpr">tables</tt></span>.</p><div><p><span><a name="running-sum"></a></span></p><pre class="pyret-display">running-sum :: <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span><a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a></span>&gt;</span></pre></div><p>Creates a new column where in each row, the running sum will be the added value of the cell in the selected column plus all the cells <italic>above</italic> the cell in the same column.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import tables as T
+end</pre><p><a class="show-embed" code="batting = table: batter :: String, 
+    at-bats :: Number, singles :: Number, doubles :: Number, 
+    triples :: Number, home-runs :: Number 
+    row: &quot;Julia&quot;, 20, 4, 2, 0, 0 
+    row: &quot;Vivian&quot;, 25, 6, 1, 1, 1 
+    row: &quot;Eddie&quot;, 28, 5, 2, 0, 2 
+ end 
+ batting-avg-and-slugging = extend batting 
+    using at-bats, singles, doubles, triples, home-runs: 
+    batting-average: (singles + doubles + triples + home-runs) / at-bats, 
+    slugging-percentage: (singles + (doubles * 2) + 
+      (triples * 3) + (home-runs * 4)) / at-bats 
+ end">(Try it!)</a></p></div><p><img src="baseball.png"/></p><div class="margin-note">As in <a href="../lang/forms.html#s:tables:transform"><tt class="pyret-highlight">transform</tt></a>, you must specify which columns will be used to calculate the value in the <tt class="pyret-highlight">extend</tt> expression using the <tt class="pyret-highlight">using</tt> keyword.</div><h3 id="Reducers" toclevel="3" tocentry="yes">Reducers</h3><p>A “reducing” column is one whose information is computed from the row it is being added to <italic>and one or more of the rows above</italic> that row.  This is analogous to the <a href="../trove/lists.html#fold"><tt class="pyret-highlight">fold</tt></a> function for <a href="../trove/lists.html#lists"></a>.</p><p>The simplest examples of reducing use reducers built into Pyret.</p><p>For each reducer below, you will need to specify a name for the new column and which existing column new value will be based on.  You will also need to <tt class="pyret-highlight">import</tt> or <tt class="pyret-highlight">include</tt> <tt class="pyret-highlight">tables</tt>.</p><div><p><span><a name="running-sum"></a></span></p><pre class="pyret-display">running-sum :: <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span><a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a></span>&gt;</span></pre></div><p>Creates a new column where in each row, the running sum will be the added value of the cell in the selected column plus all the cells <italic>above</italic> the cell in the same column.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import tables as T
 dem-primary-delegates = table: state :: String, clinton :: Number,
   sanders :: Number
   row: "Iowa", 29, 21
@@ -115,7 +173,20 @@ running-total-delegates = extend dem-primary-delegates
   total-clinton: T.running-sum of clinton,
   total-sanders: T.running-sum of sanders
 end
-print(running-total-delegates)</pre></div><p><img src="primaries.png"/></p><div><p><span><a name="difference"></a></span></p><pre class="pyret-display">difference :: <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span><a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a></span>&gt;</span></pre><p>The <span class="pyret-highlight"><tt class="pyretexpr">difference</tt></span> extender creates a new column containing the difference between the value in the current row (of the selected column) minus the value in <italic>only</italic> the row directly above.  In the first row, the value is unchanged. Since there’s no value before the first row, Pyret behaves as if it were zero.</p><div class="margin-note">Both <span class="pyret-highlight"><tt class="pyretexpr">difference</tt></span> and <a href="../builtin/tables.html#difference-from"><span class="pyret-highlight"><tt class="pyretexpr">difference-from</tt></span></a> do <italic>not</italic> calculate a running difference, only the difference between the selected row and the single row above.</div><div><p><b>Examples:</b></p><pre class="pyret-highlight">import tables as T
+print(running-total-delegates)</pre><p><a class="show-embed" code="import tables as T 
+ dem-primary-delegates = table: state :: String, clinton :: Number, 
+    sanders :: Number 
+    row: &quot;Iowa&quot;, 29, 21 
+    row: &quot;New Hampshire&quot;, 15, 16 
+    row: &quot;Nevada&quot;, 27, 16 
+    row: &quot;South Carolina&quot;, 44, 14 
+ end 
+ running-total-delegates = extend dem-primary-delegates 
+    using clinton, sanders: 
+    total-clinton: T.running-sum of clinton, 
+    total-sanders: T.running-sum of sanders 
+ end 
+ print(running-total-delegates)">(Try it!)</a></p></div><p><img src="primaries.png"/></p><div><p><span><a name="difference"></a></span></p><pre class="pyret-display">difference :: <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span><a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a></span>&gt;</span></pre><p>The <tt class="pyret-highlight">difference</tt> extender creates a new column containing the difference between the value in the current row (of the selected column) minus the value in <italic>only</italic> the row directly above.  In the first row, the value is unchanged. Since there’s no value before the first row, Pyret behaves as if it were zero.</p><div class="margin-note">Both <tt class="pyret-highlight">difference</tt> and <a href="../builtin/tables.html#difference-from"><tt class="pyret-highlight">difference-from</tt></a> do <italic>not</italic> calculate a running difference, only the difference between the selected row and the single row above.</div><div><p><b>Examples:</b></p><pre class="pyret-highlight">import tables as T
 test-scores = table: year :: Number,
   math-score :: Number, reading-score :: Number
   row: 2014, 87, 89
@@ -126,7 +197,18 @@ end
 changes-by-year = extend test-scores using math-score, reading-score:
   math-change-from-previous: T.difference of math-score,
   reading-change-from-previous: T.difference of reading-score
-end</pre></div><p><img src="difference-table.png"/></p></div><div><p><span><a name="difference-from"></a></span></p><pre class="pyret-display"><a href="../builtin/tables.html#difference-from">difference-from</a> :: <span>(<span><span class="pyret-content">start-value :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span><a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a></span>&gt;</span></span></pre><p>Like <a href="../builtin/tables.html#difference"><span class="pyret-highlight"><tt class="pyretexpr">difference</tt></span></a>, except the starting value is specified, instead of defaulting to 0.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight"># calculates velocity of a dropping ball
+end</pre><p><a class="show-embed" code="import tables as T 
+ test-scores = table: year :: Number, 
+    math-score :: Number, reading-score :: Number 
+    row: 2014, 87, 89 
+    row: 2015, 98, 93 
+    row: 2016, 79, 83 
+    row: 2017, 85, 90 
+ end 
+ changes-by-year = extend test-scores using math-score, reading-score: 
+    math-change-from-previous: T.difference of math-score, 
+    reading-change-from-previous: T.difference of reading-score 
+ end">(Try it!)</a></p></div><p><img src="difference-table.png"/></p></div><div><p><span><a name="difference-from"></a></span></p><pre class="pyret-display"><a href="../builtin/tables.html#difference-from">difference-from</a> :: <span>(<span><span class="pyret-content">start-value :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span><a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a></span>&gt;</span></span></pre><p>Like <a href="../builtin/tables.html#difference"><tt class="pyret-highlight">difference</tt></a>, except the starting value is specified, instead of defaulting to 0.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight"># calculates velocity of a dropping ball
 ball-info = table: pos-y
   row: 25
   row: 24
@@ -145,7 +227,26 @@ check:
     row: 16, -5
     row: 0, -16
   end
-end</pre></div></div><div><p><span><a name="running-mean"></a></span></p><pre class="pyret-display">running-mean :: <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span><a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a></span>&gt;</span></pre></div><p>Creates a new column  where the value in each row is equal to the mean of <italic>all</italic> values in the designated column in the current row and above.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import tables as T
+end</pre><p><a class="show-embed" code="# calculates velocity of a dropping ball 
+ ball-info = table: pos-y 
+    row: 25 
+    row: 24 
+    row: 21 
+    row: 16 
+    row: 0 
+ end 
+ with-velocity = extend ball-info using pos-y: 
+    vel-y: T.difference-from(25) of pos-y 
+ end 
+ check: 
+    with-velocity is table: pos-y, vel-y 
+      row: 25, 0 
+      row: 24, -1 
+      row: 21, -3 
+      row: 16, -5 
+      row: 0, -16 
+    end 
+ end">(Try it!)</a></p></div></div><div><p><span><a name="running-mean"></a></span></p><pre class="pyret-display">running-mean :: <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span><a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a></span>&gt;</span></pre></div><p>Creates a new column  where the value in each row is equal to the mean of <italic>all</italic> values in the designated column in the current row and above.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import tables as T
 my-grades = table: score :: Number
   row: 87
   row: 91
@@ -163,7 +264,25 @@ check:
     row: 98, 92
     row: 82, 89.5
   end
-end</pre></div><div><p><span><a name="running-max"></a></span></p><pre class="pyret-display">running-max :: <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span><a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a></span>&gt;</span></pre></div><div><p><span><a name="running-min"></a></span></p><pre class="pyret-display">running-min :: <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span><a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a></span>&gt;</span></pre></div><p>Creates a new column that contains the maximum or minimum value in the selected column in the current row or above.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">some-numbers = table: n :: Number
+end</pre><p><a class="show-embed" code="import tables as T 
+ my-grades = table: score :: Number 
+    row: 87 
+    row: 91 
+    row: 98 
+    row: 82 
+ end 
+ with-running-mean = extend my-grades 
+    using score: 
+    mean: T.running-mean of score 
+ end 
+ check: 
+    with-running-mean is table: score, mean 
+      row: 87, 87 
+      row: 91, 89 
+      row: 98, 92 
+      row: 82, 89.5 
+    end 
+ end">(Try it!)</a></p></div><div><p><span><a name="running-max"></a></span></p><pre class="pyret-display">running-max :: <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span><a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a></span>&gt;</span></pre></div><div><p><span><a name="running-min"></a></span></p><pre class="pyret-display">running-min :: <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span><a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a>, <a href="../trove/globals.html#Number">Number</a></span>&gt;</span></pre></div><p>Creates a new column that contains the maximum or minimum value in the selected column in the current row or above.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">some-numbers = table: n :: Number
   row: 4
   row: 9
   row: 3
@@ -182,7 +301,26 @@ check:
     row: 1, 9, 1
     row: 10, 10, 1
   end
-end</pre></div><div><p><span><a name="running-fold"></a></span></p><pre class="pyret-display"><a href="../builtin/tables.html#running-fold">running-fold</a> :: <span>(<span><span class="pyret-content">start-value :: Result</span>, <span class="pyret-content">combiner :: <span>(<span>Result, Col -&gt; Result</span>)</span></span></span>) -&gt; <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span>Result, Col, Result</span>&gt;</span></span></pre></div><div><p><span><a name="running-reduce"></a></span></p><pre class="pyret-display"><a href="../builtin/tables.html#running-reduce">running-reduce</a> :: <span>(<span><span class="pyret-content">combiner :: <span>(<span>Col, Col -&gt; Col</span>)</span></span></span>) -&gt; <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span>Col, Col, Col</span>&gt;</span></span></pre></div><p><span class="pyret-highlight"><tt class="pyretexpr">running-fold</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">running-reduce</tt></span> allow you to specify a function used to calculate the value in the new column, based on a running calculation of all the values in the selected column in the current row and above.</p><p>The difference between <span class="pyret-highlight"><tt class="pyretexpr">running-fold</tt></span> and <span class="pyret-highlight"><tt class="pyretexpr">running-reduce</tt></span> is that <span class="pyret-highlight"><tt class="pyretexpr">running-fold</tt></span> requires an explicit <tt>start-value</tt>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import tables as T
+end</pre><p><a class="show-embed" code="some-numbers = table: n :: Number 
+    row: 4 
+    row: 9 
+    row: 3 
+    row: 1 
+    row: 10 
+ end 
+ with-min-max = extend some-numbers using n: 
+    max: T.running-max of n, 
+    min: T.running-min of n 
+ end 
+ check: 
+    with-min-max is table: n, max, min 
+      row: 4, 4, 4 
+      row: 9, 9, 4 
+      row: 3, 9, 3 
+      row: 1, 9, 1 
+      row: 10, 10, 1 
+    end 
+ end">(Try it!)</a></p></div><div><p><span><a name="running-fold"></a></span></p><pre class="pyret-display"><a href="../builtin/tables.html#running-fold">running-fold</a> :: <span>(<span><span class="pyret-content">start-value :: Result</span>, <span class="pyret-content">combiner :: <span>(<span>Result, Col -&gt; Result</span>)</span></span></span>) -&gt; <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span>Result, Col, Result</span>&gt;</span></span></pre></div><div><p><span><a name="running-reduce"></a></span></p><pre class="pyret-display"><a href="../builtin/tables.html#running-reduce">running-reduce</a> :: <span>(<span><span class="pyret-content">combiner :: <span>(<span>Col, Col -&gt; Col</span>)</span></span></span>) -&gt; <span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;<span>Col, Col, Col</span>&gt;</span></span></pre></div><p><tt class="pyret-highlight">running-fold</tt> and <tt class="pyret-highlight">running-reduce</tt> allow you to specify a function used to calculate the value in the new column, based on a running calculation of all the values in the selected column in the current row and above.</p><p>The difference between <tt class="pyret-highlight">running-fold</tt> and <tt class="pyret-highlight">running-reduce</tt> is that <tt class="pyret-highlight">running-fold</tt> requires an explicit <tt>start-value</tt>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import tables as T
 count-if-driver = T.running-fold(0,
   lam(sum, col): if col &gt;= 16: 1 + sum else: sum end end)
 t = table: name, age
@@ -221,13 +359,58 @@ check:
     row: 003, 500, 350
   end
 end
-</pre></div><p>While the reducers found in the <tt>tables</tt> module should cover most all use cases, there may be times when one would like to create a reducer of their own. To do so, one must construct an object of the following type:</p><div><p><span><a name="Reducer"></a></span></p><pre class="pyret-display"><span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;Acc, InVal, OutVal&gt;</span></pre><div><p><span><a name=".one"></a></span></p><pre class="pyret-display">.one :: <span>(<span><span class="pyret-content">value-from-column :: InVal</span></span>) -&gt; <span>{Acc, OutVal}</span></span></pre></div><div><p><span><a name=".reduce"></a></span></p><pre class="pyret-display">.reduce :: <span>(<span><span class="pyret-content">accumulator :: Acc</span>, <span class="pyret-content">value-from-column :: InVal</span></span>) -&gt; <span>{Acc, OutVal}</span></span></pre></div><p>Reducers are essentially descriptions of folds (in the list <a href="../trove/lists.html#fold"><span class="pyret-highlight"><tt class="pyretexpr">fold</tt></span></a> sense) over table columns. The way reducers are called by the language runtime is as follows: the value(s) from the first row are passed to the reducer’s <a href="../builtin/tables.html#.one">.one</a> method, which should return a tuple containing both any accumulated information needed for the fold and the value which should be placed in the new column in that row. The remaining rows are then sequentially populated using the reducer’s <a href="../builtin/tables.html#.reduce">.reduce</a> method, which is identical to the <a href="../builtin/tables.html#.one">.one</a> method except that it receives an additional argument which is the previously mentioned accumulated information from the previous row.</p><p>To illustrate, a <span class="pyret-highlight"><tt class="pyretexpr">running-mean</tt></span> reducer which is equivalent to the one provided by the <tt>tables</tt> module could be implemented as follows:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import tables as T
+</pre><p><a class="show-embed" code="import tables as T 
+ count-if-driver = T.running-fold(0, 
+    lam(sum, col): if col &gt;= 16: 1 + sum else: sum end end) 
+ t = table: name, age 
+    row: &quot;Bob&quot;, 17 
+    row: &quot;Mary&quot;, 22 
+    row: &quot;Jane&quot;, 6 
+    row: &quot;Jim&quot;, 15 
+    row: &quot;Barbara&quot;, 30 
+ end 
+ with-driver-count = extend t using age: 
+    total-drivers: count-if-driver of age 
+ end 
+ check: 
+    with-driver-count is table: name, age, total-drivers 
+      row: &quot;Bob&quot;, 17, 1 
+      row: &quot;Mary&quot;, 22, 2 
+      row: &quot;Jane&quot;, 6, 2 
+      row: &quot;Jim&quot;, 15, 2 
+      row: &quot;Barbara&quot;, 30, 3 
+    end 
+ end 
+
+ checks = table: check-number :: Number, withdrawal :: Number 
+    row: 001, 50 
+    row: 002, 100 
+    row: 003, 500 
+ end 
+ with-checking-balance = extend checks using withdrawal: 
+    current-balance: T.running-fold(1000, 
+      lam(total, col): total - col end) of withdrawal 
+ end 
+ check: 
+    with-checking-balance is table: check-number, withdrawal, current-balance 
+      row: 001, 50, 950 
+      row: 002, 100, 850 
+      row: 003, 500, 350 
+    end 
+ end 
+">(Try it!)</a></p></div><p>While the reducers found in the <tt>tables</tt> module should cover most all use cases, there may be times when one would like to create a reducer of their own. To do so, one must construct an object of the following type:</p><div><p><span><a name="Reducer"></a></span></p><pre class="pyret-display"><span><a href="../builtin/tables.html#Reducer">Reducer</a>&lt;Acc, InVal, OutVal&gt;</span></pre><div><p><span><a name=".one"></a></span></p><pre class="pyret-display">.one :: <span>(<span><span class="pyret-content">value-from-column :: InVal</span></span>) -&gt; <span>{Acc, OutVal}</span></span></pre></div><div><p><span><a name=".reduce"></a></span></p><pre class="pyret-display">.reduce :: <span>(<span><span class="pyret-content">accumulator :: Acc</span>, <span class="pyret-content">value-from-column :: InVal</span></span>) -&gt; <span>{Acc, OutVal}</span></span></pre></div><p>Reducers are essentially descriptions of folds (in the list <a href="../trove/lists.html#fold"><tt class="pyret-highlight">fold</tt></a> sense) over table columns. The way reducers are called by the language runtime is as follows: the value(s) from the first row are passed to the reducer’s <a href="../builtin/tables.html#.one">.one</a> method, which should return a tuple containing both any accumulated information needed for the fold and the value which should be placed in the new column in that row. The remaining rows are then sequentially populated using the reducer’s <a href="../builtin/tables.html#.reduce">.reduce</a> method, which is identical to the <a href="../builtin/tables.html#.one">.one</a> method except that it receives an additional argument which is the previously mentioned accumulated information from the previous row.</p><p>To illustrate, a <tt class="pyret-highlight">running-mean</tt> reducer which is equivalent to the one provided by the <tt>tables</tt> module could be implemented as follows:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import tables as T
 running-mean :: T.Reducer&lt;{Number; Number}, Number, Number&gt; = {
   one: lam(n): {{n; 1}; n} end,
   reduce: lam({sum; count}, n):
     { {sum + n; count + 1}; (sum + n) / (count + 1) }
   end
-}</pre></div></div><p>  </p><h2 id="s:tables:comparing" toclevel="2" tocentry="yes">Comparing Tables</h2><p>The order of both rows and columns are part of a table value.  To be considered equal, tables need to have all the same rows and columns, with the rows and columns appearing in the same order.</p><h2 id="s:tables:methods" toclevel="2" tocentry="yes">Advanced Table Manipulation</h2><p>The operations listed above come with a significant restriction: all column names must also be valid identifier names. In addition, column names are always chosen directly by the programmer in each query, and there’s no way to abstract over them.</p><p>To see why this is a significant restriction, consider this (non-working) example:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun sieve-by-large-number(t :: Table, colname :: String) -&gt; Table:
+}</pre><p><a class="show-embed" code="import tables as T 
+ running-mean :: T.Reducer&lt;{Number; Number}, Number, Number&gt; = { 
+    one: lam(n): {{n; 1}; n} end, 
+    reduce: lam({sum; count}, n): 
+      { {sum + n; count + 1}; (sum + n) / (count + 1) } 
+    end 
+ }">(Try it!)</a></p></div></div><p>  </p><h2 id="s:tables:comparing" toclevel="2" tocentry="yes">Comparing Tables</h2><p>The order of both rows and columns are part of a table value.  To be considered equal, tables need to have all the same rows and columns, with the rows and columns appearing in the same order.</p><h2 id="s:tables:methods" toclevel="2" tocentry="yes">Advanced Table Manipulation</h2><p>The operations listed above come with a significant restriction: all column names must also be valid identifier names. In addition, column names are always chosen directly by the programmer in each query, and there’s no way to abstract over them.</p><p>To see why this is a significant restriction, consider this (non-working) example:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun sieve-by-large-number(t :: Table, colname :: String) -&gt; Table:
   doc: ```Return a new table containing the rows of t whose column
           named by the string provided for colname have value greater than
           1000```
@@ -243,14 +426,37 @@ where:
   sieve-by-large-number(my-t, "price") is table: item, price
     row: "Macbook", 1300
   end
-end</pre></div><p>We may well want to write this if we have a number of tables, all of which we want to sieve by the same criteria. However, it isn’t possible to abstract over a column name using <tt>sieve</tt>: the program above conflates the identifier <tt>colname</tt> with the column name <tt>colname</tt>. As a result, that program gives an error that the <tt>colname</tt> in the query shadows the <tt>colname</tt> that’s a parameter of the function.</p><p>Pyret provides facilities for writing programs like the above, they are simply a different set of operations than the query syntax. These table manipulation operations are useful for building abstractions over tables and for creating tables programmatically.</p><div><p><span><a name="Row"></a></span></p><pre class="pyret-display">Row</pre><p>The type of all row values.</p></div><div><p><span><a name="raw-row"></a></span></p><pre class="pyret-display">[<a href="../builtin/tables.html#raw-row">raw-row</a><span></span>: <span class="pyret-content">elt :: <span>{<a href="../trove/globals.html#String">String</a>, Col}</span></span>, ...] -&gt; <a href="../builtin/tables.html#Row">Row</a></pre></div><p>Takes a sequence of tuples and constructs a <a href="../builtin/tables.html#Row"><span class="pyret-highlight"><tt class="pyretexpr">Row</tt></span></a> value. Note that the type for each column may be different. The constructed row can be added to appropriate tables by using the table methods like <a href="../builtin/tables.html#.add-row">.add-row</a>.</p><p>It is often preferable to construct rows for an existing table by using the <a href="../builtin/tables.html#.row">.row</a> method, which avoids typing out the names of each column for each created row, and provides built-in checking for the count of columns.</p><div><p><span><a name=".get-column-names"></a></span></p><pre class="pyret-display">.get-column-names :: <span>(<span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#String">String</a></span>&gt;</span></span></pre></div><p>Produces a list of strings containing the names of the columns in the row.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="fun sieve-by-large-number(t :: Table, colname :: String) -&gt; Table: 
+    doc: ```Return a new table containing the rows of t whose column 
+            named by the string provided for colname have value greater than 
+            1000``` 
+    sieve t using colname: 
+      colname &gt; 1000 
+    end 
+ where: 
+    my-t = table: item, price 
+      row: &quot;Chromebook&quot;, 250 
+      row: &quot;Macbook&quot;, 1300 
+    end 
+
+    sieve-by-large-number(my-t, &quot;price&quot;) is table: item, price 
+      row: &quot;Macbook&quot;, 1300 
+    end 
+ end">(Try it!)</a></p></div><p>We may well want to write this if we have a number of tables, all of which we want to sieve by the same criteria. However, it isn’t possible to abstract over a column name using <tt>sieve</tt>: the program above conflates the identifier <tt>colname</tt> with the column name <tt>colname</tt>. As a result, that program gives an error that the <tt>colname</tt> in the query shadows the <tt>colname</tt> that’s a parameter of the function.</p><p>Pyret provides facilities for writing programs like the above, they are simply a different set of operations than the query syntax. These table manipulation operations are useful for building abstractions over tables and for creating tables programmatically.</p><div><p><span><a name="Row"></a></span></p><pre class="pyret-display">Row</pre><p>The type of all row values.</p></div><div><p><span><a name="raw-row"></a></span></p><pre class="pyret-display">[<a href="../builtin/tables.html#raw-row">raw-row</a><span></span>: <span class="pyret-content">elt :: <span>{<a href="../trove/globals.html#String">String</a>, Col}</span></span>, ...] -&gt; <a href="../builtin/tables.html#Row">Row</a></pre></div><p>Takes a sequence of tuples and constructs a <a href="../builtin/tables.html#Row"><tt class="pyret-highlight">Row</tt></a> value. Note that the type for each column may be different. The constructed row can be added to appropriate tables by using the table methods like <a href="../builtin/tables.html#.add-row">.add-row</a>.</p><p>It is often preferable to construct rows for an existing table by using the <a href="../builtin/tables.html#.row">.row</a> method, which avoids typing out the names of each column for each created row, and provides built-in checking for the count of columns.</p><div><p><span><a name=".get-column-names"></a></span></p><pre class="pyret-display">.get-column-names :: <span> -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#String">String</a></span>&gt;</span></span></pre></div><p>Produces a list of strings containing the names of the columns in the row.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   r = [raw-row: {"city"; "NYC"}, {"pop"; 8500000}]
   r.get-column-names() is [list: "city", "pop"]
-end</pre></div><div><p><span><a name=".get-value"></a></span></p><pre class="pyret-display">.get-value :: <span>(<span><span class="pyret-content">col-name :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; Col</span></pre></div><p>Consumes the name of a column, and produces the corresponding value. Results in an error if the value isn’t found. Square-bracket (<tt>[]</tt>) accessor syntax uses <tt>get-value</tt>, which is often more pleasant to write than writing out <tt>get-value</tt> fully.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    r = [raw-row: {&quot;city&quot;; &quot;NYC&quot;}, {&quot;pop&quot;; 8500000}] 
+    r.get-column-names() is [list: &quot;city&quot;, &quot;pop&quot;] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".get-value"></a></span></p><pre class="pyret-display">.get-value :: <span>(<span><span class="pyret-content">col-name :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; Col</span></pre></div><p>Consumes the name of a column, and produces the corresponding value. Results in an error if the value isn’t found. Square-bracket (<tt>[]</tt>) accessor syntax uses <tt>get-value</tt>, which is often more pleasant to write than writing out <tt>get-value</tt> fully.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   r = [raw-row: {"city"; "NYC"}, {"pop"; 8500000}]
   r.get-value("pop") is 8500000
   r["pop"] is 850000
-end</pre></div><div><p><span><a name=".get"></a></span></p><pre class="pyret-display">.get :: <span>(<span><span class="pyret-content">col-name :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <span><a href="../trove/option.html#Option">Option</a>&lt;<span>Col</span>&gt;</span></span></pre></div><p>Consumes the name of a column, and produces a <a href="../trove/option.html#some"><span class="pyret-highlight"><tt class="pyretexpr">some</tt></span></a> containing the corresponding value if it’s present, or <a href="../trove/option.html#none"><span class="pyret-highlight"><tt class="pyretexpr">none</tt></span></a> if it isn’t.</p><div><p><span><a name="Table"></a></span></p><pre class="pyret-display">Table</pre><p>The type of all tables.</p></div><div><p><span><a name="table-from-rows"></a></span></p><pre class="pyret-display">[<a href="../builtin/tables.html#table-from-rows">table-from-rows</a><span></span>: <span class="pyret-content">elt :: <a href="../builtin/tables.html#Row">Row</a></span>, ...] -&gt; <a href="../builtin/tables.html#Table">Table</a></pre></div><p>A collection constructor that creates tables from <a href="../builtin/tables.html#Row"><span class="pyret-highlight"><tt class="pyretexpr">Row</tt></span></a> values.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    r = [raw-row: {&quot;city&quot;; &quot;NYC&quot;}, {&quot;pop&quot;; 8500000}] 
+    r.get-value(&quot;pop&quot;) is 8500000 
+    r[&quot;pop&quot;] is 850000 
+ end">(Try it!)</a></p></div><div><p><span><a name=".get"></a></span></p><pre class="pyret-display">.get :: <span>(<span><span class="pyret-content">col-name :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <span><a href="../trove/option.html#Option">Option</a>&lt;<span>Col</span>&gt;</span></span></pre></div><p>Consumes the name of a column, and produces a <a href="../trove/option.html#some"><tt class="pyret-highlight">some</tt></a> containing the corresponding value if it’s present, or <a href="../trove/option.html#none"><tt class="pyret-highlight">none</tt></a> if it isn’t.</p><div><p><span><a name="Table"></a></span></p><pre class="pyret-display">Table</pre><p>The type of all tables.</p></div><div><p><span><a name="table-from-rows"></a></span></p><pre class="pyret-display">[<a href="../builtin/tables.html#table-from-rows">table-from-rows</a><span></span>: <span class="pyret-content">elt :: <a href="../builtin/tables.html#Row">Row</a></span>, ...] -&gt; <a href="../builtin/tables.html#Table">Table</a></pre></div><p>A collection constructor that creates tables from <a href="../builtin/tables.html#Row"><tt class="pyret-highlight">Row</tt></a> values.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   t = [table-from-rows:
     [raw-row: {"A"; 5}, {"B"; 7}, {"C"; 8}],
     [raw-row: {"A"; 1}, {"B"; 2}, {"C"; 3}]
@@ -259,7 +465,16 @@ end</pre></div><div><p><span><a name=".get"></a></span></p><pre class="pyret-dis
   t.length() is 2
   t.column("A") is [list: 5, 1]
   t.row-n(0) is [raw-row: {"A"; 5}, {"B"; 7}, {"C"; 8}]
-end</pre></div><div><p><span><a name="table-from-columns"></a></span></p><pre class="pyret-display">[<a href="../builtin/tables.html#table-from-columns">table-from-columns</a><span>(<span class="pyret-content">elt :: <span>{String, <span><a href="../trove/lists.html#List">List</a>&lt;<span>A</span>&gt;</span>}</span></span>)</span>: , ...] -&gt; <a href="../builtin/tables.html#Table">Table</a></pre></div><p>A collection constructor that creates tables from columns, where each column is specified as a tuple of its name (as a <a href="../trove/globals.html#String"><span class="pyret-highlight"><tt class="pyretexpr">String</tt></span></a>) and a <a href="../trove/lists.html#List"><span class="pyret-highlight"><tt class="pyretexpr">List</tt></span></a> of its values.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    t = [table-from-rows: 
+      [raw-row: {&quot;A&quot;; 5}, {&quot;B&quot;; 7}, {&quot;C&quot;; 8}], 
+      [raw-row: {&quot;A&quot;; 1}, {&quot;B&quot;; 2}, {&quot;C&quot;; 3}] 
+    ] 
+
+    t.length() is 2 
+    t.column(&quot;A&quot;) is [list: 5, 1] 
+    t.row-n(0) is [raw-row: {&quot;A&quot;; 5}, {&quot;B&quot;; 7}, {&quot;C&quot;; 8}] 
+ end">(Try it!)</a></p></div><div><p><span><a name="table-from-columns"></a></span></p><pre class="pyret-display">[<a href="../builtin/tables.html#table-from-columns">table-from-columns</a><span>(<span class="pyret-content">elt :: <span>{String, <span><a href="../trove/lists.html#List">List</a>&lt;<span>A</span>&gt;</span>}</span></span>)</span>: , ...] -&gt; <a href="../builtin/tables.html#Table">Table</a></pre></div><p>A collection constructor that creates tables from columns, where each column is specified as a tuple of its name (as a <a href="../trove/globals.html#String"><tt class="pyret-highlight">String</tt></a>) and a <a href="../trove/lists.html#List"><tt class="pyret-highlight">List</tt></a> of its values.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   t = [table-from-columns:
     {"a"; [list: 100, 200, 300]},
     {"b"; [list: true, false, true]}
@@ -268,21 +483,44 @@ end</pre></div><div><p><span><a name="table-from-columns"></a></span></p><pre cl
   t.length() is 3
   t.column("a") is [list: 100, 200, 300]
   t.row-n(2) is [raw-row: {"a"; 300}, {"b"; true}]
-end</pre></div><div><p><span><a name="table-from-column"></a></span></p><pre class="pyret-display"><a href="../builtin/tables.html#table-from-column">table-from-column</a> :: <span>(<span><span class="pyret-content">column-name :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">values :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>A</span>&gt;</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre><p>A function that creates a table of a single column from a column name, given as a <a href="../trove/globals.html#String"><span class="pyret-highlight"><tt class="pyretexpr">String</tt></span></a> and a <a href="../trove/lists.html#List"><span class="pyret-highlight"><tt class="pyretexpr">List</tt></span></a> of values.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    t = [table-from-columns: 
+      {&quot;a&quot;; [list: 100, 200, 300]}, 
+      {&quot;b&quot;; [list: true, false, true]} 
+    ] 
+
+    t.length() is 3 
+    t.column(&quot;a&quot;) is [list: 100, 200, 300] 
+    t.row-n(2) is [raw-row: {&quot;a&quot;; 300}, {&quot;b&quot;; true}] 
+ end">(Try it!)</a></p></div><div><p><span><a name="table-from-column"></a></span></p><pre class="pyret-display"><a href="../builtin/tables.html#table-from-column">table-from-column</a> :: <span>(<span><span class="pyret-content">column-name :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">values :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>A</span>&gt;</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre><p>A function that creates a table of a single column from a column name, given as a <a href="../trove/globals.html#String"><tt class="pyret-highlight">String</tt></a> and a <a href="../trove/lists.html#List"><tt class="pyret-highlight">List</tt></a> of values.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   col = range(0, 100)
   tfc = table-from-column("a", col)
   tfc.length() is 100
   tfc.column-names() is [list: "a"]
   cs = tfc.all-columns()
   cs.get(0) is col
-end</pre></div></div><div><p><span><a name=".length"></a></span></p><pre class="pyret-display">.length :: <span>(<span></span>) -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre></div><p>Evaluates to the number of rows in the table.</p><div><p><span><a name=".row"></a></span></p><pre class="pyret-display">.row :: <span><a href="../builtin/tables.html#Table">Table</a>, Col1, Col2, ..., ColN -&gt; <a href="../builtin/tables.html#Row">Row</a></span></pre></div><p>Consumes one value for each column in the table, and produces a <a href="../builtin/tables.html#Row"><span class="pyret-highlight"><tt class="pyretexpr">Row</tt></span></a> value where each provided value is associated with the appropriate column.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    col = range(0, 100) 
+    tfc = table-from-column(&quot;a&quot;, col) 
+    tfc.length() is 100 
+    tfc.column-names() is [list: &quot;a&quot;] 
+    cs = tfc.all-columns() 
+    cs.get(0) is col 
+ end">(Try it!)</a></p></div></div><div><p><span><a name=".length"></a></span></p><pre class="pyret-display">.length :: <span> -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre></div><p>Evaluates to the number of rows in the table.</p><div><p><span><a name=".row"></a></span></p><pre class="pyret-display">.row :: <span><a href="../builtin/tables.html#Table">Table</a>, Col1, Col2, ..., ColN -&gt; <a href="../builtin/tables.html#Row">Row</a></span></pre></div><p>Consumes one value for each column in the table, and produces a <a href="../builtin/tables.html#Row"><tt class="pyret-highlight">Row</tt></a> value where each provided value is associated with the appropriate column.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   t = table: city, pop
     row: "NYC", 8.5 * 1000000
     row: "SD", 1.4 * 1000000
   end
   r = t.row("Houston", 2.3 * 1000000)
   r is [raw-row: {"city"; "Houston"}, {"pop"; 2.3 * 1000000}]
-end</pre></div><div><p><span><a name=".build-column"></a></span></p><pre class="pyret-display">.build-column :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">compute-new-val :: <span>(<span><a href="../builtin/tables.html#Row">Row</a> -&gt; Col</span>)</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes an existing table, and produces a new table containing an additional column with the given <tt>colname</tt>, using <tt>compute-new-val</tt> to produce the values for that column, once for each row.</p><p>Here, <tt>Col</tt> is the type of the new column, determined by the type of value the <tt>compute-new-val</tt> function returns.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    t = table: city, pop 
+      row: &quot;NYC&quot;, 8.5 * 1000000 
+      row: &quot;SD&quot;, 1.4 * 1000000 
+    end 
+    r = t.row(&quot;Houston&quot;, 2.3 * 1000000) 
+    r is [raw-row: {&quot;city&quot;; &quot;Houston&quot;}, {&quot;pop&quot;; 2.3 * 1000000}] 
+ end">(Try it!)</a></p></div><div><p><span><a name=".build-column"></a></span></p><pre class="pyret-display">.build-column :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">compute-new-val :: <span>(<span><a href="../builtin/tables.html#Row">Row</a> -&gt; Col</span>)</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes an existing table, and produces a new table containing an additional column with the given <tt>colname</tt>, using <tt>compute-new-val</tt> to produce the values for that column, once for each row.</p><p>Here, <tt>Col</tt> is the type of the new column, determined by the type of value the <tt>compute-new-val</tt> function returns.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   foods = table: name, grams, calories
     row: "Fries", 200, 500
     row: "Milkshake", 400, 600
@@ -297,7 +535,22 @@ end</pre></div><div><p><span><a name=".build-column"></a></span></p><pre class="
   end
 
   foods.build-column("cal-per-gram", add-cpg) is foods-with-cpg
-end</pre></div><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun add-index(t):
+end</pre><p><a class="show-embed" code="check: 
+    foods = table: name, grams, calories 
+      row: &quot;Fries&quot;, 200, 500 
+      row: &quot;Milkshake&quot;, 400, 600 
+    end 
+    foods-with-cpg = table: name, grams, calories, cal-per-gram 
+      row: &quot;Fries&quot;, 200, 500, 500/200 
+      row: &quot;Milkshake&quot;, 400, 600, 600/400 
+    end 
+
+    fun add-cpg(r :: Row) -&gt; Number: 
+      r[&quot;calories&quot;] / r[&quot;grams&quot;] 
+    end 
+
+    foods.build-column(&quot;cal-per-gram&quot;, add-cpg) is foods-with-cpg 
+ end">(Try it!)</a></p></div><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun add-index(t):
   var ix = -1
   t.build-column("index", lam(_) block:
     ix := ix + 1
@@ -315,10 +568,28 @@ where:
       row: "Kathi", 2
     end
   add-index(before) is after
-end</pre></div><div><p><span><a name=".add-column"></a></span></p><pre class="pyret-display">.add-column :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">new-vals :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>Col</span>&gt;</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a column name and a list of values, and produces a new table with a columng of the given name added, containing the values from <tt>new-vals</tt>.</p><p>It is an error if the length of <tt>new-vals</tt> is different than the length of the table.</p><div><p><span><a name=".add-row"></a></span></p><pre class="pyret-display">.add-row :: <span>(<span><span class="pyret-content">r :: <a href="../builtin/tables.html#Row">Row</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a table and a row to add, and produces a new table with the given row at the end.</p><div><p><span><a name=".row-n"></a></span></p><pre class="pyret-display">.row-n :: <span>(<span><span class="pyret-content">index :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <a href="../builtin/tables.html#Row">Row</a></span></pre></div><p>Consumes an index, and returns the row at that index. The first row has index 0.</p><div><p><span><a name=".get-column"></a></span></p><pre class="pyret-display">.get-column :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>Col</span>&gt;</span></span></pre></div><p>Consumes the name of a column, and returns the values in that column as a list.</p><div><p><span><a name=".column"></a></span></p><pre class="pyret-display">.column :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>Col</span>&gt;</span></span></pre></div><p>This method is no longer used (use <a href="../builtin/tables.html#.get-column">.get-column</a> instead).</p><div><p><span><a name=".column-n"></a></span></p><pre class="pyret-display">.column-n :: <span>(<span><span class="pyret-content">index :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>Col</span>&gt;</span></span></pre></div><p>Consumes an index, and returns the values in the column at that index as a list. The first column has index 0.</p><div><p><span><a name=".column-names"></a></span></p><pre class="pyret-display">.column-names :: <span>(<span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#String">String</a></span>&gt;</span></span></pre></div><p>Consumes no arguments, and produces the names of the columns of the table as a list.</p><div><p><span><a name=".all-rows"></a></span></p><pre class="pyret-display">.all-rows :: <span>(<span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../builtin/tables.html#Row">Row</a></span>&gt;</span></span></pre></div><p>Consumes no arguments, and produces a list containing all the rows in the table, in the same order they appear in the table.</p><div><p><span><a name=".all-columns"></a></span></p><pre class="pyret-display">.all-columns :: <span>(<span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span><span><a href="../trove/lists.html#List">List</a>&lt;<span>Col</span>&gt;</span></span>&gt;</span></span></pre></div><p>Consumes no arguments, and produces a list of lists of the column values. The columns and values appear in the same order they appeared in the table.</p><div><p><span><a name=".filter"></a></span></p><pre class="pyret-display">.filter :: <span>(<span><span class="pyret-content">predicate :: <span>(<span><a href="../builtin/tables.html#Row">Row</a> -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span>)</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a predicate over rows, and produces a new table containing only the rows for which the predicate returned <span class="pyret-highlight"><tt class="pyretexpr">true</tt></span>.</p><div><p><span><a name=".filter-by"></a></span></p><pre class="pyret-display">.filter-by :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">predicate :: <span>(<span>Col -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span>)</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a column name and a predicate over the values of that column, and produces a new table containing only the rows for which the predicate returned <span class="pyret-highlight"><tt class="pyretexpr">true</tt></span> for that column. The type of argument to the predicate has the type of values in the specified column.</p><div><p><span><a name=".order-by"></a></span></p><pre class="pyret-display">.order-by :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">asc :: <a href="../trove/globals.html#Boolean">Boolean</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a column name and whether to order ascending or descending, and produces a new table with the rows ordered by the given column.</p><p>If <span class="pyret-highlight"><tt class="pyretexpr">true</tt></span> is given for <tt>asce</tt>, the rows are ordered lowest to highest by the given column (e.g. using <span class="pyret-highlight"><tt class="pyretexpr">&lt;</tt></span>), and if <span class="pyret-highlight"><tt class="pyretexpr">false</tt></span> is given, they are ordered highest to lowest.</p><div><p><span><a name=".order-by-columns"></a></span></p><pre class="pyret-display">.order-by-columns :: <span>(<span><span class="pyret-content">cols :: <span><a href="../trove/lists.html#List">List</a>&lt;<span><span>{<a href="../trove/globals.html#String">String</a>, <a href="../trove/globals.html#Boolean">Boolean</a>}</span></span>&gt;</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a list of tuples describing column orderings, and produces a new table according to the given ordering.</p><p>Each element of the list must be a two-element tuple, containing a column name and a boolean indicating whether to order ascending or not. As with <a href="../builtin/tables.html#.order-by">.order-by</a>, <span class="pyret-highlight"><tt class="pyretexpr">true</tt></span> indicates ascending and <span class="pyret-highlight"><tt class="pyretexpr">false</tt></span> indicates descending.</p><div><p><span><a name=".increasing-by"></a></span></p><pre class="pyret-display">.increasing-by :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Like <a href="../builtin/tables.html#.order-by">.order-by</a>, but <tt>ascending</tt> is always <span class="pyret-highlight"><tt class="pyretexpr">true</tt></span>.</p><div><p><span><a name=".decreasing-by"></a></span></p><pre class="pyret-display">.decreasing-by :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Like <a href="../builtin/tables.html#.order-by">.order-by</a>, but <tt>ascending</tt> is always <span class="pyret-highlight"><tt class="pyretexpr">false</tt></span>.</p><div><p><span><a name=".select-columns"></a></span></p><pre class="pyret-display">.select-columns :: <span>(<span><span class="pyret-content">colnames :: <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#String">String</a></span>&gt;</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a list of column names, and produces a new table containing only those columns. The order of the values in the columns is the same as in the input table, and the order of the columns themselves is the order they are given in the list.</p><div><p><span><a name=".transform-column"></a></span></p><pre class="pyret-display">.transform-column :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">f :: <span>(<span>ColIn -&gt; ColOut</span>)</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a column name and a transformation function, and produces a new table where the given function has been applied to all values in the specified column of the original table.</p><div><p><span><a name=".rename-column"></a></span></p><pre class="pyret-display">.rename-column :: <span>(<span><span class="pyret-content">old-colname :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">new-colname :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Produces a new table where the specified column name in the original table has been renamed to the new name.  The new name must not already be present in the table’s columns.</p><p>This operation is essentially the following:</p><pre class="pyret-highlight">fun rename-column(t :: Table, old-colname :: String, new-colname :: String):
+end</pre><p><a class="show-embed" code="fun add-index(t): 
+    var ix = -1 
+    t.build-column(&quot;index&quot;, lam(_) block: 
+      ix := ix + 1 
+      ix 
+    end) 
+ where: 
+    before = table: name 
+        row: &quot;Joe&quot; 
+        row: &quot;Shriram&quot; 
+        row: &quot;Kathi&quot; 
+      end 
+    after = table: name, index 
+        row: &quot;Joe&quot;, 0 
+        row: &quot;Shriram&quot;, 1 
+        row: &quot;Kathi&quot;, 2 
+      end 
+    add-index(before) is after 
+ end">(Try it!)</a></p></div><div><p><span><a name=".add-column"></a></span></p><pre class="pyret-display">.add-column :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">new-vals :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>Col</span>&gt;</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a column name and a list of values, and produces a new table with a columng of the given name added, containing the values from <tt>new-vals</tt>.</p><p>It is an error if the length of <tt>new-vals</tt> is different than the length of the table.</p><div><p><span><a name=".add-row"></a></span></p><pre class="pyret-display">.add-row :: <span>(<span><span class="pyret-content">r :: <a href="../builtin/tables.html#Row">Row</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a table and a row to add, and produces a new table with the given row at the end.</p><div><p><span><a name=".row-n"></a></span></p><pre class="pyret-display">.row-n :: <span>(<span><span class="pyret-content">index :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <a href="../builtin/tables.html#Row">Row</a></span></pre></div><p>Consumes an index, and returns the row at that index. The first row has index 0.</p><div><p><span><a name=".get-column"></a></span></p><pre class="pyret-display">.get-column :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>Col</span>&gt;</span></span></pre></div><p>Consumes the name of a column, and returns the values in that column as a list.</p><div><p><span><a name=".column"></a></span></p><pre class="pyret-display">.column :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>Col</span>&gt;</span></span></pre></div><p>This method is no longer used (use <a href="../builtin/tables.html#.get-column">.get-column</a> instead).</p><div><p><span><a name=".column-n"></a></span></p><pre class="pyret-display">.column-n :: <span>(<span><span class="pyret-content">index :: <a href="../trove/globals.html#Number">Number</a></span></span>) -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>Col</span>&gt;</span></span></pre></div><p>Consumes an index, and returns the values in the column at that index as a list. The first column has index 0.</p><div><p><span><a name=".column-names"></a></span></p><pre class="pyret-display">.column-names :: <span> -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#String">String</a></span>&gt;</span></span></pre></div><p>Consumes no arguments, and produces the names of the columns of the table as a list.</p><div><p><span><a name=".all-rows"></a></span></p><pre class="pyret-display">.all-rows :: <span> -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../builtin/tables.html#Row">Row</a></span>&gt;</span></span></pre></div><p>Consumes no arguments, and produces a list containing all the rows in the table, in the same order they appear in the table.</p><div><p><span><a name=".all-columns"></a></span></p><pre class="pyret-display">.all-columns :: <span> -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span><span><a href="../trove/lists.html#List">List</a>&lt;<span>Col</span>&gt;</span></span>&gt;</span></span></pre></div><p>Consumes no arguments, and produces a list of lists of the column values. The columns and values appear in the same order they appeared in the table.</p><div><p><span><a name=".filter"></a></span></p><pre class="pyret-display">.filter :: <span>(<span><span class="pyret-content">predicate :: <span>(<span><a href="../builtin/tables.html#Row">Row</a> -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span>)</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a predicate over rows, and produces a new table containing only the rows for which the predicate returned <tt class="pyret-highlight">true</tt>.</p><div><p><span><a name=".filter-by"></a></span></p><pre class="pyret-display">.filter-by :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">predicate :: <span>(<span>Col -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span>)</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a column name and a predicate over the values of that column, and produces a new table containing only the rows for which the predicate returned <tt class="pyret-highlight">true</tt> for that column. The type of argument to the predicate has the type of values in the specified column.</p><div><p><span><a name=".order-by"></a></span></p><pre class="pyret-display">.order-by :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">asc :: <a href="../trove/globals.html#Boolean">Boolean</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a column name and whether to order ascending or descending, and produces a new table with the rows ordered by the given column.</p><p>If <tt class="pyret-highlight">true</tt> is given for <tt>asce</tt>, the rows are ordered lowest to highest by the given column (e.g. using <tt class="pyret-highlight">&lt;</tt>), and if <tt class="pyret-highlight">false</tt> is given, they are ordered highest to lowest.</p><div><p><span><a name=".order-by-columns"></a></span></p><pre class="pyret-display">.order-by-columns :: <span>(<span><span class="pyret-content">cols :: <span><a href="../trove/lists.html#List">List</a>&lt;<span><span>{<a href="../trove/globals.html#String">String</a>, <a href="../trove/globals.html#Boolean">Boolean</a>}</span></span>&gt;</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a list of tuples describing column orderings, and produces a new table according to the given ordering.</p><p>Each element of the list must be a two-element tuple, containing a column name and a boolean indicating whether to order ascending or not. As with <a href="../builtin/tables.html#.order-by">.order-by</a>, <tt class="pyret-highlight">true</tt> indicates ascending and <tt class="pyret-highlight">false</tt> indicates descending.</p><div><p><span><a name=".increasing-by"></a></span></p><pre class="pyret-display">.increasing-by :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Like <a href="../builtin/tables.html#.order-by">.order-by</a>, but <tt>ascending</tt> is always <tt class="pyret-highlight">true</tt>.</p><div><p><span><a name=".decreasing-by"></a></span></p><pre class="pyret-display">.decreasing-by :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Like <a href="../builtin/tables.html#.order-by">.order-by</a>, but <tt>ascending</tt> is always <tt class="pyret-highlight">false</tt>.</p><div><p><span><a name=".select-columns"></a></span></p><pre class="pyret-display">.select-columns :: <span>(<span><span class="pyret-content">colnames :: <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#String">String</a></span>&gt;</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a list of column names, and produces a new table containing only those columns. The order of the values in the columns is the same as in the input table, and the order of the columns themselves is the order they are given in the list.</p><div><p><span><a name=".transform-column"></a></span></p><pre class="pyret-display">.transform-column :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">f :: <span>(<span>ColIn -&gt; ColOut</span>)</span></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Consumes a column name and a transformation function, and produces a new table where the given function has been applied to all values in the specified column of the original table.</p><div><p><span><a name=".rename-column"></a></span></p><pre class="pyret-display">.rename-column :: <span>(<span><span class="pyret-content">old-colname :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">new-colname :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Produces a new table where the specified column name in the original table has been renamed to the new name.  The new name must not already be present in the table’s columns.</p><p>This operation is essentially the following:</p><pre class="pyret-highlight">fun rename-column(t :: Table, old-colname :: String, new-colname :: String):
   new-t = t.build-column(new-colname, lam(r): r["old-colname"] end)
   new-t.drop("old-colname")
-end</pre><p>except that in this code, the renamed column will appear as the rightmost column of the result, whereas using <a href="../builtin/tables.html#.rename-column">.rename-column</a>, the renamed column will stay in its original place.</p><div><p><span><a name=".stack"></a></span></p><pre class="pyret-display">.stack :: <span>(<span><span class="pyret-content">bot-table :: <a href="../builtin/tables.html#Table">Table</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Returns a new table containing all the rows of this table, followed by all the rows of the <span class="pyret-highlight"><tt class="pyretexpr">bot-table</tt></span>.  The column names must all match, but the order is not required to match.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p>except that in this code, the renamed column will appear as the rightmost column of the result, whereas using <a href="../builtin/tables.html#.rename-column">.rename-column</a>, the renamed column will stay in its original place.</p><div><p><span><a name=".stack"></a></span></p><pre class="pyret-display">.stack :: <span>(<span><span class="pyret-content">bot-table :: <a href="../builtin/tables.html#Table">Table</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Returns a new table containing all the rows of this table, followed by all the rows of the <tt class="pyret-highlight">bot-table</tt>.  The column names must all match, but the order is not required to match.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   t1 = table: city, pop
     row: "Houston", 2400000
     row: "NYC", 8400000
@@ -336,13 +607,37 @@ end</pre><p>except that in this code, the renamed column will appear as the righ
     row: 2400000, "Houston"
     row: 8400000, "NYC"
   end
-end</pre></div><div><p><span><a name=".empty"></a></span></p><pre class="pyret-display">.empty :: <span>(<span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Returns a new table with the same columns as this table, but with all rows removed.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    t1 = table: city, pop 
+      row: &quot;Houston&quot;, 2400000 
+      row: &quot;NYC&quot;, 8400000 
+    end 
+    t2 = table: pop, city # deliberately reversed column order for this example 
+      row: 1400000, &quot;San Diego&quot; 
+    end 
+    t1.stack(t2) is table: city, pop 
+      row: &quot;Houston&quot;, 2400000 
+      row: &quot;NYC&quot;, 8400000 
+      row: &quot;San Diego&quot;, 1400000 
+    end 
+    t2.stack(t1) is table: pop, city 
+      row: 1400000, &quot;San Diego&quot; 
+      row: 2400000, &quot;Houston&quot; 
+      row: 8400000, &quot;NYC&quot; 
+    end 
+ end">(Try it!)</a></p></div><div><p><span><a name=".empty"></a></span></p><pre class="pyret-display">.empty :: <span> -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Returns a new table with the same columns as this table, but with all rows removed.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   t1 = table: city, pop
     row: "Houston", 2400000
     row: "NYC", 8400000
   end
   t1.empty() is table: city, pop end
-end</pre></div><div><p><span><a name=".drop"></a></span></p><pre class="pyret-display">.drop :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Returns a new table that contains all the data from this table except the specified column.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+end</pre><p><a class="show-embed" code="check: 
+    t1 = table: city, pop 
+      row: &quot;Houston&quot;, 2400000 
+      row: &quot;NYC&quot;, 8400000 
+    end 
+    t1.empty() is table: city, pop end 
+ end">(Try it!)</a></p></div><div><p><span><a name=".drop"></a></span></p><pre class="pyret-display">.drop :: <span>(<span><span class="pyret-content">colname :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../builtin/tables.html#Table">Table</a></span></pre></div><p>Returns a new table that contains all the data from this table except the specified column.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   t1 = table: city, pop
     row: "Houston", 2400000
     row: "NYC", 8400000
@@ -355,7 +650,20 @@ end</pre></div><div><p><span><a name=".drop"></a></span></p><pre class="pyret-di
     row: "Houston"
     row: "NYC"
   end
-end</pre></div></div></root>
+end</pre><p><a class="show-embed" code="check: 
+    t1 = table: city, pop 
+      row: &quot;Houston&quot;, 2400000 
+      row: &quot;NYC&quot;, 8400000 
+    end 
+    t1.drop(&quot;city&quot;) is table: pop 
+      row: 2400000 
+      row: 8400000 
+    end 
+    t1.drop(&quot;pop&quot;) is table: city 
+      row: &quot;Houston&quot; 
+      row: &quot;NYC&quot; 
+    end 
+ end">(Try it!)</a></p></div></div></root>
     <hr/>
     <!-- The current page is builtin/tables.html. -->
     <a class="floatleft" href="../trove/string-dict.html">⏴⏴⏴</a>
