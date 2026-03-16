@@ -1,0 +1,65 @@
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ var __webpack_modules__ = ({
+
+/***/ "./src/pyret.ts":
+/*!**********************!*\
+  !*** ./src/pyret.ts ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   makeEmbed: () => (/* binding */ makeEmbed),\n/* harmony export */   makeEmbedConfig: () => (/* binding */ makeEmbedConfig)\n/* harmony export */ });\nconst CPO = \"https://pyret-horizon.herokuapp.com/editor\";\nconst defaultOptions = {\n    footerStyle: 'hide',\n    warnOnExit: false,\n    hideDefinitions: false,\n    hideInteractions: false\n};\nconst defaultConfig = {\n    src: CPO,\n    state: false,\n    options: defaultOptions\n};\nfunction sendRpcResponse(frame, data, result) {\n    frame.contentWindow.postMessage({\n        protocol: 'pyret-rpc',\n        data: {\n            type: 'rpc-response',\n            callbackId: data.callbackId,\n            ...result\n        }\n    });\n}\nasync function receiveRPC(frame, e, rpcs) {\n    console.log(\"RPC:\", e.data);\n    const data = e.data.data;\n    const module = rpcs[data.module];\n    if (!module[data.method]) {\n        sendRpcResponse(frame, data, { resultType: 'exception', exception: `Unknown method ${data.method}` });\n    }\n    else {\n        try {\n            const result = await module[data.method](...data.args);\n            sendRpcResponse(frame, data, { resultType: 'value', result });\n        }\n        catch (exn) {\n            sendRpcResponse(frame, data, { resultType: 'exception', exception: String(exn) });\n        }\n        return;\n    }\n}\nfunction makeEmbedConfig(config) {\n    let mergedConfig = { ...defaultConfig, ...config };\n    let mergedOptions = { ...defaultConfig.options, ...config.options };\n    let { container, src } = mergedConfig;\n    let id = config.id || (\"pyret-embed\" + Math.floor(Math.random() * 1000000));\n    const hasprop = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);\n    console.log(\"Pyret embed config:\", mergedConfig, mergedOptions);\n    const propIfTrue = (obj, prop) => { if (obj[prop] === true) {\n        return `&${prop}=true`;\n    }\n    else {\n        return \"\";\n    } };\n    const propIfPresent = (obj, prop) => { if (hasprop(obj, prop)) {\n        return `&${prop}=${obj[prop]}`;\n    }\n    else {\n        return \"\";\n    } };\n    const fragment = `${propIfPresent(mergedOptions, \"footerStyle\")}${propIfPresent(mergedOptions, \"warnOnExit\")}${propIfTrue(mergedOptions, \"hideDefinitions\")}${propIfTrue(mergedOptions, \"hideInteractions\")}`;\n    if (src.indexOf(\"#\") !== -1) {\n        src = src + \"&\" + fragment;\n    }\n    else {\n        src = src + \"#\" + fragment;\n    }\n    let messageNumber = 0;\n    let currentState;\n    function sendReset(frame, state) {\n        if (!state) {\n            state = {\n                definitionsAtLastRun: false,\n                interactionsSinceLastRun: [],\n                editorContents: \"use context starter2024\",\n                replContents: \"\"\n            };\n        }\n        if (typeof state === \"object\") {\n            state.messageNumber = 0;\n        }\n        currentState = state;\n        const payload = {\n            data: {\n                type: 'reset',\n                state: typeof state === \"string\" ? state : JSON.stringify(state)\n            },\n            protocol: 'pyret'\n        };\n        frame.contentWindow.postMessage(payload, '*');\n    }\n    function gainControl(frame) {\n        frame.contentWindow.postMessage({\n            type: 'gainControl'\n        }, '*');\n    }\n    function setInteractions(frame, text) {\n        messageNumber += 1;\n        const change = {\n            from: { line: 0, ch: 0 },\n            to: { line: 0, ch: 0 },\n            text: text\n        };\n        currentState = { ...currentState, messageNumber, replContents: text };\n        const payload = {\n            protocol: 'pyret',\n            data: {\n                type: 'changeRepl',\n                change: change\n            },\n            state: currentState\n        };\n        frame.contentWindow.postMessage(payload, '*');\n    }\n    function runDefinitions(frame) {\n        messageNumber += 1;\n        currentState = { ...currentState, messageNumber, interactionsSinceLastRun: [], definitionsAtLastRun: currentState.editorContents };\n        const payload = {\n            protocol: 'pyret',\n            data: {\n                type: 'run'\n            },\n            state: currentState\n        };\n        frame.contentWindow.postMessage(payload, '*');\n    }\n    function clearInteractions(frame) {\n        messageNumber += 1;\n        const payload = {\n            protocol: 'pyret',\n            data: {\n                type: 'clearInteractions'\n            },\n            state: currentState\n        };\n        frame.contentWindow.postMessage(payload, '*');\n    }\n    let resultCounter = 0;\n    function runInteractionResult(frame) {\n        const { promise, resolve, reject } = Promise.withResolvers();\n        messageNumber += 1;\n        const newInteractions = currentState.interactionsSinceLastRun.concat([currentState.replContents]);\n        currentState = {\n            ...currentState,\n            messageNumber: messageNumber,\n            interactionsSinceLastRun: newInteractions,\n            replContents: \"\",\n        };\n        const payload = {\n            protocol: 'pyret',\n            data: {\n                type: 'runInteraction',\n                reportAnswer: 'interaction' + (++resultCounter)\n            },\n            state: currentState\n        };\n        frame.contentWindow.postMessage(payload, '*');\n        window.addEventListener('message', message => {\n            if (message.data.protocol !== 'pyret') {\n                return;\n            }\n            if (message.source !== frame.contentWindow) {\n                return;\n            }\n            const pyretMessage = message.data;\n            if (pyretMessage.data.type === 'interactionResult') {\n                resolve(pyretMessage.data.textResult);\n            }\n        });\n        return promise;\n    }\n    function directPostMessage(frame, message) {\n        frame.contentWindow.postMessage(message);\n    }\n    /* An issue we run into with iframes and scrolling is that CPO wants to scroll\n       interactions around sometimes. However, scrolling elements in the iframe\n       can scroll the outer page as well to focus it. We don't want that.\n       We can prevent this by making the iframe position: fixed, but that makes\n       sensible positioning hard. So we create a wrapper iframe that works in the\n       normal flow, and make the actual CPO iframe inside that.\n  \n       Since CPO only knows how to postMessage to its immediate parent, we also\n       proxy all requests through the wrapper, and that's what the client sees.\n    */\n    const wrapper = document.createElement(\"iframe\");\n    wrapper.style = \"width: 100%; height: 100%; border: 0; display: block;\";\n    wrapper.srcdoc = `\n<html>\n<head>\n<style>\nhtml, body { height: 100%; }\nbody { margin: 0; padding: 0; }\n</style>\n<script>\nwindow.addEventListener('message', (e) => {\n  if (e.source === window.parent) {\n    const iframes = document.getElementsByTagName(\"iframe\");\n    iframes[0].contentWindow.postMessage(e.data, \"*\");\n  }\n  else {\n    window.parent.postMessage(e.data, \"*\");\n  }\n});\n</script>\n<body></body>\n</html>`;\n    container.appendChild(wrapper);\n    wrapper.addEventListener(\"load\", () => {\n        const wrapperBody = wrapper.contentDocument.body;\n        const inner = document.createElement(\"iframe\");\n        inner.src = src || CPO;\n        inner.style = \"width: 100%; height: 100%; border: 0; display: block; position: fixed;\";\n        inner.width = \"100%\";\n        inner.id = id;\n        inner.frameBorder = \"0\";\n        wrapperBody.appendChild(inner);\n    });\n    const frame = wrapper;\n    frame.id = id;\n    const { promise, resolve, reject } = Promise.withResolvers();\n    setTimeout(() => reject(new Error(\"Timeout waiting for Pyret to load\")), 60000);\n    const onChangeCallbacks = [];\n    window.addEventListener('message', message => {\n        if (message.data.protocol === 'pyret-rpc') {\n            receiveRPC(frame, message, mergedConfig.rpc || {}).catch(exn => {\n                console.error(\"Error in RPC handler:\", exn);\n            });\n            return;\n        }\n        if (message.data.protocol !== 'pyret') {\n            return;\n        }\n        if (message.source !== frame.contentWindow) {\n            return;\n        }\n        const pyretMessage = message.data;\n        const typ = pyretMessage.data.type;\n        if (typ === 'pyret-init') {\n            gainControl(frame);\n            if (mergedConfig.state) {\n                sendReset(frame, mergedConfig.state);\n            }\n            const api = makeEmbedAPI(frame);\n            frame.pyretEmbed = api;\n            resolve(api);\n        }\n        else if (typ === \"changeRepl\" || typ === \"change\") {\n            onChangeCallbacks.forEach(cb => cb(pyretMessage));\n            currentState = pyretMessage.state;\n        }\n        else {\n            currentState = pyretMessage.state;\n        }\n    });\n    function makeEmbedAPI(frame) {\n        return {\n            sendReset: (state) => sendReset(frame, state),\n            postMessage: (message) => directPostMessage(frame, message),\n            getFrame: () => frame,\n            setInteractions: (text) => setInteractions(frame, text),\n            runDefinitions: () => runDefinitions(frame),\n            runInteractionResult: async () => await runInteractionResult(frame),\n            onChange: (callback) => onChangeCallbacks.push(callback),\n            clearInteractions: () => clearInteractions(frame),\n            currentState: () => currentState,\n        };\n    }\n    return promise;\n}\nfunction makeEmbed(id, container, src) {\n    const config = {\n        container,\n        id,\n        options: {}\n    };\n    if (src) {\n        config.src = src;\n    }\n    return makeEmbedConfig(config);\n}\n\n\n//# sourceURL=webpack://pyret-embed/./src/pyret.ts?");
+
+/***/ })
+
+/******/ });
+/************************************************************************/
+/******/ // The require scope
+/******/ var __webpack_require__ = {};
+/******/ 
+/************************************************************************/
+/******/ /* webpack/runtime/define property getters */
+/******/ (() => {
+/******/ 	// define getter functions for harmony exports
+/******/ 	__webpack_require__.d = (exports, definition) => {
+/******/ 		for(var key in definition) {
+/******/ 			if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 			}
+/******/ 		}
+/******/ 	};
+/******/ })();
+/******/ 
+/******/ /* webpack/runtime/hasOwnProperty shorthand */
+/******/ (() => {
+/******/ 	__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ })();
+/******/ 
+/******/ /* webpack/runtime/make namespace object */
+/******/ (() => {
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = (exports) => {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/ })();
+/******/ 
+/************************************************************************/
+/******/ 
+/******/ // startup
+/******/ // Load entry module and return exports
+/******/ // This entry module can't be inlined because the eval devtool is used.
+/******/ var __webpack_exports__ = {};
+/******/ __webpack_modules__["./src/pyret.ts"](0, __webpack_exports__, __webpack_require__);
+/******/ const __webpack_exports__makeEmbed = __webpack_exports__.makeEmbed;
+/******/ const __webpack_exports__makeEmbedConfig = __webpack_exports__.makeEmbedConfig;
+/******/ export { __webpack_exports__makeEmbed as makeEmbed, __webpack_exports__makeEmbedConfig as makeEmbedConfig };
+/******/ 

@@ -256,3 +256,7 @@ h4 {
   padding-left: 1em;
   white-space: pre;
 }
+
+.hide {
+  display: none;
+}

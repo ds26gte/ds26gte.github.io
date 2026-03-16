@@ -5,11 +5,15 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script type="module" src="../pollenboots/embed-api.js"></script>
   <script src="../pollenboots/codemirror.js"></script>
   <script src="../pollenboots/runmode.js"></script>
   <script src="../pollenboots/pyret.js"></script>
   <script src="../pollenboots/hilite.js"></script>
+  <script src="../pollenboots/search.js"></script>
+  <script src="../pollenboots/pyret_2.js"></script>
+  <script src="../pollenboots/default-rpcs.js"></script>
+  <script type="module" src="../pollenboots/embed-api.js"></script>
+  <script src="../pollenboots/scribble-common.js"></script>
   <link rel="stylesheet" type="text/css" href="../pollenboots/codemirror.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/pyret.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/styles.css" title="default"/>
@@ -18,6 +22,7 @@
   </head>
   <body>
     <div class="container">
+      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><div><h1 id="modules" toclevel="1" tocentry="yes">Modules</h1><p><span></span> As programs get larger, it becomes intractable to manage the entirety of a program in a single file: we often want to separate programs into independent pieces.  Doing so has a number of benefits, giving us the abilities to:</p><ul><li>provide library code to students (unseen to them).</li><li>logically separate responsibilities of a program into different files to make it easier for programmers to understand the code’s layout.</li><li>provide a boundary over which it’s relatively simple to substitute one implementation of a library for another.</li><li>provide a boundary where the two sides may be implemented in different languages, but can still share values.</li><li>provide only a subset of defined names to a different part of a program.</li><li>manage names when the same (good) names may be in use in different parts of the same program.</li><li>support incremental compilation.</li></ul><p>Not all of these require a module system, but a module system can help with all of them, and these use cases (and others) motivate Pyret’s.</p><p>This section describes the components of Pyret’s module system and how to use it.</p><h2 id="s:modules:quick-start" toclevel="2" tocentry="yes">Quick Start</h2><p>The shortest way to get started using the module system is to understand three key ideas:</p><ul><li>How to <i>provide</i> names from a module</li><li>How to tell Pyret to <i>locate</i> one module from a different module</li><li>How to <i>include</i> names from a located module</li></ul><p>Here’s a simple example that demonstrates all three.</p><p>In a file called <tt>list-helpers.arr</tt>:</p><pre class="pyret-highlight">provide: * end
 
 concat :: &lt;A&gt; List&lt;A&gt;, List&lt;A&gt; -&gt; List&lt;A&gt;

@@ -5,11 +5,15 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script type="module" src="pollenboots/embed-api.js"></script>
   <script src="pollenboots/codemirror.js"></script>
   <script src="pollenboots/runmode.js"></script>
   <script src="pollenboots/pyret.js"></script>
   <script src="pollenboots/hilite.js"></script>
+  <script src="pollenboots/search.js"></script>
+  <script src="pollenboots/pyret_2.js"></script>
+  <script src="pollenboots/default-rpcs.js"></script>
+  <script type="module" src="pollenboots/embed-api.js"></script>
+  <script src="pollenboots/scribble-common.js"></script>
   <link rel="stylesheet" type="text/css" href="pollenboots/codemirror.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="pollenboots/pyret.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="pollenboots/styles.css" title="default"/>
@@ -18,6 +22,7 @@
   </head>
   <body>
     <div class="container">
+      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><h1 id="Pyret-Style-Guide" toclevel="1" tocentry="yes">Pyret Style Guide</h1><div class="author">by Frank Goodman and Shriram Krishnamurthi</div><p>Ahoy matey! Here be the style guide for Pyret. Follow me rules to find the hidden treasure, or walk the plank!</p><ul class="toclist"></ul><h2 id="General" toclevel="2" tocentry="yes">General</h2><h3 id="Indentation" toclevel="3" tocentry="yes">Indentation</h3><p>You should indent your code blocks using two spaces (not tabs).</p><h3 id="Line-Length" toclevel="3" tocentry="yes">Line Length</h3><p>Try to keep the total length of your lines under 100 characters.</p><p>For overly long lines, it’s actually really hard to figure out where to put in good line breaks. This is in every language. Look for something that tries to match the logical structure of your program.</p><p>However, there’s usually a better way to solve this problem: create extra variables to name the intermediate pieces, and use those names. E.g.: instead of worrying where to put in line breaks in</p><pre class="nothing_special">fun f(x, y, z):
   g(some-very-long-thing(x * x, y + y), other-very-long-thing((x + y + z) / (2 * 3 * 4)))
 end</pre><p>it might be better to write it as</p><pre class="nothing_special">fun f(x, y, z):

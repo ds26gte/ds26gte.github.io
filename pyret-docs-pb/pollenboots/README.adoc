@@ -1,0 +1,41 @@
+= README
+
+This contains files (Racket, CSS, JS) for providing an enhanced
+Pollen syntax and output style. It is the responsibility of your
+repo containing Pollen-based docs to load this repo in the right
+place.
+
+A repo that uses pollenboots is
+
+https://github.com/ds26gte/pyret-docs-pb
+
+which is the Pyret documentation written using Pollen (as opposed
+to Scribble).
+
+== Prerequisite
+
+Ensure you have the Pollen package installed in your Racket.
+
+  raco pkg install --auto pollen
+
+== What
+
+https://docs.racket-lang.org/pollen[Pollen] allows the use of
+Racket to create complicated Web pages in particular, and also
+other outputs. This repo provides a Pollen Racket file
+link:./pollen.rkt[] to allow a more forgiving or flexible input
+style, e.g., with blank lines signifying paragraph separation,
+automatic conversion to smart quotes and dashes, automatic
+creation of external title. (Very likely others as we learn more.)
+
+We can use Pollen markup syntax to include classes and other
+attributes. These can be the Bootstrap-provided classes, as long
+as the template file (template.html.p) adds in the Bootstrap-related CSS and JS.
+
+link:./pollen.rkt[] can be used to modify existing tags and create new tags
+-- examples of both are provided. Crucial Pollen Racket functions
+are: `define-tag-function`, `default-tag-function`,
+`decode-elements`, and `txexpr`. Ideally we should be able to put
+most of the work on `define-` and `default-tag-function`: the
+former acts like a macro for creating new tags, and the latter
+extracts the original values of tags.

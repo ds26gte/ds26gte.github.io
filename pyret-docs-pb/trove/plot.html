@@ -5,11 +5,15 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script type="module" src="../pollenboots/embed-api.js"></script>
   <script src="../pollenboots/codemirror.js"></script>
   <script src="../pollenboots/runmode.js"></script>
   <script src="../pollenboots/pyret.js"></script>
   <script src="../pollenboots/hilite.js"></script>
+  <script src="../pollenboots/search.js"></script>
+  <script src="../pollenboots/pyret_2.js"></script>
+  <script src="../pollenboots/default-rpcs.js"></script>
+  <script type="module" src="../pollenboots/embed-api.js"></script>
+  <script src="../pollenboots/scribble-common.js"></script>
   <link rel="stylesheet" type="text/css" href="../pollenboots/codemirror.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/pyret.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/styles.css" title="default"/>
@@ -18,6 +22,7 @@
   </head>
   <body>
     <div class="container">
+      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><div><h1 id="plot" toclevel="1" tocentry="yes">plot</h1><div><p>Usage:</p><pre class="pyret-highlight">include plot</pre><pre class="pyret-highlight">import plot as ...</pre></div><div class="margin-note">Note that the plot library has been completely rewritten as the <a href="../trove/chart.html#chart">chart</a> library to use Google Charts, which would allow us to support more features and more types of charts easily. The current plot library will still be here for a period of time for those who still use it, but we will not support it further.</div><p>The Pyret Plot library. It consists of plot, chart, and data visualization tools. The visualization will appear in a separate dialog window, and/or be returned as an <a href="../trove/image.html#Image"><tt class="pyret-highlight">Image</tt></a>.</p><ul><li>To close the dialog, click the close button on the title bar or press <tt>esc</tt></li><li>To save a snapshot of the visualization, click the save button on the title bar and choose a location to save the image</li></ul><p>Every function in this library is available on the <tt>plot</tt> module object. For example, if you used <tt class="pyret-highlight">import plot as P</tt>, you would write <tt class="pyret-highlight">P.display-function</tt> to access <tt class="pyret-highlight">display-function</tt> below. If you used <tt class="pyret-highlight">include</tt>, then you can refer to identifiers without needing to prefix with <tt class="pyret-highlight">P.</tt></p><h2 id="The-Plot-Type" toclevel="2" tocentry="yes">The Plot Type</h2><p>(If you do not wish to customize the plotting, feel free to skip this section. There will be a link referring back to this section when necessary)</p><pre class="pyret-display"><span><a name="Plot"></a></span><span>data <a href="../trove/plot.html#Plot">Plot</a></span>
 <div><tt>   | <span><a href="../trove/plot.html#function-plot">function-plot</a>(<span>f :: <span><a href="../trove/globals.html#Number">Number</a> -&gt; <a href="../trove/globals.html#Number">Number</a></span></span>, <span>options :: <a href="../trove/plot.html#PlotOptions">PlotOptions</a></span>)</span></tt>
 <tt>   | <span><a href="../trove/plot.html#line-plot">line-plot</a>(<span>points :: <a href="../trove/globals.html#Table">Table</a></span>, <span>options :: <a href="../trove/plot.html#PlotOptions">PlotOptions</a></span>)</span></tt>

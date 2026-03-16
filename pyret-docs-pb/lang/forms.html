@@ -5,11 +5,15 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script type="module" src="../pollenboots/embed-api.js"></script>
   <script src="../pollenboots/codemirror.js"></script>
   <script src="../pollenboots/runmode.js"></script>
   <script src="../pollenboots/pyret.js"></script>
   <script src="../pollenboots/hilite.js"></script>
+  <script src="../pollenboots/search.js"></script>
+  <script src="../pollenboots/pyret_2.js"></script>
+  <script src="../pollenboots/default-rpcs.js"></script>
+  <script type="module" src="../pollenboots/embed-api.js"></script>
+  <script src="../pollenboots/scribble-common.js"></script>
   <link rel="stylesheet" type="text/css" href="../pollenboots/codemirror.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/pyret.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/styles.css" title="default"/>
@@ -18,6 +22,7 @@
   </head>
   <body>
     <div class="container">
+      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><h1 id="s:forms" toclevel="1" tocentry="yes">Language Constructs</h1><p>This section contains information on the various language forms in Pyret, from binary operators to data definitions to functions.  This is a more detailed reference to the grammar of expressions and statements and their evaluation, rather than to</p><ul class="toclist"></ul><h2 id="s:literals" toclevel="2" tocentry="yes">Primitives and Literals</h2><p>There are several different literal token types referred to in this documentation.</p><h3 id="Names" toclevel="3" tocentry="yes">Names</h3><p>Names in Pyret match the following regular expression:</p><div class="insetpara nested"><pre class="nothing_special">^[_a-zA-Z][_a-zA-Z0-9]*(?:-+[_a-zA-Z0-9]+)*</pre></div><div class="margin-note">The convention in Pyret is that <tt class="pyret-highlight">kebab-case-names</tt> are used for names of values and fields, and <tt class="pyret-highlight">TitleCaseNames</tt> are used for annotations.</div><p> That is, they start with an alphabetical character or an underscore, followed by any number of alphanumeric characters mixed with underscores and hyphens, ending in a non-hyphen.  So, for example, the following are valid names (though not necessarily good style):</p><pre class="good-ex pyret-highlight">a
 a1
 a-1

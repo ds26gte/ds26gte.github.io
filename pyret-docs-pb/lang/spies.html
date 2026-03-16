@@ -5,11 +5,15 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script type="module" src="../pollenboots/embed-api.js"></script>
   <script src="../pollenboots/codemirror.js"></script>
   <script src="../pollenboots/runmode.js"></script>
   <script src="../pollenboots/pyret.js"></script>
   <script src="../pollenboots/hilite.js"></script>
+  <script src="../pollenboots/search.js"></script>
+  <script src="../pollenboots/pyret_2.js"></script>
+  <script src="../pollenboots/default-rpcs.js"></script>
+  <script type="module" src="../pollenboots/embed-api.js"></script>
+  <script src="../pollenboots/scribble-common.js"></script>
   <link rel="stylesheet" type="text/css" href="../pollenboots/codemirror.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/pyret.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/styles.css" title="default"/>
@@ -18,6 +22,7 @@
   </head>
   <body>
     <div class="container">
+      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><h1 id="s:spies" toclevel="1" tocentry="yes">Spies</h1><p>Spies are used for convenient display of values for print-style debugging. See <a href="../lang/spies.html#s:spies:rationale">Rationale</a> for why this is particularly useful in Pyret.</p><h2 id="Examples" toclevel="2" tocentry="yes">Examples</h2><p>The shortest use of a <tt>spy</tt> statement is to print the value of a name:</p><pre class="pyret-highlight">x = 10
 spy: x end</pre><p>This will produce a message like:</p><div class="margin-note">The filename will be the name of the file containing the <tt>spy</tt> statement, not <tt>spies.arr</tt> as shown here</div><pre class="nothing_special">Spying (at file:///spies.arr:2:0-2:10)
   x: 10</pre><p>On code.pyret.org, you’ll see output like:</p><p><img src="./simple-spy.png"/></p><p>Both of these outputs indicate that the name was <tt>x</tt> and the value was <tt>10</tt>. In the text output, the line and column information is printed (this happened at line 2). In the visual output, the <tt>x</tt> is underlined–clicking it will scroll the editor to the line of the spy statement and highlight the corresponding use of <tt>x</tt>.</p><p>A <tt>spy</tt> statement can contain more than one name, and will print out all their values:</p><pre class="pyret-highlight">x = 10

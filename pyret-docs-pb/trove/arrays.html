@@ -5,11 +5,15 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script type="module" src="../pollenboots/embed-api.js"></script>
   <script src="../pollenboots/codemirror.js"></script>
   <script src="../pollenboots/runmode.js"></script>
   <script src="../pollenboots/pyret.js"></script>
   <script src="../pollenboots/hilite.js"></script>
+  <script src="../pollenboots/search.js"></script>
+  <script src="../pollenboots/pyret_2.js"></script>
+  <script src="../pollenboots/default-rpcs.js"></script>
+  <script type="module" src="../pollenboots/embed-api.js"></script>
+  <script src="../pollenboots/scribble-common.js"></script>
   <link rel="stylesheet" type="text/css" href="../pollenboots/codemirror.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/pyret.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/styles.css" title="default"/>
@@ -18,6 +22,7 @@
   </head>
   <body>
     <div class="container">
+      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><div><h1 id="arrays" toclevel="1" tocentry="yes">arrays</h1><p><span></span></p><h2 id="The-Array-Type" toclevel="2" tocentry="yes">The Array Type</h2><div><p><span><a name="Array"></a></span></p><pre class="pyret-display">Array</pre><p>A <tt class="pyret-highlight">array</tt> is a mutable, fixed-length collection indexed by non-negative intgers. Accessing and mutating a <tt class="pyret-highlight">array</tt> takes constant time in the size of the array.</p><p>By default, Pyret users should use this library. If, however, you need a higher-performant but potentially less ergonomic array library, look at <a href="../builtin/raw-arrays.html#raw-arrays"></a> instead, which is primarily reserved for internal use and for building other libraries. However, do not use that library unless you really cannot get what you need out of this one.</p><p>Because arrays are <i>mutable</i>, equality is not straightforward. Learn more at <a href="../lang/equality.html#equality"></a>.</p></div><h2 id="Using-Arrays-in-Programs" toclevel="2" tocentry="yes">Using Arrays in Programs</h2><p>Some of the names provided for arrays inevitably overlap with those provided for other data. Therefore, using the <tt class="pyret-highlight">include</tt> form is likely to cause name-clashes. It is wiser to import arrays using a prefix name and use the names below through that prefix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import arrays as A
 
 check:

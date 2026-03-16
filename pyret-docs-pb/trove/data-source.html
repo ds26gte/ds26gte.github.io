@@ -5,11 +5,15 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script type="module" src="../pollenboots/embed-api.js"></script>
   <script src="../pollenboots/codemirror.js"></script>
   <script src="../pollenboots/runmode.js"></script>
   <script src="../pollenboots/pyret.js"></script>
   <script src="../pollenboots/hilite.js"></script>
+  <script src="../pollenboots/search.js"></script>
+  <script src="../pollenboots/pyret_2.js"></script>
+  <script src="../pollenboots/default-rpcs.js"></script>
+  <script type="module" src="../pollenboots/embed-api.js"></script>
+  <script src="../pollenboots/scribble-common.js"></script>
   <link rel="stylesheet" type="text/css" href="../pollenboots/codemirror.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/pyret.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/styles.css" title="default"/>
@@ -18,6 +22,7 @@
   </head>
   <body>
     <div class="container">
+      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><div><h1 id="data-source" toclevel="1" tocentry="yes">data-source</h1><div><p>Usage:</p><pre class="pyret-highlight">include data-source</pre><pre class="pyret-highlight">import data-source as ...</pre></div><p>The general idea of loading a spreadsheet into a table is straightforward: each cell of the spreadsheet corresponds to a cell of the table.  However, spreadsheet files (such as Google Sheets or .csv files) store their data in a serialized format, and loading the file must convert from that representation back into useful Pyret data types.  Moreover, Pyret tables expect each of their columns to be homogeneous, but there is nothing enforcing that restriction on arbitrary spreadsheet files.</p><p>Accordingly, Pyret exposes a <a href="../trove/data-source.html#CellContent"><tt class="pyret-highlight">CellContent</tt></a> data type to record what type it thinks each cell contains, and a <a href="../trove/data-source.html#Sanitizer"><tt class="pyret-highlight">Sanitizer</tt></a> to allow enforcing a uniform type over all values in a column.  These two notions are used by the <a href="../trove/gdrive-sheets.html#gdrive-sheets">gdrive-sheets</a> library to convert Google Sheets files into Pyret <a href="../builtin/tables.html#Table"><tt class="pyret-highlight">Table</tt></a>s.  A similar library could be written to use these two types to load tables from .csv files or other data sources.</p><h2 id="The-CellContent-Type" toclevel="2" tocentry="yes">The CellContent Type</h2><pre class="pyret-display"><span><a name="CellContent"></a></span><span>data <a href="../trove/data-source.html#CellContent">CellContent</a>&lt;A&gt;</span>
 <div><tt>   | <span><a href="../trove/data-source.html#c-empty">c-empty</a></span></tt>
 <tt>   | <span><a href="../trove/data-source.html#c-str">c-str</a>(<span>s :: <a href="../trove/globals.html#String">String</a></span>)</span></tt>

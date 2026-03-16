@@ -18,7 +18,7 @@ async function embedFromPage(tryItLink, code) {
       container.style = `height: ${height}; display: block; min-width: 100%; width: calc(100vw - 20rem);`;
       tryItLink.innerText = "(Close)";
       const embed = await makeEmbedConfig({
-        src: "build/web/editor.embed.html",
+        src: "/pollenboots/web/editor.embed.html",
         container,
         rpc,
       });

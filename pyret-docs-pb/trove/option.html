@@ -5,11 +5,15 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script type="module" src="../pollenboots/embed-api.js"></script>
   <script src="../pollenboots/codemirror.js"></script>
   <script src="../pollenboots/runmode.js"></script>
   <script src="../pollenboots/pyret.js"></script>
   <script src="../pollenboots/hilite.js"></script>
+  <script src="../pollenboots/search.js"></script>
+  <script src="../pollenboots/pyret_2.js"></script>
+  <script src="../pollenboots/default-rpcs.js"></script>
+  <script type="module" src="../pollenboots/embed-api.js"></script>
+  <script src="../pollenboots/scribble-common.js"></script>
   <link rel="stylesheet" type="text/css" href="../pollenboots/codemirror.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/pyret.css" title="default"/>
   <link rel="stylesheet" type="text/css" href="../pollenboots/styles.css" title="default"/>
@@ -18,6 +22,7 @@
   </head>
   <body>
     <div class="container">
+      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><div><h1 id="option" toclevel="1" tocentry="yes">option</h1><div><p>Usage:</p><pre class="pyret-highlight">include option</pre><pre class="pyret-highlight">import option as ...</pre></div><p>  </p><h2 id="The-Option-Datatype" toclevel="2" tocentry="yes">The Option Datatype</h2><p>  </p><pre class="pyret-display"><span><a name="Option"></a></span><span>data <a href="../trove/option.html#Option">Option</a>&lt;a&gt;</span>
 <div><tt>   | <span><a href="../trove/option.html#none">none</a></span></tt>
 <tt>   | <span><a href="../trove/option.html#some">some</a>(<span>value :: a</span>)</span></tt></div><tt>end</tt></pre><p>  </p><div class="insetpara nested"><div><p><span><a name="none"></a></span></p><pre class="pyret-display"><a href="../trove/option.html#none">none</a> :: <span><a href="../trove/option.html#Option">Option</a>&lt;<span>a</span>&gt;</span></pre></div><div><p><span><a name="some"></a></span></p><pre class="pyret-display"><a href="../trove/option.html#some">some</a> :: (<span>value :: a</span>) -&gt; <span><a href="../trove/option.html#Option">Option</a>&lt;<span>a</span>&gt;</span></pre><p></p></div><div><p><span><a name="is-none"></a></span></p><pre class="pyret-display"><a href="../trove/option.html#is-none">is-none</a> :: <span><span class="pyret-content">(val :: <a href="../trove/globals.html#Any">Any</a>)</span> -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div><div><p><span><a name="is-some"></a></span></p><pre class="pyret-display"><a href="../trove/option.html#is-some">is-some</a> :: <span><span class="pyret-content">(val :: <a href="../trove/globals.html#Any">Any</a>)</span> -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div></div><p><tt class="pyret-highlight">Option</tt> implements a functional programming idiom that is often used when a function may or may not return a valid or meaningful value.  If there is no return value, the function returns <tt class="pyret-highlight">none</tt>.  If there is a meaningful return value, it returns that value wrapped in the <tt class="pyret-highlight">some</tt> variant.</p><p>Some Pyret library functions return <tt class="pyret-highlight">Option</tt> values, such as <tt class="pyret-highlight">string-to-number</tt>.  When the string is not a valid numeric value, it returns <tt class="pyret-highlight">none</tt>; otherwise, it returns the numeric value wrapped in <tt class="pyret-highlight">some</tt>.  A <tt class="pyret-highlight">cases</tt> expression can be used to evaluate both <tt class="pyret-highlight">Option</tt> response variants.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">fun set-angle(s :: String) -&gt; Number:
