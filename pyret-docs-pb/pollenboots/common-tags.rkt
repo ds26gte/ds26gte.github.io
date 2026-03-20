@@ -296,13 +296,6 @@
         (pre ([class "pyret-display"])
              ,methname " :: " ,contract)))
 
-(define (method-spec #:params [params #f] #:contract [contract #f] #:return [return #f]
-                     #:doc [doc #f]
-                     #:args [args #f] #:alt-docstrings [alt-docstrings #f]
-                     #:examples [examples '()] name . elems)
-  ; (printf "### method-spec ~s ~s\n" name elems)
-  `(div () (tt () ,(string-append "." name)) ,@elems))
-
 (define (repl-examples . elems)
   ; (printf "### repl-examples ~s\n" elems)
   `(div ()

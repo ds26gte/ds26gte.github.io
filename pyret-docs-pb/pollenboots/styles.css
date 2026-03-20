@@ -260,3 +260,17 @@ h4 {
 .hide {
   display: none;
 }
+
+.searchbox {
+  width: 16em;
+  margin-top: 1em;
+  margin-left: 1em;
+  padding: 0px;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  vertical-align: middle;
+}
+
+.searchbox::placeholder {
+  text-align: center;
+}

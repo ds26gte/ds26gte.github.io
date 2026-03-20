@@ -21,8 +21,8 @@
     <title>Combining Multiple Operators</title>
   </head>
   <body>
+    <form class="searchform" id="searchformid"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <div class="container">
-      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><div><h1 id="op-precedence" toclevel="1" tocentry="yes">Combining Multiple Operators</h1><p><span></span></p></div><p>Pyret has only one rule for using multiple operators in a single expression: different operators must be explicitly grouped by parentheses, and evaluation always proceeds from left to right.</p><p>Therefore, the following expressions are <b>not</b> allowed:</p><pre class="bad-ex pyret-highlight">1 + 1 - 1
 1 + 1 &gt; 1
 1 + 1 == 2

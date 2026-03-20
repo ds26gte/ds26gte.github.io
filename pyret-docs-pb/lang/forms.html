@@ -21,8 +21,8 @@
     <title>Language Constructs</title>
   </head>
   <body>
+    <form class="searchform" id="searchformid"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <div class="container">
-      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><h1 id="s:forms" toclevel="1" tocentry="yes">Language Constructs</h1><p>This section contains information on the various language forms in Pyret, from binary operators to data definitions to functions.  This is a more detailed reference to the grammar of expressions and statements and their evaluation, rather than to</p><ul class="toclist"></ul><h2 id="s:literals" toclevel="2" tocentry="yes">Primitives and Literals</h2><p>There are several different literal token types referred to in this documentation.</p><h3 id="Names" toclevel="3" tocentry="yes">Names</h3><p>Names in Pyret match the following regular expression:</p><div class="insetpara nested"><pre class="nothing_special">^[_a-zA-Z][_a-zA-Z0-9]*(?:-+[_a-zA-Z0-9]+)*</pre></div><div class="margin-note">The convention in Pyret is that <tt class="pyret-highlight">kebab-case-names</tt> are used for names of values and fields, and <tt class="pyret-highlight">TitleCaseNames</tt> are used for annotations.</div><p> That is, they start with an alphabetical character or an underscore, followed by any number of alphanumeric characters mixed with underscores and hyphens, ending in a non-hyphen.  So, for example, the following are valid names (though not necessarily good style):</p><pre class="good-ex pyret-highlight">a
 a1
 a-1

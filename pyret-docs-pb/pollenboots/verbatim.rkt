@@ -39,15 +39,17 @@
 (define (data-spec name . elems)
   ; (printf "### data-spec ~s ~s \n" name elems)
   `(div ()
-        (pre () "data-spec")
+        ,(make-gloss name)
         ,@elems))
 
 (define (variants . elems)
+  ; (printf "### variants ~s\n" elems)
   `(div ()
         ,@elems))
 
 (define (shared . elems)
   `(div ()
+        (div ([class "nested"]) "Shared Methods")
         ,@elems))
 
 (define (constr-spec name . elems)
@@ -57,15 +59,34 @@
 
 (define (members . elems)
   `(div ()
+        (div ([class "nested"]) "Fields")
         ,@elems))
 
 (define (with-members . elems)
   `(div ()
+        (div ([class "nested"]) "Methods")
+        ,@elems))
+
+(define (method-spec #:params [params #f] #:contract [contract #f] #:return [return #f]
+                     #:doc [doc #f]
+                     #:args [args #f] #:alt-docstrings [alt-docstrings #f]
+                     #:examples [examples '()] name . elems)
+  ; (printf "### method-spec ~s ~s ~s\n" contract name elems)
+  (define mname (string-append "." name))
+  `(div ([class "nested"])
+        (tt ([class "pyret-display"])
+            ,(if contract `(span () ,mname " :: " ,contract)
+                 mname))
+        ,(if doc `(div () ,doc) "")
         ,@elems))
 
 (define (member-spec #:type [type #f] #:contract [contract #f] fname . elems)
-  `(div ()
-        (pre () ,fname)
+  ; (printf "*** member-spec fname= ~s contract= ~s elems= ~s\n" fname contract elems)
+  `(div ([class "nested"])
+        (tt ()
+            ,(if contract
+                 `(span () ,fname " :: " ,contract)
+                 fname))
         ,@elems))
 
 ; (define (data-spec name type-vars variants shared)

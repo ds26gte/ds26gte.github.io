@@ -16,6 +16,7 @@
 ; (define Ar (a-id "Array" (xref "arrays" "Array")))
 (define EQ (a-id "EqualityResult" (xref "equality" "EqualityResult")))
 (define L (a-id "List" (xref "lists" "List")))
+(define SL (a-id "Srcloc" (xref "<global>" "Srcloc")))
 
 (define (RA-of typ) (a-app (a-id "RawArray" (xref "<global>" "RawArray")) typ))
 (define (A-of typ) (a-app (a-id "Array" (xref "arrays" "Array")) typ))

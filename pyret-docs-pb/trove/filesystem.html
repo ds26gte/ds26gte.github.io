@@ -21,8 +21,8 @@
     <title>filesystem</title>
   </head>
   <body>
+    <form class="searchform" id="searchformid"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <div class="container">
-      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><div class="insetpara nested"></div><p>The <tt class="pyret-highlight">filesystem</tt> library provides functions for reading and writing files, as well as working with paths.</p><p>The examples on this page work against a small filesystem that is set up every time the page loads. The filesystem contains the contents below, and the working directory is <tt class="pyret-highlight">/</tt>.</p><div class="insetpara nested">/ ├── hello.txt         “Hello, world!” ├── data/ │   ├── words         “apple\nbanana\ncherry” │   ├── numbers.txt   “1\n2\n3\n4\n5” │   └── story.txt     “A long time ago in a galaxy far, far away...”</div><div><h1 id="filesystem" toclevel="1" tocentry="yes">filesystem</h1><div><p>Usage:</p><pre class="pyret-highlight">include filesystem</pre><pre class="pyret-highlight">import filesystem as ...</pre></div><div><p><span><a name="read-file-string"></a></span></p><pre class="pyret-display"><a href="../trove/filesystem.html#read-file-string">read-file-string</a> :: <span><a href="../trove/globals.html#String">String</a> -&gt; <a href="../trove/globals.html#String">String</a></span></pre></div><div><p><b>Examples:</b></p><pre class="pyret-highlight">import filesystem as FS
 check:
   FS.read-file-string("hello.txt") is "Hello, world!"

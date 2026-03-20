@@ -21,8 +21,8 @@
     <title>Runtime API</title>
   </head>
   <body>
+    <form class="searchform" id="searchformid"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <div class="container">
-      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><h1 id="runtime" toclevel="1" tocentry="yes">Runtime API</h1><p>Pyret exposes most of its internal operations on the <tt>runtime</tt> object; most JavaScript code that interacts with Pyret will need to know about the runtime.</p><p>The library that defines runtimes is in <tt>src/js/base/runtime-anf.js</tt>, and it is configured to be importable with <tt>js/runtime-anf</tt> via RequireJS:</p><pre class="nothing_special">define(["js/runtime-anf"], function(runtimeLib) {
   // use runtimeLib
 });</pre><div><pre class="pyret-display">RuntimeLib.create(options) → Runtime</pre></div><p>Create a new Pyret runtime.  The <tt>RuntimeLib</tt> value itself only exports this interface, and most other useful functions are referenced from the runtime objecs it creates.  The options are:</p><pre class="nothing_special">options :: {

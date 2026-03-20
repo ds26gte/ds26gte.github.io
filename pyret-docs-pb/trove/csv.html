@@ -21,8 +21,8 @@
     <title>csv</title>
   </head>
   <body>
+    <form class="searchform" id="searchformid"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <div class="container">
-      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><div><h1 id="csv" toclevel="1" tocentry="yes">csv</h1><div><p>Usage:</p><pre class="pyret-highlight">include csv</pre><pre class="pyret-highlight">import csv as ...</pre></div><div><p><span><a name="csv-table-str"></a></span></p><pre class="pyret-display"><a href="../trove/csv.html#csv-table-str">csv-table-str</a> :: <span>(<span><span class="pyret-content">csv-string :: <a href="../trove/globals.html#String">String</a></span>, <span class="pyret-content">options :: <a href="../trove/csv.html#CSVOptions">CSVOptions</a></span></span>) -&gt; <a href="../builtin/tables.html#TableLoader">TableLoader</a></span></pre><p>  Reads CSV data from <tt class="pyret-highlight">csv-str</tt> with the given <tt class="pyret-highlight">options</tt>, returning   a <a href="../builtin/tables.html#TableLoader"><tt class="pyret-highlight">TableLoader</tt></a> suitable for use with <tt class="pyret-highlight">load-table:</tt></p><div><p><b>Examples:</b></p><pre class="pyret-highlight">include csv
 animals-data = ```
 Pet Name, Age (years), species, fixed

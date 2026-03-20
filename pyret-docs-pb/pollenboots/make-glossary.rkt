@@ -145,15 +145,22 @@
                 (set! glossary-exp
                   (cons `(div ([class "glossary-sep"]) (a ([name ,glossary-anchor])))
                         glossary-exp))
-                (set! glossary-exp
-                  (cons `(li ()  (a ([href ,(fourth first-glossary-entry)] [class "indexlink"])
-                                ,(third first-glossary-entry)))
-                        glossary-exp))
-                (for ([glossary-entry (rest glossary)])
-                  (set! glossary-exp
-                    (cons `(li () (a ([href ,(fourth glossary-entry)] [class "indexlink"])
-                                     ,(third glossary-entry)))
-                          glossary-exp)))))
+                (let ([prev-item "NON_EXISTENT"]
+                      [number-seen 0])
+                  (for ([glossary-entry glossary])
+                    (let ([suffix '()]
+                          [curr-item (third glossary-entry)])
+                      (cond [(equal? curr-item prev-item)
+                             (set! number-seen (+ number-seen 1))
+                             (set! suffix (list (format " (~a)" (+ number-seen 1))))]
+                            [else (set! prev-item curr-item)
+                                  (set! number-seen 0)])
+                      (set! glossary-exp
+                        (cons `(li () (a ([href ,(fourth glossary-entry)] [class "indexlink"])
+                                         ,(third glossary-entry)
+                                         ,@suffix
+                                         ))
+                              glossary-exp)))))))
 
             ; (printf "### glossary-exp = ~s\n" glossary-exp)
 

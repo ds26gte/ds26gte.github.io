@@ -43,6 +43,7 @@ $(function(){
             .append($('</br>')));
     // a very ugly way to find the appropriate place to insert, but I don't
     // know a better way
+    $('#searchformid').remove();
     alphaRow.parent().parent().parent().before(inputGroup);
     inputBox.trigger('input');
 });

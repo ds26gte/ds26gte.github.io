@@ -21,8 +21,8 @@
     <title>pprint</title>
   </head>
   <body>
+    <form class="searchform" id="searchformid"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <div class="container">
-      <form class="searchform"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <root><div><h1 id="pprint" toclevel="1" tocentry="yes">pprint</h1><div><p>Usage:</p><pre class="pyret-highlight">include pprint</pre><pre class="pyret-highlight">import pprint as ...</pre></div><p>        </p><h2 id="The-PPrintDoc-Datatype" toclevel="2" tocentry="yes">The PPrintDoc Datatype</h2><p>  This datatype is <i>not</i> exported directly to users; there are   <a href="../trove/pprint.html#Functions">easier-to-use   helper functions</a> that are exported instead.   </p><pre class="pyret-display"><span><a name="PPrintDoc"></a></span><span>data <a href="../trove/pprint.html#PPrintDoc">PPrintDoc</a></span>
 <div><tt>   | <span><a href="../trove/pprint.html#mt-doc">mt-doc</a>(<span>flat-width :: <a href="../trove/globals.html#Number">Number</a></span>, <span>has-hardline :: <a href="../trove/globals.html#Boolean">Boolean</a></span>)</span></tt>
 <tt>   | <span><a href="../trove/pprint.html#str">str</a>(<span>s :: <a href="../trove/globals.html#String">String</a></span>, <span>flat-width :: <a href="../trove/globals.html#Number">Number</a></span>, <span>has-hardline :: <a href="../trove/globals.html#Boolean">Boolean</a></span>)</span></tt>
