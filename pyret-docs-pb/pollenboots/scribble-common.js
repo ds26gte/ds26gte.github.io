@@ -94,6 +94,8 @@ function NormalizePath(path) {
 
 // Interactions ---------------------------------------------------------------
 
+window.globaljunk = "globaljunk";
+
 function DoSearchKey(event, field, ver, top_path) {
   var val = field.value;
   if (event && event.key === 'Enter') {
@@ -102,6 +104,7 @@ function DoSearchKey(event, field, ver, top_path) {
     u += "/pollenboots/search/index.html?q=" + encodeURIComponent(val);
     u = MergePageArgsIntoUrl(u);
     console.log('u=', u);
+    window.globaljunk = u;
     location = u;
     return false;
   }
