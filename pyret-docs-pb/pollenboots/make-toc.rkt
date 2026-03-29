@@ -26,11 +26,11 @@
   (define (collect-toc-entries doc)
     ; (printf "doing collect-toc-entries ~s\n"  false )
 
-    (define (collect-toc-entries-from-include-section file)
-      ; (printf "doing collect-toc-entries-from-include-section ~s\n" file)
-      (let* ([basename (regexp-replace "\\.poly.pm$" file "")]
-             [html-filename (string-append basename ".html")]
-             [idoc (get-doc file)])
+    (define (collect-toc-entries-from-include-section inc-file)
+      ; (printf "doing collect-toc-entries-from-include-section ~s\n" inc-file)
+      (let* ([html-filename (string-append "./"
+                              (regexp-replace "\\.poly.pm$" inc-file ".html"))]
+             [idoc (get-doc inc-file)])
         (define-values (_ section-txs)
           (splitf-txexpr idoc
             (lambda (x) (and (txexpr? x)
@@ -61,8 +61,8 @@
            (toc-entries (cons (list level (string-append "#" id) title) (toc-entries))))
          ]
         [(include-section-1)
-         (let ([file (attr-ref tx 'incfile)])
-           (collect-toc-entries-from-include-section file))])))
+         (let ([inc-file (attr-ref tx 'incfile)])
+           (collect-toc-entries-from-include-section inc-file))])))
 
   (collect-toc-entries doc)
 
@@ -97,7 +97,8 @@
       [(include-section-1)
        (if toc-used? `(span ([class "includesection"]))
            (let* ([incfile (attr-ref tx 'incfile)]
-                  [htmlfile (regexp-replace "\\.poly.pm$" incfile ".html")]
+                  [htmlfile (string-append "./"
+                              (regexp-replace "\\.poly.pm$" incfile ".html"))]
                   [doc (get-doc incfile)]
                   [link-text (doc-title doc)]
                   )
