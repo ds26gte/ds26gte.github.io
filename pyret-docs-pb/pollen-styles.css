@@ -1,0 +1,181 @@
+/* load after style.css for the Pollenized Pyret docs */
+
+.VSCode .vscode-icon::after {
+  content: url(platforms/code-stable-small.png);
+}
+
+.VSCodeCLI .vscode-cli-icon::after {
+  content: url(platforms/terminal-vscode.png);
+}
+
+.CLI .cli-icon::after {
+  content: url(platforms/GNOME_Terminal-small.png);
+}
+
+.CPO .cpo-icon::after {
+  content: url(platforms/pyret-logo-small.png);
+}
+
+.paintBrush {
+   -webkit-mask-image: url(trove/paint.svg);
+   mask-image: url(trove/paint.svg);
+}
+.checkersBlob {
+   background-image: url(trove/checkers.svg);
+}
+
+.container {
+  width: 100%;
+}
+
+@media (min-width: 800px) {
+  .container {
+    max-width: 72ch;
+    margin: 0 auto;
+  }
+  h1,h2,h3,h4,h5,h6 {
+    margin-left: -1em;
+  }
+}
+
+.floatleft {
+  float: left;
+}
+
+.floatright {
+  float: right;
+}
+
+p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+ul.list-group {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+ul.toclist {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+h1 {
+  font-size: 35px;
+}
+
+h2 {
+  margin-top: 1em;
+  font-size: 25px;
+}
+
+h3 {
+  margin-top: 1em;
+  font-size: 20px;
+}
+
+h4 {
+  margin-top: 1em;
+  font-size: 20px;
+}
+
+.bnf {
+  margin-top: .8em;
+  margin-bottom: .8em;
+  border-left: 2px solid gray;
+  padding-left: 1em;
+  white-space: pre;
+}
+
+.searchbox {
+  width: 16em;
+  margin-top: 1em;
+  margin-left: 1em;
+  padding: 0px;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  vertical-align: middle;
+}
+
+.searchbox::placeholder {
+  text-align: center;
+}
+
+li.indent2 {
+  text-indent: 2em;
+}
+
+li.indent3 {
+  text-indent: 4em;
+}
+
+li.indent4 {
+  text-indent: 6em;
+}
+
+ul.toclist {
+  list-style-type: none;
+}
+
+.pyretexpr {
+  /* color: cornflowerblue; */
+}
+
+.uncolored-code {
+  color: unset;
+}
+
+.pyret-display {
+  /* border-top: 0.055em solid black; */
+  border-top: 1px solid #99b;
+  font-style: monospace;
+  /* background-color: #f2f2f2; */
+  background-color: hsl(216, 78%, 95%);
+}
+
+.pyret-content {
+  font-style: monospace;
+}
+
+.function {
+  /* font-family: monospace; */
+  /* background-color: #6bccdf; */
+  /* background-color: #ffeeee; */
+}
+
+.margin-note {
+  /* background-color: #fbfb88; */
+  background-color: hsl(60, 29%, 94%);
+  float: right;
+  width: 25%;
+  margin: 0 0 1em 1em;
+  font-size: 0.9em;
+  color: #555;
+  padding-left: 0.75em;
+  padding-right: 1em;
+  border: 1px solid #ccb;
+  border-left: 0.4rem solid #ccb;
+}
+
+.author {
+  font-family: sans-serif;
+}
+
+.nested {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.insetpara {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.glossary-sep {
+  margin-top: 1em;
+}
+
+ul.glossary {
+  list-style-type: none;
+}

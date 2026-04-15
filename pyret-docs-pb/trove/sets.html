@@ -16,14 +16,15 @@
   <script src=".././pollenboots/scribble-common.js"></script>
   <link rel="stylesheet" type="text/css" href=".././pollenboots/codemirror.css" title="default"/>
   <link rel="stylesheet" type="text/css" href=".././pollenboots/pyret.css" title="default"/>
-  <link rel="stylesheet" type="text/css" href=".././pollenboots/styles.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href=".././styles.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href=".././pollen-styles.css" title="default"/>
   <head>
     <title>sets</title>
   </head>
   <body>
     <form class="searchform" id="searchformid"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <div class="container">
-    <root><div><h1 id="sets" toclevel="1" tocentry="yes">sets</h1><div><p>Usage:</p><pre class="pyret-highlight">include sets</pre><pre class="pyret-highlight">import sets as ...</pre></div><h2 id="The-Set-Type" toclevel="2" tocentry="yes">The Set Type</h2><div><p><span><a name="Set"></a></span></p><pre class="pyret-display"><span><a href="../trove/sets.html#Set">Set</a>&lt;a&gt;</span></pre><p>There are two underlying representations that sets may have:</p><ul><li>List-based sets work on all values that can be compared with the <a href="../lang/equality.html#equal-always"><tt class="pyret-highlight">equal-always</tt></a> built-in function (this means that, for example, a set of functions won’t work).  List-based sets perform up to <i>n</i> comparisons on addition, removal, and membership testing, where <i>n</i> is the number of elements in the set. (In order to give this guarantee, list-based sets don’t store duplicates; they avoid this by scanning the whole list on addition.)</li><li>Tree-based sets require that all elements implement the <tt class="pyret-highlight">_lessthan</tt> method in order to perform comparisons, and guarantee that only up to log(<i>n</i>) less-than comparisons will be performed for a set with <i>n</i> elements on addition, removal, and membership testing.</li></ul><p>There are no variants for <a href="../trove/sets.html#Set"><tt class="pyret-highlight">Set</tt></a>s, and programs cannot use <tt class="pyret-highlight">cases</tt> statements with <a href="../trove/sets.html#Set"><tt class="pyret-highlight">Set</tt></a>s.  Instead, they can be created with the constructors below, and manipulated with the methods and functions below.</p><p>Some methods, like <a href="../trove/sets.html#.union">.union</a>, combine multiple sets.  The kind of set on the left-hand side determines the kind of resulting set.  For example, in</p><pre class="pyret-highlight">[list-set: 1, 2].union([tree-set: 3, 4])</pre><p>the result will be a <tt class="pyret-highlight">list-set</tt>.</p></div><h2 id="Using-Sets-in-Programs" toclevel="2" tocentry="yes">Using Sets in Programs</h2><p>Some of the names provided for sets inevitably overlap with those provided for other data. Therefore, using the <tt class="pyret-highlight">include</tt> form is likely to cause name-clashes. It is wiser to import sets using a prefix name and use the names below through that prefix.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+    <root><div><h1 id="sets" toclevel="1" tocentry="yes">sets</h1><div><p>Usage:</p><pre class="pyret-highlight">include sets</pre><pre class="pyret-highlight">import sets as ...</pre></div><h2 id="The-Set-Type" toclevel="2" tocentry="yes">The Set Type</h2><div><p><span><a name="Set"></a></span></p><pre class="pyret-display"><span><a href="../missing_gloss">Set</a>&lt;a&gt;</span></pre><p>There are two underlying representations that sets may have:</p><ul><li>List-based sets work on all values that can be compared with the <a href="../missing_gloss"><tt class="pyret-highlight">equal-always</tt></a> built-in function (this means that, for example, a set of functions won’t work).  List-based sets perform up to <i>n</i> comparisons on addition, removal, and membership testing, where <i>n</i> is the number of elements in the set. (In order to give this guarantee, list-based sets don’t store duplicates; they avoid this by scanning the whole list on addition.)</li><li>Tree-based sets require that all elements implement the <tt class="pyret-highlight">_lessthan</tt> method in order to perform comparisons, and guarantee that only up to log(<i>n</i>) less-than comparisons will be performed for a set with <i>n</i> elements on addition, removal, and membership testing.</li></ul><p>There are no variants for <a href="../missing_gloss"><tt class="pyret-highlight">Set</tt></a>s, and programs cannot use <tt class="pyret-highlight">cases</tt> statements with <a href="../missing_gloss"><tt class="pyret-highlight">Set</tt></a>s.  Instead, they can be created with the constructors below, and manipulated with the methods and functions below.</p><p>Some methods, like <a href="../missing_gloss">.union</a>, combine multiple sets.  The kind of set on the left-hand side determines the kind of resulting set.  For example, in</p><pre class="pyret-highlight">[list-set: 1, 2].union([tree-set: 3, 4])</pre><p>the result will be a <tt class="pyret-highlight">list-set</tt>.</p></div><h2 id="Using-Sets-in-Programs" toclevel="2" tocentry="yes">Using Sets in Programs</h2><p>Some of the names provided for sets inevitably overlap with those provided for other data. Therefore, using the <tt class="pyret-highlight">include</tt> form is likely to cause name-clashes. It is wiser to import sets using a prefix name and use the names below through that prefix.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 import lists as L
 
 check:
@@ -33,7 +34,7 @@ end</pre><p><a class="show-embed" code="import sets as S
 
  check: 
     S.list-to-list-set([L.list: 1, 2, 1, 2]) is [S.list-set: 2, 1] 
- end">(Try it!)</a></p></div><h2 id="Constructing-Sets" toclevel="2" tocentry="yes">Constructing Sets</h2><div><p><span><a name="list-set"></a></span></p><pre class="pyret-display">[<a href="../trove/sets.html#list-set">list-set</a><span></span>: <span class="pyret-content">elt :: a</span>, ...] -&gt; <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></pre></div><p>Constructs a set out of the <tt class="pyret-highlight">elt</tt>s, representing them as a list. Raises an exception if the elements don’t support equality.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><h2 id="Constructing-Sets" toclevel="2" tocentry="yes">Constructing Sets</h2><div><p><span><a name="list-set"></a></span></p><pre class="pyret-display">[<a href="../missing_gloss">list-set</a><span></span>: <span class="pyret-content">elt :: a</span>, ...] -&gt; <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></pre></div><p>Constructs a set out of the <tt class="pyret-highlight">elt</tt>s, representing them as a list. Raises an exception if the elements don’t support equality.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 import lists as L
 
 check:
@@ -49,7 +50,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     [S.list-set: 1, 2, 2] is [S.list-set: 1, 2] 
     [S.list-set: [L.list: 1], [L.list: 1], [L.list: 2]] is 
       [S.list-set: [L.list: 2], [L.list: 1]] 
- end">(Try it!)</a></p></div><div><p><span><a name="empty-list-set"></a></span></p><pre class="pyret-display"><a href="../trove/sets.html#empty-list-set">empty-list-set</a> :: <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></pre></div><p>An empty set, represented as a list.</p><div><p><span><a name="tree-set"></a></span></p><pre class="pyret-display">[<a href="../trove/sets.html#tree-set">tree-set</a><span></span>: <span class="pyret-content">elt :: a</span>, ...] -&gt; <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></pre></div><p>Constructs a set out of the <tt class="pyret-highlight">elt</tt>s, representing them as a tree. Raises an exception if the elements don’t support the <tt class="pyret-highlight">&lt;</tt> operator via <tt class="pyret-highlight">_lessthan</tt>.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name="empty-list-set"></a></span></p><pre class="pyret-display"><a href="../missing_gloss">empty-list-set</a> :: <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></pre></div><p>An empty set, represented as a list.</p><div><p><span><a name="tree-set"></a></span></p><pre class="pyret-display">[<a href="../missing_gloss">tree-set</a><span></span>: <span class="pyret-content">elt :: a</span>, ...] -&gt; <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></pre></div><p>Constructs a set out of the <tt class="pyret-highlight">elt</tt>s, representing them as a tree. Raises an exception if the elements don’t support the <tt class="pyret-highlight">&lt;</tt> operator via <tt class="pyret-highlight">_lessthan</tt>.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 import lists as L
 
 check:
@@ -63,7 +64,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     [S.tree-set: 1, 2, 3] is [S.tree-set: 1, 2, 3] 
     [S.tree-set: 1, 2, 2] is [S.tree-set: 1, 2] 
     [S.tree-set: [L.list: 1], [L.list: 1], [L.list: 2]] raises &quot;binop-error&quot; 
- end">(Try it!)</a></p></div><div><p><span><a name="empty-tree-set"></a></span></p><pre class="pyret-display"><a href="../trove/sets.html#empty-tree-set">empty-tree-set</a> :: <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></pre></div><p>An empty set, represented as a tree.</p><div><p><span><a name="set"></a></span></p><pre class="pyret-display">[<a href="../trove/sets.html#set">set</a><span></span>: <span class="pyret-content">elt :: a</span>, ...] -&gt; <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></pre></div><p>Another name for <a href="../trove/sets.html#list-set"><tt class="pyret-highlight">list-set</tt></a>.</p><div><p><span><a name="list-to-list-set"></a></span></p><pre class="pyret-display"><a href="../trove/sets.html#list-to-list-set">list-to-list-set</a> :: <span>(<span><span class="pyret-content">lst :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Constructs a list-set out of the elements in the list.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name="empty-tree-set"></a></span></p><pre class="pyret-display"><a href="../missing_gloss">empty-tree-set</a> :: <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></pre></div><p>An empty set, represented as a tree.</p><div><p><span><a name="set"></a></span></p><pre class="pyret-display">[<a href="../missing_gloss">set</a><span></span>: <span class="pyret-content">elt :: a</span>, ...] -&gt; <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></pre></div><p>Another name for <a href="../missing_gloss"><tt class="pyret-highlight">list-set</tt></a>.</p><div><p><span><a name="list-to-list-set"></a></span></p><pre class="pyret-display"><a href="../missing_gloss">list-to-list-set</a> :: <span>(<span><span class="pyret-content">lst :: <span><a href="../missing_gloss">List</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Constructs a list-set out of the elements in the list.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 import lists as L
 
 check:
@@ -75,7 +76,7 @@ end</pre><p><a class="show-embed" code="import sets as S
  check: 
     s1 = S.list-to-list-set([L.list: 1, 2, 3, 3, 3]) 
     s1 is [S.list-set: 1, 2, 3] 
- end">(Try it!)</a></p></div><div><p><span><a name="list-to-tree-set"></a></span></p><pre class="pyret-display"><a href="../trove/sets.html#list-to-tree-set">list-to-tree-set</a> :: <span>(<span><span class="pyret-content">lst :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Constructs a tree-set out of the elements in the list.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name="list-to-tree-set"></a></span></p><pre class="pyret-display"><a href="../missing_gloss">list-to-tree-set</a> :: <span>(<span><span class="pyret-content">lst :: <span><a href="../missing_gloss">List</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Constructs a tree-set out of the elements in the list.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 import lists as L
 
 check:
@@ -87,7 +88,7 @@ end</pre><p><a class="show-embed" code="import sets as S
  check: 
     s1 = S.list-to-tree-set([L.list: 1, 2, 3, 3, 3]) 
     s1 is [S.tree-set: 1, 2, 3] 
- end">(Try it!)</a></p></div><div><p><span><a name="list-to-set"></a></span></p><pre class="pyret-display"><a href="../trove/sets.html#list-to-set">list-to-set</a> :: <span>(<span><span class="pyret-content">lst :: <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Another name for <a href="../trove/sets.html#list-to-list-set"><tt class="pyret-highlight">list-to-list-set</tt></a>.</p><h2 id="Set-Methods" toclevel="2" tocentry="yes">Set Methods</h2><div><p><span><a name=".add"></a></span></p><pre class="pyret-display">.add :: <span>(<span><span class="pyret-content">elt :: a</span></span>) -&gt; <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Constructs a new set containing the added element if it was not already present.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name="list-to-set"></a></span></p><pre class="pyret-display"><a href="../missing_gloss">list-to-set</a> :: <span>(<span><span class="pyret-content">lst :: <span><a href="../missing_gloss">List</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Another name for <a href="../missing_gloss"><tt class="pyret-highlight">list-to-list-set</tt></a>.</p><h2 id="Set-Methods" toclevel="2" tocentry="yes">Set Methods</h2><div><p><span><a name=".add"></a></span></p><pre class="pyret-display">.add :: <span>(<span><span class="pyret-content">elt :: a</span></span>) -&gt; <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Constructs a new set containing the added element if it was not already present.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 
 check:
   s1 = [S.set: 1, 2, 3]
@@ -109,7 +110,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     s1.size() is 3 
     s2.size() is 4 
     s3.size() is 3 
- end">(Try it!)</a></p></div><div><p><span><a name=".remove"></a></span></p><pre class="pyret-display">.remove :: <span>(<span><span class="pyret-content">elt :: a</span></span>) -&gt; <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Constructs a new set removing the element if it was present. It is <i>not</i> an error to remove an element that is not in the set; it simply leaves the set unchanged.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name=".remove"></a></span></p><pre class="pyret-display">.remove :: <span>(<span><span class="pyret-content">elt :: a</span></span>) -&gt; <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Constructs a new set removing the element if it was present. It is <i>not</i> an error to remove an element that is not in the set; it simply leaves the set unchanged.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 
 check:
   s1 = [S.set: 1, 2, 3]
@@ -131,7 +132,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     s1.size() is 3 
     s2.size() is 2 
     s3.size() is 3 
- end">(Try it!)</a></p></div><div><p><span><a name=".size"></a></span></p><pre class="pyret-display">.size :: <span> -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre></div><p>Computes the number of elements in the set.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name=".size"></a></span></p><pre class="pyret-display">.size :: <span> -&gt; <a href="../missing_gloss">Number</a></span></pre></div><p>Computes the number of elements in the set.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 
 check:
   [S.set: 1, 2, 3].size() is 3
@@ -143,7 +144,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     [S.set: 1, 2, 3].size() is 3 
     [S.tree-set: 1, 2, 3].size() is 3 
     [S.list-set: 1, 2, 3].size() is 3 
- end">(Try it!)</a></p></div><div><p><span><a name=".member"></a></span></p><pre class="pyret-display">.member :: <span>(<span><span class="pyret-content">elt :: a</span></span>) -&gt; <a href="../trove/globals.html#Boolean">Boolean</a></span></pre></div><p>Checks if <tt class="pyret-highlight">elt</tt> is contained within this set (checking membership with <a href="../lang/equality.html#equal-always"><tt class="pyret-highlight">equal-always</tt></a>).</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name=".member"></a></span></p><pre class="pyret-display">.member :: <span>(<span><span class="pyret-content">elt :: a</span></span>) -&gt; <a href="../missing_gloss">Boolean</a></span></pre></div><p>Checks if <tt class="pyret-highlight">elt</tt> is contained within this set (checking membership with <a href="../missing_gloss"><tt class="pyret-highlight">equal-always</tt></a>).</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 
 check:
   s1 = [S.set: 1, 2, 3]
@@ -155,7 +156,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     s1 = [S.set: 1, 2, 3] 
     s1.member(1) is true 
     s1.member(4) is false 
- end">(Try it!)</a></p></div><div><p><span><a name=".pick"></a></span></p><pre class="pyret-display">.pick :: <span> -&gt; <span><a href="../trove/pick.html#Pick">Pick</a>&lt;<span>a, <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span>&gt;</span></span></pre></div><p><i>Picks</i> an arbitrary element out of the set, and returns a <a href="../trove/pick.html#Pick"><tt class="pyret-highlight">Pick</tt></a> data structure.  If the set is empty, then <tt class="pyret-highlight">.pick</tt> returns a <a href="../trove/pick.html#pick-none"><tt class="pyret-highlight">pick-none</tt></a>. Otherwise it returns a <a href="../trove/pick.html#pick-some"><tt class="pyret-highlight">pick-some</tt></a>, whose <tt class="pyret-highlight">elt</tt> field stores the picked value and whose <tt class="pyret-highlight">rest</tt> field stores the rest of the set.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name=".pick"></a></span></p><pre class="pyret-display">.pick :: <span> -&gt; <span><a href="../missing_gloss">Pick</a>&lt;<span>a, <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span>&gt;</span></span></pre></div><p><i>Picks</i> an arbitrary element out of the set, and returns a <a href="../missing_gloss"><tt class="pyret-highlight">Pick</tt></a> data structure.  If the set is empty, then <tt class="pyret-highlight">.pick</tt> returns a <a href="../missing_gloss"><tt class="pyret-highlight">pick-none</tt></a>. Otherwise it returns a <a href="../missing_gloss"><tt class="pyret-highlight">pick-some</tt></a>, whose <tt class="pyret-highlight">elt</tt> field stores the picked value and whose <tt class="pyret-highlight">rest</tt> field stores the rest of the set.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 import pick as P
 
 check:
@@ -187,13 +188,13 @@ end</pre><p><a class="show-embed" code="import sets as S
 
     [S.set:].pick() is P.pick-none 
     [S.set: 1].pick() is P.pick-some(1, S.empty-list-set) 
- end">(Try it!)</a></p></div><p>It is very important to note that the order of elements returned from <a href="../trove/sets.html#.pick">.pick</a> is non-deterministic, so multiple calls to <a href="../trove/sets.html#.pick">.pick</a> may not produce the same result for the same set! Thus, in the following program:</p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><p>It is very important to note that the order of elements returned from <a href="../missing_gloss">.pick</a> is non-deterministic, so multiple calls to <a href="../missing_gloss">.pick</a> may not produce the same result for the same set! Thus, in the following program:</p><pre class="pyret-highlight">import sets as S
 import pick as P
 
 check:
   [S.set: 1, 2].pick() is P.pick-some(1, [S.set: 2])
   [S.set: 1, 2].pick() is P.pick-some(2, [S.set: 1])
-end</pre><p>Sometimes both tests will pass, sometimes one will pass and the other fail, and sometimes both tests will fail! We can, however, write the following tests that will <i>always</i> pass:</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+end</pre><p>Sometimes both tests will pass, sometimes one will pass and the other fail, and sometimes both tests will fail! We can, however, write the following tests that will <i>always</i> pass:</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 import lists as L
 import pick as P
 
@@ -213,7 +214,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     [S.set: 1, 2].pick().elt is%(one-of) [L.list: 1, 2] 
     [S.set: 1, 2].pick().rest is%(one-of) 
     [L.list: [S.set: 1], [S.set: 2]] 
- end">(Try it!)</a></p></div><div><p><span><a name=".union"></a></span></p><pre class="pyret-display">.union :: <span>(<span><span class="pyret-content">other :: <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Computes the union of two sets.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name=".union"></a></span></p><pre class="pyret-display">.union :: <span>(<span><span class="pyret-content">other :: <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Computes the union of two sets.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 
 check:
   [S.list-set: 1, 2, 3].union([S.tree-set: 2, 3, 4])
@@ -229,7 +230,7 @@ end</pre><p><a class="show-embed" code="import sets as S
 
     S.empty-tree-set.union([S.list-set: 3, 4, 4]) 
       is [S.tree-set: 3, 4] 
- end">(Try it!)</a></p></div><div><p><span><a name=".intersect"></a></span></p><pre class="pyret-display">.intersect :: <span>(<span><span class="pyret-content">other :: <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Computes the intersection of two sets.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name=".intersect"></a></span></p><pre class="pyret-display">.intersect :: <span>(<span><span class="pyret-content">other :: <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Computes the intersection of two sets.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 
 check:
   [S.list-set: 1, 2, 3].intersect([S.tree-set: 2, 3, 4])
@@ -245,7 +246,7 @@ end</pre><p><a class="show-embed" code="import sets as S
 
     S.empty-tree-set.intersect([S.list-set: 3, 4, 4]) 
       is [S.tree-set: ] 
- end">(Try it!)</a></p></div><div><p><span><a name=".difference"></a></span></p><pre class="pyret-display">.difference :: <span>(<span><span class="pyret-content">other :: <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Computes the difference of two sets.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name=".difference"></a></span></p><pre class="pyret-display">.difference :: <span>(<span><span class="pyret-content">other :: <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Computes the difference of two sets.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 
 check:
   [S.list-set: 1, 2, 3].difference([S.tree-set: 2, 3, 4])
@@ -261,7 +262,7 @@ end</pre><p><a class="show-embed" code="import sets as S
 
     S.empty-tree-set.difference([S.list-set: 3, 4, 4]) 
       is [S.tree-set: ] 
- end">(Try it!)</a></p></div><div><p><span><a name=".symmetric-difference"></a></span></p><pre class="pyret-display">.symmetric-difference :: <span>(<span><span class="pyret-content">other :: <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../trove/sets.html#Set">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Computes the symmetric difference of two sets.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name=".symmetric-difference"></a></span></p><pre class="pyret-display">.symmetric-difference :: <span>(<span><span class="pyret-content">other :: <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span></span>) -&gt; <span><a href="../missing_gloss">Set</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Computes the symmetric difference of two sets.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 
 check:
   [S.list-set: 1, 2, 3].symmetric-difference([S.tree-set: 2, 3, 4])
@@ -277,7 +278,7 @@ end</pre><p><a class="show-embed" code="import sets as S
 
     S.empty-tree-set.symmetric-difference([S.list-set: 3, 4, 4]) 
       is [S.tree-set: 3, 4] 
- end">(Try it!)</a></p></div><div><p><span><a name=".to-list"></a></span></p><pre class="pyret-display">.to-list :: <span> -&gt; <span><a href="../trove/lists.html#List">List</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Converts the set into a list. There is no guarantee about the order of elements in the list.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name=".to-list"></a></span></p><pre class="pyret-display">.to-list :: <span> -&gt; <span><a href="../missing_gloss">List</a>&lt;<span>a</span>&gt;</span></span></pre></div><p>Converts the set into a list. There is no guarantee about the order of elements in the list.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 
 check:
   [S.list-set: 3, 1, 4, 1, 5, 9, 2].to-list().length() is 6
@@ -287,7 +288,7 @@ end</pre><p><a class="show-embed" code="import sets as S
  check: 
     [S.list-set: 3, 1, 4, 1, 5, 9, 2].to-list().length() is 6 
     [S.tree-set: 8, 6, 7, 5, 3, 0, 9].to-list().length() is 7 
- end">(Try it!)</a></p></div><div><p><span><a name=".fold"></a></span></p><pre class="pyret-display">.fold :: <span>(<span><span class="pyret-content">f :: <span>(<span>(<span>b, a</span>) -&gt; b</span>)</span></span>, <span class="pyret-content">base :: b</span></span>) -&gt; b</span></pre></div><p>Applies <tt class="pyret-highlight">f</tt> to each element of the set along with the accumulator (starting with <tt class="pyret-highlight">base</tt>) to produce a new value.  Traverses elements in an unspecified order.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
+ end">(Try it!)</a></p></div></div><div><p><span><a name=".fold"></a></span></p><pre class="pyret-display">.fold :: <span>(<span><span class="pyret-content">f :: <span>(<span>(<span>b, a</span>) -&gt; b</span>)</span></span>, <span class="pyret-content">base :: b</span></span>) -&gt; b</span></pre></div><p>Applies <tt class="pyret-highlight">f</tt> to each element of the set along with the accumulator (starting with <tt class="pyret-highlight">base</tt>) to produce a new value.  Traverses elements in an unspecified order.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import sets as S
 import lists as L
 
 check:
@@ -307,7 +308,7 @@ end</pre><p><a class="show-embed" code="import sets as S
     result = s.fold(string-append, &quot;&quot;) 
 
     result is%(one-of) [L.list: &quot;123&quot;, &quot;132&quot;, &quot;213&quot;, &quot;231&quot;, &quot;312&quot;, &quot;321&quot;] 
- end">(Try it!)</a></p></div></div></root>
+ end">(Try it!)</a></p></div></div></div></root>
     <hr/>
     <!-- The current page is trove/sets.html. -->
     <a class="floatleft" href="../trove/lists.html">⏴⏴⏴</a>

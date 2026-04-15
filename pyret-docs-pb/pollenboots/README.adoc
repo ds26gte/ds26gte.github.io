@@ -18,6 +18,12 @@ Ensure you have the Pollen package installed in your Racket.
 
   raco pkg install --auto pollen
 
+== Example
+
+To run the included example, do
+
+  raco pollen render index.ptree
+
 == What
 
 https://docs.racket-lang.org/pollen[Pollen] allows the use of

@@ -16,17 +16,18 @@
   <script src=".././pollenboots/scribble-common.js"></script>
   <link rel="stylesheet" type="text/css" href=".././pollenboots/codemirror.css" title="default"/>
   <link rel="stylesheet" type="text/css" href=".././pollenboots/pyret.css" title="default"/>
-  <link rel="stylesheet" type="text/css" href=".././pollenboots/styles.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href=".././styles.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href=".././pollen-styles.css" title="default"/>
   <head>
     <title>s-exp</title>
   </head>
   <body>
     <form class="searchform" id="searchformid"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <div class="container">
-    <root><div><h1 id="s-exp" toclevel="1" tocentry="yes">s-exp</h1><div><p>Usage:</p><pre class="pyret-highlight">include s-exp</pre><pre class="pyret-highlight">import s-exp as ...</pre></div><p>  </p><p>This module re-exports the constructors from <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a>, which defines the result of parsing an s-exp.</p><p>  </p><div><p><span><a name="read-s-exp"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp.html#read-s-exp">read-s-exp</a> :: <span>(<span><span class="pyret-content">sexp-str :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></span></pre><p>    Reads an <i>s-expression</i> as a string, and returns it as a Pyret value.</p><p>    An s-expression is a string that satisfies the following grammar:</p><p>    </p><pre class="nothing_special">s-exp = "(" s-exp ... ")"
+    <root><div><h1 id="s-exp" toclevel="1" tocentry="yes">s-exp</h1><div><p>Usage:</p><pre class="pyret-highlight">include s-exp</pre><pre class="pyret-highlight">import s-exp as ...</pre></div><p>  </p><p>This module re-exports the constructors from <a href="../missing_gloss">S-Exp</a>, which defines the result of parsing an s-exp.</p><p>  </p><div><p><span><a name="read-s-exp"></a></span></p><pre class="pyret-display"><a href="../missing_gloss">read-s-exp</a> :: <span>(<span><span class="pyret-content">sexp-str :: <a href="../missing_gloss">String</a></span></span>) -&gt; <a href="../missing_gloss">S-Exp</a></span></pre><p>    Reads an <i>s-expression</i> as a string, and returns it as a Pyret value.</p><p>    An s-expression is a string that satisfies the following grammar:</p><p>    </p><pre class="nothing_special">s-exp = "(" s-exp ... ")"
       | &lt;number&gt;
       | &lt;string&gt;
-      | &lt;id&gt;</pre><p>    The first form parses to a <a href="../trove/s-exp-structs.html#s-list">s-list</a> containing the nested     sub-expression results.  Numbers become <a href="../trove/s-exp-structs.html#s-num">s-num</a>s, strings become     <a href="../trove/s-exp-structs.html#s-str">s-str</a>s, and all other names not inside quotes     become <a href="../trove/s-exp-structs.html#s-sym">s-sym</a>s.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import s-exp as S
+      | &lt;id&gt;</pre><p>    The first form parses to a <a href="../missing_gloss">s-list</a> containing the nested     sub-expression results.  Numbers become <a href="../missing_gloss">s-num</a>s, strings become     <a href="../missing_gloss">s-str</a>s, and all other names not inside quotes     become <a href="../missing_gloss">s-sym</a>s.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import s-exp as S
 
 p = S.read-s-exp
 s-list = S.s-list
@@ -120,7 +121,7 @@ end</pre><p><a class="show-embed" code="import s-exp as S
     p(&quot;(()&quot;) raises &quot;Invalid&quot; 
     p(&quot;(a')&quot;) raises &quot;Invalid&quot; 
 
- end">(Try it!)</a></p></div></div></div></root>
+ end">(Try it!)</a></p></div></div></div></div></root>
     <hr/>
     <!-- The current page is trove/s-exp.html. -->
     <a class="floatleft" href="../trove/pprint.html">⏴⏴⏴</a>

@@ -16,17 +16,18 @@
   <script src=".././pollenboots/scribble-common.js"></script>
   <link rel="stylesheet" type="text/css" href=".././pollenboots/codemirror.css" title="default"/>
   <link rel="stylesheet" type="text/css" href=".././pollenboots/pyret.css" title="default"/>
-  <link rel="stylesheet" type="text/css" href=".././pollenboots/styles.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href=".././styles.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href=".././pollen-styles.css" title="default"/>
   <head>
     <title>fetch</title>
   </head>
   <body>
     <form class="searchform" id="searchformid"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <div class="container">
-    <root><div><h1 id="fetch" toclevel="1" tocentry="yes">fetch</h1><div><p>Usage:</p><pre class="pyret-highlight">include fetch</pre><pre class="pyret-highlight">import fetch as ...</pre></div><div><p><span><a name="fetch"></a></span></p><pre class="pyret-display"><a href="../trove/fetch.html#fetch">fetch</a> :: <span>(
-  <span class="pyret-content">url :: <a href="../trove/globals.html#String">String</a></span>
+    <root><div><h1 id="fetch" toclevel="1" tocentry="yes">fetch</h1><div><p>Usage:</p><pre class="pyret-highlight">include fetch</pre><pre class="pyret-highlight">import fetch as ...</pre></div><div><p><span><a name="fetch"></a></span></p><pre class="pyret-display"><a href="../missing_gloss">fetch</a> :: <span>(
+  <span class="pyret-content">url :: <a href="../missing_gloss">String</a></span>
 )
--&gt; <span><a href="../trove/either.html#Either">Either</a>&lt;<span><a href="../trove/globals.html#String">String</a>, <a href="../trove/globals.html#String">String</a></span>&gt;</span></span></pre><p>  Fetches the content at the given <tt class="pyret-highlight">url</tt> with HTTP GET, expecting that   the result is <tt>text/plain</tt>.</p><p>  If no errors occur, returns <a href="../trove/either.html#left"><tt class="pyret-highlight">left</tt></a> with the returned   string body. The user is expected to decompose this string   using <a href="../missing_gloss"><tt class="pyret-highlight">string</tt></a> or other functions.</p><p>  If any errors occur, returns <a href="../trove/either.html#right"><tt class="pyret-highlight">right</tt></a> with that error as a string.</p><div><p><b>Examples:</b></p><pre class="pyret-highlight">import fetch as F
+-&gt; <span><a href="../missing_gloss">Either</a>&lt;<span><a href="../missing_gloss">String</a>, <a href="../missing_gloss">String</a></span>&gt;</span></span></pre><p>  Fetches the content at the given <tt class="pyret-highlight">url</tt> with HTTP GET, expecting that   the result is <tt>text/plain</tt>.</p><p>  If no errors occur, returns <a href="../missing_gloss"><tt class="pyret-highlight">left</tt></a> with the returned   string body. The user is expected to decompose this string   using <a href="../missing_gloss"><tt class="pyret-highlight">string</tt></a> or other functions.</p><p>  If any errors occur, returns <a href="../missing_gloss"><tt class="pyret-highlight">right</tt></a> with that error as a string.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import fetch as F
 import either as Ei
 
 
@@ -50,7 +51,7 @@ end</pre><p><a class="show-embed" code="import fetch as F
     bad-fetch = F.fetch(&quot;https://raw.githubusercontent.com/NO-SUCH-URL&quot;) 
     bad-fetch satisfies Ei.is-right 
     to-repr(bad-fetch) satisfies string-contains(_, &quot;400&quot;) 
- end">(Try it!)</a></p></div></div></div></root>
+ end">(Try it!)</a></p></div></div></div></div></root>
     <hr/>
     <!-- The current page is trove/fetch.html. -->
     <a class="floatleft" href="../trove/timing.html">⏴⏴⏴</a>
