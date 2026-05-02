@@ -24,7 +24,7 @@
   <body>
     <form class="searchform" id="searchformid"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
     <div class="container">
-    <root><div><h1 id="math" toclevel="1" tocentry="yes">math</h1><div><p>Usage:</p><pre class="pyret-highlight">include math</pre><pre class="pyret-highlight">import math as ...</pre></div><p>The Pyret Math library.  It consists of functions for arithmetic calculations, optimization, and more to come!</p><p>Every function in this library is available on the <tt>math</tt> module object.  For example, if you used <tt class="pyret-highlight">import math as M</tt>, you would write <tt class="pyret-highlight">M.arg-max</tt> to access <tt class="pyret-highlight">arg-max</tt> below.  If you used <tt class="pyret-highlight">include</tt>, then you can refer to identifiers without writing <tt class="pyret-highlight">M.</tt> as a prefix.</p><h2 id="Arithmetic-Functions" toclevel="2" tocentry="yes">Arithmetic Functions</h2><div><p><span><a name="sum"></a></span></p><pre class="pyret-display"><a href="../missing_gloss">sum</a> :: <span><span><a href="../missing_gloss">List</a>&lt;<span><a href="../missing_gloss">Number</a></span>&gt;</span> -&gt; <a href="../missing_gloss">Number</a></span></pre><p>Calculates the arithmetic sum of the Numbers in <tt class="pyret-highlight">l</tt>.  If <tt class="pyret-highlight">l</tt> contains at least one RoughNum, then the output will be a RoughNum.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">include math
+    <root><div><h1 id="math" toclevel="1" tocentry="yes">math</h1><div><p>Usage:</p><pre class="pyret-highlight">include math</pre><pre class="pyret-highlight">import math as ...</pre></div><p>The Pyret Math library.  It consists of functions for arithmetic calculations, optimization, and more to come!</p><p>Every function in this library is available on the <tt>math</tt> module object.  For example, if you used <tt class="pyret-highlight">import math as M</tt>, you would write <tt class="pyret-highlight">M.arg-max</tt> to access <tt class="pyret-highlight">arg-max</tt> below.  If you used <tt class="pyret-highlight">include</tt>, then you can refer to identifiers without writing <tt class="pyret-highlight">M.</tt> as a prefix.</p><h2 id="Arithmetic-Functions" toclevel="2" tocentry="yes">Arithmetic Functions</h2><div><p><span><a name="sum"></a></span></p><pre class="pyret-display"><a href="../trove/math.html#sum">sum</a> :: <span><span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span> -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre><p>Calculates the arithmetic sum of the Numbers in <tt class="pyret-highlight">l</tt>.  If <tt class="pyret-highlight">l</tt> contains at least one RoughNum, then the output will be a RoughNum.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">include math
 check:
   sum([list: ]) is 0
   sum([list: 0, 2, 4]) is 6
@@ -34,7 +34,7 @@ end</pre><p><a class="show-embed" code="include math
     sum([list: ]) is 0 
     sum([list: 0, 2, 4]) is 6 
     sum([list: -1, 1, ~2]) is-roughly ~2 
- end">(Try it!)</a></p></div></div></div><h2 id="Minimization-&amp;-Maximization" toclevel="2" tocentry="yes">Minimization &amp; Maximization</h2><div><p><span><a name="max"></a></span></p><pre class="pyret-display"><a href="../missing_gloss">max</a> :: <span><span><a href="../missing_gloss">List</a>&lt;<span><a href="../missing_gloss">Number</a></span>&gt;</span> -&gt; <a href="../missing_gloss">Number</a></span></pre><p>Calculates the maximal element of the set of Numbers in <tt class="pyret-highlight">l</tt>.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">include math
+ end">(Try it!)</a></p></div></div></div><h2 id="Minimization-&amp;-Maximization" toclevel="2" tocentry="yes">Minimization &amp; Maximization</h2><div><p><span><a name="max"></a></span></p><pre class="pyret-display"><a href="../trove/math.html#max">max</a> :: <span><span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span> -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre><p>Calculates the maximal element of the set of Numbers in <tt class="pyret-highlight">l</tt>.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">include math
 check:
   max([list: ]) raises "Empty List"
   max([list: 10]) is 10
@@ -44,7 +44,7 @@ end</pre><p><a class="show-embed" code="include math
     max([list: ]) raises &quot;Empty List&quot; 
     max([list: 10]) is 10 
     max([list: 2.1, 2, 4.5, ~1.5, -1, 1]) is-roughly 4.5 
- end">(Try it!)</a></p></div></div></div><div><p><span><a name="min"></a></span></p><pre class="pyret-display"><a href="../missing_gloss">min</a> :: <span><span><a href="../missing_gloss">List</a>&lt;<span><a href="../missing_gloss">Number</a></span>&gt;</span> -&gt; <a href="../missing_gloss">Number</a></span></pre><p>Calculates the minimal element of the set of Numbers in <tt class="pyret-highlight">l</tt>.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">include math
+ end">(Try it!)</a></p></div></div></div><div><p><span><a name="min"></a></span></p><pre class="pyret-display"><a href="../trove/math.html#min">min</a> :: <span><span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span> -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre><p>Calculates the minimal element of the set of Numbers in <tt class="pyret-highlight">l</tt>.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">include math
 check:
   min([list: ]) raises "Empty List"
   min([list: 2]) is 2
@@ -54,7 +54,7 @@ end</pre><p><a class="show-embed" code="include math
     min([list: ]) raises &quot;Empty List&quot; 
     min([list: 2]) is 2 
     min([list: -1, 0, ~1, 2, 5]) is-roughly -1 
- end">(Try it!)</a></p></div></div></div><div><p><span><a name="arg-max"></a></span></p><pre class="pyret-display"><a href="../missing_gloss">arg-max</a> :: <span><span><a href="../missing_gloss">List</a>&lt;<span><a href="../missing_gloss">Number</a></span>&gt;</span> -&gt; <a href="../missing_gloss">Number</a></span></pre><p>Calculates the index of the maximal element within <tt class="pyret-highlight">l</tt>.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">include math
+ end">(Try it!)</a></p></div></div></div><div><p><span><a name="arg-max"></a></span></p><pre class="pyret-display"><a href="../trove/math.html#arg-max">arg-max</a> :: <span><span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span> -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre><p>Calculates the index of the maximal element within <tt class="pyret-highlight">l</tt>.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">include math
 check:
   arg-max([list: ]) raises "Empty List"
   arg-max([list: 2]) is 0
@@ -64,7 +64,7 @@ end</pre><p><a class="show-embed" code="include math
     arg-max([list: ]) raises &quot;Empty List&quot; 
     arg-max([list: 2]) is 0 
     arg-max([list: -1, 0, ~1, 5, 2]) is 3 
- end">(Try it!)</a></p></div></div></div><div><p><span><a name="arg-min"></a></span></p><pre class="pyret-display"><a href="../missing_gloss">arg-min</a> :: <span><span><a href="../missing_gloss">List</a>&lt;<span><a href="../missing_gloss">Number</a></span>&gt;</span> -&gt; <a href="../missing_gloss">Number</a></span></pre><p>Calculates the index of the minimal element within <tt class="pyret-highlight">l</tt>.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">include math
+ end">(Try it!)</a></p></div></div></div><div><p><span><a name="arg-min"></a></span></p><pre class="pyret-display"><a href="../trove/math.html#arg-min">arg-min</a> :: <span><span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/globals.html#Number">Number</a></span>&gt;</span> -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre><p>Calculates the index of the minimal element within <tt class="pyret-highlight">l</tt>.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">include math
 check:
   arg-max([list: ]) raises "Empty List"
   arg-max([list: 8]) is 0
