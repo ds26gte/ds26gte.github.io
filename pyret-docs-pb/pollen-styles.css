@@ -38,6 +38,36 @@
   }
 }
 
+/* the per-module table of contents that docmodule auto-generates
+   (see local-toc in pyret-docs.rkt): inline at the top of the page on
+   narrow (phone-width) viewports, pinned as a left-hand panel once the
+   viewport is wide enough to fit it beside the centered .container
+   without overlapping the text. */
+@media (min-width: 1200px) {
+  ul.local-toc {
+    /* anchored by its right edge, at a fixed gutter to the left of
+       .container's left edge (.container's left edge sits at
+       "50% - 36ch", matching its own "max-width: 72ch; margin: 0 auto").
+       Anchoring by "right" means the gutter holds regardless of
+       .local-toc's own width or font-size. */
+    position: fixed;
+    top: 6em;
+    right: calc(50% + 36ch + 2em);
+    width: 12em;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
+    padding-right: 0.75em;
+  }
+  ul.local-toc li,
+  ul.local-toc a {
+    font-size: 0.85em;
+  }
+  ul.local-toc ul {
+    padding-left: 1em;
+  }
+}
+
 .floatleft {
   float: left;
 }
