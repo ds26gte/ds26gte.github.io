@@ -1,0 +1,245 @@
+  h1.title {
+    margin-top: 2.8em;
+    margin-bottom: 1.5em;
+    text-align: center;
+  }
+
+  .author {
+    font-style: italic;
+  }
+
+  .abstract {
+    font-style: italic;
+    margin-top: 2em;
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
+
+  h1.title {
+    font-size: 172.8%;
+  }
+
+  .dropcap {
+    line-height: 80%; /* was 90 */
+    font-size: 410%;  /* was 400 */
+    float: left;
+    padding-right: 5px;
+  }
+
+  p.hanging {
+    padding-left: 22px;
+    text-indent: -22px;
+  }
+
+  p.breakinpar {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  span.blankline {
+    display: block;
+    line-height: 1ex;
+  }
+
+  span.blankline::before {
+    content: '\a0';
+  }
+
+  pre {
+    margin-left: 2em;
+  }
+
+  blockquote {
+    margin-left: 2em;
+    margin-right: 0em;
+  }
+
+  blockquote.quotebar {
+    border-left: 1px solid black;
+    padding-left: 2ex;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  ol ol {
+    list-style-type: lower-alpha;
+  }
+
+  ol ol ol {
+    list-style-type: lower-roman;
+  }
+
+  ol ol ol ol {
+    list-style-type: upper-alpha;
+  }
+
+  tr.tableheader {
+    font-weight: bold
+  }
+
+  tt i {
+    font-family: serif;
+  }
+
+  .display.verbatim {
+    overflow: auto;
+    background-color: #f7f7f8;
+  }
+
+  .verbatim em {
+    font-family: serif;
+  }
+
+  .troffbox {
+    background-color: #fffef7;
+    border-style: solid;
+    border-color: #e6e6e6;
+    border-width: 1px;
+  }
+
+  .disable {
+    color: gray;
+  }
+
+  .footnote {
+    font-size: 90%;
+  }
+
+  .footnote hr {
+    text-align: left;
+    width: 40%;
+  }
+
+  .colophon {
+    color: gray;
+    font-size: 80%;
+    font-style: italic;
+    text-align: right;
+  }
+
+  .colophon a {
+    color: gray;
+  }
+      body {
+      margin-top: 2em;
+      margin-bottom: 2em;
+      margin-left: 8%;
+      margin-right: 8%;
+    }
+
+    .navigation {
+      color: #72010f; /* venetian red */
+      text-align: right;
+      font-size: medium;
+      font-style: italic;
+    }
+
+    @media screen {
+
+    /*
+    this ruins paragraph spacing on Firefox -- don't know why
+    a {
+      padding-left: 2px; padding-right: 2px;
+    }
+
+    a:hover {
+      padding-left: 1px; padding-right: 1px;
+      border: 1px solid #000000;
+    }
+    */
+
+  }
+
+  @media screen and (orientation: portrait) and (max-width: 480px),
+         screen and (orientation: landscape) and (max-width: 640px) {
+    body {
+      max-width: none;
+      margin: 5px;
+    }
+  }
+
+  @media print {
+
+    body {
+      text-align: justify;
+    }
+
+    a:link, a:visited {
+      text-decoration: none;
+      color: black;
+    }
+
+    /*
+    p {
+      margin-top: 1ex;
+      margin-bottom: 0;
+    }
+    */
+
+    .pagebreak {
+      page-break-after: always;
+    }
+
+    .navigation {
+      display: none;
+    }
+
+    .colophon .advertisement {
+      display: none;
+    }
+
+  }
+  @media screen {
+    h1.title {
+        color: #333333;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #dddddf;
+    }
+
+    h1,h2,h3,h4,h5,h6 {
+        color: #9b3d3d; /* terracotta pink */
+        font-family: sans-serif;
+        font-weight: normal;
+    }
+
+    a {
+        /* color: #dd4814; /* ubuntu orange */
+        text-decoration: none;
+        border-bottom: 1px dotted;
+    }
+
+    a:hover {
+        /* color: #333333; */
+        background-color: #fdca01; /* ubuntu yellow */
+    }
+}
+
+body {
+  font-family: georgia, serif;
+  line-height: 1.4;
+}
+
+.dropcap {
+    font-size: 500%;
+}
+
+@media screen { body { max-width: 672.0px; } }
+
+p.indent { text-indent: 20.0px; }
+
+p.hanging { padding-left: 20.0px; text-indent: -20.0px; }
+
+p { margin-top: 0.0px; margin-bottom: 0.0px; }
+
+.display { margin-top: 21.333333333333px; margin-bottom: 21.333333333333px; padding-top: 21.333333333333px; padding-bottom: 21.333333333333px; }
+
+.display.verbatim { padding-left: 21.333333333333px; }
+.footnote { margin-top: 0.0px; }
+
+.navigation { margin-top: 20.0px; margin-bottom: 20.0px; }
+h1,h2,h3,h4,h5,h6 { font-size: 1.2em; }

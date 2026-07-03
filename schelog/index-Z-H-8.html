@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+Programming in Schelog
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-7.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-9.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_8"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_8">8&#xa0;&#xa0;The Cut (<span style="font-family: monospace">!</span>)</a></h1>
+<p class=noindent></p>
+<p>
+
+The cut (called <code class=scheme><span class=keyword>!</span></code>) is a special goal that is used to
+prune backtracking options.  Like the <code class=scheme><span class=variable>%true</span></code> goal, the
+cut goal too succeeds, when accosted by the Schelog
+subgoaling engine.  However, when a further subgoal down the
+line fails, and time comes to retry the cut goal, Schelog
+will refuse to try alternate clauses for the predicate in
+whose definition the cut occurs.  In other words, the cut
+causes Schelog to commit to all the decisions made from the
+time that the predicate was selected to match a subgoal till
+the time the cut was satisfied.</p>
+<p>
+
+For example, consider again the <code class=scheme><span class=variable>%factorial</span></code>
+predicate, as defined in sec <a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.2">3.2</a>:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%factorial</span>
+  (<span class=keyword>%rel</span> (<span class=variable>x</span> <span class=variable>y</span> <span class=variable>x1</span> <span class=variable>y1</span>)
+    [(<span class=selfeval>0</span> <span class=selfeval>1</span>)]
+    [(<span class=variable>x</span> <span class=variable>y</span>) (<span class=keyword>%is</span> <span class=variable>x1</span> (<span class=variable>-</span> <span class=variable>x</span> <span class=selfeval>1</span>))
+           (<span class=variable>%factorial</span> <span class=variable>x1</span> <span class=variable>y1</span>)
+           (<span class=keyword>%is</span> <span class=variable>y</span> (<span class=variable>*</span> <span class=variable>y1</span> <span class=variable>x</span>))]))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Clearly,</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> ()
+  (<span class=variable>%factorial</span> <span class=selfeval>0</span> <span class=selfeval>1</span>)) <span style="font-family: monospace">=&#x3e;</span>()<sup><small>true</small></sup>
+(<span class=keyword>%which</span> (<span class=variable>n</span>)
+  (<span class=variable>%factorial</span> <span class=selfeval>0</span> <span class=variable>n</span>)) <span style="font-family: monospace">=&#x3e;</span>([<span class=variable>n</span> <span class=selfeval>1</span>])
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>But what if we asked for <code class=scheme>(<span class=variable>%more</span>)</code> for either query?
+Backtracking will try
+the second clause of <code class=scheme><span class=variable>%factorial</span></code>, and sure enough the
+clause-head unifies, producing binding <code class=scheme>[<span class=variable>x</span> <span class=selfeval>0</span>]</code>.
+We now get three subgoals.  Solving the first, we get <code class=scheme>[<span class=variable>x1</span>
+<span class=selfeval>&#x2011;1</span>]</code>, and then we have to solve <code class=scheme>(<span class=variable>%factorial</span> <span class=selfeval>&#x2011;1</span> <span class=variable>y1</span>)</code>.  It
+is easy to see there is no end to this, as we fruitlessly
+try to get the factorials of numbers that get more and more
+negative.</p>
+<p>
+
+If we placed a cut at the first clause:</p>
+<p>
+
+</p>
+<pre class=scheme>...
+[(<span class=selfeval>0</span> <span class=selfeval>1</span>) <span class=keyword>!</span>]
+...
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>the attempt to find more solutions for <code class=scheme>(<span class=variable>%factorial</span> <span class=selfeval>0</span>
+<span class=selfeval>1</span>)</code> is nipped in the bud.</p>
+<p>
+
+Calling <code class=scheme><span class=variable>%factorial</span></code> with a <em>negative</em> number would  still cause an
+infinite loop.   To take care of that problem as well, we
+use another cut:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%factorial</span>
+  (<span class=keyword>%rel</span> (<span class=variable>x</span> <span class=variable>y</span> <span class=variable>x1</span> <span class=variable>y1</span>)
+    [(<span class=selfeval>0</span> <span class=selfeval>1</span>) <span class=keyword>!</span>]
+    [(<span class=variable>x</span> <span class=variable>y</span>) (<span class=variable>&#x3c;</span> <span class=variable>x</span> <span class=selfeval>0</span>) <span class=keyword>!</span> <span class=variable>%fail</span>]
+    [(<span class=variable>x</span> <span class=variable>y</span>) (<span class=keyword>%is</span> <span class=variable>x1</span> (<span class=variable>-</span> <span class=variable>x</span> <span class=selfeval>1</span>))
+           (<span class=variable>%factorial</span> <span class=variable>x1</span> <span class=variable>y1</span>)
+           (<span class=keyword>%is</span> <span class=variable>y</span> (<span class=variable>*</span> <span class=variable>y1</span> <span class=variable>x</span>))]))
+</pre>
+<p class=noindent></p>
+<p>
+
+Using <em>raw</em> cuts as above can get very confusing.  For this
+reason, it is advisable to use it hidden away in
+well-understood abstractions.  Two such common abstractions
+are the conditional and negation.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_8.1"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_8.1">8.1&#xa0;&#xa0;Conditional Goals</a></h2>
+<p class=noindent></p>
+<p>
+
+An “if ... then ... else ...” predicate can be defined
+as follows</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%if-then-else</span>
+  (<span class=keyword>%rel</span> (<span class=variable>p</span> <span class=variable>q</span> <span class=variable>r</span>)
+    [(<span class=variable>p</span> <span class=variable>q</span> <span class=variable>r</span>) <span class=variable>p</span> <span class=keyword>!</span> <span class=variable>q</span>]
+    [(<span class=variable>p</span> <span class=variable>q</span> <span class=variable>r</span>) <span class=variable>r</span>]))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>(Note that for the first time we have predicate arguments that
+are themselves goals.)</p>
+<p>
+
+Consider the goal</p>
+<p>
+
+</p>
+<pre class=scheme><span class=variable>G0</span> <span class=variable>=</span> (<span class=variable>%if-then-else</span> <span class=variable>Gbool</span>
+		<span class=variable>Gthen</span> <span class=variable>Gelse</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>We first unify <code class=scheme><span class=variable>G0</span></code> with the first clause-head,
+giving
+<code class=scheme>[<span class=variable>p</span> <span class=variable>Gbool</span>]</code>, <code class=scheme>[<span class=variable>q</span> <span class=variable>Gthen</span>]</code>, <code class=scheme>[<span class=variable>r</span> <span class=variable>Gelse</span>]</code>.  <code class=scheme><span class=variable>Gbool</span></code> can
+now either succeed or fail.</p>
+<p>
+
+Case 1:  If <code class=scheme><span class=variable>Gbool</span></code> fails, backtracking will cause the
+<code class=scheme><span class=variable>G0</span></code> to unify with the second clause-head.  <code class=scheme><span class=variable>r</span></code> is bound
+to <code class=scheme><span class=variable>Gelse</span></code>, and so <code class=scheme><span class=variable>Gelse</span></code> is tried, as expected.</p>
+<p>
+
+Case 2: If <code class=scheme><span class=variable>Gbool</span></code> succeeds, the cut commits to this
+clause of the <code class=scheme><span class=variable>%if&#x2011;then&#x2011;else</span></code>.  We now try <code class=scheme><span class=variable>Gthen</span></code>.  If
+<code class=scheme><span class=variable>Gthen</span></code> should now fail — or even if we simply retry for
+more solutions — we are guaranteed that the second
+clause-head will not be tried.  If it were not for the cut,
+<code class=scheme><span class=variable>G0</span></code> would attempt to unify with the second clause-head, which will
+of course succeed, and <code class=scheme><span class=variable>Gelse</span></code> <em>will</em> be tried.</p>
+<p>
+
+</p>
+<a id="TAG:__tex2page_sec_8.2"></a>
+<h2 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_8.2">8.2&#xa0;&#xa0;Negation as Failure</a></h2>
+<p class=noindent></p>
+<p>
+
+Another common abstraction using the cut is <em>negation</em>.
+The negation of goal <code class=scheme><span class=variable>G</span></code> is defined as <code class=scheme>(<span class=variable>%not</span> <span class=variable>G</span>)</code>, where
+the predicate <code class=scheme><span class=variable>%not</span></code> is defined as follows:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%not</span>
+  (<span class=keyword>%rel</span> (<span class=variable>g</span>)
+    [(<span class=variable>g</span>) <span class=variable>g</span> <span class=keyword>!</span> <span class=variable>%fail</span>]
+    [(<span class=variable>g</span>) <span class=variable>%true</span>]))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Thus, <code class=scheme><span class=variable>g</span></code>’s negation is deemed a failure if <code class=scheme><span class=variable>g</span></code>
+succeeds, and a success if <code class=scheme><span class=variable>g</span></code> fails.  This is of course
+confusing goal failure with falsity.  In some cases, this
+view of negation is actually helpful.</p>
+<p>
+
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-7.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-9.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

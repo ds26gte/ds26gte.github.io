@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<!--
+Generated from index.tex by tex2page, v 20150602
+(running on Racket 6.2.0.3, unix), 
+(c) Dorai Sitaram, 
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+An \eval for TeX
+</title>
+<link rel="stylesheet" href="index-Z-S.css" title=default />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div id=slidecontent>
+<div align=right class=navigation>[Go to <span><a href="index.html">first</a>, <a href="index-Z-H-1.html">previous</a></span><span>, <a href="index-Z-H-3.html">next</a></span> page<span>; &nbsp;&nbsp;</span><span><a href="index.html#node_toc_start">contents</a></span><span><span>; &nbsp;&nbsp;</span><a href="index-Z-H-5.html#node_index_start">index</a></span>]</div>
+<p>
+<a name="node_sec_2"></a>
+<h1 class=beginchapter>2&nbsp;&nbsp;Using eval</h1></p>
+
+<p class=noindent><a name="node_idx_6"></a></p>
+<p>
+Everything of course depends on what the Scheme code
+inside the <code class=verbatim>\eval</code>s is.  As above, one can use Scheme
+as a scratchpad to perform calculations that are beyond
+T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X.  But one can also use <code class=verbatim>\eval</code> to define a
+specification language in Scheme, and then make
+effective use of that language in subsequent
+<code class=verbatim>\eval</code>s.</p>
+<p>
+In the following, we use a <em>picture language</em>
+called PicScheme, which is defined in Scheme.  The
+operators of PicScheme generate T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X and
+MetaPost&nbsp;[<a href="index-Z-H-4.html#node_bib_1">1</a>,&nbsp;<a href="index-Z-H-4.html#node_bib_2">2</a>] code fragments, but
+their true power lies in their allowing the use of the
+high-level language Scheme to compose complex pictures.
+The PicScheme code is defined inside an <code class=verbatim>\eval</code> in
+the T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X macro file <code class=verbatim>picscheme.tex</code>.  For a sample use
+of PicScheme, create a file <code class=verbatim>circlepic.tex</code> with
+the following contents:</p>
+<p>
+
+</p>
+<p>
+</p>
+<pre class=verbatim>\input eval4tex     % load \eval&nbsp;
+\input picscheme    % load picture language PicScheme&nbsp;
+</pre>
+<p class=noindent>
+</p>
+<pre class=scheme>
+<span class=variable>\eval</span>{
+(<span class=keyword>set!</span> <span class=global>*unit&#x2011;length*</span> (<span class=variable>dimen</span> <span class=selfeval>4</span> <span class=keyword>'</span><span class=variable>cm</span>))
+
+(<span class=variable>picture</span>
+  (<span class=keyword>lambda</span> ()
+    <span class=comment>;draw circle of dia 1 with center at (0,0)</span>
+    (<span class=variable>draw</span> (<span class=variable>full&#x2011;circle</span>))
+    <span class=comment>;draw horizontal diameter</span>
+    (<span class=variable>draw</span> (<span class=variable>path</span> (<span class=variable>point</span> <span class=selfeval>&#x2011;.5</span> <span class=selfeval>0</span>) <span class=keyword>'</span><span class=variable>&#x2011;&#x2011;</span> (<span class=variable>point</span> <span class=selfeval>.5</span> <span class=selfeval>0</span>)))
+    <span class=comment>;write length of diameter just above center</span>
+    (<span class=variable>label</span> (<span class=variable>point</span> <span class=selfeval>0</span> <span class=selfeval>.05</span>) <span class=selfeval>&quot;1&quot;</span>)
+    <span class=comment>;write length of circumference just outside</span>
+    <span class=comment>;circle, at 45 degrees</span>
+    (<span class=keyword>let</span> ((<span class=variable>x</span> (<span class=variable>/</span> <span class=selfeval>.55</span> (<span class=variable>sqrt</span> <span class=selfeval>2</span>))))
+      (<span class=variable>label</span> (<span class=variable>point</span> <span class=variable>x</span> <span class=variable>x</span>) <span class=selfeval>&quot;$\\pi$&quot;</span>))))
+}</pre>
+<p class=noindent></p>
+<pre class=verbatim>\bye&nbsp;
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>Note that this example contains two <code class=verbatim>\eval</code>s:
+The first is the <code class=verbatim>\eval</code> in <code class=verbatim>picscheme.tex</code>
+which defines the PicScheme operators, and the second
+is the <code class=verbatim>\eval</code> in the body of <code class=verbatim>circlepic.tex</code>
+that <em>uses</em> the PicScheme operators to draw the circle.</p>
+<p>
+We enable the <code class=verbatim>\eval</code> Scheme code in
+<code class=verbatim>circlepic.tex</code> the same way as before.  We run
+T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X on <code class=verbatim>circlepic.tex</code>, then Scheme on
+<code class=verbatim>circlepic.eval4tex</code>, and then T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X again on
+<code class=verbatim>circlepic.tex</code>:</p>
+<p>
+</p>
+<pre class=verbatim>tex circlepic&nbsp;
+racket -f circlepic.eval4tex&nbsp;
+tex circlepic&nbsp;
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent>The resulting <code class=verbatim>circlepic.dvi</code> has the
+following picture:</p>
+<p>
+<blockquote></p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+
+<img src="index-Z-G-1.gif" border="0" alt="[index-Z-G-1.gif]"></p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</blockquote></p>
+<p>
+</p>
+
+<p class=noindent>In addition, you can run T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page directly on
+<code class=verbatim>circlepic.tex</code> to produce a Web-browsable
+version:</p>
+<p>
+</p>
+<pre class=verbatim>tex2page circlepic&nbsp;
+</pre>
+<p class=noindent></p>
+<p>
+We will now describe in detail the capabilities
+provided by PicScheme.</p>
+<p>
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div align=right class=navigation>[Go to <span><a href="index.html">first</a>, <a href="index-Z-H-1.html">previous</a></span><span>, <a href="index-Z-H-3.html">next</a></span> page<span>; &nbsp;&nbsp;</span><span><a href="index.html#node_toc_start">contents</a></span><span><span>; &nbsp;&nbsp;</span><a href="index-Z-H-5.html#node_index_start">index</a></span>]</div>
+</p>
+<p></p>
+</div>
+</body>
+</html>

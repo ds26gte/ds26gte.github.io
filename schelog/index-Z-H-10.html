@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+Programming in Schelog
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-9.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-11.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_10"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_10">10&#xa0;&#xa0;Glossary of Schelog Primitives</a></h1>
+<p class=noindent></p>
+<p>
+
+This section lists, in ascii order, all the Schelog
+primitives, with a brief explanation for each.  Each entry is
+identified
+
+as either <em>procedure</em>, <em>macro</em>, <em>predicate</em>,
+<em>goal</em>, or <em>flag</em>.  (Note that predicates and goals are also
+procedures.  We nevertheless use the more specific names
+because of their importance to Schelog programming.)</p>
+<p>
+
+Following Prolog style, a predicate’s arity is also noted in
+its title.  Thus, <code class=scheme><span class=variable>%&#x3c;</span></code>/2 means that <code class=scheme><span class=variable>%&#x3c;</span></code> takes two
+arguments.  Variable-arity predicates use an asterisk
+instead of a number, eg, <code class=scheme><span class=keyword>%and</span></code>/*.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%/=</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+<code class=scheme><span class=variable>%/=</span></code> is the negation of <code class=scheme><span class=variable>%=</span></code>.
+The goal <code class=scheme>(<span class=variable>%/=</span> <span class=variable>E1</span> <span class=variable>E2</span>)</code> succeeds if <code class=scheme><span class=variable>E1</span></code> can not be unified
+with <code class=scheme><span class=variable>E2</span></code>.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%/==</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+<code class=scheme><span class=variable>%/==</span></code> is the negation of <code class=scheme><span class=variable>%==</span></code>.
+The goal <code class=scheme>(<span class=variable>%/==</span> <span class=variable>E1</span> <span class=variable>E2</span>)</code> succeeds if <code class=scheme><span class=variable>E1</span></code> and <code class=scheme><span class=variable>E2</span></code> are not
+identical.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%&#x3c;</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%&#x3c;</span> <span class=variable>E1</span> <span class=variable>E2</span>)</code> succeeds if <code class=scheme><span class=variable>E1</span></code> and <code class=scheme><span class=variable>E2</span></code> are bound to
+numbers and <code class=scheme><span class=variable>E1</span></code> is less than <code class=scheme><span class=variable>E2</span></code>.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%&#x3c;=</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%&#x3c;=</span> <span class=variable>E1</span> <span class=variable>E2</span>)</code> succeeds if <code class=scheme><span class=variable>E1</span></code> and <code class=scheme><span class=variable>E2</span></code> are bound to
+numbers and <code class=scheme><span class=variable>E1</span></code> is less than or equal to <code class=scheme><span class=variable>E2</span></code>.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%=</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%=</span> <span class=variable>E1</span> <span class=variable>E2</span>)</code> succeeds if <code class=scheme><span class=variable>E1</span></code> can be unified with
+<code class=scheme><span class=variable>E2</span></code>.  Any resulting bindings for logic variables are kept.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%=/=</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%=/=</span> <span class=variable>E1</span> <span class=variable>E2</span>)</code> succeeds if <code class=scheme><span class=variable>E1</span></code> and <code class=scheme><span class=variable>E2</span></code> are bound to
+numbers and <code class=scheme><span class=variable>E1</span></code> is not equal to <code class=scheme><span class=variable>E2</span></code>.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%=:=</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%=:=</span> <span class=variable>E1</span> <span class=variable>E2</span>)</code> succeeds if <code class=scheme><span class=variable>E1</span></code> and <code class=scheme><span class=variable>E2</span></code> are bound to
+numbers and <code class=scheme><span class=variable>E1</span></code> is equal to <code class=scheme><span class=variable>E2</span></code>.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%==</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%==</span> <span class=variable>E1</span> <span class=variable>E2</span>)</code> succeeds if <code class=scheme><span class=variable>E1</span></code> is <em>identical</em>
+to <code class=scheme><span class=variable>E2</span></code>.  They should be structurally equal.  If containing
+logic variables, they should have the same variables in the
+same position.  Unlike a <code class=scheme><span class=variable>%=</span></code>-call, this goal will not bind
+any logic variables.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%&#x3e;</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%&#x3e;</span> <span class=variable>E1</span> <span class=variable>E2</span>)</code> succeeds if <code class=scheme><span class=variable>E1</span></code> and <code class=scheme><span class=variable>E2</span></code> are bound to
+numbers and <code class=scheme><span class=variable>E1</span></code> is greater than <code class=scheme><span class=variable>E2</span></code>.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%&#x3e;=</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%&#x3e;=</span> <span class=variable>E1</span> <span class=variable>E2</span>)</code> succeeds if <code class=scheme><span class=variable>E1</span></code> and <code class=scheme><span class=variable>E2</span></code> are bound to
+numbers and <code class=scheme><span class=variable>E1</span></code> is greater than or equal to <code class=scheme><span class=variable>E2</span></code>.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=keyword>%and</span></code>/*</td><td align=right>[<i>macro</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=keyword>%and</span> <span class=variable>G</span> ...)</code> succeeds if all the goals
+<code class=scheme><span class=variable>G</span></code>, ..., succeed.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%append</span></code>/3</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%append</span> <span class=variable>E1</span> <span class=variable>E2</span> <span class=variable>E3</span>)</code> succeeds if <code class=scheme><span class=variable>E3</span></code> is unifiable
+with the list obtained by appending <code class=scheme><span class=variable>E1</span></code> and <code class=scheme><span class=variable>E2</span></code></p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=keyword>%assert</span></code></td><td align=right>[<i>macro</i>]</td></tr></table><p>
+The form  <code class=scheme>(<span class=keyword>%assert</span> <span class=variable>Pname</span> (<span class=variable>V</span> ...) <span class=variable>C</span> ...)</code> adds the clauses
+<code class=scheme><span class=variable>C</span></code>, ..., to the <em>end</em> of the predicate that is the value of
+the Scheme variable <code class=scheme><span class=variable>Pname</span></code>.  The variables <code class=scheme><span class=variable>V</span></code>, ..., are
+local logic variables for <code class=scheme><span class=variable>C</span></code>, ...</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=keyword>%assert&#x2011;a</span></code></td><td align=right>[<i>macro</i>]</td></tr></table><p>
+Like <code class=scheme><span class=keyword>%assert</span></code>, but adds the new clauses to the <em>front</em>
+of the existing predicate.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%bag&#x2011;of</span></code>/3</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%bag&#x2011;of</span> <span class=variable>E1</span> <span class=variable>G</span> <span class=variable>E2</span>)</code> unifies with <code class=scheme><span class=variable>E2</span></code> the <em>bag</em>
+(multiset)
+of all the
+instantiations of <code class=scheme><span class=variable>E1</span></code> for which goal <code class=scheme><span class=variable>G</span></code> succeeds.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%bag&#x2011;of&#x2011;1</span></code>/3</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+Similar to <code class=scheme><span class=variable>%bag&#x2011;of</span></code>, but fails if the bag is empty.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%compound</span></code>/1</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%compound</span> <span class=variable>E</span>)</code> succeeds if <code class=scheme><span class=variable>E</span></code> is a non-atomic
+structure, ie, a vector or a list.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%constant</span></code>/1</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%compound</span> <span class=variable>E</span>)</code> succeeds if <code class=scheme><span class=variable>E</span></code> is an atomic
+structure, ie, not a vector or a list.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%copy</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%copy</span> <span class=variable>F</span> <span class=variable>S</span>)</code> unifies with <code class=scheme><span class=variable>S</span></code> a copy of the
+frozen structure in <code class=scheme><span class=variable>F</span></code>.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%empty&#x2011;rel</span></code>/*</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%empty&#x2011;rel</span> <span class=variable>E</span> ...)</code> always fails.  The <em>value</em>
+<code class=scheme><span class=variable>%empty&#x2011;rel</span></code> is used as a starting value for predicates
+that can later be enhanced with <code class=scheme><span class=keyword>%assert</span></code> and <code class=scheme><span class=keyword>%assert&#x2011;a</span></code>.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%fail</span></code></td><td align=right>[<i>goal</i>]</td></tr></table><p>
+The goal <code class=scheme><span class=variable>%fail</span></code> always fails.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=keyword>%free&#x2011;vars</span></code></td><td align=right>[<i>macro</i>]</td></tr></table><p>
+The form <code class=scheme>(<span class=keyword>%free&#x2011;vars</span> (<span class=variable>V</span> ...) <span class=variable>G</span>)</code> identifies
+the occurrences of the variables <code class=scheme><span class=variable>V</span></code>, ..., in goal
+<code class=scheme><span class=variable>G</span></code> as free.  It is used to avoid existential quantification
+in calls to set predicates (<code class=scheme><span class=variable>%bag&#x2011;of</span></code>, <code class=scheme><span class=variable>%set&#x2011;of</span></code>, &#x26;c.).</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%freeze</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%freeze</span> <span class=variable>S</span> <span class=variable>F</span>)</code> unifies with <code class=scheme><span class=variable>F</span></code> a new frozen
+version of the structure in <code class=scheme><span class=variable>S</span></code>.  Freezing implies that all
+the unbound variables are preserved.  <code class=scheme><span class=variable>F</span></code> can henceforth be
+used as <em>bound</em> object with no fear of its variables
+getting bound by unification.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%if&#x2011;then&#x2011;else</span></code>/3</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%if&#x2011;then&#x2011;else</span> <span class=variable>G1</span> <span class=variable>G2</span> <span class=variable>G3</span>)</code> tries <code class=scheme><span class=variable>G1</span></code> first: if it
+succeeds, tries <code class=scheme><span class=variable>G2</span></code>; if not, tries <code class=scheme><span class=variable>G3</span></code>.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=keyword>%is</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=keyword>%is</span> <span class=variable>E1</span> <span class=variable>E2</span>)</code> unifies with <code class=scheme><span class=variable>E1</span></code> the result of
+evaluating <code class=scheme><span class=variable>E2</span></code> as a Scheme expression.  <code class=scheme><span class=variable>E2</span></code> may contain
+logic variables, which are dereferenced automatically.
+Fails if <code class=scheme><span class=variable>E2</span></code> contains unbound logic variables.
+(Note: Unlike other Schelog predicates, <code class=scheme><span class=keyword>%is</span></code> is implemented
+as a macro and not a procedure.)</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=keyword>%let</span></code></td><td align=right>[<i>macro</i>]</td></tr></table><p>
+The form <code class=scheme>(<span class=keyword>%let</span> (<span class=variable>V</span> ...) <span class=variable>E</span> ...)</code> introduces <code class=scheme><span class=variable>V</span></code>, ..., as
+lexically scoped logic variables to be used in <code class=scheme><span class=variable>E</span></code>, ...</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%melt</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%melt</span> <span class=variable>F</span> <span class=variable>S</span>)</code> unifies  <code class=scheme><span class=variable>S</span></code> with the thawed
+(original) form of the frozen structure in <code class=scheme><span class=variable>F</span></code>.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%melt&#x2011;new</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%melt&#x2011;new</span> <span class=variable>F</span> <span class=variable>S</span>)</code> unifies <code class=scheme><span class=variable>S</span></code> with a thawed
+<em>copy</em> of the frozen structure in <code class=scheme><span class=variable>F</span></code>.  This means
+new logic variables are used for unbound logic variables in
+<code class=scheme><span class=variable>F</span></code></p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%member</span></code>/2</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%member</span> <span class=variable>E1</span> <span class=variable>E2</span>)</code> succeeds if <code class=scheme><span class=variable>E1</span></code> is a member
+of the list in <code class=scheme><span class=variable>E2</span></code>.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%nonvar</span></code>/1</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+<code class=scheme><span class=variable>%nonvar</span></code> is the negation of <code class=scheme><span class=variable>%var</span></code>.
+The goal <code class=scheme>(<span class=variable>%nonvar</span> <span class=variable>E</span>)</code> succeeds if <code class=scheme><span class=variable>E</span></code> is completely
+instantiated, ie, it has no unbound variable in it.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%not</span></code>/1</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%not</span> <span class=variable>G</span>)</code> succeeds if <code class=scheme><span class=variable>G</span></code> fails.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%more</span></code></td><td align=right>[<i>procedure</i>]</td></tr></table><p>
+The thunk <code class=scheme><span class=variable>%more</span></code> produces more instantiations of the
+variables in the most recent <code class=scheme><span class=keyword>%which</span></code>-form that satisfy the
+goals in that <code class=scheme><span class=keyword>%which</span></code>-form.  If no more solutions can
+be found, <code class=scheme><span class=variable>%more</span></code> returns <code class=scheme><span class=selfeval>#f</span></code>.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=keyword>%or</span></code>/*</td><td align=right>[<i>macro</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=keyword>%or</span> <span class=variable>G</span> ...)</code> succeeds if one of <code class=scheme><span class=variable>G</span></code>, ..., tried
+in that order, succeeds.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=keyword>%rel</span></code></td><td align=right>[<i>macro</i>]</td></tr></table><p>
+The form <code class=scheme>(<span class=keyword>%rel</span> (<span class=variable>V</span> ...) <span class=variable>C</span> ...)</code> creates a predicate object.
+Each clause <code class=scheme><span class=variable>C</span></code> is of the form <code class=scheme>[(<span class=variable>E</span> ...) <span class=variable>G</span> ...]</code>, signifying
+that the goal created by applying the predicate object to
+anything that matches <code class=scheme>(<span class=variable>E</span> ...)</code> is deemed to succeed if all
+the goals <code class=scheme><span class=variable>G</span></code>, ..., can, in their turn, be shown to succeed.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%repeat</span></code>/0</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%repeat</span>)</code> always succeeds (even on retries).
+Used for failure-driven loops.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=global>*schelog&#x2011;use&#x2011;occurs&#x2011;check?*</span></code></td><td align=right>[<i>flag</i>]</td></tr></table><p>
+If the global flag
+<code class=scheme><span class=global>*schelog&#x2011;use&#x2011;occurs&#x2011;check?*</span></code> is false (the default),
+Schelog’s unification will not use the occurs check.
+If it is true, the occurs check is enabled.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%set&#x2011;of</span></code>/3</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%set&#x2011;of</span> <span class=variable>E1</span> <span class=variable>G</span> <span class=variable>E2</span>)</code> unifies with <code class=scheme><span class=variable>E2</span></code> the <em>set</em>
+of all the
+instantiations of <code class=scheme><span class=variable>E1</span></code> for which goal <code class=scheme><span class=variable>G</span></code> succeeds.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%set&#x2011;of&#x2011;1</span></code>/3</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+Similar to <code class=scheme><span class=variable>%set&#x2011;of</span></code>, but fails if the set is empty.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%true</span></code></td><td align=right>[<i>goal</i>]</td></tr></table><p>
+The goal <code class=scheme><span class=variable>%true</span></code> succeeds.  Fails on retry.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>%var</span></code>/1</td><td align=right>[<i>predicate</i>]</td></tr></table><p>
+The goal <code class=scheme>(<span class=variable>%var</span> <span class=variable>E</span>)</code> succeeds if <code class=scheme><span class=variable>E</span></code> is not completely
+instantiated, ie, it has at least one unbound variable in
+it.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=keyword>%which</span></code></td><td align=right>[<i>macro</i>]</td></tr></table><p>
+The form <code class=scheme>(<span class=keyword>%which</span> (<span class=variable>V</span> ...) <span class=variable>G</span> ...)</code> returns an instantiation
+of the variables <code class=scheme><span class=variable>V</span></code>, ..., that satisfies all of <code class=scheme><span class=variable>G</span></code>,
+...  If <code class=scheme><span class=variable>G</span></code>, ..., cannot be satisfied, returns <code class=scheme><span class=selfeval>#f</span></code>.
+Calling the thunk <code class=scheme><span class=variable>%more</span></code> produces more
+instantiations, if available.</p>
+<p>
+
+</p>
+<table bgcolor="#e5e5e5"  width=90% cellpadding=0 cellspacing=0><tr ><td align=left><code class=scheme><span class=variable>_</span></code> &#xa0;&#xa0;(underscore)</td><td align=right>[<i>procedure</i>]</td></tr></table><p>
+A thunk that produces a new logic variable.  Can be
+used in situations where we want a logic variable but
+don’t want to name it.  (<code class=scheme><span class=keyword>%let</span></code>, in contrast, introduces new
+lexical names for the logic variables it creates.)</p>
+<p>
+
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-9.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-11.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

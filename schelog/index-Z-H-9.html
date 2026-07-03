@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+Programming in Schelog
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-8.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-10.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_9"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_9">9&#xa0;&#xa0;Set Predicates</a></h1>
+<p class=noindent></p>
+<p>
+
+The goal</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>%bag-of</span> <span class=variable>X</span> <span class=variable>G</span> <span class=variable>Bag</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>unifies with <code class=scheme><span class=variable>Bag</span></code> the list of all instantiations of
+<code class=scheme><span class=variable>X</span></code> for which <code class=scheme><span class=variable>G</span></code> succeeds.  Thus, the following query
+asks for all the things known — ie, the collection of things
+such that someone knows them:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> (<span class=variable>things-known</span>)
+  (<span class=keyword>%let</span> (<span class=variable>someone</span> <span class=variable>x</span>)
+    (<span class=variable>%bag-of</span> <span class=variable>x</span> (<span class=variable>%knows</span> <span class=variable>someone</span> <span class=variable>x</span>)
+      <span class=variable>things-known</span>)))
+<span style="font-family: monospace">=&#x3e;</span>([<span class=variable>things-known</span>
+      (<span class=variable>TeX</span> <span class=variable>Scheme</span> <span class=variable>Prolog</span>
+       <span class=variable>Penelope</span> <span class=variable>TeX</span> <span class=variable>Prolog</span>
+       <span class=variable>Odysseus</span> <span class=variable>TeX</span> <span class=variable>calculus</span>)])
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>This is the only solution for this goal:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>%more</span>) <span style="font-family: monospace">=&#x3e;</span><span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Note that some things — eg, TeX — are enumerated
+more than once.  This is because more than one person knows
+TeX.  To remove duplicates, use the predicate
+<code class=scheme><span class=variable>%set&#x2011;of</span></code>
+instead of <code class=scheme><span class=variable>%bag&#x2011;of</span></code>:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> (<span class=variable>things-known</span>)
+  (<span class=keyword>%let</span> (<span class=variable>someone</span> <span class=variable>x</span>)
+    (<span class=variable>%set-of</span> <span class=variable>x</span> (<span class=variable>%knows</span> <span class=variable>someone</span> <span class=variable>x</span>)
+      <span class=variable>things-known</span>)))
+<span style="font-family: monospace">=&#x3e;</span>([<span class=variable>things-known</span>
+      (<span class=variable>TeX</span> <span class=variable>Scheme</span> <span class=variable>Prolog</span>
+       <span class=variable>Penelope</span> <span class=variable>Odysseus</span> <span class=variable>calculus</span>)])
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>In the above, the free variable <code class=scheme><span class=variable>someone</span></code> in the
+<code class=scheme><span class=variable>%knows</span></code>-goal is used as if it
+were existentially quantified.  In contrast, Prolog’s
+versions of
+<code class=scheme><span class=variable>%bag&#x2011;of</span></code> and <code class=scheme><span class=variable>%set&#x2011;of</span></code> fix it for each solution of the
+set-predicate goal.  We can do it too with some additional
+syntax that identifies the free variable.
+Eg,</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> (<span class=variable>someone</span> <span class=variable>things-known</span>)
+  (<span class=keyword>%let</span> (<span class=variable>x</span>)
+    (<span class=variable>%bag-of</span> <span class=variable>x</span>
+      (<span class=keyword>%free-vars</span> (<span class=variable>someone</span>)
+        (<span class=variable>%knows</span> <span class=variable>someone</span> <span class=variable>x</span>))
+      <span class=variable>things-known</span>)))
+<span style="font-family: monospace">=&#x3e;</span>([<span class=variable>someone</span> <span class=variable>Odysseus</span>]
+    [<span class=variable>things-known</span>
+      (<span class=variable>TeX</span> <span class=variable>Scheme</span> <span class=variable>Prolog</span>
+       <span class=variable>Penelope</span>)])
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The bag of things known by <em>one</em> someone is
+returned.  That someone is Odysseus.  The query can be
+retried for more solutions, each listing the things known by
+a different someone:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=variable>%more</span>) <span style="font-family: monospace">=&#x3e;</span>([<span class=variable>someone</span> <span class=variable>Penelope</span>]
+            [<span class=variable>things-known</span>
+              (<span class=variable>TeX</span> <span class=variable>Prolog</span>
+	       <span class=variable>Odysseus</span>)])
+(<span class=variable>%more</span>) <span style="font-family: monospace">=&#x3e;</span>([<span class=variable>someone</span> <span class=variable>Telemachus</span>]
+            [<span class=variable>things-known</span>
+              (<span class=variable>TeX</span> <span class=variable>calculus</span>)])
+(<span class=variable>%more</span>) <span style="font-family: monospace">=&#x3e;</span><span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+Schelog also provides two variants of these set predicates,
+viz., <code class=scheme><span class=variable>%bag&#x2011;of&#x2011;1</span></code> and <code class=scheme><span class=variable>%set&#x2011;of&#x2011;1</span></code>.  These act like <code class=scheme><span class=variable>%bag&#x2011;of</span></code>
+and <code class=scheme><span class=variable>%set&#x2011;of</span></code> but fail if the resulting bag or set is empty.</p>
+<p>
+
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-8.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-10.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

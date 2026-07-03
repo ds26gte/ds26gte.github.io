@@ -1,0 +1,80 @@
+/* last modified 2015-04-05 */
+
+body {
+    max-width: 40em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: 4em;
+    margin-right: 2em;
+}
+
+a {
+    text-decoration: none;
+    border-bottom: 1px dotted;
+}
+
+.title {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    text-align: center;
+    font-size: 200%;
+}
+
+h1,
+h2 {
+    margin-top: 1.5em;
+}
+
+.footnotes {
+    margin-top: 2.5em;
+    font-size: 80%;
+}
+
+.figure {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.listing {
+    white-space: nowrap;
+    overflow: auto;
+}
+
+.dropcap {
+    line-height: 80%;
+    font-size: 500%;
+    float: left;
+    padding-right: 5px;
+}
+
+p.bulleted {
+    padding-left: 2em;
+    text-indent: 0em; /* in case parindent used */
+}
+
+p.bulleted .bullet {
+    float: left;
+    margin-left: -2em;
+    width: 1.75em;
+    text-align: right;
+}
+
+.anchor {
+    float: left;
+    font-size: 10%;
+    vertical-align: top;
+}
+
+.navbar {
+    font-style: italic;
+}
+
+@media print {
+    body {
+        text-align: justify;
+    }
+
+    .navbar {
+        display: none;
+    }
+}

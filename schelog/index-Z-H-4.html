@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+Programming in Schelog
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-3.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-5.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_4"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_4">4&#xa0;&#xa0;Backtracking</a></h1>
+<p class=noindent></p>
+<p>
+
+It is helpful to go into the following evaluation (sec <a class=hrefinternal href="index-Z-H-2.html#TAG:__tex2page_sec_2.2">2.2</a>)
+in a
+little detail:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> ()
+  (<span class=variable>%computer-literate</span> <span class=keyword>'</span><span class=variable>Penelope</span>))
+<span style="font-family: monospace">=&#x3e;</span>()<sup><small>true</small></sup>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The starting goal
+is:</p>
+<p>
+
+</p>
+<pre class=scheme><span class=variable>G0</span> <span class=variable>=</span> (<span class=variable>%computer-literate</span> <span class=variable>Penelope</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>(I’ve taken out the quote because <code class=scheme><span class=variable>Penelope</span></code> is the result
+of evaluating <code class=scheme><span class=keyword>'</span><span class=variable>Penelope</span></code>.)</p>
+<p>
+
+Schelog tries to match this with the head of the first
+clause of <code class=scheme><span class=variable>%computer&#x2011;literate</span></code>.  It succeeds, generating a
+binding  <code class=scheme>[<span class=variable>person</span> <span class=variable>Penelope</span>]</code>.</p>
+<p>
+
+But this means it now has two new goals — <em>subgoals</em>
+— to solve.  These are the goals in the body of the
+matching clause, with the logic variables substituted by
+their instantiations:</p>
+<p>
+
+</p>
+<pre class=scheme><span class=variable>G1</span> <span class=variable>=</span> (<span class=variable>%knows</span> <span class=variable>Penelope</span> <span class=variable>TeX</span>)
+<span class=variable>G2</span> <span class=variable>=</span> (<span class=variable>%knows</span> <span class=variable>Penelope</span> <span class=variable>Scheme</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>For <code class=scheme><span class=variable>G1</span></code>, Schelog attempts matches with the clauses of
+<code class=scheme><span class=variable>%knows</span></code>, and succeeds at the fifth try.  (There are no
+subgoals in this case, because the bodies of these “fact”
+clauses are empty, in contrast to the “rule” clauses of
+<code class=scheme><span class=variable>%computer&#x2011;literate</span></code>.)
+Schelog then tries to solve <code class=scheme><span class=variable>G2</span></code> against the clauses of
+<code class=scheme><span class=variable>%knows</span></code>, and since there is no clause stating that
+Penelope knows Scheme, it fails.</p>
+<p>
+
+All is not lost though.  Schelog now <em>backtracks</em> to the
+goal that was solved just before, viz., <code class=scheme><span class=variable>G1</span></code>.  It
+<em>retries</em> <code class=scheme><span class=variable>G1</span></code>, ie, tries to solve it in a
+different way.
+This entails searching down the previously unconsidered
+<code class=scheme><span class=variable>%knows</span></code>
+clauses for <code class=scheme><span class=variable>G1</span></code>, ie, the sixth onwards.  Obviously,
+Schelog fails again, because the fact that Penelope knows
+TeX occurs only once.</p>
+<p>
+
+Schelog now backtracks to the goal before <code class=scheme><span class=variable>G1</span></code>, ie,
+<code class=scheme><span class=variable>G0</span></code>.  We abandon the current successful match with the
+first clause-head of <code class=scheme><span class=variable>%computer&#x2011;literate</span></code>, and try the
+next clause-head.  Schelog succeeds, again producing a binding
+<code class=scheme>[<span class=variable>person</span> <span class=variable>Penelope</span>]</code>, and two new subgoals:</p>
+<p>
+
+</p>
+<pre class=scheme><span class=variable>G3</span> <span class=variable>=</span> (<span class=variable>%knows</span> <span class=variable>Penelope</span> <span class=variable>TeX</span>)
+<span class=variable>G4</span> <span class=variable>=</span> (<span class=variable>%knows</span> <span class=variable>Penelope</span> <span class=variable>Prolog</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>It is now easy to trace that Schelog finds both <code class=scheme><span class=variable>G3</span></code> and <code class=scheme><span class=variable>G4</span></code> to be
+true.  Since both of <code class=scheme><span class=variable>G0</span></code>’s subgoals are true, <code class=scheme><span class=variable>G0</span></code> is
+itself considered true.  And this is what Schelog reports.  The
+interested reader can now trace  why the
+following query has a different denouement:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> ()
+  (<span class=variable>%computer-literate</span> <span class=keyword>'</span><span class=variable>Telemachus</span>))
+<span style="font-family: monospace">=&#x3e;</span><span class=selfeval>#f</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-3.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-5.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+Programming in Schelog
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-5.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-7.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_6"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_6">6&#xa0;&#xa0;Conjuctions and Disjunctions</a></h1>
+<p class=noindent></p>
+<p>
+
+Goals may be combined using the forms <code class=scheme><span class=keyword>%and</span></code>
+and <code class=scheme><span class=keyword>%or</span></code>
+to form compound goals.  (For <code class=scheme><span class=variable>%not</span></code>, see sec <a class=hrefinternal href="index-Z-H-8.html#TAG:__tex2page_sec_8.2">8.2</a>.)
+Eg,</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> (<span class=variable>x</span>)
+  (<span class=keyword>%and</span> (<span class=variable>%member</span> <span class=variable>x</span> <span class=keyword>'</span>(<span class=selfeval>1</span> <span class=selfeval>2</span> <span class=selfeval>3</span>))
+        (<span class=variable>%&#x3c;</span> <span class=variable>x</span> <span class=selfeval>3</span>)))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>gives solutions for <code class=scheme><span class=variable>x</span></code> that satisfy both the
+argument goals of the <code class=scheme><span class=keyword>%and</span></code>.
+Ie, <code class=scheme><span class=variable>x</span></code> should both be a member of <code class=scheme><span class=keyword>'</span>(<span class=selfeval>1</span> <span class=selfeval>2</span> <span class=selfeval>3</span>)</code>
+<em>and</em>  be less than <code class=scheme><span class=selfeval>3</span></code>.    The first
+solution is</p>
+<p>
+
+</p>
+<pre class=scheme>([<span class=variable>x</span> <span class=selfeval>1</span>])
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Typing <code class=scheme>(<span class=variable>%more</span>)</code> gives another solution:</p>
+<p>
+
+</p>
+<pre class=scheme>([<span class=variable>x</span> <span class=selfeval>2</span>])
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>There are no more solutions, because <code class=scheme>[<span class=variable>x</span> <span class=selfeval>3</span>]</code> satisfies
+the first but not the second goal.</p>
+<p>
+
+Similarly, the query</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> (<span class=variable>x</span>)
+  (<span class=keyword>%or</span> (<span class=variable>%member</span> <span class=variable>x</span> <span class=keyword>'</span>(<span class=selfeval>1</span> <span class=selfeval>2</span> <span class=selfeval>3</span>))
+       (<span class=variable>%member</span> <span class=variable>x</span> <span class=keyword>'</span>(<span class=selfeval>3</span> <span class=selfeval>4</span> <span class=selfeval>5</span>))))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>lists all <code class=scheme><span class=variable>x</span></code> that are members of either list.</p>
+<p>
+
+</p>
+<pre class=scheme>           ([<span class=variable>x</span> <span class=selfeval>1</span>])
+(<span class=variable>%more</span>) <span style="font-family: monospace">=&#x3e;</span>([<span class=variable>x</span> <span class=selfeval>2</span>])
+(<span class=variable>%more</span>) <span style="font-family: monospace">=&#x3e;</span>([<span class=variable>x</span> <span class=selfeval>3</span>])
+(<span class=variable>%more</span>) <span style="font-family: monospace">=&#x3e;</span>([<span class=variable>x</span> <span class=selfeval>3</span>])
+(<span class=variable>%more</span>) <span style="font-family: monospace">=&#x3e;</span>([<span class=variable>x</span> <span class=selfeval>4</span>])
+(<span class=variable>%more</span>) <span style="font-family: monospace">=&#x3e;</span>([<span class=variable>x</span> <span class=selfeval>5</span>])
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>(Yes, <code class=scheme>([<span class=variable>x</span> <span class=selfeval>3</span>])</code> is listed twice.)</p>
+<p>
+
+We can rewrite the predicate <code class=scheme><span class=variable>%computer&#x2011;literate</span></code>
+from sec <a class=hrefinternal href="index-Z-H-2.html#TAG:__tex2page_sec_2.2">2.2</a> using <code class=scheme><span class=keyword>%and</span></code> and <code class=scheme><span class=keyword>%or</span></code>:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%computer-literate</span>
+  (<span class=keyword>%rel</span> (<span class=variable>person</span>)
+    [(<span class=variable>person</span>)
+     (<span class=keyword>%or</span>
+       (<span class=keyword>%and</span> (<span class=variable>%knows</span> <span class=variable>person</span>
+	       <span class=keyword>'</span><span class=variable>TeX</span>)
+	     (<span class=variable>%knows</span> <span class=variable>person</span>
+	       <span class=keyword>'</span><span class=variable>Scheme</span>))
+       (<span class=keyword>%and</span> (<span class=variable>%knows</span> <span class=variable>person</span>
+	       <span class=keyword>'</span><span class=variable>TeX</span>)
+	     (<span class=variable>%knows</span> <span class=variable>person</span>
+	       <span class=keyword>'</span><span class=variable>Prolog</span>)))]))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>Or,  more succinctly:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%computer-literate</span>
+  (<span class=keyword>%rel</span> (<span class=variable>person</span>)
+    [(<span class=variable>person</span>)
+      (<span class=keyword>%and</span> (<span class=variable>%knows</span> <span class=variable>person</span>
+	      <span class=keyword>'</span><span class=variable>TeX</span>)
+        (<span class=keyword>%or</span> (<span class=variable>%knows</span> <span class=variable>person</span>
+	       <span class=keyword>'</span><span class=variable>Scheme</span>)
+	     (<span class=variable>%knows</span> <span class=variable>person</span>
+	       <span class=keyword>'</span><span class=variable>Prolog</span>)))]))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>We can even dispense with the <code class=scheme><span class=keyword>%rel</span></code> altogether:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>define</span> <span class=variable>%computer-literate</span>
+  (<span class=keyword>lambda</span> (<span class=variable>person</span>)
+    (<span class=keyword>%and</span> (<span class=variable>%knows</span> <span class=variable>person</span>
+	    <span class=keyword>'</span><span class=variable>TeX</span>)
+      (<span class=keyword>%or</span> (<span class=variable>%knows</span> <span class=variable>person</span>
+	     <span class=keyword>'</span><span class=variable>Scheme</span>)
+	(<span class=variable>%knows</span> <span class=variable>person</span>
+	  <span class=keyword>'</span><span class=variable>Prolog</span>)))))
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>This last looks like a conventional Scheme predicate
+definition, and is arguably
+the most readable format for a Scheme programmer.</p>
+<p>
+
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index-Z-H-5.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-7.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

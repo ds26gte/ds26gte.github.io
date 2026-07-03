@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<!--
+Generated from index.tex by tex2page, v. 20170113
+Copyright (C) 1997-2017 Dorai Sitaram
+(running on SBCL 1.3.13.76-990abdc0f Linux)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+club3
+</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proza+Libre" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=EB+Garamond" />
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div align=right class=navigation></div>
+<p></p>
+<p>
+</p>
+<p>
+
+  
+</p>
+<p>
+</p>
+<p>
+  </p>
+<p>
+
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+ 
+</p>
+<p>
+
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+
+
+
+ 
+</p>
+<h1 class=title>club3</h1>
+<p class=noindent></p>
+<div align=center>&#xa0;<a href="https://github.com/ds26gte/club3">https://github.com/ds26gte/club3</a>&#xa0;</div>
+
+<div align=center>&#xa0;<a href="http://ds26gte.github.io">Dorai Sitaram</a>&#xa0;</div>
+<p>
+</p>
+<div class=medskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+
+</p>
+
+<p class=noindent>club3 is a Common Lisp program that schedule a series of meetings of the
+Toastmaster™
+type fairly.</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_1"></a>
+<h1 class=section>Installation</h1>
+<p class=noindent>Get club3 from GitHub:</p>
+<p>
+</p>
+<pre class=verbatim>git clone https://github.com/ds26gte/club3
+</pre>
+<p class=noindent>
+This produces
+a directory <code class=verbatim>club3</code>,
+which contains a shell script called <code class=verbatim>club3</code>.  Put a copy of or soft link to
+<code class=verbatim>club3</code> in your <code class=verbatim>PATH</code>.</p>
+<p>
+The subdirectory <code class=verbatim>lisp</code> contains several Lisp files, the main file
+being <code class=verbatim>club3.lisp</code>.  If you move <code class=verbatim>club3.lisp</code> to a different
+location, you must ensure that all the other <code class=verbatim>.lisp</code> files in the
+<code class=verbatim>lisp</code> subdirectory move with it, as code in <code class=verbatim>club3.lisp</code> assumes
+that they are in the same directory as itself.</p>
+<p>
+The script <code class=verbatim>club3</code> sets and uses an environment variable <code class=verbatim>CLUB3DIR</code> to
+identify the directory containing <code class=verbatim>club3.lisp</code>.  Change it to suit you.</p>
+<p>
+The script <code class=verbatim>club3</code> also sets and uses an environment variable <code class=verbatim>LISP</code> to identify
+your Common Lisp system.  Change to suit you.</p>
+<p>
+Optional: You may compile <code class=verbatim>club3.lisp</code> (using the Common Lisp function
+<code class=verbatim>compile&#x2011;file</code>).  Only <code class=verbatim>club3.lisp</code> need be explicitly compiled — it will
+take care of compiling the other <code class=verbatim>.lisp</code> files.</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_2"></a>
+<h1 class=section>Usage</h1>
+<p class=noindent>In a directory that contains all the data relevant to your club, call
+<code class=verbatim>club3</code> with the argument <code class=verbatim>schedules</code> or <code class=verbatim>profiles</code>.</p>
+<p>
+The data in the current directory serves as input to both calls, and
+influences the result.  This input data consists of an init file
+<code class=verbatim>club3rc.lisp</code> and a subdirectory <code class=verbatim>past&#x2011;schedules</code> which contains the
+scheduling history of the club.  For an example, see
+the directory <code class=verbatim>examples/articulators</code> in the distribution.</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_3"></a>
+<h1 class=section>Generating schedules</h1>
+<p class=noindent></p>
+<pre class=verbatim>% club3 schedules
+</pre>
+<p class=noindent>
+generates schedules.  (I.e., type <code class=verbatim>club3 schedules</code> at your Unix
+prompt <code class=verbatim>%</code>.)</p>
+<p>
+(For convenience, the argument <code class=verbatim>schedules</code> can be dropped:
+calling <code class=verbatim>club3</code> is equivalent to calling <code class=verbatim>club3 schedules</code>.)</p>
+<p>
+The schedules consist of a <code class=verbatim>.txt</code> file for each date
+in the calendar (see below), and an HTML file <code class=verbatim>new&#x2011;schedules.html</code>
+that lists the schedules as an easy-to-read and -print table.
+For a saved example, see
+<tt>examples/articulators/current-schedules.html</tt> in the club3 distro.</p>
+<p>
+The generated <code class=verbatim>.txt</code> files can be inserted into <code class=verbatim>past&#x2011;schedules</code> (see
+below) to influence the course of future schedules (created by future
+calls to <code class=verbatim>club3 schedules</code>).  Before putting a <code class=verbatim>.txt</code> file into
+<code class=verbatim>past&#x2011;schedules</code>, it is a good idea to edit this file by hand to ensure
+that it accurately records the members who actually performed the roles
+(since club members typically negotiate substitutions up to the very
+last minute because of unforeseen circumstances).</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_4"></a>
+<h1 class=section>Generating profiles</h1>
+<p class=noindent></p>
+<pre class=verbatim>% club3 profiles
+</pre>
+<p class=noindent>
+generates member profiles in a subdirectory called <code class=verbatim>profiles</code>, browsable
+via an <code class=verbatim>index.html</code> file.
+Example: <code class=verbatim>examples/articulators/profiles/index.html</code> in the distro.</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_5"></a>
+<h1 class=section>Initialization</h1>
+<p class=noindent>The init file <code class=verbatim>club3rc.lisp</code> is essential.  At the very least, it must
+use the operators <code class=verbatim>members</code>, <code class=verbatim>lineups</code>, and <code class=verbatim>calendar</code> to respectively list
+the members in the club; the type of meeting lineups used; and the
+calendar dates for which schedules are desired.</p>
+<p>
+Other operators such as <code class=verbatim>availability</code>, <code class=verbatim>expertise</code>, <code class=verbatim>eagerness</code>,
+<code class=verbatim>role&#x2011;difficulty</code>, and <code class=verbatim>number&#x2011;of&#x2011;trials</code> are optional: However it is useful
+to invoke some or all of them so that the generated schedules are both
+equitable and feasible.</p>
+<p>
+The operators <code class=verbatim>full&#x2011;names</code>, <code class=verbatim>role&#x2011;names</code>, and <code class=verbatim>club&#x2011;name</code> help make the output
+schedules more readable.</p>
+<p>
+Example: <code class=verbatim>examples/articulators/club3rc.lisp</code> in the distro.</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_6"></a>
+<h1 class=section>Members</h1>
+<p class=noindent>The operator <code class=verbatim>members</code> lists the members in the club, a symbol for each
+member.  E.g.,</p>
+<p>
+</p>
+<pre class=verbatim>(members andrew brad charlie dan eileen fran george hilary ian judy
+         kim lori marcia nelson oliver prasad rick stephanie theresa
+         ulrich vanessa willy xavier yul zoe)
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_7"></a>
+<h1 class=section>Lineups</h1>
+<p class=noindent>The operator <code class=verbatim>lineups</code> introduces the various prescribed lineups for the
+club’s meetings.  Each lineup is a list whose first element is a keyword
+describing the type of meeting, and whose second element is a list of
+roles.</p>
+<p>
+</p>
+<pre class=verbatim>(lineups (:default
+           (tm word joke poet speaker speaker speaker
+               ge eval eval eval topics)))
+</pre>
+<p class=noindent>
+Roles can repeat: the above lineup allows for three <code class=verbatim>speaker</code>s and three
+<code class=verbatim>eval</code>s.</p>
+<p>
+The first lineup is considered the default lineup (even if it wasn’t
+explicitly named <code class=verbatim>:default</code>).  <code class=verbatim>lineups</code> can take more arguments if different
+lineups are possible (for different meetings).</p>
+<p>
+</p>
+<pre class=verbatim>(lineups (:default ...)
+         (:topics-tuesday
+          (tm word joke poet speaker speaker ge eval eval topics)))
+</pre>
+<p class=noindent>
+This specifies a meeting of type <code class=verbatim>:topics&#x2011;tuesday</code>, which differs from the
+<code class=verbatim>:default</code> meeting in that its lineup has only two <code class=verbatim>speaker</code>s and two <code class=verbatim>eval</code>s.
+(The purpose of this meeting is plausibly to allow more time for <code class=verbatim>topics</code>
+than is possible in a <code class=verbatim>:default</code> meeting.)</p>
+<p>
+A type of meeting called <code class=verbatim>:superset</code> may be optionally added.  This
+specifies the list of roles that will be specified in the HTML table
+generated by <code class=verbatim>club3 schedules</code> for a sequence of meetings, which may be
+of different type.  The idea is to list all the roles possible in all
+the meetings, and have the column for each meeting fill only the row
+that is relevant to it.</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_8"></a>
+<h1 class=section>Calendar</h1>
+<p class=noindent>The operator <code class=verbatim>calendar</code> contains a series of dates for which meetings need
+to be scheduled.  Each date is given as a dotted integer YYYY.MM.DD; thus,
+2009.02.24 is 2009 Feb 24.</p>
+<p>
+</p>
+<pre class=verbatim>(calendar 2009.03.03
+          2009.03.10)
+</pre>
+<p class=noindent>
+If the type of meeting to be held on a particular date differs from the
+<code class=verbatim>:default</code> type of meeting, then the date is enclosed as the first element
+in a list whose second element is the type of meeting. E.g.,</p>
+<p>
+</p>
+<pre class=verbatim>(calendar 2009.03.03
+          (2009.03.10 :contest)
+          2009.03.17
+          2009.03.24
+          (2009.03.31 :skills-night)
+          (2009.04.07 :topics-tuesday))
+</pre>
+<p class=noindent>
+The type of meeting is typically one of the keywords introduced by the
+<code class=verbatim>lineups</code> operator (see above).  However, it can be anything.  If it isn’t one
+of the keywords introduced by <code class=verbatim>lineups</code>, then no schedule is presumed
+for that date.  (This is useful to mark certain dates for special
+activities that do not require scheduling, or have been scheduled by
+other means.)</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_9"></a>
+<h1 class=section>Availability</h1>
+<p class=noindent>The <code class=verbatim>availability</code> operator contains exceptional information about the
+temporal availability of the members.  By default, members are assumed
+to be always available.  To override this for any member, that member’s
+symbol is associated with an expression denoting
+when that member is available.</p>
+<p>
+Availability expressions are given in prefix notation using operators
+such as <code class=verbatim>after</code>, <code class=verbatim>always</code>, <code class=verbatim>before</code>, <code class=verbatim>between</code>, <code class=verbatim>from</code>,
+<code class=verbatim>on</code>, and <code class=verbatim>until</code> whose arguments
+are dates or the results of other operations.</p>
+<p>
+<code class=verbatim>and</code>, <code class=verbatim>not</code>, and <code class=verbatim>or</code> are also allowed, but can only operate on the results of
+other operations (i.e., not directly on dates).  [Use <code class=verbatim>on</code> if you find
+yourself wanting to use <code class=verbatim>and</code>/<code class=verbatim>not</code>/<code class=verbatim>or</code> directly on dates.  E.g.,
+<code class=verbatim>(not (on 2009.03.17))</code>.]</p>
+<p>
+Dates are either in YYYY.MM.DD format or the keyword
+<code class=verbatim>:further&#x2011;notice</code> (= &#x221e;).
+Examples:</p>
+<p>
+</p>
+<pre class=verbatim>(availabilty (kim (not (between 2009.03.10 2009.03.21))))
+</pre>
+<p class=noindent>
+states that <code class=verbatim>kim</code> will not be available from March 3 to 21, 2009
+(inclusive).</p>
+<p>
+</p>
+<pre class=verbatim>(availability (kim ...)
+              (theresa (not (until :further-notice))))
+</pre>
+<p class=noindent>
+says that <code class=verbatim>theresa</code> will not be available until further notice.</p>
+<p>
+</p>
+<pre class=verbatim>(availability (kim ...)
+              (theresa ...)
+              (kumaran (and (not (on 2009.02.24 2009.04.28
+                                     2009.05.26 2009.06.30))
+                            (not (between 2009.03.10
+                                          2009.03.31)))))
+</pre>
+<p class=noindent>
+states that <code class=verbatim>kumaran</code> will not be available on Feb 24, April 28, May 26, and
+June 30 of 2009; and also between March 10 and 31 of 2009.</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_10"></a>
+<h1 class=section>Role-difficulty</h1>
+<p class=noindent>Using the <code class=verbatim>role&#x2011;difficulty</code> operator, you can identify specific roles to
+be either <code class=verbatim>:easy</code>, <code class=verbatim>:intermediate</code>, or <code class=verbatim>:hard</code>.  By default, all roles are
+considered to be <code class=verbatim>:easy</code>.  Example entries:</p>
+<p>
+</p>
+<pre class=verbatim>(role-difficulty (speaker :intermediate)
+                 (eval :hard))
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_11"></a>
+<h1 class=section>Expertise</h1>
+<p class=noindent>By default, every member is considered to be capable of doing all and
+only the <code class=verbatim>:easy</code> roles  To modify this, use the <code class=verbatim>expertise</code> operator.  Each
+argument is a list whose first element is the member name and whose
+subsequent elements are the additional roles they can tackle beyond the
+<code class=verbatim>:easy</code> roles.  E.g.,</p>
+<p>
+</p>
+<pre class=verbatim>(expertise (rick topics eval))
+</pre>
+<p class=noindent>
+If you entered <code class=verbatim>:intermediate</code> or <code class=verbatim>:hard</code> instead of a role name, all roles
+that are intermediate or hard, respectively, are intended.</p>
+<p>
+</p>
+<pre class=verbatim>(expertise (rick ...)
+           (connie :intermediate))
+</pre>
+<p class=noindent>
+The keyword <code class=verbatim>:all</code> stands for <em>all</em> roles.  Thus to encode the fact that
+<code class=verbatim>bash</code> can do anything:</p>
+<p>
+</p>
+<pre class=verbatim>(expertise (rick ...)
+           (connie ...)
+           (bash :all))
+</pre>
+<p class=noindent>
+You may also enter a list such as <code class=verbatim>(&#x2011; speaker topics)</code> instead of a role.
+This requests that the <code class=verbatim>speaker</code> and <code class=verbatim>topics</code> roles be removed from that
+member’s expertise.</p>
+<p>
+</p>
+<pre class=verbatim>(expertise (rick ...)
+           (connie ...)
+           (bash ...)
+           (judyk (- speaker topics)))
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_12"></a>
+<h1 class=section>Eagerness</h1>
+<p class=noindent>By default, all members are supposed to exhibit the same moderate level
+of eagerness to be scheduled.  However, using the <code class=verbatim>eagerness</code> operator,
+you can add an eagerness level to a member.  Each argument consists of
+the member name followed by a number between 0 and 3 inclusive: 0 for
+inactive; 1 for taking it slow; 2 for normal (the default); and 3 for
+fast track.  E.g.,</p>
+<p>
+</p>
+<pre class=verbatim>(eagerness (joseph 3)
+           (judyk 1)
+           (theresa 0))
+</pre>
+<p class=noindent>
+states that <code class=verbatim>theresa</code> is inactive, <code class=verbatim>judyk</code> wants to take it slow, and <code class=verbatim>joseph</code>
+wants the fast track.</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_13"></a>
+<h1 class=section>Number-of-trials</h1>
+<p class=noindent><code class=verbatim>club3</code> uses a system that ascribes demerits to each member for a role on
+any day (based on history, availability, etc).  Since a lineup is filled
+in a certain order, earlier roles may beat out later roles in getting
+their best-suited members, leading to overall higher demerits.  <code class=verbatim>club3</code>
+tries to counter this by picking among eligible members using an
+geometrically decaying distribution among them, so a member with higher
+demerits could still snag a role.  <code class=verbatim>club3</code> then generates more, different
+lineups, to see if another lineup with fewer overall demerits
+materializes.</p>
+<p>
+By default, <code class=verbatim>club3</code> generates 400 trial lineups for each meeting date, and
+picks the best among them.  <code class=verbatim>club3</code> output will also indicate the ordinal
+<code class=verbatim>n</code> of the eventually picked lineup, so you get an idea if the number of
+trials is reasonable.  (If <code class=verbatim>n</code> is too close to 400, and the best lineup
+was updated many times, perhaps more trials are needed.)</p>
+<p>
+To change the number of trials, use the <code class=verbatim>number&#x2011;of&#x2011;trials</code> operator, e.g.,</p>
+<p>
+</p>
+<pre class=verbatim>(number-of-trials 200)
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_14"></a>
+<h1 class=section>Full-names</h1>
+<p class=noindent>The symbol used for each member is typically capitalized  when printing
+out schedules or profiles; thus, <code class=verbatim>charlie</code> becomes “Charlie” and <code class=verbatim>marcia</code>
+becomes “Marcia”.  However, in certain cases, naive capitalization may
+be inaccurate or unsightly.  For instance, if there are several members
+with the same (first) name, the <code class=verbatim>members</code> operator may have used an
+initial to disambiguate, e.g., <code class=verbatim>judyk</code> and <code class=verbatim>judyp</code> for two different Judys.
+To properly capitalize them in the output schedule (so the Judys don’t
+judge you), use the <code class=verbatim>full&#x2011;names</code> operator:</p>
+<p>
+</p>
+<pre class=verbatim>(full-names (judyk &#x22;Judy K&#x22;)
+            (judyp &#x22;Judy P&#x22;))
+</pre>
+<p class=noindent>
+You may add more complicated names:</p>
+<p>
+</p>
+<pre class=verbatim>(full-names (judyk ...)
+            (judyp ...)
+            (kelvin &#x22;William Thomson, First Baron Kelvin&#x22;))
+</pre>
+<p class=noindent>
+For routine scheduling, however, a first name, sometimes enhanced with a
+disambiguating initial, is usually
+enough.</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_15"></a>
+<h1 class=section>Role-names</h1>
+<p class=noindent><code class=verbatim>lineups</code> uses abbreviated symbols for each role.  When printing out the
+schedule as an HTML file, the roles are capitalized, and if there are
+multiple instances of a role in a meeting, each role instance gets a number suffix
+(e.g., “Speaker #2”).  If you want the printed name for a role to be
+different than the mere capitalization of the role symbol, you may use
+the <code class=verbatim>role&#x2011;names</code> operator, e.g.,</p>
+<p>
+</p>
+<pre class=verbatim>(role-names (tm &#x22;Toastmaster&#x22;)
+            (eval &#x22;Evaluator&#x22;))
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_16"></a>
+<h1 class=section>Club-name</h1>
+<p class=noindent>The name of the club is set using the operator <code class=verbatim>club&#x2011;name</code>.  This name is
+used to title the schedules.</p>
+<p>
+</p>
+<pre class=verbatim>(club-name &#x22;The Articulators&#x22;)
+</pre>
+<p class=noindent></p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_17"></a>
+<h1 class=section>History</h1>
+<p class=noindent>The subdirectory <code class=verbatim>past&#x2011;schedules</code> contains the schedules (the <code class=verbatim>.txt</code> files)
+generated for previous calendars — i.e., by previous calls to <code class=verbatim>club3 schedules</code>.  While optional, <code class=verbatim>past&#x2011;schedules</code> is useful to maintain, as
+it provides the historical information necessary to ensure that no
+member is over- or underscheduled.</p>
+<p>
+</p>
+<a name="TAG:__tex2page_sec_Temp_18"></a>
+<h1 class=section>System requirements</h1>
+<p class=noindent><code class=verbatim>club3</code> runs on any Common Lisp in a Unix-like environment, e.g.,
+<a href="http://common-lisp.net/project/armedbear">ABCL</a>,
+<a href="http://clisp.sf.net">CLISP</a>,
+<a href="http://ccl.clozure.com">Clozure CL</a>,
+<a href="http://cmucl.org">CMUCL</a>,
+<a href="https://github.com/jcbeaudoin/MKCL">MKCL</a>,
+<a href="http://ecls.sf.net">ECL</a>, and
+<a href="http://sbcl.sf.net">SBCL</a>.
+(On Windows, you can get a Unix
+environment via <a href="http://cygwin.com">Cygwin</a>, which also
+provides CLISP.)</p>
+<p>
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+<div align=right class=navigation></div>
+</p>
+<p></p>
+<div align=right class=colophon>Last modified: Fri, Jan 13, 2017, 9:17 pm UTC−5<br><div align=right class=advertisement>HTML conversion by <a href="http://ds26gte.github.io/tex2page/index.html">T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page 20170113</a></div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+Programming in Schelog
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-2.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+<a id="TAG:__tex2page_sec_1"></a>
+<h1 class=section><a class=hrefinternal href="index.html#TAG:__tex2page_toc_TAG:__tex2page_sec_1">1&#xa0;&#xa0;Simple Goals and Queries</a></h1>
+<p class=noindent></p>
+<p>
+
+Schelog objects are the same as Scheme objects.  However, there
+are two subsets of these objects that are of special
+interest to Schelog: <em>goals</em> and <em>predicates</em>.  We
+will first look at some simple goals.
+Section <a class=hrefinternal href="index-Z-H-2.html#TAG:__tex2page_sec_2">2</a> will introduce predicates and ways
+of making  complex goals using predicates.</p>
+<p>
+
+A goal is an object whose truth or falsity we can check.  A
+goal that turns out to be true is said to succeed.
+A goal that turns out to be false is said to
+fail.</p>
+<p>
+
+Two simple goals that are provided in Schelog are:</p>
+<p>
+
+</p>
+<pre class=scheme><span class=variable>%true</span>
+<span class=variable>%fail</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>The  goal <code class=scheme><span class=variable>%true</span></code> succeeds.  The goal <code class=scheme><span class=variable>%fail</span></code>
+always fails.</p>
+<p>
+
+(The names of all Schelog primitive objects
+start with <code class=scheme><span class=variable>%</span></code>.  This is to avoid clashes with the names
+of conventional Scheme objects of related meaning.
+User-created objects in Schelog are not required to
+follow this convention.)</p>
+<p>
+
+A Schelog user can <em>query</em> a goal by wrapping it in a
+<code class=scheme><span class=keyword>%which</span></code>-form.</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> () <span class=variable>%true</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>evaluates to <code class=scheme>()</code>, indicating success, whereas:</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> () <span class=variable>%fail</span>)
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>evaluates to <code class=scheme><span class=selfeval>#f</span></code>, indicating failure.</p>
+<p>
+
+Note 1: The second subexpression of the <code class=scheme><span class=keyword>%which</span></code>-form
+is the empty list <code class=scheme>()</code>.  Later (sec <a class=hrefinternal href="index-Z-H-2.html#TAG:__tex2page_sec_2.3">2.3</a>),
+we will see <code class=scheme><span class=keyword>%which</span></code>es
+with other lists as the second subform.</p>
+<p>
+
+Note 2: The distinction between successful and failing goals
+depends on Scheme’s distinguishing <code class=scheme><span class=selfeval>#f</span></code> from
+<code class=scheme>()</code>.  We will see later (sec <a class=hrefinternal href="index-Z-H-2.html#TAG:__tex2page_sec_2.3.1">2.3.1</a>)
+what to do in Scheme dialects where <code class=scheme><span class=selfeval>#f</span></code> and <code class=scheme>()</code> are
+identical.  For the moment, we will use the annotation
+<code class=scheme>()<sup><small>true</small></sup></code> to signal that <code class=scheme>()</code> is being used as a true
+value.</p>
+<p>
+
+Henceforth, we will use the notation:</p>
+<p>
+
+</p>
+<pre class=scheme><span class=variable>E</span> <span style="font-family: monospace">=&#x3e;</span><span class=variable>F</span>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+
+<p class=noindent>to say that <code class=scheme><span class=variable>E</span></code>  <em>evaluates to</em> <code class=scheme><span class=variable>F</span></code>.   Thus,</p>
+<p>
+
+</p>
+<pre class=scheme>(<span class=keyword>%which</span> () <span class=variable>%true</span>) <span style="font-family: monospace">=&#x3e;</span>()<sup><small>true</small></sup>
+</pre>
+<p class=noindent></p>
+<p>
+
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span><a class=hrefinternal href="index.html">first</a>, <a class=hrefinternal href="index.html">previous</a></span><span>, <a class=hrefinternal href="index-Z-H-2.html">next</a></span> page<span>; &#xa0;&#xa0;</span><span><a class=hrefinternal href="index.html#TAG:__tex2page_toc">contents</a></span>]</div>
+<p>
+</p>
+</div>
+</body>
+</html>
+

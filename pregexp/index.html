@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang=en>
+<!--
+Generated from index.tex by tex2page, v. 20200131
+Copyright (C) 1997-2020 Dorai Sitaram
+(running on Racket 7.5 :unix)
+http://ds26gte.github.io/tex2page/index.html
+-->
+<head>
+<meta charset="utf-8">
+<title>
+pregexp: Portable Regular Expressions for Scheme and Common Lisp
+</title>
+<link rel="stylesheet" href="index-Z-S.css" />
+<meta name=robots content="index,follow">
+</head>
+<body>
+<div>
+<div class=navigation>[Go to <span class=disable>first, previous</span><span><span class=disable>, </span><a class=hrefinternal href="index-Z-H-1.html">next</a></span> page<span class=disable>; &#xa0;&#xa0;</span><span class=disable>contents</span>]</div>
+<p>
+</p>
+<h1 class=title>pregexp: <br>
+Portable Regular Expressions <br>
+for Scheme and Common Lisp</h1>
+<p class=noindent></p>
+<p>
+
+</p>
+<div class=centerline>&#xa0;<a href="https://github.com/ds26gte/pregexp">Download</a>&#xa0;</div>
+
+<p>
+
+</p>
+<div class=centerline>&#xa0;<a href="http://ds26gte.github.com">Dorai
+Sitaram</a>&#xa0;</div>
+<p>
+
+</p>
+<div class=bigskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+
+<p class=noindent><code class=verbatim>pregexp.scm</code> is a portable library for <em>
+regular expressions</em> (aka <em>regexps</em> or <em>
+regexes</em>) that runs in any Scheme
+that complies with R4RS, R5RS or R6RS&#xa0;[<a class=hrefinternal href="index-Z-H-5.html#TAG:__tex2page_bib_2">2</a>].  It
+provides regular expressions
+modeled on
+Perl’s&#xa0;[<a class=hrefinternal href="index-Z-H-5.html#TAG:__tex2page_bib_1">1</a>,&#xa0;<a class=hrefinternal href="index-Z-H-5.html#TAG:__tex2page_bib_3">3</a>], and includes such
+powerful directives as numeric and nongreedy
+quantifiers, capturing and non-capturing clustering,
+POSIX character classes, selective case- and
+space-insensitivity, backreferences, alternation,
+backtrack pruning,
+positive and negative lookahead and lookbehind, in
+addition to the more basic directives familiar to all
+regexp users.</p>
+<p>
+
+To use, simply load the file <code class=verbatim>pregexp.scm</code> into
+your Scheme.
+(Alternatively, if your dialect allows it, you can
+install <code class=verbatim>pregexp</code> as a <em>module</em> — consult
+the file
+<a href="https://github.com/ds26gte/pregexp/blob/master/INSTALL">INSTALL</a> in the distribution.)</p>
+<p>
+
+The file <code class=verbatim>pregexp.lisp</code> is the Common Lisp version
+of this library.  To use it, load it into your Common Lisp.
+(The descriptions and examples in this manual use Scheme
+syntax, but their
+translation to CL syntax is trivial.)</p>
+<p>
+</p>
+
+<p class=noindent><strong>Contents</strong></p>
+<p>
+
+<a id="TAG:__tex2page_toc"></a></p>
+
+<p class=noindent></p>
+<p>
+</p>
+
+<p class=noindent><b>
+&#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_1"></a><a class=hrefinternal href="index-Z-H-1.html#TAG:__tex2page_sec_1">1&#xa0;&#xa0;Introduction</a></b><br></p>
+
+<p class=noindent><b>
+&#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_2"></a><a class=hrefinternal href="index-Z-H-2.html#TAG:__tex2page_sec_2">2&#xa0;&#xa0;Regexp procedures</a></b><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_2.1"></a><a class=hrefinternal href="index-Z-H-2.html#TAG:__tex2page_sec_2.1">2.1&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp</span></code></a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_2.2"></a><a class=hrefinternal href="index-Z-H-2.html#TAG:__tex2page_sec_2.2">2.2&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp&#x2011;match&#x2011;positions</span></code></a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_2.3"></a><a class=hrefinternal href="index-Z-H-2.html#TAG:__tex2page_sec_2.3">2.3&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp&#x2011;match</span></code></a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_2.4"></a><a class=hrefinternal href="index-Z-H-2.html#TAG:__tex2page_sec_2.4">2.4&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp&#x2011;split</span></code></a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_2.5"></a><a class=hrefinternal href="index-Z-H-2.html#TAG:__tex2page_sec_2.5">2.5&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp&#x2011;replace</span></code></a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_2.6"></a><a class=hrefinternal href="index-Z-H-2.html#TAG:__tex2page_sec_2.6">2.6&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp&#x2011;replace*</span></code></a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_2.7"></a><a class=hrefinternal href="index-Z-H-2.html#TAG:__tex2page_sec_2.7">2.7&#xa0;&#xa0;<code class=scheme><span class=variable>pregexp&#x2011;quote</span></code></a><br></p>
+
+<p class=noindent><b>
+&#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3">3&#xa0;&#xa0;The regexp pattern language</a></b><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.1"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.1">3.1&#xa0;&#xa0;Basic assertions</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.2"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.2">3.2&#xa0;&#xa0;Characters and character classes</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.2.1"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.2.1">3.2.1&#xa0;&#xa0;Some frequently used character
+classes</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.2.2"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.2.2">3.2.2&#xa0;&#xa0;POSIX character classes</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.3"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.3">3.3&#xa0;&#xa0;Quantifiers</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.3.1"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.3.1">3.3.1&#xa0;&#xa0;Numeric quantifiers</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.3.2"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.3.2">3.3.2&#xa0;&#xa0;Non-greedy quantifiers</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.4"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.4">3.4&#xa0;&#xa0;Clusters</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.4.1"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.4.1">3.4.1&#xa0;&#xa0;Backreferences</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.4.2"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.4.2">3.4.2&#xa0;&#xa0;Non-capturing clusters</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.4.3"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.4.3">3.4.3&#xa0;&#xa0;Cloisters</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.5"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.5">3.5&#xa0;&#xa0;Alternation</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.6"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.6">3.6&#xa0;&#xa0;Backtracking</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.6.1"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.6.1">3.6.1&#xa0;&#xa0;Disabling backtracking</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.7"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.7">3.7&#xa0;&#xa0;Looking ahead and behind</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.7.1"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.7.1">3.7.1&#xa0;&#xa0;Lookahead</a><br>
+&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_3.7.2"></a><a class=hrefinternal href="index-Z-H-3.html#TAG:__tex2page_sec_3.7.2">3.7.2&#xa0;&#xa0;Lookbehind</a><br></p>
+
+<p class=noindent><b>
+&#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_4"></a><a class=hrefinternal href="index-Z-H-4.html#TAG:__tex2page_sec_4">4&#xa0;&#xa0;An extended example</a></b><br></p>
+
+<p class=noindent><b>
+&#xa0; &#xa0; <a id="TAG:__tex2page_toc_TAG:__tex2page_sec_5"></a><a class=hrefinternal href="index-Z-H-5.html#TAG:__tex2page_sec_5">5&#xa0;&#xa0;References</a></b><br>
+<a id="TAG:__tex2page_toc_end"></a>
+</p>
+<div class=smallskip></div>
+<p style="margin-top: 0pt; margin-bottom: 0pt">
+</p>
+<div class=navigation>[Go to <span class=disable>first, previous</span><span><span class=disable>, </span><a class=hrefinternal href="index-Z-H-1.html">next</a></span> page<span class=disable>; &#xa0;&#xa0;</span><span class=disable>contents</span>]</div>
+<p>
+</p>
+<div class="rightline colophon">Last modified: Fri, Jan 30, 2020, 2:29 pm UTC−5<br><div class="rightline advertisement">HTML conversion by <a href="http://ds26gte.github.io/tex2page/index.html">T<span style="position: relative; top: 0.5ex; margin-left: -0.1667em; margin-right: -0.125em; text-transform: uppercase">e</span>X2page 20200131</a></div></div>
+</div>
+</body>
+</html>
+

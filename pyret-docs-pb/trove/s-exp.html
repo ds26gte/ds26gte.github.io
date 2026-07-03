@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script src=".././pollenboots/codemirror.js"></script>
+  <script src=".././pollenboots/runmode.js"></script>
+  <script src=".././pollenboots/pyret.js"></script>
+  <script src=".././pollenboots/hilite.js"></script>
+  <script src=".././pollenboots/search.js"></script>
+  <script src=".././pollenboots/pyret_2.js"></script>
+  <script src=".././pollenboots/default-rpcs.js"></script>
+  <script type="module" src=".././pollenboots/embed-api.js"></script>
+  <script src=".././pollenboots/scribble-common.js"></script>
+  <link rel="stylesheet" type="text/css" href=".././pollenboots/codemirror.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href=".././pollenboots/pyret.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href=".././styles.css" title="default"/>
+  <link rel="stylesheet" type="text/css" href=".././pollen-styles.css" title="default"/>
+  <head>
+    <title>s-exp</title>
+  </head>
+  <body>
+    <form class="searchform" id="searchformid"><input class="searchbox" id="searchbox" type="text" tabindex="1" placeholder="...search manuals..." title="Enter a search string to search the manuals" onkeypress="return DoSearchKey(event, this, &quot;9.1&quot;, &quot;&quot;);"/></form>
+    <div class="container">
+    <root><div><h1 id="s-exp" toclevel="1" tocentry="yes">s-exp</h1><div><p>Usage:</p><pre class="pyret-highlight">include s-exp</pre><pre class="pyret-highlight">import s-exp as ...</pre></div><ul class="local-toc"><li><a href="#read-s-exp">read-s-exp</a></li></ul><p>  </p><p>This module re-exports the constructors from <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a>, which defines the result of parsing an s-exp.</p><p>  </p><div data-toc-fname="read-s-exp" data-toc-label="read-s-exp"><p><span><a name="read-s-exp"></a></span></p><pre class="pyret-display"><a href="../trove/s-exp.html#read-s-exp">read-s-exp</a> :: <span>(<span><span class="pyret-content">sexp-str :: <a href="../trove/globals.html#String">String</a></span></span>) -&gt; <a href="../trove/s-exp-structs.html#S-Exp">S-Exp</a></span></pre><p>    Reads an <i>s-expression</i> as a string, and returns it as a Pyret value.</p><p>    An s-expression is a string that satisfies the following grammar:</p><p>    </p><pre class="nothing_special">s-exp = "(" s-exp ... ")"
+      | &lt;number&gt;
+      | &lt;string&gt;
+      | &lt;id&gt;</pre><p>    The first form parses to a <a href="../trove/s-exp-structs.html#s-list">s-list</a> containing the nested     sub-expression results.  Numbers become <a href="../trove/s-exp-structs.html#s-num">s-num</a>s, strings become     <a href="../trove/s-exp-structs.html#s-str">s-str</a>s, and all other names not inside quotes     become <a href="../trove/s-exp-structs.html#s-sym">s-sym</a>s.</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">import s-exp as S
+
+p = S.read-s-exp
+s-list = S.s-list
+s-num = S.s-num
+s-str = S.s-str
+s-sym = S.s-sym
+
+check:
+  p("()") is s-list(empty)
+  p("(5)") is s-list([list: s-num(5)])
+  p("(5 4)") is s-list([list: s-num(5), s-num(4)])
+  p("(a 5)") is s-list([list: s-sym("a"), s-num(5)])
+  p("a") is s-sym("a")
+  p("\"a\"") is s-str("a")
+  p("(a (b c))") is
+    s-list([list:
+      s-sym("a"),
+      s-list([list: s-sym("b"), s-sym("c")])
+    ])
+  p("(\"a\" (5 (4) ()) \"b\")") is
+    s-list([list:
+      s-str("a"),
+      s-list([list:
+        s-num(5),
+        s-list([list: s-num(4)]),
+        s-list(empty)
+      ]),
+      s-str("b")
+    ])
+
+  p("-5") is s-num(-5)
+  p("-4.4") is s-num(-4.4)
+  p("-3.") is s-num(-3.0)
+  # Make sure bignums parse correctly
+  p(num-tostring(num-expt(100, 100))) is
+    s-num(num-expt(100, 100))
+  p("-abc3.3") is s-sym("-abc3.3")
+
+  p("())") raises "Invalid"
+  p("('a' 5)") raises "'quote'"
+  p("(a") raises "Invalid"
+  p(")") raises "Invalid"
+  p("('a)") raises "Invalid"
+  p("(()") raises "Invalid"
+  p("(a')") raises "Invalid"
+
+end</pre><p><a class="show-embed" code="import s-exp as S 
+
+ p = S.read-s-exp 
+ s-list = S.s-list 
+ s-num = S.s-num 
+ s-str = S.s-str 
+ s-sym = S.s-sym 
+
+ check: 
+    p(&quot;()&quot;) is s-list(empty) 
+    p(&quot;(5)&quot;) is s-list([list: s-num(5)]) 
+    p(&quot;(5 4)&quot;) is s-list([list: s-num(5), s-num(4)]) 
+    p(&quot;(a 5)&quot;) is s-list([list: s-sym(&quot;a&quot;), s-num(5)]) 
+    p(&quot;a&quot;) is s-sym(&quot;a&quot;) 
+    p(&quot;\&quot;a\&quot;&quot;) is s-str(&quot;a&quot;) 
+    p(&quot;(a (b c))&quot;) is 
+      s-list([list: 
+        s-sym(&quot;a&quot;), 
+        s-list([list: s-sym(&quot;b&quot;), s-sym(&quot;c&quot;)]) 
+      ]) 
+    p(&quot;(\&quot;a\&quot; (5 (4) ()) \&quot;b\&quot;)&quot;) is 
+      s-list([list: 
+        s-str(&quot;a&quot;), 
+        s-list([list: 
+          s-num(5), 
+          s-list([list: s-num(4)]), 
+          s-list(empty) 
+        ]), 
+        s-str(&quot;b&quot;) 
+      ]) 
+
+    p(&quot;-5&quot;) is s-num(-5) 
+    p(&quot;-4.4&quot;) is s-num(-4.4) 
+    p(&quot;-3.&quot;) is s-num(-3.0) 
+    # Make sure bignums parse correctly 
+    p(num-tostring(num-expt(100, 100))) is 
+      s-num(num-expt(100, 100)) 
+    p(&quot;-abc3.3&quot;) is s-sym(&quot;-abc3.3&quot;) 
+
+    p(&quot;())&quot;) raises &quot;Invalid&quot; 
+    p(&quot;('a' 5)&quot;) raises &quot;'quote'&quot; 
+    p(&quot;(a&quot;) raises &quot;Invalid&quot; 
+    p(&quot;)&quot;) raises &quot;Invalid&quot; 
+    p(&quot;('a)&quot;) raises &quot;Invalid&quot; 
+    p(&quot;(()&quot;) raises &quot;Invalid&quot; 
+    p(&quot;(a')&quot;) raises &quot;Invalid&quot; 
+
+ end">(Try it!)</a></p></div></div></div></div></root>
+    <hr/>
+    <!-- The current page is trove/s-exp.html. -->
+    <a class="floatleft" href="../trove/pprint.html">⏴⏴⏴</a>
+    <a class="floatright" href="../trove/s-exp-structs.html">⏵⏵⏵</a>
+    </div>
+  </body>
+</html>

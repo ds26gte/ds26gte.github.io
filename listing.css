@@ -1,0 +1,13 @@
+/* last modified 2015-05-30 */
+
+.scheme           {color: #553366} /* background punctuation, was 993333 */
+
+.scheme .selfeval {color: #006600}
+.scheme .keyword  {color: #660000}
+.scheme .builtin  {color: #660000}
+.scheme .global   {color: #660066}
+.scheme .variable {color: #000066}
+.scheme .comment  {color: #006666}
+
+.scheme .keyword  {font-weight: bold}
+.scheme .comment  {font-style:  oblique}

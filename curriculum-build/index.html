@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<title>The curriculum build specification</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>The curriculum build specification</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_the_document_source_layout">1. The document source layout</a>
+<ul class="sectlevel2">
+<li><a href="#_multiple_natural_languages">1.1. Multiple natural languages</a></li>
+<li><a href="#_multiple_proglangs">1.2. Multiple proglangs</a></li>
+<li><a href="#_pathway_narratives">1.3. Pathway narratives</a></li>
+<li><a href="#_lessons_associated_with_a_pathway">1.4. Lessons associated with a pathway</a>
+<ul class="sectlevel3">
+<li><a href="#_lesson_plans">1.4.1. Lesson plans</a></li>
+<li><a href="#_lesson_workbook_pages">1.4.2. Lesson workbook pages</a></li>
+<li><a href="#_adding_proglang_specific_source">1.4.3. Adding proglang-specific source</a></li>
+<li><a href="#_solution_mode_pages">1.4.4. Solution-mode pages</a></li>
+</ul>
+</li>
+<li><a href="#_pathway_independent_files">1.5. Pathway-independent files</a></li>
+</ul>
+</li>
+<li><a href="#_the_distribution_layout">2. The distribution layout</a>
+<ul class="sectlevel2">
+<li><a href="#_the_distribution_subdir">2.1. The distribution subdir</a></li>
+<li><a href="#_proglang_associated_with_a_course">2.2. Proglang associated with a course</a></li>
+<li><a href="#_proglang_associated_with_a_distribution_lesson">2.3. Proglang associated with a distribution lesson</a></li>
+<li><a href="#_the_course_narrative_and_other_resources">2.4. The course narrative and other resources</a></li>
+<li><a href="#_the_lesson_plan_and_workbook_pages">2.5. The lesson plan and workbook pages</a></li>
+<li><a href="#_pathway_independent_files_2">2.6. Pathway-independent files</a></li>
+</ul>
+</li>
+<li><a href="#_the_build_phases">3. The build phases</a>
+<ul class="sectlevel2">
+<li><a href="#_the_first_build_phase">3.1. The first build phase</a></li>
+<li><a href="#_the_second_build_phase">3.2. The second build phase</a></li>
+</ul>
+</li>
+<li><a href="#_rearranging_subdirs_within_the_distribution_directories">4. Rearranging subdirs within the distribution directories</a>
+<ul class="sectlevel2">
+<li><a href="#_modifying_the_distribution_lesson_directory">4.1. Modifying the distribution lesson directory</a></li>
+<li><a href="#_modifying_the_course_directory">4.2. Modifying the course directory</a></li>
+</ul>
+</li>
+<li><a href="#_batch_files_for_html_conversion">5. Batch files for HTML conversion</a></li>
+<li><a href="#_populating_the_conversion_batch_files">6. Populating the conversion batch files</a>
+<ul class="sectlevel2">
+<li><a href="#_pathway_independent_files_3">6.1. Pathway-independent files</a></li>
+<li><a href="#_workbook_pages">6.2. Workbook pages</a></li>
+<li><a href="#_lesson_plan_files">6.3. Lesson-plan files</a></li>
+<li><a href="#_pathway_resource_files">6.4. Pathway resource files</a></li>
+<li><a href="#_pathway_narrative_files">6.5. Pathway narrative files</a></li>
+</ul>
+</li>
+<li><a href="#_converting_adoc_to_html">7. Converting .adoc to .html</a>
+<ul class="sectlevel2">
+<li><a href="#_racket_preprocessor">7.1. Racket preprocessor</a>
+<ul class="sectlevel3">
+<li><a href="#_primitives_used">7.1.1. Primitives used</a></li>
+<li><a href="#_exercise_files">7.1.2. Exercise files</a></li>
+</ul>
+</li>
+<li><a href="#_calling_asciidoctor">7.2. Calling Asciidoctor</a></li>
+</ul>
+</li>
+<li><a href="#_postprocessing">8. Postprocessing</a></li>
+<li><a href="#_collective_information">9. Collective information</a>
+<ul class="sectlevel2">
+<li><a href="#_the_dependency_graph">9.1. The dependency graph</a></li>
+<li><a href="#_images_list">9.2. Images list</a></li>
+<li><a href="#_pathway_tocs">9.3. Pathway ToCs</a></li>
+<li><a href="#_bilingual_glossary">9.4. Bilingual glossary</a></li>
+</ul>
+</li>
+<li><a href="#_pdfs_and_workbooks">10. PDFs and Workbooks</a>
+<ul class="sectlevel2">
+<li><a href="#_creating_page_pdfs">10.1. Creating page PDFs</a></li>
+<li><a href="#_workbooks">10.2. Workbooks</a></li>
+</ul>
+</li>
+<li><a href="#_implementing_the_build_process_using_makefiles">11. Implementing the build process using Makefile(s)</a>
+<ul class="sectlevel2">
+<li><a href="#_make_phase_1">11.1. make, phase 1</a></li>
+<li><a href="#_make_phase_2">11.2. make, phase 2</a></li>
+</ul>
+</li>
+<li><a href="#_using_the_makefile">12. Using the Makefile</a>
+<ul class="sectlevel2">
+<li><a href="#_pdf_and_workbook_generation">12.1. PDF and workbook generation</a></li>
+<li><a href="#_link_checking">12.2. Link checking</a></li>
+<li><a href="#_dependency_graph_generation">12.3. Dependency graph generation</a></li>
+<li><a href="#_making_from_scratch">12.4. Making from scratch</a></li>
+<li><a href="#_deploying_to_website">12.5. Deploying to website</a></li>
+</ul>
+</li>
+<li><a href="#_for_users_of_legacy_script_build_pathway">13. For users of legacy script build-pathway</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_the_document_source_layout">1. The document source layout</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Our documentation sources are divided into <em>pathways</em> and <em>lessons</em>,
+which are in the subdirectories <code>pathways</code> and <code>lessons</code>
+respectively. A pathway is broadly a concatenation of a chosen
+ordered set of lessons (with some other pathway-specific resources
+thrown in).</p>
+</div>
+<div class="paragraph">
+<p>In the following, we&#8217;ll use <code>core</code> as an example
+pathway, and <code>simple-data-types</code> as an example lesson.</p>
+</div>
+<div class="sect2">
+<h3 id="_multiple_natural_languages">1.1. Multiple natural languages</h3>
+<div class="paragraph">
+<p>First, we may want to create the course <code>core</code> in
+multiple natural languages, e.g., English (<code>en-us</code>) or Spanish
+(<code>es-mx</code>). To accommodate this, the source dir <code>pathway/core</code> has
+a <code>langs</code> subdir, with further subdirs for each natlang that we want:
+i.e., <code>en-us</code> and <code>es-mx</code>.  The source tree thus looks like:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pathway/
+`—— core/
+    `—— langs/
+        |—— en-us/
+        `—— es-mx/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll call the <code>pathway/core/langs/en-us</code> the <code>core</code> pathway&#8217;s
+root directory (for the <code>en-us</code> natlang).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_multiple_proglangs">1.2. Multiple proglangs</h3>
+<div class="paragraph">
+<p>By default, the programming language associated with a pathway is
+Pyret.</p>
+</div>
+<div class="paragraph">
+<p>We may also want to create the courses for our <code>core</code> pathway for
+multiple programming languages, e.g., <code>pyret</code> and <code>wescheme</code>. To
+accommodate this, we include the file <code>proglang.txt</code> in the
+pathway root directory (<code>pathways/core/langs/en-us/</code>), and list
+in it the various proglangs supported. Thus the contents of
+<code>proglang.txt</code> will look like:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pyret
+wescheme</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sometimes we have a pathway that has associated with it only a
+single proglang, but that proglang is not Pyret. As an example,
+consider the pathway <code>shipwrecks</code> which is defined for the
+proglang <code>spreadsheets</code>. In this case, we still need a
+<code>proglang.txt</code> file containing the single line</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>spreadsheets</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pathway_narratives">1.3. Pathway narratives</h3>
+<div class="paragraph">
+<p>The pathway root directory has a file <code>index.adoc</code>, which
+specifies the <em>pathway narrative</em>.  The pathway root also
+has a <code>resources/</code> subdirectory that houses additional
+documentation that is specific to teachers. The pathway root may
+also contain subdirs for <code>front-matter</code>, <code>back-matter</code>, and
+<code>images</code>: the former two add flanking matter to the final
+workbook for the pathway&#8217;s course, while <code>images</code> is a convenient
+location for image subfiles.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lessons_associated_with_a_pathway">1.4. Lessons associated with a pathway</h3>
+<div class="paragraph">
+<p>The pathway root directory has a file <code>lesson-order.txt</code> listing
+the names of the lessons associated with it, in order. These
+lessons occur as directories in the <code>lessons/</code> directory in the
+repo top dir.</p>
+</div>
+<div class="paragraph">
+<p>As with pathways, lessons can be in different natlangs and
+proglangs. To accommodate multiple natlangs, each lesson has a
+<code>langs</code> subdir, with subdirs (e.g., <code>en-us</code>, <code>es-mx</code>) for the
+different natlangs. (This is similar to how we specify multiple
+natlangs for pathways.)</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>lessons/
+`—— simple-data-types/
+    `—— langs/
+        |—— en-us/
+        `—— es-mx/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll call <code>lessons/simple-data-types/langs/en-us</code> the lesson root
+directory.</p>
+</div>
+<div class="paragraph">
+<p>As for pathways, a lesson root directory can contain a
+<code>proglang.txt</code> listing the proglang(s) associatable with it. If
+no <code>proglang.txt</code> is present, the (single) proglang is assumed to
+be <code>pyret</code>.</p>
+</div>
+<div class="paragraph">
+<p>If more than one proglang is needed, or if the single proglang is
+something other than <code>pyret</code>, list it in <code>proglang.txt</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="_lesson_plans">1.4.1. Lesson plans</h4>
+<div class="paragraph">
+<p>The lesson counterpart to the pathway narrative is the <em>lesson
+plan</em>, given as an <code>index.adoc</code> file in the lesson root
+directory.
+Here too, an <code>images/</code> subdir is used
+for image subfiles.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_lesson_workbook_pages">1.4.2. Lesson workbook pages</h4>
+<div class="paragraph">
+<p>A lesson typically contains a <code>pages/</code> subdir, which consist of
+AsciiDoc sources for the pages in that lesson. The <code>pages/</code>
+subdir has a file <code>workbook-pages.txt</code>, listing all these pages
+in order.</p>
+</div>
+<div class="paragraph">
+<p>A lesson may also contain other subdirs, even within its
+<code>pages/</code>. These may contain files meant for inclusion in the main
+pages files.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_adding_proglang_specific_source">1.4.3. Adding proglang-specific source</h4>
+<div class="paragraph">
+<p>We&#8217;ve seen that both pathways and lessons may have <code>proglang.txt</code>
+identifying multiple proglangs as vehicles for that
+course/lesson. Proglang-specific material is specified in the
+source in two ways:</p>
+</div>
+<div class="paragraph">
+<p>1: We use the directive <code>@ifproglang{pyret}{&#8230;&#8203;}</code> to specify source fragments
+meant for the proglang <code>pyret</code>.</p>
+</div>
+<div class="paragraph">
+<p>2: Especially in the <code>pages/</code> subdirs, we use further subdirs
+named for the proglang to add files that would shadow the main
+files. Thus for a file <code>pages/abc.adoc</code>, the file
+<code>pages/pyret/abc.adoc</code> would shadow it for <code>pyret</code>, and file
+<code>pages/wescheme/abc.adoc</code> would shadow it for <code>wescheme</code>. If we
+provide shadowing files for all relevant proglangs, the main file
+doesn&#8217;t need to exist.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_solution_mode_pages">1.4.4. Solution-mode pages</h4>
+<div class="paragraph">
+<p>The <code>pages/</code> subdir in a lesson contributes to the student
+version of the final workbook. However, we also have solutions
+workbook that is intended for teachers. We have a
+<code>solution-pages/</code> subdir alongside <code>pages/</code>, which contains files
+that will shadow the similarly named student pages.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pathway_independent_files">1.5. Pathway-independent files</h3>
+<div class="paragraph">
+<p>There are also some source files that are not affiliated with any
+particular pathway or lesson. These are kept in
+<code>shared/langs/en-us/docroot</code> (and the like, for other natlangs). Chief among these are textbook
+descriptions which are .adoc files in the <code>textbooks/</code> subdir.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_distribution_layout">2. The distribution layout</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>built</em> version of a pathway&#8201;&#8212;&#8201;called a <em>course</em>&#8201;&#8212;&#8201;is
+created in a subdirectory called <code>courses</code> under the
+<code>distribution</code> subdir. The built version of a lesson&#8201;&#8212;&#8201;we&#8217;ll
+call it the <em>distribution lesson</em>&#8201;&#8212;&#8201;is similarly created in a
+subdir called <code>lessons</code>, also under the <code>distribution</code> suddir.</p>
+</div>
+<div class="sect2">
+<h3 id="_the_distribution_subdir">2.1. The distribution subdir</h3>
+<div class="paragraph">
+<p>The <code>courses</code> and <code>lessons</code> are not direct subdirs of
+<code>distribution</code>, in order to accommodate different versions of
+pathways and lessons based on the natlang used. To effect this,
+the <code>distribution</code> has subdirs for each natlang (called <code>en-us</code>,
+<code>es-mx</code>, etc.), and it is in the <code>courses</code> and <code>lessons</code> subdirs of
+these that we find the natlang-specific courses and lessons.
+Thus, the two natlang versions of the pathway <code>core</code> are laid out
+as follows:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>distribution/
+|—— en-us/
+|   `—— courses/
+|       `—— core/
+`—— es-mx/
+    `—— courses/
+        `—— core/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that we use the same name <code>core</code> for the two natlang
+versions in the distribution. We can do this because they reside
+inside two different subtrees <code>distribution/en-us</code>
+<code>distribution/es-mx</code> and thus don&#8217;t risk a name clash.</p>
+</div>
+<div class="paragraph">
+<p>As with pathways, so with lessons: To accommodate multiple
+natlangs, the lessons go into the <code>lessons</code> subdir of their
+natlang. E.g., for the lesson <code>simple-data-types</code>, we have:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>distribution/
+|—— en-us/
+|   `—— lessons/
+|       `—— simple-data-types/
+`—— es-mx/
+    `—— lessons/
+        `—— simple-data-types/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the following, we will assume the prevailing natural language is
+<code>en-us</code>, so we will restrict our attention to the
+<code>distribution/en-us</code> subtree. For other natlangs, the setup is exactly the same but in
+the appropriate natlang-based subtree.</p>
+</div>
+<div class="paragraph">
+<p>Also, we will call <code>distribution/en-us/courses/core</code> the course
+root directory (of the English version of the <code>core</code> pathway).
+The dir <code>distribution/en-us/lessons/simple-date-types</code> is the
+distribution lesson root directory (of the English version of the
+<code>simple-data-types</code> lesson).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_proglang_associated_with_a_course">2.2. Proglang associated with a course</h3>
+<div class="paragraph">
+<p>Typically&#8201;&#8212;&#8201;as seen in the above example&#8201;&#8212;&#8201;the built names of the
+pathway and the lesson are the same as their names in the source,
+but not always.</p>
+</div>
+<div class="paragraph">
+<p>By default, the programming language associated with a course is
+<code>pyret</code>. This is marked in the course root directory as the 0-length
+file <code>.cached/.proglang-pyret</code>.  (I.e.,
+<code>distribution/en-us/courses/core/.cached/.proglang-pyret</code>.)</p>
+</div>
+<div class="paragraph">
+<p>But we as have seen, a pathway may have a <code>proglang.txt</code> listing
+a different or multiple proglangs.</p>
+</div>
+<div class="paragraph">
+<p>Thus, for the pathway <code>core</code>,  two different courses are created in
+<code>distribution/en-us/courses</code>. We continue to use the unadorned
+pathway name, <code>core</code>, for the Pyret version. For other proglangs,
+the course dir&#8217;s name uses the proglang as a hyphenated suffix.
+Thus for the WeScheme version, the course is entitled
+<code>core-wescheme</code>. I.e., the two course root directories for <code>core</code> are</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>distribution/en-us/courses/core
+distribution/en-us/courses/core-wescheme</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These two directories have their own proglang marker files, i.e.,
+<code>.cached/.proglang-pyret</code> (as before) and
+<code>.cached/.proglang-wescheme</code>.</p>
+</div>
+<div class="paragraph">
+<p>We often have pathways whose <code>proglang.txt</code> contains only a single
+proglang, but that proglang isn&#8217;t Pyret.  E.g., the pathway
+<code>shipwrecks</code> whose <code>proglang.txt</code> contains only <code>spreadsheets</code>.
+In such a case, the built course is simply called <code>shipwrecks</code>
+rather than <code>shipwrecks-spreadsheets</code>, since there is no Pyret
+version to distinguish it from.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_proglang_associated_with_a_distribution_lesson">2.3. Proglang associated with a distribution lesson</h3>
+<div class="paragraph">
+<p>As with pathways, lessons can be in different proglangs, also
+specified with <code>proglang.txt</code>. If no <code>proglang.txt</code> is present,
+the (single) proglang is assumed to be <code>pyret</code>.  The distribution
+version of the non-Pyret lessons have the proglang as hyphenated
+suffix, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>simple-data-types-wescheme</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Again, as with pathways, a proglang-marker file
+<code>.cached/.proglang-wesceme</code> is placed in the distribution lesson
+root to identify it as a lesson using <code>wescheme</code>.</p>
+</div>
+<div class="paragraph">
+<p>Note that the pathway mentions in its <code>lesson-order.txt</code> the
+lesson names in unadorned form (no proglang suffix). On building, a pathway becomes a
+course, and the distribution lessons associated with it are the
+right versions corrected for proglang. Thus the pathway <code>core</code>
+has <code>simple-data-types</code> as a constituent lesson. Moving over to
+the built <code>distribution</code>, the course <code>core</code> (Pyret) includes the lesson
+<code>simple-data-types</code> (Pyret), and the course <code>core-wescheme</code>
+includes the lesson <code>simple-data-types-wescheme</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_course_narrative_and_other_resources">2.4. The course narrative and other resources</h3>
+<div class="paragraph">
+<p>The pathway narrative <code>index.adoc</code> in the pathway root eventually
+will get
+converted to <code>index.shtml</code> in the course root. The various .adoc
+files in the <code>front-matter</code>, <code>back-matter</code> and <code>resources</code>
+subdirs also will get converted to HTML files, with suffix <code>.shtml</code> at
+the top level and <code>.html</code> at lower depths, i.e., in any <code>pages</code>
+and <code>solution-pages</code> subdirs. However, these HTML conversions
+aren&#8217;t performed at this time.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_lesson_plan_and_workbook_pages">2.5. The lesson plan and workbook pages</h3>
+<div class="paragraph">
+<p>The lesson plan <code>index.adoc</code> in the lesson root eventually will
+get converted to
+<code>index.shtml</code> in the distribution lesson root.</p>
+</div>
+<div class="paragraph">
+<p>The .adoc files in the <code>pages/</code> and <code>solution-pages/</code> subdirs
+along with any .adoc files they include will get converted to <code>.html</code>
+files alongside.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pathway_independent_files_2">2.6. Pathway-independent files</h3>
+<div class="paragraph">
+<p>The pathway-independent files in <code>shared/langs/en-us/docroot</code> are
+copied over to <code>distribution/en-us</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_build_phases">3. The build phases</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The build is accomplished in two phases, each a Makefile. Because
+of the multiplicity of files to keep track of, some generated
+during the course of the build, the Makefile rules are themselves
+generated using Makefile functions.  However, the input files
+needed in the second phase are not available until the first
+phase is completed, hence the need to use a separate Makefile for
+the two phases.</p>
+</div>
+<div class="sect2">
+<h3 id="_the_first_build_phase">3.1. The first build phase</h3>
+<div class="paragraph">
+<p>The first phase initializes the distribution directory, then
+copies the lessons and pathways over, adjusting subdirectories,
+and creating proglang-specific copies as needed. It sets up the
+temp files that will contain the input date to run various conversions in
+batch mode. Two specific PDFs, the page-not-found and the
+bilingual glossary, are requested to start the ball rolling.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="phase1.svg" alt="phase1">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_second_build_phase">3.2. The second build phase</h3>
+<div class="paragraph">
+<p>The second phase does the bulk of the conversions. Requests are
+set up in the batch-input files for passing the various adoc
+files to the Racket preprocessor, which will create corresponding
+asc files.  These are then converted to html files via a batch
+call to Asciidoctor.</p>
+</div>
+<div class="paragraph">
+<p>Different batch files are then used to pick up
+primitives, the lesson inter-dependencies, and global image and
+pathway-toc listings, and to add some postprocessing.</p>
+</div>
+<div class="paragraph">
+<p>Finally the postprocessed HTML files are converted to PDFs, and
+these are assembled into workbook pages.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="phase2.svg" alt="phase2">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rearranging_subdirs_within_the_distribution_directories">4. Rearranging subdirs within the distribution directories</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The build process starts by copying (the English versions of) the
+pathway directories to <code>distribution/en-us/courses</code> and the
+lesson directories to <code>distribution/en-us/lessons</code>, sometimes
+creating multiple versions, as described in the previous section,
+to accommodate multiple proglangs as needed. (The other natlang
+versions go the corresponding subdir in <code>distribution</code>, e.g.,
+<code>es-mx</code>, and their treatment follows a similar route, with
+<code>en-us</code> replaced.)</p>
+</div>
+<div class="sect2">
+<h3 id="_modifying_the_distribution_lesson_directory">4.1. Modifying the distribution lesson directory</h3>
+<div class="paragraph">
+<p>After copying a pathway into its distribution lesson directory with fixed
+proglang, the build process drills down its directories to see if
+there are any proglang-specific shadowing subdirectories. These
+are named for the proglang, e.g., <code>pyret</code>, <code>wescheme</code>, etc.  The
+contents of the relevant proglang subdir are copied to the
+containing directory. All the other proglang subdirs are deleted.
+This ensures that all the files in the course directory, at
+whatever depth, have content appropriate to its proglang.</p>
+</div>
+<div class="paragraph">
+<p>Next, if a subdirectory called <code>pages</code> occurs at any level&#8201;&#8212;&#8201;typically these are in the <code>front-matter</code>, <code>back-matter</code> and
+<code>resources</code> subdirs --, the build ensure that a subdir called
+<code>solution-pages</code> is alongside it. Furthermore, it ensures that
+its contents are the same as the <code>pages</code> subdir, except for such
+files that are pre-existent in it (from the repo).</p>
+</div>
+<div class="paragraph">
+<p>Next the build looks for <code>workbook-pages.txt</code> inside these
+<code>pages</code> subdir. A sanitized version&#8201;&#8212;&#8201;removing
+comments&#8201;&#8212;&#8201;of this is placed in
+<code>.cached/.workbook-pages.txt.kp</code>, and an even sparer version&#8201;&#8212;&#8201;removing landscape/portrait information&#8201;&#8212;&#8201;is placed in
+<code>.cached/.workbook-pages-ls.txt.kp</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_modifying_the_course_directory">4.2. Modifying the course directory</h3>
+<div class="paragraph">
+<p>Course dirs undergo the same modifications above for
+proglang and solution-pages. Note here that the subdirs
+<code>front-matter</code>, <code>back-matter</code>, and <code>resources</code> may contain
+<code>pages/</code> subdirs with the appropriate <code>workbook-pages.txt</code>, and
+these are mined to get <code>.cached/.workbook-pages.txt.kp</code> and
+<code>.cached/.workbook-pages-ls.txt.kp</code> as well, just as for the lessons.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_batch_files_for_html_conversion">5. Batch files for HTML conversion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The next stage of the build creates batch files that enshrine
+enough information to the converters. We do not simply drill down
+the distribution tree and convert the .adoc files immediately, as
+that would be too inefficient, given the converters have
+significant startup time. Instead, we create the batch
+files in <code>distribution/en-us/.cached</code> so the conversions can be
+done in one go. The names of these batch files are given by the
+following environment variables (which are set in the build
+makefile):</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ADOCABLES_INPUT
+$ADOC_INPUT
+$ADOC_POSTPROC_LESSONPLAN_INPUT
+$ADOC_POSTPROC_NARRATIVEAUX_INPUT
+$ADOC_POSTPROC_NARRATIVE_INPUT
+$ADOC_POSTPROC_RESOURCES_INPUT
+$ADOC_POSTPROC_PWYINDEP_INPUT
+$ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+$PUPPETEER_INPUT
+$EXERCISE_COLLECTOR_INPUT
+$COURSES_LIST_FILE
+$LESSONS_LIST_FILE</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(The actual names used are not germane to this discussion.)</p>
+</div>
+<h3 id="_adocables_input" class="discrete">$ADOCABLES_INPUT</h3>
+<div class="paragraph">
+<p>The <code>$ADOCABLES_INPUT</code> file has entries for each adoc file that
+are given to the Racket preprocessor.
+Each entry is of the form:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>("&lt;adoc-filename&gt;" #:containing-directory &lt;string&gt;
+                   #:dist-root-dir &lt;string&gt;
+                   #:lesson-plan &lt;string&gt;
+                   #:lesson &lt;string&gt;
+                   #:otherdir &lt;boolean&gt;
+                   #:resources &lt;boolean&gt;
+                   #:solutions-mode? &lt;boolean&gt;
+                   #:proglang &lt;string&gt;
+                   #:other-proglangs &lt;list&gt;
+                   #:narrative &lt;boolean&gt;
+                   #:target-pathway &lt;string&gt;)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Not all the keywords are necessary for all the adoc files.</p>
+</div>
+<div class="paragraph">
+<p>The <code>&lt;adoc-filename&gt;</code> is the basename of the adoc file. The
+<code>#:containing-directory</code> value is given relative to
+<code>distribution/en-us</code>. The <code>#:dist-root-dir</code> value is the
+pathname of <code>distribution/en-us</code> relative to the adoc file. These
+three values are not optional.</p>
+</div>
+<h3 id="_adoc_input" class="discrete">$ADOC_INPUT</h3>
+<div class="paragraph">
+<p>This contains a list of <code>.asc</code> files, which are intermediate
+files created by the Racket preprocessor from the <code>.adoc</code> files
+listed in <code>$ADOCABLES_INPUT</code> before eventual conversion by
+AsciiDoctor into HTML.</p>
+</div>
+<div class="paragraph">
+<p>These <code>.asc</code> files are always inside a
+<code>.cached</code> subdir co-level with the original <code>.adoc</code>. The pathnames of
+these <code>.asc</code> files are given relative to <code>distribution/en-us</code>.</p>
+</div>
+<div class="paragraph">
+<p>The HTML files created by AsciiDoctor also
+reside in the <code>.cached</code> subdir and go through a postprocessing
+phase before moving to the directory above.</p>
+</div>
+<h3 id="_adoc_postproc_input" class="discrete">$ADOC_POSTPROC_*_INPUT</h3>
+<div class="paragraph">
+<p>These are the files</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ADOC_POSTPROC_LESSONPLAN_INPUT
+$ADOC_POSTPROC_NARRATIVEAUX_INPUT
+$ADOC_POSTPROC_NARRATIVE_INPUT
+$ADOC_POSTPROC_RESOURCES_INPUT
+$ADOC_POSTPROC_PWYINDEP_INPUT
+$ADOC_POSTPROC_WORKBOOKPAGE_INPUT</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These list the names of the HTML files awaiting postprocessing.
+They are given in six lots, because the type of postprocessing
+varies for:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>lesson plan HTML files</p>
+</li>
+<li>
+<p>glossary HTML files in courses</p>
+</li>
+<li>
+<p>pathway narrative HTML files</p>
+</li>
+<li>
+<p>pathway resource HTML files (i.e., pathway files other than the
+narrative)</p>
+</li>
+<li>
+<p>pathway-independent HTML files (neither lessons nor pathways)</p>
+</li>
+<li>
+<p>workbook HTML files (in the lessons)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The filenames in these files are relative to <code>distribution/en-us</code>.</p>
+</div>
+<h3 id="_puppeteer_input" class="discrete">$PUPPETEER_INPUT</h3>
+<div class="paragraph">
+<p>This is a JSON file containing the list of postprocessed HTML
+files that are ready to be converted to PDF.</p>
+</div>
+<h3 id="_exercise_collector_input" class="discrete">$EXERCISE_COLLECTOR_INPUT</h3>
+<div class="paragraph">
+<p>This contains all the lessons containing exercises, so that the
+latter can be quickly collected when making the workbooks.</p>
+</div>
+<h3 id="_list_file" class="discrete">*_LIST_FILE</h3>
+<div class="paragraph">
+<p>These are:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$COURSES_LIST_FILE
+$LESSONS_LIST_FILE</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These contain the list of all the courses and lessons
+respectively. While they can be obtained by listing the
+concerned subdirs in <code>distribution/</code>, they are used often enough
+that it is useful to cache these values.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_populating_the_conversion_batch_files">6. Populating the conversion batch files</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_pathway_independent_files_3">6.1. Pathway-independent files</h3>
+<div class="paragraph">
+<p>The names of the pathway-independent .adoc files under
+<code>distribution/en-us/textbooks</code> are collected.</p>
+</div>
+<div class="paragraph">
+<p>The .adoc file, together with its <code>#:containing-directory</code> and
+<code>#:dist-root-dir</code> value is added to <code>$ADOCABLES_INPUT</code>.</p>
+</div>
+<div class="paragraph">
+<p>The .asc file (which sits in the <code>.cached</code> subdir), pathname
+relative to <code>distribution/en-us</code> is added to <code>$ADOC_INPUT</code>.</p>
+</div>
+<div class="paragraph">
+<p>The .html file (not yet postprocessed, sits in <code>.cached</code>),
+pathname relative to <code>distribution/en-us</code>) is added to
+<code>$ADOC_POSTPOC_PWYINDEP_INPUT</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_workbook_pages">6.2. Workbook pages</h3>
+<div class="paragraph">
+<p>We collect all
+the workbook-page .adoc files and add them to
+<code>$ADOCABLES_INPUT</code>. The <code>#:containing-directory</code>,
+<code>#:dist-root-dir</code>, <code>#:lesson</code>, <code>#:other-dir</code>, <code>#:solutions-mode?</code>
+and <code>#:proglang</code> values are included.</p>
+</div>
+<div class="paragraph">
+<p><code>#:lesson</code> is simply the
+basename of the distribution lesson.</p>
+</div>
+<div class="paragraph">
+<p><code>#:other-dir</code> is a boolean
+identifying if the file is simply meant for inclusion in other
+adoc files and not for
+full-scale conversion themselves. Such files are located in
+subdirs named <code>fragments</code>, <code>xtra</code>, or <code>xtras</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>#:solution-mode?</code> is a boolean set to true only for adoc files
+in <code>solution-pages</code>. Such files contain information meant for
+teachers but not students.</p>
+</div>
+<div class="paragraph">
+<p>The .asc version of the file is added to <code>$ADOC_INPUT</code>.</p>
+</div>
+<div class="paragraph">
+<p>The
+cached .html version of the file is added ot
+<code>$ADOC_POSTPROC_WORKBOOKPAGE_INPUT</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lesson_plan_files">6.3. Lesson-plan files</h3>
+<div class="paragraph">
+<p>We collect all
+the lesson-plan .adoc files and add them to
+<code>$ADOCABLES_INPUT</code>. The <code>#:containing-directory</code>,
+<code>#:dist-root-dir</code>, <code>#:lesson-plan</code>, <code>#:proglang</code>,
+and <code>#:other-proglangs</code>
+ values are included.</p>
+</div>
+<div class="paragraph">
+<p><code>#:lesson-plan</code> is simply the
+basename of the distribution lesson.</p>
+</div>
+<div class="paragraph">
+<p><code>#:other-proglangs</code> is a list of the other proglangs for which
+this lesson is available. This is used to have the lesson plan
+include links to the plans for the same lesson in the other
+proglangs.</p>
+</div>
+<div class="paragraph">
+<p>The .asc version of the file is added to <code>$ADOC_INPUT</code>.</p>
+</div>
+<div class="paragraph">
+<p>The
+cached .html version of the file is added ot
+<code>$ADOC_POSTPROC_LESSONPLAN_INPUT</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pathway_resource_files">6.4. Pathway resource files</h3>
+<div class="paragraph">
+<p>Collect all the .adoc files <em>except</em> the narrative file and add
+them to <code>$ADOCABLES_INPUT</code>.  Other values included:
+<code>#:containing-directory</code>, <code>#dist-root-dir</code>, <code>#:other-dir</code>,
+<code>#:resources</code>, <code>#:target-pathway</code>, <code>#:solutions-mode?</code>,
+<code>#:proglang</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>#:resources</code> is set to true.</p>
+</div>
+<div class="paragraph">
+<p><code>#:target-pathway</code> is the (base) name of the course directory
+(with the proglang suffix, if any).</p>
+</div>
+<div class="paragraph">
+<p>The .asc file is added to <code>$ADOC_INPUT</code>.</p>
+</div>
+<div class="paragraph">
+<p>The cached .html file is added to
+<code>$ADOC_POSTPROC_RESOURCES_INPUT</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pathway_narrative_files">6.5. Pathway narrative files</h3>
+<div class="paragraph">
+<p>Collect all the narrative .adoc files in the distribution and add
+then to <code>$ADOCABLES_INPUT</code>. Other values included:
+<code>#:containing-directory</code>, <code>#:dist-root-dir</code>, <code>#:narrative</code>,
+<code>#:target-pathway</code>, <code>#:proglang</code>, <code>#:other-proglangs</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>#:narrative</code> is set to true.</p>
+</div>
+<div class="paragraph">
+<p><code>#:other-proglangs</code> is the list of other proglangs for which this
+course is available, so they can link to each other.</p>
+</div>
+<div class="paragraph">
+<p>The .asc file is added to <code>$ADOC_INPUT</code>.</p>
+</div>
+<div class="paragraph">
+<p>The cached .html file is added to
+<code>$ADOC_POSTPROC_NARRATIVE_INPUT</code>.</p>
+</div>
+<div class="paragraph">
+<p>We also the .asc file for the pathway glossary (this is generated
+by the Racket preprocessor) to <code>$ADOC_INPUT</code>. <em>Its</em> cached .html
+file is added to <code>$ADOC_POSTPROC_NARRATIVEAUX_INPUT</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_converting_adoc_to_html">7. Converting .adoc to .html</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_racket_preprocessor">7.1. Racket preprocessor</h3>
+<div class="paragraph">
+<p>After all the <code>$ADOC&#8230;&#8203;</code> batch files have been populated, the
+build runs a Racket preprocessor on the entries in
+<code>$ADOCABLES_INPUT</code> to create the <code>.cached/*.asc</code> files.</p>
+</div>
+<div class="paragraph">
+<p>This is because the .adoc files created by the curriculum authors
+contains some directives in addition to the commands provided by
+raw AsciiDoc. A Racket program preprocesses these away to create
+a raw AsciiDoc file. This has the extension <code>.asc</code> and is
+situated in a <code>.cached</code> subdir alongside the <code>.adoc</code> file penned
+by the author.</p>
+</div>
+<div class="paragraph">
+<p>The additional keyword values provided in the <code>$ADOCABLES_INPUT</code>
+enables the Racket preprocessor to correctly address the
+different types of .adoc files we have (workbook pages, lesson
+plans, narratives, etc.).</p>
+</div>
+<div class="paragraph">
+<p>A single Racket call is sufficient to process all the entries in
+<code>$ADOCABLES_INPUT</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="_primitives_used">7.1.1. Primitives used</h4>
+<div class="paragraph">
+<p>When processing lesson files (whether lesson plan, work page, or
+a file included by them), the primitives found in it are stored
+in temp files in <code>.cached</code>. These become useful when creating
+a collective description
+of all the courses and lessons.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_exercise_files">7.1.2. Exercise files</h4>
+<div class="paragraph">
+<p>Special directives&#8201;&#8212;&#8201;<code>@printable-exercise</code>,
+<code>@opt-printable-exercise</code>, <code>@handout</code>&#8201;&#8212;&#8201;are used to include
+files within the lesson directory that are meant to be
+<em>exercises</em>. Their names are stored in
+<code>.cached/.lesson-exercises.txt.kp</code>.  Again these are useful for
+the collective description.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_calling_asciidoctor">7.2. Calling Asciidoctor</h3>
+<div class="paragraph">
+<p>Once the Racket preprocessor done, we have a bunch of
+<code>.cached/*.asc</code> files in the distribution, and the list of these
+we have already captured in the file <code>$ADOC_INPUT</code>.</p>
+</div>
+<div class="paragraph">
+<p>These files are now ready to be processed by Asciidoctor to
+produce the corresponding .html.</p>
+</div>
+<div class="paragraph">
+<p>The <code>asciidoctor</code> command can take a bunch of input files
+as command-line input, so we pass it the contents of
+<code>$ADOC_INPUT</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_postprocessing">8. Postprocessing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the Racket preprocessing and the Asciidoctor runs complete,
+we have a bunch of <code>.cached/*.html</code> files in our <code>distribution</code>
+tree. It would be nice if these were all there is to it, but
+there is still a bunch of post-processing left. We use the other
+<code>$ADOC_POSTPROC_*</code> files to guide this post-processing.</p>
+</div>
+<div class="paragraph">
+<p>For starters, the <code>.cached/*.html</code> files need to go up one
+directory, so they sit alongside their source <code>.adoc</code> files in
+the <code>distribution</code> tree. (We may later choose to delete the <code>.adoc</code>
+files before deployment to the website, but that&#8217;s a different
+matter.) In particular, we need to ensure that the final HTML
+file has extension <code>.shtml</code> when it&#8217;s a lesson plan or pathway
+doc, either narrative or resources. It is <code>.html</code> in all other
+cases, i.e., workbook pages and pathway-independent files.</p>
+</div>
+<div class="paragraph">
+<p>The following are the components of the postprocessing:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CSS path correction:
+When Asciidoctor is run on the <code>.asc</code> file, it enshrines a
+pathname for <code>curriculum.css</code>. Make it relative to the HTML
+location. (Unfortunately, Asciidoctor can&#8217;t take a relative
+pathname correctly from command-line when called on files that
+aren&#8217;t in the calling directory.)</p>
+</li>
+<li>
+<p>Boilerplate insertion.
+Include links to various <code><strong>.css</code> and <code></strong>.js</code> files. Sometimes
+conditionally: Codemirror-related links are included only if the
+file has tags classed <code>pyret</code>, <code>racket</code>, or <code>circleevalsexp</code>.</p>
+</li>
+<li>
+<p>Nested span and div insertion.
+Asciidoctor lacks the ability to nest more than one level of div or span with specific
+classes. The Racket preprocessor embeds markers for these so they
+go through Asciidoctor verbatim. We can now scan for them and
+replace them with divs/spans as appropriate.</p>
+</li>
+<li>
+<p>Remove intrusive spans in headers, add self-link to h2&#8217;s</p>
+</li>
+<li>
+<p>Create Google-Drive versions</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In general, it would be nice to reduce the amount of
+postprocessing needed. However there are some limitations to how
+much we can autoinsert during the preprocessing and
+Asciidoctor-ing phases. View this purely as the unavoidable finishing
+touch. Hopefully we can reduce this with time.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_collective_information">9. Collective information</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The build also creates four files in <code>distribution/en-us</code> that combine
+glossary-type information from all the courses and lessons. They
+are: the dependency graph, the images list, the pathway ToCs,
+and the bilingual glossary.</p>
+</div>
+<div class="sect2">
+<h3 id="_the_dependency_graph">9.1. The dependency graph</h3>
+<div class="paragraph">
+<p>The lesson dependency graph <code>dependency-graph.js</code> is generated by the program
+<code>make-dependency-graph.lua</code>. It shows, for each
+lesson:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>its title</p>
+</li>
+<li>
+<p>its description</p>
+</li>
+<li>
+<p>the pages it contains</p>
+</li>
+<li>
+<p>its exercise pages</p>
+</li>
+<li>
+<p>the primitives needed for it</p>
+</li>
+<li>
+<p>its key words</p>
+</li>
+<li>
+<p>its prerequisite lessons</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The primitives are generated for each lesson as
+<code>.cached/.index-primitives.txt.kp</code> by the program
+<code>collect-primitives.lua</code>.</p>
+</div>
+<div class="paragraph">
+<p>Note that the JS file represent the collected information as a JSON
+object set to a variable. The file itself isn&#8217;t JSON. This also holds
+for the next two JS files described below.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_images_list">9.2. Images list</h3>
+<div class="paragraph">
+<p>A glossary of image information, <code>images.js</code>, is compiled from the
+<code>images/lesson-imags.json</code> file in each lesson.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pathway_tocs">9.3. Pathway ToCs</h3>
+<div class="paragraph">
+<p>A list of all the courses with their constituent lessons is
+generated in <code>pathway-tocs.js</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bilingual_glossary">9.4. Bilingual glossary</h3>
+<div class="paragraph">
+<p>In addition to these JS files, a bilingual glossary
+<code>bilingual-glossary.html</code> is created in <code>distribution/en-us/lib</code>.
+This is a browsable version of the file <code>glossary-terms.rkt</code> in the
+repo.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pdfs_and_workbooks">10. PDFs and Workbooks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A course has six types of workbooks.</p>
+</div>
+<div class="paragraph">
+<p>Each workbook is a concatenation of pages.</p>
+</div>
+<div class="paragraph">
+<p>Most of the workbook pages are from the course&#8217;s constituent
+lessons, and these are listed in the lesson&#8217;s
+<code>pages/workbook-pages.txt</code>.
+In addition, a course&#8217;s workbook may include front and back
+matter, which are specified within the pathway dir itself. Some
+workbooks may contain exercise pages, which are referred to in
+the lesson plan, are present in the lesson&#8217;s <code>pages/</code> dir, but
+not listed in its <code>workbook-pages.txt</code>.</p>
+</div>
+<div class="paragraph">
+<p>The three student-facing workbooks
+are in the <code>workbook/</code> subdir of the course:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>workbook.pdf
+workbook-long.pdf
+opt-exercises.pdf</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>workbook.pdf</code> contains the basic lesson pages. The <code>-long</code>
+version includes the optional exercises referred to in the lesson
+plans. The <code>opt-</code> version contains just the exercises.</p>
+</div>
+<div class="paragraph">
+<p>The three teacher-facing workbooks are named similarly but for
+the <code>-sols</code> suffix, and
+reside in the <code>resources/protected</code> subdir, which is
+password-protected:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>workbook-sols.pdf
+workbook-long-sols.pdf
+opt-exercises-sols.pdf</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_page_pdfs">10.1. Creating page PDFs</h3>
+<div class="paragraph">
+<p>The script <code>make-pdf.sh</code> passes the list of HTML files generated in
+<code>$PUPPETEER_INPUT</code> to the Node program <code>html2pdf.js</code>, creating
+the corresponding PDFs.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_workbooks">10.2. Workbooks</h3>
+<div class="paragraph">
+<p>The program <code>make-workbook-jsons.lua</code> scans the course and lesson
+dirs for various temp files create the previous portions of the
+build to create JSON files that list the constituent PDFs for
+each type of workbook.</p>
+</div>
+<div class="paragraph">
+<p>The script <code>make-books.sh</code> uses these JSON files to create the
+final workbook PDFs.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_implementing_the_build_process_using_makefiles">11. Implementing the build process using Makefile(s)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The build was originally implementated as a long Bash script
+<code>build-pathway</code>, but
+following
+<a href="https://github.com/bootstrapworld/curriculum/issues/467">Issue
+467</a>,
+has been rewritten as a more maintainable collection of
+Makefiles that calls much smaller subroutine-like scripts.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Makefile</code> resides at the top dir, and a build is initiated
+by calling <code>make</code>, possibly with the following options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>BOOK=yes</code> to generate the individual and workbook PDFs</p>
+</li>
+<li>
+<p><code>GRAPH=yes</code> to generate the lesson dependency graph</p>
+</li>
+<li>
+<p><code>LINKCHECK=yes</code> to verify all the internal and external links
+used</p>
+</li>
+<li>
+<p><code>NATLANG=&lt;natlang&gt;</code> to generate the docs in a language
+different from the default <code>en-us</code>, e.g., <code>es-mx</code></p>
+</li>
+<li>
+<p><code>SEMESTER=&lt;season&gt;</code> to identify the season, e.g., <code>fall</code></p>
+</li>
+<li>
+<p><code>YEAR=&lt;year&gt;</code> to identify the year, e.g., <code>2023</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The top-level <code>Makefile</code> includes <code>Makefile.all</code>, which resides
+in <code>lib/maker</code> alongside all the other auxiliary makefiles and
+programs used by the make process.</p>
+</div>
+<div class="paragraph">
+<p><code>Makefile.all</code> calls two makefiles in order: <code>Makefile.phase1</code>
+and <code>Makefile.phase2</code>. Both makefiles use <code>make</code> functions to
+create a set of related rules, as the number of rules cannot be
+determined beforehand. Furthermore, we use two makefiles to run
+two phases of the build, because the sources for the (generated)
+rules of the second phase cannot be determined until the first
+phase is done. We need only two sequential makefiles.</p>
+</div>
+<div class="sect2">
+<h3 id="_make_phase_1">11.1. make, phase 1</h3>
+<div class="paragraph">
+<p><code>Makefile.phase1</code> initializes the <code>distribution/</code> directory, with
+subdir <code>en-us/</code>, which has subdirs <code>lib/</code>, <code>extlib/</code>, <code>lessons/</code>,
+<code>courses/</code>. It also zeroes out the various temp files in
+<code>en-us/.cached</code>, which contain lists of files that will
+eventually fed as a batch to various processing scripts. We will
+mention these batch files as they come up in the process.</p>
+</div>
+<div class="paragraph">
+<p>Using generated make rules, <code>distribution/en-us/courses/</code> is
+populated with copies of the pathways, and
+<code>distribution/en-us/lessons/</code> with copies of the lessons. If a
+lesson allows multiple proglangs (e.g., <code>pyret</code>, <code>wescheme</code>,
+<code>codap</code>, etc.), it is duplicated for each such proglang, with the
+proglang added as a suffix, except for <code>pyret</code> and <code>none</code>, which
+do not get a suffix.</p>
+</div>
+<div class="paragraph">
+<p>The courses and lessons in the distribution are "massaged" to
+create <code>solution-pages/</code> alongside any <code>pages/</code> subdirs, and to
+move any shadowing files specifically meant for the prevailing
+proglang to overwrite files that are generic or meant for other
+proglangs. The massaging is done by two external scripts:
+<code>massage-distribution-lesson.sh</code> and <code>massage-course.sh</code>. Both these
+scripts make use of a program <code>collect-workbook-pages.lua</code> to
+identify within each lesson (or lesson-like entity like
+front-matter and back-matter in a course) all the pages that are
+eligible to go into the workbook&#8201;&#8212;&#8201;the so-called workbook pages.</p>
+</div>
+<div class="paragraph">
+<p>After populating (or updating) the <code>en-us/{courses,lessons}</code>,
+<code>Makefile.phase1</code> collects all the exercises in the lessons
+(these are specific exercise directives used in the adoc source
+of the lessons). These are placed in <code>.cached/</code> subdirs in the
+individual lesson <code>pages/</code>, and are also collated into the batch
+file <code>$EXERCISE_COLLECTOR_INPUT</code>.</p>
+</div>
+<div class="paragraph">
+<p>In addition, phase 1 also takes care of creating the HTML version
+of the bilingual glossary file, and adds it to the batch file
+<code>$PUPPETEER_INPUT</code>. <code>$PUPPETEER_INPUT</code> will eventually contain
+all the HTML files that will need to be converted into PDF pages.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_make_phase_2">11.2. make, phase 2</h3>
+<div class="paragraph">
+<p>After phase 1 is done, <code>Makefile.phase2</code> picks up the next phase.
+It identifies the different kinds of <code>.adoc</code> files (already
+copied under <code>{lessons, courses}</code> in the <code>distribution</code>, and
+creates make rules for converting these to <code>.asc</code> files using the
+Racket-based preprocessor. This is accomplished by updating three
+batch files: <code>$ADOCABLES_INPUT</code>, <code>$ADOC_INPUT</code> and a third
+<code>$ADOC_POSTPROC_*_INPUT</code> file whose name depends on whether the
+<code>adoc</code> file in question is a lesson plan, a pathway narrative
+file, a pathway glossary file, a pathway resources file, a
+pathway-independent file, or a workbook page (which can be in
+both lessons and pathways).</p>
+</div>
+<div class="paragraph">
+<p>After these batch files are updated, an external script
+<code>run-asciidoctor.sh</code> converts the files in <code>$ADOCABLES_INPUT</code> to
+their corresponding <code>.asc</code> (also an asciidoc file), using
+adocables-preproc.rkt, an adoc preprocessor written in Racket. It
+then uses the $ADOC_INPUT batch file containing the list of .asc&#8217;s
+as input to Asciidoctor.
+A set of .html files results alongside
+the .asc&#8217;s.</p>
+</div>
+<div class="paragraph">
+<p>The preprocessing also collects the primitive functions used (if
+any) in each of the lesson pages, and notes down the lesson
+prerequisites for each lesson.</p>
+</div>
+<div class="paragraph">
+<p>If the make var <code>BOOK</code> is set, the preproc rules include a
+further set of rules that add lines to <code>$PUPPETEER_INPUT</code>, so
+that the HTML files posited by the preproc (but only finally
+created after the postproc) will also become candidates for PDF
+conversion.</p>
+</div>
+<div class="paragraph">
+<p>This completes the preproc subphase. After it is done, the
+following bunch of other rules come into play (in no temporal
+order):</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The primitives are then consolidated per lesson, using the
+external script <code>collect-primitives.lua</code>.</p>
+</li>
+<li>
+<p>The <code>$ADOC_POSTPROC_*_INPUT</code> batch files are now used by a
+postprocessing program, <code>do-postproc.lua</code>, that creates the
+final html or shtml file in the correct directory (i.e.,
+alongside the original .adoc files). In addition,
+Google-drive-ready copies of these (s)html files are also
+created.</p>
+</li>
+<li>
+<p>If the make variable <code>LINKCHECK</code> is set, a make rule uses the
+external script <code>do-link-check.sh</code> to verify that all the
+internal and external links used in the documents really do
+exist.</p>
+</li>
+<li>
+<p>An external script <code>make-images-js.lua</code> collects all the image
+information from the lessons into a global image glossary at
+<code>en-us/images.js</code>.</p>
+</li>
+<li>
+<p>An external script <code>make-pathways-tocs.lua</code> collects the ToC
+info for all the courses into <code>en-us/pathway-tocs.js</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>After the primitive generation rule (1 above) is done, if the
+make variable <code>GRAPH</code> is set, a rule calls an external script
+<code>make-dependency-graph.lua</code> that gathers the generated info about
+the lesson primitives and prereqs to create a global lesson
+dependency graph in <code>en-us/dependency-graph.js</code>.</p>
+</div>
+<div class="paragraph">
+<p>After the postproc rule (2 above) is done, if the make variable
+<code>BOOK</code> is set, the batch file <code>$PUPPETEER_INPUT</code> is used by a Node
+program <code>html2pdf.js</code> to create all the individual page PDFs.</p>
+</div>
+<div class="paragraph">
+<p>After these individual PDFs are available, and again only if
+<code>BOOK</code> is set, a make rule uses the external program
+<code>make-workbook-pages.lua</code> to go into each course, collects all
+its constituent lessons' workbook and exercise pages into six
+course-specific list of pages for the six different types of
+workbooks. The same rule then calls the Node program
+<code>makeWorkbook.js</code> to create each course&#8217;s set of workbook PDFs.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_the_makefile">12. Using the Makefile</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>Makefile</code> in the top directory allows to you build the
+documentation system. Simply type <code>make</code>: This creates or updates the
+<code>distribution</code> subdirectory with the various files
+needed for the user.</p>
+</div>
+<div class="paragraph">
+<p>You may also set a small number of environment variables on the
+<code>make</code> command-line to further guide the build. These variable
+settings may be combined.</p>
+</div>
+<div class="sect2">
+<h3 id="_pdf_and_workbook_generation">12.1. PDF and workbook generation</h3>
+<div class="paragraph">
+<p>By default, <code>make</code> won&#8217;t create the PDF versions of the HTML files, nor the
+collections of them that form the various workbooks. PDF and
+workbook construction can be time-consuming and so is best
+relegated to the final run, when the author is sure that the HTML
+conversions have been thoroughly debugged. Once they are, and the
+PDFs are desired, set the variable <code>BOOK</code> at the <code>make</code> command
+line to a nonempty string, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make BOOK=yes</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_link_checking">12.2. Link checking</h3>
+<div class="paragraph">
+<p>By default, the checking of the various internal and external
+links in the documents are not checked&#8201;&#8212;&#8201;because it can be a
+time-consuming process. (External-link checking is particularly
+heinous because it takes a long while for each URL probe to return.)</p>
+</div>
+<div class="paragraph">
+<p>To enable link checking, set the <code>LINKCHECK</code> variable to
+nonempty, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make LINKCHECK=yes</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is often advisable to do the link check just for its own sake,
+and only once in a while,
+after the distribution dir is already in place from a previous
+<code>make</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependency_graph_generation">12.3. Dependency graph generation</h3>
+<div class="paragraph">
+<p>By default, no dependency graph is generated. To generate one at
+<code>distribution/en-us/dependency-graph.js</code>, set the <code>GRAPH</code>
+variable to nonempty, e.g.,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make GRAPH=yes</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The dependency graph shows how the various lessons depend on one
+another.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_making_from_scratch">12.4. Making from scratch</h3>
+<div class="paragraph">
+<p>To remove a previously made distribution entirely, do</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make clean</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The next <code>make</code>&#8201;&#8212;&#8201;with whatever options you desire&#8201;&#8212;&#8201;will be on
+a fresh slate.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploying_to_website">12.5. Deploying to website</h3>
+<div class="paragraph">
+<p>To deploy a built distribution to the website, do</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>make deploy</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deployment is described in more detail in the repo&#8217;s README.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_for_users_of_legacy_script_build_pathway">13. For users of legacy script build-pathway</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before the Makefile-based system was implemented, builds were
+done using a shell
+script called <code>build-pathway</code>.  For those familiar with its usage and unable to
+let go, a new script <code>build</code> is provided whose API is similar to
+<code>build-pathway</code>, and which is actually a wrapper that calls the new <code>make</code>
+under the hood.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The new name <code>build</code> is used  because <code>build-pathway</code>
+(singular) would now be a
+bit of a misnomer: the underlying <code>make</code> always creates or updates <em>all</em>
+pathways (i.e., courses). Nevertheless, for those who really can&#8217;t help using
+the old name, <code>build-pathway</code> is provided a trivial identity wrapper for
+<code>build</code>. Just remember that you cannot supply names of specific
+pathways to build:
+Such
+arguments are ignored with a helpful diagnostic.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>build</code> takes the following options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--book</code> (aka <code>--pdf</code>, <code>-b</code>): generates PDFs, both for
+individuals and the workbooks</p>
+</li>
+<li>
+<p><code>--deploy</code>: deploys to website. Uses existing <code>distribution/</code>,
+if not, makes it first. May be preceded with settings for
+<code>SKIPLIB</code>, <code>SEASON</code>, <code>YEAR</code></p>
+</li>
+<li>
+<p><code>--force</code> (aka <code>--superforce</code>, <code>--super-force</code>, <code>-f</code>, <code>-F</code>):
+builds from scratch, scrubbing any previous <code>distribution/</code></p>
+</li>
+<li>
+<p><code>--graph</code> (aka <code>-g</code>): generates the lesson dependency graph</p>
+</li>
+<li>
+<p><code>--help</code> (aka <code>-h</code>): displays help and exists</p>
+</li>
+<li>
+<p><code>--link</code> (aka <code>--verify-links</code>, <code>-l</code>): verify all the links in
+the documentation</p>
+</li>
+<li>
+<p><code>--natlang L</code>: builds doc for the natural language <code>L</code>
+(default: <code>en-us</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Options may be combined in any order.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>--help</code> and <code>--version</code>
+options overwhelm all other options: they display info but
+do not build.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use <code>-fb</code> or <code>-bf</code> for the often useful combination of
+<code>--force</code> and <code>--book</code>, used to make a final-cut distribution
+including the workbook PDFs after the source has been debugged to
+satisfaction.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+An experimental option <code>--adocjs</code> is provided that tells the
+build to use the Node
+version of Asciidoctor rather than the Ruby one.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-03-01 11:27:29 -0500
+</div>
+</div>
+</body>
+</html>
