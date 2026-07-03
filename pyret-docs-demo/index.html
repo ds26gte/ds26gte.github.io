@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.26">
+<title>Legacy doc</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_legacy_doc">Legacy doc</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://pyret.org/docs/latest/booleans.html">Booleans</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://pyret.org/docs/latest/numbers.html">Numbers</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://pyret.org/docs/latest/image.html">The image libraries</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://pyret.org/docs/latest/matrices.html">matrices</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_after_commit_1">After commit 1</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="c1/builtin/booleans.html">Booleans</a></p>
+</div>
+<div class="paragraph">
+<p><a href="c1/builtin/numbers.html">Numbers</a></p>
+</div>
+<div class="paragraph">
+<p><a href="c1/trove/image.html">The image libraries</a></p>
+</div>
+<div class="paragraph">
+<p><a href="c1/trove/matrices.html">matrices</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_after_commit_2">After commit 2</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="c2/builtin/booleans.html">Booleans</a></p>
+</div>
+<div class="paragraph">
+<p><a href="c2/builtin/numbers.html">Numbers</a></p>
+</div>
+<div class="paragraph">
+<p><a href="c2/trove/image.html">The image libraries</a></p>
+</div>
+<div class="paragraph">
+<p><a href="c2/trove/matrices.html">matrices</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_after_commit_3">After commit 3</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="c3/builtin/booleans.html">Booleans</a></p>
+</div>
+<div class="paragraph">
+<p><a href="c3/builtin/numbers.html">Numbers</a></p>
+</div>
+<div class="paragraph">
+<p><a href="c3/trove/image.html">The image libraries</a></p>
+</div>
+<div class="paragraph">
+<p><a href="c3/trove/matrices.html">matrices</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_after_final_commit">After final commit</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="f/builtin/booleans.html">Booleans</a></p>
+</div>
+<div class="paragraph">
+<p><a href="f/builtin/numbers.html">Numbers</a></p>
+</div>
+<div class="paragraph">
+<p><a href="f/trove/image.html">The image libraries</a></p>
+</div>
+<div class="paragraph">
+<p><a href="f/trove/matrices.html">matrices</a></p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-07-03 14:44:52 -0400
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>
