@@ -1,0 +1,50 @@
+== Legacy doc
+
+https://pyret.org/docs/latest/booleans.html[Booleans]
+
+https://pyret.org/docs/latest/numbers.html[Numbers]
+
+https://pyret.org/docs/latest/image.html[The image libraries]
+
+https://pyret.org/docs/latest/matrices.html[matrices]
+
+== After commit 1
+
+link:c1/builtin/booleans.html[Booleans]
+
+link:c1/builtin/numbers.html[Numbers]
+
+link:c1/trove/image.html[The image libraries]
+
+link:c1/trove/matrices.html[matrices]
+
+== After commit 2
+
+link:c2/builtin/booleans.html[Booleans]
+
+link:c2/builtin/numbers.html[Numbers]
+
+link:c2/trove/image.html[The image libraries]
+
+link:c2/trove/matrices.html[matrices]
+
+
+== After commit 3
+
+link:c3/builtin/booleans.html[Booleans]
+
+link:c3/builtin/numbers.html[Numbers]
+
+link:c3/trove/image.html[The image libraries]
+
+link:c3/trove/matrices.html[matrices]
+
+== After final commit
+
+link:f/builtin/booleans.html[Booleans]
+
+link:f/builtin/numbers.html[Numbers]
+
+link:f/trove/image.html[The image libraries]
+
+link:f/trove/matrices.html[matrices]
