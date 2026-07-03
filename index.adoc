@@ -71,3 +71,7 @@ I am grateful to Northeastern University’s
 http://www.ccs.neu.edu/scheme[Programming Languages Team (PLT)] for
 hosting some of the above web pages.
 
+== Temp
+
+link:pr-demo/index.html[pyret new-docs demo]
+
