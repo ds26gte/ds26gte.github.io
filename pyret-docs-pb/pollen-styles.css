@@ -61,7 +61,8 @@
   }
   ul.local-toc li,
   ul.local-toc a {
-    font-size: 0.85em;
+    /* font-size: 0.85em; */
+    list-style-type: none;
   }
   ul.local-toc ul {
     padding-left: 1em;

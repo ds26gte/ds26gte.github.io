@@ -292,14 +292,28 @@ check:
 
     [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].col(3) 
       is [matrix(3,1): 3, 6, 9] 
- end">(Try it!)</a></p></div></div><div data-toc-fname=".submatrix" data-toc-label=".submatrix"><p><span><a name=".submatrix"></a></span></p><pre class="pyret-display">.submatrix :: <span>(<span><span class="pyret-content">loi :: <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/matrices.html#Nat">Nat</a></span>&gt;</span></span>, <span class="pyret-content">loj :: <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/matrices.html#Nat">Nat</a></span>&gt;</span></span></span>) -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></span></pre></div><p>Returns the submatrix of the matrix comprised of the intersection of the given list of rows and the given list of columns.</p><p>For example, if our list of rows is {1, 2} and our list of columns is {2, 3}, then the positions in the resulting submatrix will be the elements with (<i>row</i>, <i>col</i>) positions {(1, 2), (1, 3), (2, 2), (2, 3)}.</p><p><img src="matrix-submatrix.png" width="100%"/></p><p>This is shown in the below example:</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+ end">(Try it!)</a></p></div></div><div data-toc-fname=".submatrix" data-toc-label=".submatrix"><p><span><a name=".submatrix"></a></span></p><pre class="pyret-display">.submatrix :: <span>(<span><span class="pyret-content">loi :: <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/matrices.html#Nat">Nat</a></span>&gt;</span></span>, <span class="pyret-content">loj :: <span><a href="../trove/lists.html#List">List</a>&lt;<span><a href="../trove/matrices.html#Nat">Nat</a></span>&gt;</span></span></span>) -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></span></pre></div><p>Returns the submatrix of the matrix comprised of the intersection of the given list of rows and the given list of columns.</p><p>For example, if our list of rows is {1, 2} and our list of columns is {2, 3}, then the positions in the resulting submatrix will be the elements with (<i>row</i>, <i>col</i>) positions {(1, 2), (1, 3), (2, 2), (2, 3)}.</p><p><img src="matrix-submatrix.png" alt=" \] 
+ a_{22} &amp; a_{23}\end{matrix}\right]         
+ a_{12} &amp; a_{13} \\         
+ \left[\begin{matrix} 
+ =    
+ \end{matrix}\right]\mathtt{.submatrix([list: 1, 2], [list: 2, 3])}         
+ a_{31} &amp; a_{32} &amp; a_{33}         
+ a_{21} &amp; a_{22} &amp; a_{23} \\         
+ a_{11} &amp; a_{12} &amp; a_{13} \\         
+ \left[\begin{matrix} 
+ \[" width="100%"/></p><p>This is shown in the below example:</p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].submatrix([list: 1, 2], [list: 2, 3])
     is [matrix(2,2): 2, 3, 4, 5]
 end</pre><p><a class="show-embed" code="include matrices
 check: 
     [matrix(3,3): 1, 2, 3, 4, 5, 6, 7, 8, 9].submatrix([list: 1, 2], [list: 2, 3]) 
       is [matrix(2,2): 2, 3, 4, 5] 
- end">(Try it!)</a></p></div></div><div data-toc-fname=".transpose" data-toc-label=".transpose"><p><span><a name=".transpose"></a></span></p><pre class="pyret-display">.transpose :: <span>() -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></span></pre></div><p>Returns the transposition of the matrix. For example,</p><p><img src="matrix-transpose.png" width="100%"/></p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+ end">(Try it!)</a></p></div></div><div data-toc-fname=".transpose" data-toc-label=".transpose"><p><span><a name=".transpose"></a></span></p><pre class="pyret-display">.transpose :: <span>() -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></span></pre></div><p>Returns the transposition of the matrix. For example,</p><p><img src="matrix-transpose.png" alt=" \] 
+ \begin{bmatrix}1 &amp; 4 \\ 2 &amp; 5 \\ 3 &amp; 6\end{bmatrix} 
+ \overrightarrow{Transpose}    
+ \begin{bmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{bmatrix} 
+ \[" width="100%"/></p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,3): 1, 2, 3, 4, 5, 6].transpose()
     is [matrix(3,2): 1, 4, 2, 5, 3, 6]
 end</pre><p><a class="show-embed" code="include matrices
@@ -477,7 +491,13 @@ check:
     [matrix(2,2): 1, 2, 3, 4].scale(2) is [matrix(2,2): 2, 4, 6, 8] 
 
     [matrix(2,2): 2, 4, 6, 8].scale(1/2) is [matrix(2,2): 1, 2, 3, 4] 
- end">(Try it!)</a></p></div></div><div data-toc-fname=".dot" data-toc-label=".dot"><p><span><a name=".dot"></a></span></p><pre class="pyret-display">.dot :: <span>(<span><span class="pyret-content">other :: <a href="../trove/matrices.html#Matrix">Matrix</a></span></span>) -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre></div><p>Returns the Frobenius Product of the matrix with the given matrix (for 1-dimensional matrices, this is simply the dot product). This is done by multiplying the matrix with the transposition of <tt class="pyret-highlight">other</tt> and taking the trace of the result. An example of this calculation (* denotes matrix multiplication):</p><p><img src="matrix-frobenius.png" width="100%"/></p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+ end">(Try it!)</a></p></div></div><div data-toc-fname=".dot" data-toc-label=".dot"><p><span><a name=".dot"></a></span></p><pre class="pyret-display">.dot :: <span>(<span><span class="pyret-content">other :: <a href="../trove/matrices.html#Matrix">Matrix</a></span></span>) -&gt; <a href="../trove/globals.html#Number">Number</a></span></pre></div><p>Returns the Frobenius Product of the matrix with the given matrix (for 1-dimensional matrices, this is simply the dot product). This is done by multiplying the matrix with the transposition of <tt class="pyret-highlight">other</tt> and taking the trace of the result. An example of this calculation (* denotes matrix multiplication):</p><p><img src="matrix-frobenius.png" alt=" \] 
+ 1\times 1 \text{ matrix}}\mathtt{.trace()}=12 
+ \underbrace{\left[\begin{smallmatrix}(1\cdot 4)+(2\cdot 2)+(3\cdot \frac{4}{3})\end{smallmatrix}\right]}_{ 
+ = 
+ \ast\left[\begin{smallmatrix}4\\ 2\\ ^4/_3 \end{smallmatrix}\right]\right)\mathtt{.trace()} 
+ \left(\left[\begin{smallmatrix}1 &amp; 2 &amp; 3\end{smallmatrix}\right] 
+ \[" width="100%"/></p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(1,3): 1, 2, 3].dot([matrix(1,3): 4, 2, 4/3]) is 12
   [matrix(1,3): 1, 2, 3].dot([matrix(1,3): 1, 1, 1]) is 6
 end</pre><p><a class="show-embed" code="include matrices
@@ -520,19 +540,42 @@ end</pre><p><a class="show-embed" code="include matrices
 A = [matrix(2,2): 0, -1, 1, 0] 
  check: 
     A.is-orthonormal() is true 
- end">(Try it!)</a></p></div></div><div data-toc-fname=".rref" data-toc-label=".rref"><p><span><a name=".rref"></a></span></p><pre class="pyret-display">.rref :: <span>() -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></span></pre></div><p>Returns the Reduced Row Echelon Form of the matrix. For example:</p><p><img src="matrix-rref.png" width="100%"/></p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+ end">(Try it!)</a></p></div></div><div data-toc-fname=".rref" data-toc-label=".rref"><p><span><a name=".rref"></a></span></p><pre class="pyret-display">.rref :: <span>() -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></span></pre></div><p>Returns the Reduced Row Echelon Form of the matrix. For example:</p><p><img src="matrix-rref.png" alt=" \] 
+ \begin{bmatrix}1 &amp; 0 &amp; -1\\ 0 &amp; 1 &amp; 2\end{bmatrix} 
+ \overrightarrow{RREF}    
+ \begin{bmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{bmatrix} 
+ \[" width="100%"/></p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(2,3): 1, 2, 3, 4, 5, 6].rref() is [matrix(2,3): 1, 0,-1, 0, 1, 2]
 end</pre><p><a class="show-embed" code="include matrices
 check: 
     [matrix(2,3): 1, 2, 3, 4, 5, 6].rref() is [matrix(2,3): 1, 0,-1, 0, 1, 2] 
- end">(Try it!)</a></p></div></div><div data-toc-fname=".inverse" data-toc-label=".inverse"><p><span><a name=".inverse"></a></span></p><pre class="pyret-display">.inverse :: <span>() -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></span></pre></div><p>Returns the inverse of the matrix, if it is invertible (found by augmenting the matrix with itself and finding the reduced-row echelon form). For example:</p><p><img src="matrix-inverse.png" width="100%"/></p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+ end">(Try it!)</a></p></div></div><div data-toc-fname=".inverse" data-toc-label=".inverse"><p><span><a name=".inverse"></a></span></p><pre class="pyret-display">.inverse :: <span>() -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></span></pre></div><p>Returns the inverse of the matrix, if it is invertible (found by augmenting the matrix with itself and finding the reduced-row echelon form). For example:</p><p><img src="matrix-inverse.png" alt=" \] 
+ = \begin{bmatrix}-5 &amp; 0 &amp; -2\\ -4 &amp; 1 &amp; -1\\ ^3/_2 &amp; 0 &amp; ^1/_2\end{bmatrix} 
+ \begin{bmatrix}1 &amp; 0 &amp; 4\\ 1 &amp; 1 &amp; 6\\ -3 &amp; 0 &amp; -10\end{bmatrix}^{-1} 
+ \[" width="100%"/></p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   [matrix(3,3): 1, 0, 4, 1, 1, 6, -3, 0, -10].inverse()
     is [matrix(3,3): -5, 0, -2, -4, 1, -1, 3/2, 0, 1/2]
 end</pre><p><a class="show-embed" code="include matrices
 check: 
     [matrix(3,3): 1, 0, 4, 1, 1, 6, -3, 0, -10].inverse() 
       is [matrix(3,3): -5, 0, -2, -4, 1, -1, 3/2, 0, 1/2] 
- end">(Try it!)</a></p></div></div><div data-toc-fname=".solve" data-toc-label=".solve"><p><span><a name=".solve"></a></span></p><pre class="pyret-display">.solve :: <span>(<span><span class="pyret-content">other :: <a href="../trove/matrices.html#Matrix">Matrix</a></span></span>) -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></span></pre></div><p>Returns the matrix which, when multiplied on the right of this matrix, results in the given matrix. In other words, this returns the solution to the system of equations represented by this and the given matrix. This method only works on invertible matrices (Calculated by inverting itself and multiplying the given matrix on the right side of this inverse).</p><div data-toc-fname=".least-squares-solve" data-toc-label=".least-squares-solve"><p><span><a name=".least-squares-solve"></a></span></p><pre class="pyret-display">.least-squares-solve :: <span>(<span><span class="pyret-content">other :: <a href="../trove/matrices.html#Matrix">Matrix</a></span></span>) -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></span></pre></div><p>Returns the least squares solution for this and the given matrix, calculated using QR decomposition.</p><div data-toc-fname=".lu-decomposition" data-toc-label=".lu-decomposition"><p><span><a name=".lu-decomposition"></a></span></p><pre class="pyret-display">.lu-decomposition :: <span>() -&gt; <span>{<span class="pyret-content">L :: <a href="../trove/matrices.html#Matrix">Matrix</a></span>, <span class="pyret-content">U :: <a href="../trove/matrices.html#Matrix">Matrix</a></span>}</span></span></pre></div><p>Computes the <a href="https://en.wikipedia.org/wiki/LU_decomposition">LU decomposition</a> of this matrix, if possible.  This returns a pair of matrices, <tt class="pyret-highlight">L</tt> and <tt class="pyret-highlight">U</tt>, that are respectively <a href="../UnDeFiNeD">lower-triangular</a> and <a href="../UnDeFiNeD">upper-triangular</a>, and whose product is this matrix:</p><p><img src="matrix-decomp.png" width="100%"/></p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">check:
+ end">(Try it!)</a></p></div></div><div data-toc-fname=".solve" data-toc-label=".solve"><p><span><a name=".solve"></a></span></p><pre class="pyret-display">.solve :: <span>(<span><span class="pyret-content">other :: <a href="../trove/matrices.html#Matrix">Matrix</a></span></span>) -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></span></pre></div><p>Returns the matrix which, when multiplied on the right of this matrix, results in the given matrix. In other words, this returns the solution to the system of equations represented by this and the given matrix. This method only works on invertible matrices (Calculated by inverting itself and multiplying the given matrix on the right side of this inverse).</p><div data-toc-fname=".least-squares-solve" data-toc-label=".least-squares-solve"><p><span><a name=".least-squares-solve"></a></span></p><pre class="pyret-display">.least-squares-solve :: <span>(<span><span class="pyret-content">other :: <a href="../trove/matrices.html#Matrix">Matrix</a></span></span>) -&gt; <a href="../trove/matrices.html#Matrix">Matrix</a></span></pre></div><p>Returns the least squares solution for this and the given matrix, calculated using QR decomposition.</p><div data-toc-fname=".lu-decomposition" data-toc-label=".lu-decomposition"><p><span><a name=".lu-decomposition"></a></span></p><pre class="pyret-display">.lu-decomposition :: <span>() -&gt; <span>{<span class="pyret-content">L :: <a href="../trove/matrices.html#Matrix">Matrix</a></span>, <span class="pyret-content">U :: <a href="../trove/matrices.html#Matrix">Matrix</a></span>}</span></span></pre></div><p>Computes the <a href="https://en.wikipedia.org/wiki/LU_decomposition">LU decomposition</a> of this matrix, if possible.  This returns a pair of matrices, <tt class="pyret-highlight">L</tt> and <tt class="pyret-highlight">U</tt>, that are respectively <a href="../UnDeFiNeD">lower-triangular</a> and <a href="../UnDeFiNeD">upper-triangular</a>, and whose product is this matrix:</p><p><img src="matrix-decomp.png" alt=" \] 
+ \end{bmatrix}    
+ 0 &amp;      0 &amp; u_{33}           
+ 0 &amp; u_{22} &amp; u_{23} \\           
+ u_{11} &amp; u_{12} &amp; u_{13} \\      
+ \begin{bmatrix}    
+ \end{bmatrix}    
+ \ell_{31} &amp; \ell_{32} &amp; \ell_{33}      
+ \ell_{21} &amp; \ell_{22} &amp; 0         \\      
+ \ell_{11} &amp;         0 &amp; 0         \\      
+ \begin{bmatrix}    
+ \end{bmatrix} =    
+ a_{31} &amp; a_{32} &amp; a_{33}      
+ a_{21} &amp; a_{22} &amp; a_{23} \\      
+ a_{11} &amp; a_{12} &amp; a_{13} \\      
+ \begin{bmatrix}    
+ \[" width="100%"/></p><div class="examples"><div class="SIntrapara"><p><b>Examples:</b></p><pre class="pyret-highlight">check:
   M = [matrix(4,4):
     1, 1, 0, 3,
     2, 1, -1, 1,
